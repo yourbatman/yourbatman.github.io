@@ -23,23 +23,25 @@
     var CONFIG = {"hostname":"www.yourbatman.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="在实际开发中，关于静态类、静态方法、内部类、匿名内部类、非静态类一般都会遇到，特别是你在研究开源框架源码的时候很是常见，它是内聚性的体现。本文针对这些“概念”的实战，做些总结。">
+  <meta name="description" content="2019很艰难，2020更艰难？">
 <meta property="og:type" content="article">
-<meta property="og:title" content="静态类、静态方法、内部类、匿名内部类、非静态类的一些实践">
-<meta property="og:url" content="https://www.yourbatman.cn/posts/x2y/889a54a1.html">
+<meta property="og:title" content="YourBatman感悟到的2019关键词：裁员、技术驱动、分享精神、能力边界">
+<meta property="og:url" content="https://www.yourbatman.cn/posts/x2y/e1bcb9c1.html">
 <meta property="og:site_name" content="BAT的乌托邦">
-<meta property="og:description" content="在实际开发中，关于静态类、静态方法、内部类、匿名内部类、非静态类一般都会遇到，特别是你在研究开源框架源码的时候很是常见，它是内聚性的体现。本文针对这些“概念”的实战，做些总结。">
+<meta property="og:description" content="2019很艰难，2020更艰难？">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2019123115480260.png#x200">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191231155031257.png#x270">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20200506161726441.jpg">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20200504103543841.png">
-<meta property="article:published_time" content="2020-05-06T01:00:10.000Z">
-<meta property="article:modified_time" content="2020-05-11T03:26:32.847Z">
+<meta property="article:published_time" content="2019-12-31T08:48:44.000Z">
+<meta property="article:modified_time" content="2020-05-11T03:59:38.209Z">
 <meta property="article:author" content="A哥(YourBatman)">
-<meta property="article:tag" content="Java">
+<meta property="article:tag" content="程序人生">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20200506161726441.jpg">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/2019123115480260.png#x200">
 
-<link rel="canonical" href="https://www.yourbatman.cn/posts/x2y/889a54a1.html">
+<link rel="canonical" href="https://www.yourbatman.cn/posts/x2y/e1bcb9c1.html">
 
 
 <script id="page-configurations">
@@ -52,7 +54,7 @@
   };
 </script>
 
-  <title>静态类、静态方法、内部类、匿名内部类、非静态类的一些实践 | BAT的乌托邦</title>
+  <title>YourBatman感悟到的2019关键词：裁员、技术驱动、分享精神、能力边界 | BAT的乌托邦</title>
   
 
 
@@ -210,7 +212,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.yourbatman.cn/posts/x2y/889a54a1.html">
+    <link itemprop="mainEntityOfPage" href="https://www.yourbatman.cn/posts/x2y/e1bcb9c1.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -223,7 +225,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          静态类、静态方法、内部类、匿名内部类、非静态类的一些实践
+          YourBatman感悟到的2019关键词：裁员、技术驱动、分享精神、能力边界
         </h1>
 
         <div class="post-meta">
@@ -233,20 +235,11 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-05-06 09:00:10" itemprop="dateCreated datePublished" datetime="2020-05-06T09:00:10+08:00">2020-05-06</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">收录于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/A%E5%93%A5%E5%AD%A6Java/" itemprop="url" rel="index"><span itemprop="name">A哥学Java</span></a>
-                </span>
+              <time title="创建时间：2019-12-31 16:48:44" itemprop="dateCreated datePublished" datetime="2019-12-31T16:48:44+08:00">2019-12-31</time>
             </span>
 
           
-            <span id="/posts/x2y/889a54a1.html" class="post-meta-item leancloud_visitors" data-flag-title="静态类、静态方法、内部类、匿名内部类、非静态类的一些实践" title="阅读次数">
+            <span id="/posts/x2y/e1bcb9c1.html" class="post-meta-item leancloud_visitors" data-flag-title="YourBatman感悟到的2019关键词：裁员、技术驱动、分享精神、能力边界" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -261,8 +254,8 @@
       </span>
       <span class="post-meta-item-text">评论数：</span>
     
-    <a title="valine" href="/posts/x2y/889a54a1.html#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/posts/x2y/889a54a1.html" itemprop="commentCount"></span>
+    <a title="valine" href="/posts/x2y/e1bcb9c1.html#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/x2y/e1bcb9c1.html" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -272,14 +265,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>3.6k</span>
+              <span>5.5k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
+              <span>5 分钟</span>
             </span>
 
         </div>
@@ -292,64 +285,102 @@
 
       
         <blockquote>
-<p>只要干不死，就往死里干。累吗，累就对了，证明你还活着。<br><strong>作者</strong>：A哥（YourBatman）<br><strong>公众号</strong>：BAT的乌托邦（ID：BAT-utopia）<br><strong>文末是否有彩蛋</strong>：有</p>
+<p>2019很艰难，2020更艰难？</p>
 </blockquote>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>如题，在实际开发中，关于静态类、静态方法、内部类、匿名内部类、非静态类一般都会遇到，特别是你在研究开源框架源码的时候很是常见，它是内聚性的体现。本文针对这些“概念”的实战，做些总结。</p>
-<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>首先介绍静态类和非静态类内部类。<strong>先普及一个常识</strong>：一个文件里可以有多个类，但public的类只能有一个且必须和文件名一样。public final class可以这样写，但不能这样写：public static class A。但如果这个类是内部类，是可以这样写的：public static class A</p>
-<h3 id="静态内部类-vs-内部类"><a href="#静态内部类-vs-内部类" class="headerlink" title="静态内部类 vs 内部类"></a>静态内部类 vs 内部类</h3><p>静态内部类：只是为了降低包的深度，方便类的使用，实现高内聚。静态内部类适用于不依赖于外部类，不用使用外在类的<strong>非静态属性</strong>和方法，只是为了方便管理类结构而定义。在创建静态内部类的时候，不需要外部类对象的引用。</p>
-<p>非静态内部类：它有一个很大的优点：<strong>可以自由使用外部类的所有变量和方法</strong>，对其外部类有个引用<br>有了这两个区别，各位看官应该知道什么时候使用什么样的类了吧</p>
+<p><img src="https://img-blog.csdnimg.cn/2019123115480260.png#x200" alt="2019"><br><img src="https://img-blog.csdnimg.cn/20191231155031257.png#x270" alt="2020"></p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>2019年注定会在历史的长河里被记下来，因为不仅对互联网而且对各行各业来说对它都是极不平静的一年，有喜事如京张高铁的顺利通行、北京大兴国际机场的落成，当然更多的是那些不平坦：中国男篮家门口折戟世锦赛、经济形势下滑、暴力裁员…</p>
+<p>作为一个遵纪守法的四有好公民，我不敢更没能力去对如上一些宏观现象评头品足，而自己仅作为一个折转多次最终进入了 <strong>IT行业</strong> 并且作为从业4年有加的“老兵”，跟行业内人士分享一下这一年 <strong>我本人</strong> 感悟较深的几个关键字，顺便尝试解读解读。</p>
+<blockquote>
+<p>说明：本篇文章所有内容纯属一家之言，没有任何偏向和针对性</p>
+</blockquote>
 <hr>
-<h3 id="静态方法-vs-非静态方法"><a href="#静态方法-vs-非静态方法" class="headerlink" title="静态方法 vs 非静态方法"></a>静态方法 vs 非静态方法</h3><p>静态方法（Static Method）与静态成员变量一样，<strong>属于类本身</strong>，在类装载的时候被装载到内存，不自动进行销毁，会一直存在于内存中，直到JVM关闭。静态方法的使用效率比非静态方法的效率高。静态方法是共享代码段，静态变量是共享数据段。既然是“共享”就有并发（Concurrence）的问题。</p>
-<p>非静态方法（Non-Static Method）又叫实例化方法，属于实例对象，实例化后才会分配内存，必须通过类的实例来引用。不会常驻内存，当实例对象被JVM 回收之后，也跟着消失。是针对确定的一个对象的，所以不会存在线程安全的问题</p>
-<p><strong><em>静态方法和实例方法是一样的，在类型第一次被使用时加载。调用的速度基本上没有差别</em></strong>。针对静态方法有一些最佳实践给你参考：</p>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>如上所说，做为一个职场老兵，同时也作为一个专业技术人员，我关注的焦点自然和 <strong>IT圈子</strong> 分不开，所以看问题的角度避免不了存在偏见，不喜勿喷，不喜勿喷，不喜勿喷。<br>下面主要分为：<code>裁员、技术驱动、分享精神、能力边界</code>这四个关键词（话题）展开：</p>
+<hr>
+<h3 id="裁员"><a href="#裁员" class="headerlink" title="裁员"></a>裁员</h3><p>2019年，特别是到了下半年，中国整个互联网圈子用”哀鸿遍野”来形容一点都不夸张。小到初创公司，大到巨头企业几乎无一幸免的进行了裁员，甚至各种暴力裁员新闻层出不穷：从新浪的<strong>现场结账，立马走人</strong>，到网易的<strong>暴力裁掉身患癌症员工</strong>；再到华为<strong>裁员7000人</strong>，以及昨天刚刚发生的<strong>神州优车暴力裁员刷新公众认知</strong>…</p>
+<p>一片景象，不可为不“热闹”。空气中弥漫的这种裁员气氛不仅让很多人中枪，更是让那些“幸免者”也忧郁匆匆，人心惶惶。<br>我本人当然没有能力条条是到的去分析为何会大批量出现此现象，我只聊我感悟到的，同时也是和我们切身相关的一个话题：如何才能尽量避免自己被裁。</p>
+<h4 id="如何尽量避免自己被裁"><a href="#如何尽量避免自己被裁" class="headerlink" title="如何尽量避免自己被裁"></a>如何尽量避免自己被裁</h4><p>我认为纯由我来说这个话题是有点站不住脚的，毕竟我是只在贵圈呆了4年的”老兵”，资格还不够”老”。所以接下来的内容大都是我和一个工作10年+的从业者聊过几次之后，我收录到的一些观点，供以参考：</p>
+<blockquote>
+<p>人物背景介绍：他的整个职业生涯总的来说分为了三个阶段 <strong>技术-&gt;管理-&gt;技术</strong>，现在在某一家世界知名互联网公司做技术专家，技术栈为Java</p>
+</blockquote>
+<h5 id="不要一味的迷恋所谓的管理，把当官作为职场唯一的追求"><a href="#不要一味的迷恋所谓的管理，把当官作为职场唯一的追求" class="headerlink" title="不要一味的迷恋所谓的管理，把当官作为职场唯一的追求"></a>不要一味的迷恋所谓的管理，把当官作为职场唯一的追求</h5><p>中国人自古以来都有“官本位”的思想：在职场上混迹几年，如果不混个一官半职，就感觉挺丢人（无言面对父老乡亲）。<br>有这种想法是完全可以被理解，甚至被普遍接受的。但绝大多数人对此都弄混了一个<strong>概念上的区别</strong>：企业单位or事业单位，体制内or体制外：</p>
 <ul>
-<li>适当地使用static方法本身并没有什么，当一个人从来不懂使用多态、接口设计时，很自然地会滥用static方法。</li>
-<li>通常通用的类中一些常用的方法可以设计为静态的</li>
-<li>只要是没有用到类的状态信息，只从参数获取信息的都可以为静态的</li>
-<li>静态方法可以实现某些特殊的设计模式：如Singleton</li>
-<li>由于没有this指针，可以把某些系统API的回调函数以静态函数的形式封装到类的内部</li>
+<li><strong>事业单位</strong>：只要不违法乱纪，不犯大的错误，这辈子就安慰了，乌纱帽是丢不了的</li>
+<li><strong>企业单位</strong>（此处只关心私企，央企/国企不讨论）：失去职位（被劝退、开除、优化、裁员…）的“机会”太多了。且不说公司内部的激斗争这方面，就算你总是能不湿鞋且八面玲珑的能应对各种关系，但也控制不了你所在的团队、所在的事业部、或者是所在的行业的衰退（比如说二手车行业不行了，你不能说是因为总监的能力不行），而企业面对这种现象最直接有效的做法就是：裁员。</li>
 </ul>
-<h3 id="匿名内部类"><a href="#匿名内部类" class="headerlink" title="匿名内部类"></a>匿名内部类</h3><p>那么，匿名内部类有什么好处呢？除了只能使用一次，其实还有其他用处哦~</p>
-<p>当你想使用一个类的<strong>protected 方法时</strong>，但是目前你的类又和他<strong>不同包</strong>且也不能继承他，这时候匿名类就派上用场了，你可以声明一个<em>匿名类继承该类</em>，并定义一个方法然后调用父类方法即可</p>
-<p>其实，这个做法，我是在<code>spring-boot</code>中的<code>HttpMessageConverters</code>类中看到的：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">HttpMessageConverters：</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> List&lt;HttpMessageConverter&lt;?&gt;&gt; getDefaultConverters() &#123;</span><br><span class="line">	    List&lt;HttpMessageConverter&lt;?&gt;&gt; converters = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">		<span class="keyword">if</span> (ClassUtils.isPresent(<span class="string">"org.springframework.web.servlet.config.annotation."</span> + <span class="string">"WebMvcConfigurationSupport"</span>, <span class="keyword">null</span>)) &#123;</span><br><span class="line">			</span><br><span class="line">			<span class="comment">// 匿名内部类的实现</span></span><br><span class="line">			converters.addAll(<span class="keyword">new</span> WebMvcConfigurationSupport() &#123;</span><br><span class="line">				<span class="keyword">public</span> List&lt;HttpMessageConverter&lt;?&gt;&gt; defaultMessageConverters() &#123;</span><br><span class="line">					<span class="keyword">return</span> <span class="keyword">super</span>.getMessageConverters();</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;.defaultMessageConverters());</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			converters.addAll(<span class="keyword">new</span> RestTemplate().getMessageConverters());</span><br><span class="line">		&#125;</span><br><span class="line">		reorderXmlConvertersToEnd(converters);</span><br><span class="line">		<span class="keyword">return</span> converters;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-<p>所以，spring都这么干了，你还有什么理由不学习麽？</p>
-<h2 id="内部类和静态内部类的区别"><a href="#内部类和静态内部类的区别" class="headerlink" title="内部类和静态内部类的区别"></a>内部类和静态内部类的区别</h2><h4 id="静态类"><a href="#静态类" class="headerlink" title="静态类"></a>静态类</h4><ol>
-<li>只能在内部类中定义静态类 </li>
-<li>静态内部类不依赖于外部类，即使外部类没有创建对象，静态类也可以new对象</li>
-<li>静态类的方法可以是静态的方法也可以是非静态的方法，静态的方法可以在外层通过静态类调用，而非静态的方法必须要创建类的对象之后才能调用。 </li>
-<li>静态类<strong>只能引用外部类的s</strong>tatic成员变量（变量或者方法）（也就是类变量）。 </li>
-<li>如果一个内部类不是被定义成静态内部类，那么在定义成员变量或者成员方法的时候，是不能够被定义成静态的。（静态成员只能定义在静态内部类里）</li>
-</ol>
-<h4 id="和普通内部类的区别"><a href="#和普通内部类的区别" class="headerlink" title="和普通内部类的区别"></a>和普通内部类的区别</h4><ol>
-<li>是否能拥有静态成员<br>静态内部类可以有静态成员(方法，属性)，而非静态内部类则不能有静态成员(方法，属性)。 </li>
-<li>访问外部类的成员<br>静态内部类只能够访问外部类的静态成员,而非静态内部类则可以访问外部类的所有成员(方法，属性)。 </li>
-<li>静态内部类和非静态内部类在创建时有区别<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//假设类A有静态内部类B和非静态内部类C，创建B和C的区别为： </span></span><br><span class="line">A a=<span class="keyword">new</span> A(); </span><br><span class="line"><span class="comment">//创建B</span></span><br><span class="line">A.B b=<span class="keyword">new</span> A.B(); </span><br><span class="line"><span class="comment">//创建C</span></span><br><span class="line">A.C c=a.<span class="keyword">new</span> C();</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<h3 id="内部类的面试题"><a href="#内部类的面试题" class="headerlink" title="内部类的面试题"></a>内部类的面试题</h3><p>送一道匿名内部类的面试题：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">按照要求，补齐代码</span><br><span class="line">	<span class="class"><span class="keyword">interface</span> <span class="title">Inter</span> </span>&#123; </span><br><span class="line">		<span class="function"><span class="keyword">void</span> <span class="title">show</span><span class="params">()</span></span>; </span><br><span class="line">	&#125;</span><br><span class="line">	<span class="class"><span class="keyword">class</span> <span class="title">Outer</span> </span>&#123; </span><br><span class="line">		<span class="comment">//补齐代码 </span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="class"><span class="keyword">class</span> <span class="title">OuterDemo</span> </span>&#123;</span><br><span class="line">	    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		      Outer.method().show();</span><br><span class="line">		  &#125;</span><br><span class="line">	&#125;</span><br><span class="line">要求在控制台输出”HelloWorld”。</span><br></pre></td></tr></table></figure>
-<p>答案如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Inter</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">show</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Outer</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Inter <span class="title">method</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> Inter()&#123;</span><br><span class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">()</span></span>&#123;</span><br><span class="line">				System.out.println(<span class="string">"Hello World"</span>);</span><br><span class="line">			&#125;;</span><br><span class="line">		&#125;;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">OuterDemo</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">		Outer.method().show();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>说说内部类的好处吧</p>
-<ul>
-<li>内部类可以很好的实现隐藏(一般的非内部类，是不允许有 private 与protected权限的，但内部类可以)</li>
-<li>内部类拥有外围类的所有元素的访问权限</li>
-<li>可以实现多重继承</li>
-<li>可以避免修改接口而实现同一个类中<strong><em>两种同名方法</em></strong>的调用</li>
-</ul>
-<p>java的设计旨在简单，所以初学者十分好入门并且上手工作，但作为一门火了这么多年的语言，肯定还是有些硬骨头的，而这些，算是一些脆骨了。我们会发现java的设计者在设计内部类的时候用心良苦，学会使用内部类，是掌握java高级编程的一部分，它可以让你更优雅的设计你的程序结构。</p>
+<p>所以迷恋管理本身没错，毕竟下命令的快感是每个人都期望的。但是深处职场的我们，应该看清你处在的工作单位环境或者大环境，然后控制好这个度才能做到游刃有余</p>
+<hr>
+<h5 id="别误以为裁员只裁一线，不裁管理层"><a href="#别误以为裁员只裁一线，不裁管理层" class="headerlink" title="别误以为裁员只裁一线，不裁管理层"></a>别误以为裁员只裁一线，不裁管理层</h5><p>这一点就又得说了，因为我觉得还蛮有意思的一个话题，并且大家体会还蛮深，能产生共鸣。</p>
+<p>各大公司公开裁员新闻时大都会说：主要裁<strong>基础员工、基层管理、中层管理</strong>。为何裁的都是这三大类职位呢？其实这非常容易理解，这三类职位可能占据公司80%的人员。因此站在企业的角度来看在这里做手术动刀，是<strong>最安全和最有效</strong>的方式。所以千万别误以为裁员只裁一线，不裁领导（管理层），毕竟员工都没了，要领导有何用？难道让1个领导只管1名员工？这明显违背了公司的“金字塔结构”嘛~</p>
+<p>其实对绝大多数<strong>中级管理职位</strong>来说，无论是个人的价值，还是地位，都严重于依赖他当前所在的组织，以及其中的title。一旦离开这个公司，失去了对应的title，这些管理者一瞬间就会失去所有光环。再加上管理者相对“务虚”，所依赖的往往是大家津津乐道的“软实力”（比如沟通、协调、推动…），而这里面本身是没有问题的，我认为最大的问题就在于这个 “软” 字，因为它不好展现，尤其是你在面试的时候…</p>
+<blockquote>
+<p>为了避免被喷，此处必须强调说明一点：相信没有任何人敢否定”软实力”的强大作用，我自然也就不是这个意思了</p>
+</blockquote>
+<p>因为作为管理岗，招聘的需求一般是较少的，所以如果不能运气好很快的碰到生涯中的伯乐，那么中层管理者一旦离开当前的公司，价值一般会出现断崖式下降，跌到谷底后就真正会应了那句名言：<strong>公司有名我无名</strong>。<br>反观技术人员，且不说你肯定是精通技术的，但只要社会还在发展，企业对生产力还有需求，专业技术人员就很难彻底的失业，再就业的概率也是很大、很快的。</p>
+<p>对于裁员后面对失业的现状是：管理层往往比普通员工更加悲惨，因为在大环境在向下的时候，<strong>脱了毛的凤凰是还不如鸡的</strong>。并且所谓的<strong>由俭入奢易，由奢入俭难</strong>的思维必然亦会阻碍领导层再就业时的选择。</p>
+<hr>
+<h5 id="即使你已经步入管理，建议还是不要脱离技术"><a href="#即使你已经步入管理，建议还是不要脱离技术" class="headerlink" title="即使你已经步入管理，建议还是不要脱离技术"></a>即使你已经步入管理，建议还是不要脱离技术</h5><p>行业有一句话：脱离技术，最多只用3年。而一旦脱离，就像断了头，捡起来的难度非常之大。<br>所以即使你已经步入了管理，就不要把这条路走成一条断头路，尤其在现在一日千里的IT行业，变化可谓瞬息万变，所以埋头管理的同时，也得经常抬头看路。</p>
+<hr>
+<h5 id="即使转产品，也请做一个有扎实技术基础的产品经理"><a href="#即使转产品，也请做一个有扎实技术基础的产品经理" class="headerlink" title="即使转产品，也请做一个有扎实技术基础的产品经理"></a>即使转产品，也请做一个有扎实技术基础的产品经理</h5><p>坊间传闻，阿里现在招聘产品经理，大部分都倾向于从技术流里面转。阿里作为中国互联网企业的翘楚和领军，不客气的说它的某些行为就是标准，就是规范，其它中小企业会慢慢效仿，这获取就是将来的一种趋势~</p>
+<blockquote>
+<p>各位同仁也可观察观察业界名人（产品经理）：张小龙、雷军、周鸿祎、马化腾…均为技术出生转向的产品</p>
+</blockquote>
+<p>在我身边，很多程序员是很“羡慕”产品经理的工作的：门槛低、工资高；压力小，不背锅；有假期，加班少…很多小伙伴纷纷觉得这个工种超级棒。<br>确实，从“幸福生活”的角度去这么思考是无可厚非的，我自己本人也十分同意和羡慕。但永远相信：人的选择可能会错，但社会的选择却永远不会有误。就好比前几年移动端Android、IOS超级超级火一样，还是不要只看当下而已~</p>
+<p>技术转产品岗我个人认为是非常好的一种归宿，幸福指数很高。在纯技术 or 纯产品都受到了前所未有的挑战的现在，如果你转准备转产品，也请做一个有扎实技术基础的产品经理，而不是仅仅为了逃到舒适区里去，否则就被温水煮青蛙了~</p>
+<hr>
+<h5 id="平台高和能力强越来越不成正比"><a href="#平台高和能力强越来越不成正比" class="headerlink" title="平台高和能力强越来越不成正比"></a>平台高和能力强越来越不成正比</h5><p>时间往前推5年，从BAT（甚至包括京东）跳出来的人面试是带光环的，自然而然的会高看你一眼。所以那个时候出现了非常多的的去大公司”镀金”现象。也正因为如此并且伴随着互联网的快速发展，现在市场上可谓鱼龙混杂，越来越多的浑水摸鱼的现象出现了（相信你肯定也吐槽过自己身边的前BAT员工：”我操，这水平也太菜了吧”）</p>
+<p>那企业招聘怎么办？？？很简单：一刀切呗（<strong>talk is cheap, show me the code</strong>）。时代在变迁，这种思维5年前好用，现在已经过时了。需要保持时俱进，随时纠正自己。只有自己真的是铁，才不怕面试的三位真火，保持自己的核心竞争力才是屹立于市场之王道</p>
+<hr>
+<h5 id="跳出舒适区，居安思危"><a href="#跳出舒适区，居安思危" class="headerlink" title="跳出舒适区，居安思危"></a>跳出舒适区，居安思危</h5><p>在职场上混，永远没有谁是真正安全的，无论是做技术，还是做管理。<strong>人生已经这么艰难了，没想到越来越难</strong>。本着居安思危，如履薄冰的态度，才能让我们一直保持可靠的竞争力，越过IT人35岁的怪圈~</p>
+<hr>
+<h3 id="技术驱动"><a href="#技术驱动" class="headerlink" title="技术驱动"></a>技术驱动</h3><p><strong>世界上没有技术驱动型公司</strong>。哪怕强如google，微软，或是国内的阿里、腾讯，都不是技术驱动型公司。道理很简单：技术不是源头，需求才是。而技术只是为了更好的去服务需求的一种工具而已~</p>
+<p>一切技术问题，都要服从产品交付和市场反馈，所以客观的说，任何公司都不可能以技术去驱动自身。人可以用技术驱动自身，但公司不行。<br>在市场经济下，以技术为导向的组织只有一个地方：研究院。它的特点是：不需要自己挣钱，所以没有生存压力，国家用纳税人的钱养着就成。</p>
+<p>针对IT行业的技术特性，我亦有如下感悟：</p>
+<hr>
+<h4 id="和IT行业相似度最高的是盖楼房"><a href="#和IT行业相似度最高的是盖楼房" class="headerlink" title="和IT行业相似度最高的是盖楼房"></a>和IT行业相似度最高的是盖楼房</h4><p>IT是工科，不是理科，和IT行业相似度最高的行业是盖楼房，相似度惊人。</p>
+<hr>
+<h4 id="IT领域最重要的是经验而不是你有多聪明"><a href="#IT领域最重要的是经验而不是你有多聪明" class="headerlink" title="IT领域最重要的是经验而不是你有多聪明"></a>IT领域最重要的是经验而不是你有多聪明</h4><p>作为技术从业者，你需要区分什么是IT领域，什么是科研领域，而本文只讨论现在知识社会生产力中的IT领域。</p>
+<p>你可能被大叔大妈这样跨过：做IT计算机的人都好聪明的，膜拜。可千万别被这种“幻觉”带跑偏了，别迷之自信哈。记住我之前分享过的一句非常经典的话：<strong>你做得好不好，不取决于你是否聪明，而取决于你是否愿意不断读书不断学习和不断积累</strong>。经常给自己泼泼冷水，能让自己更加清醒</p>
+<hr>
+<h5 id="能大规模商用的技术，都不需要智商"><a href="#能大规模商用的技术，都不需要智商" class="headerlink" title="能大规模商用的技术，都不需要智商"></a>能大规模商用的技术，都不需要智商</h5><p>存在即合理：如果一门技术需要智商才能使用，那么它不可能规模化，不可能规模化那就最终就会消失（或者小众到只留在实验室）</p>
+<hr>
+<h5 id="技术栈，一旦确立了，就几乎改不了"><a href="#技术栈，一旦确立了，就几乎改不了" class="headerlink" title="技术栈，一旦确立了，就几乎改不了"></a>技术栈，一旦确立了，就几乎改不了</h5><p>写代码和盖楼是一样的，一旦地基框架都打好了，只有可能重新建一栋而不可能去重构它。</p>
+<blockquote>
+<p>在技术层面我记忆最深的是初学编程的时候，很多文章都建议写SQL标准的SQL，因为万一数据库换了呢？现在看来这种，一旦你确立了，就几乎改不了了（存在0.01%改的可能性，但那并不重要）</p>
+</blockquote>
+<p><strong>这里面有一个看起来很对，其实错误的一个观点</strong>：”只要学会了一门语言，其它语言都差不多的”。这句话最常听见是挂在工作只有几年的从业者身上，也是没有认知自我，迷之自信的表现。稍微深入点了解才知道其实这是非常错误的，因为每一个<strong>技术栈</strong>的size都太深了，你几乎不太可能去精通多个~</p>
+<p>正所谓基础不牢，地动山摇，所以选型、确定根基很重要。因此业界有个极端的二八原则：花80%的时间做代码设计、画UML图、画时序图，20%的时间写code和debug~</p>
+<hr>
+<h3 id="分享精神"><a href="#分享精神" class="headerlink" title="分享精神"></a>分享精神</h3><p>说到分享精神，有必要提及一个代表性人物：罗振宇（同时也是贩卖知识、贩卖焦虑的代表，哈哈）</p>
+<blockquote>
+<p>小提示：罗振宇2019时间的朋友跨年演讲就在今晚20:30哦，在愛奇艺播出</p>
+</blockquote>
+<p>它的产品”得到”是一个很大的、有干货的、自媒体分享平台，可以说它是一个当代一个伟大的作品。我觉得你从它里最主要得到的不应该是它分享出来的内容，而是它的这种精神。毕竟即使你天天听逻辑思维，你也变不成罗振宇。这些是需要你自己有这个去实践的过程的~</p>
+<hr>
+<h4 id="你最大的价值在于你知道那些东西的过程，而不是那些东西本身"><a href="#你最大的价值在于你知道那些东西的过程，而不是那些东西本身" class="headerlink" title="你最大的价值在于你知道那些东西的过程，而不是那些东西本身"></a>你最大的价值在于你知道那些东西的过程，而不是那些东西本身</h4><p>不要担心你知道的东西告诉了别人你就没价值了。在我们IT圈，你愿意和别人分享别人自然也会愿意和你分享，最终达到1+1大于2的效果。不分享，就像一个失去了互联网的程序员，试问N年后你的价值还能被保留多少呢？</p>
+<p>持有“我把别人知道的都学会、我把自己知道的都藏起来别让别人学去”想法的人，其实是默认全世界只有你聪明别人都是傻瓜，这样的人，在信息传输成本高的时代，尚且可以活下去，但是在今天这个信息交换极速的时代，这么做的话路会越走越窄最后会自己走入死胡同。</p>
+<blockquote>
+<p>说明：若你真的知道了了不得的黑科技，请你也注意保护好自己的知识产权，申请专利</p>
+</blockquote>
+<hr>
+<h4 id="工作要有热情"><a href="#工作要有热情" class="headerlink" title="工作要有热情"></a>工作要有热情</h4><p>有一句很熟悉的话语：智商决定了你的起点，情商决定你能走多远。在工作中，你不乏看到过这样的现象：你某个同事技术一般、学历一般、智商也一般，但它就是工作饱有热情，然后它最终成为了你的领导~</p>
+<p>对于这种现象，不要怨天尤人，因为所有的被动选择其实都是你当初的主动选择</p>
+<hr>
+<h3 id="能力边界"><a href="#能力边界" class="headerlink" title="能力边界"></a>能力边界</h3><p>在2019年，这是我本人听到自己的领导们提及最多的一个词语。在过去，专精一个方面是不错的，这是我们说的专注，工匠精神。但是在如今，我们会发现这个领域变化太快了，很多时候不是自己的原因，是<strong>趋势和浪潮</strong>决定了，突然某个时间点，你还在奔跑，但是赛道变了。</p>
+<blockquote>
+<p>比如你还在闭门造你的燃油车，然而电车出现了并且引领了潮流</p>
+</blockquote>
+<p>做技术也是一样的，现在越来越流行<strong>弯道超车</strong>（比如DevOps，K8S，Serviceless等等），对于那些”逝去”的技术，很多时候你无需搭理，而应该吧时间放在刀刃上。<br>所以如果我们的专业能力只在一个赛道上，就可能会有类似的风险，so我们应该让自己的能力边界应该越来越宽，更新，拓展，找到新的领域，巩固自己已有护城河时，也别忘了增加自己的护城河。</p>
+<hr>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>到这里，我的2019年感悟的总结就结束了，还是需要说明一句：本文仅仅是一家之言，不代表任何官方和组织，也没有任何偏向，纯自己yy，顺便和同行的你们交换交换意见。</p>
+<p>最后，2019年马上结束了，当然要预祝各位新年愉快喽。若有些想法和思考的朋友，可以私信我 or 左边加我好友一起探讨的，祝福2020年一切将变得更加美好~</p>
 <h2 id="文末彩蛋"><a href="#文末彩蛋" class="headerlink" title="文末彩蛋"></a>文末彩蛋</h2><p>福利继续。【BAT的乌托邦】知识星球欢迎你的加入：</p>
 <img src="https://img-blog.csdnimg.cn/20200506161726441.jpg"  height="200">
-**提示：先关注公众号，回复“知识星球”关键字，领取大额优惠券，加入星球，小众的事情咱们小众聊**。
+**提示：先关注同名公众号，回复“知识星球”关键字，领取大额优惠券，加入星球，小众的事情咱们小众聊**。
+## 关注我
+- 关注我的公众号，然后加我微信，邀你进入“Java高工架构师系列”纯纯纯技术群，当然还有366G的自学资料
+- 每月底统计当月**在看、转发**次数最多的几位朋友，私下发红包哈（钱不多，但你的支持我得表示感谢）
+- 文章在公众号首发，其它平台会慢1-2天。你也可以关注我的个人博客：https://www.yourbatman.cn
 
-<h2 id="关注我"><a href="#关注我" class="headerlink" title="关注我"></a>关注我</h2><ul>
-<li>关注我的公众号，然后加我微信，邀你进入“Java高工架构师系列”纯纯纯技术群，当然还有366G的自学资料</li>
-<li>每月底统计当月<strong>在看、转发</strong>次数最多的几位朋友，私下发红包哈（钱不多，但你的支持我得表示感谢）</li>
-<li>文章在公众号首发，其它平台会慢1-2天。你也可以关注我的个人博客：<a href="https://www.yourbatman.cn">https://www.yourbatman.cn</a></li>
-</ul>
 <hr>
 <ul>
 <li><strong>原文链接</strong>：<a href="https://mp.weixin.qq.com/s/PGIFtpI7aZaxY7es0F6C6Q" target="_blank" rel="noopener">程序人生 | 春风得意马蹄疾，一日看尽长安花</a></li>
@@ -374,7 +405,7 @@
   <div class="popular-posts-header">AI推测你可能还喜欢：</div>
   <ul class="popular-posts">
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\posts\x2y\1b8d333f.html" rel="bookmark">静态代码块、静态变量，构造代码块、实例变量的执行顺序和继承逻辑</a></div>
+      <div class="popular-posts-title"><a href="\posts\x2y\f3891d18.html" rel="bookmark">程序人生 | 春风得意马蹄疾，一日看尽长安花</a></div>
     </li>
   </ul>
 
@@ -410,7 +441,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://www.yourbatman.cn/posts/x2y/889a54a1.html" title="静态类、静态方法、内部类、匿名内部类、非静态类的一些实践">https://www.yourbatman.cn/posts/x2y/889a54a1.html</a>
+    <a href="https://www.yourbatman.cn/posts/x2y/e1bcb9c1.html" title="YourBatman感悟到的2019关键词：裁员、技术驱动、分享精神、能力边界">https://www.yourbatman.cn/posts/x2y/e1bcb9c1.html</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本站所有文章均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载：No！转发：Yes！
@@ -442,7 +473,7 @@
       <footer class="post-footer">
           
           <div class="post-tags">
-              <a href="/tags/Java/" rel="tag"><i class="fa fa-tag"></i> Java</a>
+              <a href="/tags/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F/" rel="tag"><i class="fa fa-tag"></i> 程序人生</a>
           </div>
 
         
@@ -450,13 +481,10 @@
 
         
     <div class="post-nav">
+      <div class="post-nav-item"></div>
       <div class="post-nav-item">
-    <a href="/posts/x2y/8105a089.html" rel="prev" title="Hallo Wolrd">
-      <i class="fa fa-chevron-left"></i> Hallo Wolrd
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/posts/x2y/1b8d333f.html" rel="next" title="静态代码块、静态变量，构造代码块、实例变量的执行顺序和继承逻辑">
-      静态代码块、静态变量，构造代码块、实例变量的执行顺序和继承逻辑 <i class="fa fa-chevron-right"></i>
+    <a href="/posts/x2y/8105a089.html" rel="next" title="Hallo Wolrd">
+      Hallo Wolrd <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -517,7 +545,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正文"><span class="nav-number">2.</span> <span class="nav-text">正文</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#静态内部类-vs-内部类"><span class="nav-number">2.1.</span> <span class="nav-text">静态内部类 vs 内部类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#静态方法-vs-非静态方法"><span class="nav-number">2.2.</span> <span class="nav-text">静态方法 vs 非静态方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#匿名内部类"><span class="nav-number">2.3.</span> <span class="nav-text">匿名内部类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内部类和静态内部类的区别"><span class="nav-number">3.</span> <span class="nav-text">内部类和静态内部类的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#静态类"><span class="nav-number">3.0.1.</span> <span class="nav-text">静态类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#和普通内部类的区别"><span class="nav-number">3.0.2.</span> <span class="nav-text">和普通内部类的区别</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内部类的面试题"><span class="nav-number">3.1.</span> <span class="nav-text">内部类的面试题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文末彩蛋"><span class="nav-number">5.</span> <span class="nav-text">文末彩蛋</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关注我"><span class="nav-number">6.</span> <span class="nav-text">关注我</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正文"><span class="nav-number">2.</span> <span class="nav-text">正文</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#裁员"><span class="nav-number">2.1.</span> <span class="nav-text">裁员</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#如何尽量避免自己被裁"><span class="nav-number">2.1.1.</span> <span class="nav-text">如何尽量避免自己被裁</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#不要一味的迷恋所谓的管理，把当官作为职场唯一的追求"><span class="nav-number">2.1.1.1.</span> <span class="nav-text">不要一味的迷恋所谓的管理，把当官作为职场唯一的追求</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#别误以为裁员只裁一线，不裁管理层"><span class="nav-number">2.1.1.2.</span> <span class="nav-text">别误以为裁员只裁一线，不裁管理层</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#即使你已经步入管理，建议还是不要脱离技术"><span class="nav-number">2.1.1.3.</span> <span class="nav-text">即使你已经步入管理，建议还是不要脱离技术</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#即使转产品，也请做一个有扎实技术基础的产品经理"><span class="nav-number">2.1.1.4.</span> <span class="nav-text">即使转产品，也请做一个有扎实技术基础的产品经理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#平台高和能力强越来越不成正比"><span class="nav-number">2.1.1.5.</span> <span class="nav-text">平台高和能力强越来越不成正比</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#跳出舒适区，居安思危"><span class="nav-number">2.1.1.6.</span> <span class="nav-text">跳出舒适区，居安思危</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#技术驱动"><span class="nav-number">2.2.</span> <span class="nav-text">技术驱动</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#和IT行业相似度最高的是盖楼房"><span class="nav-number">2.2.1.</span> <span class="nav-text">和IT行业相似度最高的是盖楼房</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#IT领域最重要的是经验而不是你有多聪明"><span class="nav-number">2.2.2.</span> <span class="nav-text">IT领域最重要的是经验而不是你有多聪明</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#能大规模商用的技术，都不需要智商"><span class="nav-number">2.2.2.1.</span> <span class="nav-text">能大规模商用的技术，都不需要智商</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#技术栈，一旦确立了，就几乎改不了"><span class="nav-number">2.2.2.2.</span> <span class="nav-text">技术栈，一旦确立了，就几乎改不了</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分享精神"><span class="nav-number">2.3.</span> <span class="nav-text">分享精神</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#你最大的价值在于你知道那些东西的过程，而不是那些东西本身"><span class="nav-number">2.3.1.</span> <span class="nav-text">你最大的价值在于你知道那些东西的过程，而不是那些东西本身</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#工作要有热情"><span class="nav-number">2.3.2.</span> <span class="nav-text">工作要有热情</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#能力边界"><span class="nav-number">2.4.</span> <span class="nav-text">能力边界</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文末彩蛋"><span class="nav-number">4.</span> <span class="nav-text">文末彩蛋</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
