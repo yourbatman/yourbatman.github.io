@@ -20,13 +20,13 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"yourbatman.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"www.yourbatman.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="在实际开发中，关于静态类、静态方法、内部类、匿名内部类、非静态类一般都会遇到，特别是你在研究开源框架源码的时候很是常见，它是内聚性的体现。本文针对这些“概念”的实战，做些总结。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="静态类、静态方法、内部类、匿名内部类、非静态类的一些实践">
-<meta property="og:url" content="https://yourbatman.github.io/posts/x2y/889a54a1.html">
+<meta property="og:url" content="https://www.yourbatman.cn/posts/x2y/889a54a1.html">
 <meta property="og:site_name" content="BAT的乌托邦">
 <meta property="og:description" content="在实际开发中，关于静态类、静态方法、内部类、匿名内部类、非静态类一般都会遇到，特别是你在研究开源框架源码的时候很是常见，它是内聚性的体现。本文针对这些“概念”的实战，做些总结。">
 <meta property="og:locale" content="zh_CN">
@@ -39,7 +39,7 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://img-blog.csdnimg.cn/20200506161726441.jpg">
 
-<link rel="canonical" href="https://yourbatman.github.io/posts/x2y/889a54a1.html">
+<link rel="canonical" href="https://www.yourbatman.cn/posts/x2y/889a54a1.html">
 
 
 <script id="page-configurations">
@@ -210,7 +210,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://yourbatman.github.io/posts/x2y/889a54a1.html">
+    <link itemprop="mainEntityOfPage" href="https://www.yourbatman.cn/posts/x2y/889a54a1.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -348,12 +348,12 @@
 <h2 id="关注我"><a href="#关注我" class="headerlink" title="关注我"></a>关注我</h2><ul>
 <li>关注我的公众号，然后加我微信，邀你进入“Java高工架构师系列”纯纯纯技术群，当然还有366G的自学资料</li>
 <li>每月底统计当月<strong>在看、转发</strong>次数最多的几位朋友，私下发红包哈（钱不多，但你的支持我得表示感谢）</li>
-<li>文章在公众号首发，其它平台会慢1-2天。你也可以关注我的个人博客：<a href="https://www.yourbatman.cn" target="_blank" rel="noopener">https://www.yourbatman.cn</a></li>
+<li>文章在公众号首发，其它平台会慢1-2天。你也可以关注我的个人博客：<a href="https://www.yourbatman.cn">https://www.yourbatman.cn</a></li>
 </ul>
 <hr>
 <ul>
 <li><strong>原文链接</strong>：<a href="https://mp.weixin.qq.com/s/PGIFtpI7aZaxY7es0F6C6Q" target="_blank" rel="noopener">程序人生 | 春风得意马蹄疾，一日看尽长安花</a></li>
-<li><strong>A哥的个人博客</strong>：<a href="https://www.yourbatman.cn" target="_blank" rel="noopener">https://www.yourbatman.cn</a></li>
+<li><strong>A哥的个人博客</strong>：<a href="https://www.yourbatman.cn">https://www.yourbatman.cn</a></li>
 <li><strong>主页地址</strong>：<a href="https://shimo.im/docs/T3gTj3tgdTg9VtKc" target="_blank" rel="noopener">【A哥】的个人空间</a></li>
 <li><strong>CSDN</strong>：<a href="https://blog.csdn.net/f641385712" target="_blank" rel="noopener">BAT的乌托邦</a></li>
 <li><strong>博客园</strong>：<a href="https://www.cnblogs.com/fangshixiang" target="_blank" rel="noopener">BAT的乌托邦</a></li>
@@ -410,7 +410,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://yourbatman.github.io/posts/x2y/889a54a1.html" title="静态类、静态方法、内部类、匿名内部类、非静态类的一些实践">https://yourbatman.github.io/posts/x2y/889a54a1.html</a>
+    <a href="https://www.yourbatman.cn/posts/x2y/889a54a1.html" title="静态类、静态方法、内部类、匿名内部类、非静态类的一些实践">https://www.yourbatman.cn/posts/x2y/889a54a1.html</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本站所有文章均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载：No！转发：Yes！
