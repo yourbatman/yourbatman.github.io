@@ -1319,7 +1319,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #93304f;
+  background: #25ffff;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -1400,7 +1400,7 @@ pre .javascript .function {
   color: var(--text-color);
   cursor: pointer;
   display: inline-block;
-  font-size: 0.75em;
+  font-size: 0.875em;
 }
 .sidebar-nav li.sidebar-nav-overview {
   margin-left: 10px;
@@ -2013,14 +2013,16 @@ pre .javascript .function {
   flex: 1;
 }
 .post-nav-item a {
+  color: #5073b8;
+  font-size: 0.875em;
   border-bottom: none;
   display: block;
-  font-size: 0.875em;
   line-height: 1.6;
   position: relative;
 }
 .post-nav-item a:active {
   top: 2px;
+  font-weight: 700;
 }
 .post-nav-item .fa {
   font-size: 0.5em;
@@ -2173,7 +2175,7 @@ pre .javascript .function {
   font-size: 14px;
 }
 body {
-  background: url("/images/bg_img.png");
+  background: url("https://img-blog.csdnimg.cn/2020051313434251.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -2354,9 +2356,6 @@ ul.breadcrumb li + li:last-child {
   display: inline-block;
   margin: 10px;
 }
-.tag-cloud a:hover {
-  color: var(--link-hover-color) !important;
-}
 .search-pop-overlay {
   background: rgba(0,0,0,0);
   height: 100%;
@@ -2479,6 +2478,9 @@ ul.breadcrumb li + li:last-child {
   font-weight: normal;
   line-height: 2;
   margin: 0;
+}
+.popular-posts .popular-posts-item .popular-posts-title a {
+  color: #5073b8;
 }
 .header {
   margin: 0 auto;
@@ -2921,4 +2923,32 @@ ul.breadcrumb li + li:last-child {
   .pagination {
     margin: 8px 0 0;
   }
+}
+/* ``标注为这样的代码块的颜色 */
+code {
+  color: #c7254e;
+  background: #f9f2f4;
+}
+/* 文章正文 a标签的颜色 */
+.post-body a:not(.btn):not(.hexo-douban-button):not(.hexo-douban-tab) {
+  color: #5073b8;
+  border-bottom: none;
+  text-decoration: none;
+}
+.footer {
+  color: #fff;
+}
+.footer a {
+  color: #fff;
+}
+.post-button .btn {
+  color: #555;
+  background-color: #fff;
+  border-radius: 3px;
+  font-size: 15px;
+  box-shadow: inset 0 0 10px 0 rgba(0,0,0,0.35);
+  border: none !important;
+  transition-property: unset;
+  padding: 0 15px;
+  margin: inherit;
 }
