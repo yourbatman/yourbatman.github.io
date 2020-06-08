@@ -1319,7 +1319,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #ff75ff;
+  background: #ffcf9e;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -1661,7 +1661,7 @@ pre .javascript .function {
   }
 }
 .reading-progress-bar {
-  background: #000000;
+  background: orange;
   display: block;
   height: 3px;
   left: 0;
@@ -2879,15 +2879,17 @@ ul.breadcrumb li + li:last-child {
     margin: 8px 0 0;
   }
 }
-/* 宽屏显示 效果好很多 */
-.container .main-inner {
-  width: 90%;
-}
-header {
-  width: 90% !important;
-}
-header.post-header {
-  width: 100% !important;
+/* 宽屏显示 效果好很多 笔记本的宽度至少为1366 但手机超不过1200*/
+@media (min-width: 1200px) {
+  .container .main-inner {
+    width: 90%;
+  }
+  header {
+    width: 90% !important;
+  }
+  header.post-header {
+    width: 100% !important;
+  }
 }
 /* ``标注为这样的代码块的颜色 */
 code {
@@ -2928,12 +2930,17 @@ blockquote {
   padding: 12px 24px 12px 24px;
   margin: 1em 0;
 }
+blockquote p {
+  margin: 0 0 0 0 !important;
+  color: #848484;
+}
 .footer {
   color: #fff;
 }
 .footer a {
   color: #fff;
 }
+/* 首页的阅读更多 */
 .post-button .btn {
   color: #555;
   background-color: #fff;
@@ -2945,6 +2952,23 @@ blockquote {
   padding: 0 15px;
   margin: inherit;
 }
+/* 导流的阅读更多 */
+#yourbatman #read-more-wrap a {
+  box-shadow: inset 0 0 10px 0 rgba(0,0,0,0.35);
+  border: none !important;
+  transition-property: unset;
+  padding: 0 15px;
+  font-weight: bolder;
+}
+#yourbatman #btw-footer {
+  display: none;
+}
+#yourbatman #btw-modal-input-code {
+  margin-bottom: 20px;
+}
+#yourbatman #btw-modal-header strong {
+  color: #4200e2;
+}
 /* 首页的图片、文字样式 */
 .post-body img.homepage {
   margin-bottom: 15px;
@@ -2954,7 +2978,46 @@ blockquote {
   border-radius: 1px 1px 1px 1px;
 }
 .post-body div.homepage {
-  color: #212221;
+  color: #8e8e8e;
   font-weight: 500;
   text-align: center;
 }
+/* 滚动条样式 start */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-button {
+  width: 0;
+  height: 0;
+}
+::-webkit-scrollbar-button:start:increment,
+::-webkit-scrollbar-button:end:decrement {
+  display: none;
+}
+::-webkit-scrollbar-corner {
+  display: block;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  background-color: rgba(0,0,0,0.2);
+}
+::-webkit-scrollbar-thumb:hover {
+  border-radius: 8px;
+  background-color: rgba(0,0,0,0.5);
+}
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-thumb {
+  border-right: 1px solid transparent;
+  border-left: 1px solid transparent;
+}
+::-webkit-scrollbar-track:hover {
+  background-color: rgba(0,0,0,0.15);
+}
+::-webkit-scrollbar-button:start {
+  width: 10px;
+  height: 10px;
+/*background: url(../images/scrollbar_arrow.png) no-repeat 0 0;*/
+/*可以添加滚动条样式*/
+}
+/* 滚动条样式 end */
