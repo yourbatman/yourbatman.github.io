@@ -1319,7 +1319,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #378a8f;
+  background: #995bff;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2981,6 +2981,11 @@ blockquote p {
   color: #8e8e8e;
   font-weight: 500;
   text-align: center;
+}
+/* 自定义底部的样式 */
+div.yourbatman-footer img {
+  box-shadow: 10px 10px 10px #d7d7d7;
+  border-radius: 5px;
 }
 /* 滚动条样式 start */
 ::-webkit-scrollbar {
