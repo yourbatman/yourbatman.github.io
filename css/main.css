@@ -246,7 +246,7 @@ hr {
   background-image: repeating-linear-gradient(-45deg, #ddd, #ddd 4px, transparent 4px, transparent 8px);
   border: 0;
   height: 3px;
-  margin: 10px 0;
+  margin: 20px 0;
 }
 blockquote {
   border-left: 4px solid #ddd;
@@ -1319,7 +1319,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #d4b14d;
+  background: #ff75ff;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2136,44 +2136,6 @@ pre .javascript .function {
   margin: 1em 0 0;
   padding: 0.5em 0.5em;
 }
-.followme {
-  align-items: center;
-  background: var(--card-bg-color);
-  border-left: 3px solid #ff2a2a;
-  color: #bbb;
-  margin: 1em 0 1em 0;
-  padding: 1em 1.5em;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.followme .social-list {
-  align-items: center;
-  display: flex;
-  flex-wrap: wrap;
-}
-.followme .social-list .social-item {
-  margin: 0.5em 1em;
-}
-@media (max-width: 991px) {
-  .followme .social-list .social-item {
-    margin: 0.5em 0.75em;
-  }
-}
-.followme .social-list .social-link {
-  border: 0;
-  display: inline-block;
-  text-align: center;
-}
-.followme .social-list .social-link .icon {
-  font-size: 1.75em;
-  height: 1.75em;
-  width: 1.75em;
-}
-.followme .social-list .social-link .label {
-  display: block;
-  font-size: 14px;
-}
 body {
   background: url("https://img-blog.csdnimg.cn/2020051313434251.jpg");
   background-size: cover;
@@ -2799,7 +2761,7 @@ ul.breadcrumb li + li:last-child {
   background: var(--content-bg-color);
   border-radius: 10px 10px 10px 10px;
   line-height: 1.75;
-  opacity: 0.9 !important;
+  opacity: 0.95 !important;
   box-shadow: 0 2px 2px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.06), 0 1px 5px 0 rgba(0,0,0,0.12);
   padding: 20px;
 }
@@ -2814,7 +2776,7 @@ ul.breadcrumb li + li:last-child {
 .comments {
   background: var(--content-bg-color);
   border-radius: 10px 10px 10px 10px;
-  opacity: 0.9 !important;
+  opacity: 0.95 !important;
   box-shadow: 0 2px 2px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.06), 0 1px 5px 0 rgba(0,0,0,0.12), 0 -1px 0.5px 0 rgba(0,0,0,0.09);
   margin-top: 12px;
   padding: 20px;
@@ -2870,13 +2832,6 @@ ul.breadcrumb li + li:last-child {
     margin-top: 8px;
   }
 }
-.post-body h1,
-.post-body h2 {
-  border-bottom: 1px solid #eee;
-}
-.post-body h3 {
-  border-bottom: 1px dotted #eee;
-}
 @media (min-width: 768px) and (max-width: 991px) {
   .content-wrap {
     padding: 10px;
@@ -2924,16 +2879,54 @@ ul.breadcrumb li + li:last-child {
     margin: 8px 0 0;
   }
 }
+/* 宽屏显示 效果好很多 */
+.container .main-inner {
+  width: 90%;
+}
+header {
+  width: 90% !important;
+}
+header.post-header {
+  width: 100% !important;
+}
 /* ``标注为这样的代码块的颜色 */
 code {
   color: #c7254e;
   background: #f9f2f4;
+  border: 1px solid #d6d6d6;
+  padding: 1px 4px;
+  word-break: break-all;
+  border-radius: 4px;
+}
+.post-header .post-title {
+  color: #000;
+}
+content-wrap h1,
+h2,
+h3,
+h4 {
+  color: #2c3e50;
+}
+content-wrap strong {
+  color: #5b5b5b;
 }
 /* 文章正文 a标签的颜色 */
 .post-body a:not(.btn):not(.hexo-douban-button):not(.hexo-douban-tab) {
-  color: #5073b8;
+  color: #0593d3;
   border-bottom: none;
   text-decoration: none;
+}
+/* 代码块的样式 */
+.highlight-container {
+  box-shadow: 18px 18px 15px 0 rgba(0,0,0,0.4);
+}
+/* > 注释的颜色 */
+blockquote {
+  font-size: 15px;
+  background: rgba(217,239,220,0.369);
+  border-left-color: rgba(15,197,48,0.522);
+  padding: 12px 24px 12px 24px;
+  margin: 1em 0;
 }
 .footer {
   color: #fff;
@@ -2945,10 +2938,23 @@ code {
   color: #555;
   background-color: #fff;
   border-radius: 3px;
-  font-size: 15px;
+  font-size: 13px;
   box-shadow: inset 0 0 10px 0 rgba(0,0,0,0.35);
   border: none !important;
   transition-property: unset;
   padding: 0 15px;
   margin: inherit;
+}
+/* 首页的图片、文字样式 */
+.post-body img.homepage {
+  margin-bottom: 15px;
+  margin-top: 15px;
+  height: 220px;
+  box-shadow: 0px 0px 2px #d7d7d7;
+  border-radius: 1px 1px 1px 1px;
+}
+.post-body div.homepage {
+  color: #212221;
+  font-weight: 500;
+  text-align: center;
 }
