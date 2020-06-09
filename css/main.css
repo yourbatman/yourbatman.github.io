@@ -1147,7 +1147,8 @@ pre .javascript .function {
 .menu-item-active a,
 .menu .menu-item a:hover,
 .menu .menu-item span.exturl:hover {
-  background: var(--menu-item-bg-color);
+  text-align: center;
+  background: #dfdfdf;
 }
 .use-motion .menu-item {
   opacity: 0;
@@ -1319,7 +1320,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #a6ffc2;
+  background: #ffff26;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -3036,9 +3037,9 @@ a.fancybox img {
 /* 滚动条样式 end */
 /* botui关于我的样式start */
 .popcontainer {
-  min-height: 100px;
+  min-height: 300px;
   padding: 2px 6px 6px;
-  background-color: #e1e1e1;
+  background-color: #d7edff;
   border-radius: 10px;
 }
 .botui-container {
@@ -3189,3 +3190,5 @@ button.botui-actions-buttons-button {
   }
 }
 /* botui关于我的样式end */
+/* 分页样式start */
+/* 分页样式end */
