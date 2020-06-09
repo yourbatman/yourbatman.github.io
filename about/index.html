@@ -33,7 +33,7 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20200609100814596.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20200609100831689.png">
 <meta property="article:published_time" content="2020-05-05T15:33:03.000Z">
-<meta property="article:modified_time" content="2020-06-09T03:45:11.711Z">
+<meta property="article:modified_time" content="2020-06-09T03:57:50.288Z">
 <meta property="article:author" content="A哥(YourBatman)">
 <meta property="article:tag" content="Java | Spring | Spring Boot | Spring Cloud | Dubbo | Netflix | BAT">
 <meta name="twitter:card" content="summary">
@@ -433,9 +433,9 @@ function bot_ui_ini() {
         content: "比如个人博客、CSDN、博客园、腾讯云+社区...只要你叫得上名的..."
       }).then(function () {
         botui.action.button({
-          delay: 1500,
+          delay: 4000,
           action: [{
-            text: "竟然都没公众号？",
+            text: "呃，竟然没公众号？😄",
             value: "why-cat"
           }, {
             text: "加A哥微信，回聊",
@@ -463,9 +463,9 @@ function bot_ui_ini() {
           content: "![...](https://img-blog.csdnimg.cn/20200511100304550.jpg)"
         }).then(function () {
           botui.action.button({
-            delay: 1500,
+            delay: 2000,
             action: [{
-              text: "撤回了啥玩意？你倒是扔啊，等着呢...",
+              text: "撤回了啥玩意？你倒是扔啊，坐等...",
               value: "why-domain"
             }]
           }).then(function (a) {
@@ -485,7 +485,7 @@ function bot_ui_ini() {
         })
       }).then(function () {
         botui.message.add({
-          delay: 2600,
+          delay: 4500,
           content: "![...](https://img-blog.csdnimg.cn/20200511100304545.jpg)"
         })
       })
