@@ -1322,7 +1322,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #c11cff;
+  background: #e7ffff;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -3041,7 +3041,7 @@ a.fancybox img {
 .popcontainer {
   min-height: 300px;
   padding: 2px 6px 6px;
-  background-color: #d7edff;
+  background-color: #f0f8ff;
   border-radius: 10px;
 }
 .botui-container {
@@ -3192,5 +3192,33 @@ button.botui-actions-buttons-button {
   }
 }
 /* botui关于我的样式end */
-/* 分页样式start */
-/* 分页样式end */
+/* valine评论系统美化start */
+#valine-comments .vheader {
+  background-color: #f1f1f1;
+  border-radius: 3px;
+}
+#valine-comments .vwrap {
+  border: 1px solid #000 !important;
+}
+#valine-comments #veditor {
+  background: url("/images/comment.webp") 100% 100% no-repeat;
+}
+#valine-comments .vcol.vcol-30 {
+  display: none;
+}
+#valine-comments .vcol.vcol-70 {
+  width: 100%;
+  text-align: center;
+}
+#valine-comments .vbtn {
+  padding: 0.4rem 1.2rem !important;
+  border-color: #fff !important;
+  background-color: #a5a5a5 !important;
+  color: #fff !important;
+  font-size: 0.7rem !important;
+}
+#valine-comments .vbtn:hover {
+  background-color: #000 !important;
+  font-weight: bolder;
+}
+/* valine评论系统美化end */

@@ -33,7 +33,7 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20200609100814596.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20200609100831689.png">
 <meta property="article:published_time" content="2020-05-05T15:33:03.000Z">
-<meta property="article:modified_time" content="2020-06-09T07:33:30.529Z">
+<meta property="article:modified_time" content="2020-06-09T16:23:00.504Z">
 <meta property="article:author" content="A哥(YourBatman)">
 <meta property="article:tag" content="Java | Spring | Spring Boot | Spring Cloud | Dubbo | Netflix | BAT">
 <meta name="twitter:card" content="summary">
@@ -144,7 +144,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">6</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>时间轴<span class="badge">6</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -294,7 +294,7 @@
 </table></div>
 <hr>
 <div class="note default" style="background-color: aliceblue;">
-    有什么想对A哥说的吗？是的，在这里你什么都可以说，包括对你领导的吐槽，但 <strong style="color: red;">不！可！以！</strong>订外卖
+    想对A哥说什么？我答应你，在这里你什么都可以说，包括对你领导的吐槽，甚至对你的TA的不满意😄，但 <strong style="color: red;">不-可-以</strong>订外卖！！！
 </div>
 <style type="text/css">
 .wechat-code:after {
@@ -383,7 +383,7 @@ function bot_ui_ini() {
         botui.action.button({
           delay: 1600,
           action: [{
-            text: "开始你的表演 😃",
+            text: "开始你的表演😃",
             value: "sure"
           }, {
             text: "不好意思，我很忙🙄",
@@ -407,7 +407,7 @@ function bot_ui_ini() {
     end = function () {
       botui.message.add({
         delay: 600,
-        content: "![...](https://view.moezx.cc/images/2018/05/06/a1c4cd0452528b572af37952489372b6.md.jpg)"
+        content: "![...](https://img-blog.csdnimg.cn/20200610002228829.jpg)"
       })
     },
     secondpart = function () {
@@ -417,19 +417,19 @@ function bot_ui_ini() {
       }).then(function () {
         botui.message.add({
           delay: 1500,
-          content: "智商情商双低，并且起步还挺晚的一枚大龄程序员。这不，我用一万字介绍了自己的前半生："
+          content: "一个网游失足少年，毕业后辗转过近10份工作，大龄再折业成为一枚程序员。这不，我用一万字介绍了自己的前半生："
         }).then(function () {
           botui.message.add({
             delay: 1200,
-            content: "https://mp.weixin.qq.com/s/PGIFtpI7aZaxY7es0F6C6Q"
+            content: 'https://mp.weixin.qq.com/s/PGIFtpI7aZaxY7es0F6C6Q'
           }).then(function () {
             botui.message.add({
               delay: 1500,
-              content: "[[目前觉得]]，敲代码是为了乐趣（和钱😄）"
+              content: "[[[[目前觉得]]]]，敲代码是为了乐趣（和钱😄）"
             }).then(function () {
               botui.message.add({
                 delay: 1500,
-                content: "擅长的嘛，Spring技术栈算不算？"
+                content: "擅长的嘛，Spring技术栈算不算？Java基础算不算？哈哈灬"
               }).then(function () {
                 botui.message.add({
                   delay: 1800,
@@ -438,7 +438,7 @@ function bot_ui_ini() {
                   botui.action.button({
                     delay: 1100,
                     action: [{
-                      text: "A哥都在哪写文章啊？",
+                      text: "A哥在哪写文章啊？",
                       value: "where-to-write"
                     }]
                   }).then(function (a) {
@@ -454,12 +454,12 @@ function bot_ui_ini() {
     writeBlog = function () {
       botui.message.add({
         delay: 1E3,
-        content: "比如个人博客、CSDN、博客园、腾讯云+社区...只要你叫得上名的..."
+        content: "都是些大中型平台：大江炉子，煎饼铺子；比如个人博客、CSDN、博客园、腾讯云+社区...只要你叫得上名的..."
       }).then(function () {
         botui.action.button({
           delay: 4000,
           action: [{
-            text: "竟没公众号？",
+            text: "竟然没公众号？",
             value: "why-cat"
           }, {
             text: "加A哥微信，回聊",
@@ -489,7 +489,7 @@ function bot_ui_ini() {
           botui.action.button({
             delay: 2000,
             action: [{
-              text: "撤回了啥？倒是扔啊，坐等...",
+              text: "撤回了啥？倒是扔啊，坐等ing",
               value: "why-domain"
             }]
           }).then(function (a) {
@@ -501,7 +501,7 @@ function bot_ui_ini() {
     fifthpart = function () {
       botui.message.add({
         delay: 2000,
-        content: "emmmm，我去我去我去，我找找。不过，给你扔了你必须得扫码关注呀"
+        content: "emmmm，我去我去我去，我找找。不过，给你扔了你必须得【扫码关注】呀"
       }).then(function () {
         botui.message.add({
           delay: 1600,
@@ -599,7 +599,7 @@ bot_ui_ini();
           <a href="/archives/">
         
           <span class="site-state-item-count">6</span>
-          <span class="site-state-item-name">日志</span>
+          <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
@@ -1111,7 +1111,7 @@ bot_ui_ini();
         <i class="fa fa-user"></i>
       </span>
       <span class="site-uv" title="总访客量">
-        共计 <span id="busuanzi_value_site_uv"></span> 人访问
+        承蒙 <span id="busuanzi_value_site_uv"></span> 位朋友
       </span>
     </span>
     <span class="post-meta-divider">|</span>
@@ -1120,7 +1120,7 @@ bot_ui_ini();
         <i class="fa fa-eye"></i>
       </span>
       <span class="site-pv" title="总访问量">
-        共计 <span id="busuanzi_value_site_pv"></span> 次访问
+        共造访本站 <span id="busuanzi_value_site_pv"></span> 次
       </span>
     </span>
 </div>
@@ -1239,7 +1239,7 @@ NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
       notify     : false,
       appId      : 'GL1AoYvDSErHS8idMvn35STX-gzGzoHsz',
       appKey     : 'flstBFF7gvWX8emTwJooV0bB',
-      placeholder: "(((つ•̀ω•́)つ))各位道友，一起快活呀！(((つ•̀ω•́)つ))",
+      placeholder: "各位道友，请填写【正确邮箱号】，这样我就可以给你发送回复提醒的邮件啦",
       avatar     : 'robohash',
       meta       : guest,
       pageSize   : '5' || 10,
