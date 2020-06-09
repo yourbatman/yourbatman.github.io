@@ -1322,7 +1322,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #b88aad;
+  background: #38814e;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -3219,6 +3219,8 @@ button.botui-actions-buttons-button {
   background-color: #a5a5a5 !important;
   color: #fff !important;
   font-size: 0.7rem !important;
+}
+#valine-comments .vsubmit.vbtn {
   position: absolute;
   margin-top: -33px;
   right: 10px;
