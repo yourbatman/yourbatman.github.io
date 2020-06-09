@@ -1322,7 +1322,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #e7ffff;
+  background: #b88aad;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -3200,6 +3200,9 @@ button.botui-actions-buttons-button {
 #valine-comments .vwrap {
   border: 1px solid #000 !important;
 }
+#valine-comments .vrow {
+  padding: 0px;
+}
 #valine-comments #veditor {
   background: url("/images/comment.webp") 100% 100% no-repeat;
 }
@@ -3216,9 +3219,19 @@ button.botui-actions-buttons-button {
   background-color: #a5a5a5 !important;
   color: #fff !important;
   font-size: 0.7rem !important;
+  position: absolute;
+  margin-top: -33px;
+  right: 10px;
 }
 #valine-comments .vbtn:hover {
   background-color: #000 !important;
   font-weight: bolder;
+}
+#valine-comments .vicon.vpreview-btn {
+  display: none;
+}
+#valine-comments .vctrl.text-right {
+  width: 50% !important;
+  text-align: left !important;
 }
 /* valine评论系统美化end */
