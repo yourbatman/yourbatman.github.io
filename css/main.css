@@ -876,9 +876,11 @@ pre .javascript .function {
   }
 }
 .pagination {
+  opacity: 0.95 !important;
   border-top: 1px solid #eee;
   margin: 120px 0 0;
   text-align: center;
+  border-radius: 10px !important;
 }
 .pagination .prev,
 .pagination .next,
@@ -1320,7 +1322,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #ffff26;
+  background: #cdff53;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
