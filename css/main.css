@@ -1322,7 +1322,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #41e9df;
+  background: #bfff1d;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -3204,7 +3204,11 @@ button.botui-actions-buttons-button {
   padding: 0px;
 }
 #valine-comments #veditor {
-  background: url("/images/comment.webp") 100% 100% no-repeat;
+  padding: 10px;
+  color: #d2691e;
+  background: #fff url("https://gitee.com/dbnuo/Cnblogs-Theme-SimpleMemory/raw/master/img/webp/comment_bg.webp") right -80px;
+  background-size: 200px;
+  background-repeat: no-repeat;
 }
 #valine-comments .vcol.vcol-30 {
   display: none;
@@ -3212,6 +3216,10 @@ button.botui-actions-buttons-button {
 #valine-comments .vcol.vcol-70 {
   width: 100%;
   text-align: center;
+}
+#valine-comments .valert {
+  color: #ff7272;
+  font-weight: bolder;
 }
 #valine-comments .vbtn {
   padding: 0.4rem 1.2rem !important;

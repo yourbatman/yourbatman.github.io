@@ -360,6 +360,33 @@
     </ul>
   </div>
 
+<!-- 近期文章（源代码） -->
+
+    <div class="links-of-blogroll motion-element links-of-blogroll-block">
+      <div class="links-of-blogroll-title">
+        <!-- modify icon to fire by szw -->
+        <i class="fa fa-history fa-" aria-hidden="true"></i>
+        近期文章
+      </div>
+      <ul class="links-of-blogroll-list">
+        
+        
+          <li>
+            <a href="/posts/x2y/tencent+.html" title="2020-4-17群福利：腾讯云+社区公仔寄送公示" target="_blank">2020-4-17群福利：腾讯云+社区公仔寄送公示</a>
+          </li>
+        
+          <li>
+            <a href="/posts/x2y/f3891d18.html" title="程序人生 | 春风得意马蹄疾，一日看尽长安花" target="_blank">程序人生 | 春风得意马蹄疾，一日看尽长安花</a>
+          </li>
+        
+          <li>
+            <a href="/posts/x2y/1b8d333f.html" title="静态代码块、静态变量，构造代码块、实例变量的执行顺序和继承逻辑" target="_blank">静态代码块、静态变量，构造代码块、实例变量的执行顺序和继承逻辑</a>
+          </li>
+        
+      </ul>
+    </div>
+
+
       </div>
 
       <!-- canvas粒子时钟效果  放在侧边栏最下面 -->
@@ -780,6 +807,25 @@
         document.getElementById("times").innerHTML = hnum + "小时" + mnum + "分" + snum + "秒";
     }
     setInterval("createtime()",250);
+
+    // 自定义邮箱审核规则（目前校验：邮箱必填，且格式必须正确 昵称也必须填写）
+    document.body.addEventListener('click', function(e) {
+        if (e.target.classList.contains('vsubmit')) {
+            const email = document.querySelector('input[type=email]');
+            const nick = document.querySelector('input[name=nick]');
+            const reg = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+            if (!email.value || !nick.value || !reg.test(email.value)) {
+                const str = `<div class="valert text-center"><div class="vtext">请填写正确的昵称和邮箱！</div></div>`;
+                const vmark = document.querySelector('.vmark');
+                vmark.innerHTML = str;
+                vmark.style.display = 'block';
+                setTimeout(function() {
+                    vmark.style.display = 'none';
+                    vmark.innerHTML = '';
+                }, 2500);
+            }
+        }
+    })
 </script>
   <span class="beian"><a href="http://www.beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备12009483号 </a>
   </span>
@@ -945,7 +991,7 @@ NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
       notify     : false,
       appId      : 'GL1AoYvDSErHS8idMvn35STX-gzGzoHsz',
       appKey     : 'flstBFF7gvWX8emTwJooV0bB',
-      placeholder: "📢📢📢各位道友，请填写【正确邮箱号】，这样我就可以给你发送[回复提醒]的邮件啦(不写邮箱没法收到提醒哦)",
+      placeholder: "各位道友📢📢📢：&#10;1、填写昵称和【正确邮箱号】；&#10;2、有邮箱可收到回复的邮件提醒；&#10;3、礼貌言辞，拒绝黄赌毒；",
       avatar     : 'robohash',
       meta       : guest,
       pageSize   : '5' || 10,
