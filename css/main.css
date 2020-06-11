@@ -1322,7 +1322,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #bfff1d;
+  background: #1b28ff;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2894,6 +2894,12 @@ ul.breadcrumb li + li:last-child {
     width: 100% !important;
   }
 }
+li.menu-item.menu-item-search a {
+  color: #ff6347;
+}
+.sidebar-inner {
+  padding: 10px 10px;
+}
 /* ``标注为这样的代码块的颜色 */
 code {
   color: #c7254e;
@@ -2957,6 +2963,22 @@ blockquote p {
   transition-property: unset;
   padding: 0 15px;
   margin: inherit;
+}
+/* 近期文章 最新博文 */
+.recent_posts .links-of-blogroll-title {
+  font-size: 16px;
+  color: #ff6347;
+}
+.recent_posts .links-of-blogroll-list a {
+  color: #209a7e;
+  font-size: 12px;
+}
+.recent_posts .links-of-blogroll-list a:hover {
+  font-weight: bolder;
+  text-decoration: underline;
+}
+.recent_posts ul li {
+  text-align: left;
 }
 /* 导流的阅读更多 */
 #yourbatman #read-more-wrap a {
