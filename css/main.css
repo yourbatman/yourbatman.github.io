@@ -1322,7 +1322,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #1b28ff;
+  background: #75c76f;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2929,6 +2929,14 @@ content-wrap strong {
 }
 .post-header .post-meta-item a span {
   color: #c71585;
+}
+.post-footer .post-tags {
+  font-size: 20px;
+  margin-top: 10px;
+}
+.post-footer .post-tags a {
+  color: #f06322;
+  font-weight: bold;
 }
 /* 代码块的样式 */
 .highlight-container {
