@@ -1322,7 +1322,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #4d54b9;
+  background: #af1470;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2994,6 +2994,7 @@ blockquote p {
 .recent_posts .links-of-blogroll-title {
   font-size: 16px;
   color: #ff6347;
+  font-weight: normal;
 }
 .recent_posts .links-of-blogroll-list a {
   color: #209a7e;
