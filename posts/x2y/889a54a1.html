@@ -20,7 +20,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.yourbatman.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},"motion":{"enable":true,"async":true,"transition":{"post_block":"swoopIn","post_header":"whirlIn","post_body":"shrinkIn","coll_header":"expandIn","sidebar":"perspectiveRightIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"www.yourbatman.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},"motion":{"enable":true,"async":true,"transition":{"post_block":"flipBounceYIn","post_header":"flipXIn","post_body":"flipBounceXIn","coll_header":"expandIn","sidebar":"shrinkIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="在实际开发中，关于静态类、静态方法、内部类、匿名内部类、非静态类一般都会遇到，特别是你在研究开源框架源码的时候很是常见，它是内聚性的体现。本文针对这些“概念”的实战，做些总结。">
@@ -399,12 +399,12 @@
   <div id="qr" style="display: none;">
       
       <div style="display: inline-block;">
-        <img src="/images/reward/wechatpay.png" alt="A哥(YourBatman) 微信支付">
+        <img src="https://img-blog.csdnimg.cn/20200612080128384.png" alt="A哥(YourBatman) 微信支付">
         <p>微信支付</p>
       </div>
       
       <div style="display: inline-block;">
-        <img src="/images/reward/alipay.png" alt="A哥(YourBatman) 支付宝">
+        <img src="https://img-blog.csdnimg.cn/20200612080128343.png" alt="A哥(YourBatman) 支付宝">
         <p>支付宝</p>
       </div>
 
@@ -416,17 +416,21 @@
 <div>
 <ul class="post-copyright">
   <li class="post-copyright-title">
-    <strong>文章标题： </strong>静态类、静态方法、内部类、匿名内部类、非静态类的一些实践
+    <strong>本文标题： </strong>
+    《静态类、静态方法、内部类、匿名内部类、非静态类的一些实践》
   </li>
   <li class="post-copyright-author">
-    <strong>文章作者： </strong>A哥(YourBatman)
+    <strong>本文作者： </strong>A哥(YourBatman)
+  </li>
+  <li class="post-copyright-date">
+    <strong>发布时间： </strong>2020-05-06 09:00:10
   </li>
   <li class="post-copyright-link">
-    <strong>文章链接：</strong>
+    <strong>本文链接：</strong>
     <a href="https://www.yourbatman.cn/posts/x2y/889a54a1.html" title="静态类、静态方法、内部类、匿名内部类、非静态类的一些实践">https://www.yourbatman.cn/posts/x2y/889a54a1.html</a>
   </li>
   <li class="post-copyright-license">
-    <strong>版权声明： </strong>本站所有文章均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载：No！转发：Yes！
+    <strong>许可协议： </strong>本站所有文章均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载：No！转发：Yes！
   </li>
 </ul>
 </div>
@@ -443,16 +447,11 @@
         
   <!-- 投票功能 -->
   <div class="post-widgets">
-    <div style="color: #ea778c;">这位兄台请留步，给本文【投一票】再走呗</div>
+    <div style="color: #ea778c;font-size: 14px;">这位兄台请留步，给本文【投一票】再走呗</div>
     <div class="wp_rating">
       <div id="wpac-rating"></div>
     </div>
   </div>
-  <style>
-    .wp_rating {
-      margin-top: 0px;
-    }
-  </style>
 
 
         

@@ -1322,7 +1322,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #75c76f;
+  background: #4d54b9;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2082,11 +2082,16 @@ pre .javascript .function {
   border-top: 1px solid #eee;
   margin-top: 15px;
   text-align: center;
+  background: var(--card-bg-color);
+  border-left: 3px solid #ff2a2a;
+  list-style: none;
+  margin: 1em 0 0;
+  padding: 0.5em 0.5em;
 }
 .wp_rating {
   height: 20px;
   line-height: 20px;
-  margin-top: 10px;
+  margin-top: 0px;
   padding-top: 6px;
   text-align: center;
 }
@@ -2897,6 +2902,14 @@ ul.breadcrumb li + li:last-child {
 li.menu-item.menu-item-search a {
   color: #ff6347;
 }
+.post-copyright {
+  font-size: 14px;
+}
+.post-copyright li a {
+  color: #0593d3;
+  border-bottom: none;
+  text-decoration: none;
+}
 .sidebar-inner {
   padding: 10px 10px;
 }
@@ -2911,6 +2924,11 @@ code {
 }
 .post-header .post-title {
   color: #000;
+}
+.post-header .post-title a span {
+  color: #0593d3;
+  border-bottom: none;
+  text-decoration: none;
 }
 content-wrap h1,
 h2,
@@ -3273,5 +3291,16 @@ button.botui-actions-buttons-button {
 #valine-comments .vctrl.text-right {
   width: 50% !important;
   text-align: left !important;
+}
+#valine-comments .vcards .vcard {
+  border: 1px dashed #e5e4e4;
+  padding: 10px;
+}
+#valine-comments .vcards .vcard .vh .vmeta .vat {
+  color: #808080;
+}
+#valine-comments .vcards .vcard .vh .vmeta .vat:hover {
+  font-weight: bolder;
+  color: #ff6347;
 }
 /* valine评论系统美化end */
