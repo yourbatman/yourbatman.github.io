@@ -21,7 +21,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.yourbatman.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},"motion":{"enable":true,"async":true,"transition":{"post_block":"flipBounceYIn","post_header":"flipXIn","post_body":"flipBounceXIn","coll_header":"expandIn","sidebar":"shrinkIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"www.yourbatman.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},"motion":{"enable":false,"async":true,"transition":{"post_block":"flipBounceYIn","post_header":"flipXIn","post_body":"flipBounceXIn","coll_header":"expandIn","sidebar":"shrinkIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="和【A哥】对话中...                              赏                                                                                          😄谢谢亲们的慷慨解囊😄                      赞助人(昵称)">
@@ -34,7 +34,7 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20200609100814596.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20200609100831689.png">
 <meta property="article:published_time" content="2020-05-05T15:33:03.000Z">
-<meta property="article:modified_time" content="2020-06-11T07:11:20.033Z">
+<meta property="article:modified_time" content="2020-06-12T23:12:33.753Z">
 <meta property="article:author" content="A哥(YourBatman)">
 <meta property="article:tag" content="Java | Spring | Spring Boot | Spring Cloud | Dubbo | Netflix | BAT">
 <meta name="twitter:card" content="summary">
@@ -88,7 +88,7 @@
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
+  <div class="container">
     <div class="headband"></div>
 
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -145,7 +145,12 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>时间轴<span class="badge">6</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>时间轴<span class="badge">7</span></a>
+
+  </li>
+        <li class="menu-item menu-item-top">
+
+    <a href="/top/" rel="section"><i class="fa fa-signal fa-fw"></i>热门文章</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -241,8 +246,8 @@
     <div class="reward-open">赏
         <div class="reward-main">
             <ul class="reward-row">
-                <li class="wechat-code"><img src="https://img-blog.csdnimg.cn/20200609100814596.png"></li>
-                <li class="alipay-code"><img src="https://img-blog.csdnimg.cn/20200609100831689.png"></li>
+                <li class="wechat-code"><img data-src="https://img-blog.csdnimg.cn/20200609100814596.png"></li>
+                <li class="alipay-code"><img data-src="https://img-blog.csdnimg.cn/20200609100831689.png"></li>
             </ul>
         </div>
     </div>
@@ -599,7 +604,7 @@ bot_ui_ini();
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -656,6 +661,12 @@ bot_ui_ini();
         
         
           <li>
+            <a href="/posts/x2y/wechat-gauge.html" title="【Java高工、架构师】系列群群规" target="_blank">
+            <i class="fa fa-check-square"></i> 【Java高工、架构师】系列群群规
+            </a>
+          </li>
+        
+          <li>
             <a href="/posts/x2y/tencent+.html" title="2020-4-17群福利：腾讯云+社区公仔寄送公示" target="_blank">
             <i class="fa fa-check-square"></i> 2020-4-17群福利：腾讯云+社区公仔寄送公示
             </a>
@@ -664,12 +675,6 @@ bot_ui_ini();
           <li>
             <a href="/posts/x2y/f3891d18.html" title="程序人生 | 春风得意马蹄疾，一日看尽长安花" target="_blank">
             <i class="fa fa-check-square"></i> 程序人生 | 春风得意马蹄疾，一日看尽长安花
-            </a>
-          </li>
-        
-          <li>
-            <a href="/posts/x2y/1b8d333f.html" title="静态代码块、静态变量，构造代码块、实例变量的执行顺序和继承逻辑" target="_blank">
-            <i class="fa fa-check-square"></i> 静态代码块、静态变量，构造代码块、实例变量的执行顺序和继承逻辑
             </a>
           </li>
         
@@ -1133,13 +1138,13 @@ bot_ui_ini();
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">本站总字数：</span>
-    <span title="本站总字数">24k</span>
+    <span title="本站总字数">25k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">本站总阅读时长 &asymp;</span>
-    <span title="本站总阅读时长">22 分钟</span>
+    <span title="本站总阅读时长">23 分钟</span>
 </div>
   <div class="addthis_inline_share_toolbox">
     <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5eb7b6f6b64d54f6" async="async"></script>
@@ -1182,12 +1187,9 @@ bot_ui_ini();
   <script src="/lib/anime.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
   <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
 
 <script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
 
 
 <script src="/js/schemes/pisces.js"></script>
@@ -1262,6 +1264,26 @@ bot_ui_ini();
 
 
 
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
 
 
 
