@@ -1,183 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Hallo World</title>
-    <url>/posts/x2y/43fc112c.html</url>
-    <content><![CDATA[<p>你好同学，欢迎来到A哥的博客：BAT的乌托邦</p>]]></content>
-      <categories>
-        <category>缺省</category>
-      </categories>
-      <tags>
-        <tag>缺省</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【Java高工、架构师】系列群群规</title>
-    <url>/posts/x2y/wechat-gauge.html</url>
-    <content><![CDATA[<blockquote class="blockquote-center">
-            <i class="fa fa-quote-left"></i>
-            <p>久旱逢甘雨，一滴；<br>他乡遇故知，债主；<br>洞房花烛夜，隔壁；<br>金榜题名时，重名。</p>
-
-            <i class="fa fa-quote-right"></i>
-          </blockquote>
-<div style="margin-top: 50px; margin-bottom: 50px; text-align: center; font-weight: bolder; color: grey; font-size: 23px;">
-【Java高工、架构师】系列群是由A哥搭建起的纯净技术交流平台，一直秉承着做技术我们是认真的态度。因此有一些群规需要你遵守
-</div>
-<div class="tabs" id=""><ul class="nav-tabs"><li class="tab active"><a href="#-1">关于推文</a></li><li class="tab"><a href="#-2">关于广告</a></li><li class="tab"><a href="#-3">关于群</a></li><li class="tab"><a href="#-4">群福利</a></li></ul><div class="tab-content"><div class="tab-pane active" id="-1"><div style="text-align: center; color: red; font-weight: bolder; font-size: 18px; }" class="note danger">
-禁止一切未经允许的推文
-</div>
-目的：避免沦为推文群、僵尸群，同时提高文章质量，旨在帮群友筛选出真正的干货。因此需要对推文方面作出一些限制：
-<div class="note warning">
-            <ol><li>禁止一切未经允许的推文</li><li>目前【仅】10群开放自由推文限制（但也不能是广告文、太水的文），若你是号主or你希望看到更多“不一样”的文章，可私聊A哥邀请你进入10群</li><li>除了10群外，其它群推文采用【申请授权】方式，A哥已组件好了小团队会定期进行审核，通过后会通知到你便可在指定群推文了。<a href="https://shimo.im/sheets/QtqXwKgCVJxJjhtJ/MODOC" target="_blank" rel="noopener">申请登记地址</a></li><li>为了避免信息爆炸，每个群允许通过授权的数量目前定在【5个】，后期会根据实际情况加以调整</li></ol>
-          </div></div><div class="tab-pane" id="-2"><div style="text-align: center; color: red; font-weight: bolder; font-size: 18px; }" class="note danger">
-所有群禁止一切未经允许的广告
-</div>
-目的：你懂的，咱们是纯净版技术群，是有B格的。广告最容易让一个群死翘翘了，所以禁止它无需多言：
-<div class="note warning">
-            <ol><li>所有群禁止一切未经允许的广告（包括但不限于：商业广告、推广、拼单、拉票、招聘广告…）</li><li>禁止一切发送二维码的广告行为，且严令禁止</li><li>为了照顾有些群友确实在找工作，所以会定期允许几个【招聘广告】发出，但是这是有前提的：<ol><li>请务必先发给群主“审核”允许后，才允许发出</li><li>群并不独属于群主，因此广告发出需要配额一定数量红包（金额10元起步，数量最大30个）</li></ol></li><li>需要注意的是：目前仅规则性允许招聘广告，其它广告类型一律拒绝</li></ol>
-          </div></div><div class="tab-pane" id="-3"><div style="text-align: center; color: red; font-weight: bolder; font-size: 18px; }" class="note danger">
-禁止群内私加好友行为，欢迎举报
-</div>
-目的：例举一些基本规则，希望你能遵守
-<div class="note info">
-            <ol><li>禁止群内私加好友行为，欢迎举报</li><li>禁聊政治敏感话题</li><li>文明聊天，拒绝黄赌毒。那些总是喜欢开车的小伙伴们啊，请低速驾驶，超速者将吊销你的驾驶证</li><li>为了避免人员重复，每个人只允许呆在本系列群一个群内（10群除外），管理员会定期检测T出重复人员</li><li>群内问问题小技巧：<ol><li>请把你的问题描述完整再问，因为程序运行都要有context，何况人呢？</li><li>代码尽量用截图形式发出，这样能保持格式，以及也方便你对敏感信息打码</li><li>帮你是情分，不帮你是本分。若你很希望此问题有人可以帮你，发个小小红包以示感谢效果会更好</li></ol></li></ol>
-          </div></div><div class="tab-pane" id="-4"><p>😄你造的，目前单单【公益】（意思就是你一分钱不用花，快递费都不用出呢）活动，A哥就已经送出了超200个公仔了，这对于本就贫穷的我，不是个小数目了😄，相较于一般的群还是不错的哈。</p>
-<table>
-<thead>
-<tr>
-<th align="left"><img data-src="https://img-blog.csdnimg.cn/20200612225136939.png" alt="A哥私人微信"></th>
-<th align="left"><img data-src="https://img-blog.csdnimg.cn/20200613092818287.gif" alt="A哥私人公众号"></th>
-</tr>
-</thead>
-</table>
-<p>除了这些，你还可以：</p>
-<div class="note info">
-            <ol><li>扫码加A哥好友，和一个很有技术范的coder做朋友（如果已经是群友，建议你务必添加好友，方便我做群管理）</li><li>如果你是个对技术有研究热情的，就扫码关注我的公众号吧（BAT的乌托邦：只做有深度的文章分享，拒绝浅尝辄止）</li><li>若你有兴趣，近期正在筹划线下面积活动，认识认识圈内人。当然地点是北京，若你有兴趣可下面留言</li></ol>
-          </div></div></div></div>
-<div style="margin-top: 50px; margin-bottom: 50px; text-align: center; font-weight: bolder; color: grey; font-size: 23px;">
-😄希望大家遵守群规哈，群内不求大富大贵。但可以聚集在一起做个俗人：贪财好色，更快乐些不是😄
-</div>
-
-<hr>]]></content>
-      <categories>
-        <category>缺省</category>
-      </categories>
-      <tags>
-        <tag>缺省</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>静态代码块、静态变量，构造代码块、实例变量的执行顺序和继承逻辑</title>
-    <url>/posts/x2y/1b8d333f.html</url>
-    <content><![CDATA[<blockquote>
-<p>面试总在懵逼和牛逼之间徘徊。切忌：考官手下留点情，给个机会行不行<br><strong>作者</strong>：A哥（YourBatman）<br><strong>公众号</strong>：BAT的乌托邦（ID：BAT-utopia）<br><strong>文末是否有彩蛋</strong>：有</p>
-</blockquote>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>各位小伙伴大家好，我是A哥。如果问：Java的三大特性是什么？你顺口就能答出：封装、继承、多态。如果继续问：你真的了解Java中的继承吗？</p>
-<p>或许你本来很懂，但被我这么一问就有点怀疑了。那么，就看看本文吧，保证你会有收获，能让你更好的理解Java中的继承机制。</p>
-<h3 id="继承案例"><a href="#继承案例" class="headerlink" title="继承案例"></a>继承案例</h3><h4 id="case1：父类和子类有同名同类型的属性时"><a href="#case1：父类和子类有同名同类型的属性时" class="headerlink" title="case1：父类和子类有同名同类型的属性时"></a>case1：父类和子类有同名同类型的属性时</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 使用多态</span></span><br><span class="line">        Parent chidParent = <span class="keyword">new</span> Child();</span><br><span class="line">        System.out.println(<span class="string">"Parent:"</span> + chidParent.getAge()); <span class="comment">//40</span></span><br><span class="line">        System.out.println(<span class="string">"Parent:"</span> + chidParent.age); <span class="comment">//18 这个结果你能接受吗？哈哈</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 直接使用原本类型</span></span><br><span class="line">        Child child = <span class="keyword">new</span> Child();</span><br><span class="line">        System.out.println(<span class="string">"Child:"</span> + child.getAge()); <span class="comment">//40</span></span><br><span class="line">        System.out.println(<span class="string">"Child:"</span> + child.age); <span class="comment">//40</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Getter</span></span><br><span class="line"><span class="meta">@Setter</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Child</span> <span class="keyword">extends</span> <span class="title">Parent</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> Integer age = <span class="number">40</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Getter</span></span><br><span class="line"><span class="meta">@Setter</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Parent</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> Integer age = <span class="number">18</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>输出结果：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Parent:<span class="number">40</span></span><br><span class="line">Parent:<span class="number">18</span></span><br><span class="line">Child:<span class="number">40</span></span><br><span class="line">Child:<span class="number">40</span></span><br></pre></td></tr></table></figure>
-<p>我相信和最初的我一样，对<code>Parent:18</code>这个结果大吃一惊，what？其实这就是Java的继承机制，对此说明如下：</p>
-<ol>
-<li><strong>属性属于实例自己的</strong>，所以Parent的age属性值是18，这就解释通了</li>
-<li>属性不存在覆盖（即使同名），而方法是实实在在的覆盖（复写）。所以你调用<code>getAge()</code>方法返回的100%是40喽</li>
-</ol>
-<h4 id="case2：父类和子类有同名但不同类型的属性时"><a href="#case2：父类和子类有同名但不同类型的属性时" class="headerlink" title="case2：父类和子类有同名但不同类型的属性时"></a>case2：父类和子类有同名但不同类型的属性时</h4><p>结论同上。</p>
-<h4 id="case3：下面代码输出什么？"><a href="#case3：下面代码输出什么？" class="headerlink" title="case3：下面代码输出什么？"></a>case3：下面代码输出什么？</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> Child();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Getter</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Child</span> <span class="keyword">extends</span> <span class="title">Parent</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">"Child的静态块"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    &#123;</span><br><span class="line">        System.out.println(<span class="string">"Child的构造块"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    Child() &#123;</span><br><span class="line">        System.out.println(<span class="string">"Child的构造方法"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Getter</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Parent</span> </span>&#123;</span><br><span class="line">    Integer age = <span class="number">18</span>;</span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">"Parent的静态块"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    &#123;</span><br><span class="line">        System.out.println(<span class="string">"Parent的构造块"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    Parent() &#123;</span><br><span class="line">        System.out.println(<span class="string">"Parent的构造方法"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>结果输出：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Parent的静态块</span><br><span class="line">Child的静态块</span><br><span class="line">Parent的构造块</span><br><span class="line">Parent的构造方法</span><br><span class="line">Child的构造块</span><br><span class="line">Child的构造方法</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>Tips：构造代码块优先于构造方法执行，<strong>且优先于属性初始化之前执行</strong><br><code>@PostConstruct</code>是对象的属性都初始化ok了<code>之后</code>才去执行的（注意你new的话，<code>@PostConstruct</code>方法是不会执行的，他是Spring给与的支持哦~）</p>
-</blockquote>
-<p>值得注意的是，此处子类没有<strong>显示调用super()</strong>，但父类的构造还是执行了的。但是，但是，但是，如果构造快为有参构造，请记得显示调用super方法，否则父类是不能被初始化的。<strong>如果子类的构造器没有显示地调用超类的构造器，则将自动调用超类默认（没有参数） 的构造器</strong>。如果超类没有不带参数的构造器，并且在子类的构造器又没有显式地调用超类的其他构造器，则 java 编译器将报告错误~</p>
-<hr>
-<h5 id="变种面试题"><a href="#变种面试题" class="headerlink" title="变种面试题"></a>变种面试题</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StaticTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        staticFunction();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 静态变量（有实例化的过程,这就是本题的重点）</span></span><br><span class="line">    <span class="keyword">static</span> StaticTest st = <span class="keyword">new</span> StaticTest();</span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        <span class="comment">//System.out.println(b); // 编译报错：因为b在构造代码块后边，此处不能引用。因此Java代码是从上到下的顺序</span></span><br><span class="line">        System.out.println(<span class="string">"1"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    &#123;</span><br><span class="line">        System.out.println(<span class="string">"2"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    StaticTest() &#123;</span><br><span class="line">        System.out.println(<span class="string">"3"</span>);</span><br><span class="line">        System.out.println(<span class="string">"a="</span> + a + <span class="string">",b="</span> + b);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">staticFunction</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"4"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 这两个变量写在最后面</span></span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">110</span>;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> b = <span class="number">112</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>输出：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line">a=<span class="number">110</span>,b=<span class="number">0</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">4</span></span><br></pre></td></tr></table></figure>
-<p>答案五花八门，真正能答对这道题的小伙伴<strong>少之又少</strong>。从结果中，这里先给你扔个结论：</p>
-<ol>
-<li>先初始化静态变量，也就是执行<code>new StaticTest()</code>，从而打印：2</li>
-<li>再执行构造函数，打印：3和<code>a=110,b=0</code><ol>
-<li>为何a=110，而b却为0呢？<ol>
-<li>执行构造函数之前，必须初始化实例属性，所以a=110</li>
-<li>静态变量从上到下初始化，而<code>st</code>变量还没初始化完呢，所以b此时值为0</li>
-</ol>
-</li>
-</ol>
-</li>
-<li>执行紧跟着的静态代码块。打印：1</li>
-<li>执行静态方法<code>staticFunction</code>，打印：4</li>
-</ol>
-<p>从该结果你应该能知道：<strong>static变量可不是100%一定在实例变量之前被赋值（初始化哦~），比如本例的b就在a之后初始化了</strong></p>
-<h6 id="原因："><a href="#原因：" class="headerlink" title="原因："></a>原因：</h6><p>类的生命周期是：<strong>加载-&gt;验证-&gt;准备-&gt;解析-&gt;初始化-&gt;使用-&gt;卸载。</strong></p>
-<blockquote>
-<p>只有在准备阶段和初始化阶段才会涉及<code>类变量的初始化和赋值</code>，因此只针对这两个阶段进行分析；</p>
-</blockquote>
-<p><code>类的准备阶段</code>：需要做是为类变量（static变量）分配内存并设置<code>默认值</code>（注意此处都是先给默认值），因此类变量st为null、b为0；</p>
-<blockquote>
-<p>需要注意的是，如果类变量是final的，<strong>编译时</strong>javac就会为它赋上值。因此上面如果我们这样写<code>static final int b=112</code>它哪怕在准备阶段，值就应该是112了</p>
-</blockquote>
-<p><code>类的初始化阶段</code>：需要做的是执行<code>类构造器</code>（<code>请注意：这里不是指的构造函数</code>）。</p>
-<blockquote>
-<p>类构造器：<code>编译器</code>收集所有<code>静态语句块</code>和<code>类变量</code>的<code>赋值语句</code>，按语句在源码中的<strong>顺序（请注意这三者是有序的）</strong>合并生成类构造器</p>
-</blockquote>
-<p>因此现在执行：<code>st = new StaticTest()</code>.此时我们发现，就会进行对象的初始化了（看到没，这个时候b变量的赋值语句还没有执行哦<del>~</del>）</p>
-<p><strong>而对象初始化的顺序为：成员变量 -&gt; 普通代码块 -&gt; 构造函数</strong>，因此这一波过后：a=110了。<br>输出为：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line">a=<span class="number">110</span>,b=<span class="number">0</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>需要注意的是，此时b仍然为0，并没有被赋值哦~</p>
-</blockquote>
-<p>到此<code>st = new StaticTest()</code>这句就执行结束了。继续执行<code>类构造器</code>，显然就会执行static语句块了<del>输出1，最后调用静态方法，就输出4了   完美</del></p>
-<h5 id="冷知识"><a href="#冷知识" class="headerlink" title="冷知识"></a>冷知识</h5><p>通过结果看，有点颠覆我们之前的认知。其实这是一个冷知识：</p>
-<blockquote>
-<p>它的关键在于：<code>static StaticTest st = new StaticTest()</code>这句代码，内嵌的这个变量<code>恰好是个静态成员</code>，而且是<code>本类的实例</code>  这就导致了这个有趣的现象：<code>“实例初始化竟然出现在静态初始化之前”。</code></p>
-</blockquote>
-<p>这里面我只做一小步变化：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> StaticTest st = <span class="keyword">new</span> StaticTest()</span><br><span class="line">改成</span><br><span class="line">StaticTest st = <span class="keyword">new</span> StaticTest()</span><br><span class="line">或者改成：</span><br><span class="line"><span class="keyword">static</span> Object st = <span class="keyword">new</span> Object();</span><br></pre></td></tr></table></figure>
-<p>最终输出结果就为（符合我们常识了吧，啊哈哈哈哈）：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">4</span></span><br></pre></td></tr></table></figure>
-
-<hr>
-<h4 id="case4：子类和父类有同名同类型的静态变量的时候"><a href="#case4：子类和父类有同名同类型的静态变量的时候" class="headerlink" title="case4：子类和父类有同名同类型的静态变量的时候"></a>case4：子类和父类有<code>同名同类型</code>的<code>静态</code>变量的时候</h4><p>结论就不用解释了：静态变量属于类的，和继承无关。</p>
-<h4 id="case5：静态代码块属于类的，并且优先于main方法执行（有难度）"><a href="#case5：静态代码块属于类的，并且优先于main方法执行（有难度）" class="headerlink" title="case5：静态代码块属于类的，并且优先于main方法执行（有难度）"></a>case5：静态代码块属于类的，并且优先于main方法执行（有难度）</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StaticDemo1</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        speak();</span><br><span class="line">        <span class="comment">//StaticDemo1 t1 = new StaticDemo1();</span></span><br><span class="line">        <span class="comment">//System.out.println(t1.i);</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 静态变量</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> i = <span class="number">1</span>;</span><br><span class="line">    <span class="comment">// 静态方法</span></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">speak</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"a"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 静态代码块</span></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        i = i + <span class="number">3</span>;</span><br><span class="line">        System.out.println(i);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 构造函数</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">StaticDemo1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        i = i + <span class="number">5</span>;</span><br><span class="line">        System.out.println(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>输出：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="number">4</span></span><br><span class="line">a</span><br></pre></td></tr></table></figure>
-<p>4在a之前输出，证明：毕竟mian方法属于<code>StaticDemo1</code>类的方法，所以会先执行此类的静态变量 + 静态代码块。</p>
-<p>其它不变，改为这样：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    StaticDemo1 t1 = <span class="keyword">new</span> StaticDemo1();</span><br><span class="line">    System.out.println(t1.i);</span><br><span class="line">    speak();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="number">9</span></span><br><span class="line"><span class="number">9</span></span><br><span class="line">a</span><br></pre></td></tr></table></figure>
-<ol>
-<li>执行静态代码块：打印4</li>
-<li>执行构造方法：打印9</li>
-<li><code>System.out.println(t1.i)</code>直接输出，打印9（此时i的值是9）</li>
-<li>执行speak()：打印1</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    speak();</span><br><span class="line">    StaticDemo1 t1 = <span class="keyword">new</span> StaticDemo1();</span><br><span class="line">    System.out.println(t1.i);</span><br><span class="line">&#125;</span><br><span class="line"><span class="number">4</span></span><br><span class="line">a</span><br><span class="line"><span class="number">9</span></span><br><span class="line"><span class="number">9</span></span><br></pre></td></tr></table></figure>
-<p>这个输出，在意料之中，不再解释喽。</p>
-<p>这是一道面试题，考察的是：<strong>static块真正的执行时机</strong>。若想真正了解类的装载，请去了解JVM吧~</p>
-<h3 id="注解对执行顺序的影响"><a href="#注解对执行顺序的影响" class="headerlink" title="注解对执行顺序的影响"></a>注解对执行顺序的影响</h3><p>特别的，这里我介绍一下各种注解影响的执行顺序，如下代码：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Component</span>  </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">InitBeanTest</span> <span class="keyword">implements</span> <span class="title">InitializingBean</span>,<span class="title">ApplicationListener</span>&lt;<span class="title">ContextRefreshedEvent</span>&gt; </span>&#123;  </span><br><span class="line">  </span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    DemoService demoService;  </span><br><span class="line">      </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">InitBeanTest</span><span class="params">()</span> </span>&#123;     </span><br><span class="line">       System.err.println(<span class="string">"----&gt; InitSequenceBean: constructor: "</span>+demoService);     </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="meta">@PostConstruct</span>  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">postConstruct</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">        System.err.println(<span class="string">"----&gt; InitSequenceBean: @PostConstruct: "</span>+demoService);  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="meta">@Override</span>  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">afterPropertiesSet</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;  </span><br><span class="line">        System.err.println(<span class="string">"----&gt; InitSequenceBean: afterPropertiesSet: "</span>+demoService);  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="meta">@Override</span>  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onApplicationEvent</span><span class="params">(ContextRefreshedEvent arg0)</span> </span>&#123;  </span><br><span class="line">        System.err.println(<span class="string">"----&gt; InitSequenceBean: onApplicationEvent"</span>);  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line">执行结果：</span><br><span class="line">----&gt; InitSequenceBean: constructor: <span class="keyword">null</span></span><br><span class="line">----&gt; InitSequenceBean: <span class="meta">@PostConstruct</span>: com.xxx.service.impl.DemoServiceImpl@<span class="number">40f</span>e544</span><br><span class="line">----&gt; InitSequenceBean: afterPropertiesSet: com.xxx.service.impl.DemoServiceImpl@<span class="number">40f</span>e544</span><br><span class="line">----&gt; InitSequenceBean: onApplicationEvent</span><br></pre></td></tr></table></figure>
-<p>根据代码演示，得出文字版结论：</p>
-<ul>
-<li>构造函数是每个类<strong>最先执行</strong>的，这个时候，bean属性还没有被注入</li>
-<li><strong>@PostConstruct优先于afterPropertiesSet执行</strong>：在这执行，属性已经完成了赋值（注入）</li>
-</ul>
-<hr>
-<h3 id="继续补充：子类默认调用父类构造函数问题"><a href="#继续补充：子类默认调用父类构造函数问题" class="headerlink" title="继续补充：子类默认调用父类构造函数问题"></a>继续补充：子类默认调用<code>父类构造函数</code>问题</h3><p>Java有个很有趣的现象：父类有N多个构造函数，子类如果只写一个的话那么子类最终就只有一个构造函数可用，因此子类在这方面要特别的注意喽。<br>默认情况下，子类在使用构造函数初始化时（不管是子类使用有参构造还是无参构造），<strong>默认情况下都会调用父类的无参构造函数（相当于调用了<code>super()</code>）</strong>。看看下面几个变种如下：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 父类木有空的构造  只有一个有参构造</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Parent</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Integer id;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Parent</span><span class="params">(Integer id)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"this is parent cons..."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>此时候我们发现发现如下三问题：<br>1、子类Child<strong>必须</strong>有对应的有参构造<br><img data-src="https://img-blog.csdnimg.cn/20190617171950547.png" alt="在这里插入图片描述"><br>2、super(id)必须显示的写出，否则编译不通过<br><img data-src="https://img-blog.csdnimg.cn/20190617172039187.png" alt="在这里插入图片描述"><br>3、原则上，子类的构造函数不能<strong>多于</strong>父类的<br><img data-src="https://img-blog.csdnimg.cn/20190617172208443.png" alt="在这里插入图片描述"><br>4、子类构造函数若多余父类（或者类型啥的和父类不匹配），需要显示的调用父类构造函数<br><img data-src="https://img-blog.csdnimg.cn/20190625141710640.png" alt="在这里插入图片描述"><br>结论：</p>
-<ul>
-<li>1、子类构造器执行之前<strong>必须</strong>能够<code>先执行</code>父类的构造函数（super(xxx)必须放在第一行代码）</li>
-<li>2、若父类有空构造，子类构造默认都会调用<code>super()</code>。若父类木有空构造，子类所有构造都必须<strong>显示</strong>调用<code>super(xxx)·</code></li>
-</ul>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>据反馈，看了此篇文章后，很多小伙伴感觉自己学的是另外一个Java，其实这就是JavaSE，很多架构师认为，Java基础才是精华中的精华（一流），Spring才属于应用级别的技术（二流）。</p>]]></content>
-      <categories>
-        <category>A哥学Java</category>
-      </categories>
-      <tags>
-        <tag>Java基础</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>程序人生 | 春风得意马蹄疾，一日看尽长安花</title>
     <url>/posts/x2y/f3891d18.html</url>
     <content><![CDATA[<blockquote>
@@ -358,6 +181,61 @@
       </categories>
       <tags>
         <tag>职业生涯</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【Java高工、架构师】系列群群规</title>
+    <url>/posts/x2y/wechat-gauge.html</url>
+    <content><![CDATA[<blockquote class="blockquote-center">
+            <i class="fa fa-quote-left"></i>
+            <p>久旱逢甘雨，一滴；<br>他乡遇故知，债主；<br>洞房花烛夜，隔壁；<br>金榜题名时，重名。</p>
+
+            <i class="fa fa-quote-right"></i>
+          </blockquote>
+<div style="margin-top: 50px; margin-bottom: 50px; text-align: center; font-weight: bolder; color: grey; font-size: 23px;">
+【Java高工、架构师】系列群是由A哥搭建起的纯净技术交流平台，一直秉承着做技术我们是认真的态度。因此有一些群规需要你遵守
+</div>
+<div class="tabs" id=""><ul class="nav-tabs"><li class="tab active"><a href="#-1">关于推文</a></li><li class="tab"><a href="#-2">关于广告</a></li><li class="tab"><a href="#-3">关于群</a></li><li class="tab"><a href="#-4">群福利</a></li></ul><div class="tab-content"><div class="tab-pane active" id="-1"><div style="text-align: center; color: red; font-weight: bolder; font-size: 18px; }" class="note danger">
+禁止一切未经允许的推文
+</div>
+目的：避免沦为推文群、僵尸群，同时提高文章质量，旨在帮群友筛选出真正的干货。因此需要对推文方面作出一些限制：
+<div class="note warning">
+            <ol><li>禁止一切未经允许的推文</li><li>目前【仅】10群开放自由推文限制（但也不能是广告文、太水的文），若你是号主or你希望看到更多“不一样”的文章，可私聊A哥邀请你进入10群</li><li>除了10群外，其它群推文采用【申请授权】方式，A哥已组件好了小团队会定期进行审核，通过后会通知到你便可在指定群推文了。<a href="https://shimo.im/sheets/QtqXwKgCVJxJjhtJ/MODOC" target="_blank" rel="noopener">申请登记地址</a></li><li>为了避免信息爆炸，每个群允许通过授权的数量目前定在【5个】，后期会根据实际情况加以调整</li></ol>
+          </div></div><div class="tab-pane" id="-2"><div style="text-align: center; color: red; font-weight: bolder; font-size: 18px; }" class="note danger">
+所有群禁止一切未经允许的广告
+</div>
+目的：你懂的，咱们是纯净版技术群，是有B格的。广告最容易让一个群死翘翘了，所以禁止它无需多言：
+<div class="note warning">
+            <ol><li>所有群禁止一切未经允许的广告（包括但不限于：商业广告、推广、拼单、拉票、招聘广告…）</li><li>禁止一切发送二维码的广告行为，且严令禁止</li><li>为了照顾有些群友确实在找工作，所以会定期允许几个【招聘广告】发出，但是这是有前提的：<ol><li>请务必先发给群主“审核”允许后，才允许发出</li><li>群并不独属于群主，因此广告发出需要配额一定数量红包（金额10元起步，数量最大30个）</li></ol></li><li>需要注意的是：目前仅规则性允许招聘广告，其它广告类型一律拒绝</li></ol>
+          </div></div><div class="tab-pane" id="-3"><div style="text-align: center; color: red; font-weight: bolder; font-size: 18px; }" class="note danger">
+禁止群内私加好友行为，欢迎举报
+</div>
+目的：例举一些基本规则，希望你能遵守
+<div class="note info">
+            <ol><li>禁止群内私加好友行为，欢迎举报</li><li>禁聊政治敏感话题</li><li>文明聊天，拒绝黄赌毒。那些总是喜欢开车的小伙伴们啊，请低速驾驶，超速者将吊销你的驾驶证</li><li>为了避免人员重复，每个人只允许呆在本系列群一个群内（10群除外），管理员会定期检测T出重复人员</li><li>群内问问题小技巧：<ol><li>请把你的问题描述完整再问，因为程序运行都要有context，何况人呢？</li><li>代码尽量用截图形式发出，这样能保持格式，以及也方便你对敏感信息打码</li><li>帮你是情分，不帮你是本分。若你很希望此问题有人可以帮你，发个小小红包以示感谢效果会更好</li></ol></li></ol>
+          </div></div><div class="tab-pane" id="-4"><p>😄你造的，目前单单【公益】（意思就是你一分钱不用花，快递费都不用出呢）活动，A哥就已经送出了超200个公仔了，这对于本就贫穷的我，不是个小数目了😄，相较于一般的群还是不错的哈。</p>
+<table>
+<thead>
+<tr>
+<th align="left"><img data-src="https://img-blog.csdnimg.cn/20200612225136939.png" alt="A哥私人微信"></th>
+<th align="left"><img data-src="https://img-blog.csdnimg.cn/20200613092818287.gif" alt="A哥私人公众号"></th>
+</tr>
+</thead>
+</table>
+<p>关于A哥的介绍，你可以<a href="/about">点击这里</a>。除了这些，你还可以：</p>
+<div class="note info">
+            <ol><li>扫码加A哥好友，和一个很有技术范的coder做朋友（如果已经是群友，建议你务必添加好友，方便我做群管理）</li><li>如果你是个对技术有研究热情的，就扫码关注我的公众号吧（BAT的乌托邦：只做有深度的文章分享，拒绝浅尝辄止）</li><li>若你有兴趣，近期正在筹划线下面积活动，认识认识圈内人。当然地点是北京，若你有兴趣可下面留言</li></ol>
+          </div></div></div></div>
+<div style="margin-top: 50px; margin-bottom: 50px; text-align: center; font-weight: bolder; color: grey; font-size: 23px;">
+😄希望大家遵守群规哈，群内不求大富大贵。但可以聚集在一起做个俗人：贪财好色，更快乐些不是😄
+</div>
+
+<hr>]]></content>
+      <categories>
+        <category>缺省</category>
+      </categories>
+      <tags>
+        <tag>缺省</tag>
       </tags>
   </entry>
   <entry>
@@ -616,6 +494,117 @@
       </tags>
   </entry>
   <entry>
+    <title>静态代码块、静态变量，构造代码块、实例变量的执行顺序和继承逻辑</title>
+    <url>/posts/x2y/1b8d333f.html</url>
+    <content><![CDATA[<blockquote>
+<p>面试总在懵逼和牛逼之间徘徊。切忌：考官手下留点情，给个机会行不行<br><strong>作者</strong>：A哥（YourBatman）<br><strong>公众号</strong>：BAT的乌托邦（ID：BAT-utopia）<br><strong>文末是否有彩蛋</strong>：有</p>
+</blockquote>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>各位小伙伴大家好，我是A哥。如果问：Java的三大特性是什么？你顺口就能答出：封装、继承、多态。如果继续问：你真的了解Java中的继承吗？</p>
+<p>或许你本来很懂，但被我这么一问就有点怀疑了。那么，就看看本文吧，保证你会有收获，能让你更好的理解Java中的继承机制。</p>
+<h3 id="继承案例"><a href="#继承案例" class="headerlink" title="继承案例"></a>继承案例</h3><h4 id="case1：父类和子类有同名同类型的属性时"><a href="#case1：父类和子类有同名同类型的属性时" class="headerlink" title="case1：父类和子类有同名同类型的属性时"></a>case1：父类和子类有同名同类型的属性时</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 使用多态</span></span><br><span class="line">        Parent chidParent = <span class="keyword">new</span> Child();</span><br><span class="line">        System.out.println(<span class="string">"Parent:"</span> + chidParent.getAge()); <span class="comment">//40</span></span><br><span class="line">        System.out.println(<span class="string">"Parent:"</span> + chidParent.age); <span class="comment">//18 这个结果你能接受吗？哈哈</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 直接使用原本类型</span></span><br><span class="line">        Child child = <span class="keyword">new</span> Child();</span><br><span class="line">        System.out.println(<span class="string">"Child:"</span> + child.getAge()); <span class="comment">//40</span></span><br><span class="line">        System.out.println(<span class="string">"Child:"</span> + child.age); <span class="comment">//40</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Getter</span></span><br><span class="line"><span class="meta">@Setter</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Child</span> <span class="keyword">extends</span> <span class="title">Parent</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> Integer age = <span class="number">40</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Getter</span></span><br><span class="line"><span class="meta">@Setter</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Parent</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> Integer age = <span class="number">18</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Parent:<span class="number">40</span></span><br><span class="line">Parent:<span class="number">18</span></span><br><span class="line">Child:<span class="number">40</span></span><br><span class="line">Child:<span class="number">40</span></span><br></pre></td></tr></table></figure>
+<p>我相信和最初的我一样，对<code>Parent:18</code>这个结果大吃一惊，what？其实这就是Java的继承机制，对此说明如下：</p>
+<ol>
+<li><strong>属性属于实例自己的</strong>，所以Parent的age属性值是18，这就解释通了</li>
+<li>属性不存在覆盖（即使同名），而方法是实实在在的覆盖（复写）。所以你调用<code>getAge()</code>方法返回的100%是40喽</li>
+</ol>
+<h4 id="case2：父类和子类有同名但不同类型的属性时"><a href="#case2：父类和子类有同名但不同类型的属性时" class="headerlink" title="case2：父类和子类有同名但不同类型的属性时"></a>case2：父类和子类有同名但不同类型的属性时</h4><p>结论同上。</p>
+<h4 id="case3：下面代码输出什么？"><a href="#case3：下面代码输出什么？" class="headerlink" title="case3：下面代码输出什么？"></a>case3：下面代码输出什么？</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> Child();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Getter</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Child</span> <span class="keyword">extends</span> <span class="title">Parent</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">"Child的静态块"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    &#123;</span><br><span class="line">        System.out.println(<span class="string">"Child的构造块"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    Child() &#123;</span><br><span class="line">        System.out.println(<span class="string">"Child的构造方法"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Getter</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Parent</span> </span>&#123;</span><br><span class="line">    Integer age = <span class="number">18</span>;</span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">"Parent的静态块"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    &#123;</span><br><span class="line">        System.out.println(<span class="string">"Parent的构造块"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    Parent() &#123;</span><br><span class="line">        System.out.println(<span class="string">"Parent的构造方法"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>结果输出：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Parent的静态块</span><br><span class="line">Child的静态块</span><br><span class="line">Parent的构造块</span><br><span class="line">Parent的构造方法</span><br><span class="line">Child的构造块</span><br><span class="line">Child的构造方法</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Tips：构造代码块优先于构造方法执行，<strong>且优先于属性初始化之前执行</strong><br><code>@PostConstruct</code>是对象的属性都初始化ok了<code>之后</code>才去执行的（注意你new的话，<code>@PostConstruct</code>方法是不会执行的，他是Spring给与的支持哦~）</p>
+</blockquote>
+<p>值得注意的是，此处子类没有<strong>显示调用super()</strong>，但父类的构造还是执行了的。但是，但是，但是，如果构造快为有参构造，请记得显示调用super方法，否则父类是不能被初始化的。<strong>如果子类的构造器没有显示地调用超类的构造器，则将自动调用超类默认（没有参数） 的构造器</strong>。如果超类没有不带参数的构造器，并且在子类的构造器又没有显式地调用超类的其他构造器，则 java 编译器将报告错误~</p>
+<hr>
+<h5 id="变种面试题"><a href="#变种面试题" class="headerlink" title="变种面试题"></a>变种面试题</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StaticTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        staticFunction();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 静态变量（有实例化的过程,这就是本题的重点）</span></span><br><span class="line">    <span class="keyword">static</span> StaticTest st = <span class="keyword">new</span> StaticTest();</span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        <span class="comment">//System.out.println(b); // 编译报错：因为b在构造代码块后边，此处不能引用。因此Java代码是从上到下的顺序</span></span><br><span class="line">        System.out.println(<span class="string">"1"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    &#123;</span><br><span class="line">        System.out.println(<span class="string">"2"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    StaticTest() &#123;</span><br><span class="line">        System.out.println(<span class="string">"3"</span>);</span><br><span class="line">        System.out.println(<span class="string">"a="</span> + a + <span class="string">",b="</span> + b);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">staticFunction</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"4"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 这两个变量写在最后面</span></span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">110</span>;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> b = <span class="number">112</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line">a=<span class="number">110</span>,b=<span class="number">0</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">4</span></span><br></pre></td></tr></table></figure>
+<p>答案五花八门，真正能答对这道题的小伙伴<strong>少之又少</strong>。从结果中，这里先给你扔个结论：</p>
+<ol>
+<li>先初始化静态变量，也就是执行<code>new StaticTest()</code>，从而打印：2</li>
+<li>再执行构造函数，打印：3和<code>a=110,b=0</code><ol>
+<li>为何a=110，而b却为0呢？<ol>
+<li>执行构造函数之前，必须初始化实例属性，所以a=110</li>
+<li>静态变量从上到下初始化，而<code>st</code>变量还没初始化完呢，所以b此时值为0</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>执行紧跟着的静态代码块。打印：1</li>
+<li>执行静态方法<code>staticFunction</code>，打印：4</li>
+</ol>
+<p>从该结果你应该能知道：<strong>static变量可不是100%一定在实例变量之前被赋值（初始化哦~），比如本例的b就在a之后初始化了</strong></p>
+<h6 id="原因："><a href="#原因：" class="headerlink" title="原因："></a>原因：</h6><p>类的生命周期是：<strong>加载-&gt;验证-&gt;准备-&gt;解析-&gt;初始化-&gt;使用-&gt;卸载。</strong></p>
+<blockquote>
+<p>只有在准备阶段和初始化阶段才会涉及<code>类变量的初始化和赋值</code>，因此只针对这两个阶段进行分析；</p>
+</blockquote>
+<p><code>类的准备阶段</code>：需要做是为类变量（static变量）分配内存并设置<code>默认值</code>（注意此处都是先给默认值），因此类变量st为null、b为0；</p>
+<blockquote>
+<p>需要注意的是，如果类变量是final的，<strong>编译时</strong>javac就会为它赋上值。因此上面如果我们这样写<code>static final int b=112</code>它哪怕在准备阶段，值就应该是112了</p>
+</blockquote>
+<p><code>类的初始化阶段</code>：需要做的是执行<code>类构造器</code>（<code>请注意：这里不是指的构造函数</code>）。</p>
+<blockquote>
+<p>类构造器：<code>编译器</code>收集所有<code>静态语句块</code>和<code>类变量</code>的<code>赋值语句</code>，按语句在源码中的<strong>顺序（请注意这三者是有序的）</strong>合并生成类构造器</p>
+</blockquote>
+<p>因此现在执行：<code>st = new StaticTest()</code>.此时我们发现，就会进行对象的初始化了（看到没，这个时候b变量的赋值语句还没有执行哦<del>~</del>）</p>
+<p><strong>而对象初始化的顺序为：成员变量 -&gt; 普通代码块 -&gt; 构造函数</strong>，因此这一波过后：a=110了。<br>输出为：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line">a=<span class="number">110</span>,b=<span class="number">0</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>需要注意的是，此时b仍然为0，并没有被赋值哦~</p>
+</blockquote>
+<p>到此<code>st = new StaticTest()</code>这句就执行结束了。继续执行<code>类构造器</code>，显然就会执行static语句块了<del>输出1，最后调用静态方法，就输出4了   完美</del></p>
+<h5 id="冷知识"><a href="#冷知识" class="headerlink" title="冷知识"></a>冷知识</h5><p>通过结果看，有点颠覆我们之前的认知。其实这是一个冷知识：</p>
+<blockquote>
+<p>它的关键在于：<code>static StaticTest st = new StaticTest()</code>这句代码，内嵌的这个变量<code>恰好是个静态成员</code>，而且是<code>本类的实例</code>  这就导致了这个有趣的现象：<code>“实例初始化竟然出现在静态初始化之前”。</code></p>
+</blockquote>
+<p>这里面我只做一小步变化：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> StaticTest st = <span class="keyword">new</span> StaticTest()</span><br><span class="line">改成</span><br><span class="line">StaticTest st = <span class="keyword">new</span> StaticTest()</span><br><span class="line">或者改成：</span><br><span class="line"><span class="keyword">static</span> Object st = <span class="keyword">new</span> Object();</span><br></pre></td></tr></table></figure>
+<p>最终输出结果就为（符合我们常识了吧，啊哈哈哈哈）：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">4</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="case4：子类和父类有同名同类型的静态变量的时候"><a href="#case4：子类和父类有同名同类型的静态变量的时候" class="headerlink" title="case4：子类和父类有同名同类型的静态变量的时候"></a>case4：子类和父类有<code>同名同类型</code>的<code>静态</code>变量的时候</h4><p>结论就不用解释了：静态变量属于类的，和继承无关。</p>
+<h4 id="case5：静态代码块属于类的，并且优先于main方法执行（有难度）"><a href="#case5：静态代码块属于类的，并且优先于main方法执行（有难度）" class="headerlink" title="case5：静态代码块属于类的，并且优先于main方法执行（有难度）"></a>case5：静态代码块属于类的，并且优先于main方法执行（有难度）</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StaticDemo1</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        speak();</span><br><span class="line">        <span class="comment">//StaticDemo1 t1 = new StaticDemo1();</span></span><br><span class="line">        <span class="comment">//System.out.println(t1.i);</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 静态变量</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> i = <span class="number">1</span>;</span><br><span class="line">    <span class="comment">// 静态方法</span></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">speak</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"a"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 静态代码块</span></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        i = i + <span class="number">3</span>;</span><br><span class="line">        System.out.println(i);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 构造函数</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">StaticDemo1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        i = i + <span class="number">5</span>;</span><br><span class="line">        System.out.println(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="number">4</span></span><br><span class="line">a</span><br></pre></td></tr></table></figure>
+<p>4在a之前输出，证明：毕竟mian方法属于<code>StaticDemo1</code>类的方法，所以会先执行此类的静态变量 + 静态代码块。</p>
+<p>其它不变，改为这样：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    StaticDemo1 t1 = <span class="keyword">new</span> StaticDemo1();</span><br><span class="line">    System.out.println(t1.i);</span><br><span class="line">    speak();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="number">9</span></span><br><span class="line"><span class="number">9</span></span><br><span class="line">a</span><br></pre></td></tr></table></figure>
+<ol>
+<li>执行静态代码块：打印4</li>
+<li>执行构造方法：打印9</li>
+<li><code>System.out.println(t1.i)</code>直接输出，打印9（此时i的值是9）</li>
+<li>执行speak()：打印1</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    speak();</span><br><span class="line">    StaticDemo1 t1 = <span class="keyword">new</span> StaticDemo1();</span><br><span class="line">    System.out.println(t1.i);</span><br><span class="line">&#125;</span><br><span class="line"><span class="number">4</span></span><br><span class="line">a</span><br><span class="line"><span class="number">9</span></span><br><span class="line"><span class="number">9</span></span><br></pre></td></tr></table></figure>
+<p>这个输出，在意料之中，不再解释喽。</p>
+<p>这是一道面试题，考察的是：<strong>static块真正的执行时机</strong>。若想真正了解类的装载，请去了解JVM吧~</p>
+<h3 id="注解对执行顺序的影响"><a href="#注解对执行顺序的影响" class="headerlink" title="注解对执行顺序的影响"></a>注解对执行顺序的影响</h3><p>特别的，这里我介绍一下各种注解影响的执行顺序，如下代码：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Component</span>  </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">InitBeanTest</span> <span class="keyword">implements</span> <span class="title">InitializingBean</span>,<span class="title">ApplicationListener</span>&lt;<span class="title">ContextRefreshedEvent</span>&gt; </span>&#123;  </span><br><span class="line">  </span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    DemoService demoService;  </span><br><span class="line">      </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">InitBeanTest</span><span class="params">()</span> </span>&#123;     </span><br><span class="line">       System.err.println(<span class="string">"----&gt; InitSequenceBean: constructor: "</span>+demoService);     </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="meta">@PostConstruct</span>  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">postConstruct</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">        System.err.println(<span class="string">"----&gt; InitSequenceBean: @PostConstruct: "</span>+demoService);  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="meta">@Override</span>  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">afterPropertiesSet</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;  </span><br><span class="line">        System.err.println(<span class="string">"----&gt; InitSequenceBean: afterPropertiesSet: "</span>+demoService);  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="meta">@Override</span>  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onApplicationEvent</span><span class="params">(ContextRefreshedEvent arg0)</span> </span>&#123;  </span><br><span class="line">        System.err.println(<span class="string">"----&gt; InitSequenceBean: onApplicationEvent"</span>);  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line">执行结果：</span><br><span class="line">----&gt; InitSequenceBean: constructor: <span class="keyword">null</span></span><br><span class="line">----&gt; InitSequenceBean: <span class="meta">@PostConstruct</span>: com.xxx.service.impl.DemoServiceImpl@<span class="number">40f</span>e544</span><br><span class="line">----&gt; InitSequenceBean: afterPropertiesSet: com.xxx.service.impl.DemoServiceImpl@<span class="number">40f</span>e544</span><br><span class="line">----&gt; InitSequenceBean: onApplicationEvent</span><br></pre></td></tr></table></figure>
+<p>根据代码演示，得出文字版结论：</p>
+<ul>
+<li>构造函数是每个类<strong>最先执行</strong>的，这个时候，bean属性还没有被注入</li>
+<li><strong>@PostConstruct优先于afterPropertiesSet执行</strong>：在这执行，属性已经完成了赋值（注入）</li>
+</ul>
+<hr>
+<h3 id="继续补充：子类默认调用父类构造函数问题"><a href="#继续补充：子类默认调用父类构造函数问题" class="headerlink" title="继续补充：子类默认调用父类构造函数问题"></a>继续补充：子类默认调用<code>父类构造函数</code>问题</h3><p>Java有个很有趣的现象：父类有N多个构造函数，子类如果只写一个的话那么子类最终就只有一个构造函数可用，因此子类在这方面要特别的注意喽。<br>默认情况下，子类在使用构造函数初始化时（不管是子类使用有参构造还是无参构造），<strong>默认情况下都会调用父类的无参构造函数（相当于调用了<code>super()</code>）</strong>。看看下面几个变种如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 父类木有空的构造  只有一个有参构造</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Parent</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Integer id;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Parent</span><span class="params">(Integer id)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"this is parent cons..."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>此时候我们发现发现如下三问题：<br>1、子类Child<strong>必须</strong>有对应的有参构造<br><img data-src="https://img-blog.csdnimg.cn/20190617171950547.png" alt="在这里插入图片描述"><br>2、super(id)必须显示的写出，否则编译不通过<br><img data-src="https://img-blog.csdnimg.cn/20190617172039187.png" alt="在这里插入图片描述"><br>3、原则上，子类的构造函数不能<strong>多于</strong>父类的<br><img data-src="https://img-blog.csdnimg.cn/20190617172208443.png" alt="在这里插入图片描述"><br>4、子类构造函数若多余父类（或者类型啥的和父类不匹配），需要显示的调用父类构造函数<br><img data-src="https://img-blog.csdnimg.cn/20190625141710640.png" alt="在这里插入图片描述"><br>结论：</p>
+<ul>
+<li>1、子类构造器执行之前<strong>必须</strong>能够<code>先执行</code>父类的构造函数（super(xxx)必须放在第一行代码）</li>
+<li>2、若父类有空构造，子类构造默认都会调用<code>super()</code>。若父类木有空构造，子类所有构造都必须<strong>显示</strong>调用<code>super(xxx)·</code></li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>据反馈，看了此篇文章后，很多小伙伴感觉自己学的是另外一个Java，其实这就是JavaSE，很多架构师认为，Java基础才是精华中的精华（一流），Spring才属于应用级别的技术（二流）。</p>]]></content>
+      <categories>
+        <category>A哥学Java</category>
+      </categories>
+      <tags>
+        <tag>Java基础</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>静态类、静态方法、内部类、匿名内部类、非静态类的一些实践</title>
     <url>/posts/x2y/889a54a1.html</url>
     <content><![CDATA[<blockquote>
@@ -673,6 +662,17 @@
       </categories>
       <tags>
         <tag>Java基础</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hallo World</title>
+    <url>/posts/x2y/43fc112c.html</url>
+    <content><![CDATA[<p>你好同学，欢迎来到A哥的博客：BAT的乌托邦</p>]]></content>
+      <categories>
+        <category>缺省</category>
+      </categories>
+      <tags>
+        <tag>缺省</tag>
       </tags>
   </entry>
   <entry>
