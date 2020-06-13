@@ -1369,7 +1369,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #13305d;
+  background: #8e1d78;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -3082,6 +3082,64 @@ blockquote p {
   color: #8e8e8e;
   font-weight: 500;
   text-align: center;
+}
+.posts-expand .post-body ol {
+  padding-left: 0;
+  font-size: 15px;
+  margin-top: 0.4rem;
+  list-style: none;
+  counter-reset: ol-li;
+}
+.posts-expand .post-body ol li ol {
+  margin-left: 23px;
+}
+.posts-expand .post-body ol li:before {
+  display: block;
+  float: left;
+  width: 17px;
+  height: 17px;
+  line-height: 16px;
+  margin: 0.5rem 0.5rem 0 0;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 500;
+  font-style: normal;
+  background-color: #49b1f5;
+  border-radius: 50%;
+  text-align: center;
+  content: counter(ol-li);
+  counter-increment: ol-li;
+  transition: all 0.5s;
+}
+.posts-expand .post-body ol li:hover::before {
+  transform: rotate(360deg);
+  -webkit-transform: rotate(360deg);
+  -moz-transform: rotate(360deg);
+  -o-transform: rotate(360deg);
+  -ms-transform: rotate(360deg);
+}
+.posts-expand .post-body ul {
+  list-style: none;
+}
+.posts-expand .post-body ul li:before {
+  float: left;
+  left: 0;
+  margin: 9px 15px 0 0;
+  width: 8px;
+  height: 8px;
+  border: 0.2rem solid #49b1f5;
+  border-radius: 50%;
+  background: #fff;
+  content: "";
+  line-height: 19px;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  -ms-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+}
+.posts-expand .post-body ul li:hover:before {
+  border-color: #fc6423;
 }
 /* 自定义底部的样式 */
 div.yourbatman-footer img {
