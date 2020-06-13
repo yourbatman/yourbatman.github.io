@@ -189,6 +189,11 @@
     <a href="/top/" rel="section"><i class="fa fa-signal fa-fw"></i>热门文章</a>
 
   </li>
+        <li class="menu-item menu-item-books">
+
+    <a href="/books/" rel="section"><i class="fa fa-book fa-fw"></i>图书馆</a>
+
+  </li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -776,8 +781,8 @@
         
         
           <li>
-            <a href="/posts/x2y/wechat-white-list.html" title="【BAT的乌托邦】公众号开白申请登记表" target="_blank">
-            <i class="fa fa-check-square"></i> 【BAT的乌托邦】公众号开白申请登记表
+            <a href="/posts/x2y/wechat-white-list.html" title="【BAT的乌托邦】公众号开白申请" target="_blank">
+            <i class="fa fa-check-square"></i> 【BAT的乌托邦】公众号开白申请
             </a>
           </li>
         
@@ -1383,10 +1388,11 @@
 document.querySelectorAll('.pdfobject-container').forEach(element => {
   let url = element.dataset.target;
   let pdfOpenParams = {
-    navpanes : 0,
-    toolbar  : 0,
-    statusbar: 0,
-    pagemode : 'thumbs',
+    navpanes : 1, // 打开或关闭导航空格和选项卡 1:打开 0:关闭
+    scrollbar: 1, // 打开/关闭滚动条
+    toolbar  : 1, // 打开/关闭工具栏
+    statusbar: 1, // 打开或关闭状态栏
+    pagemode : 'thumbs', // 侧边栏状态，显示书签或缩略图 接受值：none，thumbs，bookmarks，attachments
     view     : 'FitH'
   };
   let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');

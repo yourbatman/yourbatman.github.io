@@ -147,6 +147,11 @@
     <a href="/top/" rel="section"><i class="fa fa-signal fa-fw"></i>热门文章</a>
 
   </li>
+        <li class="menu-item menu-item-books">
+
+    <a href="/books/" rel="section"><i class="fa fa-book fa-fw"></i>图书馆</a>
+
+  </li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -652,7 +657,7 @@
       
           <!--
 -->
-<img data-src="https://img-blog.csdnimg.cn/20200511100304777.png#pic_center =x100" class="homepage">
+<img src="https://img-blog.csdnimg.cn/20200511100304777.png#pic_center =x100" class="homepage">
 <div class="homepage">
 来自一个大龄程序员的坎坷职业生涯：作者万字自述
 </div>
@@ -698,7 +703,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/posts/x2y/wechat-white-list.html" class="post-title-link" itemprop="url">【BAT的乌托邦】公众号开白申请登记表</a>
+            <a href="/posts/x2y/wechat-white-list.html" class="post-title-link" itemprop="url">【BAT的乌托邦】公众号开白申请</a>
         </h2>
 
         <div class="post-meta">
@@ -726,7 +731,7 @@
             </span>
 
           
-            <span id="/posts/x2y/wechat-white-list.html" class="post-meta-item leancloud_visitors" data-flag-title="【BAT的乌托邦】公众号开白申请登记表" title="阅读次数">
+            <span id="/posts/x2y/wechat-white-list.html" class="post-meta-item leancloud_visitors" data-flag-title="【BAT的乌托邦】公众号开白申请" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -775,7 +780,7 @@
 
       
           <!--
-<img data-src="xxx" class="homepage">
+<img src="xxx" class="homepage">
 -->
 <div class="homepage">
 公众号申请开白，请在此处登记
@@ -898,7 +903,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <img data-src="https://img-blog.csdnimg.cn/20200613101159736.png" class="homepage">
+          <img src="https://img-blog.csdnimg.cn/20200613101159736.png" class="homepage">
 <div class="homepage">
 本系列群的群规详情内容
 </div>
@@ -1018,7 +1023,7 @@
 
       
           <!--
-<img data-src="xxx" class="homepage">
+<img src="xxx" class="homepage">
 -->
 <div class="homepage">
 公示参加了2020-4-17日腾讯云+社区的免费公开课的名单，以示公平
@@ -1411,8 +1416,8 @@
         
         
           <li>
-            <a href="/posts/x2y/wechat-white-list.html" title="【BAT的乌托邦】公众号开白申请登记表" target="_blank">
-            <i class="fa fa-check-square"></i> 【BAT的乌托邦】公众号开白申请登记表
+            <a href="/posts/x2y/wechat-white-list.html" title="【BAT的乌托邦】公众号开白申请" target="_blank">
+            <i class="fa fa-check-square"></i> 【BAT的乌托邦】公众号开白申请
             </a>
           </li>
         
@@ -2018,10 +2023,11 @@
 document.querySelectorAll('.pdfobject-container').forEach(element => {
   let url = element.dataset.target;
   let pdfOpenParams = {
-    navpanes : 0,
-    toolbar  : 0,
-    statusbar: 0,
-    pagemode : 'thumbs',
+    navpanes : 1, // 打开或关闭导航空格和选项卡 1:打开 0:关闭
+    scrollbar: 1, // 打开/关闭滚动条
+    toolbar  : 1, // 打开/关闭工具栏
+    statusbar: 1, // 打开或关闭状态栏
+    pagemode : 'thumbs', // 侧边栏状态，显示书签或缩略图 接受值：none，thumbs，bookmarks，attachments
     view     : 'FitH'
   };
   let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
