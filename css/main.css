@@ -1334,7 +1334,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #c31804;
+  background: #5dbe67;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -3087,12 +3087,10 @@ blockquote p {
   color: #ff6347;
   font-weight: bolder;
 }
-.posts-expand .post-body ul:not(.reward-row,
-.posts-expand .post-body nav-tabs) {
+.posts-expand .post-body ul:not(.reward-row):not(.nav-tabs) {
   list-style: none;
 }
-.posts-expand .post-body ul:not(.reward-row li:before,
-.posts-expand .post-body nav-tabs) li:before {
+.posts-expand .post-body ul:not(.reward-row):not(.nav-tabs) li:before {
   float: left;
   left: 0;
   margin: 9px 15px 0 0;
@@ -3109,8 +3107,7 @@ blockquote p {
   -ms-transition: all 0.3s ease-out;
   transition: all 0.3s ease-out;
 }
-.posts-expand .post-body ul:not(.reward-row li:hover:before,
-.posts-expand .post-body nav-tabs) li:hover:before {
+.posts-expand .post-body ul:not(.reward-row):not(.nav-tabs) li:hover:before {
   border-color: #fc6423;
 }
 /* 自定义底部的样式 */

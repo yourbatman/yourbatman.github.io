@@ -184,6 +184,48 @@
       </tags>
   </entry>
   <entry>
+    <title>【BAT的乌托邦】公众号开白申请登记表</title>
+    <url>/posts/x2y/wechat-white-list.html</url>
+    <content><![CDATA[<div class="note primary">
+            <ul><li>公众号：BAT的乌托邦</li><li>作者：A哥<ul><li>A哥的介绍：<ul><li><a href="/about">PC版</a></li><li><a href="https://mp.weixin.qq.com/s/PGIFtpI7aZaxY7es0F6C6Q" target="_blank" rel="noopener">手机版</a></li></ul></li><li>示例文章：<a href="https://mp.weixin.qq.com/s/PYVD8BvT7Nux0jiSomSG0A" target="_blank" rel="noopener">点击这里</a></li></ul></li><li>定位：专注Java领域，只做有深度的专栏文章分享，拒绝浅尝辄止</li><li>首篇文章时间：2020-05-03   <a href="https://mp.weixin.qq.com/s/PGIFtpI7aZaxY7es0F6C6Q" target="_blank" rel="noopener">查看首篇文章</a></li></ul>
+          </div>
+<div style="margin-top: 50px; margin-bottom: 50px; text-align: center; font-weight: bolder; color: grey; font-size: 20px;">
+😄申请【开长白】请在本文下面留言，开白成功后我会登记入下表，谢谢合作😄
+</div>
+<div style="text-align: center; font-weight: bolder; color: black; font-size: 11px;margin-top: -50px;margin-bottom: 20px;">
+(留言时请输入正确邮箱号，这样开白成功会给你发邮件提醒)
+</div>
+
+<div class="table-container"><table>
+    <thead>
+    <tr>
+        <th align="center">公众号</th>
+        <th align="center">操作时间</th>
+        <th align="center">是否长白</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td align="center">石杉的架构笔记</td>
+        <td align="center">2020.06.09</td>
+        <td align="center">是</td>
+    </tr>
+    <tr>
+        <td align="center">源码笔记</td>
+        <td align="center">2020.06.04</td>
+        <td align="center">是</td>
+    </tr>
+    </tbody>
+</table></div>]]></content>
+      <categories>
+        <category>公众号</category>
+      </categories>
+      <tags>
+        <tag>白名单</tag>
+        <tag>公众号</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>【Java高工、架构师】系列群群规</title>
     <url>/posts/x2y/wechat-gauge.html</url>
     <content><![CDATA[<blockquote class="blockquote-center">
@@ -194,13 +236,14 @@
           </blockquote>
 
 <p><img data-src="https://img-blog.csdnimg.cn/20200613101159736.png" alt=""></p>
-<div style="margin-top: 50px; margin-bottom: 50px; text-align: center; font-weight: bolder; color: grey; font-size: 23px;">
-【Java高工、架构师】系列群是由A哥搭建起的纯净技术交流平台，一直秉承着做技术我们是认真的态度。因此有一些群规需要你遵守
+<div style="margin-top: 50px; margin-bottom: 50px; text-align: center; font-weight: bolder; color: grey; font-size: 20px;">
+😄本系列群是由A哥搭建起的纯技术交流平台，无任何商业属性。秉承着做技术我们是认真的态度，有一些规则需要你遵守😄
 </div>
 <div class="tabs" id=""><ul class="nav-tabs"><li class="tab active"><a href="#-1">关于推文</a></li><li class="tab"><a href="#-2">关于广告</a></li><li class="tab"><a href="#-3">关于群</a></li><li class="tab"><a href="#-4">群福利</a></li></ul><div class="tab-content"><div class="tab-pane active" id="-1"><div style="text-align: center; color: red; font-weight: bolder; font-size: 18px; }" class="note danger">
 禁止一切未经允许的推文
 </div>
-目的：避免沦为推文群、僵尸群，同时提高文章质量，旨在帮群友筛选出真正的干货。因此需要对推文方面作出一些限制：
+
+<p>目的：避免沦为推文群、僵尸群，同时提高文章质量，旨在帮群友筛选出真正的干货。因此需要对推文方面作出一些限制：</p>
 <div class="note warning">
             <ol><li>禁止一切未经允许的推文</li><li>目前【仅】10群开放自由推文限制（但也不能是广告文、太水的文），若你是号主or你希望看到更多“不一样”的文章，可私聊A哥邀请你进入10群</li><li>除了10群外，其它群推文采用【申请授权】方式，A哥已组件好了小团队会定期进行审核，通过后会通知到你便可在指定群推文了。<a href="https://shimo.im/sheets/QtqXwKgCVJxJjhtJ/MODOC" target="_blank" rel="noopener">申请登记地址</a></li><li>为了避免信息爆炸，每个群允许通过授权的数量目前定在【5个】，后期会根据实际情况加以调整</li></ol>
           </div></div><div class="tab-pane" id="-2"><div style="text-align: center; color: red; font-weight: bolder; font-size: 18px; }" class="note danger">
@@ -228,16 +271,16 @@
 <div class="note info">
             <ol><li>扫码加A哥好友，和一个很有技术范的coder做朋友（如果已经是群友，建议你务必添加好友，方便我做群管理）</li><li>如果你是个对技术有研究热情的，就扫码关注我的公众号吧（BAT的乌托邦：只做有深度的文章分享，拒绝浅尝辄止）</li><li>近期正在筹划线下面基，扩大下朋友圈。当然地点只是北京，若你有兴趣可下面留言</li></ol>
           </div></div></div></div>
-<div style="margin-top: 50px; margin-bottom: 50px; text-align: center; font-weight: bolder; color: grey; font-size: 23px;">
-😄希望大家遵守群规哈，群内不求大富大贵。但可以聚集在一起做个俗人：贪财好色，更快乐些不是😄
+<div style="margin-top: 50px; margin-bottom: 50px; text-align: center; font-weight: bolder; color: grey; font-size: 20px;">
+😄希望大家遵守群规，群内不求能大富大贵。但可以聚集在一起做个俗人：贪财好色，岂不更快乐些不是😄
 </div>
 
 <hr>]]></content>
       <categories>
-        <category>缺省</category>
+        <category>公众号</category>
       </categories>
       <tags>
-        <tag>缺省</tag>
+        <tag>公众号</tag>
       </tags>
   </entry>
   <entry>
