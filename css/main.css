@@ -1334,7 +1334,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #38f42d;
+  background: #3cff88;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2884,6 +2884,9 @@ ul.breadcrumb li + li:last-child {
 }
 li.menu-item.menu-item-search a {
   color: #ff6347;
+}
+.table-container {
+  color: #000;
 }
 .post-copyright {
   width: 85%;
