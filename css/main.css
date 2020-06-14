@@ -1334,7 +1334,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #ffa35c;
+  background: #ffcdbd;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -3053,8 +3053,8 @@ blockquote p {
   float: left;
   width: 17px;
   height: 17px;
-  line-height: 16px;
-  margin: 0.5rem 0.5rem 0 0;
+  line-height: 17px;
+  margin: 4px 8px 0 0;
   color: #fff;
   font-size: 15px;
   font-weight: 500;
@@ -3086,7 +3086,7 @@ blockquote p {
 .posts-expand .post-body ul:not(.reward-row):not(.nav-tabs) li:before {
   float: left;
   left: 0;
-  margin: 9px 15px 0 0;
+  margin: 7px 7px 0 0;
   width: 8px;
   height: 8px;
   border: 0.2rem solid #49b1f5;
