@@ -1334,7 +1334,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #8bd22b;
+  background: #0350d6;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2947,7 +2947,7 @@ content-wrap strong {
   text-decoration: none;
 }
 .post-header .post-meta-item a span {
-  color: #c71585;
+  color: #7483f1;
 }
 .post-footer .post-tags {
   font-size: 20px;

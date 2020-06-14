@@ -589,9 +589,9 @@
         <category>Spring static关键字</category>
       </categories>
       <tags>
+        <tag>Spring Boot</tag>
         <tag>Spring Framework</tag>
         <tag>static</tag>
-        <tag>Spring Boot</tag>
       </tags>
   </entry>
   <entry>
@@ -2079,8 +2079,8 @@
         <category>Spring配置类</category>
       </categories>
       <tags>
-        <tag>@Configuration</tag>
         <tag>Spring Boot</tag>
+        <tag>@Configuration</tag>
         <tag>@AutoConfigureBefore</tag>
       </tags>
   </entry>
