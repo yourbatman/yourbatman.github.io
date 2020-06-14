@@ -1334,7 +1334,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #ffba62;
+  background: #ff29d2;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2914,12 +2914,27 @@ li.menu-item.menu-item-search a {
   color: #ff6347;
 }
 .post-copyright {
-  font-size: 14px;
+  width: 85%;
+  max-width: 45em;
+  margin: 2.8em auto 0;
+  padding: 0.5em 1em;
+  border: 1px solid #d3d3d3;
+  font-size: 0.93rem;
+  line-height: 1.6em;
+  word-break: break-all;
+  background: rgba(255,255,255,0.4);
+  background-color: #fff;
 }
 .post-copyright li a {
   color: #0593d3;
   border-bottom: none;
   text-decoration: none;
+}
+.post-copyright strong {
+  display: inline-block;
+  width: 5.2em;
+  color: #b5b5b5;
+  font-weight: 700;
 }
 .sidebar-inner {
   padding: 10px 10px;
@@ -2965,7 +2980,10 @@ content-wrap strong {
 }
 .post-footer .post-tags a {
   color: #f06322;
+}
+.post-footer .post-tags a:hover {
   font-weight: bold;
+  color: #f00;
 }
 /* 代码块的样式 */
 .highlight-container {
@@ -3370,6 +3388,15 @@ button.botui-actions-buttons-button {
   border: 1px dashed #e5e4e4;
   padding: 10px;
 }
+#valine-comments .vcards .vcard .vsys {
+  display: inline-block;
+  padding: 0.1rem 0.3rem;
+  background: #f3f3f3;
+  color: #b3b1b1;
+  font-size: 0.75rem;
+  border-radius: 0.2rem;
+  margin-right: 0.3rem;
+}
 #valine-comments .vcards .vcard .vh .vmeta .vat {
   color: #808080;
 }
@@ -3378,3 +3405,83 @@ button.botui-actions-buttons-button {
   color: #ff6347;
 }
 /* valine评论系统美化end */
+/* 友链start */
+#links {
+  margin-top: 2rem;
+}
+#links .links-content {
+  margin-top: 1rem;
+}
+#links .link-navigation::after {
+  content: " ";
+  display: block;
+  clear: both;
+}
+#links .card {
+  width: 300px;
+  font-size: 1rem;
+  padding: 10px 20px;
+  border-radius: 4px;
+  transition-duration: 0.15s;
+  margin-bottom: 1rem;
+  display: flex;
+}
+#links .card:nth-child(odd) {
+  float: left;
+}
+#links .card:nth-child(even) {
+  float: right;
+}
+#links .card:hover {
+  transform: scale(1.1);
+  box-shadow: 0 2px 6px 0 rgba(0,0,0,0.12), 0 0 6px 0 rgba(0,0,0,0.04);
+}
+#links .card a {
+  border: none;
+}
+#links .card .ava {
+  width: 3rem !important;
+  height: 3rem !important;
+  margin: 0 !important;
+  margin-right: 1em !important;
+  border-radius: 4px;
+}
+#links .card .card-header {
+  font-style: italic;
+  overflow: hidden;
+  width: 236px;
+}
+#links .card .card-header a {
+  font-style: normal;
+  color: #2bbc8a !important;
+  text-decoration: none !important;
+}
+#links .card .card-header a:hover {
+  color: #d480aa;
+  font-weight: bolder;
+  text-decoration: none;
+}
+#links .card .card-header .info {
+  font-style: normal;
+  color: #a3a3a3;
+  font-size: 14px;
+  min-width: 0;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+#links span.focus-links {
+  font-style: normal;
+  position: unset;
+  left: 0;
+  padding: 0 7px 0 5px;
+  font-size: 11px;
+  border-color: #42c02e;
+  border-radius: 40px;
+  line-height: 24px;
+  height: 22px;
+  color: #fff !important;
+  background-color: #42c02e;
+  display: inline-block;
+}
+/* 友链end */
