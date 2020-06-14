@@ -24,20 +24,33 @@
     var CONFIG = {"hostname":"www.yourbatman.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},"motion":{"enable":false,"async":true,"transition":{"post_block":"flipBounceYIn","post_header":"flipXIn","post_body":"flipBounceXIn","coll_header":"expandIn","sidebar":"shrinkIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="请写文章摘要">
+  <meta name="description" content="Spring Boot刚发布了2.3.0版本，好基友Spring Cloud还没跟上">
 <meta property="og:type" content="article">
-<meta property="og:title" content="5">
+<meta property="og:title" content="Spring Boot 2.3.0正式发布：优雅停机、配置文件位置通配符新特性一览">
 <meta property="og:url" content="https://www.yourbatman.cn/x2y/84b12bae.html">
 <meta property="og:site_name" content="BAT的乌托邦">
-<meta property="og:description" content="请写文章摘要">
+<meta property="og:description" content="Spring Boot刚发布了2.3.0版本，好基友Spring Cloud还没跟上">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-06-14T05:41:50.000Z">
-<meta property="article:modified_time" content="2020-06-14T05:48:20.238Z">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200523202933979.png#x200">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200523204026164.png#x200">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200523162357514.png#x120">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200523212126237.png#x160">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200523212434591.png#x200">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200523185845525.png#x120">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200523190109536.png#x120">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200523191327508.png#x60">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2020052321424955.png#x180">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200523215452630.png#x300">
+<meta property="article:published_time" content="2020-05-23T05:41:50.000Z">
+<meta property="article:modified_time" content="2020-06-14T07:54:44.880Z">
 <meta property="article:author" content="A哥(YourBatman)">
 <meta property="article:tag" content="BAT的乌托邦">
 <meta property="article:tag" content="A哥">
 <meta property="article:tag" content="YourBatman">
+<meta property="article:tag" content="Spring Boot">
+<meta property="article:tag" content="优雅停机">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20200523202933979.png#x200">
 
 <link rel="canonical" href="https://www.yourbatman.cn/x2y/84b12bae.html">
 
@@ -52,7 +65,7 @@
   };
 </script>
 
-  <title>5 | BAT的乌托邦</title>
+  <title>Spring Boot 2.3.0正式发布：优雅停机、配置文件位置通配符新特性一览 | BAT的乌托邦</title>
   
 
 
@@ -133,17 +146,17 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">13</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">20</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>专栏<span class="badge">6</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>专栏<span class="badge">9</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>时间轴<span class="badge">19</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>时间轴<span class="badge">20</span></a>
 
   </li>
         <li class="menu-item menu-item-top">
@@ -238,7 +251,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          5
+          Spring Boot 2.3.0正式发布：优雅停机、配置文件位置通配符新特性一览
         </h1>
 
         <div class="post-meta">
@@ -253,7 +266,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-06-14 13:41:50" itemprop="dateCreated datePublished" datetime="2020-06-14T13:41:50+08:00">2020-06-14</time>
+              <time title="创建时间：2020-05-23 13:41:50" itemprop="dateCreated datePublished" datetime="2020-05-23T13:41:50+08:00">2020-05-23</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -261,12 +274,12 @@
               </span>
               <span class="post-meta-item-text">收录于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%BC%BA%E7%9C%81/" itemprop="url" rel="index"><span itemprop="name">缺省</span></a>
+                  <a href="/categories/%E6%96%B0%E7%89%B9%E6%80%A7/" itemprop="url" rel="index"><span itemprop="name">新特性</span></a>
                 </span>
             </span>
 
           
-            <span id="/x2y/84b12bae.html" class="post-meta-item leancloud_visitors" data-flag-title="5" title="阅读次数">
+            <span id="/x2y/84b12bae.html" class="post-meta-item leancloud_visitors" data-flag-title="Spring Boot 2.3.0正式发布：优雅停机、配置文件位置通配符新特性一览" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -295,14 +308,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>0</span>
+              <span>6.8k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>6 分钟</span>
             </span>
 
         </div>
@@ -314,7 +327,172 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
+        <blockquote>
+<p>当大潮退去，才知道谁在裸泳。<br><strong>作者</strong>：A哥（YourBatman）<br><strong>公众号</strong>：BAT的乌托邦（ID：BAT-utopia）<br><strong>文末是否有彩蛋</strong>：有</p>
+</blockquote>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>各位小伙伴大家好，我是A哥。北京时间2020-05-15，Spring Boot 2.3.0版本正式发布了，次版本号的升级，一般会有些新特性出来。作为Java Coder的我们有必要一览它的新new Feature，keep下技术节奏嘛。</p>
+<p>A哥“第二时间”知道了这个消息，然后在自己本机（请注意：非生产环境）体验了一把，然后再结合Spring Boot官方的<a href="https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.3-Release-Notes" target="_blank" rel="noopener">Release Notes</a>，在这里给你絮叨絮叨。</p>
+<hr>
+<h2 id="关于版本号"><a href="#关于版本号" class="headerlink" title="关于版本号"></a>关于版本号</h2><p>Spring Boot代码库的版本好采用“国际通用”（我自己yy的）的命名方式：<strong>主版本号.次版本号.修订号</strong>，所以通过版本号就能感受到它的变化到底大不大，你升级时是否需要倍加注意等等。那么此处我就对这种命名方式版本号的各段进行科普一波：</p>
+<ul>
+<li><strong>主版本号</strong>：完全不兼容。产品定位变化、核心API大规模不兼容（比如包名变了）、架构方式升级不能向下兼容……<ul>
+<li>举例：Configuration1.x -&gt; 2.x；Zuul1.x -&gt; 2.x；Spring Boot1.x -&gt; 2.x；Netty4.x -&gt; 5.x</li>
+</ul>
+</li>
+<li><strong>次版本号</strong>：相对兼容。一般是增加新特新，删除掉废弃的API，修改某些API不兼容。总的来说是影响比较小，在可控范围内的，但升级时不可掉以轻心，<strong>必须</strong>做前期调研</li>
+<li><strong>修订号</strong>：100%兼容。一般是修复bug、新增无伤大雅的一些特性等，一般想升就升</li>
+</ul>
+<p>这次Spring Boot升级到2.3.0版本，属于<strong>次版本号</strong>的升级，因此会带有些新特性，还是值得一看的。<br><img data-src="https://img-blog.csdnimg.cn/20200523202933979.png#x200" alt=""></p>
+<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><p>Spring Boot v2.2依然是<strong>活跃的</strong>维护的版本，Spring Boot遵循的是<code>Pivotal OSS</code>支持策略，从发布日期起支持主要版本<strong>3年</strong>。但是呢，一般来说在主要/次要版本发布时，将会对上个主要版本至少提供12个月的支持（即使超过了3年），以解决关键的bug或者安全问题。</p>
+<p>关于其它版本的维护活跃状态和已经EOL的日期，做出如下说明：</p>
+<ul>
+<li><code>2.2.x</code>：<strong>支持的版本</strong>。2019.10发布，是现在的活跃的主干</li>
+<li><code>2.1.x</code>：<strong>支持的版本</strong>。2018.10发布，会支持到2020.10月底</li>
+<li><code>2.0.x</code>：生命已终止的版本。2018.3发布，2019.4.3停止维护</li>
+<li><code>1.5.x</code>：生命已终止的版本。2017.1发布，是最后一个1.x分支，2019.8.1停止维护</li>
+</ul>
+<p>从官网页面也可以看出，只有支持的版本才会被列出来，对使用者是有一定的引导作用的：<br><img data-src="https://img-blog.csdnimg.cn/20200523204026164.png#x200" alt=""></p>
+<hr>
+<h2 id="简单回忆2-2版本的新特性"><a href="#简单回忆2-2版本的新特性" class="headerlink" title="简单回忆2.2版本的新特性"></a>简单回忆2.2版本的新特性</h2><p>很明显，Spring Boot2.2版本不是本文关心的重点，但为了起到衔接作用，本处把它的核心新特性列一下：</p>
+<ol>
+<li>Spring Framework 5.2：重大升级，可以看到它为Cloud Native的努力</li>
+<li>JUnit 5：从此版本开始，<code>spring-boot-starter-test</code>默认使用<code>JUnit 5</code>作为单元测试框架</li>
+<li>支持Java13</li>
+<li><strong>性能提升</strong>：表现在对所有的自动配置类改为了<code>@Configuration</code>的Lite模式，提升性能。</li>
+<li>新增<code>@ConfigurationPropertiesScan</code>注解，自动扫描<code>@ConfigurationProperties</code>配置类</li>
+<li>支持RSocket </li>
+</ol>
+<p>下面我们来了解下本次升级（2.3.0版本）的新特性，分为主要新特性和其它新特性分开阐述。</p>
+<hr>
+<h2 id="主要新特性"><a href="#主要新特性" class="headerlink" title="主要新特性"></a>主要新特性</h2><h3 id="优雅停机"><a href="#优雅停机" class="headerlink" title="优雅停机"></a>优雅停机</h3><p><strong>这个新特性深入人心</strong>，是开发者、运维的福音啊。据我了解，很多中小型公司/团队都是使用<code>kill -9</code>（当然有些比较“温柔”的团队也用<code>kill -2</code>）来停服的，这样暴力“停机”很容易造成业务逻辑执行失败，导致在一些业务场景下出现数据不一致现象。虽然我们可以通过一些手段（自研）来避免这个问题，但并不是每个公司/团队都去做了。这不Spring Boot2.3.0版本就内置了这个功能：<strong>优雅停机</strong>。</p>
+<blockquote>
+<p>小知识：kill -2类似于你的Ctrl + C，会触发shutDownHook事件（从而关闭Spring容器）；kill -9就没啥好说的，杀杀杀</p>
+</blockquote>
+<p>SB所有四个嵌入式web服务器(Jetty、Reactor Netty、Tomcat和Undertow)以及响应性和基于servlet的web应用<strong>都支持优雅的关闭</strong>。在关闭时，web服务器将<strong>不再允许</strong>新的请求，并将等待完成的请求给个宽限期让它完成。当然这个宽限期是可以设置的：可以使用<code>spring.lifecycle.timeout-per-shutdown-phase=xxx</code>来配置，默认值是30s。</p>
+<p><strong>注意，注意，注意</strong>：默认情况下，优雅关机并<code>没有开启</code>（还是立即关机），你仅需添加<code>server.shutdown=graceful</code>配置即可开启优雅关机（取值参见2.3.0新增的Shutdown枚举类，默认值参见<code>AbstractConfigurableWebServerFactory.shutdown</code>属性值）。</p>
+<hr>
+<h3 id="配置属性的调整"><a href="#配置属性的调整" class="headerlink" title="配置属性的调整"></a>配置属性的调整</h3><p>这个版本中，一些配置属性已<strong>被重命名或弃用</strong>（这会导致不向下兼容，需要特别引起注意），需要你做出调整。</p>
+<p>那么如何知道我现在用的哪些属性存在不兼容情况呢？？？官方给了一个很好的解决方案，这里我用个使用示例教你可以这么处理：</p>
+<p>现状：在Spring Boot2.2.x环境中你有很多配置，痛点是不知道哪些配置需要配替换成2.3.x中新的。此时你可以在工程下加入这个jar：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-properties-migrator<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>runtime<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>然后<strong>升级你的Spring Boot版本号为2.3.0</strong>，重新启动工程。本处以你配置文件里的<code>spring.http.encoding.enabled=true</code>为例，由于使用了SB的最新版本，因此可以在控制台看到如下日志输出：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Property source <span class="string">'applicationConfig: [classpath:/application.properties]'</span>:</span><br><span class="line">	Key: spring.http.encoding.enabled</span><br><span class="line">		Line: <span class="number">3</span></span><br><span class="line">		Replacement: server.servlet.encoding.enabled</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://img-blog.csdnimg.cn/20200523162357514.png#x120" alt=""><br>日志说够明确了吧。有了这个好帮手，妈妈就不用再担心辣么多的配置项需要自己一个个去核对喽，按照指示一个个的修改即可。</p>
+<blockquote>
+<p>官方说明：完成迁移后，请确保从项目的依赖项中删除<code>properties-migrator</code>这个模块。</p>
+</blockquote>
+<p>顺道说一下：升级到2.3.0版本号，属性变化主要是这个：<code>spring.http.</code> -&gt; <code>server.servlet.encoding.、spring.mvc.、spring.codec.</code></p>
+<hr>
+<h3 id="删除不推荐使用的类-方法-属性"><a href="#删除不推荐使用的类-方法-属性" class="headerlink" title="删除不推荐使用的类/方法/属性"></a>删除不推荐使用的类/方法/属性</h3><p>在该版本中，Spring Boot删除了2.2版本中<strong>不推荐使用</strong>的大多数类，方法和属性。请确保升级之前没有再调用不推荐使用的方法。针对于此，下面我举例那些在2.2版本中还“活着”但被弃用（标记有<code>@Deprecated</code>注解），但在2.3版本中已<strong>完全删除</strong>的类、方法、属性：</p>
+<ol>
+<li>方法BindResult#orElseCreate</li>
+<li>属性LoggingApplicationListener#LOGFILE_BEAN_NAME</li>
+<li>类JodaDateTimeJacksonConfiguration</li>
+<li>类JestAutoConfiguration</li>
+</ol>
+<p>即使如此，有些虽然在2.2就已被弃用，但在2.3.0还存在的，如：<code>ConfigurationBeanFactoryMetadata、CompositeHealthIndicator</code></p>
+<hr>
+<h3 id="配置文件位置支持通配符"><a href="#配置文件位置支持通配符" class="headerlink" title="配置文件位置支持通配符"></a>配置文件位置支持通配符</h3><p>Spring Boot现在在加载配置文件时<strong>支持通配符位置</strong>。默认情况下，jar外部的<code>config/*/</code>位置是被支持的。当配置属性有<strong>多个源时</strong>，比如在<code>Kubernetes</code>这样的环境中非常有用。</p>
+<blockquote>
+<p>特点说明：jar包外，jar包外，jar包外，放在内部（比如resource目录下是没有此特针的），下面有示例证明</p>
+</blockquote>
+<p>简单的说，如果你有MySql的配置和Redis配置的话，你就可以把他们分开来放置，隔离性更好目录也更加清晰了：</p>
+<ul>
+<li>mysql：<code>/config/mysql/application.properties</code></li>
+<li>redis：<code>/config/redis/application.properties</code></li>
+</ul>
+<p>工程目录如下截图：<br><img data-src="https://img-blog.csdnimg.cn/20200523212126237.png#x160" alt=""><br>运行程序：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    ConfigurableApplicationContext context = SpringApplication.run(Boot23Demo1Application<span class="class">.<span class="keyword">class</span>, <span class="title">args</span>)</span>;</span><br><span class="line"></span><br><span class="line">    ConfigurableEnvironment environment = context.getEnvironment();</span><br><span class="line">    System.out.println(environment.getProperty(<span class="string">"mysql.name"</span>));</span><br><span class="line">    System.out.println(environment.getProperty(<span class="string">"redis.name"</span>));</span><br><span class="line"></span><br><span class="line">    context.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>结果输出：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql</span><br><span class="line">redis</span><br></pre></td></tr></table></figure>
+
+<p>但如果你把文件放在jar包内，形如这样，是<strong>没有效果的</strong>：<br><img data-src="https://img-blog.csdnimg.cn/20200523212434591.png#x200" alt=""><br>输出为null null，因此使用时需要稍加注意哈~</p>
+<hr>
+<h3 id="web下的日期转换支持配置"><a href="#web下的日期转换支持配置" class="headerlink" title="web下的日期转换支持配置"></a>web下的日期转换支持配置</h3><p>现在时间/日期的转换现在<strong>可以通过</strong>属性进行配置了，这补充了对格式化日期值的现有支持。比如对于MVC和WebFlux来说，它们的配置项分别如下：</p>
+<ul>
+<li>spring.mvc.format.date</li>
+<li>spring.mvc.format.date-time</li>
+<li>spring.mvc.format.time</li>
+<li>spring.webflux.format.date</li>
+<li>spring.webflux.format.date-time</li>
+<li>spring.webflux.format.time</li>
+</ul>
+<p>这个怎么用，相信大家都会，一看就知道什么含义。但是，但是，但是：<strong>请一定做好充分测试</strong>，并且充分考虑兼容性，因为你这动的是接口层的东西~</p>
+<hr>
+<hr>
+<h2 id="其它新特性"><a href="#其它新特性" class="headerlink" title="其它新特性"></a>其它新特性</h2><h3 id="更改某些依赖最低版本要求"><a href="#更改某些依赖最低版本要求" class="headerlink" title="更改某些依赖最低版本要求"></a>更改某些依赖最低版本要求</h3><p>主要体现在如下两处：</p>
+<ol>
+<li>如果你使用Gradle构建，支持<code>Gradle 6.3+</code>。当然喽<code>5.6.x</code>也支持，只是标记为@Deprecated不推荐使用了</li>
+<li>如果你使用Jetty嵌入式容器，版本要求是<code>Jetty 9.4.22+</code></li>
+</ol>
+<hr>
+<h3 id="核心依赖升级"><a href="#核心依赖升级" class="headerlink" title="核心依赖升级"></a>核心依赖升级</h3><p>Spring Boot 2.3迁移到几个Spring项目的新版本:</p>
+<ul>
+<li>Spring Data Neumann：你可以理解为它就是之前的Spirng Data工程的升级版</li>
+<li>Spring HATEOAS 1.1</li>
+<li>Spring Integration 5.3</li>
+<li>Spring Kafka 2.5</li>
+<li>Spring Security 5.3</li>
+<li>Spring Session Dragonfruit</li>
+</ul>
+<p>Spring Boot 2.3的构建与Spring Boot 2.2基于 <strong>相同的</strong> Spring Framework和Reactor。</p>
+<blockquote>
+<p>说明：spirng-core么有升级，还是5.2.6版本（SB的2.2.7版本依赖的spring-core也是这个版本）</p>
+</blockquote>
+<hr>
+<h3 id="三方库依赖升级"><a href="#三方库依赖升级" class="headerlink" title="三方库依赖升级"></a>三方库依赖升级</h3><ul>
+<li>AssertJ 3.16</li>
+<li>Cassandra Driver 4.6</li>
+<li>Elasticsearch 7.6</li>
+<li>Hibernate Validator 6.1</li>
+<li>JUnit Jupiter 5.6</li>
+<li>Kafka 2.5</li>
+<li>Lettuce 5.3</li>
+<li>Micrometer 1.5</li>
+<li>MongoDB 4.0</li>
+</ul>
+<hr>
+<h3 id="Spring-Data-Neumann升级带来的变化"><a href="#Spring-Data-Neumann升级带来的变化" class="headerlink" title="Spring Data Neumann升级带来的变化"></a>Spring Data Neumann升级带来的变化</h3><ul>
+<li><code>Cassandra</code>：升级到v4版本，带来了一些变化，如<code>ClusterBuilderCustomizer</code>就木有了~</li>
+<li><code>Couchbase</code>：升级到v3版本</li>
+<li><code>Elasticsearch</code>：已废弃的原生Elasticsearch transport直接被删除了，并且还移除了对Jest的支持。从此版本开始，默认支持<code>Elasticsearch7.5+</code></li>
+<li><code>MongoDB</code>：升级到v4版本</li>
+</ul>
+<hr>
+<h3 id="关于Validation"><a href="#关于Validation" class="headerlink" title="关于Validation"></a>关于Validation</h3><p>从此版本开始，<code>spring-boot-starter-web</code>不会再把validation带进来，所以若使用到，你需要自己添加这个<code>spring-boot-starter-validation</code>依赖：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-validation<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>关于<code>spring-boot-starter-web</code>启动器新、老版本的区别截图：<br><img data-src="https://img-blog.csdnimg.cn/20200523185845525.png#x120" alt=""><br><img data-src="https://img-blog.csdnimg.cn/20200523190109536.png#x120" alt=""></p>
+<hr>
+<h3 id="移除一些maven插件"><a href="#移除一些maven插件" class="headerlink" title="移除一些maven插件"></a>移除一些maven插件</h3><p>移除了对<code>exec-maven-plugin</code>和<code>maven-site-plugin</code>这两个插件的管理，所以如果你的工程依赖于这两个插件，那么你得显示的导入（指定版本号）。</p>
+<hr>
+<h3 id="支持Java14"><a href="#支持Java14" class="headerlink" title="支持Java14"></a>支持Java14</h3><p>Spring Boot 2.3增加了对Java 14的支持。当然Java 8和Java 11也还是被支持的。</p>
+<hr>
+<h3 id="Docker支持"><a href="#Docker支持" class="headerlink" title="Docker支持"></a>Docker支持</h3><p>在Maven和Gradle插件中添加了对构建包含分层内容的jar文件的支持。分层根据<strong>jar内容的更改频率</strong>来分隔它们。这种分离允许更有效地构建Docker映像。未更改的现有层可以与已更改的层一起放在顶部进行重用。</p>
+<p>根据您的应用程序，您可能需要调整层的创建方式并添加新层。这可以通过描述如何将jar分成层以及这些层的顺序的配置来完成。</p>
+<hr>
+<h3 id="Fat-Jar支持优化"><a href="#Fat-Jar支持优化" class="headerlink" title="Fat Jar支持优化"></a>Fat Jar支持优化</h3><p>用Maven和Gradle构建的Fat jar现在包括一个<strong>索引文件</strong>。当jar被分解时，这个索引文件用于确保类路径的顺序与直接执行jar时相同。</p>
+<hr>
+<h3 id="嵌入式Servlet-Web-Server线程配置"><a href="#嵌入式Servlet-Web-Server线程配置" class="headerlink" title="嵌入式Servlet Web Server线程配置"></a>嵌入式Servlet Web Server线程配置</h3><p>用于配置嵌入式Servlet web服务器使用的线程的配置属性（包括Jetty, Tomcat, 和Undertow）别移动到了专注于threads的组：<code>erver.jetty.threads</code>，<code>server.tomcat.threads</code>，<code>server.undertow.threads</code>。当然喽，旧的配置属性目前<strong>依然保留着</strong>，但被标记为<code>@Deprecated</code>不再推荐使用了~<br><img data-src="https://img-blog.csdnimg.cn/20200523191327508.png#x60" alt=""></p>
+<hr>
+<h3 id="WebFlux基础路径配置"><a href="#WebFlux基础路径配置" class="headerlink" title="WebFlux基础路径配置"></a>WebFlux基础路径配置</h3><p>现在可以配置WebFlux应用程序的所有web处理程序的基本路径。使用<code>pring.webflux.base-path = xxx</code>配置。</p>
+<hr>
+<h3 id="活性探测器"><a href="#活性探测器" class="headerlink" title="活性探测器"></a>活性探测器</h3><p>Spring Boot现在内置了关于应用程序可用性的探测的能力，可以<strong>跟踪应用程序是否处于活动状态</strong>以及是否准备好处理流量。如果你配置了<code>management.health.probes.enabled=true</code>，那么健康检查端点就可以查看你应用的活性和就绪列表，这在在Kubernetes上运行时，这是自动完成的。<br><img data-src="https://img-blog.csdnimg.cn/2020052321424955.png#x180" alt=""></p>
+<hr>
+<h3 id="Actuator增强"><a href="#Actuator增强" class="headerlink" title="Actuator增强"></a>Actuator增强</h3><p>主要是对端点做了些输出、显示上的优化。如：</p>
+<ul>
+<li><code>/actuator/metrics/</code>：按字母顺序排列，这样你找起来就更方便了</li>
+<li>DataSource的<code>HealthIndicator</code>健康指示器，现在进行无查询判断，而<code>Connection</code>仅做连接可用性验证而已</li>
+<li>…</li>
+</ul>
+<hr>
+<hr>
+<h1 id="好基友Spring-Cloud什么时候跟上？"><a href="#好基友Spring-Cloud什么时候跟上？" class="headerlink" title="好基友Spring Cloud什么时候跟上？"></a>好基友Spring Cloud什么时候跟上？</h1><p>作为Spring Boot的好基友，按照以往的惯例，他俩的步调不一般都保持基本一致。戒指到当前，Spring Cloud的最新版本是<code>Hoxton SR4</code>，那它是否支持最新的Spring Boot2.3.0呢？？？答案是：<strong>不支持，不支持，不支持</strong>。对于Spring Boot这种跨版本升级，一般是有阻断性变化，所以它的机油SC适配上还需要时间。</p>
+<p>这不，官方就公布了Spring Cloud支持<code>Spring Boot 2.3.x</code>的里程碑时间点，也就是它的<code>Hoxton.SR5</code>版本发布时间点：<br><img data-src="https://img-blog.csdnimg.cn/20200523215452630.png#x300" alt=""><br>Spring Cloud里程碑地址：<a href="https://github.com/spring-cloud/spring-cloud-release/milestones" target="_blank" rel="noopener">https://github.com/spring-cloud/spring-cloud-release/milestones</a></p>
+<hr>
+<h1 id="升级建议：等等"><a href="#升级建议：等等" class="headerlink" title="升级建议：等等"></a>升级建议：等等</h1><p>至少要等到2020-5-26号发布后嘛，至少要等到Spring Boot2.3.x跑一段时间之后嘛，<strong>坐在第二排看戏</strong>，才是最舒服最稳妥的。</p>
+<hr>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>这是A哥奉给大家的，对Spring Boot2.3.0版本新特性的介绍，希望对你有些帮助。有些人可能会这么说：反正我现在也不用这个版本，没有必要去了解它。其实非也，如果你2.3.0不去了解，2.4.0不去了解，倘若某一天你突然要从2.0.0版本过度过来使用2.5.x版本了，你会“浑身不舒服”的。你品下，是不是这么个道理呢？</p>
         <!-- ....这里是正文内容的底部（首页不会展示）... -->
         <hr>
 <div class="yourbatman-footer">
@@ -359,22 +537,13 @@
   <div class="popular-posts-header">你可能还喜欢：</div>
   <ul class="popular-posts">
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\x2y\8d076785.html" rel="bookmark">9</a></div>
+      <div class="popular-posts-title"><a href="\x2y\fa005713.html" rel="bookmark">static关键字有何魔法？竟让Spring Boot搞出那么多静态内部类</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\x2y\fa005713.html" rel="bookmark">8</a></div>
+      <div class="popular-posts-title"><a href="\x2y\3aa2234d.html" rel="bookmark">使用@AutoConfigureBefore调整配置顺序竟没生效？</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\x2y\6abf4a82.html" rel="bookmark">7</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\x2y\1db87a14.html" rel="bookmark">6</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\x2y\f3b61b38.html" rel="bookmark">4</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\x2y\6dd28e9b.html" rel="bookmark">3</a></div>
+      <div class="popular-posts-title"><a href="\x2y\78afedd2.html" rel="bookmark">不懂SpringApplication生命周期事件？那就等于不会Spring Boot嘛</a></div>
     </li>
   </ul>
 
@@ -384,17 +553,17 @@
 <ul class="post-copyright">
   <li class="post-copyright-title">
     <strong>本文标题： </strong>
-    《5》
+    《Spring Boot 2.3.0正式发布：优雅停机、配置文件位置通配符新特性一览》
   </li>
   <li class="post-copyright-author">
     <strong>本文作者： </strong>A哥(YourBatman)
   </li>
   <li class="post-copyright-date">
-    <strong>发布时间： </strong>2020-06-14 13:41:50
+    <strong>发布时间： </strong>2020-05-23 13:41:50
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://www.yourbatman.cn/x2y/84b12bae.html" title="5">https://www.yourbatman.cn/x2y/84b12bae.html</a>
+    <a href="https://www.yourbatman.cn/x2y/84b12bae.html" title="Spring Boot 2.3.0正式发布：优雅停机、配置文件位置通配符新特性一览">https://www.yourbatman.cn/x2y/84b12bae.html</a>
   </li>
   <li class="post-copyright-license">
     <strong>许可协议： </strong>本站所有文章均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载：No！转发：Yes！
@@ -430,7 +599,8 @@
       <footer class="post-footer">
           
           <div class="post-tags">
-              <a href="/tags/%E7%BC%BA%E7%9C%81/" rel="tag"><i class="fa fa-tag"></i> 缺省</a>
+              <a href="/tags/Spring-Boot/" rel="tag"><i class="fa fa-tag"></i> Spring Boot</a>
+              <a href="/tags/%E4%BC%98%E9%9B%85%E5%81%9C%E6%9C%BA/" rel="tag"><i class="fa fa-tag"></i> 优雅停机</a>
           </div>
 
         <!-- 导入投票模块 -->
@@ -447,12 +617,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/x2y/f3b61b38.html" rel="prev" title="4">
-      <i class="fa fa-chevron-left"></i> 4
+    <a href="/x2y/f3b61b38.html" rel="prev" title="521我发誓读完本文，再也不会担心Spring配置类问题了">
+      <i class="fa fa-chevron-left"></i> 521我发誓读完本文，再也不会担心Spring配置类问题了
     </a></div>
       <div class="post-nav-item">
-    <a href="/x2y/1db87a14.html" rel="next" title="6">
-      6 <i class="fa fa-chevron-right"></i>
+    <a href="/x2y/1db87a14.html" rel="next" title="Spring配置类深度剖析-总结篇(手绘流程图，可白嫖)">
+      Spring配置类深度剖析-总结篇(手绘流程图，可白嫖) <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -519,6 +689,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#关于版本号"><span class="nav-number">1.1.</span> <span class="nav-text">关于版本号</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#正文"><span class="nav-number">2.</span> <span class="nav-text">正文</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#简单回忆2-2版本的新特性"><span class="nav-number">2.1.</span> <span class="nav-text">简单回忆2.2版本的新特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主要新特性"><span class="nav-number">2.2.</span> <span class="nav-text">主要新特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#优雅停机"><span class="nav-number">2.2.1.</span> <span class="nav-text">优雅停机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置属性的调整"><span class="nav-number">2.2.2.</span> <span class="nav-text">配置属性的调整</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除不推荐使用的类-方法-属性"><span class="nav-number">2.2.3.</span> <span class="nav-text">删除不推荐使用的类&#x2F;方法&#x2F;属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置文件位置支持通配符"><span class="nav-number">2.2.4.</span> <span class="nav-text">配置文件位置支持通配符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web下的日期转换支持配置"><span class="nav-number">2.2.5.</span> <span class="nav-text">web下的日期转换支持配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其它新特性"><span class="nav-number">2.3.</span> <span class="nav-text">其它新特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#更改某些依赖最低版本要求"><span class="nav-number">2.3.1.</span> <span class="nav-text">更改某些依赖最低版本要求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#核心依赖升级"><span class="nav-number">2.3.2.</span> <span class="nav-text">核心依赖升级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三方库依赖升级"><span class="nav-number">2.3.3.</span> <span class="nav-text">三方库依赖升级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring-Data-Neumann升级带来的变化"><span class="nav-number">2.3.4.</span> <span class="nav-text">Spring Data Neumann升级带来的变化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于Validation"><span class="nav-number">2.3.5.</span> <span class="nav-text">关于Validation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#移除一些maven插件"><span class="nav-number">2.3.6.</span> <span class="nav-text">移除一些maven插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#支持Java14"><span class="nav-number">2.3.7.</span> <span class="nav-text">支持Java14</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker支持"><span class="nav-number">2.3.8.</span> <span class="nav-text">Docker支持</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Fat-Jar支持优化"><span class="nav-number">2.3.9.</span> <span class="nav-text">Fat Jar支持优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#嵌入式Servlet-Web-Server线程配置"><span class="nav-number">2.3.10.</span> <span class="nav-text">嵌入式Servlet Web Server线程配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WebFlux基础路径配置"><span class="nav-number">2.3.11.</span> <span class="nav-text">WebFlux基础路径配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#活性探测器"><span class="nav-number">2.3.12.</span> <span class="nav-text">活性探测器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Actuator增强"><span class="nav-number">2.3.13.</span> <span class="nav-text">Actuator增强</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#好基友Spring-Cloud什么时候跟上？"><span class="nav-number">3.</span> <span class="nav-text">好基友Spring Cloud什么时候跟上？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#升级建议：等等"><span class="nav-number">4.</span> <span class="nav-text">升级建议：等等</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -573,20 +744,20 @@
         
         
           <li>
-            <a href="/x2y/8d076785.html" title="9" target="_blank">
-            <i class="fa fa-check-square"></i> 9
+            <a href="/x2y/b934cc4f.html" title="IDEA命令行缩短器助你解决此问题：Command line is too long. Shorten command line" target="_blank">
+            <i class="fa fa-check-square"></i> IDEA命令行缩短器助你解决此问题：Command line is too long. Shorten command line
             </a>
           </li>
         
           <li>
-            <a href="/x2y/fa005713.html" title="8" target="_blank">
-            <i class="fa fa-check-square"></i> 8
+            <a href="/x2y/8d076785.html" title="想用@Autowired注入static静态成员？官方不推荐你却还偏要这么做" target="_blank">
+            <i class="fa fa-check-square"></i> 想用@Autowired注入static静态成员？官方不推荐你却还偏要这么做
             </a>
           </li>
         
           <li>
-            <a href="/x2y/6abf4a82.html" title="7" target="_blank">
-            <i class="fa fa-check-square"></i> 7
+            <a href="/x2y/fa005713.html" title="static关键字有何魔法？竟让Spring Boot搞出那么多静态内部类" target="_blank">
+            <i class="fa fa-check-square"></i> static关键字有何魔法？竟让Spring Boot搞出那么多静态内部类
             </a>
           </li>
         
@@ -1050,13 +1221,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">本站总字数：</span>
-    <span title="本站总字数">67k</span>
+    <span title="本站总字数">152k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">本站总阅读时长 &asymp;</span>
-    <span title="本站总阅读时长">1:01</span>
+    <span title="本站总阅读时长">2:18</span>
 </div>
   <div class="addthis_inline_share_toolbox">
     <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5eb7b6f6b64d54f6" async="async"></script>

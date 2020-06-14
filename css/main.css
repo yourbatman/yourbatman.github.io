@@ -1334,7 +1334,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #ffcdbd;
+  background: #38f42d;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -3046,7 +3046,7 @@ blockquote p {
   counter-reset: ol-li;
 }
 .posts-expand .post-body ol li ol {
-  margin-left: 23px;
+  padding-left: 23px;
 }
 .posts-expand .post-body ol li:before {
   display: block;
@@ -3078,10 +3078,14 @@ blockquote p {
   font-weight: bolder;
 }
 .posts-expand .post-body ul:not(.reward-row):not(.nav-tabs) {
+  padding-left: 0;
   list-style: none;
 }
 .posts-expand .post-body ul:not(.reward-row):not(.nav-tabs) li {
   display: flow-root;
+}
+.posts-expand .post-body ul:not(.reward-row):not(.nav-tabs) li ul {
+  padding-left: 23px;
 }
 .posts-expand .post-body ul:not(.reward-row):not(.nav-tabs) li:before {
   float: left;

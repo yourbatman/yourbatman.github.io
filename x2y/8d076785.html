@@ -24,20 +24,28 @@
     var CONFIG = {"hostname":"www.yourbatman.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},"motion":{"enable":false,"async":true,"transition":{"post_block":"flipBounceYIn","post_header":"flipXIn","post_body":"flipBounceXIn","coll_header":"expandIn","sidebar":"shrinkIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="请写文章摘要">
+  <meta name="description" content="Spring依赖注入static静态成员（属性、方法），这里的坑谁用谁知道">
 <meta property="og:type" content="article">
-<meta property="og:title" content="9">
+<meta property="og:title" content="想用@Autowired注入static静态成员？官方不推荐你却还偏要这么做">
 <meta property="og:url" content="https://www.yourbatman.cn/x2y/8d076785.html">
 <meta property="og:site_name" content="BAT的乌托邦">
-<meta property="og:description" content="请写文章摘要">
+<meta property="og:description" content="Spring依赖注入static静态成员（属性、方法），这里的坑谁用谁知道">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-06-14T05:42:05.000Z">
-<meta property="article:modified_time" content="2020-06-14T05:48:20.240Z">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200606065710511.png#x200">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200607071214299.png#x200">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200607072738933.png#x200">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200607085820115.png#x200">
+<meta property="article:published_time" content="2020-06-07T05:42:05.000Z">
+<meta property="article:modified_time" content="2020-06-14T08:17:44.997Z">
 <meta property="article:author" content="A哥(YourBatman)">
 <meta property="article:tag" content="BAT的乌托邦">
 <meta property="article:tag" content="A哥">
 <meta property="article:tag" content="YourBatman">
+<meta property="article:tag" content="Spring Framework">
+<meta property="article:tag" content="static">
+<meta property="article:tag" content="@Autowired">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20200606065710511.png#x200">
 
 <link rel="canonical" href="https://www.yourbatman.cn/x2y/8d076785.html">
 
@@ -52,7 +60,7 @@
   };
 </script>
 
-  <title>9 | BAT的乌托邦</title>
+  <title>想用@Autowired注入static静态成员？官方不推荐你却还偏要这么做 | BAT的乌托邦</title>
   
 
 
@@ -133,17 +141,17 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">13</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">20</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>专栏<span class="badge">6</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>专栏<span class="badge">9</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>时间轴<span class="badge">19</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>时间轴<span class="badge">20</span></a>
 
   </li>
         <li class="menu-item menu-item-top">
@@ -238,14 +246,11 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          9
+          想用@Autowired注入static静态成员？官方不推荐你却还偏要这么做
         </h1>
 
         <div class="post-meta">
           <!-- 精品文章 精华帖 -->
-          
-            <i class="fa fa-anchor" style="background: #00a8c3; padding: 2px 4px 2px 4px; color: #fff;">&nbsp;精华帖</i>
-            <span class="post-meta-divider">|</span>
           
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -253,7 +258,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-06-14 13:42:05" itemprop="dateCreated datePublished" datetime="2020-06-14T13:42:05+08:00">2020-06-14</time>
+              <time title="创建时间：2020-06-07 13:42:05" itemprop="dateCreated datePublished" datetime="2020-06-07T13:42:05+08:00">2020-06-07</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -261,12 +266,12 @@
               </span>
               <span class="post-meta-item-text">收录于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%BC%BA%E7%9C%81/" itemprop="url" rel="index"><span itemprop="name">缺省</span></a>
+                  <a href="/categories/Spring-static%E5%85%B3%E9%94%AE%E5%AD%97/" itemprop="url" rel="index"><span itemprop="name">Spring static关键字</span></a>
                 </span>
             </span>
 
           
-            <span id="/x2y/8d076785.html" class="post-meta-item leancloud_visitors" data-flag-title="9" title="阅读次数">
+            <span id="/x2y/8d076785.html" class="post-meta-item leancloud_visitors" data-flag-title="想用@Autowired注入static静态成员？官方不推荐你却还偏要这么做" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -295,14 +300,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>0</span>
+              <span>11k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>10 分钟</span>
             </span>
 
         </div>
@@ -314,7 +319,131 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
+        <blockquote>
+<p>当大潮退去，才知道谁在裸泳。<br><strong>作者</strong>：A哥（YourBatman）<br><strong>公众号</strong>：BAT的乌托邦（ID：BAT-utopia）<br><strong>文末是否有彩蛋</strong>：有</p>
+</blockquote>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>各位小伙伴大家好，我是A哥。通过本专栏前两篇的学习，相信你对static关键字在Spring/Spring Boot里的应用有了全新的认识，能够解释工作中遇到的大多数问题/疑问了。本文继续来聊聊static关键字更为常见的一种case：使用<code>@Autowired</code>依赖注入静态成员(属性)。</p>
+<p>在Java中，针对static静态成员，我们有一些最基本的常识：静态变量（成员）它是<strong>属于类</strong>的，而非属于实例对象的属性；同样的静态方法也是属于类的，普通方法（实例方法）才属于对象。而Spring容器管理的都是<strong>实例对象</strong>，包括它的<code>@Autowired</code>依赖注入的均是容器内的对象实例，所以对于static成员是不能直接使用<code>@Autowired</code>注入的。</p>
+<blockquote>
+<p>这很容易理解：类成员的初始化较早，并不需要依赖实例的创建，所以这个时候Spring容器可能都还没“出生”，谈何依赖注入呢？</p>
+</blockquote>
+<p>这个示例，你或许似曾相识：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SonHolder</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Son son;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Son <span class="title">getSon</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> son;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后“正常使用”这个组件：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> SonHolder sonHolder;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Transaction</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method1</span><span class="params">()</span></span>&#123;</span><br><span class="line">	...</span><br><span class="line">	sonHolder.getSon().toString();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，结果抛错：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Exception in thread <span class="string">"main"</span> java.lang.NullPointerException</span><br><span class="line">	...</span><br></pre></td></tr></table></figure>
+<p>很明显，<code>getSon()</code>得到的是一个null，所以给你扔了个NPE。<br><img data-src="https://img-blog.csdnimg.cn/20200606065710511.png#x200" alt=""></p>
+<hr>
+<h2 id="版本约定"><a href="#版本约定" class="headerlink" title="版本约定"></a>版本约定</h2><p>本文内容若没做特殊说明，均基于以下版本：</p>
+<ul>
+<li>JDK：<code>1.8</code></li>
+<li>Spring Framework：<code>5.2.2.RELEASE</code></li>
+</ul>
+<hr>
+<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><p>说起<code>@Autowired</code>注解的作用，没有人不熟悉，<strong>自动装配</strong>嘛。根据此注解的定义，它似乎能使用在很多地方：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Target</span>(&#123;ElementType.CONSTRUCTOR, ElementType.METHOD, </span><br><span class="line">	ElementType.PARAMETER, ElementType.FIELD, ElementType.ANNOTATION_TYPE&#125;)</span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Autowired &#123;</span><br><span class="line">	<span class="function"><span class="keyword">boolean</span> <span class="title">required</span><span class="params">()</span> <span class="keyword">default</span> <span class="keyword">true</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>本文我们重点关注它使用在FIELD成员属性上的case，标注在static静态属性上是本文讨论的中心。</p>
+<blockquote>
+<p>说明：虽然Spring官方现在并不推荐字段/属性注入的方式，但它的便捷性仍无可取代，因此在做<strong>业务开发</strong>时它仍旧是主流的使用方式</p>
+</blockquote>
+<hr>
+<h2 id="场景描述"><a href="#场景描述" class="headerlink" title="场景描述"></a>场景描述</h2><p>假如有这样一个场景需求：创建一个教室(Room)，需要传入一批学生和一个老师，此时我需要对这些<strong>用户</strong>按照规则（如名字中含有test字样的示为测试帐号）进行数据合法性校验和过滤，然后才能正常走创建逻辑。此case还有以下特点：</p>
+<ul>
+<li>用户名字/详细信息，需要远程调用（如FeignClient方式）从UC中心获取<ul>
+<li>因此很需要做桥接，提供防腐层</li>
+</ul>
+</li>
+<li>该过滤规则功能性很强，工程内很多地方都有用到<ul>
+<li>有点工具的意思有木有 </li>
+</ul>
+</li>
+</ul>
+<p>阅读完“题目”感觉还是蛮简单的，很normal的一个业务需求case嘛，下面我来模拟一下它的实现。</p>
+<p>从UC用户中心获取用户数据（使用本地数据模拟远程访问）：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 模拟去远端用户中心，根据ids批量获取用户数据</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> yourbatman</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2020/6/5 7:16</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UCClient</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 模拟远程调用的结果返回（有正常的，也有测试数据）</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;User&gt; <span class="title">getByIds</span><span class="params">(List&lt;Long&gt; userIds)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> userIds.stream().map(uId -&gt; &#123;</span><br><span class="line">            User user = <span class="keyword">new</span> User();</span><br><span class="line">            user.setId(uId);</span><br><span class="line">            user.setName(<span class="string">"YourBatman"</span>);</span><br><span class="line">            <span class="keyword">if</span> (uId % <span class="number">2</span> == <span class="number">0</span>) &#123;</span><br><span class="line">                user.setName(user.getName() + <span class="string">"_test"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> user;</span><br><span class="line">        &#125;).collect(Collectors.toList());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>说明：实际情况这里可能只是一个<code>@FeignClient</code>接口而已，本例就使用它mock喽</p>
+</blockquote>
+<p>因为过滤测试用户的功能过于<strong>通用</strong>，并且规则也需要收口，须对它进行封装，因此有了我们的<strong>内部</strong>帮助类<code>UserHelper</code>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 工具方法：根据用户ids，按照一定的规则过滤掉测试用户后返回结果</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> yourbatman</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2020/6/5 7:43</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserHelper</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    UCClient ucClient;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;User&gt; <span class="title">getAndFilterTest</span><span class="params">(List&lt;Long&gt; userIds)</span> </span>&#123;</span><br><span class="line">        List&lt;User&gt; users = ucClient.getByIds(userIds);</span><br><span class="line">        <span class="keyword">return</span> users.stream().filter(u -&gt; &#123;</span><br><span class="line">            Long id = u.getId();</span><br><span class="line">            String name = u.getName();</span><br><span class="line">            <span class="keyword">if</span> (name.contains(<span class="string">"test"</span>)) &#123;</span><br><span class="line">                System.out.printf(<span class="string">"id=%s name=%s是测试用户，已过滤\n"</span>, id, name);</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;).collect(Collectors.toList());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>很明显，它内部需依赖于<code>UCClient</code>这个远程调用的结果。封装好后，我们的业务Service层任何组件就可以尽情的“享用”该工具啦，形如这样：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 业务服务：教室服务</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> yourbatman</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2020/6/5 7:29</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RoomService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    UserHelper userHelper;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">create</span><span class="params">(List&lt;Long&gt; studentIds, Long teacherId)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 因为学生和老师统称为user 所以可以放在一起校验</span></span><br><span class="line">        List&lt;Long&gt; userIds = <span class="keyword">new</span> ArrayList&lt;&gt;(studentIds);</span><br><span class="line">        userIds.add(teacherId);</span><br><span class="line">        List&lt;User&gt; users = userHelper.getAndFilterTest(userIds);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// ...  排除掉测试数据后，执行创建逻辑</span></span><br><span class="line">        System.out.println(<span class="string">"教室创建成功"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>书写个测试程序来模拟Service业务调用：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ComponentScan</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DemoTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        ApplicationContext context = <span class="keyword">new</span> AnnotationConfigApplicationContext(DemoTest<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 模拟接口调用/单元测试</span></span><br><span class="line">        RoomService roomService = context.getBean(RoomService<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">        roomService.create(Arrays.asList(<span class="number">1L</span>, <span class="number">2L</span>, <span class="number">3L</span>, <span class="number">4L</span>, <span class="number">5L</span>, <span class="number">6L</span>), <span class="number">101L</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，结果输出：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">id=<span class="number">2</span> name=YourBatman_test是测试用户，已过滤</span><br><span class="line">id=<span class="number">4</span> name=YourBatman_test是测试用户，已过滤</span><br><span class="line">id=<span class="number">6</span> name=YourBatman_test是测试用户，已过滤</span><br><span class="line">教室创建成功</span><br></pre></td></tr></table></figure>
+<p>一切都这么美好，相安无事的，那为何还会有本文指出的问题存在呢？正所谓“不作死不会死”，总有那么一些“追求极致”的选手就喜欢玩花，下面姑且让我猜猜你为何想要依赖注入static成员属性呢？<br><img data-src="https://img-blog.csdnimg.cn/20200607071214299.png#x200" alt=""></p>
+<hr>
+<h3 id="帮你猜猜你为何有如此需求？"><a href="#帮你猜猜你为何有如此需求？" class="headerlink" title="帮你猜猜你为何有如此需求？"></a>帮你猜猜你为何有如此需求？</h3><p>从上面示例类的命名中，我或许能猜出你的用意。<code>UserHelper</code>它被命名为一个工具类，而一般我们对工具类的理解是：</p>
+<ol>
+<li>方法均为static工具方法</li>
+<li>使用越便捷越好<ol>
+<li>很明显，static方法使用是最便捷的嘛</li>
+</ol>
+</li>
+</ol>
+<p>现状是：使用<code>UserHelper</code>去处理用户信息还得先<code>@Autowired</code>注入它的实例，实属不便。因此你想方设法的想把<code>getAndFilterTest()</code>这个方法变为静态方法，这样通过类名便可直接调用而并不再依赖于注入UserHelper实例了，so你想当然的这么“优化”：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserHelper</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">static</span> UCClient ucClient;</span><br><span class="line">    </span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> List&lt;User&gt; <span class="title">getAndFilterTest</span><span class="params">(List&lt;Long&gt; userIds)</span> </span>&#123;</span><br><span class="line">		... <span class="comment">// 处理逻辑完全同上</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>属性和方法都添加上static修饰，这样使用方通过类名便可直接访问（无需注入）：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RoomService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">create</span><span class="params">(List&lt;Long&gt; studentIds, Long teacherId)</span> </span>&#123;</span><br><span class="line">		...</span><br><span class="line">		<span class="comment">// 通过类名直接调用其静态方法</span></span><br><span class="line">		List&lt;User&gt; users = UserHelper.getAndFilterTest(userIds);</span><br><span class="line">		...</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，结果输出：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">07</span>:<span class="number">22</span>:<span class="number">49.359</span> [main] INFO org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor - Autowired annotation is not supported on <span class="keyword">static</span> fields: <span class="keyword">static</span> cn.yourbatman.temp.component.UCClient cn.yourbatman.temp.component.UserHelper.ucClient</span><br><span class="line"><span class="number">07</span>:<span class="number">22</span>:<span class="number">49.359</span> [main] INFO org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor - Autowired annotation is not supported on <span class="keyword">static</span> fields: <span class="keyword">static</span> cn.yourbatman.temp.component.UCClient cn.yourbatman.temp.component.UserHelper.ucClient</span><br><span class="line">...</span><br><span class="line">Exception in thread <span class="string">"main"</span> java.lang.NullPointerException</span><br><span class="line">	at cn.yourbatman.temp.component.UserHelper.getAndFilterTest(UserHelper.java:<span class="number">23</span>)</span><br><span class="line">	at cn.yourbatman.temp.component.RoomService.create(RoomService.java:<span class="number">26</span>)</span><br><span class="line">	at cn.yourbatman.temp.DemoTest.main(DemoTest.java:<span class="number">19</span>)</span><br></pre></td></tr></table></figure>
+<p>以为天衣无缝，可结果并不完美，抛异常了。我特意多粘贴了两句info日志，它们告诉了你为何抛出NPE异常的原因：<strong>@Autowired不支持标注在static字段/属性上</strong>。<br><img data-src="https://img-blog.csdnimg.cn/20200607072738933.png#x200" alt=""></p>
+<hr>
+<h2 id="为什么-Autowired不能注入static成员属性"><a href="#为什么-Autowired不能注入static成员属性" class="headerlink" title="为什么@Autowired不能注入static成员属性"></a>为什么@Autowired不能注入static成员属性</h2><p>静态变量是属于<strong>类本身</strong>的信息，当类加载器加载静态变量时，Spring的上下文环境<strong>还没有</strong>被加载，所以不可能为静态变量绑定值（这只是最表象原因，并不准确）。同时，Spring也不鼓励为静态变量注入值（言外之意：并不是不能注入），因为它认为这会增加了耦合度，对测试不友好。</p>
+<p>这些都是表象，那么实际上Spring是如何“操作”的呢？我们沿着<code>AutowiredAnnotationBeanPostProcessor</code>输出的这句info日志，倒着找原因，这句日志的输出在这：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">AutowiredAnnotationBeanPostProcessor：</span><br><span class="line"></span><br><span class="line"><span class="comment">// 构建@Autowired注入元数据方法</span></span><br><span class="line"><span class="comment">// 简单的说就是找到该Class类下有哪些是需要做依赖注入的</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> InjectionMetadata <span class="title">buildAutowiringMetadata</span><span class="params">(<span class="keyword">final</span> Class&lt;?&gt; clazz)</span> </span>&#123;</span><br><span class="line">	...</span><br><span class="line">	<span class="comment">// 循环递归，因为父类的也要管上</span></span><br><span class="line">	<span class="keyword">do</span> &#123;</span><br><span class="line">		<span class="comment">// 遍历所有的字段（包括静态字段）</span></span><br><span class="line">		ReflectionUtils.doWithLocalFields(targetClass, field -&gt; &#123;</span><br><span class="line">			<span class="keyword">if</span> (Modifier.isStatic(field.getModifiers())) &#123;</span><br><span class="line">				logger.info(<span class="string">"Autowired annotation is not supported on static fields: "</span> + field);</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">			...</span><br><span class="line">		&#125;);</span><br><span class="line">		<span class="comment">// 遍历所有的方法（包括静态方法）</span></span><br><span class="line">		ReflectionUtils.doWithLocalMethods(targetClass, method -&gt; &#123;</span><br><span class="line">			<span class="keyword">if</span> (Modifier.isStatic(method.getModifiers())) &#123;</span><br><span class="line">				logger.info(<span class="string">"Autowired annotation is not supported on static methods: "</span> + method);</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">			...</span><br><span class="line">		&#125;);</span><br><span class="line">		...</span><br><span class="line">		targetClass = targetClass.getSuperclass();</span><br><span class="line">	&#125; <span class="keyword">while</span> (targetClass != <span class="keyword">null</span> &amp;&amp; targetClass != Object<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这几句代码道出了Spring为何不给static静态字段/静态方法执行<code>@Autowired</code>注入的<strong>最真实原因</strong>：扫描Class类需要注入的元数据的时候，直接选择忽略掉了static成员（包括属性和方法）。</p>
+<p>那么这个处理的入口在哪儿呢？是否在这个阶段时Spring真的无法给static成员完成赋值而选择忽略掉它呢，我们继续最终此方法的调用处。此方法唯一调用处是<code>findAutowiringMetadata()</code>方法，而它被调用的地方有三个：</p>
+<p>调用处一：执行时机较早，在<code>MergedBeanDefinitionPostProcessor</code>处理bd合并期间就会解析出需要注入的元数据，然后做check。它会作用于每个bd身上，所以上例中的2句info日志第一句就是从这输出的</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">AutowiredAnnotationBeanPostProcessor：</span><br><span class="line"></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">postProcessMergedBeanDefinition</span><span class="params">(RootBeanDefinition beanDefinition, Class&lt;?&gt; beanType, String beanName)</span> </span>&#123;</span><br><span class="line">	InjectionMetadata metadata = findAutowiringMetadata(beanName, beanType, <span class="keyword">null</span>);</span><br><span class="line">	metadata.checkConfigMembers(beanDefinition);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>调用处二：在<code>InstantiationAwareBeanPostProcessor</code>也就是<strong>实例创建好后</strong>，给属性赋值阶段（也就是<code>populateBean()</code>阶段）执行。所以它也是会作用于每个bd的，上例中2句info日志的第二句就是从这输出的</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">AutowiredAnnotationBeanPostProcessor：</span><br><span class="line"></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> PropertyValues <span class="title">postProcessProperties</span><span class="params">(PropertyValues pvs, Object bean, String beanName)</span> </span>&#123;</span><br><span class="line">	InjectionMetadata metadata = findAutowiringMetadata(beanName, bean.getClass(), pvs);</span><br><span class="line">	<span class="keyword">try</span> &#123;</span><br><span class="line">		metadata.inject(bean, beanName, pvs);</span><br><span class="line">	&#125;</span><br><span class="line">	...</span><br><span class="line">	<span class="keyword">return</span> pvs;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>调用处三：这个方法比较特殊，它表示对于带有任意<strong>目标实例</strong>（已经不仅是Class，而是实例本身）直接调用的“本地”处理方法实行注入。这是Spring提供给“外部”使用/注入的一个public公共方法，比如给容器外的实例注入属性，还是比较实用的，本文下面会介绍它的使用办法</p>
+<blockquote>
+<p>说明：此方法Spring自己并不会主动调用，所以不会自动输出日志（这也是为何调用处有3处，但日志只有2条的原因）</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">AutowiredAnnotationBeanPostProcessor：</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">processInjection</span><span class="params">(Object bean)</span> <span class="keyword">throws</span> BeanCreationException </span>&#123;</span><br><span class="line">	Class&lt;?&gt; clazz = bean.getClass();</span><br><span class="line">	InjectionMetadata metadata = findAutowiringMetadata(clazz.getName(), clazz, <span class="keyword">null</span>);</span><br><span class="line">	<span class="keyword">try</span> &#123;</span><br><span class="line">		metadata.inject(bean, <span class="keyword">null</span>, <span class="keyword">null</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通过这部分源码，从底层诠释了Spring为何不让你<code>@Autowired</code>注入static成员的原因。既然这样，难道就没有办法满足我的“诉求”了吗？答案是有的，接着往下看。</p>
+<hr>
+<h2 id="间接实现static成员注入的N种方式"><a href="#间接实现static成员注入的N种方式" class="headerlink" title="间接实现static成员注入的N种方式"></a>间接实现static成员注入的N种方式</h2><p>虽然Spring会忽略掉你直接使用<strong>@Autowired + static成员</strong>注入，但还是有很多方法来<strong>绕过</strong>这些限制，实现对静态变量注入值。下面A哥介绍2种方式，供以参考：</p>
+<p>方式一：以set方法作为跳板，在里面实现对static静态成员的赋值</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserHelper</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> UCClient ucClient;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUcClient</span><span class="params">(UCClient ucClient)</span> </span>&#123;</span><br><span class="line">        UserHelper.ucClient = ucClient;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>方式二：使用<code>@PostConstruct</code>注解，在里面为static静态成员赋值</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserHelper</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> UCClient ucClient;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    ApplicationContext applicationContext;</span><br><span class="line">    <span class="meta">@PostConstruct</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        UserHelper.ucClient = applicationContext.getBean(UCClient<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>虽然称作是2种方式，但其实我认为思想只是一个：<strong>延迟为static成员属性赋值</strong>。因此，基于此思想<strong>确切的说</strong>会有N种实现方案（只需要保证你在使用它之前给其赋值上即可），各位可自行思考，A哥就没必要一一举例了。</p>
+<hr>
+<h3 id="高级实现方式"><a href="#高级实现方式" class="headerlink" title="高级实现方式"></a>高级实现方式</h3><p>作为<strong>福利</strong>，A哥在这里提供一种更为高（zhuang）级（bi）的实现方式供以你学习和参考：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AutowireStaticSmartInitializingSingleton</span> <span class="keyword">implements</span> <span class="title">SmartInitializingSingleton</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> AutowireCapableBeanFactory beanFactory;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 当所有的单例Bena初始化完成后，对static静态成员进行赋值</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">afterSingletonsInstantiated</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 因为是给static静态属性赋值，因此这里new一个实例做注入是可行的</span></span><br><span class="line">        beanFactory.autowireBean(<span class="keyword">new</span> UserHelper());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>UserHelper类<strong>不再需要</strong>标注<code>@Component</code>注解，也就是说它不再需要被Spirng容器管理（static工具类确实不需要交给容器管理嘛，毕竟我们不需要用到它的实例），这从某种程度上也是节约开销的表现。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserHelper</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">static</span> UCClient ucClient;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，结果输出：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">08</span>:<span class="number">50</span>:<span class="number">15.765</span> [main] INFO org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor - Autowired annotation is not supported on <span class="keyword">static</span> fields: <span class="keyword">static</span> cn.yourbatman.temp.component.UCClient cn.yourbatman.temp.component.UserHelper.ucClient</span><br><span class="line">Exception in thread <span class="string">"main"</span> java.lang.NullPointerException</span><br><span class="line">	at cn.yourbatman.temp.component.UserHelper.getAndFilterTest(UserHelper.java:<span class="number">26</span>)</span><br><span class="line">	at cn.yourbatman.temp.component.RoomService.create(RoomService.java:<span class="number">26</span>)</span><br><span class="line">	at cn.yourbatman.temp.DemoTest.main(DemoTest.java:<span class="number">19</span>)</span><br></pre></td></tr></table></figure>
+<p>报错。当然喽，这是我故意的，虽然抛异常了，但是看到我们的进步了没：<strong>info日志只打印一句了</strong>（自行想想啥原因哈）。不卖关子了，正确的姿势还得这么写：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserHelper</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> UCClient ucClient;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUcClient</span><span class="params">(UCClient ucClient)</span> </span>&#123;</span><br><span class="line">        UserHelper.ucClient = ucClient;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>再次运行程序，<strong>一切正常</strong>（info日志也不会输出喽）。这么处理的好处我觉得有如下三点：</p>
+<ol>
+<li>手动管理这种case的依赖注入，更可控。而非交给Spring容器去自动处理</li>
+<li>工具类<strong>本身</strong>并不需要加入到Spring容器内，这对于有大量这种case的话，是可以节约开销的</li>
+<li>略显高级，装x神器（可别小看装x，这是个中意词，你的加薪往往来来自于装x成功）</li>
+</ol>
+<p>当然，你也可以这么玩：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AutowireStaticSmartInitializingSingleton</span> <span class="keyword">implements</span> <span class="title">SmartInitializingSingleton</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> AutowiredAnnotationBeanPostProcessor autowiredAnnotationBeanPostProcessor;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">afterSingletonsInstantiated</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        autowiredAnnotationBeanPostProcessor.processInjection(<span class="keyword">new</span> UserHelper());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>依旧可以正常work。这不正是上面介绍的<strong>调用处三</strong>麽，马上就学以致用了有木有，开心吧😄。<br><img data-src="https://img-blog.csdnimg.cn/20200607085820115.png#x200" alt=""></p>
+<hr>
+<h2 id="使用建议"><a href="#使用建议" class="headerlink" title="使用建议"></a>使用建议</h2><p>有这种使用需求的小伙伴需要明晰什么才叫真正的util工具类？若你的工具类存在外部依赖，依赖于Spring容器内的<strong>实例</strong>，那么它就称不上是工具类，就请不要把它当做static来用，容易玩坏的。你现在能够这么用<strong>恰好是</strong>得益于Spring管理的实例默认都是<strong>单例</strong>，所以你赋值一次即可，倘若某天真变成多例了呢（即使可能性极小）？</p>
+<p>强行这么撸，是有隐患的。同时也打破了优先级关系、生命周期关系，容易让“初学者”感到迷糊。当然若你坚持这么使用也未尝不可，那么请做好相关规范/归约，比如使用上面我推荐的高（zhuang）级（bi）使用方式是一种较好的选择，这个时候<strong>手动管理</strong>往往比自动来得更安全，降低后期可能的维护成本。</p>
+<hr>
+<h2 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h2><ol>
+<li>在解析类的<code>@Autowired</code>注入元数据的时候，Spring工厂/容器明明已经准备好了，理论上已经<strong>完全具备</strong>帮你完成注入/赋值的能力，既然这样，为何Spring还偏要“拒绝”这么干呢？可直接注入static成员不香吗？</li>
+<li>既然<code>@Autowired</code>不能注入static属性，那么static方法呢？@Value注解呢？ </li>
+</ol>
+<hr>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>本文介绍了Spring依赖注入和static的关系，从使用背景到原因分析都做了相应的阐述，A哥觉得还是蛮香的，对你帮助应该不小吧。</p>
+<p>最后，我想对小伙伴说：依赖注入的<strong>主要目的</strong>，是让容器去产生一个对象的实例然后管理它的生命周期，然后<strong>在生命周期中</strong>使用他们，这会让单元测试工作更加容易（什么？不写单元测试，那你应该关注我喽，下下下个专栏会专门讲单元测试）。而如果你使用静态变量/类变量就<strong>扩大了</strong>使用范围，使得不可控了。这种static field是<strong>隐含共享</strong>的，并且是一种global全局状态，Spring并不推荐你去这么做，因此使用起来务必当心~</p>
         <!-- ....这里是正文内容的底部（首页不会展示）... -->
         <hr>
 <div class="yourbatman-footer">
@@ -359,22 +488,22 @@
   <div class="popular-posts-header">你可能还喜欢：</div>
   <ul class="popular-posts">
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\x2y\fa005713.html" rel="bookmark">8</a></div>
+      <div class="popular-posts-title"><a href="\x2y\fa005713.html" rel="bookmark">static关键字有何魔法？竟让Spring Boot搞出那么多静态内部类</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\x2y\6abf4a82.html" rel="bookmark">7</a></div>
+      <div class="popular-posts-title"><a href="\x2y\6abf4a82.html" rel="bookmark">static关键字真能提高Bean的优先级吗？答：真能</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\x2y\1db87a14.html" rel="bookmark">6</a></div>
+      <div class="popular-posts-title"><a href="\x2y\1db87a14.html" rel="bookmark">Spring配置类深度剖析-总结篇(手绘流程图，可白嫖)</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\x2y\84b12bae.html" rel="bookmark">5</a></div>
+      <div class="popular-posts-title"><a href="\x2y\f3b61b38.html" rel="bookmark">521我发誓读完本文，再也不会担心Spring配置类问题了</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\x2y\f3b61b38.html" rel="bookmark">4</a></div>
+      <div class="popular-posts-title"><a href="\x2y\6dd28e9b.html" rel="bookmark">你自我介绍说很懂Spring配置类，那你怎么解释这个现象？</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\x2y\6dd28e9b.html" rel="bookmark">3</a></div>
+      <div class="popular-posts-title"><a href="\x2y\8e3281a7.html" rel="bookmark">配置类需要标注@Configuration却不知原因？那这次就不能给你涨薪喽</a></div>
     </li>
   </ul>
 
@@ -384,17 +513,17 @@
 <ul class="post-copyright">
   <li class="post-copyright-title">
     <strong>本文标题： </strong>
-    《9》
+    《想用@Autowired注入static静态成员？官方不推荐你却还偏要这么做》
   </li>
   <li class="post-copyright-author">
     <strong>本文作者： </strong>A哥(YourBatman)
   </li>
   <li class="post-copyright-date">
-    <strong>发布时间： </strong>2020-06-14 13:42:05
+    <strong>发布时间： </strong>2020-06-07 13:42:05
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://www.yourbatman.cn/x2y/8d076785.html" title="9">https://www.yourbatman.cn/x2y/8d076785.html</a>
+    <a href="https://www.yourbatman.cn/x2y/8d076785.html" title="想用@Autowired注入static静态成员？官方不推荐你却还偏要这么做">https://www.yourbatman.cn/x2y/8d076785.html</a>
   </li>
   <li class="post-copyright-license">
     <strong>许可协议： </strong>本站所有文章均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载：No！转发：Yes！
@@ -430,7 +559,9 @@
       <footer class="post-footer">
           
           <div class="post-tags">
-              <a href="/tags/%E7%BC%BA%E7%9C%81/" rel="tag"><i class="fa fa-tag"></i> 缺省</a>
+              <a href="/tags/Spring-Framework/" rel="tag"><i class="fa fa-tag"></i> Spring Framework</a>
+              <a href="/tags/static/" rel="tag"><i class="fa fa-tag"></i> static</a>
+              <a href="/tags/Autowired/" rel="tag"><i class="fa fa-tag"></i> @Autowired</a>
           </div>
 
         <!-- 导入投票模块 -->
@@ -447,10 +578,13 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/x2y/fa005713.html" rel="prev" title="8">
-      <i class="fa fa-chevron-left"></i> 8
+    <a href="/x2y/fa005713.html" rel="prev" title="static关键字有何魔法？竟让Spring Boot搞出那么多静态内部类">
+      <i class="fa fa-chevron-left"></i> static关键字有何魔法？竟让Spring Boot搞出那么多静态内部类
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/x2y/b934cc4f.html" rel="next" title="IDEA命令行缩短器助你解决此问题：Command line is too long. Shorten command line">
+      IDEA命令行缩短器助你解决此问题：Command line is too long. Shorten command line <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -516,6 +650,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#版本约定"><span class="nav-number">1.1.</span> <span class="nav-text">版本约定</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#正文"><span class="nav-number">2.</span> <span class="nav-text">正文</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#场景描述"><span class="nav-number">2.1.</span> <span class="nav-text">场景描述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#帮你猜猜你为何有如此需求？"><span class="nav-number">2.1.1.</span> <span class="nav-text">帮你猜猜你为何有如此需求？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么-Autowired不能注入static成员属性"><span class="nav-number">2.2.</span> <span class="nav-text">为什么@Autowired不能注入static成员属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#间接实现static成员注入的N种方式"><span class="nav-number">2.3.</span> <span class="nav-text">间接实现static成员注入的N种方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#高级实现方式"><span class="nav-number">2.3.1.</span> <span class="nav-text">高级实现方式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用建议"><span class="nav-number">2.4.</span> <span class="nav-text">使用建议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思考题"><span class="nav-number">2.5.</span> <span class="nav-text">思考题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -570,20 +705,20 @@
         
         
           <li>
-            <a href="/x2y/8d076785.html" title="9" target="_blank">
-            <i class="fa fa-check-square"></i> 9
+            <a href="/x2y/b934cc4f.html" title="IDEA命令行缩短器助你解决此问题：Command line is too long. Shorten command line" target="_blank">
+            <i class="fa fa-check-square"></i> IDEA命令行缩短器助你解决此问题：Command line is too long. Shorten command line
             </a>
           </li>
         
           <li>
-            <a href="/x2y/fa005713.html" title="8" target="_blank">
-            <i class="fa fa-check-square"></i> 8
+            <a href="/x2y/8d076785.html" title="想用@Autowired注入static静态成员？官方不推荐你却还偏要这么做" target="_blank">
+            <i class="fa fa-check-square"></i> 想用@Autowired注入static静态成员？官方不推荐你却还偏要这么做
             </a>
           </li>
         
           <li>
-            <a href="/x2y/6abf4a82.html" title="7" target="_blank">
-            <i class="fa fa-check-square"></i> 7
+            <a href="/x2y/fa005713.html" title="static关键字有何魔法？竟让Spring Boot搞出那么多静态内部类" target="_blank">
+            <i class="fa fa-check-square"></i> static关键字有何魔法？竟让Spring Boot搞出那么多静态内部类
             </a>
           </li>
         
@@ -1047,13 +1182,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">本站总字数：</span>
-    <span title="本站总字数">67k</span>
+    <span title="本站总字数">152k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">本站总阅读时长 &asymp;</span>
-    <span title="本站总阅读时长">1:01</span>
+    <span title="本站总阅读时长">2:18</span>
 </div>
   <div class="addthis_inline_share_toolbox">
     <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5eb7b6f6b64d54f6" async="async"></script>

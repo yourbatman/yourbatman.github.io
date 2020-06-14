@@ -24,20 +24,30 @@
     var CONFIG = {"hostname":"www.yourbatman.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},"motion":{"enable":false,"async":true,"transition":{"post_block":"flipBounceYIn","post_header":"flipXIn","post_body":"flipBounceXIn","coll_header":"expandIn","sidebar":"shrinkIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="请写文章摘要">
+  <meta name="description" content="static关键字提升配置类的优先级，带你领略为何Spring Boot搞出那么多静态内部类">
 <meta property="og:type" content="article">
-<meta property="og:title" content="8">
+<meta property="og:title" content="static关键字有何魔法？竟让Spring Boot搞出那么多静态内部类">
 <meta property="og:url" content="https://www.yourbatman.cn/x2y/fa005713.html">
 <meta property="og:site_name" content="BAT的乌托邦">
-<meta property="og:description" content="请写文章摘要">
+<meta property="og:description" content="static关键字提升配置类的优先级，带你领略为何Spring Boot搞出那么多静态内部类">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-06-14T05:42:01.000Z">
-<meta property="article:modified_time" content="2020-06-14T05:48:20.244Z">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200601065329491.png#x200">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200602131928138.png#x200">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200602135110469.png#x180">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200602140854236.png#x160">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200602143335570.png#x200">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2020060214460054.png#x260">
+<meta property="article:published_time" content="2020-06-03T05:42:01.000Z">
+<meta property="article:modified_time" content="2020-06-14T08:17:45.005Z">
 <meta property="article:author" content="A哥(YourBatman)">
 <meta property="article:tag" content="BAT的乌托邦">
 <meta property="article:tag" content="A哥">
 <meta property="article:tag" content="YourBatman">
+<meta property="article:tag" content="Spring Framework">
+<meta property="article:tag" content="static">
+<meta property="article:tag" content="Spring Boot">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20200601065329491.png#x200">
 
 <link rel="canonical" href="https://www.yourbatman.cn/x2y/fa005713.html">
 
@@ -52,7 +62,7 @@
   };
 </script>
 
-  <title>8 | BAT的乌托邦</title>
+  <title>static关键字有何魔法？竟让Spring Boot搞出那么多静态内部类 | BAT的乌托邦</title>
   
 
 
@@ -133,17 +143,17 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">13</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">20</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>专栏<span class="badge">6</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>专栏<span class="badge">9</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>时间轴<span class="badge">19</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>时间轴<span class="badge">20</span></a>
 
   </li>
         <li class="menu-item menu-item-top">
@@ -238,14 +248,11 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          8
+          static关键字有何魔法？竟让Spring Boot搞出那么多静态内部类
         </h1>
 
         <div class="post-meta">
           <!-- 精品文章 精华帖 -->
-          
-            <i class="fa fa-anchor" style="background: #00a8c3; padding: 2px 4px 2px 4px; color: #fff;">&nbsp;精华帖</i>
-            <span class="post-meta-divider">|</span>
           
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -253,7 +260,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-06-14 13:42:01" itemprop="dateCreated datePublished" datetime="2020-06-14T13:42:01+08:00">2020-06-14</time>
+              <time title="创建时间：2020-06-03 13:42:01" itemprop="dateCreated datePublished" datetime="2020-06-03T13:42:01+08:00">2020-06-03</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -261,12 +268,12 @@
               </span>
               <span class="post-meta-item-text">收录于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%BC%BA%E7%9C%81/" itemprop="url" rel="index"><span itemprop="name">缺省</span></a>
+                  <a href="/categories/Spring-static%E5%85%B3%E9%94%AE%E5%AD%97/" itemprop="url" rel="index"><span itemprop="name">Spring static关键字</span></a>
                 </span>
             </span>
 
           
-            <span id="/x2y/fa005713.html" class="post-meta-item leancloud_visitors" data-flag-title="8" title="阅读次数">
+            <span id="/x2y/fa005713.html" class="post-meta-item leancloud_visitors" data-flag-title="static关键字有何魔法？竟让Spring Boot搞出那么多静态内部类" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -295,14 +302,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>0</span>
+              <span>14k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>12 分钟</span>
             </span>
 
         </div>
@@ -314,7 +321,175 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
+        <blockquote>
+<p>当大潮退去，才知道谁在裸泳。<br><strong>作者</strong>：A哥（YourBatman）<br><strong>公众号</strong>：BAT的乌托邦（ID：BAT-utopia）<br><strong>文末是否有彩蛋</strong>：有</p>
+</blockquote>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>各位小伙伴大家好，我是A哥。<a href="https://mp.weixin.qq.com/s/VTB9f8S6TYeuNVd4Z71zUw" target="_blank" rel="noopener">上篇文章</a>了解了<strong>static关键字 + @Bean方法</strong>的使用，知晓了它能够提升Bean的优先级，在@Bean方法前标注static关键字，特定情况下可以避免一些烦人的“警告”日志的输出，排除隐患让工程变得更加安全。我们知道static关键字它不仅可使用在方法上，那么本文将继续挖掘static在Spring环境下的用处。</p>
+<p>根据所学的JavaSE基础，static关键字除了能够修饰方法外，还能使用在这两个地方：</p>
+<ol>
+<li>修饰类。确切的说，应该叫修饰<strong>内部类</strong>，所以它叫静态内部类</li>
+<li>修饰成员变量</li>
+</ol>
+<blockquote>
+<p>其实static还可以修饰代码块、static静态导包等，但很明显，这些与本文无关</p>
+</blockquote>
+<p>接下来就以这为两条主线，分别研究static在对应场景下的作用，本文将聚焦在静态内部类上。<br><img data-src="https://img-blog.csdnimg.cn/20200601065329491.png#x200" alt=""></p>
+<hr>
+<h2 id="版本约定"><a href="#版本约定" class="headerlink" title="版本约定"></a>版本约定</h2><p>本文内容若没做特殊说明，均基于以下版本：</p>
+<ul>
+<li>JDK：<code>1.8</code></li>
+<li>Spring Framework：<code>5.2.2.RELEASE</code></li>
+</ul>
+<hr>
+<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><p>说到Java里的static关键字，这当属最基础的入门知识，是Java中常用的关键字之一。你平时用它来修饰变量和方法了，但是对它的了解，即使放在JavaSE情景下知道这些还是<strong>不够的</strong>，问题虽小但这往往反映了你对Java基础的了解程度。</p>
+<p>当然喽，本文并不讨论它在JavaSE下使用，毕竟咱们还是<strong>有一定逼格的</strong>专栏，需要进阶一把，玩玩它在Spring环境下到底能够迸出怎么样的火花呢？比如静态内部类~</p>
+<hr>
+<h2 id="Spring下的静态内部类"><a href="#Spring下的静态内部类" class="headerlink" title="Spring下的静态内部类"></a>Spring下的静态内部类</h2><p>static修饰类<strong>只有一种情况</strong>：那就是这个类属于内部类，这就是我们津津乐道的<strong>静态内部类</strong>，形如这样：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Outer</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Integer age;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 静态内部类</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Inner</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">private</span> String innerName;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">static</span> Integer innerAge;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fun1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="comment">// 无法访问外部类的成员变量</span></span><br><span class="line">            <span class="comment">//System.out.println(name);</span></span><br><span class="line">            System.out.println(age);</span><br><span class="line"></span><br><span class="line">            System.out.println(innerName);</span><br><span class="line">            System.out.println(innerAge);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 静态内部类的实例化并不需要依赖于外部类的实例</span></span><br><span class="line">        Inner inner = <span class="keyword">new</span> Inner();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在实际开发中，静态内部类的使用场景是非常之多的。</p>
+<hr>
+<h3 id="认识静态-普通内部类"><a href="#认识静态-普通内部类" class="headerlink" title="认识静态/普通内部类"></a>认识静态/普通内部类</h3><p>由于一些小伙伴对普通内部类 vs 静态内部类傻傻分不清，为了方便后续讲解，本处把<strong>关键要素</strong>做简要对比说明：</p>
+<ol>
+<li>静态内部类可以声明静态or实例成员(属性和方法)；而普通内部类则<strong>不可以</strong>声明静态成员(属性和方法)</li>
+<li>静态内部类实例的创建<strong>不依赖于</strong>外部类；而普通外部类实例创建必须先有外部类实例才行（绑定关系拿捏得死死的，不信你问郑凯）</li>
+<li>静态内部类<strong>不能</strong>访问外部类的实例成员；而普通内部类可以随意访问(不管静态or非静态)  –&gt; 我理解这是普通内部类能 <strong>“存活”</strong> 下来的最大理由了吧😄</li>
+</ol>
+<p>总之，普通内部类和外部类的关系属于<strong>强绑定</strong>，而静态内部类几乎不会受到外部类的限制，可以游离<strong>单独使用</strong>。既然如此，那为何还需要static静态内部类呢，直接单独写个Class类岂不就好了吗？存在即合理，这么使用的原因我个人觉得有如下两方面思考，供以你参考：</p>
+<ul>
+<li>静态内部类是弱关系并不是没关系，比如它还是可以访问外部类的static的变量的不是（即便它是private的）</li>
+<li><strong>高内聚的体现</strong> </li>
+</ul>
+<p>在传统<code>Spirng Framework</code>的配置类场景下，你可能鲜有接触到static关键字使用在类上的场景，但这在Spring Boot下使用非常频繁，比如属性配置类的典型应用：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ConfigurationProperties</span>(prefix = <span class="string">"server"</span>, ignoreUnknownFields = <span class="keyword">true</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ServerProperties</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// server.port = xxx </span></span><br><span class="line">	<span class="comment">// server.address = xxx</span></span><br><span class="line">	<span class="keyword">private</span> Integer port;</span><br><span class="line">	<span class="keyword">private</span> InetAddress address;</span><br><span class="line">	...</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// tomcat配置</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Tomcat</span> </span>&#123;</span><br><span class="line">		</span><br><span class="line">		<span class="comment">// server.tomcat.protocol-header = xxx</span></span><br><span class="line">		<span class="keyword">private</span> String protocolHeader;</span><br><span class="line">		...</span><br><span class="line">		</span><br><span class="line">		<span class="comment">// tomcat内的log配置</span></span><br><span class="line">		<span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Accesslog</span> </span>&#123;</span><br><span class="line">			</span><br><span class="line">			<span class="comment">// server.tomcat.accesslog.enabled = xxx</span></span><br><span class="line">			<span class="keyword">private</span> <span class="keyword">boolean</span> enabled = <span class="keyword">false</span>;</span><br><span class="line">			...</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这种嵌套case使得代码（配置）的key <strong>内聚性非常强</strong>，使用起来更加方便。试想一下，如果你<strong>不使用</strong>静态内部类去集中管理这些配置，每个配置都单独书写的话，像这样：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ConfigurationProperties</span>(prefix = <span class="string">"server"</span>, ignoreUnknownFields = <span class="keyword">true</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ServerProperties</span> </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@ConfigurationProperties</span>(prefix = <span class="string">"server.tomcat"</span>, ignoreUnknownFields = <span class="keyword">true</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TomcatProperties</span> </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@ConfigurationProperties</span>(prefix = <span class="string">"server.tomcat.accesslog"</span>, ignoreUnknownFields = <span class="keyword">true</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AccesslogProperties</span> </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这代码，就问你，如果是你同事写的，你骂不骂吧！用<strong>臃肿</strong>来形容还是个中意词，层次结构体现得也非常的不直观嘛。因此，对于这种属性类里使用静态内部类是非常适合，内聚性一下子高很多~</p>
+<p>除了在内聚性上的作用，在Spring Boot中的<code>@Configuration</code>配置类下（特别常见于自动配置类）也能经常看到它的身影：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span>(proxyBeanMethods = <span class="keyword">false</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebMvcAutoConfiguration</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// web MVC个性化定制配置</span></span><br><span class="line">	<span class="meta">@Configuration</span>(proxyBeanMethods = <span class="keyword">false</span>)</span><br><span class="line">	<span class="meta">@Import</span>(EnableWebMvcConfiguration<span class="class">.<span class="keyword">class</span>)</span></span><br><span class="line"><span class="class">	@<span class="title">EnableConfigurationProperties</span>(</span>&#123; WebMvcProperties<span class="class">.<span class="keyword">class</span>, <span class="title">ResourceProperties</span>.<span class="title">class</span> &#125;)</span></span><br><span class="line"><span class="class">	@<span class="title">Order</span>(0)</span></span><br><span class="line"><span class="class">	<span class="title">public</span> <span class="title">static</span> <span class="title">class</span> <span class="title">WebMvcAutoConfigurationAdapter</span> <span class="keyword">implements</span> <span class="title">WebMvcConfigurer</span> </span>&#123;</span><br><span class="line">		...</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Configuration</span>(proxyBeanMethods = <span class="keyword">false</span>)</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">EnableWebMvcConfiguration</span> <span class="keyword">extends</span> <span class="title">DelegatingWebMvcConfiguration</span> <span class="keyword">implements</span> <span class="title">ResourceLoaderAware</span> </span>&#123;</span><br><span class="line">		...</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>利用静态内部类把相似配置类<strong>归并</strong>在一个 <strong>.java文件</strong> 内，这样多个static类还可<strong>公用</strong>外部类的属性、方法，也是一种高内聚的体现。同时static关键字提升了初始化的优先级，比如本例中的<code>EnableWebMvcConfiguration</code>它会优先于外部类加载~</p>
+<p>关于static静态内部类优先级相关是<strong>重点</strong>，静态内部类的优先级会更高吗？使用普通内部能达到同样效果吗？拍脑袋直接回答是没用的，带着这两个问题，接下来A哥举例领你一探究竟…</p>
+<hr>
+<h3 id="static静态配置类提升配置优先级"><a href="#static静态配置类提升配置优先级" class="headerlink" title="static静态配置类提升配置优先级"></a>static静态配置类提升配置优先级</h3><p>自己先构造一个Demo，场景如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">OuterConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    OuterConfig() &#123;</span><br><span class="line">        System.out.println(<span class="string">"OuterConfig init..."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">static</span> Parent <span class="title">parent</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Parent();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Configuration</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">InnerConfig</span> </span>&#123;</span><br><span class="line">        InnerConfig() &#123;</span><br><span class="line">            System.out.println(<span class="string">"InnerConfig init..."</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="meta">@Bean</span></span><br><span class="line">        <span class="function">Daughter <span class="title">daughter</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> Daughter();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>测试程序：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ComponentScan</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestSpring</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> AnnotationConfigApplicationContext(TestSpring<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>启动程序，结果输出：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">InnerConfig init...</span><br><span class="line">OuterConfig init...</span><br><span class="line">Daughter init...</span><br><span class="line">Parent init...</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>结果细节：似乎都是按照字母表的顺序来执行的。I在前O在后；D在前P在后；</p>
+</blockquote>
+<p>看到这个结果，如果你就过早的得出结论：静态内部类优先级高于外部类，那么就太随意了，图样图森破啊。<strong>大胆猜想，小心求证</strong> 应该是程序员应有的态度，那么继续往下看，在此基础上我新增加一个静态内部类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">OuterConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    OuterConfig() &#123;</span><br><span class="line">        System.out.println(<span class="string">"OuterConfig init..."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">static</span> Parent <span class="title">parent</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Parent();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Configuration</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">PInnerConfig</span> </span>&#123;</span><br><span class="line">        PInnerConfig() &#123;</span><br><span class="line">            System.out.println(<span class="string">"PInnerConfig init..."</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="meta">@Bean</span></span><br><span class="line">        <span class="function">Son <span class="title">son</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> Son();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Configuration</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">InnerConfig</span> </span>&#123;</span><br><span class="line">        InnerConfig() &#123;</span><br><span class="line">            System.out.println(<span class="string">"InnerConfig init..."</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="meta">@Bean</span></span><br><span class="line">        <span class="function">Daughter <span class="title">daughter</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> Daughter();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我先解释下我这么做的意图：</p>
+<ol>
+<li>增加一个字母P开头的内部类，自然顺序P在O（外部类）后面，消除影响</li>
+<li>P开头的内部类在源码摆放顺序上<strong>故意</strong>放在了I开头的内部类的<strong>上面</strong>，同样为了消除字母表顺序带来的影响<ol>
+<li>目的：看看是按照字节码顺序，还是字母表顺序呢？</li>
+</ol>
+</li>
+<li>PInnerConfig里面的@Bean实例为Son，字母表顺序是三者中最为靠后的，但字节码却在中间，这样也能够消除影响</li>
+</ol>
+<p>运行程序，结果输出：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">InnerConfig init...</span><br><span class="line">PInnerConfig init...</span><br><span class="line">OuterConfig init...</span><br><span class="line">Daughter init...</span><br><span class="line">son init...</span><br><span class="line">Parent init...</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>结果细节：外部类貌似总是滞后于内部类初始化；同一类的多个内部类之间顺序是按照字母表顺序（自然排序）初始化而非字节码顺序；@Bean方法的顺序依照了类的顺序</p>
+</blockquote>
+<p><strong>请留意本结果和上面结果是否有区别</strong>，你应该若有所思。</p>
+<p>这是单.java文件的case（所有static类都在同一个.java文件内），接下来我在同目录下<strong>增加</strong> 2个.java文件（请自行留意类名第一个字母，我将不再赘述我的设计意图）：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 文件一：</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A_OuterConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    A_OuterConfig() &#123;</span><br><span class="line">        System.out.println(<span class="string">"A_OuterConfig init..."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function">String <span class="title">a_o_bean</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"A_OuterConfig a_o_bean init..."</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> String();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Configuration</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">PInnerConfig</span> </span>&#123;</span><br><span class="line">        PInnerConfig() &#123;</span><br><span class="line">            System.out.println(<span class="string">"A_OuterConfig PInnerConfig init..."</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="meta">@Bean</span></span><br><span class="line">        <span class="function">String <span class="title">a_p_bean</span><span class="params">()</span></span>&#123;</span><br><span class="line">            System.out.println(<span class="string">"A_OuterConfig a_p_bean init..."</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> String();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Configuration</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">InnerConfig</span> </span>&#123;</span><br><span class="line">        InnerConfig() &#123;</span><br><span class="line">            System.out.println(<span class="string">"A_OuterConfig InnerConfig init..."</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="meta">@Bean</span></span><br><span class="line">        <span class="function">String <span class="title">a_i_bean</span><span class="params">()</span></span>&#123;</span><br><span class="line">            System.out.println(<span class="string">"A_OuterConfig a_i_bean init..."</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> String();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 文件二：</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Z_OuterConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    Z_OuterConfig() &#123;</span><br><span class="line">        System.out.println(<span class="string">"Z_OuterConfig init..."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function">String <span class="title">z_o_bean</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Z_OuterConfig z_o_bean init..."</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> String();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Configuration</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">PInnerConfig</span> </span>&#123;</span><br><span class="line">        PInnerConfig() &#123;</span><br><span class="line">            System.out.println(<span class="string">"Z_OuterConfig PInnerConfig init..."</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="meta">@Bean</span></span><br><span class="line">        <span class="function">String <span class="title">z_p_bean</span><span class="params">()</span></span>&#123;</span><br><span class="line">            System.out.println(<span class="string">"Z_OuterConfig z_p_bean init..."</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> String();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Configuration</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">InnerConfig</span> </span>&#123;</span><br><span class="line">        InnerConfig() &#123;</span><br><span class="line">            System.out.println(<span class="string">"Z_OuterConfig InnerConfig init..."</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="meta">@Bean</span></span><br><span class="line">        <span class="function">String <span class="title">z_i_bean</span><span class="params">()</span></span>&#123;</span><br><span class="line">            System.out.println(<span class="string">"Z_OuterConfig z_i_bean init..."</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> String();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，结果输出：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">A_OuterConfig InnerConfig init...</span><br><span class="line">A_OuterConfig PInnerConfig init...</span><br><span class="line">A_OuterConfig init...</span><br><span class="line">InnerConfig init...</span><br><span class="line">PInnerConfig init...</span><br><span class="line">OuterConfig init...</span><br><span class="line">Z_OuterConfig InnerConfig init...</span><br><span class="line">Z_OuterConfig PInnerConfig init...</span><br><span class="line">Z_OuterConfig init...</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">A_OuterConfig a_i_bean init...</span><br><span class="line">A_OuterConfig a_p_bean init...</span><br><span class="line">A_OuterConfig a_o_bean init...</span><br><span class="line">Daughter init...</span><br><span class="line">son init...</span><br><span class="line">Parent init...</span><br><span class="line">Z_OuterConfig z_i_bean init...</span><br><span class="line">Z_OuterConfig z_p_bean init...</span><br><span class="line">Z_OuterConfig z_o_bean init...</span><br></pre></td></tr></table></figure>
+<p>这个结果大而全，是有说服力的，通过这几个示例可以总结出如下结论：</p>
+<ol>
+<li><strong>垮.java文件</strong> （垮配置类）之间的顺序，是由自然顺序来保证的（字母表顺序）<ol>
+<li>如上：下加载A打头的配置类（含静态内部类），再是O打头的，再是Z打头的</li>
+</ol>
+</li>
+<li><strong>同一.java文件内部</strong>，static静态内部类<strong>优先于</strong>外部类初始化。若有多个静态内部类，那么按照类名自然排序初始化（并非按照定义顺序哦，请务必注意）<ol>
+<li>说明：一般内部类只可能与外部类“发生关系”，与兄弟之间不建议有任何联系，否则顺序控制上你就得当心了。毕竟靠自然顺序去保证是一种弱保证，容错性太低</li>
+</ol>
+</li>
+<li><strong>同一.java文件内</strong>，不同类内的@Bean方法之间的执行顺序，保持同2一致（也就说你的@Bean所在的@Configuration配置类先加载，那你就优先被初始化喽）<ol>
+<li>同一Class内多个@Bean方法的执行顺序，上篇文章<a href="https://mp.weixin.qq.com/s/VTB9f8S6TYeuNVd4Z71zUw" target="_blank" rel="noopener">static关键字真能提高Bean的优先级吗？答：真能</a> 就已经说过了哈，请移步参见</li>
+</ol>
+</li>
+</ol>
+<p>总的来说，当static标注在class类上时，在<strong>同.java文件内</strong>它是能够提升优先级的，这对于<code>Spring Boot</code>的自动配置非常有意义，主要体现在如下两个方法：</p>
+<ul>
+<li>static静态内部类配置优先于外部类加载，从而静态内部类里面的@Bean也<strong>优先于</strong>外部类的@Bean先加载</li>
+<li>既然这样，那么Spring Boot自动配置就可以结合此特性，就可以进行具有优先级的<code>@Conditional</code>条件判断了。这里我举个官方的例子，你便能感受到它的魅力所在：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FeignClientsConfiguration</span> </span>&#123;</span><br><span class="line">	...</span><br><span class="line">	<span class="meta">@Bean</span></span><br><span class="line">	<span class="meta">@Scope</span>(<span class="string">"prototype"</span>)</span><br><span class="line">	<span class="meta">@ConditionalOnMissingBean</span></span><br><span class="line">	<span class="keyword">public</span> Feign.<span class="function">Builder <span class="title">feignBuilder</span><span class="params">(Retryer retryer)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> Feign.builder().retryer(retryer);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Configuration</span></span><br><span class="line">	<span class="meta">@ConditionalOnClass</span>(&#123; HystrixCommand<span class="class">.<span class="keyword">class</span>, <span class="title">HystrixFeign</span>.<span class="title">class</span> &#125;)</span></span><br><span class="line"><span class="class">	<span class="title">protected</span> <span class="title">static</span> <span class="title">class</span> <span class="title">HystrixFeignConfiguration</span> </span>&#123;</span><br><span class="line">		<span class="meta">@Bean</span></span><br><span class="line">		<span class="meta">@Scope</span>(<span class="string">"prototype"</span>)</span><br><span class="line">		<span class="meta">@ConditionalOnMissingBean</span></span><br><span class="line">		<span class="meta">@ConditionalOnProperty</span>(name = <span class="string">"feign.hystrix.enabled"</span>)</span><br><span class="line">		<span class="keyword">public</span> Feign.<span class="function">Builder <span class="title">feignHystrixBuilder</span><span class="params">()</span> </span>&#123;</span><br><span class="line">			<span class="keyword">return</span> HystrixFeign.builder();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>因为<code>HystrixFeign.builder()</code>它属于静态内部类，所以这个@Bean肯定是优先于外部的<code>Feign.builder()</code>先加载的。所以这段逻辑可解释为：优先使用<code>HystrixFeign.builder()</code>（若条件满足），否则使用<code>Feign.builder().retryer(retryer)</code>作为兜底。通过此例你应该再一次感受到<strong>Bean的加载顺序之于Spring应用的重要性</strong>，特别在Spring Boot/Cloud下此特性尤为凸显。</p>
+<p>你以为记住这几个结论就完事了？不，这明显不符合A哥的逼格嘛，下面我们就来继续挖一挖吧。<br><img data-src="https://img-blog.csdnimg.cn/20200602131928138.png#x200" alt=""></p>
+<hr>
+<h3 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h3><p>关于<code>@Configuration</code>配置类的顺序问题，事前需强调两点：</p>
+<ol>
+<li>不同 <strong>.java文件</strong> 之间的加载顺序是不重要的，Spring官方也强烈建议使用者不要去依赖这种顺序<ol>
+<li>因为无状态性，因此你在使用过程中可以认为垮<code>@Configuration</code>文件之前的初始化顺序<strong>是不确定的</strong></li>
+</ol>
+</li>
+<li><strong>同一.javaw文件</strong>内也可能存在多个<code>@Configuration</code>配置类（比如静态内部类、普通内部类等），它们之间的顺序是我们<strong>需要关心</strong>的，并且需要强依赖于这个顺序编程（比如Spring Boot）</li>
+</ol>
+<p><code>@Configuration</code>配置类只有是被<code>@ComponentScan</code>扫描进来（或者被Spring Boot自动配置加载进来）才需要讨论顺序（倘若是构建上下文时自己手动指好的，那顺序就已经定死了嘛），实际开发中的配置类也确实是酱紫的，一般都是通过扫描被加载。接下来我们看看<code>@ComponentScan</code>是如何扫描的，把此注解的解析步骤（伪代码）展示如下：</p>
+<blockquote>
+<p>说明：本文并不会着重分析@ComponentScan它的解析原理，只关注本文“感兴趣”部分</p>
+</blockquote>
+<p>1、解析配置类上的<code>@ComponentScan</code>注解(们)：本例中<code>TestSpring</code>作为扫描入口，会扫描到A_OuterConfig/OuterConfig等配置类们</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">ConfigurationClassParser#doProcessConfigurationClass：</span><br><span class="line"></span><br><span class="line">	<span class="comment">// **最先判断** 该配置类是否有成员类（普通内部类）</span></span><br><span class="line">	<span class="comment">// 若存在普通内部类，最先把普通内部类给解析喽（注意，不是静态内部类）</span></span><br><span class="line">	<span class="keyword">if</span> (configClass.getMetadata().isAnnotated(Component<span class="class">.<span class="keyword">class</span>.<span class="title">getName</span>())) </span>&#123;</span><br><span class="line">		processMemberClasses(configClass, sourceClass);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	...</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 遍历该配置类上所有的@ComponentScan注解</span></span><br><span class="line">	<span class="comment">// 使用ComponentScanAnnotationParser一个个解析</span></span><br><span class="line">	<span class="keyword">for</span> (AnnotationAttributes componentScan : componentScans) &#123;</span><br><span class="line">		Set&lt;BeanDefinitionHolder&gt; scannedBeanDefinitions = <span class="keyword">this</span>.componentScanParser.parse(componentScan,...);</span><br><span class="line">		</span><br><span class="line">		<span class="comment">// 继续判断扫描到的bd是否是配置类，递归调用</span></span><br><span class="line">		... </span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>细节说明：关于最先解析内部类时需要特别注意，Spring通过<code>sourceClass.getMemberClasses()</code>来获取内部类们：只有普通内部类属于这个，static静态内部类<strong>并不属于</strong>它，这点很重要哦</p>
+</blockquote>
+<p>2、解析该注解上的basePackages/basePackageClasses等属性值得到一些扫描的<strong>基包</strong>，委托给ClassPathBeanDefinitionScanner去完成扫描</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ComponentScanAnnotationParser#parse</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 使用ClassPathBeanDefinitionScanner扫描，基于类路径哦</span></span><br><span class="line">	scanner.doScan(StringUtils.toStringArray(basePackages));</span><br></pre></td></tr></table></figure>
+<p>3、遍历<strong>每个基包</strong>，从文件系统中定位到资源，把符合条件的<strong>Spring组件</strong>（强调：这里只指外部@Configuration配置类，还没涉及到里面的@Bean这些）注册到BeanDefinitionRegistry注册中心</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">ComponentScanAnnotationParser#doScan</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (String basePackage : basePackages) &#123;</span><br><span class="line">		<span class="comment">// 这个方法是本文最需要关注的方法</span></span><br><span class="line">		Set&lt;BeanDefinition&gt; candidates = findCandidateComponents(basePackage);</span><br><span class="line">		<span class="keyword">for</span> (BeanDefinition candidate : candidates) &#123;</span><br><span class="line">			...</span><br><span class="line">			<span class="comment">// 把该配置**类**(并非@Bean方法)注册到注册中心</span></span><br><span class="line">			registerBeanDefinition(definitionHolder, <span class="keyword">this</span>.registry);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p>到这一步就完成了Bean定义的注册，此处可以验证一个结论：<strong>多个配置类之间，谁先被扫描到，就先注册谁，对应的就是谁最先被初始化</strong>。那么这个顺序到底是咋样界定的呢？那么就要来到这中间<strong>最为重要</strong>（本文最关心）的一步喽：<code>findCandidateComponents(basePackage)</code>。</p>
+<blockquote>
+<p>说明：Spring 5.0开始增加了<code>@Indexed</code>注解为云原生做了准备，可以让scan扫描动作在编译期就完成，但这项技术还不成熟，暂时几乎无人使用，因此本文仍旧只关注经典模式的实现</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">ClassPathScanningCandidateComponentProvider#scanCandidateComponents</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 最终返回的候选组件们</span></span><br><span class="line">	Set&lt;BeanDefinition&gt; candidates = <span class="keyword">new</span> LinkedHashSet&lt;&gt;();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="comment">// 得到文件系统的路径，比如本例为classpath*:com/yourbatman/**/*.class</span></span><br><span class="line">	String packageSearchPath = ResourcePatternResolver.CLASSPATH_ALL_URL_PREFIX +</span><br><span class="line">					resolveBasePackage(basePackage) + <span class="string">'/'</span> + <span class="keyword">this</span>.resourcePattern;</span><br><span class="line">	<span class="comment">// 从文件系统去加载Resource资源文件进来</span></span><br><span class="line">	<span class="comment">// 这里Resource代表的是一个本地资源：存在你硬盘上的.class文件</span></span><br><span class="line">	Resource[] resources = getResourcePatternResolver().getResources(packageSearchPath);</span><br><span class="line">	<span class="keyword">for</span> (Resource resource : resources) &#123;</span><br><span class="line">		<span class="keyword">if</span> (isCandidateComponent(metadataReader)) &#123;</span><br><span class="line">			<span class="keyword">if</span> (isCandidateComponent(sbd)) &#123;</span><br><span class="line">				candidates.add(sbd);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p>这段代码的信息量是很大的，分解为如下两大步：</p>
+<ol>
+<li>通过ResourcePatternResolver从磁盘里加载到<strong>所有的</strong> .class资源Resource[]。这里面<strong>顺序信息</strong>就出现了，加载磁盘Resource资源的过程很复杂，总而言之它依赖于你os文件系统。所以关于资源的顺序可简单理解为：<strong>你磁盘文件里是啥顺序它就按啥顺序加载进来</strong></li>
+</ol>
+<blockquote>
+<p>注意：不是看.java源代码顺序，也不是看你<code>target</code>目录下的文件顺序（该目录是经过了IDEA反编译的结果，无法反应真实顺序），而是编译后看你的<strong>磁盘上的</strong>.class文件的文件顺序</p>
+</blockquote>
+<ol start="2">
+<li>遍历每一个Resource资源，并不是每个资源都会成为candidates候选，它有个<strong>双重过滤</strong>（对应两个isCandidateComponent()方法）：<ol>
+<li>过滤一：使用TypeFilter执行过滤，看看是否被排除；再看看是否满足<code>@Conditional</code>条件</li>
+<li>过滤二：它有两种case能满足条件（任意满足一个case即可）<ol>
+<li><code>isIndependent()</code>是独立类（top-level类 or 静态内部类属于独立类） <strong>并且</strong> isConcrete()是具体的（非接口非抽象类）</li>
+<li><code>isAbstract()</code>是抽象类 <strong>并且</strong> 类内存在标注有<code>@Lookup</code>注解的方法</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<p>基于以上例子，磁盘中的.class文件情况如下：<br><img data-src="https://img-blog.csdnimg.cn/20200602135110469.png#x180" alt=""><br>看着这个顺序，再结合上面的打印结果，是不是感觉得到了解释呢？既然@Configuration类（外部类和内部类）的顺序确定了，那么@Bean就跟着定了喽，因为毕竟配置类也得遍历一个一个去执行嘛（有依赖关系的case除外）。</p>
+<blockquote>
+<p>特别说明：理论上不同的操作系统（如windows和Linux）它们的文件系统是有差异的，对文件存放的顺序是可能不同的（比如$xxx内部类可能放在后面），但<strong>现实状况</strong>它们是一样的，因此各位同学对此无需担心跨平台问题哈，这由JVM底层来给你保证。</p>
+</blockquote>
+<p>什么，关于此解析步骤你想要张流程图？好吧，你知道的，这个A哥会放到本专栏的<strong>总结篇</strong>里统一供以你白嫖，关注我公众号吧~</p>
+<hr>
+<h4 id="静态内部类在容器内的beanName是什么？"><a href="#静态内部类在容器内的beanName是什么？" class="headerlink" title="静态内部类在容器内的beanName是什么？"></a>静态内部类在容器内的beanName是什么？</h4><p>看到这个截图你就懂了：在不同.java文件内，静态内部类是不用担心重名问题的，这不也就是内聚性的一种体现麽。<br><img data-src="https://img-blog.csdnimg.cn/20200602140854236.png#x160" alt=""><br>说明：beanName的生成其实和你注册Bean的方式有关，比如@Import、Scan方式是不一样的，这里就不展开讨论了，知道有这个差异就成。</p>
+<hr>
+<h2 id="进阶：Spring下普通内部类表现如何？"><a href="#进阶：Spring下普通内部类表现如何？" class="headerlink" title="进阶：Spring下普通内部类表现如何？"></a>进阶：Spring下普通内部类表现如何？</h2><p>我们知道，从内聚性上来说，普通内部类似乎也可以达到目的。但是相较于静态内部类在Spring容器内对优先级的问题，它的表现可就没这么好喽。基于以上例子，把所有的static关键字<strong>去掉</strong>，就是本处需要的case。</p>
+<p>reRun测试程序，结果输出：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">A_OuterConfig init...</span><br><span class="line">OuterConfig init...</span><br><span class="line">Z_OuterConfig init...</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">A_OuterConfig InnerConfig init...</span><br><span class="line">A_OuterConfig a_i_bean init...</span><br><span class="line">A_OuterConfig PInnerConfig init...</span><br><span class="line">A_OuterConfig a_p_bean init...</span><br><span class="line">A_OuterConfig a_o_bean init...</span><br><span class="line"></span><br><span class="line">InnerConfig init...</span><br><span class="line">Daughter init...</span><br><span class="line">PInnerConfig init...</span><br><span class="line">son init...</span><br><span class="line">Parent init...</span><br><span class="line"></span><br><span class="line">Z_OuterConfig InnerConfig init...</span><br><span class="line">Z_OuterConfig z_i_bean init...</span><br><span class="line">Z_OuterConfig PInnerConfig init...</span><br><span class="line">Z_OuterConfig z_p_bean init...</span><br><span class="line">Z_OuterConfig z_o_bean init...</span><br></pre></td></tr></table></figure>
+<p>对于这个结果A哥不用再做详尽分析了，看似比较复杂其实有了上面的分析还是比较容易理解的。主要有如下两点需要注意：</p>
+<ol>
+<li>普通内部类它不是一个独立的类（也就是说<code>isIndependent() = false</code>），所以它并不能像静态内部类那样预先就被<strong>扫描进去</strong>，如图结果展示：<br><img data-src="https://img-blog.csdnimg.cn/20200602143335570.png#x200" alt=""></li>
+<li>普通内部类初始化之前，<strong>一定</strong>得先初始化外部类，所以类本身的优先级是低于外部类的（不包含@Bean方法哦）</li>
+<li>普通内部类属于外部类的memberClasses，因此它会在解析<strong>当前外部类</strong>的第一步<code>processMemberClasses()</code>时被解析</li>
+<li>普通内部类的beanName和静态内部类是有差异的，如下截图：<br><img data-src="https://img-blog.csdnimg.cn/2020060214460054.png#x260" alt=""></li>
+</ol>
+<hr>
+<h2 id="思考题："><a href="#思考题：" class="headerlink" title="思考题："></a>思考题：</h2><p>请思考：为何使用普通内部类得到的是这个结果呢？建议copy我的demo，自行走一遍流程，多动手总是好的</p>
+<hr>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>本文一如既往的很干哈。写本文的<strong>原动力</strong>是因为真的太多小伙伴在看Spring Boot自动配置类的时候，无法理解为毛它有些@Bean配置要单独写在一个<strong>static静态类</strong>里面，感觉挺费事；方法前直接价格static不香吗？通过<strong>这篇文章 + 上篇文章</strong>的解读，相信A哥已经给了你答案了。</p>
+<p>static关键字在Spring中使用的这个专栏，下篇将进入到可能是你<strong>更关心</strong>的一个话题：为毛static字段不能使用@Autowired注入的分析，下篇见~</p>
         <!-- ....这里是正文内容的底部（首页不会展示）... -->
         <hr>
 <div class="yourbatman-footer">
@@ -359,22 +534,22 @@
   <div class="popular-posts-header">你可能还喜欢：</div>
   <ul class="popular-posts">
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\x2y\8d076785.html" rel="bookmark">9</a></div>
+      <div class="popular-posts-title"><a href="\x2y\8d076785.html" rel="bookmark">想用@Autowired注入static静态成员？官方不推荐你却还偏要这么做</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\x2y\6abf4a82.html" rel="bookmark">7</a></div>
+      <div class="popular-posts-title"><a href="\x2y\6abf4a82.html" rel="bookmark">static关键字真能提高Bean的优先级吗？答：真能</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\x2y\1db87a14.html" rel="bookmark">6</a></div>
+      <div class="popular-posts-title"><a href="\x2y\1db87a14.html" rel="bookmark">Spring配置类深度剖析-总结篇(手绘流程图，可白嫖)</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\x2y\84b12bae.html" rel="bookmark">5</a></div>
+      <div class="popular-posts-title"><a href="\x2y\f3b61b38.html" rel="bookmark">521我发誓读完本文，再也不会担心Spring配置类问题了</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\x2y\f3b61b38.html" rel="bookmark">4</a></div>
+      <div class="popular-posts-title"><a href="\x2y\6dd28e9b.html" rel="bookmark">你自我介绍说很懂Spring配置类，那你怎么解释这个现象？</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\x2y\6dd28e9b.html" rel="bookmark">3</a></div>
+      <div class="popular-posts-title"><a href="\x2y\8e3281a7.html" rel="bookmark">配置类需要标注@Configuration却不知原因？那这次就不能给你涨薪喽</a></div>
     </li>
   </ul>
 
@@ -384,17 +559,17 @@
 <ul class="post-copyright">
   <li class="post-copyright-title">
     <strong>本文标题： </strong>
-    《8》
+    《static关键字有何魔法？竟让Spring Boot搞出那么多静态内部类》
   </li>
   <li class="post-copyright-author">
     <strong>本文作者： </strong>A哥(YourBatman)
   </li>
   <li class="post-copyright-date">
-    <strong>发布时间： </strong>2020-06-14 13:42:01
+    <strong>发布时间： </strong>2020-06-03 13:42:01
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://www.yourbatman.cn/x2y/fa005713.html" title="8">https://www.yourbatman.cn/x2y/fa005713.html</a>
+    <a href="https://www.yourbatman.cn/x2y/fa005713.html" title="static关键字有何魔法？竟让Spring Boot搞出那么多静态内部类">https://www.yourbatman.cn/x2y/fa005713.html</a>
   </li>
   <li class="post-copyright-license">
     <strong>许可协议： </strong>本站所有文章均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载：No！转发：Yes！
@@ -430,7 +605,9 @@
       <footer class="post-footer">
           
           <div class="post-tags">
-              <a href="/tags/%E7%BC%BA%E7%9C%81/" rel="tag"><i class="fa fa-tag"></i> 缺省</a>
+              <a href="/tags/Spring-Framework/" rel="tag"><i class="fa fa-tag"></i> Spring Framework</a>
+              <a href="/tags/Spring-Boot/" rel="tag"><i class="fa fa-tag"></i> Spring Boot</a>
+              <a href="/tags/static/" rel="tag"><i class="fa fa-tag"></i> static</a>
           </div>
 
         <!-- 导入投票模块 -->
@@ -447,12 +624,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/x2y/6abf4a82.html" rel="prev" title="7">
-      <i class="fa fa-chevron-left"></i> 7
+    <a href="/x2y/6abf4a82.html" rel="prev" title="static关键字真能提高Bean的优先级吗？答：真能">
+      <i class="fa fa-chevron-left"></i> static关键字真能提高Bean的优先级吗？答：真能
     </a></div>
       <div class="post-nav-item">
-    <a href="/x2y/8d076785.html" rel="next" title="9">
-      9 <i class="fa fa-chevron-right"></i>
+    <a href="/x2y/8d076785.html" rel="next" title="想用@Autowired注入static静态成员？官方不推荐你却还偏要这么做">
+      想用@Autowired注入static静态成员？官方不推荐你却还偏要这么做 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -519,6 +696,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#版本约定"><span class="nav-number">1.1.</span> <span class="nav-text">版本约定</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#正文"><span class="nav-number">2.</span> <span class="nav-text">正文</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring下的静态内部类"><span class="nav-number">2.1.</span> <span class="nav-text">Spring下的静态内部类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#认识静态-普通内部类"><span class="nav-number">2.1.1.</span> <span class="nav-text">认识静态&#x2F;普通内部类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#static静态配置类提升配置优先级"><span class="nav-number">2.1.2.</span> <span class="nav-text">static静态配置类提升配置优先级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#源码分析"><span class="nav-number">2.1.3.</span> <span class="nav-text">源码分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#静态内部类在容器内的beanName是什么？"><span class="nav-number">2.1.3.1.</span> <span class="nav-text">静态内部类在容器内的beanName是什么？</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进阶：Spring下普通内部类表现如何？"><span class="nav-number">2.2.</span> <span class="nav-text">进阶：Spring下普通内部类表现如何？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思考题："><span class="nav-number">2.3.</span> <span class="nav-text">思考题：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -573,20 +751,20 @@
         
         
           <li>
-            <a href="/x2y/8d076785.html" title="9" target="_blank">
-            <i class="fa fa-check-square"></i> 9
+            <a href="/x2y/b934cc4f.html" title="IDEA命令行缩短器助你解决此问题：Command line is too long. Shorten command line" target="_blank">
+            <i class="fa fa-check-square"></i> IDEA命令行缩短器助你解决此问题：Command line is too long. Shorten command line
             </a>
           </li>
         
           <li>
-            <a href="/x2y/fa005713.html" title="8" target="_blank">
-            <i class="fa fa-check-square"></i> 8
+            <a href="/x2y/8d076785.html" title="想用@Autowired注入static静态成员？官方不推荐你却还偏要这么做" target="_blank">
+            <i class="fa fa-check-square"></i> 想用@Autowired注入static静态成员？官方不推荐你却还偏要这么做
             </a>
           </li>
         
           <li>
-            <a href="/x2y/6abf4a82.html" title="7" target="_blank">
-            <i class="fa fa-check-square"></i> 7
+            <a href="/x2y/fa005713.html" title="static关键字有何魔法？竟让Spring Boot搞出那么多静态内部类" target="_blank">
+            <i class="fa fa-check-square"></i> static关键字有何魔法？竟让Spring Boot搞出那么多静态内部类
             </a>
           </li>
         
@@ -1050,13 +1228,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">本站总字数：</span>
-    <span title="本站总字数">67k</span>
+    <span title="本站总字数">152k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">本站总阅读时长 &asymp;</span>
-    <span title="本站总阅读时长">1:01</span>
+    <span title="本站总阅读时长">2:18</span>
 </div>
   <div class="addthis_inline_share_toolbox">
     <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5eb7b6f6b64d54f6" async="async"></script>
