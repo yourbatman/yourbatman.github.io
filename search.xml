@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>程序人生 | 春风得意马蹄疾，一日看尽长安花</title>
-    <url>/posts/x2y/f3891d18.html</url>
+    <url>/x2y/f3891d18.html</url>
     <content><![CDATA[<blockquote>
 <p>当大潮退去，才知道谁在裸泳。<br><strong>作者</strong>：A哥（YourBatman）<br><strong>公众号</strong>：BAT的乌托邦（ID：BAT-utopia）<br><strong>文末是否有彩蛋</strong>：有</p>
 </blockquote>
@@ -173,7 +173,7 @@
   </entry>
   <entry>
     <title>【BAT的乌托邦】公众号开白申请</title>
-    <url>/posts/x2y/wechat-white-list.html</url>
+    <url>/x2y/wechat-white-list.html</url>
     <content><![CDATA[<div class="note primary">
             <ul><li>公众号：BAT的乌托邦</li><li>作者：A哥<ul><li>A哥的介绍：<ul><li><a href="/about">PC版</a></li><li><a href="https://mp.weixin.qq.com/s/PGIFtpI7aZaxY7es0F6C6Q" target="_blank" rel="noopener">手机版</a></li></ul></li><li>示例文章：<a href="https://mp.weixin.qq.com/s/PYVD8BvT7Nux0jiSomSG0A" target="_blank" rel="noopener">点击这里</a></li></ul></li><li>定位：专注Java领域，只做有深度的专栏文章分享，拒绝浅尝辄止</li><li>首篇文章时间：2020-05-03   <a href="https://mp.weixin.qq.com/s/PGIFtpI7aZaxY7es0F6C6Q" target="_blank" rel="noopener">查看首篇文章</a></li></ul>
           </div>
@@ -215,7 +215,7 @@
   </entry>
   <entry>
     <title>【Java高工、架构师】系列群群规</title>
-    <url>/posts/x2y/wechat-gauge.html</url>
+    <url>/x2y/wechat-gauge.html</url>
     <content><![CDATA[<blockquote class="blockquote-center">
             <i class="fa fa-quote-left"></i>
             <p>久旱逢甘雨，一滴；<br>他乡遇故知，债主；<br>洞房花烛夜，隔壁；<br>金榜题名时，重名。</p>
@@ -271,7 +271,7 @@
   </entry>
   <entry>
     <title>2020-4-17群福利：腾讯云+社区公仔寄送公示</title>
-    <url>/posts/x2y/tencent+.html</url>
+    <url>/x2y/tencent+.html</url>
     <content><![CDATA[<p>2020-4-17群福利，本次群福利，我通过问卷一共收集到200个左右的报名，最后大大小小共送出80个腾讯公仔。公仔有大有小，随机发送，<code>全免费的公益寄送</code>，就当是A哥帮大家争取到的一点小小小小福利喽，小小礼物不成敬意~</p>
 <h3 id="筛选规则"><a href="#筛选规则" class="headerlink" title="筛选规则"></a>筛选规则</h3><ul>
 <li>去除掉没填电话的</li>
@@ -525,8 +525,326 @@
       </tags>
   </entry>
   <entry>
+    <title>不懂SpringApplication生命周期事件？那就等于不会Spring Boot嘛</title>
+    <url>/x2y/78afedd2.html</url>
+    <content><![CDATA[<blockquote>
+<p>学习方法之少废话：吹牛、装逼、叫大哥。<br><strong>作者</strong>：A哥（YourBatman）<br><strong>公众号</strong>：BAT的乌托邦（ID：BAT-utopia）<br><strong>文末是否有彩蛋</strong>：有</p>
+</blockquote>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>各位小伙伴大家好，我是A哥。本文属总结性文章，对总览<code>Spring Boot</code>生命周期<strong>很是重要</strong>，建议点在看、转发“造福”更多小伙伴。</p>
+<p>我最近不是在写Spring Cloud深度剖析的相关专栏麽，最近有收到小伙伴发过来一些问题，通过这段时间收集到的反馈，总结了一下有一个问题非常集中：那便是对Spring Boot应用<code>SpringApplication</code>的生命周期、事件的理解。有句话我不是经常挂嘴边说的麽，你对Spring Framework有多了解决定了你对Spring Boot有多了解，你对Spring Boot的了解深度又会制约你去了解Spring Cloud，一环扣一环。因此此问题反馈比较集中是在清理之中的~</p>
+<p>为何在Spring Boot中生命周期事件机制如此重要？缘由很简单：Spring Cloud父容器是由该生命周期事件机制来驱动的，而它仅仅是一个典型代表。<strong>Spring Cloud构建在Spring Boot之上</strong>，它在此基础上构建并添加了一些“Cloud”功能。应用程序事件<code>ApplicationEvent</code>以及监听<code>ApplicationListener</code>是Spring Framework提供的扩展点，Spring Boot对此扩展点利用得非常充分和深入，并且还衍生出了非常多“子”事件类型，甚至<strong>自成体系</strong>。从<code>ApplicationEvent</code>衍生出来的子事件类型非常多，例如<code>JobExecutionEvent、RSocketServerInitializedEvent、AuditApplicationEvent...</code></p>
+<p>本文并不会对每个子事件分别介绍（也并无必要），而是集中火力主攻Spring Boot最为重要的一套事件机制：<strong>SpringApplication生命周期的事件体系</strong>。<br><img data-src="https://img-blog.csdnimg.cn/20200426082403185.png#x240" alt="学习去..."></p>
+<hr>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>本文将以<code>SpringApplication</code>的启动流程/生命周期各时期发出的Event事件为主线，结合每个生命周期内<strong>完成的大事记</strong>介绍，真正实现一文让你总览Spring Boot的全貌，这对你<strong>深入理解Spring Boot，以及整合进Spring Cloud都将非常重要</strong>。</p>
+<p>为表诚意，本文一开始便把<code>SpringApplication</code>生命周期事件流程图附上，然后再精细化讲解各个事件的详情。</p>
+<blockquote>
+<p>话外音：赶时间的小伙伴可以拿图走人😁，但不建议白嫖哟</p>
+</blockquote>
+<hr>
+<h3 id="生命周期事件流程图"><a href="#生命周期事件流程图" class="headerlink" title="生命周期事件流程图"></a>生命周期事件流程图</h3><p><img data-src="https://img-blog.csdnimg.cn/2020042709145967.png#x500" alt=""></p>
+<hr>
+<h4 id="版本说明："><a href="#版本说明：" class="headerlink" title="版本说明："></a>版本说明：</h4><p>由于不同版本、类路径下存在不同包时结果会存在差异，不指明版本的文章都是不够负责任的。因此对导包/版本情况作出如下说明：</p>
+<ul>
+<li><code>Spring Boot</code>：2.2.2.RELEASE。有且仅导入<code>spring-boot-starter-web</code>和<code>spring-boot-starter-actuator</code></li>
+<li><code>Spring Cloud</code>：Hoxton.SR1。有且仅导入<code>spring-cloud-context</code>（注意：并非spring-cloud-starter，并不含有spring-cloud-commons哦）</li>
+</ul>
+<p>总的来说：本例导包是非常非常“干净”的，这样在流程上才更有说服力嘛~</p>
+<hr>
+<h3 id="SpringApplicationEvent"><a href="#SpringApplicationEvent" class="headerlink" title="SpringApplicationEvent"></a>SpringApplicationEvent</h3><p>它是和<code>SpringApplication</code>生命周期有关的<strong>所有事件</strong>的父类，@since 1.0.0。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">SpringApplicationEvent</span> <span class="keyword">extends</span> <span class="title">ApplicationEvent</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">final</span> String[] args;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">SpringApplicationEvent</span><span class="params">(SpringApplication application, String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">super</span>(application);</span><br><span class="line">		<span class="keyword">this</span>.args = args;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> SpringApplication <span class="title">getSpringApplication</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> (SpringApplication) getSource();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">final</span> String[] getArgs() &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">this</span>.args;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>它是抽象类，扩展自Spring Framwork的<code>ApplicationEvent</code>，确保了事件和应用实体<code>SpringApplication</code>产生关联（当然还有<code>String[] args</code>）。它有如下实现子类（7个）：</p>
+<p><img data-src="https://img-blog.csdnimg.cn/20200426105441685.png#x140" alt=""><br>每个事件都代表着SpringApplication不同生命周期所处的位置，下面分别进行讲解。</p>
+<hr>
+<hr>
+<hr>
+<h4 id="ApplicationStartingEvent：开始启动中"><a href="#ApplicationStartingEvent：开始启动中" class="headerlink" title="ApplicationStartingEvent：开始启动中"></a>ApplicationStartingEvent：开始启动中</h4><p>@since 1.5.0，并非1.0.0就有的哦。不过现在几乎没有人用1.5以下的版本了，所以可当它是标准事件。</p>
+<hr>
+<h5 id="完成的大事记"><a href="#完成的大事记" class="headerlink" title="完成的大事记"></a>完成的大事记</h5><ul>
+<li><p><code>SpringApplication</code>实例已实例化：<code>new SpringApplication(primarySources)</code></p>
+<ul>
+<li><p>它在实例化阶段完成了如下几件“大”事：</p>
+<ul>
+<li>推断出应用类型<code>webApplicationType</code>、main方法所在类</li>
+<li>给字段initializers赋值：拿到SPI方式配置的<code>ApplicationContextInitializer</code>上下文初始化器<br><img data-src="https://img-blog.csdnimg.cn/20200426113340172.png#x140" alt=""></li>
+<li>给字段listeners赋值：拿到SPI方式配置的<code>ApplicationListener</code>应用监听器<br><img data-src="https://img-blog.csdnimg.cn/2020042611345757.png#x240" alt=""></li>
+</ul>
+</li>
+<li><p>注意：在此阶段(早期阶段)不要过多地使用它的内部状态，因为它可能在生命周期的后期被修改（话外音：使用时需谨慎）</p>
+</li>
+</ul>
+</li>
+<li><p>此时，<code>SpringApplicationRunListener</code>已实例化：它通过SPI方式指定<code>org.springframework.boot.SpringApplicationRunListener=org.springframework.boot.context.event.EventPublishingRunListener</code>。</p>
+<ul>
+<li>若你有自己的运行时应用监听器，使用相同方式配置上即可，均会生效</li>
+</ul>
+</li>
+<li><p>由于<code>EventPublishingRunListener</code>已经实例化了，因此在后续的事件发送中，均能够触发对应的监听器的执行</p>
+</li>
+<li><p>==发送ApplicationStartingEvent事件，触发对应的监听器的执行==</p>
+</li>
+</ul>
+<hr>
+<h5 id="监听此事件的监听器们"><a href="#监听此事件的监听器们" class="headerlink" title="监听此事件的监听器们"></a>监听此事件的监听器们</h5><p>默认情况下，有4个监听器监听<code>ApplicationStartingEvent</code>事件：</p>
+<p><img data-src="https://img-blog.csdnimg.cn/20200426114311648.png#x100" alt=""></p>
+<ol>
+<li><code>LoggingApplicationListener</code>：@since 2.0.0。对日志系统抽象<code>LoggingSystem</code>执行实例化以及初始化之前的操作，默认使用的是基于Logback的<code>LogbackLoggingSystem</code></li>
+<li><code>BackgroundPreinitializer</code>：启动一个后台进行对一些类进行<strong>预热</strong>。如<code>ValidationInitializer、JacksonInitializer...</code>，因为这些组件有第一次惩罚的特点（并且首次初始化均还比较耗时），所以使用后台线程先预热效果更佳</li>
+<li><code>DelegatingApplicationListener</code>：它监听的是<code>ApplicationEvent</code>，而实际上只会<code>ApplicationEnvironmentPreparedEvent</code>到达时生效，所以此处忽略</li>
+<li><code>LiquibaseServiceLocatorApplicationListener</code>：略</li>
+</ol>
+<p>总结：此事件节点结束时，<code>SpringApplication</code>完成了一些实例化相关的动作：本实例实例化、本实例属性赋值、日志系统实例化等。</p>
+<hr>
+<h4 id="ApplicationEnvironmentPreparedEvent：环境已准备好"><a href="#ApplicationEnvironmentPreparedEvent：环境已准备好" class="headerlink" title="ApplicationEnvironmentPreparedEvent：环境已准备好"></a>ApplicationEnvironmentPreparedEvent：环境已准备好</h4><p>@since 1.0.0。该事件节点是最为重要的一个节点之一，因为对于Spring应用来说，环境抽象<code>Enviroment</code>简直太重要了，它是最为基础的<strong>元数据</strong>，决定着程序的构建和走向，所以构建的时机是比较早的。</p>
+<hr>
+<h5 id="完成的大事记-1"><a href="#完成的大事记-1" class="headerlink" title="完成的大事记"></a>完成的大事记</h5><ul>
+<li>封装命令行参数（main方法的args）到<code>ApplicationArguments</code>里面</li>
+<li>创建出一个环境抽象实例<code>ConfigurableEnvironment</code>的实现类，并且填入值：Profiles配置和Properties属性，默认内容如下（注意，这只是初始状态，后面还会改变、添加属性源，实际见最后的截图）：<br><img data-src="https://img-blog.csdnimg.cn/20200426164107130.png#x160" alt=""></li>
+<li>==发送ApplicationEnvironmentPreparedEvent事件，触发对应的监听器的执行==<ul>
+<li>对环境抽象Enviroment的<strong>填值</strong>，均是由监听此事件的监听器去完成，见下面的监听器详解</li>
+</ul>
+</li>
+<li></li>
+<li><code>bindToSpringApplication(environment)</code>：把环境属性中<code>spring.main.xxx = xxx</code>绑定到当前的SpringApplication实例属性上，如常用的<code>spring.main.allow-bean-definition-overriding=true</code>会被绑定到当前<code>SpringApplication</code>实例的对应属性上</li>
+</ul>
+<hr>
+<h5 id="监听此事件的监听器们-1"><a href="#监听此事件的监听器们-1" class="headerlink" title="监听此事件的监听器们"></a>监听此事件的监听器们</h5><p>默认情况下，有9个监听器监听<code>ApplicationEnvironmentPreparedEvent</code>事件：</p>
+<p><img data-src="https://img-blog.csdnimg.cn/20200426165334573.png#x200" alt=""></p>
+<ol>
+<li><code>BootstrapApplicationListener</code>：来自SC。优先级最高，用于启动/创建Spring Cloud的应用上下文。需要注意的是：到此时SB的上下文<code>ApplicationContext</code>还并没有创建哦。这个流程“嵌套”特别像Bean初始化流程：初始化Bean A时，遇到了Bean B，就需要先去完成Bean B的初始化，<strong>再回头来</strong>继续完成Bean A的步骤。<ul>
+<li>说明：在创建SC的应用的时候，使用的也是<code>SpringApplication#run()</code>完成的（非web），因此也会走下一整套SpringApplication的生命周期逻辑，所以请你务必区分。<ul>
+<li>特别是这种case会让“绝大多数”初始化器、监听器等执行多次，若你有那种只需要执行一次的需求（比如只想让SB容器生命周期内执行，SC生命周期不执行），<strong>请务必自行处理</strong>，否则会被执行多次而带来不可预知的结果</li>
+</ul>
+</li>
+<li>SC应用上下文读取的外部化配置文件名默认是：<code>bootstrap</code>，使用的也是<code>ConfigFileApplicationListener</code>完成的加载/解析</li>
+</ul>
+</li>
+<li><code>LoggingSystemShutdownListener</code>：来自SC。对<code>LogbackLoggingSystem</code>先清理，再重新初始化一次，效果同上个事件，相当于重新来了一次，毕竟现在有Enviroment环境里嘛</li>
+<li><code>ConfigFileApplicationListener</code>：@since 1.0.0。<strong>它也许是最重要的一个监听器</strong>。做了如下事情：<ul>
+<li>加载SPI配置的所有的<code>EnvironmentPostProcessor</code>实例，并且排好序。需要注意的是：<code>ConfigFileApplicationListener</code>也是个<code>EnvironmentPostProcessor</code>，会参与排序哦<br><img data-src="https://img-blog.csdnimg.cn/20200426172309831.png#x130" alt=""></li>
+<li><strong>排好序后</strong>，分别一个个的执行<code>EnvironmentPostProcessor</code>（@since 1.3.0，并非一开始就有），介绍如下：<ul>
+<li><code>SystemEnvironmentPropertySourceEnvironmentPostProcessor</code>：@since 2.0.0。把<code>SystemEnvironmentPropertySource</code>替换为其子类<code>OriginAwareSystemEnvironmentPropertySource</code>（属性值带有Origin来源），仅此而已</li>
+<li><code>SpringApplicationJsonEnvironmentPostProcessor</code>：@since 1.3.0。把环境中<code>spring.application.json=xxx</code>值解析成为一个<code>MapPropertySource</code>属性源，然后放进环境里面去（属性源的位置是做了处理的，一般不用太关心）<ul>
+<li>可以看到，SB是直接支持JSON串配置的哦。Json解析参见：<code>JsonParser</code></li>
+</ul>
+</li>
+<li><code>CloudFoundryVcapEnvironmentPostProcessor</code>：@since 1.3.0。略</li>
+<li><code>ConfigFileApplicationListener</code>：@since 1.0.0（它比EnvironmentPostProcessor先出现的哦）。加载<code>application.properties/yaml</code>等外部化配置，解析好后放进环境里（这应该是最为重要的）。<ul>
+<li>外部化配置默认的优先级为：<code>&quot;classpath:/,classpath:/config/,file:./,file:./config/&quot;</code>。当前工程下的config目录里的application.properties优先级最高，当前工程类路径下的application.properties优先级最低</li>
+<li>值得强调的是：bootstrap.xxx也是由它负责加载的，处理规则一样</li>
+</ul>
+</li>
+<li><code>DebugAgentEnvironmentPostProcessor</code>：@since 2.2.0。处理和<code>reactor</code>测试相关，略</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>AnsiOutputApplicationListener</code>：@since 1.2.0。让你的终端（可以是控制台、可以是日志文件）支持Ansi彩色输出，使其更具可读性。当然前提是你的终端支持ANSI显示。参考类：<code>AnsiOutput</code>。你可通过<code>spring.output.ansi.enabled = xxx</code>配置，可选值是：<code>DETECT/ALWAYS/NEVER</code>，一般不动即可。另外，针对控制台可以单独配置：<code>spring.output.ansi.console-available = true/false</code></li>
+<li><code>LoggingApplicationListener</code>：@since 2.0.0。根据Enviroment环境完成<code>initialize()</code>初始化动作：日志等级、日志格式模版等<ul>
+<li>值得注意的是：它这步相当于在ApplicationStartingEvent事件基础上进一步完成了初始化（上一步只是实例化）</li>
+</ul>
+</li>
+<li><code>ClasspathLoggingApplicationListener</code>：@since 2.0.0。用于把classpath路径以<code>log.debug()</code>输出，略<ol>
+<li>值得注意的是：classpath类路径是有N多个的<code>Arrays.toString(((URLClassLoader) classLoader).getURLs())</code>，也就是说每个.jar里都属于classpath的范畴</li>
+<li>当然喽，你需要注意Spring在处理类路径时：<strong>classpath和classpath*的区别</strong>~，这属于基础知识</li>
+</ol>
+</li>
+<li><code>BackgroundPreinitializer</code>：本事件达到时无动作</li>
+<li><code>DelegatingApplicationListener</code>：执行通过外部化配置<code>context.listener.classes = xxx,xxx</code>的监听器们，然后把该事件广播给他们，关心此事件的监听器执行<ul>
+<li>这麽做的好处：可以通过属性文件外部化配置监听器，而不一定必须写在<code>spring.factories</code>里，更具弹性</li>
+<li>外部化配置的执行优先级，还是相对较低的，到这里才给与执行嘛</li>
+</ul>
+</li>
+<li><code>FileEncodingApplicationListener</code>：检测当前系统环境的file.encoding和spring.mandatory-file-encoding设置的值是否一样,如果不一样则抛出异常如果不配置spring.mandatory-file-encoding则不检查</li>
+</ol>
+<p>总结：此事件节点结束时，Spring Boot的环境抽象Enviroment已经准备完毕，但此时其上下文<code>ApplicationContext</code>还<strong>没有创建</strong>，但是Spring Cloud的应用上下文（引导上下文）已经<strong>全部初始化完毕哦</strong>，所以SC管理的外部化配置也应该都进入到了SB里面。如下图所示（这是基本上算是Enviroment的最终态了）：</p>
+<p><img data-src="https://img-blog.csdnimg.cn/20200426175307644.png#x180" alt=""><br>小提示：SC配置的优先级是高于SB管理的外部化配置的。例如针对<code>spring.application.name</code>这个属性，若bootstrap里已配置了值，再在application.yaml里配置其实就无效了，因此生产上建议不要写两处。</p>
+<hr>
+<h4 id="ApplicationContextInitializedEvent：上下文已实例化"><a href="#ApplicationContextInitializedEvent：上下文已实例化" class="headerlink" title="ApplicationContextInitializedEvent：上下文已实例化"></a>ApplicationContextInitializedEvent：上下文已实例化</h4><p>@since 2.1.0，非常新的一个事件。当SpringApplication的上下文<code>ApplicationContext</code>准备好<strong>后</strong>，对单例Bean们实例化之<strong>前</strong>，发送此事件。所以此事件又可称为：<code>contextPrepared</code>事件。</p>
+<hr>
+<h5 id="完成的大事记-2"><a href="#完成的大事记-2" class="headerlink" title="完成的大事记"></a>完成的大事记</h5><ul>
+<li><p><code>printBanner(environment)</code>：打印Banner图，默认打印的是Spring Boot字样</p>
+<ul>
+<li><code>spring.main.banner-mode = xxx</code>来控制Banner的输出，可选值为<code>CONSOLE/LOG/OFF</code>，一般默认就好</li>
+<li>默认在类路径下放置一个<code>banner.txt</code>文件，可实现自定义Banner。关于更多自定义方式，如使用图片、gif等，本处不做过多介绍<ul>
+<li>小建议：别花里胡哨搞个佛祖在那。让它能自动打印输出<strong>当前应用名</strong>，这样才是最为实用，最高级的（但需要你定制化开发，并且支持可配置，最好对使用者无感，属于一个common组件）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>根据是否是web环境、是否是REACTIVE等，用<strong>空构造器</strong>创建出一个<code>ConfigurableApplicationContext</code>上下文实例（因为使用的是空构造器，所以不会立马“启动”上下文）</p>
+<ul>
+<li>SERVLET -&gt; AnnotationConfigServletWebServerApplicationContext</li>
+<li>REACTIVE -&gt; AnnotationConfigReactiveWebServerApplicationContext</li>
+<li>非web环境 -&gt; AnnotationConfigApplicationContext（SC应用的容器就是使用的它）</li>
+</ul>
+</li>
+<li><p>既然上下文实例已经有了，那么就开始对它进行一些参数的设置：</p>
+<ul>
+<li>首先<strong>最重要的</strong>便是把已经准备好的环境Enviroment环境设置给它</li>
+<li>设置些beanNameGenerator、resourceLoader、ConversionService等组件</li>
+<li>实例化所有的<code>ApplicationContextInitializer</code>上下文初始化器，并且排序好后挨个执行它（这个很重要），默认有如下截图这些初始化器此时要执行：<br><img data-src="https://img-blog.csdnimg.cn/20200426203418279.png#x260" alt=""><br>下面对这些初始化器分别做出简单介绍：<ol>
+<li><code>BootstrapApplicationListener.AncestorInitializer</code>：来自SC。用于把SC容器设置为SB容器的父容器。当然实际操作委托给了此方法：<code>new ParentContextApplicationContextInitializer(this.parent).initialize(context)</code>去完成</li>
+<li><code>BootstrapApplicationListener.DelegatingEnvironmentDecryptApplicationInitializer</code>：来自SC。代理了下面会提到的<code>EnvironmentDecryptApplicationInitializer</code>，也就是说在此处就会先执行，用于提前解密Enviroment环境里面的属性，如相关URL等</li>
+<li><code>PropertySourceBootstrapConfiguration</code>：来自SC。重要，和配置中心相关，<strong>若想自定义配置中心必须了解它</strong>。主要作用是<code>PropertySourceLocator</code>属性源定位器，我会把它放在配置中心章节详解</li>
+<li><code>EnvironmentDecryptApplicationInitializer</code>：来自SC。属性源头通过上面加载回来了，通过它来实现解密<ul>
+<li>值得注意的是：它被执行了两次哦~</li>
+</ul>
+</li>
+<li><code>DelegatingApplicationContextInitializer</code>：和上面的<code>DelegatingApplicationListener</code>功能类似，支持外部化配置<code>context.initializer.classes = xxx,xxx</code></li>
+<li><code>SharedMetadataReaderFactoryContextInitializer</code>：略</li>
+<li><code>ContextIdApplicationContextInitializer</code>：@since 1.0.0。设置应用ID -&gt; <code>applicationContext.setId()</code>。默认取值为<code>spring.application.name</code>，再为application，再为自动生成</li>
+<li><code>ConfigurationWarningsApplicationContextInitializer</code>：@since 1.2.0。对错误的配置进行<strong>警告</strong>（不会终止程序），以warn()日志输出在控制台。默认内置的只有对包名的检查：若你扫包含有<code>&quot;org.springframework&quot;/&quot;org&quot;</code>这种包名就警告<ul>
+<li>若你想自定义检查规则，请实现<code>Check</code>接口，然后…</li>
+</ul>
+</li>
+<li><code>RSocketPortInfoApplicationContextInitializer</code>：@since 2.2.0。暂略</li>
+<li><code>ServerPortInfoApplicationContextInitializer</code>：@since 2.0.0。将自己作为一个监听器注册到上下文<code>ConfigurableApplicationContext</code>里，专门用于监听<code>WebServerInitializedEvent</code>事件（非SpringApplication的生命周期事件）<ul>
+<li>该事件有两个实现类：<code>ServletWebServerInitializedEvent</code>和<code>ReactiveWebServerInitializedEvent</code>。发送此事件的时机是<code>WebServer</code>已启动完成，所以已经有了监听的端口号</li>
+<li>该监听器做的事有两个：<ul>
+<li><code>&quot;local.&quot; + getName(context.getServerNamespace()) + &quot;.port&quot;</code>作为key（默认值是<code>local.server.port</code>），value是端口值。这样可以通过@Value来获取到本机端口了（但貌似端口写0的时候，SB在显示上有个小bug）</li>
+<li>作为一个属性源<code>MapPropertySource</code>放进环境里，属性源名称为：<code>server.ports</code>（因为一个server是可以监听多个端口的，所以这里用复数）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li><code>ConditionEvaluationReportLoggingListener</code>：将<code>ConditionEvaluationReport</code>报告（自动配置中哪些匹配了，哪些没匹配上）写入日志，当然只有<code>LogLevel#DEBUG</code>时才会输出（注意：这不是日志级别哦，应该叫报告级别）。如你配置<code>debug=true</code>就开启了此自动配置类报告<ul>
+<li>槽点：它明明是个初始化器，为毛命名为Listener？</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>==发送ApplicationContextInitializedEvent事件，触发对应的监听器的执行==</p>
+</li>
+</ul>
+<hr>
+<h5 id="监听此事件的监听器们-2"><a href="#监听此事件的监听器们-2" class="headerlink" title="监听此事件的监听器们"></a>监听此事件的监听器们</h5><p>默认情况下，有2个监听器监听<code>ApplicationContextInitializedEvent</code>事件：</p>
+<p><img data-src="https://img-blog.csdnimg.cn/20200426212435270.png#x80" alt=""></p>
+<ol>
+<li><code>BackgroundPreinitializer</code>：本事件达到时无动作</li>
+<li><code>DelegatingApplicationListener</code>：本事件达到时无动作</li>
+</ol>
+<p>总结：此事件节点结束时，完成了应用上下文ApplicationContext的准备工作，<strong>并且执行所有注册的上下文初始化器<code>ApplicationContextInitializer</code></strong>。但是此时，单例Bean是仍旧还没有初始化，并且WebServer也还没有启动</p>
+<hr>
+<h4 id="ApplicationPreparedEvent：上下文已准备好"><a href="#ApplicationPreparedEvent：上下文已准备好" class="headerlink" title="ApplicationPreparedEvent：上下文已准备好"></a>ApplicationPreparedEvent：上下文已准备好</h4><p>@since 1.0.0。截止到上个事件<code>ApplicationContextInitializedEvent</code>，应用上下文ApplicationContext充其量叫<strong>实例化</strong>好了，但是还剩下很重要的事没做，这便是本周期的内容。</p>
+<hr>
+<h5 id="完成的大事记-3"><a href="#完成的大事记-3" class="headerlink" title="完成的大事记"></a>完成的大事记</h5><ul>
+<li>把applicationArguments、printedBanner等都作为一个Bean放进Bean工厂里（因此你就可以@Autowired注入的哦）<ul>
+<li>比如：有了Banner这个Bean，你可以在你任何想要输出的地方输出一个Banner，而不仅仅是启动时只会输出一次了</li>
+</ul>
+</li>
+<li>若<code>lazyInitialization = true</code>延迟初始化，那就向Bean工厂放一个：<code>new LazyInitializationBeanFactoryPostProcessor()</code><ul>
+<li>该处理器@since 2.2.0。该处理器的作用是：对所有的Bean（通过<code>LazyInitializationExcludeFilter</code>接口指定的排除在外）全部<code>.setLazyInit(true);</code>延迟初始化</li>
+</ul>
+</li>
+<li>根据primarySources和allSources，交给<code>BeanDefinitionLoader</code>（SB提供的实现）实现加载<strong>Bean的定义信息</strong>，它支持4种加载方式（4种源）：<ul>
+<li><code>AnnotatedBeanDefinitionReader</code> -&gt; 基于注解</li>
+<li><code>XmlBeanDefinitionReader</code> -&gt; 基于xml配置</li>
+<li><code>GroovyBeanDefinitionReader</code> -&gt; Groovy文件</li>
+<li><code>ClassPathBeanDefinitionScanner</code> -&gt; classpath中加载</li>
+<li>(不同的源使用了不同的load加载方式)</li>
+</ul>
+</li>
+<li>==发送ApplicationPreparedEvent事件，触发对应的监听器的执行==</li>
+</ul>
+<hr>
+<h5 id="监听此事件的监听器们-3"><a href="#监听此事件的监听器们-3" class="headerlink" title="监听此事件的监听器们"></a>监听此事件的监听器们</h5><p>默认情况下，有6个监听器监听<code>ApplicationContextInitializedEvent</code>事件：</p>
+<p><img data-src="https://img-blog.csdnimg.cn/20200426222617526.png#x130" alt=""></p>
+<ol>
+<li><code>CloudFoundryVcapEnvironmentPostProcessor</code>：略</li>
+<li><code>ConfigFileApplicationListener</code>：向上下文注册一个<code>new PropertySourceOrderingPostProcessor(context)</code>。它的作用是：Bean工厂结束后对环境里的属性源进行重排序 -&gt; 把名字叫<code>defaultProperties</code>的属性源放在最末位<ul>
+<li>该属性源是通过<code>SpringApplication#setDefaultProperties</code> API方式放进来的，一般不会使用到，留个印象即可</li>
+</ul>
+</li>
+<li><code>LoggingApplicationListener</code>：因为这时已经有Bean工厂了嘛，所以它做的事是：向工厂内放入Bean<ul>
+<li>“springBootLoggingSystem” -&gt; loggingSystem</li>
+<li>“springBootLogFile” -&gt; logFile</li>
+<li>“springBootLoggerGroups” -&gt; loggerGroups</li>
+</ul>
+</li>
+<li><code>BackgroundPreinitializer</code>：本事件达到时无动作</li>
+<li><code>RestartListener</code>：SC提供。把当前最新的上下文缓存起来而已，目前并未发现有实质性作用，可忽略</li>
+<li><code>DelegatingApplicationListener</code>：本事件达到时无动作</li>
+</ol>
+<p>总结：此事件节点结束时，应用上下文ApplicationContext<strong>初始化</strong>完成，该赋值的赋值了，Bean定义信息也已全部加载完成。但是，单例Bean还没有被实例化，web容器依旧还没启动。</p>
+<hr>
+<h4 id="ApplicationStartedEvent：应用成功启动"><a href="#ApplicationStartedEvent：应用成功启动" class="headerlink" title="ApplicationStartedEvent：应用成功启动"></a>ApplicationStartedEvent：应用成功启动</h4><p>@since 2.0.0。截止到此，应用已经<strong>准备就绪</strong>，并且通过监听器、初始化器等完成了非常多的工作了，但仍旧剩下<strong>被认为最为重要的</strong>初始化单例Bean动作还没做、web容器（如Tomcat）还没启动，这便是这个周期所要做的事。</p>
+<hr>
+<h5 id="完成的大事记-4"><a href="#完成的大事记-4" class="headerlink" title="完成的大事记"></a>完成的大事记</h5><ul>
+<li>启动Spring容器：<code>AbstractApplicationContext#refresh()</code>，这个步骤会做很多事，比如会<strong>实例化单例Bean</strong><ul>
+<li>该步骤属于Spring Framework的核心内容范畴，做了很多事，请参考Spring核心技术内容章节</li>
+<li>在Spring容器refresh()启动完成后，<code>WebServer</code>也随之完成启动，<strong>成功监听到对应端口(们)</strong></li>
+</ul>
+</li>
+<li>输出启动成功的日志：<code>Started Application in xxx seconds (JVM running for xxx)</code></li>
+<li>==发送ApplicationStartedEvent事件，触发对应的监听器的执行==</li>
+<li></li>
+<li><code>callRunners()</code>：依次执行容器内配置的<code>ApplicationRunner/CommandLineRunner</code>的Bean实现类，支持sort排序<ul>
+<li><code>ApplicationRunner</code>：@since 1.3.0，入参是<code>ApplicationArguments</code>，先执行（推荐使用）</li>
+<li><code>CommandLineRunner</code>：@since 1.0.0，入参是<code>String... args</code>，后执行（不推荐使用）</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h5 id="监听此事件的监听器们-4"><a href="#监听此事件的监听器们-4" class="headerlink" title="监听此事件的监听器们"></a>监听此事件的监听器们</h5><p>默认情况下，有3个监听器监听<code>ApplicationStartedEvent</code>事件：</p>
+<p><img data-src="https://img-blog.csdnimg.cn/2020042623300532.png#x80" alt=""></p>
+<ol>
+<li>前两个不用再解释了吧：本事件达到时无动作</li>
+<li><code>TomcatMetricsBinder</code>：@since 2.1.0。和监控相关：将你的tomcat指标信息<code>TomcatMetrics</code>绑定到<code>MeterRegistry</code>，从而就能收集到相关指标了</li>
+</ol>
+<p>总结：此事件节点结束时，<code>SpringApplication</code>的生命周期到这一步，<strong>正常的启动流程</strong>就全部完成了。也就说Spring Boot应用可以正常对对外提供服务了。</p>
+<hr>
+<h4 id="ApplicationReadyEvent：应用已准备好"><a href="#ApplicationReadyEvent：应用已准备好" class="headerlink" title="ApplicationReadyEvent：应用已准备好"></a>ApplicationReadyEvent：应用已准备好</h4><p>@since 1.3.0。该事件所处的生命周期可认为基本同<code>ApplicationStartedEvent</code>，仅是在其后执行而已，两者中间并无其它特别的动作，但是监听此事件的监听器们还是<strong>蛮重要的</strong>。</p>
+<hr>
+<h5 id="完成的大事记-5"><a href="#完成的大事记-5" class="headerlink" title="完成的大事记"></a>完成的大事记</h5><p>同上。</p>
+<hr>
+<h5 id="监听此事件的监听器们-5"><a href="#监听此事件的监听器们-5" class="headerlink" title="监听此事件的监听器们"></a>监听此事件的监听器们</h5><p>默认情况下，有4个监听器监听<code>ApplicationStartedEvent</code>事件：</p>
+<p><img data-src="https://img-blog.csdnimg.cn/20200427105742674.png#x100" alt=""></p>
+<ol>
+<li><code>SpringApplicationAdminMXBeanRegistrar</code>：当此事件到达时，告诉Admin Spring应用已经ready，可以使用啦。</li>
+<li>中间这两个不用再解释了吧：本事件达到时无动作</li>
+<li><code>RefreshEventListener</code>：当此事件到达时，告诉Spring应用已经ready了，接下来便可以执行<code>ContextRefresher.refresh()</code>喽</li>
+</ol>
+<p>总结：此事件节点结束时，应用已经完完全全的准备好了，并且也已经完成了相关组件的周知工作。</p>
+<hr>
+<hr>
+<h4 id="异常情况"><a href="#异常情况" class="headerlink" title="异常情况"></a>异常情况</h4><p><code>SpringApplication</code>是有可能在启动的时候失败（如端口号已被占用），当然任何一步骤遇到异常时交给<code>SpringApplication#handleRunFailure()</code>方法来处理，这时候也会有对应的事件发出。</p>
+<hr>
+<h5 id="ApplicationFailedEvent：应用启动失败"><a href="#ApplicationFailedEvent：应用启动失败" class="headerlink" title="ApplicationFailedEvent：应用启动失败"></a>ApplicationFailedEvent：应用启动失败</h5><p>当<code>SpringApplication</code>在启动时抛出异常：可能是端口绑定、也可能是你自定义的监听器你写了个bug等，就会“可能”发送此事件。</p>
+<hr>
+<h6 id="完成的大事记-6"><a href="#完成的大事记-6" class="headerlink" title="完成的大事记"></a>完成的大事记</h6><ul>
+<li>得到异常的退出码ExitCode，然后发送<code>ExitCodeEvent</code>事件（非生命周期事件）</li>
+<li>发送<code>ApplicationFailedEvent</code>事件，触发对应的监听器的执行</li>
+</ul>
+<hr>
+<h6 id="监听此事件的监听器们-6"><a href="#监听此事件的监听器们-6" class="headerlink" title="监听此事件的监听器们"></a>监听此事件的监听器们</h6><p>默认情况下，有6个监听器监听<code>ApplicationStartedEvent</code>事件：<br><img data-src="https://img-blog.csdnimg.cn/20200426235823365.png#x140" alt=""></p>
+<ol>
+<li><code>LoggingApplicationListener</code>：执行<code>loggingSystem.cleanUp()</code>清理资源</li>
+<li><code>ClasspathLoggingApplicationListener</code>：输出一句debug日志：<code>Application failed to start with classpath:  ...</code></li>
+<li>中间这两个不用再解释了吧：本事件达到时无动作</li>
+<li><code>ConditionEvaluationReportLoggingListener</code>：自动配置输出报告，输出错误日志呗：特别方便你查看和错误定位<ul>
+<li>不得不夸：SB对错误定位这块才真叫智能，比Spring Framework好用太多了</li>
+</ul>
+</li>
+<li><code>BootstrapApplicationListener.CloseContextOnFailureApplicationListener</code>：执行context.close()</li>
+</ol>
+<p>总结：此事件节点结束时，会做一些释放资源的操作。一般情况下：我们并不需要监听到此事件</p>
+<hr>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>关于<code>SpringApplication</code>的生命周期体系的介绍就到这了，相信通过此“万字长文”你能体会到A哥的用心。翻了翻市面上的相关文章，本文Almost可以保证是总结得最到位的，让你通过一文便可从大的方面基本掌握Spring Boot，这不管是你使用SB，还是后续自行扩展、精雕细琢SB，以及去深入了解Spring Cloud均由非常重要的意义，希望对你有帮助，谢谢你的三连。</p>]]></content>
+      <categories>
+        <category>享学Spring Boot</category>
+      </categories>
+      <tags>
+        <tag>SpringApplication</tag>
+        <tag>Spring Boot</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hallo World</title>
-    <url>/posts/x2y/43fc112c.html</url>
+    <url>/x2y/43fc112c.html</url>
     <content><![CDATA[<p>你好同学，欢迎来到A哥的博客：BAT的乌托邦</p>]]></content>
       <categories>
         <category>缺省</category>
@@ -537,7 +855,7 @@
   </entry>
   <entry>
     <title>A哥感悟到的2019关键词：裁员、技术驱动、分享精神、能力边界</title>
-    <url>/posts/x2y/e1bcb9c1.html</url>
+    <url>/x2y/e1bcb9c1.html</url>
     <content><![CDATA[<blockquote>
 <p>2019很艰难，2020更艰难？</p>
 </blockquote>
@@ -639,7 +957,7 @@
   </entry>
   <entry>
     <title>静态代码块、静态变量，构造代码块、实例变量的执行顺序和继承逻辑</title>
-    <url>/posts/x2y/1b8d333f.html</url>
+    <url>/x2y/1b8d333f.html</url>
     <content><![CDATA[<blockquote>
 <p>面试总在懵逼和牛逼之间徘徊。切忌：考官手下留点情，给个机会行不行<br><strong>作者</strong>：A哥（YourBatman）<br><strong>公众号</strong>：BAT的乌托邦（ID：BAT-utopia）<br><strong>文末是否有彩蛋</strong>：有</p>
 </blockquote>
@@ -747,7 +1065,7 @@
   </entry>
   <entry>
     <title>静态类、静态方法、内部类、匿名内部类、非静态类的一些实践</title>
-    <url>/posts/x2y/889a54a1.html</url>
+    <url>/x2y/889a54a1.html</url>
     <content><![CDATA[<blockquote>
 <p>只要干不死，就往死里干。累吗，累就对了，证明你还活着。<br><strong>作者</strong>：A哥（YourBatman）<br><strong>公众号</strong>：BAT的乌托邦（ID：BAT-utopia）<br><strong>文末是否有彩蛋</strong>：有</p>
 </blockquote>

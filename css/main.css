@@ -1334,7 +1334,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #dd3b88;
+  background: #ffa35c;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -3079,6 +3079,9 @@ blockquote p {
 }
 .posts-expand .post-body ul:not(.reward-row):not(.nav-tabs) {
   list-style: none;
+}
+.posts-expand .post-body ul:not(.reward-row):not(.nav-tabs) li {
+  display: flow-root;
 }
 .posts-expand .post-body ul:not(.reward-row):not(.nav-tabs) li:before {
   float: left;
