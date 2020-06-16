@@ -589,8 +589,8 @@
         <category>Spring static关键字</category>
       </categories>
       <tags>
-        <tag>Spring Boot</tag>
         <tag>Spring Framework</tag>
+        <tag>Spring Boot</tag>
         <tag>static</tag>
       </tags>
   </entry>
@@ -1885,13 +1885,16 @@
     <content><![CDATA[<div class="note primary">
             <ul><li>公众号：BAT的乌托邦</li><li>作者：A哥<ul><li>A哥的介绍：<ul><li><a href="/about">PC版</a></li><li><a href="https://mp.weixin.qq.com/s/PGIFtpI7aZaxY7es0F6C6Q" target="_blank" rel="noopener">手机版</a></li></ul></li><li>示例文章：<a href="https://mp.weixin.qq.com/s/PYVD8BvT7Nux0jiSomSG0A" target="_blank" rel="noopener">点击这里</a></li></ul></li><li>定位：专注Java领域，只做有深度的专栏文章分享，拒绝浅尝辄止</li><li>首篇文章时间：2020-05-03   <a href="https://mp.weixin.qq.com/s/PGIFtpI7aZaxY7es0F6C6Q" target="_blank" rel="noopener">查看首篇文章</a></li></ul>
           </div>
+
+<h3 id="转载请著名出处，示例（文首-文末）："><a href="#转载请著名出处，示例（文首-文末）：" class="headerlink" title="转载请著名出处，示例（文首 + 文末）："></a>转载请著名出处，示例（文首 + 文末）：</h3><p><img data-src="https://img-blog.csdnimg.cn/20200616122117470.png" alt="文首"><br><img data-src="https://img-blog.csdnimg.cn/20200616122910584.png" alt="文末"></p>
+<div style="text-align: center;color: #8c8888;font-size: 8px;margin-top: -10px;">文案请从此处复制：本文转载自公众号【BAT的乌托邦】，专注Java领域，只做有深度的专栏文章分享，拒绝浅尝辄止。</div>
+
 <div style="margin-top: 50px; margin-bottom: 50px; text-align: center; font-weight: bolder; color: grey; font-size: 20px;">
 😄申请【开长白】请在本文下面留言，开白成功后我会登记入下表，谢谢合作😄
 </div>
-<div style="text-align: center; font-weight: bolder; color: black; font-size: 11px;margin-top: -50px;margin-bottom: 20px;">
+<div style="text-align: center; font-weight: bolder; color: #7d7d7d; font-size: 11px;margin-top: -50px;margin-bottom: 20px;">
 (留言时请输入正确邮箱号，这样开白成功会给你发邮件提醒)
 </div>
-
 <div class="table-container"><table>
     <thead>
     <tr>
@@ -1901,6 +1904,21 @@
     </tr>
     </thead>
     <tbody>
+    <tr>
+        <td align="center">softech华山论剑</td>
+        <td align="center">2020.06.14</td>
+        <td align="center">是</td>
+    </tr>
+    <tr>
+        <td align="center">自由程序人</td>
+        <td align="center">2020.06.16</td>
+        <td align="center">是</td>
+    </tr>
+    <tr>
+        <td align="center">softech华山论剑</td>
+        <td align="center">2020.06.14</td>
+        <td align="center">是</td>
+    </tr>
     <tr>
         <td align="center">石杉的架构笔记</td>
         <td align="center">2020.06.09</td>
@@ -2079,8 +2097,8 @@
         <category>Spring配置类</category>
       </categories>
       <tags>
-        <tag>Spring Boot</tag>
         <tag>@Configuration</tag>
+        <tag>Spring Boot</tag>
         <tag>@AutoConfigureBefore</tag>
       </tags>
   </entry>
