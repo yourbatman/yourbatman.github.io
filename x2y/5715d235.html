@@ -24,18 +24,30 @@
     var CONFIG = {"hostname":"www.yourbatman.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},"motion":{"enable":false,"async":true,"transition":{"post_block":"flipBounceYIn","post_header":"flipXIn","post_body":"flipBounceXIn","coll_header":"expandIn","sidebar":"shrinkIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="我这有故事，你那有酒吗？">
-<meta property="og:type" content="website">
-<meta property="og:title" content="BAT的乌托邦">
-<meta property="og:url" content="https://www.yourbatman.cn/tags/2019/index.html">
+  <meta name="description" content="来自硅谷大佬，对依赖注入Dependency Injection的很简约易懂的解释">
+<meta property="og:type" content="article">
+<meta property="og:title" content="系统设计：你的service要用Dependency Injection吗?">
+<meta property="og:url" content="https://www.yourbatman.cn/x2y/5715d235.html">
 <meta property="og:site_name" content="BAT的乌托邦">
-<meta property="og:description" content="我这有故事，你那有酒吗？">
+<meta property="og:description" content="来自硅谷大佬，对依赖注入Dependency Injection的很简约易懂的解释">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2020061807003859.png#x200">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200618070204992.png#x200">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200618070513198.png#x200">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2020061807072948.png#x200">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2020061807103662.png#x200">
+<meta property="article:published_time" content="2020-06-17T23:17:57.000Z">
+<meta property="article:modified_time" content="2020-06-17T23:24:43.317Z">
 <meta property="article:author" content="A哥(YourBatman)">
-<meta property="article:tag" content="Java | Spring | Spring Boot | Spring Cloud | Dubbo | Netflix | BAT">
+<meta property="article:tag" content="BAT的乌托邦">
+<meta property="article:tag" content="A哥">
+<meta property="article:tag" content="YourBatman">
+<meta property="article:tag" content="依赖注入">
+<meta property="article:tag" content="Dependency Injection">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/2020061807003859.png#x200">
 
-<link rel="canonical" href="https://www.yourbatman.cn/tags/2019/">
+<link rel="canonical" href="https://www.yourbatman.cn/x2y/5715d235.html">
 
 
 <script id="page-configurations">
@@ -43,12 +55,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>标签: 2019 | BAT的乌托邦</title>
+  <title>系统设计：你的service要用Dependency Injection吗? | BAT的乌托邦</title>
   
 
 
@@ -209,57 +221,281 @@
         <div class="content-wrap">
           
 
-          <div class="content tag">
+          <div class="content post posts-expand">
             
 
+    
   
   
   
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h2 class="collection-header">2019
-          <small>标签</small>
-        </h2>
-      </div>
+    <div id="yourbatman">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.yourbatman.cn/x2y/5715d235.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://img-blog.csdnimg.cn/20200511100304592.jpg">
+      <meta itemprop="name" content="A哥(YourBatman)">
+      <meta itemprop="description" content="我这有故事，你那有酒吗？">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BAT的乌托邦">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          系统设计：你的service要用Dependency Injection吗?
+        </h1>
+
+        <div class="post-meta">
+          <!-- 精品文章 精华帖 -->
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-06-18 07:17:57" itemprop="dateCreated datePublished" datetime="2020-06-18T07:17:57+08:00">2020-06-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">收录于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/" itemprop="url" rel="index"><span itemprop="name">系统设计</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/x2y/5715d235.html" class="post-meta-item leancloud_visitors" data-flag-title="系统设计：你的service要用Dependency Injection吗?" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">评论数：</span>
+    
+    <a title="valine" href="/x2y/5715d235.html#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/x2y/5715d235.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+          <!-- 置顶 可以写top:true  也可以写数字top:1/2/3  顺序规则同Spring-->
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+          <!-- 本文作者 -->
+          <span class="post-meta-item" title="阅读时长">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-user fa-fw"></i>
+            </span>
+            <span class="post-meta-item-text">本文作者：</span>
+            <a href="/about/" itemprop="url" rel="index">
+              <span>大西Xi</span>
+            </a>
+          </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2019</span>
+        <blockquote>
+<p>当大潮退去，才知道谁在裸泳。<br><strong>作者</strong>：A哥（YourBatman）<br><strong>公众号</strong>：BAT的乌托邦（ID：BAT-utopia）<br><strong>文末是否有彩蛋</strong>：有</p>
+</blockquote>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>各位小伙伴大家好，我是A哥。<strong>以下文章来源于硅谷成长攻略 ，作者大西Xi</strong>。</p>
+<p>依赖注入，它不仅仅是Spring，而是一种通用思想。本文硅谷大佬用简短的语句道出了其核心思想，值得参阅。</p>
+<hr>
+<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><p>我最近在给一个Go service升级重构framework。我和一个朋友提了下，他点评到，搞这种基础升级，就是悟道啊，类似于《禅与摩托车维修艺术》。<br><img data-src="https://img-blog.csdnimg.cn/2020061807003859.png#x200" alt=""><br>他这个说法挺有道理的，大家平时写业务代码，更多是站在地面想着怎么快速完成目标。只有趁升级的时候，才有空飞在1000公里天上，想想为啥要这么设计的哲学问题。</p>
+<p>今天就给大家介绍一个重要的基本设计原则：Dependency Injection。这个设计模式在复杂的业务service非常有用，没有它，每次改一个模块的初始化接口，你都要把用到这个模块的代码都改一遍，非常麻烦。</p>
+<p><strong>今天很多主流的开源framework都用到了它</strong>，比如：</p>
+<ul>
+<li>Guice: Google 维护的一个基于Java的 lightweight dependency injection framework</li>
+<li>Fx: Uber 维护的一个基于Go的dependency injection framework</li>
+<li>AngularJS: Google 维护的基于JavaScript的前端 framework</li>
+<li>Wire: Google维护的Compile-time Dependency Injection for Go</li>
+</ul>
+<hr>
+<h3 id="什么是Dependency-Injection？"><a href="#什么是Dependency-Injection？" class="headerlink" title="什么是Dependency Injection？"></a>什么是Dependency Injection？</h3><p>这个翻译成中文叫做依赖注入，用大白话解释就是即插即用。</p>
+<p>举个例子，假设你的service里面有个模块A叫“笔记本”，它有个依赖叫“耳机”，用了这个设计原则，你需要听音乐，只用插”耳机“就可以了。后端service中常见的“耳机”依赖有哪些？比如Logging，输出Metrics等。<br><img data-src="https://img-blog.csdnimg.cn/20200618070204992.png#x200" alt=""><br>下面的代码是用 <strong>Dependency Injection</strong> 创建模块A的伪代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">func <span class="title">CreateLaptopService</span><span class="params">()</span> *LaptopService </span>&#123;</span><br><span class="line">	panic(wire.Build(</span><br><span class="line">		wire.Struct(<span class="keyword">new</span>(Logger), <span class="string">"*"</span>),</span><br><span class="line">		NewHttpClient,</span><br><span class="line">		NewHeadphoneService,</span><br><span class="line">	))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="不用这个原则，有什么后果？"><a href="#不用这个原则，有什么后果？" class="headerlink" title="不用这个原则，有什么后果？"></a>不用这个原则，有什么后果？</h3><p>你需要自己搞一堆耳机的原材料，然后自己组装配置。模块A需要耳机的时候，手动装一遍，模块B需要耳机的时候，再手动装一遍。<br><img data-src="https://img-blog.csdnimg.cn/20200618070513198.png#x200" alt=""><br>下面是不用Dependency Injection，创建模块A的伪代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">func <span class="title">CreateLaptopService</span><span class="params">()</span> *LaptopService </span>&#123;</span><br><span class="line">	logger := &amp;Logger&#123;&#125;</span><br><span class="line">	headphone := &amp;Headphone&#123;&#125;</span><br><span class="line">	client := NewHttpClient(logger)</span><br><span class="line">	<span class="keyword">return</span> NewLaptopService(logger,client,headphone)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果service很简单，还可以忍受。但是在业务很复杂时，项目里有上百个依赖的时候就更痛苦了。每次配置”耳机“，你都需要手动把所有模块的接口配置一遍。<br><img data-src="https://img-blog.csdnimg.cn/2020061807072948.png#x200" alt=""><br>下面是不用<strong>Dependency Injection</strong>，再创建模块B的伪代码:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">func <span class="title">CreateDesktopService</span><span class="params">()</span> *DesktopService </span>&#123;</span><br><span class="line">	logger := &amp;Logger&#123;&#125;</span><br><span class="line">	headphone := &amp;Headphone&#123;&#125;</span><br><span class="line">	client := NewHttpClient(logger)</span><br><span class="line">	cdDisk := &amp;CdDisk&#123;&#125;</span><br><span class="line">	cdDrive := &amp;CdDrive&#123;cdDisk&#125;</span><br><span class="line">	headphone := &amp;Headphone&#123;&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> NewLaptopService(logger, client, headphone, cdDrive)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="优点一：减少依赖关系、方便重复使用"><a href="#优点一：减少依赖关系、方便重复使用" class="headerlink" title="优点一：减少依赖关系、方便重复使用"></a>优点一：减少依赖关系、方便重复使用</h4><p>有了Dependency Injection，每次配置时，模块A和模块B都是连接到同一个设置的耳机，你只要组装一次耳机。即使有100个模块都需要用耳机，你也只需要组装一次。<br><img data-src="https://img-blog.csdnimg.cn/2020061807103662.png#x200" alt=""></p>
+<h4 id="优点二：提高可维护性"><a href="#优点二：提高可维护性" class="headerlink" title="优点二：提高可维护性"></a>优点二：提高可维护性</h4><p>而对于更复杂的场景，模块B依赖于一个”CD机“，而”CD机“又需要一个”CD碟片“。如果有100个类似的模块都有”CD机“，而你需要做的只是更改”CD机”里的CD碟片，有了Dependency Injection，你也可以省去在“电子厂”里面翻找所有”CD机“的时间，只需要换一张”CD碟片“。</p>
+<h4 id="优点三：简化测试流程"><a href="#优点三：简化测试流程" class="headerlink" title="优点三：简化测试流程"></a>优点三：简化测试流程</h4><p>每次升级时，只需要测试”耳机“本身的性能，测试不需要和使用”耳机“的代码有任何关联。</p>
+<hr>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>最后，划一下重点，Dependency Injection适用的场景，是复杂的大型系统，有很多个服务相互依赖的情况。它能够避免一些重复劳动带来的小错误，提高生产力。如果是一个人写的小玩具，那杀鸡就不用牛刀啦。</p>
+        <!-- ....这里是正文内容的底部（首页不会展示）... -->
+        <hr>
+<div class="yourbatman-footer">
+  <h2 id="关注A哥"><a href="关注A哥" class="headerlink" title="关注A哥"></a>关注A哥</h2>
+  <ul>
+    <li>原创不易，码字更不易，不用请我喝饮料，来个在看/转发足矣</li>
+    <li><strong>专栏式学习，我们是认真的</strong>（关注公众号回复“知识星球”领券后再轻装入驻）</li>
+    <img src="https://img-blog.csdnimg.cn/20200506161726441.jpg#pic_center" alt="" height="160">
+  </ul>
+  <ul>
+    <li><strong>原文链接</strong>：<a href="https://mp.weixin.qq.com/s/PGIFtpI7aZaxY7es0F6C6Q" target="_blank" rel="noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc">程序人生 | 春风得意马蹄疾，一日看尽长安花</a></li>
+    <li><strong>个人博客</strong>：<a href="https://www.yourbatman.cn" >https://www.yourbatman.cn</a></li>
+    <li><strong>关于A哥</strong>：<a href="https://www.yourbatman.cn/about">关于A哥</a></li>
+    <li><strong>CSDN</strong>：<a href="https://blog.csdn.net/f641385712" target="_blank">BAT的乌托邦</a></li>
+    <li><strong>博客园</strong>：<a href="https://www.cnblogs.com/fangshixiang" target="_blank">BAT的乌托邦</a></li>
+    <li><strong>知乎</strong>：<a href="https://www.zhihu.com/people/fangshixiang" target="_blank">BAT的乌托邦</a></li>
+    <li><strong>掘金</strong>：<a href="https://juejin.im/user/5b44d178f265da0fa1220efe" target="_blank">BAT的乌托邦</a></li>
+    <li><strong>腾讯云+社区</strong>：<a href="https://cloud.tencent.com/developer/user/6158873" target="_blank">BAT的乌托邦</a></li>
+    <li><strong>InfoQ写作</strong>：<a href="https://www.infoq.cn/profile/1046769/following/user" target="_blank">BAT的乌托邦</a></li>
+    <li><strong>知识星球</strong>：<a href="https://t.zsxq.com/nQBi66I" target="_blank">BAT的乌托邦</a></li>
+    <li><strong>公众号</strong>：BAT的乌托邦（ID：BAT-utopia）</li>
+  </ul>
+
+<div class="table-container"><table>
+<thead>
+<tr>
+<th align="left" style="width: 50%;"><a class="fancybox fancybox.image" href="https://img-blog.csdnimg.cn/20200612225136939.png" target="_blank" itemscope="" itemtype="http://schema.org/ImageObject" itemprop="url" data-fancybox="default" rel="default noopener" title="A哥私人微信" data-caption="A哥私人微信"><img style="max-height: 200px" data-src="https://img-blog.csdnimg.cn/20200612225136939.png" alt="A哥私人微信" src="https://img-blog.csdnimg.cn/20200612225136939.png" data-loaded="true"><p class="image-caption">A哥私人微信</p></a></th>
+<th align="left"><a class="fancybox fancybox.image" href="https://img-blog.csdnimg.cn/20200613092818287.gif" target="_blank" itemscope="" itemtype="http://schema.org/ImageObject" itemprop="url" data-fancybox="default" rel="default noopener" title="A哥私人公众号" data-caption="A哥私人公众号"><img style="max-height: 200px" data-src="https://img-blog.csdnimg.cn/20200613092818287.gif" alt="A哥私人公众号" src="https://img-blog.csdnimg.cn/20200613092818287.gif" data-loaded="true"><p class="image-caption">A哥私人公众号</p></a></th>
+</tr>
+</thead>
+</table></div>
+</div>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    
+    
+    
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-12-31T16:48:44+08:00"
-              content="2019-12-31">
-          12-31
-        </time>
+    <!-- 相关阅读（你可能还喜欢） -->
+      
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-title">
+    <strong>本文标题： </strong>
+    《系统设计：你的service要用Dependency Injection吗?》
+  </li>
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>大西Xi
+  </li>
+  <li class="post-copyright-date">
+    <strong>发布时间： </strong>2020-06-18 07:17:57
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://www.yourbatman.cn/x2y/5715d235.html" title="系统设计：你的service要用Dependency Injection吗?">https://www.yourbatman.cn/x2y/5715d235.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>许可协议： </strong>本站所有文章均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载：No！转发：Yes！
+  </li>
+</ul>
+</div>
+
+
+      <!-- 添加“本文结束”标记 -->
+      <div class="read-over" style="text-align: center;margin-top: 25px;color: rgba(234,16,61,.569);font-size: 16px">-------------您已触及底线 <i class="fa fa-paw"></i> 感谢阅读-------------</div>
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    请A哥喝水
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="https://img-blog.csdnimg.cn/20200612080128384.png" alt="A哥(YourBatman) 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="https://img-blog.csdnimg.cn/20200612080128343.png" alt="A哥(YourBatman) 支付宝">
+        <p>支付宝</p>
       </div>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/x2y/e1bcb9c1.html" itemprop="url">
-            <span itemprop="name">A哥感悟到的2019关键词：裁员、技术驱动、分享精神、能力边界</span>
-          </a>
-      </div>
+  </div>
+</div>
 
-    </header>
-  </article>
 
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/" rel="tag"><i class="fa fa-tag"></i> 依赖注入</a>
+              <a href="/tags/Dependency-Injection/" rel="tag"><i class="fa fa-tag"></i> Dependency Injection</a>
+          </div>
+
+        <!-- 导入投票模块 -->
+        
+  <!-- 投票功能 -->
+  <div class="post-widgets">
+    <div style="color: #ea778c;font-size: 14px;">(>兄台请留步，看完记得六星好评哦<)</div>
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
     </div>
   </div>
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/x2y/da0c5a61.html" rel="prev" title="技术​选型的艺术">
+      <i class="fa fa-chevron-left"></i> 技术​选型的艺术
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
   
   
   
 
+    </div>
+  
+  
+  
   
 
 
 
           </div>
           
+    <div class="comments" id="valine-comments"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -306,6 +542,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#正文"><span class="nav-number">2.</span> <span class="nav-text">正文</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是Dependency-Injection？"><span class="nav-number">2.0.1.</span> <span class="nav-text">什么是Dependency Injection？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不用这个原则，有什么后果？"><span class="nav-number">2.0.2.</span> <span class="nav-text">不用这个原则，有什么后果？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#优点一：减少依赖关系、方便重复使用"><span class="nav-number">2.0.2.1.</span> <span class="nav-text">优点一：减少依赖关系、方便重复使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#优点二：提高可维护性"><span class="nav-number">2.0.2.2.</span> <span class="nav-text">优点二：提高可维护性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#优点三：简化测试流程"><span class="nav-number">2.0.2.3.</span> <span class="nav-text">优点三：简化测试流程</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
