@@ -1334,7 +1334,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #112bde;
+  background: #611d49;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2763,6 +2763,7 @@ ul.breadcrumb li + li:last-child {
 }
 .post-block p {
   margin: 0px 0 10px 0;
+  color: #24292e;
 }
 .comments {
   background: var(--content-bg-color);
