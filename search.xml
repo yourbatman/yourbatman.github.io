@@ -2032,33 +2032,38 @@
 </div>
 <div class="table-container"><table>
     <thead>
-    <tr>
-        <th align="center">公众号</th>
-        <th align="center">操作时间</th>
-        <th align="center">是否长白</th>
-    </tr>
+        <tr>
+            <th align="center">公众号</th>
+            <th align="center">操作时间</th>
+            <th align="center">是否长白</th>
+        </tr>
     </thead>
     <tbody>
-    <tr>
-        <td align="center">自由程序人</td>
-        <td align="center">2020.06.16</td>
-        <td align="center">是</td>
-    </tr>
-    <tr>
-        <td align="center">softech华山论剑</td>
-        <td align="center">2020.06.14</td>
-        <td align="center">是</td>
-    </tr>
-    <tr>
-        <td align="center">石杉的架构笔记</td>
-        <td align="center">2020.06.09</td>
-        <td align="center">是</td>
-    </tr>
-    <tr>
-        <td align="center">源码笔记</td>
-        <td align="center">2020.06.04</td>
-        <td align="center">是</td>
-    </tr>
+        <tr>
+            <td align="center">学习Java的小姐姐</td>
+            <td align="center">2020.06.24</td>
+            <td align="center">是</td>
+        </tr>
+        <tr>
+            <td align="center">自由程序人</td>
+            <td align="center">2020.06.16</td>
+            <td align="center">是</td>
+        </tr>
+        <tr>
+            <td align="center">softech华山论剑</td>
+            <td align="center">2020.06.14</td>
+            <td align="center">是</td>
+        </tr>
+        <tr>
+            <td align="center">石杉的架构笔记</td>
+            <td align="center">2020.06.09</td>
+            <td align="center">是</td>
+        </tr>
+        <tr>
+            <td align="center">源码笔记</td>
+            <td align="center">2020.06.04</td>
+            <td align="center">是</td>
+        </tr>
     </tbody>
 </table></div>]]></content>
       <categories>
