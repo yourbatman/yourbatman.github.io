@@ -172,6 +172,150 @@
       </tags>
   </entry>
   <entry>
+    <title>Fastjson到了说再见的时候了</title>
+    <url>/x2y/221f1084.html</url>
+    <content><![CDATA[<blockquote>
+<p>专注Java领域分享、成长，拒绝浅尝辄止<br><strong>作者</strong>：<a href="https://www.yourbatman.cn/about/">A哥（YourBatman）</a><br><strong>公众号</strong>：BAT的乌托邦（ID：BAT-utopia）<br><strong>个人博客</strong>：<a href="https://www.yourbatman.cn/">https://www.yourbatman.cn</a>，本文已收录</p>
+</blockquote>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>各位小伙伴大家好，我是A哥。停更1个月后回归啦，今天咱们聊聊一个比较有意思的话题：是否真的需要跟Fastjson说再见了？<br><img data-src="https://img-blog.csdnimg.cn/20200622172605662.png#x260" alt=""></p>
+<h2 id="我的态度"><a href="#我的态度" class="headerlink" title="我的态度"></a>我的态度</h2><p>我在CSDN写过好些篇关于JSON的文章，特别是2020年专门写了一个付费专栏：<code>享学Jackson</code><br><img data-src="https://img-blog.csdnimg.cn/2020062218500935.png#x100" alt=""><br><img data-src="https://img-blog.csdnimg.cn/20200701071842704.png#x100" alt=""><br>这个专栏“销量”在我心目中还凑合，4个月“卖出”200份的样子（虽不值一提，但我很满足了😄），小小的一个JSON库而已，热度可见一斑。专栏里不可避免的提到了Jackson和Fastjson的比较，我本人一直持中立态度，主要原因有二：</p>
+<ol>
+<li>两者都很流行（国内Fastjson流行度甚至超过Jackson），因此平时开发中我<strong>两者都用</strong>（需要随大流嘛）</li>
+<li>国产开源软件是需要被支持的，即使现在还存在差距（联想下<strong>最初的</strong>国产手机和苹果手机的差距，再看看现在呢？）</li>
+</ol>
+<p>当然，本文不一样了，必须得加点料。态度中立并不代表没有偏向：很明显我偏向于使用Jackson作为你的 <strong>唯一</strong> JSON库。<br><img data-src="https://img-blog.csdnimg.cn/20200622160236785.png#x260" alt=""></p>
+<hr>
+<hr>
+<p><strong>从本文起</strong>，我将把CSDN里该付费专栏<strong>全部内容</strong>搬到公众号，免费助你轻松拥抱世界上最好的JSON库：Jackson。<br><strong>从本文起</strong>，我将把CSDN里该付费专栏<strong>全部内容</strong>搬到公众号，免费助你轻松拥抱世界上最好的JSON库：Jackson。<br><strong>从本文起</strong>，我将把CSDN里该付费专栏<strong>全部内容</strong>搬到公众号，免费助你轻松拥抱世界上最好的JSON库：Jackson。</p>
+<blockquote>
+<p>市面上并无成体系介绍Jackson的教程（官网都木有），独此一家哦。当然喽，这必将损伤到我的CSDN专栏售卖权益（小钱也是钱嘛😄），所以希望你关注公众号，关注此专栏，然后学到手我就觉得值了</p>
+</blockquote>
+<hr>
+<hr>
+<p>2020-05-30阿里云应急响应中心监测到Fastjson爆发新的反序列化远程代码执行漏洞，黑客利用漏洞，可绕过autoType限制，直接远程执行任意命令攻击服务器，<strong>风险极大</strong>（话外音：此bug必须Fix）。幸运的是，官方的响应速度非常快：<br><img data-src="https://img-blog.csdnimg.cn/20200622190151492.png##x100" alt=""><br>还记得上一次Fastjson <strong>高级别风险</strong> 安全漏洞是什么时候吗？是的，它就发生在2019-09-04，两次相距着实不远，不满你说我还记忆犹新呢，我司安全部门发的邮件还能找到😄。</p>
+<blockquote>
+<p>当然，之前也有些漏洞问题，但关注度不如这两次。主要是这两次时间相近，危险级别非常高影响面很大，所以社区反应较为强烈</p>
+</blockquote>
+<p>这两次“相邻”的安全漏洞着实把Fastjson推到了风口浪尖，吃瓜群众一波接一波，一时间 <strong>“弃用Fastjson，拥抱Jackson/Gson”</strong> 的声音不绝于耳。这很容易理解，因为谁都不情愿时不时收到公司安全部门的这种邮件：<br><img data-src="https://img-blog.csdnimg.cn/20200701173929379.png#x260" alt=""><br>针对此漏洞，虽说咱们Fix起来步骤简单：升级Fastjson的版本，然后重启应用。看起来毫不费力，实则是个大坑。你是否曾想过这个问题：倘若有上百个、几百个Java应用呢？且不谈你操作上的时间和人力成本有多高，单单<strong>管理</strong>起来的工作量也不容小觑。所以如果你是技术Leader，胸中的怒火释放一下是在情理之中的。</p>
+<blockquote>
+<p>相信很少有部门/团队把Spring Boot应用做成<strong>Jar包分离</strong>的形式的吧~因此大概率都需要经过升版本 -&gt; 提交代码 -&gt; 合代码 -&gt; 上pre -&gt; 上线 -&gt; 验证等步骤，so还是比较麻烦的</p>
+</blockquote>
+<hr>
+<h2 id="你为何用Fastjson？"><a href="#你为何用Fastjson？" class="headerlink" title="你为何用Fastjson？"></a>你为何用Fastjson？</h2><p>这个问题你可以问自己，也可以问身边的同事。汇总一下就是答案，这才是来自用户最真实的声音嘛。我针对此也简单“调查”过，把我听到的了解到的汇总为如下三点：</p>
+<ol>
+<li>API简单（static方法直接使用），上手快，对开发者友好</li>
+<li>阿里巴巴出品，背靠大厂值得信赖. </li>
+<li>社区相对活跃，维护升级有保障</li>
+</ol>
+<p>容我猜猜，这3个理由大概率命中了你心中所想吧😄？有大厂做背书自然能给产品加分，但自身优秀才是硬道理。虽然原因有三点，但我认为让很多人决定去使用它、赞它的最最最主要原因其实就一点：<strong>API简单，static方法直接调用对开发者友好</strong>。</p>
+<p>我感觉对于大多数Java Coder（特别对于初学者）来说，使用时会有这样的一种情节在里面：静态方法的逼格比实例方法高。而实际上不应该是这样子的，初学者（初/中级选手）热爱使用静态方法，而高手在设计一个库/框架时应在静态方法+实例方法间运用自如。一味地、过多地使用静态方法只会让你的的思维倾向于<strong>面向过程</strong>，而非更好的利用Java <strong>面向对象</strong> 的特性，因此高下立判。</p>
+<blockquote>
+<p>没有孰优孰劣，适合的才是最好的</p>
+</blockquote>
+<p>发现了没，使用Fastjson的原因中，我们至始至终都没有提到性能高/速度快等字眼，但这却是Fastjson最最最为核心的特性，可谓是它能立足于众多JSON库中、“脱颖而出”的立身之本。岂不怪哉，我们使用它竟<strong>不是</strong>因为它最核心的特性有多好，那这是为何呢？<br><img data-src="https://img-blog.csdnimg.cn/2020070118342039.png#x260" alt=""></p>
+<hr>
+<h2 id="你为何仍在用Fastjson？"><a href="#你为何仍在用Fastjson？" class="headerlink" title="你为何仍在用Fastjson？"></a>你为何仍在用Fastjson？</h2><p>原因可以说出5678种，总而言之言而总之，你不（敢）切换的原因或许只有一个：Fastjson的静态方法调用用着省心；最重要的是，<strong>对其它JSON库（如Jackson/Gson）并不熟悉</strong>不敢切换。</p>
+<p>我认为<strong>害怕来自于未知</strong><br><img data-src="https://img-blog.csdnimg.cn/20200629070547714.png#x260" alt=""><br>不可否认Jackson/Gson的使用门槛的确比Fastjson高那么一丢丢，但这绝不是你拒绝去使用它的理由。受Fastjson这“连续”两次高危漏洞影响，A哥更加坚定了把Jackson当作 <strong>唯一</strong> JSON库的决心，甚至在团队内<strong>严令禁止使用Fastjson</strong>。大家统一了语言/工具，更能提高生产力~</p>
+<p>如果你也是因为不太了解Jackson而不敢离开温室，那么看到本文就很幸运了，本系列会免费带你拥抱Jackson这个高级JSON库，功能上比Fastjson强了不止一点点。</p>
+<hr>
+<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><p>坊间在某坛里看到这样一句言论：<strong>若你还依赖于使用Fastjson，那么你大概率还只是初/中级水平</strong>。这句话必然让Fastjson的忠实用户火冒三丈，抄起家伙嘎嘎就是干。话出必然有因，那么这句话是否真的言过于词呢？接下来就絮叨絮叨</p>
+<p>我很愿意用<strong>存在即合理</strong>原则来表达一个观点：Fastjson出个bug就能有这么高的关注度，不可否认这本身就是一种成功。</p>
+<blockquote>
+<p>误区描述：“合理”请不要误读为“合乎情理”之类，而是当做“理由”来讲。“存在即合理”正确理解为：一切存在的事物都有它存在的理由</p>
+</blockquote>
+<p>任何技术能够流行起来，well-known被我们所熟知必然有它的优势，哪怕这个过人之处<strong>只有一个</strong>。下面我们来看看为何Fastjson能一步步被宠爱，它的魔力到底在哪？</p>
+<blockquote>
+<p>技术选型不应该像相亲：肯定你只需要一个理由，而否定你却能…</p>
+</blockquote>
+<p><img data-src="https://img-blog.csdnimg.cn/20200630071300475.png#x260" alt=""></p>
+<hr>
+<h2 id="Why-Fastjson？"><a href="#Why-Fastjson？" class="headerlink" title="Why Fastjson？"></a>Why Fastjson？</h2><p>虽然最近Fastjson由于出现安全漏洞，社区言论一边倒。即使如此，几乎没人直接否定过Fastjson本身的优秀，特别是当你知道这个使用广泛的库几乎全部来自于一人之手时。他就是匠人温少：<br><img data-src="https://img-blog.csdnimg.cn/20200622153533596.png#x260" alt="图片来源于开源中国"></p>
+<blockquote>
+<p>值得一提的是：温少另一个开源项目Druid是国内<strong>最</strong>流行的（甚至没有之一）数据库连接池产品，广受好评</p>
+</blockquote>
+<p>成人只看利弊，小孩才分对错。为何要使用它能流行开来，那必然是因为它优秀。它优秀品质在其官网可一览无遗：<br><img data-src="https://img-blog.csdnimg.cn/20200630072342330.png#x160" alt="截图来自于Fastjson官网"><br>这些“优点”用中文描述出来更加直（震）观（撼）：</p>
+<h3 id="1、速度快"><a href="#1、速度快" class="headerlink" title="1、速度快"></a>1、速度快</h3><p>fastjson相对其他JSON库的特点是快，从2011年fastjson发布1.1.x版本之后，其性能<strong>从未被</strong>其他Java实现的JSON库超越。</p>
+<blockquote>
+<p>话外音：速度/性能这一块，Fastjson一直拿捏得死死的</p>
+</blockquote>
+<p><img data-src="https://img-blog.csdnimg.cn/20200630073524542.gif#x160" alt=""></p>
+<h3 id="2、使用广泛"><a href="#2、使用广泛" class="headerlink" title="2、使用广泛"></a>2、使用广泛</h3><p>fastjson在阿里巴巴大规模使用，在数万台服务器上部署，fastjson在业界被广泛接受。在2012年被开源中国评选为最受欢迎的国产开源软件之一。</p>
+<blockquote>
+<p>话外音：阿里巴巴数以万计的大规模集群实例做规模背书，说服力杠杠的</p>
+</blockquote>
+<p><img data-src="https://img-blog.csdnimg.cn/20200630073638950.png#x160" alt=""></p>
+<h3 id="3、测试完备"><a href="#3、测试完备" class="headerlink" title="3、测试完备"></a>3、测试完备</h3><p>fastjson有非常多的testcase，在1.2.11版本中，testcase超过3321个。每次发布都会进行回归测试，保证质量稳定。</p>
+<blockquote>
+<p>话外音：单测覆盖率高，代码健壮性有保证</p>
+</blockquote>
+<p><img data-src="https://img-blog.csdnimg.cn/20200630073803595.png#x160" alt=""></p>
+<h3 id="4、使用简单"><a href="#4、使用简单" class="headerlink" title="4、使用简单"></a>4、使用简单</h3><p>fastjson的API十分简洁。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">String text = JSON.toJSONString(obj); <span class="comment">//序列化</span></span><br><span class="line">VO vo = JSON.parseObject(<span class="string">"&#123;...&#125;"</span>, VO<span class="class">.<span class="keyword">class</span>)</span>; <span class="comment">//反序列化</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>话外音：不管你是小白还是小小白，轻松上手，使用起来都无障碍</p>
+</blockquote>
+<p><img data-src="https://img-blog.csdnimg.cn/20200630073840692.png#x160" alt=""></p>
+<h3 id="5、功能完备"><a href="#5、功能完备" class="headerlink" title="5、功能完备"></a>5、功能完备</h3><p>支持泛型，支持流处理超大文本，支持枚举，支持序列化和反序列化扩展。</p>
+<blockquote>
+<p>话外音：我这一家就够了，你要的，这都有</p>
+</blockquote>
+<p><img data-src="https://img-blog.csdnimg.cn/20200630074119345.png#x260" alt=""></p>
+<hr>
+<h2 id="Why-Not-Fastjson？"><a href="#Why-Not-Fastjson？" class="headerlink" title="Why Not Fastjson？"></a>Why Not Fastjson？</h2><p><img data-src="https://img-blog.csdnimg.cn/20200620162515660.png" alt=""><br>文首有表态本文我是有态度和有偏向的，因此不来几点原因实则不妥。那么我就针对于官网列出的5点（见上），给出个人观点供以参考。是否言过于辞，咱们拿出另外一个JSON库做出对比，本文以Jackson为例。</p>
+<hr>
+<h3 id="版本约定"><a href="#版本约定" class="headerlink" title="版本约定"></a>版本约定</h3><p>因为要做比较嘛，所以对使用的JSON库做出版本约定：</p>
+<ul>
+<li>Jackson：2.10.1<ul>
+<li>演示代码均使用最常用的<strong>高层API</strong>，而非底层API。毕竟用底层API去PK Fastjson并不公平，毕竟那并不常用</li>
+</ul>
+</li>
+<li>Fastjson：1.2.72<ul>
+<li>only one jar</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="1、速度上并没有那么的快"><a href="#1、速度上并没有那么的快" class="headerlink" title="1、速度上并没有那么的快"></a>1、速度上并没有那么的快</h3><p>速度快/性能高是Fastjson <strong>最最最最最最</strong> 大的“卖点”，可谓是<strong>立身之本</strong>，从它的命名以及它的logo设计上你都能感受到这一点。</p>
+<p>没有调研就没有发言权，本文针对于<strong>最常用</strong>的使用场景来一波测试对比（对比尽量公正，切勿钻牛角尖）。关于Fastjson和Jackson在性能PK这一块，网上的案例有不少，我自己也书写了多个场景的比较代码。但最终我还是决定引用Robin的结果展示给大家，我看了他的测试方案（代码）更加专业些：<a href="https://zhuanlan.zhihu.com/p/99123002" target="_blank" rel="noopener">几种常用 JSON 库性能比较</a>，结论如下两张图</p>
+<p><img data-src="https://img-blog.csdnimg.cn/20200701161604410.png#x260" alt="序列化"><br><img data-src="https://img-blog.csdnimg.cn/20200701161604416.png#x260" alt="反序列化"><br>总的结论：除了<code>Json-lib</code>是来搞笑的（它早已停止更新，切勿在生产上使用），Fastjson、Jsckson、Gson三者不分伯仲，差异性较小。<br><img data-src="https://img-blog.csdnimg.cn/20200620155220213.png" alt=""></p>
+<blockquote>
+<p>综合各种测试case，网上的 + 我自己写的测试用例，三者在性能方面除了Gson稍微差点外，Jackson和Fastjson在速度上可认为是差不多的（甚至Jackson综合性能表现更好）</p>
+</blockquote>
+<p><strong>既然差异性这么小，Fastjson一味的强调它是最快的真的有意义吗？</strong></p>
+<hr>
+<h4 id="JSON的解析速度绝不会制约系统的性能"><a href="#JSON的解析速度绝不会制约系统的性能" class="headerlink" title="JSON的解析速度绝不会制约系统的性能"></a>JSON的解析速度绝不会制约系统的性能</h4><p>比如我们一次REST调用环节全流程可能100ms；其中操作一次数据库，可能需要几十ms；序列化反序列化一次json <strong>一般只需要几ms</strong>；也就是说不同的json库，性能相差都在毫秒间；在一次REST调用全流程里，不同的JSON库在性能表现上影响甚微。</p>
+<p>在现代应用程序中，即使最慢的Gson，也是满足需求的；解析文档速度的快慢，并不能作为选型的唯一标准，可能连主要标准都算不上。对IO优化、网络优化、并行处理等优化措施，远比选用一个更快的库更有效。</p>
+<p>言而总之，如果你选择一个JSON库把性能当作了一个标准，就犯了方向性的错误。</p>
+<hr>
+<h3 id="2、并没有那么的流行"><a href="#2、并没有那么的流行" class="headerlink" title="2、并没有那么的流行"></a>2、并没有那么的流行</h3><p>使用广不广泛、流行度有多高这玩意是相对的。有一个最直观的数据，那就是在Maven中的引用量，我截图如下：<br><img data-src="https://img-blog.csdnimg.cn/2020070116254166.png" alt=""><br><img data-src="https://img-blog.csdnimg.cn/20200701162604932.png" alt=""><br><img data-src="https://img-blog.csdnimg.cn/20200701162620171.png" alt=""><br>从usages数值上看，似乎不在一个量级上。当然这么比较我个人认为不算特别客观，主要原因有二：</p>
+<ol>
+<li>开源的技术发展的越早，使用者越多，主流框架越支持（比如Spring MVC内置Jackson支持），就会形成聚集效应，赢者通吃</li>
+<li>Fastjson起步较晚，且主要发力于国内</li>
+</ol>
+<p>不可否认Fastjson在国内的流行度是非常高的，甚至超过Jackson。否则最近一次的安全漏洞也不会有那么多人吃瓜嘛，但是这种“使用广泛”你也得辩证性的去看，毕竟在中国Java领域里，阿里巴巴是绝对的执牛耳者。</p>
+<p>Fastjson的流行，是有着内在的原因的，比如这个无奈：<br><img data-src="https://img-blog.csdnimg.cn/20200702142954225.png?#x260" alt=""></p>
+<hr>
+<h3 id="3、测试真的完备吗？"><a href="#3、测试真的完备吗？" class="headerlink" title="3、测试真的完备吗？"></a>3、测试真的完备吗？</h3><p>额，这个我只能说：Fastjson自己知道就成，并无必要当作亮点show出来，毕竟使用者只关心出bug、出漏洞的频率和严重性，并不关心工程内部是如何保证健壮性的。</p>
+<p>在使用者眼中：不出bug，一行单测没有都没关系。出了严重bug，有上万个test case也难以让人信服。</p>
+<hr>
+<h3 id="4、API真的简单吗？"><a href="#4、API真的简单吗？" class="headerlink" title="4、API真的简单吗？"></a>4、API真的简单吗？</h3><p>答：真的。文上有解释，这也许可能大概是你选择使用Jackson作为JSON库最重要的理由。 </p>
+<p>当然，API使用简单针对于simple场景，对于复杂场景它也并不能简单应对。道理很简单，POP is simple,OOP is Complex。但恰好的是，在互联网应用场景中使用JSON库，大多属于简单场景，因此Fastjson把它当做一个亮点我觉得是无可厚非的。</p>
+<hr>
+<h3 id="5、功能并没有那么完备"><a href="#5、功能并没有那么完备" class="headerlink" title="5、功能并没有那么完备"></a>5、功能并没有那么完备</h3><p>官网强调了它是支持泛型、枚举等类型的序列化、反序列化的。但是对着JavaBean + JSON规范来讲，Fastjson有不少功能缺失（没遵循规范），这是A哥最为忍受不了的地方，因为它已经不能实现我的功能了。如果你基于它做过中间件开发、框架开发或者是DDD驱动设计开发，相信你也深有体会：<br><img data-src="https://img-blog.csdnimg.cn/20200702151128425.png?#x60" alt=""></p>
+<hr>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>真理是相对的，没有绝对的真理。真理是让人明白道理的，不是用来诡辩的，更不是用来抬扛的。</p>
+<p>同样的，Fastjson还是Jackson也就没有标准的答案，各位还是结合自己的具体情况，见仁见智。本文只是阐述我的<strong>个人观点</strong>，表达了我的使用倾向，供以你决策时参考。</p>
+<p>如果你和我一样，也想把<code>Jackson</code>作为你的<strong>唯一</strong> JSON库，那就关注我吧，接下来我会把付费专栏里的内容全部搬过来给你，免费助你平滑过渡到这个世界上最好的JSON库。<br><img data-src="https://img-blog.csdnimg.cn/20200630074132924.png?#x260" alt=""></p>]]></content>
+      <categories>
+        <category>A哥学Jackson</category>
+      </categories>
+      <tags>
+        <tag>Fastjson</tag>
+        <tag>Jackson</tag>
+        <tag>安全漏洞</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>系统设计：你的service要用Dependency Injection吗?</title>
     <url>/x2y/5715d235.html</url>
     <content><![CDATA[<blockquote>
