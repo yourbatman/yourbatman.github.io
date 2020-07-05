@@ -224,51 +224,6 @@
   
 <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<!-- 飘雪花 -->
-<script type="text/javascript">
-function getRandomColor(){
-  return '#'+Math.floor(Math.random()*16777215).toString(16);
-}
-
-function snow(options){
-    var $flake = $('<div id="snowbox" />').css({'position': 'absolute','z-index':'9999', 'top': '-50px'}).html('❄'),
-    documentHeight     = $(document).height(),
-    documentWidth    = $(document).width(),
-    defaults = {
-        minSize        : 5,
-        maxSize        : 25,
-        newOn        : 500,
-        flakeColor    : getRandomColor() /* 此处可以定义雪花颜色，若要白色可以改为#FFFFFF */
-    },
-    options    = $.extend({}, defaults, options);
-    var interval= setInterval( function(){
-    var startPositionLeft = Math.random() * documentWidth - 100,
-    startOpacity = 0.5 + Math.random(),
-    sizeFlake = options.minSize + Math.random() * options.maxSize,
-    endPositionTop = documentHeight - 200,
-    endPositionLeft = startPositionLeft - 500 + Math.random() * 500,
-    durationFall = documentHeight * 10 + Math.random() * 5000;
-    $flake.clone().appendTo('body').css({
-        left: startPositionLeft,
-        opacity: startOpacity,
-        'font-size': sizeFlake,
-        color: getRandomColor()
-    }).animate({
-        top: endPositionTop,
-        left: endPositionLeft,
-        opacity: 0.2
-    },durationFall,'linear',function(){
-        $(this).remove()
-    });
-    }, options.newOn);
-};
-
-snow({
-     minSize: 3, /* 定义雪花最小尺寸 */
-     maxSize: 33,/* 定义雪花最大尺寸 */
-     newOn: 666  /* 定义密集程度，数字越小越密集 */
- });
-</script>
 
 <style type="text/css">
 
@@ -696,7 +651,7 @@ snow({
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>9.2k</span>
+              <span>9.3k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -960,7 +915,7 @@ Spring配置类的Lite模式和Full模式，一锅全端走
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>906</span>
+              <span>941</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -1092,7 +1047,7 @@ Spring配置类的Lite模式和Full模式，一锅全端走
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>333</span>
+              <span>347</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -2001,13 +1956,13 @@ Spring配置类的Lite模式和Full模式，一锅全端走
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">本站总字数：</span>
-    <span title="本站总字数">169k</span>
+    <span title="本站总字数">170k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">本站总阅读时长 &asymp;</span>
-    <span title="本站总阅读时长">2:33</span>
+    <span title="本站总阅读时长">2:34</span>
 </div>
   <div class="addthis_inline_share_toolbox">
     <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5eb7b6f6b64d54f6" async="async"></script>
