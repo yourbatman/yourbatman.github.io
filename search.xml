@@ -177,7 +177,6 @@
     <content><![CDATA[<blockquote>
 <p>要想人前显贵，必须背后受罪。关注公众号【<strong>BAT的乌托邦</strong>】开启专栏式学习，拒绝浅尝辄止。本文 <a href="https://www.yourbatman.cn">https://www.yourbatman.cn</a> 已收录，里面一并有Spring技术栈、MyBatis、中间件等小而美的专栏供以学习哦。</p>
 </blockquote>
-<p><a href="https://blog.csdn.net/f641385712/category_9625300.html" target="_blank" rel="noopener">–&gt; 返回专栏总目录 &lt;–</a><br>代码下载地址：<a href="https://github.com/yourbatman/jackson-learning" target="_blank" rel="noopener">https://github.com/yourbatman/jackson-learning</a></p>
 <p><img data-src="https://img-blog.csdnimg.cn/20200707110839233.png#x200" alt=""></p>
 <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>各位小伙伴大家好，我是A哥。上篇文章 <a href="https://mp.weixin.qq.com/s/z6T9n9YvwjmDwuj-YTa0_w" target="_blank" rel="noopener">【Fastjson到了说再见的时候了】</a> A哥跟Fastjson说了拜拜，从本系列开始，我们将一起进入Jackson库的学习。当然喽说它是世界上最好的JSON库并非一家之言，是官网上它自己说的，我免责申明哈。</p>
 <p><img data-src="https://img-blog.csdnimg.cn/2020070711185561.png#x200" alt=""></p>
@@ -335,8 +334,6 @@
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>本文结合官网认识了Jackson的全貌，用全面的视角整体上把握到了Jackson所提供的功能模块，这为专栏后续的讲解提供一个索引。</p>
 <p>从Jackson的<strong>升级之快、模块支持之多</strong>足矣看得见它社区的活跃。并且为了迎合市场它在<code>2.10</code>版本后还提供了商业支持的服务：与Tidelift公司合作，为用户构建应用程序的开源依赖项提供商业支持和维护。节省时间、降低风险和改善代码健康状况（商业支持是收费的）。</p>
 <p>相信通过本文你对Jackson有了个大概的了解，不出意外你应该是有兴趣去学它了的。当你深入研究后会发现它的<strong>设计之优雅，扩展性之强</strong>，不是一般国产类库所能比拟的。如果说Fastjson是一个优秀的JSON库，那么Jackson就是一个更优秀的JSON生态。</p>
-<hr>
-<p><strong>PS</strong>：这是作者第一个付费专栏，专栏费用本想设置为0.01元的，但CSDN官方有最低定价限制，希望各位同仁予以理解。本专栏我会用心去撰写，以确保能对得起您的这个付费。若您对本专栏有任何疑问，或者对Java非常感兴趣，均可以私信我 or 左边扫码加我好友，一起交流探讨，共同进步~</p>
 <hr>
 <p><strong>本专栏在CSDN付费，在公众号全部免费公开，欢迎你关注A哥的公众号【BAT的乌托邦】</strong></p>]]></content>
       <categories>
@@ -1045,9 +1042,9 @@
         <category>Spring static关键字</category>
       </categories>
       <tags>
+        <tag>Spring Boot</tag>
         <tag>Spring Framework</tag>
         <tag>static</tag>
-        <tag>Spring Boot</tag>
       </tags>
   </entry>
   <entry>
@@ -2336,66 +2333,6 @@
       </tags>
   </entry>
   <entry>
-    <title>【BAT的乌托邦】公众号开白申请</title>
-    <url>/x2y/wechat-white-list.html</url>
-    <content><![CDATA[<div class="note primary">
-            <ul><li>公众号：BAT的乌托邦</li><li>作者：A哥<ul><li>A哥的介绍：<ul><li><a href="/about">PC版</a></li><li><a href="https://mp.weixin.qq.com/s/PGIFtpI7aZaxY7es0F6C6Q" target="_blank" rel="noopener">手机版</a></li></ul></li><li>示例文章：<a href="https://mp.weixin.qq.com/s/PYVD8BvT7Nux0jiSomSG0A" target="_blank" rel="noopener">点击这里</a></li></ul></li><li>定位：专注Java领域，只做有深度的专栏文章分享，拒绝浅尝辄止</li><li>首篇文章时间：2020-05-03   <a href="https://mp.weixin.qq.com/s/PGIFtpI7aZaxY7es0F6C6Q" target="_blank" rel="noopener">查看首篇文章</a></li></ul>
-          </div>
-
-<h3 id="转载请著名出处，示例（文首-文末）："><a href="#转载请著名出处，示例（文首-文末）：" class="headerlink" title="转载请著名出处，示例（文首 + 文末）："></a>转载请著名出处，示例（文首 + 文末）：</h3><p><img data-src="https://img-blog.csdnimg.cn/20200616122117470.png" alt="文首"><br><img data-src="https://img-blog.csdnimg.cn/20200616122910584.png" alt="文末"></p>
-<div style="text-align: center;color: #8c8888;font-size: 8px;margin-top: -10px;">文案请从此处复制：本文转载自公众号【BAT的乌托邦】，专注Java领域，只做有深度的专栏文章分享，拒绝浅尝辄止。</div>
-
-<div style="margin-top: 50px; margin-bottom: 50px; text-align: center; font-weight: bolder; color: grey; font-size: 20px;">
-😄申请【开长白】请在本文下面留言，开白成功后我会登记入下表，谢谢合作😄
-</div>
-<div style="text-align: center; font-weight: bolder; color: #7d7d7d; font-size: 11px;margin-top: -50px;margin-bottom: 20px;">
-(留言时请输入正确邮箱号，这样开白成功会给你发邮件提醒)
-</div>
-<div class="table-container"><table>
-    <thead>
-        <tr>
-            <th align="center">公众号</th>
-            <th align="center">操作时间</th>
-            <th align="center">是否长白</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td align="center">学习Java的小姐姐</td>
-            <td align="center">2020.06.24</td>
-            <td align="center">是</td>
-        </tr>
-        <tr>
-            <td align="center">自由程序人</td>
-            <td align="center">2020.06.16</td>
-            <td align="center">是</td>
-        </tr>
-        <tr>
-            <td align="center">softech华山论剑</td>
-            <td align="center">2020.06.14</td>
-            <td align="center">是</td>
-        </tr>
-        <tr>
-            <td align="center">石杉的架构笔记</td>
-            <td align="center">2020.06.09</td>
-            <td align="center">是</td>
-        </tr>
-        <tr>
-            <td align="center">源码笔记</td>
-            <td align="center">2020.06.04</td>
-            <td align="center">是</td>
-        </tr>
-    </tbody>
-</table></div>]]></content>
-      <categories>
-        <category>公众号</category>
-      </categories>
-      <tags>
-        <tag>白名单</tag>
-        <tag>公众号</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>【Java高工、架构师】系列群群规</title>
     <url>/x2y/wechat-gauge.html</url>
     <content><![CDATA[<blockquote class="blockquote-center">
@@ -2451,6 +2388,66 @@
       </categories>
       <tags>
         <tag>公众号</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【BAT的乌托邦】公众号开白申请</title>
+    <url>/x2y/wechat-white-list.html</url>
+    <content><![CDATA[<div class="note primary">
+            <ul><li>公众号：BAT的乌托邦</li><li>作者：A哥<ul><li>A哥的介绍：<ul><li><a href="/about">PC版</a></li><li><a href="https://mp.weixin.qq.com/s/PGIFtpI7aZaxY7es0F6C6Q" target="_blank" rel="noopener">手机版</a></li></ul></li><li>示例文章：<a href="https://mp.weixin.qq.com/s/PYVD8BvT7Nux0jiSomSG0A" target="_blank" rel="noopener">点击这里</a></li></ul></li><li>定位：专注Java领域，只做有深度的专栏文章分享，拒绝浅尝辄止</li><li>首篇文章时间：2020-05-03   <a href="https://mp.weixin.qq.com/s/PGIFtpI7aZaxY7es0F6C6Q" target="_blank" rel="noopener">查看首篇文章</a></li></ul>
+          </div>
+
+<h3 id="转载请著名出处，示例（文首-文末）："><a href="#转载请著名出处，示例（文首-文末）：" class="headerlink" title="转载请著名出处，示例（文首 + 文末）："></a>转载请著名出处，示例（文首 + 文末）：</h3><p><img data-src="https://img-blog.csdnimg.cn/20200616122117470.png" alt="文首"><br><img data-src="https://img-blog.csdnimg.cn/20200616122910584.png" alt="文末"></p>
+<div style="text-align: center;color: #8c8888;font-size: 8px;margin-top: -10px;">文案请从此处复制：本文转载自公众号【BAT的乌托邦】，专注Java领域，只做有深度的专栏文章分享，拒绝浅尝辄止。</div>
+
+<div style="margin-top: 50px; margin-bottom: 50px; text-align: center; font-weight: bolder; color: grey; font-size: 20px;">
+😄申请【开长白】请在本文下面留言，开白成功后我会登记入下表，谢谢合作😄
+</div>
+<div style="text-align: center; font-weight: bolder; color: #7d7d7d; font-size: 11px;margin-top: -50px;margin-bottom: 20px;">
+(留言时请输入正确邮箱号，这样开白成功会给你发邮件提醒)
+</div>
+<div class="table-container"><table>
+    <thead>
+        <tr>
+            <th align="center">公众号</th>
+            <th align="center">操作时间</th>
+            <th align="center">是否长白</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td align="center">学习Java的小姐姐</td>
+            <td align="center">2020.06.24</td>
+            <td align="center">是</td>
+        </tr>
+        <tr>
+            <td align="center">自由程序人</td>
+            <td align="center">2020.06.16</td>
+            <td align="center">是</td>
+        </tr>
+        <tr>
+            <td align="center">softech华山论剑</td>
+            <td align="center">2020.06.14</td>
+            <td align="center">是</td>
+        </tr>
+        <tr>
+            <td align="center">石杉的架构笔记</td>
+            <td align="center">2020.06.09</td>
+            <td align="center">是</td>
+        </tr>
+        <tr>
+            <td align="center">源码笔记</td>
+            <td align="center">2020.06.04</td>
+            <td align="center">是</td>
+        </tr>
+    </tbody>
+</table></div>]]></content>
+      <categories>
+        <category>公众号</category>
+      </categories>
+      <tags>
+        <tag>公众号</tag>
+        <tag>白名单</tag>
       </tags>
   </entry>
   <entry>
@@ -2555,8 +2552,8 @@
         <category>Spring配置类</category>
       </categories>
       <tags>
-        <tag>@Configuration</tag>
         <tag>Spring Boot</tag>
+        <tag>@Configuration</tag>
         <tag>@AutoConfigureBefore</tag>
       </tags>
   </entry>
