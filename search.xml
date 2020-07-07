@@ -868,8 +868,8 @@
         <category>Spring static关键字</category>
       </categories>
       <tags>
-        <tag>Spring Boot</tag>
         <tag>Spring Framework</tag>
+        <tag>Spring Boot</tag>
         <tag>static</tag>
       </tags>
   </entry>
@@ -2378,8 +2378,8 @@
         <category>Spring配置类</category>
       </categories>
       <tags>
-        <tag>Spring Boot</tag>
         <tag>@Configuration</tag>
+        <tag>Spring Boot</tag>
         <tag>@AutoConfigureBefore</tag>
       </tags>
   </entry>
