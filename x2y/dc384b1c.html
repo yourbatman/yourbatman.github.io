@@ -24,18 +24,30 @@
     var CONFIG = {"hostname":"www.yourbatman.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},"motion":{"enable":false,"async":true,"transition":{"post_block":"flipBounceYIn","post_header":"flipXIn","post_body":"flipBounceXIn","coll_header":"expandIn","sidebar":"shrinkIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="我这有故事，你那有酒吗？">
-<meta property="og:type" content="website">
-<meta property="og:title" content="BAT的乌托邦">
-<meta property="og:url" content="https://www.yourbatman.cn/tags/static/index.html">
+  <meta name="description" content="关于JSON库，我只用世界最好的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="1. 初识Jackson -- 世界上最好的JSON库">
+<meta property="og:url" content="https://www.yourbatman.cn/x2y/dc384b1c.html">
 <meta property="og:site_name" content="BAT的乌托邦">
-<meta property="og:description" content="我这有故事，你那有酒吗？">
+<meta property="og:description" content="关于JSON库，我只用世界最好的">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200707110839233.png#x200">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2020070711185561.png#x200">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191227172623307.png#x200">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200707113820299.png#x200">
+<meta property="article:published_time" content="2020-07-07T12:09:39.000Z">
+<meta property="article:modified_time" content="2020-07-07T12:11:11.795Z">
 <meta property="article:author" content="A哥(YourBatman)">
-<meta property="article:tag" content="Java | Spring | Spring Boot | Spring Cloud | Dubbo | Netflix | BAT">
+<meta property="article:tag" content="BAT的乌托邦">
+<meta property="article:tag" content="A哥">
+<meta property="article:tag" content="YourBatman">
+<meta property="article:tag" content="Jackson">
+<meta property="article:tag" content="Fastjson">
+<meta property="article:tag" content="JSON库">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20200707110839233.png#x200">
 
-<link rel="canonical" href="https://www.yourbatman.cn/tags/static/">
+<link rel="canonical" href="https://www.yourbatman.cn/x2y/dc384b1c.html">
 
 
 <script id="page-configurations">
@@ -43,12 +55,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>标签: static | BAT的乌托邦</title>
+  <title>1. 初识Jackson -- 世界上最好的JSON库 | BAT的乌托邦</title>
   
 
 
@@ -218,97 +230,414 @@
         <div class="content-wrap">
           
 
-          <div class="content tag">
+          <div class="content post posts-expand">
             
 
+    
   
   
   
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h2 class="collection-header">static
-          <small>标签</small>
-        </h2>
-      </div>
+    <div id="yourbatman">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.yourbatman.cn/x2y/dc384b1c.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://img-blog.csdnimg.cn/20200511100304592.jpg">
+      <meta itemprop="name" content="A哥(YourBatman)">
+      <meta itemprop="description" content="我这有故事，你那有酒吗？">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BAT的乌托邦">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          1. 初识Jackson -- 世界上最好的JSON库
+        </h1>
+
+        <div class="post-meta">
+          <!-- 精品文章 精华帖 -->
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-07-07 20:09:39" itemprop="dateCreated datePublished" datetime="2020-07-07T20:09:39+08:00">2020-07-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">收录于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/A%E5%93%A5%E5%AD%A6Jackson/" itemprop="url" rel="index"><span itemprop="name">A哥学Jackson</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/x2y/dc384b1c.html" class="post-meta-item leancloud_visitors" data-flag-title="1. 初识Jackson -- 世界上最好的JSON库" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">评论数：</span>
+    
+    <a title="valine" href="/x2y/dc384b1c.html#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/x2y/dc384b1c.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+          <!-- 置顶 可以写top:true  也可以写数字top:1/2/3  顺序规则同Spring-->
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>6.7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>6 分钟</span>
+            </span>
+
+          <!-- 本文作者 -->
+          <span class="post-meta-item" title="阅读时长">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-user fa-fw"></i>
+            </span>
+            <span class="post-meta-item-text">本文作者：</span>
+            <a href="/about/" itemprop="url" rel="index">
+              <span>A哥(YourBatman)</span>
+            </a>
+          </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2020</span>
+        <blockquote>
+<p>要想人前显贵，必须背后受罪。关注公众号【<strong>BAT的乌托邦</strong>】开启专栏式学习，拒绝浅尝辄止。本文 <a href="https://www.yourbatman.cn">https://www.yourbatman.cn</a> 已收录，里面一并有Spring技术栈、MyBatis、中间件等小而美的专栏供以学习哦。</p>
+</blockquote>
+<p><a href="https://blog.csdn.net/f641385712/category_9625300.html" target="_blank" rel="noopener">–&gt; 返回专栏总目录 &lt;–</a><br>代码下载地址：<a href="https://github.com/yourbatman/jackson-learning" target="_blank" rel="noopener">https://github.com/yourbatman/jackson-learning</a></p>
+<p><img data-src="https://img-blog.csdnimg.cn/20200707110839233.png#x200" alt=""></p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>各位小伙伴大家好，我是A哥。上篇文章 <a href="https://mp.weixin.qq.com/s/z6T9n9YvwjmDwuj-YTa0_w" target="_blank" rel="noopener">【Fastjson到了说再见的时候了】</a> A哥跟Fastjson说了拜拜，从本系列开始，我们将一起进入Jackson库的学习。当然喽说它是世界上最好的JSON库并非一家之言，是官网上它自己说的，我免责申明哈。</p>
+<p><img data-src="https://img-blog.csdnimg.cn/2020070711185561.png#x200" alt=""></p>
+<h2 id="一个工程仅需一个JSON库"><a href="#一个工程仅需一个JSON库" class="headerlink" title="一个工程仅需一个JSON库"></a>一个工程仅需一个JSON库</h2><p>Java的JSON库，你<strong>至少</strong>应该用过/听过这三种：<code>Jackson、Gson、Fastjson</code>。一个独立的工程，按照依赖最少原则，本应该only one JSON库是足矣的。但现状是：各位同仁可观察观察各自的项目，大都同时存在2种JSON库，亦或者3种甚至更多…</p>
+<blockquote>
+<p>说明：在<strong>同一个工程内</strong>，同一功能若有多种实现，实属不好的现象。这会让管理起来显得混乱（譬如对日期的格式化就不方便做到统一），出口若有多个，想收口时就是个大难题了</p>
+</blockquote>
+<p>作为一个<strong>合格的</strong>架构师/工程师，保持最简依赖(一致性依赖)是应该有的技术范，因为简单一致性它能带来很大的收益，道理很简单：两个Java程序员的沟通/协同效率，一定会比1个Java + 1个Python沟通效率高。</p>
+<p>so what，我们应该选择哪一种JSON库呢？答案显而易见，那便是Jackson。因为它各个方面表现均非常优秀，是世界最流行、最好的JSON库。把<code>Jackson</code>作为工程唯一JSON库是有一丢丢门槛的（想想你为何使用Fastjson就知道啦），所以它来啦，祝你跨越此门槛，规范化使用，<strong>助你增加一项主流的硬核实力，这也是本专栏的最大意义所在</strong>。</p>
+<hr>
+<h2 id="Jackson是世界最好的JSON库"><a href="#Jackson是世界最好的JSON库" class="headerlink" title="Jackson是世界最好的JSON库"></a>Jackson是世界最好的JSON库</h2><p>Jackson是一个简单的、功能强大的、基于Java的<strong>应用库</strong>。它可以很方便完成<strong>Java对象</strong>和<strong>Json对象</strong>(xml文档or其它格式）进行互转。Jackson社区相对比较活跃，更新速度也比较快。Jackson库有如下几大特性：</p>
+<ul>
+<li>高性能且稳定：低内存占用，对大/小JSON串，大/小对象的解析表现均很优秀</li>
+<li>流行度高：是很多流行框架的默认选择</li>
+<li>容易使用：提供高层次的API，极大简化了日常使用案例</li>
+<li>无需自己手动创建映射：内置了绝大部分序列化时和Java类型的映射关系</li>
+<li>干净的JSON：创建的JSON具有干净、紧凑、体积小等特点</li>
+<li>无三方依赖：仅依赖于JDK</li>
+<li><strong>Spring生态加持</strong>：jackson是Spring家族的默认JSON/XML解析器（明白了吧，学完此专栏你对Spring都能更亲近些了，一举两得）</li>
+</ul>
+<p>版本约定：本专栏统一使用的版本号固定为<code>2.10.1</code>（2019-12-09发布），GAV如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.fasterxml.jackson.core<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jackson-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.10.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>为了保持版本的统一性，后续的<code>Spring Boot（2.2.2.RELEASE）/Spring Framework（5.2.2.RELEASE）</code>使用的均为当前最新版本，因为它内置的jackson也恰好就是本专栏讲解的版本。</p>
+<hr>
+<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><p>细心的朋友从上面的<code>groupId</code>里可以看到：<code>jackson</code>它隶属于<code>fasterxml</code>这个组织。本着追本溯源的精神，可以稍微的了解了解这个组织：<a href="http://fasterxml.com/" target="_blank" rel="noopener">fasterxml官网</a> 截图如下</p>
+<p><img data-src="https://img-blog.csdnimg.cn/20191227172623307.png#x200" alt=""><br>简单翻译：FasterXML是Woodstox流的XML解析器、Jackson流的JSON解析器、Aalto非阻塞XML解析器以及<strong>不断增长</strong>的实用程序库和扩展家族背后的业务。</p>
+<p>作为一个高度流行的开源库，这种官网页面应该刷新了你的认知吧。并不是它内容不多，而其实是它的详细介绍都发布在<code>github</code>上了，这便是接下来我们来认识它的主要渠道。</p>
+<blockquote>
+<p>这种做法貌似已经成为了一种流行的趋势：越来越多的开源软件倾向于把github作为他们的Home Page了</p>
+</blockquote>
+<p><code>fasterxml</code>组织它<strong>直属的一级工程</strong>其实也有不少：</p>
+<ol>
+<li><strong>com.fasterxml.jackson</strong></li>
+<li>com.fasterxml.uuid</li>
+<li>com.fasterxml.woodstox</li>
+<li>…</li>
+</ol>
+<p>很显然，<strong>本专栏仅仅只会关注jackson工程</strong>，该工程便是该组织最出名且最最最为重要的部分。</p>
+<hr>
+<h2 id="官网介绍"><a href="#官网介绍" class="headerlink" title="官网介绍"></a>官网介绍</h2><p>了解一门新的技术，第一步应该就是看它的官网。上面已然解释了，<code>fasterxml</code>组织它把各工程的首页内容都托管在了github上，Jackson当然也不例外。<a href="https://github.com/FasterXML/jackson" target="_blank" rel="noopener">Jackson官网</a> 上对它自己有如下描述：</p>
+<p>Jackson旧称为：<strong>Java(或JVM平台)</strong>的标准JSON库，或者是Java的<strong>最佳JSON解析器</strong>，或者简称为“<strong>Java的JSON</strong>”</p>
+<blockquote>
+<p>从这名字就霸气外露了，NB得不行，足以见得它在JSON解析方面的地位和流行程度，当然主要是自信</p>
+</blockquote>
+<p><img data-src="https://img-blog.csdnimg.cn/20200707113820299.png#x200" alt=""></p>
+<p>更重要的是，Jackson是一套JVM平台的 <strong>数据处理（不限于JSON）</strong> 工具集：包括 <strong>一流的</strong> JSON解析器/ JSON生成器、数据绑定库(POJOs to and from JSON)；并且提供了相关模块来支持 Avro, BSON, CBOR, CSV, Smile, Properties, Protobuf, XML or YAML等数据格式，甚至还支持大数据格式模块的设置。</p>
+<hr>
+<h2 id="分支：1-x和2-x"><a href="#分支：1-x和2-x" class="headerlink" title="分支：1.x和2.x"></a>分支：1.x和2.x</h2><p>Jackson有两个主要的分支：</p>
+<ul>
+<li>1.x分支，处于维护模式，只发布bug修复版本（最近一次发布于Jul, 2013）</li>
+<li>2.x是正在开发的版本（持续更新升级中，2.0.0发布于Mar, 2012）</li>
+</ul>
+<p>注意：这两个主要版本使用<strong>不同的Java包名</strong>和Maven GAV，因此它们并不相互兼容，<strong>但可以和平共存</strong>。一个项目可以同时依赖于这两个版本是没有冲突的。这是经过设计而为之，选择这种策略是为了更顺利地从1.x进行迁移2. x</p>
+<blockquote>
+<p>说明：现在都2020年了，1.x可以毫不客气的说已经淘汰了（除了非常老的项目还在用），因此针对1.x版本本专栏不会有任何涉猎。</p>
+</blockquote>
+<hr>
+<h2 id="模块介绍"><a href="#模块介绍" class="headerlink" title="模块介绍"></a>模块介绍</h2><p>Jackson是个开源的、且开放的社区。下面列出的大多数项目/模块是由Jackson开发团队<strong>领导的</strong>，但也有一些来自Jackson社区的成员</p>
+<hr>
+<h3 id="三大核心模块"><a href="#三大核心模块" class="headerlink" title="三大核心模块"></a>三大核心模块</h3><p><strong>core module(核心模块) 是扩展模块构建的基础</strong>。Jackson目前有3个核心模块：</p>
+<blockquote>
+<p>说明：核心模块的groupId均为：<code>&lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;</code>，artifactId见下面各模块所示</p>
+</blockquote>
+<ul>
+<li>Streaming流处理模块(<code>jackson-core</code>)：定义底层处理流的API：JsonPaser和JsonGenerator等，并包含<strong>特定于json</strong>的实现。</li>
+<li>Annotations标准注解模块(<code>jackson-annotations</code>)：包含标准的Jackson注解</li>
+<li>Databind数据绑定模块(<code>jackson-databind</code>)：在streaming包上实现数据绑定(和对象序列化)支持；<strong>它依赖于上面的两个模块</strong>，也是Jackson的高层API(如ObjectMapper)所在的模块</li>
+</ul>
+<p>实际应用级开发中，我们只会使用到Databind数据绑定模块，so它是本系列重中之重。下面介绍那些举足轻重的<strong>第三方模块</strong>。</p>
+<hr>
+<h3 id="数据类型模块"><a href="#数据类型模块" class="headerlink" title="数据类型模块"></a>数据类型模块</h3><p>这些扩展是Jackson插件模块(通过<code>ObjectMapper.registerModule()</code>注册，下同)，并通过添加序列化器和反序列化器来对各种常用Java库数据类型的支持，以便<code>Jackson databind</code>包(<code>ObjectMapper / ObjectReader / ObjectWriter</code>)能够顺利读写/转换这些类型。</p>
+<p>第三方模块有些是Jackson官方人员直接lead和维护的（主流模块），也有些是纯社区行为。现在按照这两个分类分别介绍一下各个模块的作用：</p>
+<p><strong>官方直接维护：</strong></p>
+<blockquote>
+<p>说明：官方维护的这些数据类型模块的groupId统一为：<code>&lt;groupId&gt;com.fasterxml.jackson.datatype&lt;/groupId&gt;</code>，且版本号是和主版本号保持一致的</p>
+</blockquote>
+<ul>
+<li>标准集合数据类型模块：<ul>
+<li>Guava：支持Guava的集合数据类型</li>
+<li>HPPC：略</li>
+<li>PCollections：略 (Jackson 2.7新增的支持)</li>
+</ul>
+</li>
+<li>Hibernate：支持Hibernate的一些特性，如懒加载、proxy代理等</li>
+<li>Joda：支持Joda date/time的数据类型</li>
+<li>JDK7：对JDK7的支持（说明：2.7以后就无用了，以为2.7版本后最低的JDK版本要求是7）</li>
+<li>Java8：它分为如下三个子模块来支持Java8<ul>
+<li><code>jackson-module-parameter-names</code>：此模块能够访问构造函数和方法参数的名称，从而允许省略<code>@JsonProperty</code>（当然前提是你必须加了编译参数：<code>-parameters</code>）</li>
+<li><code>jackson-datatype-jsr310</code>：支持Java8新增的JSR310时间API</li>
+<li><code>jackson-datatype-jdk8</code>：除了Java8的时间API外其它的API的支持，如<code>Optional</code></li>
+</ul>
+</li>
+<li>JSR-353/org.json：略</li>
+</ul>
+<p><strong>非官方直接维护：</strong></p>
+<blockquote>
+<p>说明：非官方直接维护的这些模块groupId是不定的，每个模块可能都不一样，并且它们的版本号不会随着官方的主版本号一起走</p>
+</blockquote>
+<ul>
+<li>jackson-datatype-bolts：对 Yandex Bolts collection types 的支持</li>
+<li>jackson-datatype-commons-lang3：支持Apache Commons Lang v3里面的一些类型</li>
+<li>jackson-datatype-money：支持<code>javax.money</code></li>
+<li>jackson-datatype-json-lib：对久远的<code>json-lib</code>这个库的支持</li>
+<li>…</li>
+</ul>
+<hr>
+<h3 id="数据格式模块"><a href="#数据格式模块" class="headerlink" title="数据格式模块"></a>数据格式模块</h3><p>Data format modules(数据格式模块)提供对<strong>JSON之外</strong>的数据格式的支持。它们中的大多数只是实现streaming API抽象，以便数据绑定组件可以按原样使用。</p>
+<p><strong>官方直接维护：</strong></p>
+<blockquote>
+<p>说明：这些数据格式的模块的groupId均为<code>&lt;groupId&gt;com.fasterxml.jackson.dataformat&lt;/groupId&gt;</code>，且跟着主版本号走</p>
+</blockquote>
+<ul>
+<li>Avro/CBOR/Ion/Protobuf/Smile(binary JSON) ：这些均属于二进制的数据格式，它们的artifactId为：<code>&lt;artifactId&gt;jackson-dataformat-[FORMAT]&lt;/artifactId&gt;</code></li>
+<li>CSV/Properties/<strong>XML/YAML</strong>：这些格式熟悉吧，同样的支持到了这些常用的文本格式</li>
+</ul>
+<p><strong>非官方直接维护：</strong><br>因非官方直接维护的模块过于偏门，因此省略</p>
+<hr>
+<h3 id="JVM平台其它语言"><a href="#JVM平台其它语言" class="headerlink" title="JVM平台其它语言"></a>JVM平台其它语言</h3><p>官网有说，Jackson是一个<strong>JVM平台</strong>的解析器，因此语言层面不局限于Java本身，还涵盖了另外两大主流JVM语言：Kotlin和Scala</p>
+<blockquote>
+<p>说明：这块的groupId均为：<code>&lt;groupId&gt;com.fasterxml.jackson.module&lt;/groupId&gt;</code>，版本号跟着主版本号走</p>
+</blockquote>
+<ul>
+<li>jackson-module-kotlin：处理kotlin源生类型</li>
+<li>jackson-module-scala_[scala版本号]：处理scala源生类型</li>
+</ul>
+<hr>
+<h3 id="模式支持"><a href="#模式支持" class="headerlink" title="模式支持"></a>模式支持</h3><p>Jackson注解为POJO定义了预期的属性和预期的处理，除了Jackson本身将其用于读取/写入JSON和其他格式之外，它还允许生成<strong>外部模式</strong>。上面已讲述的数据格式扩展中包含了部分功能，但也仍还有许多独立的模式工具，如：</p>
+<ul>
+<li>Ant Task for JSON Schema Generation：使用Apache Ant时，使用Jackson库和扩展模块从Java类生成JSON</li>
+<li>jackson-json-schema-maven-plugin：maven插件，用于生成JSON</li>
+<li>…<blockquote>
+<p>说明：本部分因实际应用场景实在太少，为了不要混淆主要内容，此部分后面亦不会再提及</p>
+</blockquote>
+</li>
+</ul>
+<hr>
+<h3 id="Jackson-jr（用于移动端）"><a href="#Jackson-jr（用于移动端）" class="headerlink" title="Jackson jr（用于移动端）"></a>Jackson jr（用于移动端）</h3><p>虽然<code>Jackson databind</code>（如ObjectMapper）是通用数据绑定的良好选择，但它的<strong>占用空间（Jar包大小）</strong>和<strong>启动开销</strong>在某些领域可能存在问题：比如移动端，特别是对于轻量使用(读或写)。这种case下，完整的Jackson API是让人接受不了的。</p>
+<p>由于所有这些原因，Jackson官方决定创建一个<strong>更简单、更小</strong>的库：Jackson jr。它仍旧构建在Streaming API之上，但不依赖于databind和annotation。因此，它的大小(jar和运行时内存使用)要小得多，它的API非常紧凑，所以适合APP等移动端。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.fasterxml.jackson.jr<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jackson-jr-objects<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>它仅仅只依赖了<code>jackson-core</code>模块，所以体积上控制得非常的好。Jackson单单三大核心模块大小合计1700KB左右（320 + 70 + 1370）。而Jackson jr的体积控制在了95KB（就算加上core模块的320也不到500KB）。</p>
+<p>而对于开发Java后台的我们对内存并不敏感，简单易用、功能强大才是硬道理。因此<code>jackson-jr</code>只是在此处做个简单了解即可，本专栏后面也不会再提及。</p>
+<hr>
+<h2 id="漏洞报告"><a href="#漏洞报告" class="headerlink" title="漏洞报告"></a>漏洞报告</h2><p>Jackson虽然已经足够稳定并且安全了，但哪有圣人呢。针对它的相关漏洞报告，最近一次发生在<code>2019-07-23</code>：<a href="https://www.seebug.org/vuldb/ssvid-98029" target="_blank" rel="noopener">FasterXML jackson-databind 远程代码执行(CVE-2019-12384)</a><br>更多、更新的详细漏洞报告参考链接（持续更新中）：<a href="https://www.seebug.org/appdir/Jackson" target="_blank" rel="noopener">知道创宇Jackson漏洞报告</a></p>
+<hr>
+<h2 id="Java-JSON库比较"><a href="#Java-JSON库比较" class="headerlink" title="Java JSON库比较"></a>Java JSON库比较</h2><p>市面上的JSON库非常之多，综合一些Java人员的意见，关于使用哪个库，这里有一些现有的独立比较的链接供以你参考：</p>
+<ul>
+<li><a href="https://www.developer.com/lang/jscript/top-7-open-source-json-binding-providers-available-today.html" target="_blank" rel="noopener">Top 7 Open-Source JSON-binding providers</a></li>
+<li><a href="https://dzone.com/articles/be-lazy-productive-android" target="_blank" rel="noopener">Be a Lazy but a Productive Android Developer, Part 3: JSON Parsing Library</a></li>
+<li><a href="https://www.linkedin.com/groups/Can-anyone-recommend-good-Java-50472.S.226644043" target="_blank" rel="noopener">“Can anyone recommend a good Java JSON library” (Linked-In group)</a></li>
+<li><a href="http://thetarah.com/2012/09/21/which-json-library-should-i-use-in-my-android-and-java-projects/" target="_blank" rel="noopener">“Which JSON library to use on Android?”</a></li>
+</ul>
+<p>说明：此处贴出的几个参考链接均为官网给出的参考文章，均为国外较权威的文献。</p>
+<p>当然天朝的你可能更关心Jackson和Fastjson的对比，那暂先不用着急（虽然上文也比较过），这是本专栏后面的一道主菜，那里会详细道来。</p>
+<hr>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>本文结合官网认识了Jackson的全貌，用全面的视角整体上把握到了Jackson所提供的功能模块，这为专栏后续的讲解提供一个索引。</p>
+<p>从Jackson的<strong>升级之快、模块支持之多</strong>足矣看得见它社区的活跃。并且为了迎合市场它在<code>2.10</code>版本后还提供了商业支持的服务：与Tidelift公司合作，为用户构建应用程序的开源依赖项提供商业支持和维护。节省时间、降低风险和改善代码健康状况（商业支持是收费的）。</p>
+<p>相信通过本文你对Jackson有了个大概的了解，不出意外你应该是有兴趣去学它了的。当你深入研究后会发现它的<strong>设计之优雅，扩展性之强</strong>，不是一般国产类库所能比拟的。如果说Fastjson是一个优秀的JSON库，那么Jackson就是一个更优秀的JSON生态。</p>
+<hr>
+<p><strong>PS</strong>：这是作者第一个付费专栏，专栏费用本想设置为0.01元的，但CSDN官方有最低定价限制，希望各位同仁予以理解。本专栏我会用心去撰写，以确保能对得起您的这个付费。若您对本专栏有任何疑问，或者对Java非常感兴趣，均可以私信我 or 左边扫码加我好友，一起交流探讨，共同进步~</p>
+<hr>
+<p><strong>本专栏在CSDN付费，在公众号全部免费公开，欢迎你关注A哥的公众号【BAT的乌托邦】</strong></p>
+        <!-- ....这里是正文内容的底部（首页不会展示）... -->
+        <hr>
+<div class="yourbatman-footer">
+  <h2 id="关注A哥"><a href="关注A哥" class="headerlink" title="关注A哥"></a>关注A哥</h2>
+  <ul>
+    <li>原创不易，码字更不易。关注A哥的公众号【BAT的乌托邦】，开启有深度的专栏式学习，拒绝浅尝辄止</li>
+    <li><strong>专栏式学习，我们是认真的</strong>（关注公众号回复“知识星球”领券后再轻装入驻）</li>
+  </ul>
+
+  <div class="table-container">
+    <table>
+      <thead>
+      <tr>
+        <th align="left" style="width: 50%;">
+          <a class="fancybox fancybox.image" href="https://img-blog.csdnimg.cn/20200612225136939.png" target="_blank" itemscope="" itemtype="http://schema.org/ImageObject" itemprop="url" data-fancybox="default" rel="default noopener" title="A哥私人微信" data-caption="A哥私人微信"><img style="max-height: 200px" data-src="https://img-blog.csdnimg.cn/20200612225136939.png" alt="A哥私人微信" src="https://img-blog.csdnimg.cn/20200612225136939.png" data-loaded="true"><p class="image-caption">A哥私人微信</p></a>
+        </th>
+        <th align="left">
+          <a class="fancybox fancybox.image" href="https://img-blog.csdnimg.cn/20200613092818287.gif" target="_blank" itemscope="" itemtype="http://schema.org/ImageObject" itemprop="url" data-fancybox="default" rel="default noopener" title="A哥私人公众号" data-caption="A哥私人公众号"><img style="max-height: 200px" data-src="https://img-blog.csdnimg.cn/20200613092818287.gif" alt="A哥私人公众号" src="https://img-blog.csdnimg.cn/20200613092818287.gif" data-loaded="true"><p class="image-caption">A哥私人公众号</p></a>
+        </th>
+      </tr>
+      </thead>
+    </table>
+  </div>
+</div>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    
+    
+    
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-06-07T13:42:05+08:00"
-              content="2020-06-07">
-          06-07
-        </time>
+    <!-- 相关阅读（你可能还喜欢） -->
+      
+  <div class="popular-posts-header">你可能还喜欢：</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\x2y\221f1084.html" rel="bookmark">Fastjson到了说再见的时候了</a></div>
+    </li>
+  </ul>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-title">
+    <strong>本文标题： </strong>
+    《1. 初识Jackson -- 世界上最好的JSON库》
+  </li>
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>A哥(YourBatman)
+  </li>
+  <li class="post-copyright-date">
+    <strong>发布时间： </strong>2020-07-07 20:09:39
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://www.yourbatman.cn/x2y/dc384b1c.html" title="1. 初识Jackson -- 世界上最好的JSON库">https://www.yourbatman.cn/x2y/dc384b1c.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>许可协议： </strong>本站所有文章均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载：No！转发：Yes！
+  </li>
+</ul>
+</div>
+
+
+      <!-- 添加“本文结束”标记 -->
+      <div class="read-over" style="text-align: center;margin-top: 25px;color: rgba(234,16,61,.569);font-size: 16px">-------------您已触及底线 <i class="fa fa-paw"></i> 感谢阅读-------------</div>
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    请A哥喝水
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="https://img-blog.csdnimg.cn/20200612080128384.png" alt="A哥(YourBatman) 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="https://img-blog.csdnimg.cn/20200612080128343.png" alt="A哥(YourBatman) 支付宝">
+        <p>支付宝</p>
       </div>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/x2y/8d076785.html" itemprop="url">
-            <span itemprop="name">想用@Autowired注入static静态成员？官方不推荐你却还偏要这么做</span>
-          </a>
-      </div>
+  </div>
+</div>
 
-    </header>
-  </article>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-06-03T13:42:01+08:00"
-              content="2020-06-03">
-          06-03
-        </time>
-      </div>
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Jackson/" rel="tag"><i class="fa fa-tag"></i> Jackson</a>
+              <a href="/tags/Fastjson/" rel="tag"><i class="fa fa-tag"></i> Fastjson</a>
+              <a href="/tags/JSON%E5%BA%93/" rel="tag"><i class="fa fa-tag"></i> JSON库</a>
+          </div>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/x2y/fa005713.html" itemprop="url">
-            <span itemprop="name">static关键字有何魔法？竟让Spring Boot搞出那么多静态内部类</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-05-31T13:41:58+08:00"
-              content="2020-05-31">
-          05-31
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/x2y/6abf4a82.html" itemprop="url">
-            <span itemprop="name">static关键字真能提高Bean的优先级吗？答：真能</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
+        <!-- 导入投票模块 -->
+        
+  <!-- 投票功能 -->
+  <div class="post-widgets">
+    <div style="color: #ea778c;font-size: 14px;">(>兄台请留步，看完记得六星好评哦<)</div>
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
     </div>
   </div>
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/x2y/221f1084.html" rel="prev" title="Fastjson到了说再见的时候了">
+      <i class="fa fa-chevron-left"></i> Fastjson到了说再见的时候了
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
   
   
   
 
+    </div>
+  
+  
+  
   
 
 
 
           </div>
           
+    <div class="comments" id="valine-comments"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -355,6 +684,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一个工程仅需一个JSON库"><span class="nav-number">1.1.</span> <span class="nav-text">一个工程仅需一个JSON库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Jackson是世界最好的JSON库"><span class="nav-number">1.2.</span> <span class="nav-text">Jackson是世界最好的JSON库</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#正文"><span class="nav-number">2.</span> <span class="nav-text">正文</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#官网介绍"><span class="nav-number">2.1.</span> <span class="nav-text">官网介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分支：1-x和2-x"><span class="nav-number">2.2.</span> <span class="nav-text">分支：1.x和2.x</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模块介绍"><span class="nav-number">2.3.</span> <span class="nav-text">模块介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#三大核心模块"><span class="nav-number">2.3.1.</span> <span class="nav-text">三大核心模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据类型模块"><span class="nav-number">2.3.2.</span> <span class="nav-text">数据类型模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据格式模块"><span class="nav-number">2.3.3.</span> <span class="nav-text">数据格式模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JVM平台其它语言"><span class="nav-number">2.3.4.</span> <span class="nav-text">JVM平台其它语言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模式支持"><span class="nav-number">2.3.5.</span> <span class="nav-text">模式支持</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Jackson-jr（用于移动端）"><span class="nav-number">2.3.6.</span> <span class="nav-text">Jackson jr（用于移动端）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#漏洞报告"><span class="nav-number">2.4.</span> <span class="nav-text">漏洞报告</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java-JSON库比较"><span class="nav-number">2.5.</span> <span class="nav-text">Java JSON库比较</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
