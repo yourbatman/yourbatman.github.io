@@ -511,29 +511,59 @@
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>本文一如既往的很干哈。写本文的<strong>原动力</strong>是因为真的太多小伙伴在看Spring Boot自动配置类的时候，无法理解为毛它有些@Bean配置要单独写在一个<strong>static静态类</strong>里面，感觉挺费事；方法前直接价格static不香吗？通过<strong>这篇文章 + 上篇文章</strong>的解读，相信A哥已经给了你答案了。</p>
 <p>static关键字在Spring中使用的这个专栏，下篇将进入到可能是你<strong>更关心</strong>的一个话题：为毛static字段不能使用@Autowired注入的分析，下篇见~</p>
         <!-- ....这里是正文内容的底部（首页不会展示）... -->
-        <hr>
-<div class="yourbatman-footer">
-  <h2 id="关注A哥"><a href="关注A哥" class="headerlink" title="关注A哥"></a>关注A哥</h2>
-  <ul>
-    <li>原创不易，码字更不易。关注A哥的公众号【BAT的乌托邦】，开启有深度的专栏式学习，拒绝浅尝辄止</li>
-    <li><strong>专栏式学习，我们是认真的</strong>（关注公众号回复“知识星球”领券后再轻装入驻）</li>
-  </ul>
+        <style>
+.table-container img{
+    display: inherit;
+    margin-top: 5px;
+    margin-bottom: 0px;
+    margin-right: 10px;
+}
+</style>
+<hr>
+<h1 style="text-align: left;">关注A哥</h1>
 
-  <div class="table-container">
-    <table>
-      <thead>
-      <tr>
-        <th align="left" style="width: 50%;">
-          <a class="fancybox fancybox.image" href="https://img-blog.csdnimg.cn/20200612225136939.png" target="_blank" itemscope="" itemtype="http://schema.org/ImageObject" itemprop="url" data-fancybox="default" rel="default noopener" title="A哥私人微信" data-caption="A哥私人微信"><img style="max-height: 200px" data-src="https://img-blog.csdnimg.cn/20200612225136939.png" alt="A哥私人微信" src="https://img-blog.csdnimg.cn/20200612225136939.png" data-loaded="true"><p class="image-caption">A哥私人微信</p></a>
-        </th>
-        <th align="left">
-          <a class="fancybox fancybox.image" href="https://img-blog.csdnimg.cn/20200613092818287.gif" target="_blank" itemscope="" itemtype="http://schema.org/ImageObject" itemprop="url" data-fancybox="default" rel="default noopener" title="A哥私人公众号" data-caption="A哥私人公众号"><img style="max-height: 200px" data-src="https://img-blog.csdnimg.cn/20200613092818287.gif" alt="A哥私人公众号" src="https://img-blog.csdnimg.cn/20200613092818287.gif" data-loaded="true"><p class="image-caption">A哥私人公众号</p></a>
-        </th>
-      </tr>
-      </thead>
-    </table>
-  </div>
-</div>
+<div><table>
+<thead>
+<tr>
+<th>Author</th>
+<th>A哥(YourBatman)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>个人站点</td>
+<td><a href="https://www.yourbatman.cn" rel="nofollow" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc">www.yourbatman.cn</a></td>
+</tr>
+<tr>
+<td>E-mail</td>
+<td>yourbatman@qq.com</td>
+</tr>
+<tr>
+<td><strong>微 信</strong></td>
+<td><a href="https://www.yourbatman.cn/images/wechat.png" rel="nofollow" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc">fsx641385712</a></td>
+</tr>
+<tr>
+<td><strong><code>活跃平台</code></strong></td>
+<td><a href="https://www.yourbatman.cn" rel="nofollow" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/2020071015182276.png" alt=""></a> <a href="https://fangshixiang.blog.csdn.net/" target="_blank" rel="nofollow noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/20200710151913394.png" alt=""></a><a href="https://yourbatman.cnblogs.com" target="_blank" rel="nofollow noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/20200710151929355.png" alt=""></a><a href="https://juejin.im/user/5b44d178f265da0fa1220efe/posts" target="_blank" rel="nofollow noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/20200710151938937.png" alt=""></a><a href="https://www.zhihu.com/people/fangshixiang/posts" target="_blank" rel="nofollow noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/20200710151950629.png" alt=""></a><a href="https://www.jianshu.com/u/8740f1fdd684" target="_blank" rel="nofollow noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/20200710152000530.png" alt=""></a><a href="https://segmentfault.com/u/yourbatman/articles" target="_blank" rel="nofollow noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/20200710152008726.png" alt=""></a><a href="https://github.com/yourbatman" target="_blank" rel="noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/20200710152015895.png" alt=""></a></td>
+</tr>
+<tr>
+<td><strong>公众号</strong></td>
+<td><a href="https://www.yourbatman.cn/images/wechat_channel.jpg" rel="nofollow" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc">BAT的乌托邦（ID：BAT-utopia）</a></td>
+</tr>
+<tr>
+<td>知识星球</td>
+<td><a href="https://t.zsxq.com/nQBi66I" target="_blank" rel="nofollow noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc">BAT的乌托邦</a></td>
+</tr>
+<tr>
+<td>每日文章推荐</td>
+<td><a href="https://github.com/yourbatman/reading/issues" target="_blank" rel="noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc">每日文章推荐</a></td>
+</tr>
+</tbody>
+</table></div>
+
+<p>
+<img src="https://img-blog.csdnimg.cn/20200710160552549.gif" alt="BAT的乌托邦">
+</p>
 
     </div>
 
@@ -618,8 +648,8 @@
           
           <div class="post-tags">
               <a href="/tags/Spring-Framework/" rel="tag"><i class="fa fa-tag"></i> Spring Framework</a>
-              <a href="/tags/static/" rel="tag"><i class="fa fa-tag"></i> static</a>
               <a href="/tags/Spring-Boot/" rel="tag"><i class="fa fa-tag"></i> Spring Boot</a>
+              <a href="/tags/static/" rel="tag"><i class="fa fa-tag"></i> static</a>
           </div>
 
         <!-- 导入投票模块 -->
