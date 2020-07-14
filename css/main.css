@@ -1334,7 +1334,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #c75caa;
+  background: #ddb9ff;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -1836,6 +1836,20 @@ pre .javascript .function {
   .post-body {
     text-align: justify;
   }
+}
+.post-body h1 {
+  font-size: 18pt;
+  font-weight: 700;
+  margin-top: 20px;
+  text-align: left;
+  background: #3d97cb;
+  border-radius: 6px 6px 6px 6px;
+  box-shadow: 0 0 0 1px #5f5a4b, 1px 1px 6px 1px rgba(10,10,0,0.5);
+  color: #fff;
+  line-height: 25px;
+  margin: 15px 0 !important;
+  padding: 5px 0 5px 20px;
+  text-shadow: 2px 2px 3px #222;
 }
 .post-body h1,
 .post-body h2,
