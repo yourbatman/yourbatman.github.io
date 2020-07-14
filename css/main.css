@@ -1334,7 +1334,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #ddb9ff;
+  background: #ffe7ff;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2977,7 +2977,7 @@ content-wrap strong {
 }
 /* 代码块的样式 */
 .highlight-container {
-  box-shadow: 18px 18px 15px 0 rgba(0,0,0,0.4);
+  box-shadow: 5px 5px 5px 0 rgba(0,0,0,0.4);
 }
 /* > 注释的颜色 */
 blockquote {
