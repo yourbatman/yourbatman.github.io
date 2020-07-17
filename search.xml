@@ -172,6 +172,204 @@
       </tags>
   </entry>
   <entry>
+    <title>2. 妈呀，Jackson原来是这样写JSON的</title>
+    <url>/x2y/cf41a8ab.html</url>
+    <content><![CDATA[<blockquote>
+<p>没有人永远18岁，但永远有人18岁。本文已被 <a href="https://www.yourbatman.cn"><strong>https://www.yourbatman.cn</strong></a> 收录，里面一并有Spring技术栈、MyBatis、JVM、中间件等小而美的<strong>专栏</strong>供以免费学习。关注公众号【<strong>BAT的乌托邦</strong>】逐个击破，深入掌握，拒绝浅尝辄止。</p>
+</blockquote>
+<p><img data-src="https://img-blog.csdnimg.cn/20200717122214583.png" alt=""></p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>各位好，我是A哥(YourBatman)。<a href="https://mp.weixin.qq.com/s/iqSN4HUoIdX0kGcSdnD7EA" target="_blank" rel="noopener">上篇文章</a> 整体介绍了世界上最好的JSON库 – Jackson，对它有了整体了解：知晓了它是个生态，其它的仅是个JSON库而已。</p>
+<blockquote>
+<p>有人说Jackson小众？那么请先看看上篇文章吧。学Jackson性价比特别高，因为它使用广泛、会的人少，因此在团队内如果你能精通，附加价值的效应就会非常明显了…</p>
+</blockquote>
+<p>我挠头想了想，本系列来不了虚的，只能肝。本系列教程不仅仅教授基本使用，目标是搞完后能够解决日常99.99%的问题，毕竟每个小团队都最好能有某些方面的小专家，毕竟大家都不乏遇见过一个技术问题卡一天的情况。<strong>只有从底层把握，方能游刃有余</strong>。<br><img data-src="https://img-blog.csdnimg.cn/20200715180628489.png" alt=""></p>
+<p>命名为core的模块一般都不简单，<code>jackson-core</code>自然也不例外。它是三大核心模块之一，并且是<strong>核心中的核心</strong>，提供了对JSON数据的<strong>完整支持</strong>（包括各种读、写）。它是三者中最强大的模块，具有<strong>最低的</strong>开销和<strong>最快的</strong>读/写操作。 </p>
+<p>此模块提供了<strong>最具底层</strong>的Streaming JSON解析器/生成器，这组流式API属于Low-Level API，具有非常显著的特点：</p>
+<ul>
+<li>开销小，损耗小，性能极高</li>
+<li>因为是Low-Level API，所以灵活度极高</li>
+<li>又因为是Low-Level API，所以易错性高，可读性差</li>
+</ul>
+<p><strong>jackson-core</strong>模块提供了两种处理JSON的方式（纵缆整个Jackson共三种）：</p>
+<ol>
+<li>流式API：读取并将JSON内容写入作为离散事件 -&gt; <code>JsonParser</code>读取数据，而<code>JsonGenerator</code>负责写入数据</li>
+<li>树模型：JSON文件在内存里以树形式表示。此种方式也很灵活，它类似于XML的DOM解析，层层嵌套的</li>
+</ol>
+<p>作为“底层”技术，应用级开发中确实接触不多。为了引起你的重视，提前预告一下：<code>Spring MVC</code>对JSON消息的转换器<code>AbstractJackson2HttpMessageConverter</code>它就用到了底层流式API -&gt; JsonGenerator写数据。想不想拿下Spring呢？我想你的答案应该是Yes吧~<br><img data-src="https://img-blog.csdnimg.cn/20200715182507991.png" alt=""></p>
+<p>相信做<strong>难事必有所得</strong>，你我他都会用的技术、都能解决的问题，那绝成不了你的核心竞争力，自然在团队内就难成发光体。</p>
+<h2 id="版本约定"><a href="#版本约定" class="headerlink" title="版本约定"></a>版本约定</h2><p>原则：均选当前最新版本（忽略小版本）</p>
+<ul>
+<li>Jackson版本：<code>2.11.0</code></li>
+<li>Spring Framework版本：<code>5.2.6.RELEASE</code></li>
+<li>Spring Boot版本：<code>2.3.0.RELEASE</code><ul>
+<li>内置的Jackson和Spring版本均和👆保持一致，避免了版本交叉</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>说明：类似2.11.0和2.11.x这种小版本号的差异，你权可认为没有区别</p>
+</blockquote>
+<h2 id="工程结构"><a href="#工程结构" class="headerlink" title="工程结构"></a>工程结构</h2><p>鉴于是首次展示工程示例代码，将基本结构展示如下：<br><img data-src="https://img-blog.csdnimg.cn/20200716114814949.png" alt=""><br><img data-src="https://img-blog.csdnimg.cn/20200716114929650.png" alt=""></p>
+<blockquote>
+<p>全部源码地址在本系列的<strong>最后一篇</strong>文章中会全部公示出来</p>
+</blockquote>
+<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><p>Jackson提供了一种对性能有极致要求的方式：流式API。它用于对性能有极致要求的场景，这个时候就可以使用此种方式来对JSON进行读写。</p>
+<h2 id="概念解释：流式、增量模式、JsonToken"><a href="#概念解释：流式、增量模式、JsonToken" class="headerlink" title="概念解释：流式、增量模式、JsonToken"></a>概念解释：流式、增量模式、JsonToken</h2><ul>
+<li>流式（Streaming）：此概念和Java8中的Stream流是不同的。这里指的是<strong>IO流</strong>，因此具有最低的开销和最快的读/写操作（记得关流哦）</li>
+<li>增量模式（incremental mode）：它表示每个部分一个一个地往上增加，类似于垒砖。使用此流式API读写JSON的方式使用的<strong>均是增量模式</strong></li>
+<li>JsonToken：每一部分都是一个独立的Token（有不同类型的Token），最终被“拼凑”起来就是一个JSON。这是流式API里很重要的一个抽象概念。</li>
+</ul>
+<blockquote>
+<p>关于增量模式和Token概念，在Spirng的<strong>SpEL</strong>表达式中也有同样的概念，这在Spring相关专栏里你将会再次体会到</p>
+</blockquote>
+<p><img data-src="https://img-blog.csdnimg.cn/20200715184404566.png" alt=""><br>本文将看看它是如何写JSON数据的，也就是<code>JsonGenerator</code>。</p>
+<h2 id="JsonGenerator使用Demo"><a href="#JsonGenerator使用Demo" class="headerlink" title="JsonGenerator使用Demo"></a>JsonGenerator使用Demo</h2><p><code>JsonGenerator</code>定义用于编写JSON内容的公共API的基类（抽象类）。实例使用的工厂方法创建，也就是<code>JsonFactory</code>。</p>
+<blockquote>
+<p>小贴士：纵观整个Jackson，它更多的是使用抽象类而非接口，这是它的一大“特色”。因此你熟悉的面向接口编程，到这都要转变为面向抽象类编程喽。</p>
+</blockquote>
+<p>话不多说，先来一个Demo感受一把：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test1</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    JsonFactory factory = <span class="keyword">new</span> JsonFactory();</span><br><span class="line">    <span class="comment">// 本处只需演示，向控制台写（当然你可以向文件等任意地方写都是可以的）</span></span><br><span class="line">    JsonGenerator jsonGenerator = factory.createGenerator(System.out, JsonEncoding.UTF8);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        jsonGenerator.writeStartObject(); <span class="comment">//开始写，也就是这个符号 &#123;</span></span><br><span class="line"></span><br><span class="line">        jsonGenerator.writeStringField(<span class="string">"name"</span>, <span class="string">"YourBatman"</span>);</span><br><span class="line">        jsonGenerator.writeNumberField(<span class="string">"age"</span>, <span class="number">18</span>);</span><br><span class="line"></span><br><span class="line">        jsonGenerator.writeEndObject(); <span class="comment">//结束写，也就是这个符号 &#125;</span></span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        jsonGenerator.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>因为JsonGenerator实现了<code>AutoCloseable</code>接口，因此可以使用<code>try-with-resources</code>优雅关闭资源（这也是推荐的使用方式），代码改造如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test1</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    JsonFactory factory = <span class="keyword">new</span> JsonFactory();</span><br><span class="line">    <span class="comment">// 本处只需演示，向控制台写（当然你可以向文件等任意地方写都是可以的）</span></span><br><span class="line">    <span class="keyword">try</span> (JsonGenerator jsonGenerator = factory.createGenerator(System.out, JsonEncoding.UTF8)) &#123;</span><br><span class="line">        jsonGenerator.writeStartObject(); <span class="comment">//开始写，也就是这个符号 &#123;</span></span><br><span class="line"></span><br><span class="line">        jsonGenerator.writeStringField(<span class="string">"name"</span>, <span class="string">"YourBatman"</span>);</span><br><span class="line">        jsonGenerator.writeNumberField(<span class="string">"age"</span>, <span class="number">18</span>);</span><br><span class="line"></span><br><span class="line">        jsonGenerator.writeEndObject(); <span class="comment">//结束写，也就是这个符号 &#125;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，<strong>控制台</strong>输出：</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;<span class="attr">"name"</span>:<span class="string">"YourBatman"</span>,<span class="attr">"age"</span>:<span class="number">18</span>&#125;</span><br></pre></td></tr></table></figure>
+<p>这是最简使用示例，这也就是所谓的<strong>序列化</strong>底层实现，从示例中对<strong>增量模式</strong>能够有所感受吧。</p>
+<p>纯手动档有木有，灵活性和性能极高，但易出错。这就像头文字D的赛车一样，先要速度、高性能、灵活性，那必须上手动档。<br><img data-src="https://img-blog.csdnimg.cn/2020071612110129.png" alt=""></p>
+<h2 id="JsonGenerator详细介绍"><a href="#JsonGenerator详细介绍" class="headerlink" title="JsonGenerator详细介绍"></a>JsonGenerator详细介绍</h2><p>JsonGenerator是个抽象类，它的继承体系如下：<br><img data-src="https://img-blog.csdnimg.cn/20200716122204956.png" alt=""></p>
+<ul>
+<li><code>WriterBasedJsonGenerator</code>：基于java.io.Writer处理字符编码（话外音：使用Writer输出JSON）<ul>
+<li>因为UTF-8编码基本标准化了，因此Jackson内部也提供了<code>SegmentedStringWriter/UTF8Writer</code>来简化操作</li>
+</ul>
+</li>
+<li><code>UTF8JsonGenerator</code>：基于OutputStream + UTF-8处理字符编码（话外音：明确指定了使用UTF-8编码把字节变为字符）</li>
+</ul>
+<p>默认情况下（不指定编码），Jackson默认会使用UTF-8进行编码，也就是说会使用<code>UTF8JsonGenerator</code>作为实际的JSON生成器实现类，具体逻辑将在讲述<code>JsonFactory</code>章节中有所体现，敬请关注。</p>
+<p>值得注意的是，抽象基类<code>JsonGenerator</code>它只负责JSON的生成，至于把生成好的JSON写到哪里去它并不关心。比如示例中我给写到了控制台，当然你也可以写到文件、写到网络等等。</p>
+<blockquote>
+<p>Spring MVC中的JSON消息转换器就是向<code>HttpOutputMessage</code>（网络输出流）里写JSON数据</p>
+</blockquote>
+<h3 id="关键API"><a href="#关键API" class="headerlink" title="关键API"></a>关键API</h3><p><code>JsonGenerator</code>虽然仅是抽象基类，但Jackson它建议我们使用<code>JsonFactory</code>工厂来创建其实例，并不需要使用者去关心其底层实现类，因此我们仅需要<strong>面向此抽象类编程</strong>即可，此为对使用者非常友好的设计。</p>
+<p>对于JSON生成器来说，写方法自然是它的灵魂所在。众所周知，JSON属于K-V数据结构，因此针对于一个JSON来说，每一段都k额分为<strong>写key</strong>和<strong>写value</strong>两大阶段。<br><img data-src="https://img-blog.csdnimg.cn/20200717135546876.png" alt=""></p>
+<h3 id="写JSON-Key"><a href="#写JSON-Key" class="headerlink" title="写JSON Key"></a>写JSON Key</h3><p>JsonGenerator一共提供了3个方法用于写JSON的key：<br><img data-src="https://img-blog.csdnimg.cn/20200716150405123.png" alt=""></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test2</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    JsonFactory factory = <span class="keyword">new</span> JsonFactory();</span><br><span class="line">    <span class="keyword">try</span> (JsonGenerator jsonGenerator = factory.createGenerator(System.out, JsonEncoding.UTF8)) &#123;</span><br><span class="line">        jsonGenerator.writeStartObject();</span><br><span class="line"></span><br><span class="line">        jsonGenerator.writeFieldName(<span class="string">"zhName"</span>);</span><br><span class="line"></span><br><span class="line">        jsonGenerator.writeEndObject();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，输出：</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;<span class="attr">"zhName"</span>&#125;</span><br></pre></td></tr></table></figure>
+<p>可以发现，<strong>key可以独立存在（无需value）</strong>，但value是不能独立存在的哦，下面你会看到效果。而3个方法中的<strong>其它2个方法</strong>：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">writeFieldName</span><span class="params">(SerializableString name)</span> <span class="keyword">throws</span> IOException</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">writeFieldId</span><span class="params">(<span class="keyword">long</span> id)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    writeFieldName(Long.toString(id));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这两个方法，你可以忘了吧，记住<code>writeFieldName()</code>就足够了。</p>
+<p>总的来说，写JSON的key非常简单的，这得益于JSON的key有且仅可能是String类型，所以情况单一。下面继续了解较为复杂的写Value的情况。</p>
+<h3 id="写JSON-Value"><a href="#写JSON-Value" class="headerlink" title="写JSON Value"></a>写JSON Value</h3><p>我们知道在Java中数据存在的形式（类型）非常之多，比如String、int、Reader、char[]…，而在JSON中<strong>值的类型</strong>只能是如下形式：</p>
+<ul>
+<li>字符串（如<code>{ &quot;name&quot;:&quot;YourBatman&quot; }</code>）</li>
+<li>数字（如<code>{ &quot;age&quot;:18 }</code>）</li>
+<li>对象（JSON 对象）（如<code>{ &quot;person&quot;:{ &quot;name&quot;:&quot;YourBatman&quot;, &quot;age&quot;:18}}</code>）</li>
+<li>数组（如<code>{&quot;names&quot;:[ &quot;YourBatman&quot;, &quot;A哥&quot; ]}</code>）</li>
+<li>布尔（如<code>{ &quot;success&quot;:true }</code>）</li>
+<li>null（如：<code>{ &quot;name&quot;:null }</code>）</li>
+</ul>
+<blockquote>
+<p>小贴士：像数组、对象等这些“高级”类型可以互相无限嵌套</p>
+</blockquote>
+<p>很明显，Java中的数据类型和JSON中的值类型并不是一一对应的关系，那么这就需要<code>JsonGenerator</code>在写入时起到一个桥梁（适配）作用：<br><img data-src="https://img-blog.csdnimg.cn/20200716143504786.png" alt=""><br>下面针对不同的Value类型分别作出API讲解，给出示例说明。在此之前，请先记住两个结论，会更有利于你理解示例：</p>
+<ul>
+<li>JSON的顺序，和你write的顺序保持一致</li>
+<li>写任何类型的Value之前请记得先write写key，否则可能无效</li>
+</ul>
+<h4 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h4><p><img data-src="https://img-blog.csdnimg.cn/20200716141127952.png" alt=""><br>可把Java中的String类型、Reader类型、char[]字符数组类型等等写为JSON的字符串形式。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test3</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    JsonFactory factory = <span class="keyword">new</span> JsonFactory();</span><br><span class="line">    <span class="keyword">try</span> (JsonGenerator jsonGenerator = factory.createGenerator(System.out, JsonEncoding.UTF8)) &#123;</span><br><span class="line">        jsonGenerator.writeStartObject();</span><br><span class="line"></span><br><span class="line">        jsonGenerator.writeFieldName(<span class="string">"zhName"</span>);</span><br><span class="line">        jsonGenerator.writeString(<span class="string">"A哥"</span>);</span><br><span class="line"></span><br><span class="line">        jsonGenerator.writeFieldName(<span class="string">"enName"</span>);</span><br><span class="line">        jsonGenerator.writeString(<span class="string">"YourBatman"</span>);</span><br><span class="line"></span><br><span class="line">        jsonGenerator.writeEndObject();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，输出：</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;<span class="attr">"zhName"</span>:<span class="string">"A哥"</span>,<span class="attr">"enName"</span>:<span class="string">"YourBatman"</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="数字"><a href="#数字" class="headerlink" title="数字"></a>数字</h4><p><img data-src="https://img-blog.csdnimg.cn/20200716143851555.png" alt=""><br>参考上例，不解释。</p>
+<h4 id="对象（JSON-对象）"><a href="#对象（JSON-对象）" class="headerlink" title="对象（JSON 对象）"></a>对象（JSON 对象）</h4><p><img data-src="https://img-blog.csdnimg.cn/20200716151833420.png" alt=""></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test4</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    JsonFactory factory = <span class="keyword">new</span> JsonFactory();</span><br><span class="line">    <span class="keyword">try</span> (JsonGenerator jsonGenerator = factory.createGenerator(System.out, JsonEncoding.UTF8)) &#123;</span><br><span class="line">        jsonGenerator.writeStartObject();</span><br><span class="line"></span><br><span class="line">        jsonGenerator.writeFieldName(<span class="string">"zhName"</span>);</span><br><span class="line">        jsonGenerator.writeString(<span class="string">"A哥"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 写对象（记得先写key 否则无效）</span></span><br><span class="line">        jsonGenerator.writeFieldName(<span class="string">"person"</span>);</span><br><span class="line">        jsonGenerator.writeStartObject();</span><br><span class="line">        jsonGenerator.writeFieldName(<span class="string">"enName"</span>);</span><br><span class="line">        jsonGenerator.writeString(<span class="string">"YourBatman"</span>);</span><br><span class="line">        jsonGenerator.writeFieldName(<span class="string">"age"</span>);</span><br><span class="line">        jsonGenerator.writeNumber(<span class="number">18</span>);</span><br><span class="line">        jsonGenerator.writeEndObject();</span><br><span class="line"></span><br><span class="line">        jsonGenerator.writeEndObject();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，输出：</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;<span class="attr">"zhName"</span>:<span class="string">"A哥"</span>,<span class="attr">"person"</span>:&#123;<span class="attr">"enName"</span>:<span class="string">"YourBatman"</span>,<span class="attr">"age"</span>:<span class="number">18</span>&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>对象属于一个比较特殊的value值类型，可以实现各种嵌套。也就是我们平时所说的JSON套JSON</p>
+</blockquote>
+<h4 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h4><p>写数组和写对象有点类似，也会有先start再end的闭环思路。<br><img data-src="https://img-blog.csdnimg.cn/2020071615422269.png" alt=""><br>如何向数组里写入Value值？我们知道JSON数组里可以装任何数据类型，因此往里写值的方法都可使用，形如这样：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test5</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    JsonFactory factory = <span class="keyword">new</span> JsonFactory();</span><br><span class="line">    <span class="keyword">try</span> (JsonGenerator jsonGenerator = factory.createGenerator(System.out, JsonEncoding.UTF8)) &#123;</span><br><span class="line">        jsonGenerator.writeStartObject();</span><br><span class="line"></span><br><span class="line">        jsonGenerator.writeFieldName(<span class="string">"zhName"</span>);</span><br><span class="line">        jsonGenerator.writeString(<span class="string">"A哥"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 写数组（记得先写key 否则无效）</span></span><br><span class="line">        jsonGenerator.writeFieldName(<span class="string">"objects"</span>);</span><br><span class="line">        jsonGenerator.writeStartArray();</span><br><span class="line">        <span class="comment">// 1、写字符串</span></span><br><span class="line">        jsonGenerator.writeString(<span class="string">"YourBatman"</span>);</span><br><span class="line">        <span class="comment">// 2、写对象</span></span><br><span class="line">        jsonGenerator.writeStartObject();</span><br><span class="line">        jsonGenerator.writeStringField(<span class="string">"enName"</span>, <span class="string">"YourBatman"</span>);</span><br><span class="line">        jsonGenerator.writeEndObject();</span><br><span class="line">        <span class="comment">// 3、写数字</span></span><br><span class="line">        jsonGenerator.writeNumber(<span class="number">18</span>);</span><br><span class="line">        jsonGenerator.writeEndArray();</span><br><span class="line"></span><br><span class="line">        jsonGenerator.writeEndObject();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，输出：</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;<span class="attr">"zhName"</span>:<span class="string">"A哥"</span>,<span class="attr">"objects"</span>:[<span class="string">"YourBatman"</span>,&#123;<span class="attr">"enName"</span>:<span class="string">"YourBatman"</span>&#125;,<span class="number">18</span>]&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>理论上JSON数组里的每个元素可以是不同类型，但<strong>原则上</strong>请确保是同一类型哦</p>
+</blockquote>
+<p>对于JSON数组类型，很多时候里面装载的是数字或者普通字符串类型，因此<code>JsonGenerator</code>也很暖心的为此提供了专用方法（可以调用该方法来一次性便捷的写入单个数组）：<br><img data-src="https://img-blog.csdnimg.cn/20200716154341562.png" alt=""></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test6</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    JsonFactory factory = <span class="keyword">new</span> JsonFactory();</span><br><span class="line">    <span class="keyword">try</span> (JsonGenerator jsonGenerator = factory.createGenerator(System.out, JsonEncoding.UTF8)) &#123;</span><br><span class="line">        jsonGenerator.writeStartObject();</span><br><span class="line"></span><br><span class="line">        jsonGenerator.writeFieldName(<span class="string">"zhName"</span>);</span><br><span class="line">        jsonGenerator.writeString(<span class="string">"A哥"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 快捷写入数组（从第index = 2位开始，取3个）</span></span><br><span class="line">        jsonGenerator.writeFieldName(<span class="string">"values"</span>);</span><br><span class="line">        jsonGenerator.writeArray(<span class="keyword">new</span> <span class="keyword">int</span>[]&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>&#125;, <span class="number">2</span>, <span class="number">3</span>);</span><br><span class="line"></span><br><span class="line">        jsonGenerator.writeEndObject();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，输出：</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;<span class="attr">"zhName"</span>:<span class="string">"A哥"</span>,<span class="attr">"values"</span>:[<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="布尔和null"><a href="#布尔和null" class="headerlink" title="布尔和null"></a>布尔和null</h4><p>比较简单，JsonGenerator各提供了一个方法供你使用：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">writeBoolean</span><span class="params">(<span class="keyword">boolean</span> state)</span> <span class="keyword">throws</span> IOException</span>;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">writeNull</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span>;</span><br></pre></td></tr></table></figure>
+<p>示例代码：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test7</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    JsonFactory factory = <span class="keyword">new</span> JsonFactory();</span><br><span class="line">    <span class="keyword">try</span> (JsonGenerator jsonGenerator = factory.createGenerator(System.out, JsonEncoding.UTF8)) &#123;</span><br><span class="line">        jsonGenerator.writeStartObject();</span><br><span class="line"></span><br><span class="line">        jsonGenerator.writeFieldName(<span class="string">"success"</span>);</span><br><span class="line">        jsonGenerator.writeBoolean(<span class="keyword">true</span>);</span><br><span class="line">        jsonGenerator.writeFieldName(<span class="string">"myName"</span>);</span><br><span class="line">        jsonGenerator.writeNull();</span><br><span class="line"></span><br><span class="line">        jsonGenerator.writeEndObject();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，输出：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">&#123;<span class="string">"success"</span>:<span class="keyword">true</span>,<span class="string">"myName"</span>:<span class="keyword">null</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="组合写JSON-Key和Value"><a href="#组合写JSON-Key和Value" class="headerlink" title="组合写JSON Key和Value"></a>组合写JSON Key和Value</h3><p>在写每个value之前，都必须写key。为了<strong>简化书写</strong>，JsonGenerator提供了二合一的组合方法，一个顶两：<br><img data-src="https://img-blog.csdnimg.cn/20200716161328124.png" alt=""></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test8</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    JsonFactory factory = <span class="keyword">new</span> JsonFactory();</span><br><span class="line">    <span class="keyword">try</span> (JsonGenerator jsonGenerator = factory.createGenerator(System.out, JsonEncoding.UTF8)) &#123;</span><br><span class="line">        jsonGenerator.writeStartObject();</span><br><span class="line"></span><br><span class="line">        jsonGenerator.writeStringField(<span class="string">"zhName"</span>,<span class="string">"A哥"</span>);</span><br><span class="line">        jsonGenerator.writeBooleanField(<span class="string">"success"</span>,<span class="keyword">true</span>);</span><br><span class="line">        jsonGenerator.writeNullField(<span class="string">"myName"</span>);</span><br><span class="line">        <span class="comment">// jsonGenerator.writeObjectFieldStart();</span></span><br><span class="line">        <span class="comment">// jsonGenerator.writeArrayFieldStart();</span></span><br><span class="line"></span><br><span class="line">        jsonGenerator.writeEndObject();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，输出：</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;<span class="attr">"zhName"</span>:<span class="string">"A哥"</span>,<span class="attr">"success"</span>:<span class="literal">true</span>,<span class="attr">"myName"</span>:<span class="literal">null</span>&#125;</span><br></pre></td></tr></table></figure>
+<p>实际使用时，<strong>推荐使用这些组合方法</strong>去简化书写，毕竟新盖中盖高钙片，一片能顶过去2片，效率高。<br><img data-src="https://img-blog.csdnimg.cn/20200716161708643.png" alt=""></p>
+<h3 id="其它写方法"><a href="#其它写方法" class="headerlink" title="其它写方法"></a>其它写方法</h3><p>如果说上面写方法是必修课，那下面的write写方法就当选修课吧。</p>
+<p><strong>writeRaw()和writeRawValue()</strong>：<br><img data-src="https://img-blog.csdnimg.cn/2020071616500318.png" alt=""><br>该方法将强制生成器<strong>不做任何修改</strong>地逐字复制输入文本（包括不进行转义，也不添加分隔符，即使上下文[array，object]可能需要这样做）。如果需要这样的分隔符，请改用writeRawValue方法。</p>
+<blockquote>
+<p>绝大多数情况下，使用writeRaw()就够了，writeRawValue的使用场景愈发的少</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test9</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    JsonFactory factory = <span class="keyword">new</span> JsonFactory();</span><br><span class="line">    <span class="keyword">try</span> (JsonGenerator jsonGenerator = factory.createGenerator(System.out, JsonEncoding.UTF8)) &#123;</span><br><span class="line">        jsonGenerator.writeRaw(<span class="string">"&#123;'name':'YourBatman'&#125;"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，输出：</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&#123;'name':'YourBatman'&#125;</span><br></pre></td></tr></table></figure>
+<p>如果换成<code>writeString()</code>方法，结果为（请注意比较差异）：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="string">"&#123;'name':'YourBatman'&#125;"</span></span><br></pre></td></tr></table></figure>
+
+
+<p><strong>writeBinary()</strong>：<br><img data-src="https://img-blog.csdnimg.cn/20200716165057929.png" alt=""><br>使用Base64编码把数据写进去。</p>
+<p><strong>writeEmbeddedObject()</strong>：<br>2.8版本新增的方法。看看此方法的源码你就知道它是什么意思，不解释：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">writeEmbeddedObject</span><span class="params">(Object object)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    <span class="comment">// 01-Sep-2016, tatu: As per [core#318], handle small number of cases</span></span><br><span class="line">    <span class="keyword">if</span> (object == <span class="keyword">null</span>) &#123;</span><br><span class="line">        writeNull();</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (object <span class="keyword">instanceof</span> <span class="keyword">byte</span>[]) &#123;</span><br><span class="line">        writeBinary((<span class="keyword">byte</span>[]) object);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> JsonGenerationException(...);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>writeObject()</strong>（重要）：<br>写POJO，但前提是你必须给<code>JsonGenerator</code>指定一个<code>ObjectCodec</code>解码器才能正常work，否则抛出异常：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">java.lang.IllegalStateException: No ObjectCodec defined <span class="keyword">for</span> the generator, <span class="function">can only serialize simple wrapper <span class="title">types</span> <span class="params">(type passed cn.yourbatman.jackson.core.beans.User)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">	at com.fasterxml.jackson.core.JsonGenerator.<span class="title">_writeSimpleObject</span><span class="params">(JsonGenerator.java:<span class="number">2238</span>)</span></span></span><br><span class="line"><span class="function">	at com.fasterxml.jackson.core.base.GeneratorBase.<span class="title">writeObject</span><span class="params">(GeneratorBase.java:<span class="number">391</span>)</span></span></span><br><span class="line"><span class="function">	...</span></span><br></pre></td></tr></table></figure>
+<p>值得注意的是，Jackson里我们最为熟悉的API <code>ObjectMapper</code>它就是一个ObjectCodec解码器，具体我们在<strong>数据绑定</strong>章节会再详细讨论，下面我给出个简单的使用示例模拟一把：</p>
+<p>准备一个User对象，以及解码器UserObjectCodec：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name = <span class="string">"YourBatman"</span>;</span><br><span class="line">    <span class="keyword">private</span> Integer age = <span class="number">18</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 自定义ObjectCodec解码器 用于把User写为JSON</span></span><br><span class="line"><span class="comment">// 因为本例只关注write写，因此只需要实现此这一个方法即可</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserObjectCodec</span> <span class="keyword">extends</span> <span class="title">ObjectCodec</span> </span>&#123;</span><br><span class="line">	...</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">writeValue</span><span class="params">(JsonGenerator gen, Object value)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        User user = User<span class="class">.<span class="keyword">class</span>.<span class="title">cast</span>(<span class="title">value</span>)</span>;</span><br><span class="line"></span><br><span class="line">        gen.writeStartObject();</span><br><span class="line">        gen.writeStringField(<span class="string">"name"</span>,user.getName());</span><br><span class="line">        gen.writeNumberField(<span class="string">"age"</span>,user.getAge());</span><br><span class="line">        gen.writeEndObject();</span><br><span class="line">    &#125;</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>测试用例：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test11</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    JsonFactory factory = <span class="keyword">new</span> JsonFactory();</span><br><span class="line">    <span class="keyword">try</span> (JsonGenerator jsonGenerator = factory.createGenerator(System.err, JsonEncoding.UTF8)) &#123;</span><br><span class="line">        jsonGenerator.setCodec(<span class="keyword">new</span> UserObjectCodec());</span><br><span class="line"></span><br><span class="line">        jsonGenerator.writeObject(<span class="keyword">new</span> User());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，输出：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">&#123;<span class="string">"name"</span>:<span class="string">"YourBatman"</span>,<span class="string">"age"</span>:<span class="number">18</span>&#125;</span><br></pre></td></tr></table></figure>
+<p>😄这就是<code>ObjectMapper</code>的原理雏形，是不是开始着道了？😄</p>
+<p><strong>writeTree()</strong>：<br>顾名思义，它便是Jackson大名鼎鼎的<strong>树模型</strong>。可惜的是core模块并没有提供树模型TreeNode的实现，以及它也是得依赖于ObjectCodec才能正常完成解码。</p>
+<p>方法用来编写给定的JSON树（表示为树，其中给定的JsonNode是根）。这通常只调用给定节点的writeObject，但添加它是为了方便起见，并使代码在专门处理树的情况下更显式。</p>
+<p>可能你会想，已经有了<code>writeObject()</code>方法还要它干啥呢？这其实是蛮有必要的，因为有时候你并不想定义POJO时，就可以用它快速写/读数据，同时它也可以达到<strong>模糊掉类型的概念</strong>，做到更抽象和更公用。</p>
+<blockquote>
+<p>说到模糊掉类型的的操作，你也可以辅以Spring的<code>AnnotationAttributes</code>的设计和使用来理解</p>
+</blockquote>
+<p>准备一个TreeNode的实现UserTreeNode：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserTreeNode</span> <span class="keyword">implements</span> <span class="title">TreeNode</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> User user;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> User <span class="title">getUser</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> user;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">UserTreeNode</span><span class="params">(User user)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.user = user;</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>UserObjectCodec改写如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserObjectCodec</span> <span class="keyword">extends</span> <span class="title">ObjectCodec</span> </span>&#123;</span><br><span class="line">	...</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">writeValue</span><span class="params">(JsonGenerator gen, Object value)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        User user = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">if</span> (value <span class="keyword">instanceof</span> User) &#123;</span><br><span class="line">            user = User<span class="class">.<span class="keyword">class</span>.<span class="title">cast</span>(<span class="title">value</span>)</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (value <span class="keyword">instanceof</span> TreeNode) &#123;</span><br><span class="line">            user = UserTreeNode<span class="class">.<span class="keyword">class</span>.<span class="title">cast</span>(<span class="title">value</span>).<span class="title">getUser</span>()</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        gen.writeStartObject();</span><br><span class="line">        gen.writeStringField(<span class="string">"name"</span>, user.getName());</span><br><span class="line">        gen.writeNumberField(<span class="string">"age"</span>, user.getAge());</span><br><span class="line">        gen.writeEndObject();</span><br><span class="line">    &#125;</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>书写测试用例：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test12</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    JsonFactory factory = <span class="keyword">new</span> JsonFactory();</span><br><span class="line">    <span class="keyword">try</span> (JsonGenerator jsonGenerator = factory.createGenerator(System.err, JsonEncoding.UTF8)) &#123;</span><br><span class="line">        jsonGenerator.setCodec(<span class="keyword">new</span> UserObjectCodec());</span><br><span class="line">        jsonGenerator.writeObject(<span class="keyword">new</span> UserTreeNode(<span class="keyword">new</span> User()));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，输出：</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;<span class="attr">"name"</span>:<span class="string">"YourBatman"</span>,<span class="attr">"age"</span>:<span class="number">18</span>&#125;</span><br></pre></td></tr></table></figure>
+<p>本案例绕过了<code>TreeNode</code>的真实处理逻辑，是因为<strong>树模型</strong>这块会放在databind数据绑定模块进行更加详细的描述，后面再会喽。</p>
+<blockquote>
+<p>说明：Jackson的树模型是比较重要的，当然直接使用core模块的树模型没有意义，所以这里先卖个关子，保持好奇心哈😄</p>
+</blockquote>
+<h1 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h1><p>国人很喜欢把Jackson的序列化（写JSON）效率和Fastjson进行对比，那么你敢使用本文的流式API和Fastjson比吗？结果你猜一下呢？</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>本文介绍了jackson-core模块的流式API，以及JsonGenerator写JSON的使用，相信对你理解Jackson生成JSON方面是有帮助的。它作为JSON处理的基石，虽然并不推荐直接使用，但仅仅是<strong>应用开发级别</strong>不推荐哦，如果你是个框架、中间件开发者，这些原理你很可能绕不过。</p>
+<p>还是那句话，本文介绍它的目的并不是建议大家去项目上使用，而是为了后面理解<code>ObjectMapper</code>夯实基础，毕竟做技术的要知其然，知其所以然了后，面对问题才能坦然。</p>]]></content>
+      <categories>
+        <category>A哥学Jackson</category>
+      </categories>
+      <tags>
+        <tag>Jackson</tag>
+        <tag>JSON</tag>
+        <tag>Fastjson</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>1. 初识Jackson -- 世界上最好的JSON库</title>
     <url>/x2y/dc384b1c.html</url>
     <content><![CDATA[<blockquote>
@@ -340,8 +538,8 @@
         <category>A哥学Jackson</category>
       </categories>
       <tags>
-        <tag>Fastjson</tag>
         <tag>Jackson</tag>
+        <tag>Fastjson</tag>
         <tag>JSON库</tag>
       </tags>
   </entry>
@@ -484,8 +682,8 @@
         <category>A哥学Jackson</category>
       </categories>
       <tags>
-        <tag>Fastjson</tag>
         <tag>Jackson</tag>
+        <tag>Fastjson</tag>
         <tag>安全漏洞</tag>
       </tags>
   </entry>

@@ -1,0 +1,1515 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="baidu-site-verification" content="FdPXpeNylP">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.yourbatman.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},"motion":{"enable":false,"async":true,"transition":{"post_block":"flipBounceYIn","post_header":"flipXIn","post_body":"flipBounceXIn","coll_header":"expandIn","sidebar":"shrinkIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="底层原理，jackson-core核心模块JsonGenerator流式API高效写JSON">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2. 妈呀，Jackson原来是这样写JSON的">
+<meta property="og:url" content="https://www.yourbatman.cn/x2y/cf41a8ab.html">
+<meta property="og:site_name" content="BAT的乌托邦">
+<meta property="og:description" content="底层原理，jackson-core核心模块JsonGenerator流式API高效写JSON">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200717122214583.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200715180628489.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200715182507991.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200716114814949.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200716114929650.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200715184404566.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2020071612110129.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200716122204956.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200717135546876.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200716150405123.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200716143504786.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200716141127952.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200716143851555.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200716151833420.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2020071615422269.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200716154341562.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200716161328124.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200716161708643.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2020071616500318.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200716165057929.png">
+<meta property="article:published_time" content="2020-07-17T09:54:02.000Z">
+<meta property="article:modified_time" content="2020-07-17T09:56:00.228Z">
+<meta property="article:author" content="A哥(YourBatman)">
+<meta property="article:tag" content="BAT的乌托邦">
+<meta property="article:tag" content="A哥">
+<meta property="article:tag" content="YourBatman">
+<meta property="article:tag" content="Jackson">
+<meta property="article:tag" content="JSON">
+<meta property="article:tag" content="Fastjson">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20200717122214583.png">
+
+<link rel="canonical" href="https://www.yourbatman.cn/x2y/cf41a8ab.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>2. 妈呀，Jackson原来是这样写JSON的 | BAT的乌托邦</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?2ad49a2290d0249428335633c45e2806";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">BAT的乌托邦</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">当大潮退去，才知道谁在裸泳</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于A哥/留言板</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">29</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>专栏<span class="badge">12</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>时间轴<span class="badge">26</span></a>
+
+  </li>
+        <li class="menu-item menu-item-top">
+
+    <a href="/top/" rel="section"><i class="fa fa-signal fa-fw"></i>热门文章</a>
+
+  </li>
+        <li class="menu-item menu-item-books">
+
+    <a href="/books/" rel="section"><i class="fa fa-book fa-fw"></i>图书馆</a>
+
+  </li>
+        <li class="menu-item menu-item-links">
+
+    <a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友情债</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="请输入关键字检索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/yourbatman" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  
+    <div id="yourbatman">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.yourbatman.cn/x2y/cf41a8ab.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://img-blog.csdnimg.cn/20200511100304592.jpg">
+      <meta itemprop="name" content="A哥(YourBatman)">
+      <meta itemprop="description" content="我这有故事，你那有酒吗？">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BAT的乌托邦">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          2. 妈呀，Jackson原来是这样写JSON的
+        </h1>
+
+        <div class="post-meta">
+          <!-- 精品文章 精华帖 -->
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-07-17 17:54:02" itemprop="dateCreated datePublished" datetime="2020-07-17T17:54:02+08:00">2020-07-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">收录于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/A%E5%93%A5%E5%AD%A6Jackson/" itemprop="url" rel="index"><span itemprop="name">A哥学Jackson</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/x2y/cf41a8ab.html" class="post-meta-item leancloud_visitors" data-flag-title="2. 妈呀，Jackson原来是这样写JSON的" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">评论数：</span>
+    
+    <a title="valine" href="/x2y/cf41a8ab.html#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/x2y/cf41a8ab.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+          <!-- 置顶 可以写top:true  也可以写数字top:1/2/3  顺序规则同Spring-->
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>13k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>12 分钟</span>
+            </span>
+
+          <!-- 本文作者 -->
+          <span class="post-meta-item" title="阅读时长">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-user fa-fw"></i>
+            </span>
+            <span class="post-meta-item-text">本文作者：</span>
+            <a href="/about/" itemprop="url" rel="index">
+              <span>A哥(YourBatman)</span>
+            </a>
+          </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>没有人永远18岁，但永远有人18岁。本文已被 <a href="https://www.yourbatman.cn"><strong>https://www.yourbatman.cn</strong></a> 收录，里面一并有Spring技术栈、MyBatis、JVM、中间件等小而美的<strong>专栏</strong>供以免费学习。关注公众号【<strong>BAT的乌托邦</strong>】逐个击破，深入掌握，拒绝浅尝辄止。</p>
+</blockquote>
+<p><img data-src="https://img-blog.csdnimg.cn/20200717122214583.png" alt=""></p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>各位好，我是A哥(YourBatman)。<a href="https://mp.weixin.qq.com/s/iqSN4HUoIdX0kGcSdnD7EA" target="_blank" rel="noopener">上篇文章</a> 整体介绍了世界上最好的JSON库 – Jackson，对它有了整体了解：知晓了它是个生态，其它的仅是个JSON库而已。</p>
+<blockquote>
+<p>有人说Jackson小众？那么请先看看上篇文章吧。学Jackson性价比特别高，因为它使用广泛、会的人少，因此在团队内如果你能精通，附加价值的效应就会非常明显了…</p>
+</blockquote>
+<p>我挠头想了想，本系列来不了虚的，只能肝。本系列教程不仅仅教授基本使用，目标是搞完后能够解决日常99.99%的问题，毕竟每个小团队都最好能有某些方面的小专家，毕竟大家都不乏遇见过一个技术问题卡一天的情况。<strong>只有从底层把握，方能游刃有余</strong>。<br><img data-src="https://img-blog.csdnimg.cn/20200715180628489.png" alt=""></p>
+<p>命名为core的模块一般都不简单，<code>jackson-core</code>自然也不例外。它是三大核心模块之一，并且是<strong>核心中的核心</strong>，提供了对JSON数据的<strong>完整支持</strong>（包括各种读、写）。它是三者中最强大的模块，具有<strong>最低的</strong>开销和<strong>最快的</strong>读/写操作。 </p>
+<p>此模块提供了<strong>最具底层</strong>的Streaming JSON解析器/生成器，这组流式API属于Low-Level API，具有非常显著的特点：</p>
+<ul>
+<li>开销小，损耗小，性能极高</li>
+<li>因为是Low-Level API，所以灵活度极高</li>
+<li>又因为是Low-Level API，所以易错性高，可读性差</li>
+</ul>
+<p><strong>jackson-core</strong>模块提供了两种处理JSON的方式（纵缆整个Jackson共三种）：</p>
+<ol>
+<li>流式API：读取并将JSON内容写入作为离散事件 -&gt; <code>JsonParser</code>读取数据，而<code>JsonGenerator</code>负责写入数据</li>
+<li>树模型：JSON文件在内存里以树形式表示。此种方式也很灵活，它类似于XML的DOM解析，层层嵌套的</li>
+</ol>
+<p>作为“底层”技术，应用级开发中确实接触不多。为了引起你的重视，提前预告一下：<code>Spring MVC</code>对JSON消息的转换器<code>AbstractJackson2HttpMessageConverter</code>它就用到了底层流式API -&gt; JsonGenerator写数据。想不想拿下Spring呢？我想你的答案应该是Yes吧~<br><img data-src="https://img-blog.csdnimg.cn/20200715182507991.png" alt=""></p>
+<p>相信做<strong>难事必有所得</strong>，你我他都会用的技术、都能解决的问题，那绝成不了你的核心竞争力，自然在团队内就难成发光体。</p>
+<h2 id="版本约定"><a href="#版本约定" class="headerlink" title="版本约定"></a>版本约定</h2><p>原则：均选当前最新版本（忽略小版本）</p>
+<ul>
+<li>Jackson版本：<code>2.11.0</code></li>
+<li>Spring Framework版本：<code>5.2.6.RELEASE</code></li>
+<li>Spring Boot版本：<code>2.3.0.RELEASE</code><ul>
+<li>内置的Jackson和Spring版本均和👆保持一致，避免了版本交叉</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>说明：类似2.11.0和2.11.x这种小版本号的差异，你权可认为没有区别</p>
+</blockquote>
+<h2 id="工程结构"><a href="#工程结构" class="headerlink" title="工程结构"></a>工程结构</h2><p>鉴于是首次展示工程示例代码，将基本结构展示如下：<br><img data-src="https://img-blog.csdnimg.cn/20200716114814949.png" alt=""><br><img data-src="https://img-blog.csdnimg.cn/20200716114929650.png" alt=""></p>
+<blockquote>
+<p>全部源码地址在本系列的<strong>最后一篇</strong>文章中会全部公示出来</p>
+</blockquote>
+<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><p>Jackson提供了一种对性能有极致要求的方式：流式API。它用于对性能有极致要求的场景，这个时候就可以使用此种方式来对JSON进行读写。</p>
+<h2 id="概念解释：流式、增量模式、JsonToken"><a href="#概念解释：流式、增量模式、JsonToken" class="headerlink" title="概念解释：流式、增量模式、JsonToken"></a>概念解释：流式、增量模式、JsonToken</h2><ul>
+<li>流式（Streaming）：此概念和Java8中的Stream流是不同的。这里指的是<strong>IO流</strong>，因此具有最低的开销和最快的读/写操作（记得关流哦）</li>
+<li>增量模式（incremental mode）：它表示每个部分一个一个地往上增加，类似于垒砖。使用此流式API读写JSON的方式使用的<strong>均是增量模式</strong></li>
+<li>JsonToken：每一部分都是一个独立的Token（有不同类型的Token），最终被“拼凑”起来就是一个JSON。这是流式API里很重要的一个抽象概念。</li>
+</ul>
+<blockquote>
+<p>关于增量模式和Token概念，在Spirng的<strong>SpEL</strong>表达式中也有同样的概念，这在Spring相关专栏里你将会再次体会到</p>
+</blockquote>
+<p><img data-src="https://img-blog.csdnimg.cn/20200715184404566.png" alt=""><br>本文将看看它是如何写JSON数据的，也就是<code>JsonGenerator</code>。</p>
+<h2 id="JsonGenerator使用Demo"><a href="#JsonGenerator使用Demo" class="headerlink" title="JsonGenerator使用Demo"></a>JsonGenerator使用Demo</h2><p><code>JsonGenerator</code>定义用于编写JSON内容的公共API的基类（抽象类）。实例使用的工厂方法创建，也就是<code>JsonFactory</code>。</p>
+<blockquote>
+<p>小贴士：纵观整个Jackson，它更多的是使用抽象类而非接口，这是它的一大“特色”。因此你熟悉的面向接口编程，到这都要转变为面向抽象类编程喽。</p>
+</blockquote>
+<p>话不多说，先来一个Demo感受一把：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test1</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    JsonFactory factory = <span class="keyword">new</span> JsonFactory();</span><br><span class="line">    <span class="comment">// 本处只需演示，向控制台写（当然你可以向文件等任意地方写都是可以的）</span></span><br><span class="line">    JsonGenerator jsonGenerator = factory.createGenerator(System.out, JsonEncoding.UTF8);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        jsonGenerator.writeStartObject(); <span class="comment">//开始写，也就是这个符号 &#123;</span></span><br><span class="line"></span><br><span class="line">        jsonGenerator.writeStringField(<span class="string">"name"</span>, <span class="string">"YourBatman"</span>);</span><br><span class="line">        jsonGenerator.writeNumberField(<span class="string">"age"</span>, <span class="number">18</span>);</span><br><span class="line"></span><br><span class="line">        jsonGenerator.writeEndObject(); <span class="comment">//结束写，也就是这个符号 &#125;</span></span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        jsonGenerator.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>因为JsonGenerator实现了<code>AutoCloseable</code>接口，因此可以使用<code>try-with-resources</code>优雅关闭资源（这也是推荐的使用方式），代码改造如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test1</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    JsonFactory factory = <span class="keyword">new</span> JsonFactory();</span><br><span class="line">    <span class="comment">// 本处只需演示，向控制台写（当然你可以向文件等任意地方写都是可以的）</span></span><br><span class="line">    <span class="keyword">try</span> (JsonGenerator jsonGenerator = factory.createGenerator(System.out, JsonEncoding.UTF8)) &#123;</span><br><span class="line">        jsonGenerator.writeStartObject(); <span class="comment">//开始写，也就是这个符号 &#123;</span></span><br><span class="line"></span><br><span class="line">        jsonGenerator.writeStringField(<span class="string">"name"</span>, <span class="string">"YourBatman"</span>);</span><br><span class="line">        jsonGenerator.writeNumberField(<span class="string">"age"</span>, <span class="number">18</span>);</span><br><span class="line"></span><br><span class="line">        jsonGenerator.writeEndObject(); <span class="comment">//结束写，也就是这个符号 &#125;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，<strong>控制台</strong>输出：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">"name"</span>:<span class="string">"YourBatman"</span>,<span class="attr">"age"</span>:<span class="number">18</span>&#125;</span><br></pre></td></tr></table></figure>
+<p>这是最简使用示例，这也就是所谓的<strong>序列化</strong>底层实现，从示例中对<strong>增量模式</strong>能够有所感受吧。</p>
+<p>纯手动档有木有，灵活性和性能极高，但易出错。这就像头文字D的赛车一样，先要速度、高性能、灵活性，那必须上手动档。<br><img data-src="https://img-blog.csdnimg.cn/2020071612110129.png" alt=""></p>
+<h2 id="JsonGenerator详细介绍"><a href="#JsonGenerator详细介绍" class="headerlink" title="JsonGenerator详细介绍"></a>JsonGenerator详细介绍</h2><p>JsonGenerator是个抽象类，它的继承体系如下：<br><img data-src="https://img-blog.csdnimg.cn/20200716122204956.png" alt=""></p>
+<ul>
+<li><code>WriterBasedJsonGenerator</code>：基于java.io.Writer处理字符编码（话外音：使用Writer输出JSON）<ul>
+<li>因为UTF-8编码基本标准化了，因此Jackson内部也提供了<code>SegmentedStringWriter/UTF8Writer</code>来简化操作</li>
+</ul>
+</li>
+<li><code>UTF8JsonGenerator</code>：基于OutputStream + UTF-8处理字符编码（话外音：明确指定了使用UTF-8编码把字节变为字符）</li>
+</ul>
+<p>默认情况下（不指定编码），Jackson默认会使用UTF-8进行编码，也就是说会使用<code>UTF8JsonGenerator</code>作为实际的JSON生成器实现类，具体逻辑将在讲述<code>JsonFactory</code>章节中有所体现，敬请关注。</p>
+<p>值得注意的是，抽象基类<code>JsonGenerator</code>它只负责JSON的生成，至于把生成好的JSON写到哪里去它并不关心。比如示例中我给写到了控制台，当然你也可以写到文件、写到网络等等。</p>
+<blockquote>
+<p>Spring MVC中的JSON消息转换器就是向<code>HttpOutputMessage</code>（网络输出流）里写JSON数据</p>
+</blockquote>
+<h3 id="关键API"><a href="#关键API" class="headerlink" title="关键API"></a>关键API</h3><p><code>JsonGenerator</code>虽然仅是抽象基类，但Jackson它建议我们使用<code>JsonFactory</code>工厂来创建其实例，并不需要使用者去关心其底层实现类，因此我们仅需要<strong>面向此抽象类编程</strong>即可，此为对使用者非常友好的设计。</p>
+<p>对于JSON生成器来说，写方法自然是它的灵魂所在。众所周知，JSON属于K-V数据结构，因此针对于一个JSON来说，每一段都k额分为<strong>写key</strong>和<strong>写value</strong>两大阶段。<br><img data-src="https://img-blog.csdnimg.cn/20200717135546876.png" alt=""></p>
+<h3 id="写JSON-Key"><a href="#写JSON-Key" class="headerlink" title="写JSON Key"></a>写JSON Key</h3><p>JsonGenerator一共提供了3个方法用于写JSON的key：<br><img data-src="https://img-blog.csdnimg.cn/20200716150405123.png" alt=""></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test2</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    JsonFactory factory = <span class="keyword">new</span> JsonFactory();</span><br><span class="line">    <span class="keyword">try</span> (JsonGenerator jsonGenerator = factory.createGenerator(System.out, JsonEncoding.UTF8)) &#123;</span><br><span class="line">        jsonGenerator.writeStartObject();</span><br><span class="line"></span><br><span class="line">        jsonGenerator.writeFieldName(<span class="string">"zhName"</span>);</span><br><span class="line"></span><br><span class="line">        jsonGenerator.writeEndObject();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，输出：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">"zhName"</span>&#125;</span><br></pre></td></tr></table></figure>
+<p>可以发现，<strong>key可以独立存在（无需value）</strong>，但value是不能独立存在的哦，下面你会看到效果。而3个方法中的<strong>其它2个方法</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">writeFieldName</span><span class="params">(SerializableString name)</span> <span class="keyword">throws</span> IOException</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">writeFieldId</span><span class="params">(<span class="keyword">long</span> id)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    writeFieldName(Long.toString(id));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这两个方法，你可以忘了吧，记住<code>writeFieldName()</code>就足够了。</p>
+<p>总的来说，写JSON的key非常简单的，这得益于JSON的key有且仅可能是String类型，所以情况单一。下面继续了解较为复杂的写Value的情况。</p>
+<h3 id="写JSON-Value"><a href="#写JSON-Value" class="headerlink" title="写JSON Value"></a>写JSON Value</h3><p>我们知道在Java中数据存在的形式（类型）非常之多，比如String、int、Reader、char[]…，而在JSON中<strong>值的类型</strong>只能是如下形式：</p>
+<ul>
+<li>字符串（如<code>{ &quot;name&quot;:&quot;YourBatman&quot; }</code>）</li>
+<li>数字（如<code>{ &quot;age&quot;:18 }</code>）</li>
+<li>对象（JSON 对象）（如<code>{ &quot;person&quot;:{ &quot;name&quot;:&quot;YourBatman&quot;, &quot;age&quot;:18}}</code>）</li>
+<li>数组（如<code>{&quot;names&quot;:[ &quot;YourBatman&quot;, &quot;A哥&quot; ]}</code>）</li>
+<li>布尔（如<code>{ &quot;success&quot;:true }</code>）</li>
+<li>null（如：<code>{ &quot;name&quot;:null }</code>）</li>
+</ul>
+<blockquote>
+<p>小贴士：像数组、对象等这些“高级”类型可以互相无限嵌套</p>
+</blockquote>
+<p>很明显，Java中的数据类型和JSON中的值类型并不是一一对应的关系，那么这就需要<code>JsonGenerator</code>在写入时起到一个桥梁（适配）作用：<br><img data-src="https://img-blog.csdnimg.cn/20200716143504786.png" alt=""><br>下面针对不同的Value类型分别作出API讲解，给出示例说明。在此之前，请先记住两个结论，会更有利于你理解示例：</p>
+<ul>
+<li>JSON的顺序，和你write的顺序保持一致</li>
+<li>写任何类型的Value之前请记得先write写key，否则可能无效</li>
+</ul>
+<h4 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h4><p><img data-src="https://img-blog.csdnimg.cn/20200716141127952.png" alt=""><br>可把Java中的String类型、Reader类型、char[]字符数组类型等等写为JSON的字符串形式。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test3</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    JsonFactory factory = <span class="keyword">new</span> JsonFactory();</span><br><span class="line">    <span class="keyword">try</span> (JsonGenerator jsonGenerator = factory.createGenerator(System.out, JsonEncoding.UTF8)) &#123;</span><br><span class="line">        jsonGenerator.writeStartObject();</span><br><span class="line"></span><br><span class="line">        jsonGenerator.writeFieldName(<span class="string">"zhName"</span>);</span><br><span class="line">        jsonGenerator.writeString(<span class="string">"A哥"</span>);</span><br><span class="line"></span><br><span class="line">        jsonGenerator.writeFieldName(<span class="string">"enName"</span>);</span><br><span class="line">        jsonGenerator.writeString(<span class="string">"YourBatman"</span>);</span><br><span class="line"></span><br><span class="line">        jsonGenerator.writeEndObject();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，输出：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">"zhName"</span>:<span class="string">"A哥"</span>,<span class="attr">"enName"</span>:<span class="string">"YourBatman"</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="数字"><a href="#数字" class="headerlink" title="数字"></a>数字</h4><p><img data-src="https://img-blog.csdnimg.cn/20200716143851555.png" alt=""><br>参考上例，不解释。</p>
+<h4 id="对象（JSON-对象）"><a href="#对象（JSON-对象）" class="headerlink" title="对象（JSON 对象）"></a>对象（JSON 对象）</h4><p><img data-src="https://img-blog.csdnimg.cn/20200716151833420.png" alt=""></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test4</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    JsonFactory factory = <span class="keyword">new</span> JsonFactory();</span><br><span class="line">    <span class="keyword">try</span> (JsonGenerator jsonGenerator = factory.createGenerator(System.out, JsonEncoding.UTF8)) &#123;</span><br><span class="line">        jsonGenerator.writeStartObject();</span><br><span class="line"></span><br><span class="line">        jsonGenerator.writeFieldName(<span class="string">"zhName"</span>);</span><br><span class="line">        jsonGenerator.writeString(<span class="string">"A哥"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 写对象（记得先写key 否则无效）</span></span><br><span class="line">        jsonGenerator.writeFieldName(<span class="string">"person"</span>);</span><br><span class="line">        jsonGenerator.writeStartObject();</span><br><span class="line">        jsonGenerator.writeFieldName(<span class="string">"enName"</span>);</span><br><span class="line">        jsonGenerator.writeString(<span class="string">"YourBatman"</span>);</span><br><span class="line">        jsonGenerator.writeFieldName(<span class="string">"age"</span>);</span><br><span class="line">        jsonGenerator.writeNumber(<span class="number">18</span>);</span><br><span class="line">        jsonGenerator.writeEndObject();</span><br><span class="line"></span><br><span class="line">        jsonGenerator.writeEndObject();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，输出：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">"zhName"</span>:<span class="string">"A哥"</span>,<span class="attr">"person"</span>:&#123;<span class="attr">"enName"</span>:<span class="string">"YourBatman"</span>,<span class="attr">"age"</span>:<span class="number">18</span>&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>对象属于一个比较特殊的value值类型，可以实现各种嵌套。也就是我们平时所说的JSON套JSON</p>
+</blockquote>
+<h4 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h4><p>写数组和写对象有点类似，也会有先start再end的闭环思路。<br><img data-src="https://img-blog.csdnimg.cn/2020071615422269.png" alt=""><br>如何向数组里写入Value值？我们知道JSON数组里可以装任何数据类型，因此往里写值的方法都可使用，形如这样：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test5</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    JsonFactory factory = <span class="keyword">new</span> JsonFactory();</span><br><span class="line">    <span class="keyword">try</span> (JsonGenerator jsonGenerator = factory.createGenerator(System.out, JsonEncoding.UTF8)) &#123;</span><br><span class="line">        jsonGenerator.writeStartObject();</span><br><span class="line"></span><br><span class="line">        jsonGenerator.writeFieldName(<span class="string">"zhName"</span>);</span><br><span class="line">        jsonGenerator.writeString(<span class="string">"A哥"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 写数组（记得先写key 否则无效）</span></span><br><span class="line">        jsonGenerator.writeFieldName(<span class="string">"objects"</span>);</span><br><span class="line">        jsonGenerator.writeStartArray();</span><br><span class="line">        <span class="comment">// 1、写字符串</span></span><br><span class="line">        jsonGenerator.writeString(<span class="string">"YourBatman"</span>);</span><br><span class="line">        <span class="comment">// 2、写对象</span></span><br><span class="line">        jsonGenerator.writeStartObject();</span><br><span class="line">        jsonGenerator.writeStringField(<span class="string">"enName"</span>, <span class="string">"YourBatman"</span>);</span><br><span class="line">        jsonGenerator.writeEndObject();</span><br><span class="line">        <span class="comment">// 3、写数字</span></span><br><span class="line">        jsonGenerator.writeNumber(<span class="number">18</span>);</span><br><span class="line">        jsonGenerator.writeEndArray();</span><br><span class="line"></span><br><span class="line">        jsonGenerator.writeEndObject();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，输出：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">"zhName"</span>:<span class="string">"A哥"</span>,<span class="attr">"objects"</span>:[<span class="string">"YourBatman"</span>,&#123;<span class="attr">"enName"</span>:<span class="string">"YourBatman"</span>&#125;,<span class="number">18</span>]&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>理论上JSON数组里的每个元素可以是不同类型，但<strong>原则上</strong>请确保是同一类型哦</p>
+</blockquote>
+<p>对于JSON数组类型，很多时候里面装载的是数字或者普通字符串类型，因此<code>JsonGenerator</code>也很暖心的为此提供了专用方法（可以调用该方法来一次性便捷的写入单个数组）：<br><img data-src="https://img-blog.csdnimg.cn/20200716154341562.png" alt=""></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test6</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    JsonFactory factory = <span class="keyword">new</span> JsonFactory();</span><br><span class="line">    <span class="keyword">try</span> (JsonGenerator jsonGenerator = factory.createGenerator(System.out, JsonEncoding.UTF8)) &#123;</span><br><span class="line">        jsonGenerator.writeStartObject();</span><br><span class="line"></span><br><span class="line">        jsonGenerator.writeFieldName(<span class="string">"zhName"</span>);</span><br><span class="line">        jsonGenerator.writeString(<span class="string">"A哥"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 快捷写入数组（从第index = 2位开始，取3个）</span></span><br><span class="line">        jsonGenerator.writeFieldName(<span class="string">"values"</span>);</span><br><span class="line">        jsonGenerator.writeArray(<span class="keyword">new</span> <span class="keyword">int</span>[]&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>&#125;, <span class="number">2</span>, <span class="number">3</span>);</span><br><span class="line"></span><br><span class="line">        jsonGenerator.writeEndObject();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，输出：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">"zhName"</span>:<span class="string">"A哥"</span>,<span class="attr">"values"</span>:[<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="布尔和null"><a href="#布尔和null" class="headerlink" title="布尔和null"></a>布尔和null</h4><p>比较简单，JsonGenerator各提供了一个方法供你使用：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">writeBoolean</span><span class="params">(<span class="keyword">boolean</span> state)</span> <span class="keyword">throws</span> IOException</span>;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">writeNull</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span>;</span><br></pre></td></tr></table></figure>
+<p>示例代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test7</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    JsonFactory factory = <span class="keyword">new</span> JsonFactory();</span><br><span class="line">    <span class="keyword">try</span> (JsonGenerator jsonGenerator = factory.createGenerator(System.out, JsonEncoding.UTF8)) &#123;</span><br><span class="line">        jsonGenerator.writeStartObject();</span><br><span class="line"></span><br><span class="line">        jsonGenerator.writeFieldName(<span class="string">"success"</span>);</span><br><span class="line">        jsonGenerator.writeBoolean(<span class="keyword">true</span>);</span><br><span class="line">        jsonGenerator.writeFieldName(<span class="string">"myName"</span>);</span><br><span class="line">        jsonGenerator.writeNull();</span><br><span class="line"></span><br><span class="line">        jsonGenerator.writeEndObject();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，输出：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="string">"success"</span>:<span class="keyword">true</span>,<span class="string">"myName"</span>:<span class="keyword">null</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="组合写JSON-Key和Value"><a href="#组合写JSON-Key和Value" class="headerlink" title="组合写JSON Key和Value"></a>组合写JSON Key和Value</h3><p>在写每个value之前，都必须写key。为了<strong>简化书写</strong>，JsonGenerator提供了二合一的组合方法，一个顶两：<br><img data-src="https://img-blog.csdnimg.cn/20200716161328124.png" alt=""></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test8</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    JsonFactory factory = <span class="keyword">new</span> JsonFactory();</span><br><span class="line">    <span class="keyword">try</span> (JsonGenerator jsonGenerator = factory.createGenerator(System.out, JsonEncoding.UTF8)) &#123;</span><br><span class="line">        jsonGenerator.writeStartObject();</span><br><span class="line"></span><br><span class="line">        jsonGenerator.writeStringField(<span class="string">"zhName"</span>,<span class="string">"A哥"</span>);</span><br><span class="line">        jsonGenerator.writeBooleanField(<span class="string">"success"</span>,<span class="keyword">true</span>);</span><br><span class="line">        jsonGenerator.writeNullField(<span class="string">"myName"</span>);</span><br><span class="line">        <span class="comment">// jsonGenerator.writeObjectFieldStart();</span></span><br><span class="line">        <span class="comment">// jsonGenerator.writeArrayFieldStart();</span></span><br><span class="line"></span><br><span class="line">        jsonGenerator.writeEndObject();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，输出：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">"zhName"</span>:<span class="string">"A哥"</span>,<span class="attr">"success"</span>:<span class="literal">true</span>,<span class="attr">"myName"</span>:<span class="literal">null</span>&#125;</span><br></pre></td></tr></table></figure>
+<p>实际使用时，<strong>推荐使用这些组合方法</strong>去简化书写，毕竟新盖中盖高钙片，一片能顶过去2片，效率高。<br><img data-src="https://img-blog.csdnimg.cn/20200716161708643.png" alt=""></p>
+<h3 id="其它写方法"><a href="#其它写方法" class="headerlink" title="其它写方法"></a>其它写方法</h3><p>如果说上面写方法是必修课，那下面的write写方法就当选修课吧。</p>
+<p><strong>writeRaw()和writeRawValue()</strong>：<br><img data-src="https://img-blog.csdnimg.cn/2020071616500318.png" alt=""><br>该方法将强制生成器<strong>不做任何修改</strong>地逐字复制输入文本（包括不进行转义，也不添加分隔符，即使上下文[array，object]可能需要这样做）。如果需要这样的分隔符，请改用writeRawValue方法。</p>
+<blockquote>
+<p>绝大多数情况下，使用writeRaw()就够了，writeRawValue的使用场景愈发的少</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test9</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    JsonFactory factory = <span class="keyword">new</span> JsonFactory();</span><br><span class="line">    <span class="keyword">try</span> (JsonGenerator jsonGenerator = factory.createGenerator(System.out, JsonEncoding.UTF8)) &#123;</span><br><span class="line">        jsonGenerator.writeRaw(<span class="string">"&#123;'name':'YourBatman'&#125;"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，输出：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;'name':'YourBatman'&#125;</span><br></pre></td></tr></table></figure>
+<p>如果换成<code>writeString()</code>方法，结果为（请注意比较差异）：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"&#123;'name':'YourBatman'&#125;"</span></span><br></pre></td></tr></table></figure>
+
+
+<p><strong>writeBinary()</strong>：<br><img data-src="https://img-blog.csdnimg.cn/20200716165057929.png" alt=""><br>使用Base64编码把数据写进去。</p>
+<p><strong>writeEmbeddedObject()</strong>：<br>2.8版本新增的方法。看看此方法的源码你就知道它是什么意思，不解释：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">writeEmbeddedObject</span><span class="params">(Object object)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    <span class="comment">// 01-Sep-2016, tatu: As per [core#318], handle small number of cases</span></span><br><span class="line">    <span class="keyword">if</span> (object == <span class="keyword">null</span>) &#123;</span><br><span class="line">        writeNull();</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (object <span class="keyword">instanceof</span> <span class="keyword">byte</span>[]) &#123;</span><br><span class="line">        writeBinary((<span class="keyword">byte</span>[]) object);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> JsonGenerationException(...);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>writeObject()</strong>（重要）：<br>写POJO，但前提是你必须给<code>JsonGenerator</code>指定一个<code>ObjectCodec</code>解码器才能正常work，否则抛出异常：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">java.lang.IllegalStateException: No ObjectCodec defined <span class="keyword">for</span> the generator, <span class="function">can only serialize simple wrapper <span class="title">types</span> <span class="params">(type passed cn.yourbatman.jackson.core.beans.User)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">	at com.fasterxml.jackson.core.JsonGenerator.<span class="title">_writeSimpleObject</span><span class="params">(JsonGenerator.java:<span class="number">2238</span>)</span></span></span><br><span class="line"><span class="function">	at com.fasterxml.jackson.core.base.GeneratorBase.<span class="title">writeObject</span><span class="params">(GeneratorBase.java:<span class="number">391</span>)</span></span></span><br><span class="line"><span class="function">	...</span></span><br></pre></td></tr></table></figure>
+<p>值得注意的是，Jackson里我们最为熟悉的API <code>ObjectMapper</code>它就是一个ObjectCodec解码器，具体我们在<strong>数据绑定</strong>章节会再详细讨论，下面我给出个简单的使用示例模拟一把：</p>
+<p>准备一个User对象，以及解码器UserObjectCodec：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name = <span class="string">"YourBatman"</span>;</span><br><span class="line">    <span class="keyword">private</span> Integer age = <span class="number">18</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 自定义ObjectCodec解码器 用于把User写为JSON</span></span><br><span class="line"><span class="comment">// 因为本例只关注write写，因此只需要实现此这一个方法即可</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserObjectCodec</span> <span class="keyword">extends</span> <span class="title">ObjectCodec</span> </span>&#123;</span><br><span class="line">	...</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">writeValue</span><span class="params">(JsonGenerator gen, Object value)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        User user = User<span class="class">.<span class="keyword">class</span>.<span class="title">cast</span>(<span class="title">value</span>)</span>;</span><br><span class="line"></span><br><span class="line">        gen.writeStartObject();</span><br><span class="line">        gen.writeStringField(<span class="string">"name"</span>,user.getName());</span><br><span class="line">        gen.writeNumberField(<span class="string">"age"</span>,user.getAge());</span><br><span class="line">        gen.writeEndObject();</span><br><span class="line">    &#125;</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>测试用例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test11</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    JsonFactory factory = <span class="keyword">new</span> JsonFactory();</span><br><span class="line">    <span class="keyword">try</span> (JsonGenerator jsonGenerator = factory.createGenerator(System.err, JsonEncoding.UTF8)) &#123;</span><br><span class="line">        jsonGenerator.setCodec(<span class="keyword">new</span> UserObjectCodec());</span><br><span class="line"></span><br><span class="line">        jsonGenerator.writeObject(<span class="keyword">new</span> User());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，输出：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="string">"name"</span>:<span class="string">"YourBatman"</span>,<span class="string">"age"</span>:<span class="number">18</span>&#125;</span><br></pre></td></tr></table></figure>
+<p>😄这就是<code>ObjectMapper</code>的原理雏形，是不是开始着道了？😄</p>
+<p><strong>writeTree()</strong>：<br>顾名思义，它便是Jackson大名鼎鼎的<strong>树模型</strong>。可惜的是core模块并没有提供树模型TreeNode的实现，以及它也是得依赖于ObjectCodec才能正常完成解码。</p>
+<p>方法用来编写给定的JSON树（表示为树，其中给定的JsonNode是根）。这通常只调用给定节点的writeObject，但添加它是为了方便起见，并使代码在专门处理树的情况下更显式。</p>
+<p>可能你会想，已经有了<code>writeObject()</code>方法还要它干啥呢？这其实是蛮有必要的，因为有时候你并不想定义POJO时，就可以用它快速写/读数据，同时它也可以达到<strong>模糊掉类型的概念</strong>，做到更抽象和更公用。</p>
+<blockquote>
+<p>说到模糊掉类型的的操作，你也可以辅以Spring的<code>AnnotationAttributes</code>的设计和使用来理解</p>
+</blockquote>
+<p>准备一个TreeNode的实现UserTreeNode：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserTreeNode</span> <span class="keyword">implements</span> <span class="title">TreeNode</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> User user;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> User <span class="title">getUser</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> user;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">UserTreeNode</span><span class="params">(User user)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.user = user;</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>UserObjectCodec改写如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserObjectCodec</span> <span class="keyword">extends</span> <span class="title">ObjectCodec</span> </span>&#123;</span><br><span class="line">	...</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">writeValue</span><span class="params">(JsonGenerator gen, Object value)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        User user = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">if</span> (value <span class="keyword">instanceof</span> User) &#123;</span><br><span class="line">            user = User<span class="class">.<span class="keyword">class</span>.<span class="title">cast</span>(<span class="title">value</span>)</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (value <span class="keyword">instanceof</span> TreeNode) &#123;</span><br><span class="line">            user = UserTreeNode<span class="class">.<span class="keyword">class</span>.<span class="title">cast</span>(<span class="title">value</span>).<span class="title">getUser</span>()</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        gen.writeStartObject();</span><br><span class="line">        gen.writeStringField(<span class="string">"name"</span>, user.getName());</span><br><span class="line">        gen.writeNumberField(<span class="string">"age"</span>, user.getAge());</span><br><span class="line">        gen.writeEndObject();</span><br><span class="line">    &#125;</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>书写测试用例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test12</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    JsonFactory factory = <span class="keyword">new</span> JsonFactory();</span><br><span class="line">    <span class="keyword">try</span> (JsonGenerator jsonGenerator = factory.createGenerator(System.err, JsonEncoding.UTF8)) &#123;</span><br><span class="line">        jsonGenerator.setCodec(<span class="keyword">new</span> UserObjectCodec());</span><br><span class="line">        jsonGenerator.writeObject(<span class="keyword">new</span> UserTreeNode(<span class="keyword">new</span> User()));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，输出：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">"name"</span>:<span class="string">"YourBatman"</span>,<span class="attr">"age"</span>:<span class="number">18</span>&#125;</span><br></pre></td></tr></table></figure>
+<p>本案例绕过了<code>TreeNode</code>的真实处理逻辑，是因为<strong>树模型</strong>这块会放在databind数据绑定模块进行更加详细的描述，后面再会喽。</p>
+<blockquote>
+<p>说明：Jackson的树模型是比较重要的，当然直接使用core模块的树模型没有意义，所以这里先卖个关子，保持好奇心哈😄</p>
+</blockquote>
+<h1 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h1><p>国人很喜欢把Jackson的序列化（写JSON）效率和Fastjson进行对比，那么你敢使用本文的流式API和Fastjson比吗？结果你猜一下呢？</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>本文介绍了jackson-core模块的流式API，以及JsonGenerator写JSON的使用，相信对你理解Jackson生成JSON方面是有帮助的。它作为JSON处理的基石，虽然并不推荐直接使用，但仅仅是<strong>应用开发级别</strong>不推荐哦，如果你是个框架、中间件开发者，这些原理你很可能绕不过。</p>
+<p>还是那句话，本文介绍它的目的并不是建议大家去项目上使用，而是为了后面理解<code>ObjectMapper</code>夯实基础，毕竟做技术的要知其然，知其所以然了后，面对问题才能坦然。</p>
+        <!-- ....这里是正文内容的底部（首页不会展示）... -->
+        <style>
+.table-container img{
+    display: inherit;
+    margin-top: 5px;
+    margin-bottom: 0px;
+    margin-right: 10px;
+}
+</style>
+<hr>
+<h1 style="text-align: left;">关注A哥</h1>
+
+<div><table>
+<thead>
+<tr>
+<th>Author</th>
+<th>A哥(YourBatman)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>个人站点</td>
+<td><a href="https://www.yourbatman.cn" rel="nofollow" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc">www.yourbatman.cn</a></td>
+</tr>
+<tr>
+<td>E-mail</td>
+<td>yourbatman@qq.com</td>
+</tr>
+<tr>
+<td><strong>微 信</strong></td>
+<td><a href="https://www.yourbatman.cn/images/wechat.png" rel="nofollow" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc">fsx641385712</a></td>
+</tr>
+<tr>
+<td><strong><code>活跃平台</code></strong></td>
+<td><a href="https://www.yourbatman.cn" rel="nofollow" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/2020071015182276.png" alt=""></a> <a href="https://fangshixiang.blog.csdn.net/" target="_blank" rel="nofollow noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/20200710151913394.png" alt=""></a><a href="https://yourbatman.cnblogs.com" target="_blank" rel="nofollow noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/20200710151929355.png" alt=""></a><a href="https://juejin.im/user/5b44d178f265da0fa1220efe/posts" target="_blank" rel="nofollow noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/20200710151938937.png" alt=""></a><a href="https://www.zhihu.com/people/fangshixiang/posts" target="_blank" rel="nofollow noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/20200710151950629.png" alt=""></a><a href="https://www.jianshu.com/u/8740f1fdd684" target="_blank" rel="nofollow noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/20200710152000530.png" alt=""></a><a href="https://segmentfault.com/u/yourbatman/articles" target="_blank" rel="nofollow noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/20200710152008726.png" alt=""></a><a href="https://github.com/yourbatman" target="_blank" rel="noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/20200710152015895.png" alt=""></a></td>
+</tr>
+<tr>
+<td><strong>公众号</strong></td>
+<td><a href="https://www.yourbatman.cn/images/wechat_channel.jpg" rel="nofollow" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc">BAT的乌托邦（ID：BAT-utopia）</a></td>
+</tr>
+<tr>
+<td>知识星球</td>
+<td><a href="https://t.zsxq.com/nQBi66I" target="_blank" rel="nofollow noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc">BAT的乌托邦</a></td>
+</tr>
+<tr>
+<td>每日文章推荐</td>
+<td><a href="https://github.com/yourbatman/reading/issues" target="_blank" rel="noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc">文字</a></td>
+</tr>
+</tbody>
+</table></div>
+
+<p>
+<img src="https://img-blog.csdnimg.cn/20200710160552549.gif" alt="BAT的乌托邦">
+</p>
+
+    </div>
+
+    
+    
+    
+
+    <!-- 相关阅读（你可能还喜欢） -->
+      
+  <div class="popular-posts-header">你可能还喜欢：</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\x2y\dc384b1c.html" rel="bookmark">1. 初识Jackson -- 世界上最好的JSON库</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\x2y\221f1084.html" rel="bookmark">Fastjson到了说再见的时候了</a></div>
+    </li>
+  </ul>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-title">
+    <strong>本文标题： </strong>
+    《2. 妈呀，Jackson原来是这样写JSON的》
+  </li>
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>A哥(YourBatman)
+  </li>
+  <li class="post-copyright-date">
+    <strong>发布时间： </strong>2020-07-17 17:54:02
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://www.yourbatman.cn/x2y/cf41a8ab.html" title="2. 妈呀，Jackson原来是这样写JSON的">https://www.yourbatman.cn/x2y/cf41a8ab.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>许可协议： </strong>本站所有文章均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载：No！转发：Yes！
+  </li>
+</ul>
+</div>
+
+
+      <!-- 添加“本文结束”标记 -->
+      <div class="read-over" style="text-align: center;margin-top: 25px;color: rgba(234,16,61,.569);font-size: 16px">-------------您已触及底线 <i class="fa fa-paw"></i> 感谢阅读-------------</div>
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    请A哥喝水
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="https://img-blog.csdnimg.cn/20200612080128384.png" alt="A哥(YourBatman) 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="https://img-blog.csdnimg.cn/20200612080128343.png" alt="A哥(YourBatman) 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Jackson/" rel="tag"><i class="fa fa-tag"></i> Jackson</a>
+              <a href="/tags/JSON/" rel="tag"><i class="fa fa-tag"></i> JSON</a>
+              <a href="/tags/Fastjson/" rel="tag"><i class="fa fa-tag"></i> Fastjson</a>
+          </div>
+
+        <!-- 导入投票模块 -->
+        
+  <!-- 投票功能 -->
+  <div class="post-widgets">
+    <div style="color: #ea778c;font-size: 14px;">(>兄台请留步，看完记得六星好评哦<)</div>
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/x2y/dc384b1c.html" rel="prev" title="1. 初识Jackson -- 世界上最好的JSON库">
+      <i class="fa fa-chevron-left"></i> 1. 初识Jackson -- 世界上最好的JSON库
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+    </div>
+  
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#版本约定"><span class="nav-number">1.1.</span> <span class="nav-text">版本约定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工程结构"><span class="nav-number">1.2.</span> <span class="nav-text">工程结构</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#正文"><span class="nav-number">2.</span> <span class="nav-text">正文</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#概念解释：流式、增量模式、JsonToken"><span class="nav-number">2.1.</span> <span class="nav-text">概念解释：流式、增量模式、JsonToken</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JsonGenerator使用Demo"><span class="nav-number">2.2.</span> <span class="nav-text">JsonGenerator使用Demo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JsonGenerator详细介绍"><span class="nav-number">2.3.</span> <span class="nav-text">JsonGenerator详细介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#关键API"><span class="nav-number">2.3.1.</span> <span class="nav-text">关键API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#写JSON-Key"><span class="nav-number">2.3.2.</span> <span class="nav-text">写JSON Key</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#写JSON-Value"><span class="nav-number">2.3.3.</span> <span class="nav-text">写JSON Value</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#字符串"><span class="nav-number">2.3.3.1.</span> <span class="nav-text">字符串</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数字"><span class="nav-number">2.3.3.2.</span> <span class="nav-text">数字</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对象（JSON-对象）"><span class="nav-number">2.3.3.3.</span> <span class="nav-text">对象（JSON 对象）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数组"><span class="nav-number">2.3.3.4.</span> <span class="nav-text">数组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#布尔和null"><span class="nav-number">2.3.3.5.</span> <span class="nav-text">布尔和null</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#组合写JSON-Key和Value"><span class="nav-number">2.3.4.</span> <span class="nav-text">组合写JSON Key和Value</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其它写方法"><span class="nav-number">2.3.5.</span> <span class="nav-text">其它写方法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#思考题"><span class="nav-number">3.</span> <span class="nav-text">思考题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="A哥(YourBatman)"
+      src="https://img-blog.csdnimg.cn/20200511100304592.jpg">
+  <p class="site-author-name" itemprop="name">A哥(YourBatman)</p>
+  <div class="site-description" itemprop="description">我这有故事，你那有酒吗？</div>
+</div>
+<div class="site-author motion-element" style="border-top: 1px dotted #ccc;padding-top: 10px;opacity: 0.7" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img itemprop="image" alt="A哥(YourBatman)" style="max-width: 120px;"
+      src="https://img-blog.csdnimg.cn/20200608214500399.png">
+  <div style="color: #e36a7c;font-size: 10px;" itemprop="description">加A哥好友(备注:Java入群)</div>
+</div>
+  <div class="sidebar-button motion-element">
+    <a onclick="tidioChatApi.open();"><i class="fa fa-comment"></i>
+    私聊A哥
+  </a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://fangshixiang.blog.csdn.net/" title="https:&#x2F;&#x2F;fangshixiang.blog.csdn.net&#x2F;" rel="noopener" target="_blank">CSDN</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/yourbatman/" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;yourbatman&#x2F;" rel="noopener" target="_blank">博客园</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://juejin.im/user/5b44d178f265da0fa1220efe/posts" title="https:&#x2F;&#x2F;juejin.im&#x2F;user&#x2F;5b44d178f265da0fa1220efe&#x2F;posts" rel="noopener" target="_blank">掘金</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.zhihu.com/people/fangshixiang" title="https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;fangshixiang" rel="noopener" target="_blank">知乎</a>
+        </li>
+    </ul>
+  </div>
+
+<!-- 近期文章（源代码） -->
+
+    <div class="recent_posts links-of-blogroll motion-element links-of-blogroll-block">
+      <div class="links-of-blogroll-title">
+        <!-- modify icon to fire by szw -->
+        <i class="fa fa-history fa-" aria-hidden="true"></i>
+        最新文章
+      </div>
+      <ul class="links-of-blogroll-list">
+        
+        
+          <li>
+            <a href="/x2y/cf41a8ab.html" title="2. 妈呀，Jackson原来是这样写JSON的" target="_blank">
+            <i class="fa fa-check-square"></i> 2. 妈呀，Jackson原来是这样写JSON的
+            </a>
+          </li>
+        
+          <li>
+            <a href="/x2y/dc384b1c.html" title="1. 初识Jackson -- 世界上最好的JSON库" target="_blank">
+            <i class="fa fa-check-square"></i> 1. 初识Jackson -- 世界上最好的JSON库
+            </a>
+          </li>
+        
+          <li>
+            <a href="/x2y/221f1084.html" title="Fastjson到了说再见的时候了" target="_blank">
+            <i class="fa fa-check-square"></i> Fastjson到了说再见的时候了
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+
+
+      </div>
+
+      <!-- canvas粒子时钟效果  放在侧边栏最下面 -->
+      <div style="">
+  <canvas id="canvas" style="width:50%;margin-top:10px;margin-bottom: -10px;" width="820" height="250">当前浏览器不支持canvas，建议使用谷歌浏览器再试</canvas>
+</div>
+<script>
+(function(){
+    var WINDOW_WIDTH = 820;
+    var WINDOW_HEIGHT = 250;
+    var RADIUS = 7; //球半径
+    var NUMBER_GAP = 10; //数字之间的间隙
+    var u=0.65; //碰撞能量损耗系数
+    var context; //Canvas绘制上下文
+    var balls = []; //存储彩色的小球
+    const colors = ["#33B5E5","#0099CC","#AA66CC","#9933CC","#99CC00","#669900","#FFBB33","#FF8800","#FF4444","#CC0000"]; //彩色小球的颜色
+    var currentNums = []; //屏幕显示的8个字符
+    var digit =
+        [
+            [
+                [0,0,1,1,1,0,0],
+                [0,1,1,0,1,1,0],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [0,1,1,0,1,1,0],
+                [0,0,1,1,1,0,0]
+            ],//0
+            [
+                [0,0,0,1,1,0,0],
+                [0,1,1,1,1,0,0],
+                [0,0,0,1,1,0,0],
+                [0,0,0,1,1,0,0],
+                [0,0,0,1,1,0,0],
+                [0,0,0,1,1,0,0],
+                [0,0,0,1,1,0,0],
+                [0,0,0,1,1,0,0],
+                [0,0,0,1,1,0,0],
+                [1,1,1,1,1,1,1]
+            ],//1
+            [
+                [0,1,1,1,1,1,0],
+                [1,1,0,0,0,1,1],
+                [0,0,0,0,0,1,1],
+                [0,0,0,0,1,1,0],
+                [0,0,0,1,1,0,0],
+                [0,0,1,1,0,0,0],
+                [0,1,1,0,0,0,0],
+                [1,1,0,0,0,0,0],
+                [1,1,0,0,0,1,1],
+                [1,1,1,1,1,1,1]
+            ],//2
+            [
+                [1,1,1,1,1,1,1],
+                [0,0,0,0,0,1,1],
+                [0,0,0,0,1,1,0],
+                [0,0,0,1,1,0,0],
+                [0,0,1,1,1,0,0],
+                [0,0,0,0,1,1,0],
+                [0,0,0,0,0,1,1],
+                [0,0,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [0,1,1,1,1,1,0]
+            ],//3
+            [
+                [0,0,0,0,1,1,0],
+                [0,0,0,1,1,1,0],
+                [0,0,1,1,1,1,0],
+                [0,1,1,0,1,1,0],
+                [1,1,0,0,1,1,0],
+                [1,1,1,1,1,1,1],
+                [0,0,0,0,1,1,0],
+                [0,0,0,0,1,1,0],
+                [0,0,0,0,1,1,0],
+                [0,0,0,1,1,1,1]
+            ],//4
+            [
+                [1,1,1,1,1,1,1],
+                [1,1,0,0,0,0,0],
+                [1,1,0,0,0,0,0],
+                [1,1,1,1,1,1,0],
+                [0,0,0,0,0,1,1],
+                [0,0,0,0,0,1,1],
+                [0,0,0,0,0,1,1],
+                [0,0,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [0,1,1,1,1,1,0]
+            ],//5
+            [
+                [0,0,0,0,1,1,0],
+                [0,0,1,1,0,0,0],
+                [0,1,1,0,0,0,0],
+                [1,1,0,0,0,0,0],
+                [1,1,0,1,1,1,0],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [0,1,1,1,1,1,0]
+            ],//6
+            [
+                [1,1,1,1,1,1,1],
+                [1,1,0,0,0,1,1],
+                [0,0,0,0,1,1,0],
+                [0,0,0,0,1,1,0],
+                [0,0,0,1,1,0,0],
+                [0,0,0,1,1,0,0],
+                [0,0,1,1,0,0,0],
+                [0,0,1,1,0,0,0],
+                [0,0,1,1,0,0,0],
+                [0,0,1,1,0,0,0]
+            ],//7
+            [
+                [0,1,1,1,1,1,0],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [0,1,1,1,1,1,0],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [0,1,1,1,1,1,0]
+            ],//8
+            [
+                [0,1,1,1,1,1,0],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [0,1,1,1,0,1,1],
+                [0,0,0,0,0,1,1],
+                [0,0,0,0,0,1,1],
+                [0,0,0,0,1,1,0],
+                [0,0,0,1,1,0,0],
+                [0,1,1,0,0,0,0]
+            ],//9
+            [
+                [0,0,0,0],
+                [0,0,0,0],
+                [0,1,1,0],
+                [0,1,1,0],
+                [0,0,0,0],
+                [0,0,0,0],
+                [0,1,1,0],
+                [0,1,1,0],
+                [0,0,0,0],
+                [0,0,0,0]
+            ]//:
+        ];
+
+    function drawDatetime(cxt){
+        var nums = [];
+
+        context.fillStyle="#005eac"
+        var date = new Date();
+        var offsetX = 70, offsetY = 30;
+        var hours = date.getHours();
+        var num1 = Math.floor(hours/10);
+        var num2 = hours%10;
+        nums.push({num: num1});
+        nums.push({num: num2});
+        nums.push({num: 10}); //冒号
+        var minutes = date.getMinutes();
+        var num1 = Math.floor(minutes/10);
+        var num2 = minutes%10;
+        nums.push({num: num1});
+        nums.push({num: num2});
+        nums.push({num: 10}); //冒号
+        var seconds = date.getSeconds();
+        var num1 = Math.floor(seconds/10);
+        var num2 = seconds%10;
+        nums.push({num: num1});
+        nums.push({num: num2});
+
+        for(var x = 0;x<nums.length;x++){
+            nums[x].offsetX = offsetX;
+            offsetX = drawSingleNumber(offsetX,offsetY, nums[x].num,cxt);
+            //两个数字连一块，应该间隔一些距离
+            if(x<nums.length-1){
+                if((nums[x].num!=10) &&(nums[x+1].num!=10)){
+                    offsetX+=NUMBER_GAP;
+                }
+            }
+        }
+
+        //说明这是初始化
+        if(currentNums.length ==0){
+            currentNums = nums;
+        }else{
+            //进行比较
+            for(var index = 0;index<currentNums.length;index++){
+                if(currentNums[index].num!=nums[index].num){
+                    //不一样时，添加彩色小球
+                    addBalls(nums[index]);
+                    currentNums[index].num=nums[index].num;
+                }
+            }
+        }
+        renderBalls(cxt);
+        updateBalls();
+
+        return date;
+    }
+
+    function addBalls (item) {
+        var num = item.num;
+        var numMatrix = digit[num];
+        for(var y = 0;y<numMatrix.length;y++){
+            for(var x = 0;x<numMatrix[y].length;x++){
+                if(numMatrix[y][x]==1){
+                    var ball={
+                        offsetX:item.offsetX+RADIUS+RADIUS*2*x,
+                        offsetY:30+RADIUS+RADIUS*2*y,
+                        color:colors[Math.floor(Math.random()*colors.length)],
+                        g:1.5+Math.random(),
+                        vx:Math.pow(-1, Math.ceil(Math.random()*10))*4+Math.random(),
+                        vy:-5
+                    }
+                    balls.push(ball);
+                }
+            }
+        }
+    }
+
+    function renderBalls(cxt){
+        for(var index = 0;index<balls.length;index++){
+            cxt.beginPath();
+            cxt.fillStyle=balls[index].color;
+            cxt.arc(balls[index].offsetX, balls[index].offsetY, RADIUS, 0, 2*Math.PI);
+            cxt.fill();
+        }
+    }
+
+    function updateBalls () {
+        var i =0;
+        for(var index = 0;index<balls.length;index++){
+            var ball = balls[index];
+            ball.offsetX += ball.vx;
+            ball.offsetY += ball.vy;
+            ball.vy+=ball.g;
+            if(ball.offsetY > (WINDOW_HEIGHT-RADIUS)){
+                ball.offsetY= WINDOW_HEIGHT-RADIUS;
+                ball.vy=-ball.vy*u;
+            }
+            if(ball.offsetX>RADIUS&&ball.offsetX<(WINDOW_WIDTH-RADIUS)){
+
+                balls[i]=balls[index];
+                i++;
+            }
+        }
+        //去除出边界的球
+        for(;i<balls.length;i++){
+            balls.pop();
+        }
+    }
+    function drawSingleNumber(offsetX, offsetY, num, cxt){
+        var numMatrix = digit[num];
+        for(var y = 0;y<numMatrix.length;y++){
+            for(var x = 0;x<numMatrix[y].length;x++){
+                if(numMatrix[y][x]==1){
+                    cxt.beginPath();
+                    cxt.arc(offsetX+RADIUS+RADIUS*2*x,offsetY+RADIUS+RADIUS*2*y,RADIUS,0,2*Math.PI);
+                    cxt.fill();
+                }
+            }
+        }
+        cxt.beginPath();
+        offsetX += numMatrix[0].length*RADIUS*2;
+        return offsetX;
+    }
+
+    var canvas = document.getElementById("canvas");
+    canvas.width=WINDOW_WIDTH;
+    canvas.height=WINDOW_HEIGHT;
+    context = canvas.getContext("2d");
+
+    //记录当前绘制的时刻
+    var currentDate = new Date();
+
+    setInterval(function(){
+        //清空整个Canvas，重新绘制内容
+        context.clearRect(0, 0, context.canvas.width, context.canvas.height);
+        drawDatetime(context);
+    }, 50)
+})();
+</script>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+
+     <!-- 此处为新加的代码 -->
+     
+<script src="https://my.openwrite.cn/js/readmore.js" type="text/javascript"></script>
+<script>
+    const btw = new BTWPlugin();
+    btw.init({
+        id: 'yourbatman',
+        blogId: '10059-1591593090091-727',
+        name: 'BAT的乌托邦',
+        qrcode: 'https://img-blog.csdnimg.cn/20200511100304545.jpg',
+        keyword: 'vip',
+    });
+</script>
+
+
+     <script src="https://cdn.staticfile.org/jquery/3.1.1/jquery.min.js"></script>
+<script>
+    //暂时储存文章中的内容
+    var div = $('.post-body');
+    //暂时储存目录的内容
+    var toc=$('.post-toc')
+    function password() {
+        if(''){
+            //将文章内容删除
+            div.remove();
+            //将目录删除
+            toc.remove();
+            //将文章删除后，向原来文章的地方添加，应该出现的提示用户输入密码的样式
+            //下面这里的第一个用textarea是因为如果在手机端的时候只能显示一部分文字，
+            //只是拓展:input里面的字只能显示一行，不会自动换行，目前上网搜索没有发现好的办法，所以用了textarea，右下角的小三角通过resize:none 去掉。
+            $('.post-header').after(
+            '<span class="description" value="请输入密码，然后按 Enter 键阅读全文" style="font-style: oblique;font-weight: bold;border: none;display: block;'+
+            'width: 60%;margin: 0 auto;text-align: center;outline: none;margin-bottom: 40px;resize:none; margin-top: 20px;">'+
+            '<i class="fa fa-heartbeat" id="myheartbeat"></i>'+
+            '请输入密码，然后按 Enter 键阅读全文' +
+            '<i class="fa fa-heartbeat" id="myheartbeat"></i>'+
+            '</span>' +
+            '<div class="qiang" style="height: 100px;width: 60%;margin:0 auto">' +
+            '<input class="password"  type="password" autocomplete="new-password" autofocus="autofocus" value="" style="border-radius: 5px;height: 30px;border: none;display: block;border-bottom: 1px solid #ccc;' +
+            'margin: 0 auto;outline: none;width:95%"/>' +
+            '</div>')
+            //绑定点击事件，如果是点击的.password 这个div就改变样式，如果是document中除了div之外的其他任何元素，就变回原来的样式。
+            document.onclick = function (event) {
+                var e = event || window.event;
+                var elem = e.srcElement || e.target;
+
+                while (elem) {
+                    if (elem != document) {
+                        if (elem.className == "password") {
+                            //$(".password").animate({paddingTop:"30px",width:"100%",borderWidth:"2px"},300)
+                            return;
+                        }
+                        elem = elem.parentNode;
+                    } else {
+                        //$(".password").animate({paddingTop:"0px",width:"95%",borderWidth:"1px"},300)
+                        return;
+                    }
+                }
+            }
+            //绑定enter键按下后离开的事件
+            $(document).keyup(function(event){
+                if(event.keyCode ==13&&$('.password').length>0){
+                    //console.log($('.password').val())
+                    //console.log('')
+                    if ($('.password').val() == '') {
+                        //恢复文章内容
+                        (div).appendTo($(".post-header"))
+                        //恢复目录
+                        toc.appendTo($(".sidebar-inner"))
+                        //删除本页面的输入密码组件
+                        $(".description").remove();
+                        $(".qiang").remove();
+                        $(".password").remove();
+
+                        //重新处理pjax事件,如果没有加pjax的从下面这行起到下面的else之间的代码需要去掉。
+                        //图片懒加载，没有加入此功能的这个函数需要去掉
+                        $('img').lazyload({
+                            placeholder: '/images/loading.gif',
+                            effect: 'fadeIn',
+                            threshold : 100,
+                            failure_limit : 20,
+                            skip_invisible : false
+                        });
+                        //pjax后出现文章不显示，没有pjax的下面四行需要去掉
+                        $(".post-block").css({opacity:1});
+                        $(".post-header").css({opacity:1});
+                        $(".post-body").css({opacity:1});
+                        $(".pagination").css({opacity:1});
+                    }else {
+                        alert("密码不对，请重新输入~")
+                    }
+                }
+                //将document的keyup移除，防止在pjax的情况下会重复绑定事件
+            });
+        }
+    }
+    password();
+</script>
+
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        <!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<span id="times" style="margin-right: 10px;">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("05/03/2020 12:00:00");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "小破站已苟活"+dnum+"天";
+        document.getElementById("times").innerHTML = hnum + "小时" + mnum + "分" + snum + "秒";
+    }
+    setInterval("createtime()",250);
+
+    // 自定义邮箱审核规则（目前校验：邮箱必填，且格式必须正确 昵称也必须填写）
+    document.body.addEventListener('click', function(e) {
+        if (e.target.classList.contains('vsubmit')) {
+            const email = document.querySelector('input[type=email]');
+            const nick = document.querySelector('input[name=nick]');
+            const reg = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+            if (!email.value || !nick.value || !reg.test(email.value)) {
+                const str = `<div class="valert text-center"><div class="vtext">请填写正确的昵称和邮箱！</div></div>`;
+                const vmark = document.querySelector('.vmark');
+                vmark.innerHTML = str;
+                vmark.style.display = 'block';
+                setTimeout(function() {
+                    vmark.style.display = 'none';
+                    vmark.innerHTML = '';
+                }, 2500);
+            }
+        }
+    })
+</script>
+  <span class="beian"><a href="http://www.beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备12009483号 </a>
+  </span>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">A哥(YourBatman)</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">本站总字数：</span>
+    <span title="本站总字数">188k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">本站总阅读时长 &asymp;</span>
+    <span title="本站总阅读时长">2:51</span>
+</div>
+  <div class="addthis_inline_share_toolbox">
+    <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5eb7b6f6b64d54f6" async="async"></script>
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        承蒙 <span id="busuanzi_value_site_uv"></span> 位朋友
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        共造访本站 <span id="busuanzi_value_site_pv"></span> 次
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+  <script>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id    : 25645,
+      el    : 'wpac-rating',
+      color : 'fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+  <script src="//code.tidio.co/imnhfpyrju0tgipwdxke6moou6p9kbdu.js"></script>
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 1, // 打开或关闭导航空格和选项卡 1:打开 0:关闭
+    scrollbar: 1, // 打开/关闭滚动条
+    toolbar  : 1, // 打开/关闭工具栏
+    statusbar: 1, // 打开或关闭状态栏
+    pagemode : 'thumbs', // 侧边栏状态，显示书签或缩略图 接受值：none，thumbs，bookmarks，attachments
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+
+  
+
+  
+
+
+  <!-- 自定义的js效果 -->
+  <script type="text/javascript">
+    (function() {
+var a_idx = 0;
+ 
+        $("body").click(function(e) {
+            //var a = new Array(
+            //    "富强", "民主", "文明", "和谐",
+            //    "自由", "平等", "公正", "法治",
+            //    "爱国", "敬业", "诚信", "友善"
+            //    );
+            var a = new Array(
+            "耕耘","挑灯","悬梁","废寝",
+            "映雪","刺骨","囊萤","凿壁",
+            "勤奋","刻苦","打拼","砥砺");
+
+            var $i = $("<span/>").text(a[a_idx]);
+            a_idx = (a_idx + 1) % a.length;
+            var x = e.pageX,
+            y = e.pageY;
+            $i.css({
+                "z-index": 144469,
+                "top": y - 20,
+                "left": x,
+                "position": "absolute",
+                "font-weight": "bold",
+                "color": "#f00"
+            });
+            $("body").append($i);
+            $i.animate({
+                "top": y - 180,
+                "opacity": 0
+            },
+            1500,
+            function() {
+                $i.remove()
+            })
+        });
+    })();
+  </script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'GL1AoYvDSErHS8idMvn35STX-gzGzoHsz',
+      appKey     : 'flstBFF7gvWX8emTwJooV0bB',
+      placeholder: "各位道友📢📢📢：&#10;1、填写昵称和【正确邮箱号】；&#10;2、有邮箱可收到回复的邮件提醒；&#10;3、礼貌言辞，拒绝黄赌毒；",
+      avatar     : 'robohash',
+      meta       : guest,
+      pageSize   : '6' || 10,
+      visitor    : true,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
