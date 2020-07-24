@@ -435,8 +435,8 @@
       </categories>
       <tags>
         <tag>Jackson</tag>
-        <tag>JSON</tag>
         <tag>Fastjson</tag>
+        <tag>JSON</tag>
       </tags>
   </entry>
   <entry>
@@ -633,8 +633,8 @@
       </categories>
       <tags>
         <tag>Jackson</tag>
-        <tag>JSON</tag>
         <tag>Fastjson</tag>
+        <tag>JSON</tag>
       </tags>
   </entry>
   <entry>
@@ -1509,8 +1509,8 @@
       </categories>
       <tags>
         <tag>Spring Framework</tag>
-        <tag>Spring Boot</tag>
         <tag>static</tag>
+        <tag>Spring Boot</tag>
       </tags>
   </entry>
   <entry>
