@@ -172,6 +172,93 @@
       </tags>
   </entry>
   <entry>
+    <title>搞事情？Spring Boot今天一口气发布三个版本</title>
+    <url>/x2y/a3cba048.html</url>
+    <content><![CDATA[<blockquote>
+<p>学无止境？本文已被 <a href="https://www.yourbatman.cn"><strong>https://www.yourbatman.cn</strong></a> 收录，里面一并有Spring技术栈、MyBatis、JVM、中间件等小而美的<strong>专栏</strong>供以免费学习。关注公众号【<strong>BAT的乌托邦</strong>】逐个击破，深入掌握，拒绝浅尝辄止。</p>
+</blockquote>
+<p><img data-src="https://img-blog.csdnimg.cn/20200725232718273.png" alt=""></p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>各位好，我是A哥(YourBatman)。今天是2020-07-25，上午我正从<strong><a href="https://start.spring.io" target="_blank" rel="noopener">https://start.spring.io</a></strong>准备down一个工程下来的时候，打开页面发现默认选中的Spring Boot版本号是<code>2.3.2</code>：<br><img data-src="https://img-blog.csdnimg.cn/20200725213616518.png" alt=""><br>并非我刻意的去找到这个变化，而是由于我<strong>昨天</strong> down下来的工程使用的Spring Boot版本是<strong>2.3.1</strong>，印象还在，所以今天一下子就发现了差异。</p>
+<p>既然升级了（虽然是小版本号），那就去官方楼一眼呗。不看不知道，一看还真让发现些内容：<strong>Spring Boot在同一天（2020-07-25）一口气发布了三个版本，这是要搞事情啊？</strong><br><img data-src="https://img-blog.csdnimg.cn/20200725233253231.png" alt=""></p>
+<blockquote>
+<p>小贴士：本文所有时间若未做特殊说明，指的均是<strong>北京时间</strong></p>
+</blockquote>
+<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><p>Spring Boot目前还处于<strong>Active</strong>活跃的分支共有三个：<br><img data-src="https://img-blog.csdnimg.cn/20200725215806663.png" alt=""><br>因此就在今天，<strong>同一天</strong>里Spring Boot对它的这三条线做了更新：</p>
+<ul>
+<li>Spring Boot 2.3.1 -&gt; <strong>Spring Boot 2.3.2</strong></li>
+<li>Spring Boot 2.2.8 -&gt; <strong>Spring Boot 2.2.9</strong></li>
+<li>Spring Boot 2.1.15 -&gt; <strong>Spring Boot 2.1.16</strong></li>
+</ul>
+<p><img data-src="https://img-blog.csdnimg.cn/20200725221151805.png" alt=""><br>此次发版，距离上次<strong>正式</strong>发版（不区分分支）已足足有<strong>44天</strong>之久。<br><img data-src="https://img-blog.csdnimg.cn/20200725220629806.png" alt=""></p>
+<h2 id="有哪些升级？"><a href="#有哪些升级？" class="headerlink" title="有哪些升级？"></a>有哪些升级？</h2><p>参考github上的Release详情，三个分支<strong>都</strong>有如下三方面的改进：</p>
+<ol>
+<li>🐞 修复bug</li>
+<li>📔 文档同步</li>
+<li>🔨 升级依赖</li>
+</ol>
+<h3 id="🐞-修复bug"><a href="#🐞-修复bug" class="headerlink" title="🐞 修复bug"></a>🐞 修复bug</h3><p>小版本号的升级，最重要的使命就是<strong>修复bug</strong>，这是它存在的意义。针对这三个版本，各自的bug修复总数如下：</p>
+<ul>
+<li><strong>2.3.2</strong>：34个。遥遥领先</li>
+<li><strong>2.2.9</strong>：10个。</li>
+<li><strong>2.1.16</strong>：1个。</li>
+</ul>
+<p>能发现规律吧，<strong>版本越新，bug越多</strong>，这是符合常理的。另外，从小版本号里能知道：2.1.x版本都修复16次bug了，而2.3.x才第2次修复，正处于bug井喷阶段呢。所以一味的追新的话，还需谨慎哈。</p>
+<p>也许你会吐槽，Spring Boot这啥编码水平，咋这么多bug？其实非也，个数虽多（其实也还好），但每一个都是<strong>非严重bug</strong>，影响甚微，无需大惊小怪。</p>
+<p>另外，从bug的原因上来看，不少bug是各个版本都有的共性问题。比如2.1.x版本那个唯一的bug，其它两个版本均有：<br><img data-src="https://img-blog.csdnimg.cn/20200725224007874.png" alt=""></p>
+<h3 id="📔-文档同步"><a href="#📔-文档同步" class="headerlink" title="📔 文档同步"></a>📔 文档同步</h3><p>此part用于对文档上的改变做出一些说明，比如文字描述错误、排班不正确等等。举例本次的一个修复：</p>
+<p>修复前：<br><img data-src="https://img-blog.csdnimg.cn/20200725224446430.png" alt=""><br>修复后：<br><img data-src="https://img-blog.csdnimg.cn/20200725224517894.png" alt=""><br>不得不说，这老外还挺较真（挺仔细）的。</p>
+<h3 id="🔨-升级依赖"><a href="#🔨-升级依赖" class="headerlink" title="🔨 升级依赖"></a>🔨 升级依赖</h3><p>由于是小版本的升级，因此对应的依赖也是小版本升级。举例：</p>
+<ul>
+<li>Tomcat升级到9.0.37</li>
+<li>Spring Framework升级到5.2.8（此版本4天前发布）</li>
+</ul>
+<p>值得注意的是，拿<code>Spring Framework</code>的升级举例：Spring Boot的2.2.x和2.3.x都是升级到了5.2.8版本，而Spring Boot的2.1.x分支依赖的是<code>Spring Framework 5.1.17</code>版本哦。</p>
+<hr>
+<p><strong>除此之外</strong>，Spring Boot它的最新版本，也就是2.3.2里还新增了3个新特性，了解一下：</p>
+<ol>
+<li>改进 Kubernates Liveness/Readiness 健康指标和探针配置</li>
+<li>添加运行镜像选项用于Docker镜像构建</li>
+<li>增加对reactive Elasticsearch的健康检查</li>
+</ol>
+<blockquote>
+<p>小贴士：小版本号的升级是可以新增这种很小的功能点的，但不允许新增大功能</p>
+</blockquote>
+<h2 id="三个版本核心依赖的区别"><a href="#三个版本核心依赖的区别" class="headerlink" title="三个版本核心依赖的区别"></a>三个版本核心依赖的区别</h2><p>Spring Boot目前活跃的分支有3个，也就是这三个<strong>主线版本</strong>。那么他们三在核心依赖上有啥区别呢？A哥特意翻资料帮你整理了一下，绘制如下表：</p>
+<blockquote>
+<p>说明：因为表格兼容性不太好，所以我以图片方式展示</p>
+</blockquote>
+<p><img data-src="https://img-blog.csdnimg.cn/20200725230447674.png" alt=""></p>
+<h2 id="关于1-5-x和2-0-x版本"><a href="#关于1-5-x和2-0-x版本" class="headerlink" title="关于1.5.x和2.0.x版本"></a>关于1.5.x和2.0.x版本</h2><p>这两个分支已经是古董分支了：<br><img data-src="https://img-blog.csdnimg.cn/20200725230905400.png" alt=""></p>
+<blockquote>
+<p>stale中文意思：不新鲜的，老掉牙的，没有新意的</p>
+</blockquote>
+<p>它们<strong>早已</strong>寿终正寝，最后一个版本和发布时间为：</p>
+<ul>
+<li>1.5.22.RELEASE，2019.08</li>
+<li>2.0.9.RELEASE，2019.04</li>
+</ul>
+<p>有意思的是，<strong>2.0.x</strong>版本的生命周期非常的短暂，几乎刚好一年（2018.3 - 2019.4）。但是不可否认2.0.x版本是具有划时代意义的，在1.5.x的基础上垮了一大步，上了一个大台阶。</p>
+<p>所以如果你的项目还在使用这两个版本，特别是1.5.x，那么尽快升级吧。官方推荐的是使用最新的2.3.x分支，这也是当前最为活跃的分支。</p>
+<blockquote>
+<p>小贴士：1.5.x升级到2.x.x属于阻断式升级，需要十分谨慎</p>
+</blockquote>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>Spring Boot作为微服务、云原生开发的基础设施，每个Java开发者都应该理解它、跟上它、学习它，才得以保证自己不掉队，不被<strong>后浪</strong>拍死。</p>
+<p>但是，如此之快的更新速度，Spring官方是认真的，但你能认真起来吗？歪果仁，这是周末唉，你们不用休息的吗？疫情期间在家办公就这么任性？<br><img data-src="https://img-blog.csdnimg.cn/20200725231628798.png" alt=""></p>
+<h5 id="相关推荐："><a href="#相关推荐：" class="headerlink" title="相关推荐："></a>相关推荐：</h5><ul>
+<li><a href="https://mp.weixin.qq.com/s/z6T9n9YvwjmDwuj-YTa0_w" target="_blank" rel="noopener">Fastjson到了说再见的时候了</a></li>
+<li><a href="https://mp.weixin.qq.com/s/iqSN4HUoIdX0kGcSdnD7EA" target="_blank" rel="noopener">1. 初识Jackson – 世界上最好的JSON库</a></li>
+<li><a href="https://mp.weixin.qq.com/s/p6cwP2BVrC8VxkN-T3uAxg" target="_blank" rel="noopener">2. 妈呀，Jackson原来是这样写JSON的</a></li>
+<li><a href="https://mp.weixin.qq.com/s/ZHb3P06IC4xElHwJqDepxw" target="_blank" rel="noopener">3. 懂了这些，方敢在简历上说会用Jackson写JSON</a></li>
+</ul>]]></content>
+      <categories>
+        <category>Spring Boot</category>
+      </categories>
+      <tags>
+        <tag>Spring Boot</tag>
+        <tag>新特性</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>蚂蚁金服上市了，我不想努力了</title>
     <url>/x2y/2d980889.html</url>
     <content><![CDATA[<blockquote>
@@ -1509,8 +1596,8 @@
       </categories>
       <tags>
         <tag>Spring Framework</tag>
-        <tag>static</tag>
         <tag>Spring Boot</tag>
+        <tag>static</tag>
       </tags>
   </entry>
   <entry>
@@ -2799,66 +2886,6 @@
       </tags>
   </entry>
   <entry>
-    <title>【BAT的乌托邦】公众号开白申请</title>
-    <url>/x2y/wechat-white-list.html</url>
-    <content><![CDATA[<div class="note primary">
-            <ul><li>公众号：BAT的乌托邦</li><li>作者：A哥<ul><li>A哥的介绍：<ul><li><a href="/about">PC版</a></li><li><a href="https://mp.weixin.qq.com/s/PGIFtpI7aZaxY7es0F6C6Q" target="_blank" rel="noopener">手机版</a></li></ul></li><li>示例文章：<a href="https://mp.weixin.qq.com/s/PYVD8BvT7Nux0jiSomSG0A" target="_blank" rel="noopener">点击这里</a></li></ul></li><li>定位：专注Java领域，只做有深度的专栏文章分享，拒绝浅尝辄止</li><li>首篇文章时间：2020-05-03   <a href="https://mp.weixin.qq.com/s/PGIFtpI7aZaxY7es0F6C6Q" target="_blank" rel="noopener">查看首篇文章</a></li></ul>
-          </div>
-
-<h3 id="转载请著名出处，示例（文首-文末）："><a href="#转载请著名出处，示例（文首-文末）：" class="headerlink" title="转载请著名出处，示例（文首 + 文末）："></a>转载请著名出处，示例（文首 + 文末）：</h3><p><img data-src="https://img-blog.csdnimg.cn/20200616122117470.png" alt="文首"><br><img data-src="https://img-blog.csdnimg.cn/20200616122910584.png" alt="文末"></p>
-<div style="text-align: center;color: #8c8888;font-size: 8px;margin-top: -10px;">文案请从此处复制：本文转载自公众号【BAT的乌托邦】，专注Java领域，只做有深度的专栏文章分享，拒绝浅尝辄止。</div>
-
-<div style="margin-top: 50px; margin-bottom: 50px; text-align: center; font-weight: bolder; color: grey; font-size: 20px;">
-😄申请【开长白】请在本文下面留言，开白成功后我会登记入下表，谢谢合作😄
-</div>
-<div style="text-align: center; font-weight: bolder; color: #7d7d7d; font-size: 11px;margin-top: -50px;margin-bottom: 20px;">
-(留言时请输入正确邮箱号，这样开白成功会给你发邮件提醒)
-</div>
-<div class="table-container"><table>
-    <thead>
-        <tr>
-            <th align="center">公众号</th>
-            <th align="center">操作时间</th>
-            <th align="center">是否长白</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td align="center">学习Java的小姐姐</td>
-            <td align="center">2020.06.24</td>
-            <td align="center">是</td>
-        </tr>
-        <tr>
-            <td align="center">自由程序人</td>
-            <td align="center">2020.06.16</td>
-            <td align="center">是</td>
-        </tr>
-        <tr>
-            <td align="center">softech华山论剑</td>
-            <td align="center">2020.06.14</td>
-            <td align="center">是</td>
-        </tr>
-        <tr>
-            <td align="center">石杉的架构笔记</td>
-            <td align="center">2020.06.09</td>
-            <td align="center">是</td>
-        </tr>
-        <tr>
-            <td align="center">源码笔记</td>
-            <td align="center">2020.06.04</td>
-            <td align="center">是</td>
-        </tr>
-    </tbody>
-</table></div>]]></content>
-      <categories>
-        <category>公众号</category>
-      </categories>
-      <tags>
-        <tag>白名单</tag>
-        <tag>公众号</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>【Java高工、架构师】系列群群规</title>
     <url>/x2y/wechat-gauge.html</url>
     <content><![CDATA[<blockquote class="blockquote-center">
@@ -2914,6 +2941,66 @@
       </categories>
       <tags>
         <tag>公众号</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【BAT的乌托邦】公众号开白申请</title>
+    <url>/x2y/wechat-white-list.html</url>
+    <content><![CDATA[<div class="note primary">
+            <ul><li>公众号：BAT的乌托邦</li><li>作者：A哥<ul><li>A哥的介绍：<ul><li><a href="/about">PC版</a></li><li><a href="https://mp.weixin.qq.com/s/PGIFtpI7aZaxY7es0F6C6Q" target="_blank" rel="noopener">手机版</a></li></ul></li><li>示例文章：<a href="https://mp.weixin.qq.com/s/PYVD8BvT7Nux0jiSomSG0A" target="_blank" rel="noopener">点击这里</a></li></ul></li><li>定位：专注Java领域，只做有深度的专栏文章分享，拒绝浅尝辄止</li><li>首篇文章时间：2020-05-03   <a href="https://mp.weixin.qq.com/s/PGIFtpI7aZaxY7es0F6C6Q" target="_blank" rel="noopener">查看首篇文章</a></li></ul>
+          </div>
+
+<h3 id="转载请著名出处，示例（文首-文末）："><a href="#转载请著名出处，示例（文首-文末）：" class="headerlink" title="转载请著名出处，示例（文首 + 文末）："></a>转载请著名出处，示例（文首 + 文末）：</h3><p><img data-src="https://img-blog.csdnimg.cn/20200616122117470.png" alt="文首"><br><img data-src="https://img-blog.csdnimg.cn/20200616122910584.png" alt="文末"></p>
+<div style="text-align: center;color: #8c8888;font-size: 8px;margin-top: -10px;">文案请从此处复制：本文转载自公众号【BAT的乌托邦】，专注Java领域，只做有深度的专栏文章分享，拒绝浅尝辄止。</div>
+
+<div style="margin-top: 50px; margin-bottom: 50px; text-align: center; font-weight: bolder; color: grey; font-size: 20px;">
+😄申请【开长白】请在本文下面留言，开白成功后我会登记入下表，谢谢合作😄
+</div>
+<div style="text-align: center; font-weight: bolder; color: #7d7d7d; font-size: 11px;margin-top: -50px;margin-bottom: 20px;">
+(留言时请输入正确邮箱号，这样开白成功会给你发邮件提醒)
+</div>
+<div class="table-container"><table>
+    <thead>
+        <tr>
+            <th align="center">公众号</th>
+            <th align="center">操作时间</th>
+            <th align="center">是否长白</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td align="center">学习Java的小姐姐</td>
+            <td align="center">2020.06.24</td>
+            <td align="center">是</td>
+        </tr>
+        <tr>
+            <td align="center">自由程序人</td>
+            <td align="center">2020.06.16</td>
+            <td align="center">是</td>
+        </tr>
+        <tr>
+            <td align="center">softech华山论剑</td>
+            <td align="center">2020.06.14</td>
+            <td align="center">是</td>
+        </tr>
+        <tr>
+            <td align="center">石杉的架构笔记</td>
+            <td align="center">2020.06.09</td>
+            <td align="center">是</td>
+        </tr>
+        <tr>
+            <td align="center">源码笔记</td>
+            <td align="center">2020.06.04</td>
+            <td align="center">是</td>
+        </tr>
+    </tbody>
+</table></div>]]></content>
+      <categories>
+        <category>公众号</category>
+      </categories>
+      <tags>
+        <tag>公众号</tag>
+        <tag>白名单</tag>
       </tags>
   </entry>
   <entry>
