@@ -172,6 +172,217 @@
       </tags>
   </entry>
   <entry>
+    <title>4. JSON字符串是如何被解析的？JsonParser了解一下</title>
+    <url>/x2y/a47cf2f7.html</url>
+    <content><![CDATA[<blockquote>
+<p>公司不是你家，领导不是你妈。本文已被 <a href="https://www.yourbatman.cn"><strong>https://www.yourbatman.cn</strong></a> 收录，里面一并有Spring技术栈、MyBatis、JVM、中间件等小而美的<strong>专栏</strong>供以免费学习。关注公众号【<strong>BAT的乌托邦</strong>】逐个击破，深入掌握，拒绝浅尝辄止。</p>
+</blockquote>
+<p><img data-src="https://img-blog.csdnimg.cn/20200725140936285.png" alt=""></p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>各位好，我是A哥(YourBatman)。上篇文章：<a href="https://mp.weixin.qq.com/s/ZHb3P06IC4xElHwJqDepxw" target="_blank" rel="noopener">3. 懂了这些，方敢在简历上说会用Jackson写JSON</a>  聊完，<strong>流式API</strong>的写部分可以认为你已完全掌握了，本文了解它读的部分。<br><img data-src="https://img-blog.csdnimg.cn/20200723180943213.png" alt=""></p>
+<h2 id="版本约定"><a href="#版本约定" class="headerlink" title="版本约定"></a>版本约定</h2><ul>
+<li>Jackson版本：<code>2.11.0</code></li>
+<li>Spring Framework版本：<code>5.2.6.RELEASE</code></li>
+<li>Spring Boot版本：<code>2.3.0.RELEASE</code></li>
+</ul>
+<blockquote>
+<p>小贴士：截止到本文，本系列<strong>前面</strong>所有示例都只仅仅导入<code>jackson-core</code>而已，后续若要新增jar包我会额外说明，否则相同</p>
+</blockquote>
+<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><p>什么叫读JSON？就是把一个JSON <strong>字符串</strong> 解析为对象or树模型嘛，因此也称作解析JSON串。Jackson底层流式API使用<code>JsonParser</code>来完成<strong>JSON字符串</strong>的解析。</p>
+<h2 id="最简使用Demo"><a href="#最简使用Demo" class="headerlink" title="最简使用Demo"></a>最简使用Demo</h2><p>准备一个POJO：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> Integer age;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>测试用例：把一个JSON字符串绑定（封装）进一个POJO对象里</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test1</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    String jsonStr = <span class="string">"&#123;\"name\":\"YourBatman\",\"age\":18&#125;"</span>;</span><br><span class="line">    Person person = <span class="keyword">new</span> Person();</span><br><span class="line"></span><br><span class="line">    JsonFactory factory = <span class="keyword">new</span> JsonFactory();</span><br><span class="line">    <span class="keyword">try</span> (JsonParser jsonParser = factory.createParser(jsonStr)) &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 只要还没结束"&#125;"，就一直读</span></span><br><span class="line">        <span class="keyword">while</span> (jsonParser.nextToken() != JsonToken.END_OBJECT) &#123;</span><br><span class="line">            String fieldname = jsonParser.getCurrentName();</span><br><span class="line">            <span class="keyword">if</span> (<span class="string">"name"</span>.equals(fieldname)) &#123;</span><br><span class="line">                jsonParser.nextToken();</span><br><span class="line">                person.setName(jsonParser.getText());</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="string">"age"</span>.equals(fieldname)) &#123;</span><br><span class="line">                jsonParser.nextToken();</span><br><span class="line">                person.setAge(jsonParser.getIntValue());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        System.out.println(person);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，输出：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Person(name=YourBatman, age=<span class="number">18</span>)</span><br></pre></td></tr></table></figure>
+<p>成功把一个JSON字符串的值解析到Person对象。你可能会疑问，怎么这么麻烦？那当然，这是底层流式API，纯<strong>手动档</strong>嘛。你获得了性能，可不要失去一些便捷性嘛。</p>
+<blockquote>
+<p>小贴士：底层流式API一般面向“专业人士”，应用级开发使用高阶API <code>ObjectMapper</code>即可。当然，读完本系列就能让你完全具备“专业人士”的实力😄</p>
+</blockquote>
+<p><code>JsonParser</code>针对不同的value类型，提供了非常多的方法用于实际值的获取。</p>
+<p><strong>直接</strong>值获取：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 获取字符串类型</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> String <span class="title">getText</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 数字Number类型值 标量值（支持的Number类型参照NumberType枚举）</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> Number <span class="title">getNumberValue</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span>;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> NumberType &#123;</span><br><span class="line">    INT, LONG, BIG_INTEGER, FLOAT, DOUBLE, BIG_DECIMAL</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">int</span> <span class="title">getIntValue</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span>;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">long</span> <span class="title">getLongValue</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span>;</span><br><span class="line">...</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">byte</span>[] getBinaryValue(Base64Variant bv) <span class="keyword">throws</span> IOException;</span><br></pre></td></tr></table></figure>
+<p>这类方法可能会抛出异常：比如value值本不是数字但你调用了getInValue()方法~</p>
+<blockquote>
+<p>小贴士：如果value值是null，像getIntValue()、getBooleanValue()等这种直接获取方法是会抛出异常的，但getText()不会</p>
+</blockquote>
+<p><strong>带默认值</strong>的值获取，具有更好安全性：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">getValueAsString</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> getValueAsString(<span class="keyword">null</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> String <span class="title">getValueAsString</span><span class="params">(String def)</span> <span class="keyword">throws</span> IOException</span>;</span><br><span class="line">...</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">long</span> <span class="title">getValueAsLong</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> getValueAsLong(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">long</span> <span class="title">getValueAsLong</span><span class="params">(<span class="keyword">long</span> def)</span> <span class="keyword">throws</span> IOException</span>;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>此类方法若碰到数据的转换失败时，<strong>不会抛出异常</strong>，把<code>def</code>作为默认值返回。</p>
+<h3 id="组合方法"><a href="#组合方法" class="headerlink" title="组合方法"></a>组合方法</h3><p>同<code>JsonGenerator</code>一样，JsonParser也提供了<strong>高钙片</strong>组合方法，让你更加便捷的使用。<br><img data-src="https://img-blog.csdnimg.cn/20200725133407278.png" alt=""></p>
+<h3 id="自动绑定"><a href="#自动绑定" class="headerlink" title="自动绑定"></a>自动绑定</h3><p>听起来像高级功能，是的，它必须依赖于<code>ObjectCodec</code>去实现，因为实际是全部委托给了它去完成的，也就是我们最为熟悉的readXXX系列方法：<br><img data-src="https://img-blog.csdnimg.cn/20200724154538278.png" alt=""><br>我们知道，ObjectMapper就是一个ObjectCodec，它属于高级API，本文显然不会用到ObjectMapper它喽，因此我们自己手敲一个实现来完成此功能。</p>
+<p>自定义一个ObjectCodec，Person类专用：用于把JSON串自动绑定到实例属性。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PersonObjectCodec</span> <span class="keyword">extends</span> <span class="title">ObjectCodec</span> </span>&#123;</span><br><span class="line">	...</span><br><span class="line">    <span class="meta">@SneakyThrows</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> &lt;T&gt; <span class="function">T <span class="title">readValue</span><span class="params">(JsonParser jsonParser, Class&lt;T&gt; valueType)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        Person person = (Person) valueType.newInstance();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 只要还没结束"&#125;"，就一直读</span></span><br><span class="line">        <span class="keyword">while</span> (jsonParser.nextToken() != JsonToken.END_OBJECT) &#123;</span><br><span class="line">            String fieldname = jsonParser.getCurrentName();</span><br><span class="line">            <span class="keyword">if</span> (<span class="string">"name"</span>.equals(fieldname)) &#123;</span><br><span class="line">                jsonParser.nextToken();</span><br><span class="line">                person.setName(jsonParser.getText());</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="string">"age"</span>.equals(fieldname)) &#123;</span><br><span class="line">                jsonParser.nextToken();</span><br><span class="line">                person.setAge(jsonParser.getIntValue());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> (T) person;</span><br><span class="line">    &#125;</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>有了它，就可以实现我们的<strong>自动</strong>绑定了，书写测试用例：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test3</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    String jsonStr = <span class="string">"&#123;\"name\":\"YourBatman\",\"age\":18, \"pickName\":null&#125;"</span>;</span><br><span class="line"></span><br><span class="line">    JsonFactory factory = <span class="keyword">new</span> JsonFactory();</span><br><span class="line">    <span class="keyword">try</span> (JsonParser jsonParser = factory.createParser(jsonStr)) &#123;</span><br><span class="line">        jsonParser.setCodec(<span class="keyword">new</span> PersonObjectCodec());</span><br><span class="line"></span><br><span class="line">        System.out.println(jsonParser.readValueAs(Person<span class="class">.<span class="keyword">class</span>))</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，输出：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Person(name=YourBatman, age=<span class="number">18</span>)</span><br></pre></td></tr></table></figure>
+<p>这就是ObjectMapper自动绑定的核心原理所在，其它更为强大能力将在后续章节详细展开。</p>
+<h2 id="JsonToken"><a href="#JsonToken" class="headerlink" title="JsonToken"></a>JsonToken</h2><p>在上例解析过程中，有一个非常重要的角色，那便是：JsonToken。它表示解析JSON内容时，用于返回结果的基本<strong>标记类型</strong>的枚举。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> JsonToken &#123;</span><br><span class="line">	NOT_AVAILABLE(<span class="keyword">null</span>, JsonTokenId.ID_NOT_AVAILABLE),</span><br><span class="line">	</span><br><span class="line">	START_OBJECT(<span class="string">"&#123;"</span>, JsonTokenId.ID_START_OBJECT),</span><br><span class="line">	END_OBJECT(<span class="string">"&#125;"</span>, JsonTokenId.ID_END_OBJECT),</span><br><span class="line">	START_ARRAY(<span class="string">"["</span>, JsonTokenId.ID_START_ARRAY),</span><br><span class="line">	END_ARRAY(<span class="string">"]"</span>, JsonTokenId.ID_END_ARRAY),</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 属性名（key）</span></span><br><span class="line">	FIELD_NAME(<span class="keyword">null</span>, JsonTokenId.ID_FIELD_NAME),</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 值（value）</span></span><br><span class="line">	VALUE_EMBEDDED_OBJECT(<span class="keyword">null</span>, JsonTokenId.ID_EMBEDDED_OBJECT),</span><br><span class="line">	VALUE_STRING(<span class="keyword">null</span>, JsonTokenId.ID_STRING),</span><br><span class="line">	VALUE_NUMBER_INT(<span class="keyword">null</span>, JsonTokenId.ID_NUMBER_INT),</span><br><span class="line">	VALUE_NUMBER_FLOAT(<span class="keyword">null</span>, JsonTokenId.ID_NUMBER_FLOAT),</span><br><span class="line">	VALUE_TRUE(<span class="string">"true"</span>, JsonTokenId.ID_TRUE),</span><br><span class="line">	VALUE_FALSE(<span class="string">"false"</span>, JsonTokenId.ID_FALSE),</span><br><span class="line">	VALUE_NULL(<span class="string">"null"</span>, JsonTokenId.ID_NULL),</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>为了辅助理解，A哥用一个例子，输出各个部分一目了然：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test2</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    String jsonStr = <span class="string">"&#123;\"name\":\"YourBatman\",\"age\":18, \"pickName\":null&#125;"</span>;</span><br><span class="line">    System.out.println(jsonStr);</span><br><span class="line">    JsonFactory factory = <span class="keyword">new</span> JsonFactory();</span><br><span class="line">    <span class="keyword">try</span> (JsonParser jsonParser = factory.createParser(jsonStr)) &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">            JsonToken token = jsonParser.nextToken();</span><br><span class="line">            System.out.println(token + <span class="string">" -&gt; 值为:"</span> + jsonParser.getValueAsString());</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (token == JsonToken.END_OBJECT) &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，输出：</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&#123;<span class="attr">"name"</span>:<span class="string">"YourBatman"</span>,<span class="attr">"age"</span>:<span class="number">18</span>, <span class="attr">"pickName"</span>:<span class="literal">null</span>&#125;</span><br><span class="line">START_OBJECT -&gt; 值为:null</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">FIELD_NAME -&gt; 值为:name</span><br><span class="line">VALUE_STRING -&gt; 值为:YourBatman</span><br><span class="line"></span><br><span class="line">FIELD_NAME -&gt; 值为:age</span><br><span class="line">VALUE_NUMBER_INT -&gt; 值为:18</span><br><span class="line"></span><br><span class="line">FIELD_NAME -&gt; 值为:pickName</span><br><span class="line">VALUE_NULL -&gt; 值为:null</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">END_OBJECT -&gt; 值为:null</span><br></pre></td></tr></table></figure>
+<p><strong>从左至右</strong>解析，一一对应。各个部分用下面这张图可以简略表示出来：<br><img data-src="https://img-blog.csdnimg.cn/20200724140146351.png" alt=""></p>
+<blockquote>
+<p>小贴士：解析时请确保你的的JSON串是合法的，否则抛出<code>JsonParseException</code>异常</p>
+</blockquote>
+<h2 id="JsonParser的Feature"><a href="#JsonParser的Feature" class="headerlink" title="JsonParser的Feature"></a>JsonParser的Feature</h2><p>它是JsonParser的一个内部枚举类，共15个枚举值：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> Feature &#123;</span><br><span class="line">	AUTO_CLOSE_SOURCE(<span class="keyword">true</span>),</span><br><span class="line">	</span><br><span class="line">	ALLOW_COMMENTS(<span class="keyword">false</span>),</span><br><span class="line">	ALLOW_YAML_COMMENTS(<span class="keyword">false</span>),</span><br><span class="line">	ALLOW_UNQUOTED_FIELD_NAMES(<span class="keyword">false</span>),</span><br><span class="line">	ALLOW_SINGLE_QUOTES(<span class="keyword">false</span>),</span><br><span class="line">	<span class="meta">@Deprecated</span></span><br><span class="line">	ALLOW_UNQUOTED_CONTROL_CHARS(<span class="keyword">false</span>),</span><br><span class="line">	<span class="meta">@Deprecated</span></span><br><span class="line">	ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER(<span class="keyword">false</span>),</span><br><span class="line">	<span class="meta">@Deprecated</span></span><br><span class="line">	ALLOW_NUMERIC_LEADING_ZEROS(<span class="keyword">false</span>),</span><br><span class="line">	<span class="meta">@Deprecated</span></span><br><span class="line">	ALLOW_LEADING_DECIMAL_POINT_FOR_NUMBERS(<span class="keyword">false</span>),</span><br><span class="line">	<span class="meta">@Deprecated</span></span><br><span class="line">	ALLOW_NON_NUMERIC_NUMBERS(<span class="keyword">false</span>),</span><br><span class="line">	<span class="meta">@Deprecated</span></span><br><span class="line">	ALLOW_MISSING_VALUES(<span class="keyword">false</span>),</span><br><span class="line">	<span class="meta">@Deprecated</span></span><br><span class="line">	ALLOW_TRAILING_COMMA(<span class="keyword">false</span>),</span><br><span class="line">	</span><br><span class="line">	STRICT_DUPLICATE_DETECTION(<span class="keyword">false</span>),</span><br><span class="line">	IGNORE_UNDEFINED(<span class="keyword">false</span>),</span><br><span class="line">	INCLUDE_SOURCE_IN_LOCATION(<span class="keyword">true</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>小贴士：枚举值均为bool类型，括号内为默认值</p>
+</blockquote>
+<p>每个枚举值都控制着<code>JsonParser</code>不同的行为。下面分类进行解释</p>
+<h3 id="底层I-O流相关"><a href="#底层I-O流相关" class="headerlink" title="底层I/O流相关"></a>底层I/O流相关</h3><blockquote>
+<p>自2.10版本后，使用<code>StreamReadFeature#AUTO_CLOSE_SOURCE</code>代替</p>
+</blockquote>
+<p>Jackson的流式API指的是I/O流，所以即使是<strong>读</strong>，底层也是用I/O流（Reader）去读取然后解析的。</p>
+<h4 id="AUTO-CLOSE-SOURCE-true"><a href="#AUTO-CLOSE-SOURCE-true" class="headerlink" title="AUTO_CLOSE_SOURCE(true)"></a>AUTO_CLOSE_SOURCE(true)</h4><p>原理和JsonGenerator的<code>AUTO_CLOSE_TARGET(true)</code>一样，不再解释，详见<a href="https://mp.weixin.qq.com/s/ZHb3P06IC4xElHwJqDepxw" target="_blank" rel="noopener">上篇文章</a>对应部分。</p>
+<h3 id="支持非标准格式"><a href="#支持非标准格式" class="headerlink" title="支持非标准格式"></a>支持非标准格式</h3><p>JSON是有规范的，在它的规范里并没有描述到对注释的规定、对控制字符的处理等等，也就是说这些均属于<strong>非标准</strong>行为。比如这个JSON串：</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	<span class="attr">"name"</span> : <span class="string">"YourBarman"</span>, <span class="comment">// 名字</span></span><br><span class="line">	<span class="attr">"age"</span> : <span class="number">18</span> <span class="comment">// 年龄</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>你看，若你这么写IDEA都会飘红提示你：<br><img data-src="https://img-blog.csdnimg.cn/20200724185832770.png" alt=""><br><strong>但是</strong>，在很多使用场景（特别是JavaScript）里，我们会在JSON串里写注释（属性多时尤甚）那么对于这种串，JsonParser如何控制处理呢？它提供了对非标准JSON格式的兼容，通过下面这些特征值来控制。</p>
+<h4 id="ALLOW-COMMENTS-false"><a href="#ALLOW-COMMENTS-false" class="headerlink" title="ALLOW_COMMENTS(false)"></a>ALLOW_COMMENTS(false)</h4><blockquote>
+<p>自2.10版本后，使用<code>JsonReadFeature#ALLOW_JAVA_COMMENTS</code>代替</p>
+</blockquote>
+<p>是否允许<code>/* */</code>或者<code>//</code>这种类型的注释出现。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test4</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    String jsonStr = <span class="string">"&#123;\n"</span> +</span><br><span class="line">            <span class="string">"\t\"name\" : \"YourBarman\", // 名字\n"</span> +</span><br><span class="line">            <span class="string">"\t\"age\" : 18 // 年龄\n"</span> +</span><br><span class="line">            <span class="string">"&#125;"</span>;</span><br><span class="line"></span><br><span class="line">    JsonFactory factory = <span class="keyword">new</span> JsonFactory();</span><br><span class="line">    <span class="keyword">try</span> (JsonParser jsonParser = factory.createParser(jsonStr)) &#123;</span><br><span class="line">    	<span class="comment">// 开启注释支持</span></span><br><span class="line">        <span class="comment">// jsonParser.enable(JsonParser.Feature.ALLOW_COMMENTS);</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (jsonParser.nextToken() != JsonToken.END_OBJECT) &#123;</span><br><span class="line">            String fieldname = jsonParser.getCurrentName();</span><br><span class="line">            <span class="keyword">if</span> (<span class="string">"name"</span>.equals(fieldname)) &#123;</span><br><span class="line">                jsonParser.nextToken();</span><br><span class="line">                System.out.println(jsonParser.getText());</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="string">"age"</span>.equals(fieldname)) &#123;</span><br><span class="line">                jsonParser.nextToken();</span><br><span class="line">                System.out.println(jsonParser.getIntValue());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，抛出异常：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">com.fasterxml.jackson.core.JsonParseException: <span class="function">Unexpected <span class="title">character</span> <span class="params">(<span class="string">'/'</span> (code <span class="number">47</span>)</span>): maybe <span class="title">a</span> <span class="params">(non-standard)</span> comment? <span class="params">(not recognized as one since Feature <span class="string">'ALLOW_COMMENTS'</span> not enabled <span class="keyword">for</span> parser)</span></span></span><br><span class="line"><span class="function"> at [Source: <span class="params">(String)</span>"</span>&#123;</span><br><span class="line">	<span class="string">"name"</span> : <span class="string">"YourBarman"</span>, <span class="comment">// 名字</span></span><br><span class="line">	<span class="string">"age"</span> : <span class="number">18</span> <span class="comment">// 年龄</span></span><br><span class="line">&#125;<span class="string">"; line: 2, column: 26]</span></span><br></pre></td></tr></table></figure>
+<p>放开注释的代码，再次运行程序，<strong>正常work</strong>。</p>
+<h4 id="ALLOW-YAML-COMMENTS-false"><a href="#ALLOW-YAML-COMMENTS-false" class="headerlink" title="ALLOW_YAML_COMMENTS(false)"></a>ALLOW_YAML_COMMENTS(false)</h4><blockquote>
+<p>自2.10版本后，使用<code>JsonReadFeature#ALLOW_YAML_COMMENTS</code>代替</p>
+</blockquote>
+<p>顾名思义，开启后将支持Yaml格式的的注释，也就是<code>#</code>形式的注释语法。</p>
+<h4 id="ALLOW-UNQUOTED-FIELD-NAMES-false"><a href="#ALLOW-UNQUOTED-FIELD-NAMES-false" class="headerlink" title="ALLOW_UNQUOTED_FIELD_NAMES(false)"></a>ALLOW_UNQUOTED_FIELD_NAMES(false)</h4><blockquote>
+<p>自2.10版本后，使用<code>JsonReadFeature#ALLOW_UNQUOTED_FIELD_NAMES</code>代替</p>
+</blockquote>
+<p>是否允许属性名<strong>不带双引号””</strong>，比较简单，示例略。</p>
+<h4 id="ALLOW-SINGLE-QUOTES-false"><a href="#ALLOW-SINGLE-QUOTES-false" class="headerlink" title="ALLOW_SINGLE_QUOTES(false)"></a>ALLOW_SINGLE_QUOTES(false)</h4><blockquote>
+<p>自2.10版本后，使用<code>JsonReadFeature#ALLOW_SINGLE_QUOTES</code>代替</p>
+</blockquote>
+<p>是否允许属性名支持单引号，也就是使用<code>&#39;&#39;</code>包裹，形如这样：</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    'age' : 18</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="ALLOW-UNQUOTED-CONTROL-CHARS-false"><a href="#ALLOW-UNQUOTED-CONTROL-CHARS-false" class="headerlink" title="ALLOW_UNQUOTED_CONTROL_CHARS(false)"></a><del>ALLOW_UNQUOTED_CONTROL_CHARS(false)</del></h4><blockquote>
+<p>自2.10版本后，使用<code>JsonReadFeature#ALLOW_UNESCAPED_CONTROL_CHARS</code>代替</p>
+</blockquote>
+<p>是否允许JSON字符串包含非引号<strong>控制字符</strong>（值小于32的ASCII字符，包含制表符和换行符）。 由于JSON规范要求对所有控制字符使用引号，这是一个非标准的特性，因此默认禁用。</p>
+<p>那么，哪些字符属于控制字符呢？做个简单科普：我们一般说的ASCII码共128个字符(7bit)，共分为两大类</p>
+<h5 id="控制字符"><a href="#控制字符" class="headerlink" title="控制字符"></a>控制字符</h5><p>控制字符，也叫不可打印字符。第<strong>0～32号</strong>及第127号(共34个)是控制字符，例如常见的：<strong>LF（换行）</strong>、<strong>CR（回车）</strong>、FF（换页）、DEL（删除）、BS（退格)等都属于此类。</p>
+<p>控制字符<strong>大部分已经废弃</strong>不用了，它们的用途主要是用来操控已经处理过的文字，ASCII值为8、9、10 和13 分别转换为退格、制表、换行和回车字符。它们<strong>并没有特定的图形显示</strong>，但会依不同的应用程序，而对文本显示有不同的影响。</p>
+<blockquote>
+<p>话外音：你看不见我，但我对你影响还蛮大</p>
+</blockquote>
+<h5 id="非控制字符"><a href="#非控制字符" class="headerlink" title="非控制字符"></a>非控制字符</h5><p>也叫可显示字符，或者可打印字符，能从键盘直接输入的字符。比如0-9数字，逗号、分号这些等等。</p>
+<blockquote>
+<p>话外音：你肉眼能看到的字符就属于非控制字符</p>
+</blockquote>
+<h4 id="ALLOW-BACKSLASH-ESCAPING-ANY-CHARACTER-false"><a href="#ALLOW-BACKSLASH-ESCAPING-ANY-CHARACTER-false" class="headerlink" title="ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER(false)"></a><del>ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER(false)</del></h4><blockquote>
+<p>自2.10版本后，使用<code>JsonReadFeature#ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER</code>代替</p>
+</blockquote>
+<p>是否允许<strong>反斜杠\</strong>转义任何字符。这句话不是非常好理解，看下面这个例子：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test4</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    String jsonStr = <span class="string">"&#123;\"name\" : \"YourB\\'atman\" &#125;"</span>;</span><br><span class="line"></span><br><span class="line">    JsonFactory factory = <span class="keyword">new</span> JsonFactory();</span><br><span class="line">    <span class="keyword">try</span> (JsonParser jsonParser = factory.createParser(jsonStr)) &#123;</span><br><span class="line">        <span class="comment">// jsonParser.enable(JsonParser.Feature.ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER);</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (jsonParser.nextToken() != JsonToken.END_OBJECT) &#123;</span><br><span class="line">            String fieldname = jsonParser.getCurrentName();</span><br><span class="line">            <span class="keyword">if</span> (<span class="string">"name"</span>.equals(fieldname)) &#123;</span><br><span class="line">                jsonParser.nextToken();</span><br><span class="line">                System.out.println(jsonParser.getText());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，报错：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">com.fasterxml.jackson.core.JsonParseException: Unrecognized character escape <span class="string">''</span><span class="string">' (code 39)</span></span><br><span class="line"><span class="string"> at [Source: (String)"&#123;"name" : "YourB\'atman" &#125;"; line: 1, column: 19]</span></span><br><span class="line"><span class="string"> ...</span></span><br></pre></td></tr></table></figure>
+<p>放开注释掉的代码，再次运行程序，<strong>一切正常</strong>，输出：<code>YourB&#39;atman</code>。</p>
+<h4 id="ALLOW-NUMERIC-LEADING-ZEROS-false"><a href="#ALLOW-NUMERIC-LEADING-ZEROS-false" class="headerlink" title="ALLOW_NUMERIC_LEADING_ZEROS(false)"></a><del>ALLOW_NUMERIC_LEADING_ZEROS(false)</del></h4><blockquote>
+<p>自2.10版本后，使用<code>JsonReadFeature#ALLOW_LEADING_ZEROS_FOR_NUMBERS</code>代替</p>
+</blockquote>
+<p>是否允许像<code>00001</code>这样的“数字”出现（而不报错）。看例子：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test5</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    String jsonStr = <span class="string">"&#123;\"age\" : 00018 &#125;"</span>;</span><br><span class="line"></span><br><span class="line">    JsonFactory factory = <span class="keyword">new</span> JsonFactory();</span><br><span class="line">    <span class="keyword">try</span> (JsonParser jsonParser = factory.createParser(jsonStr)) &#123;</span><br><span class="line">        <span class="comment">// jsonParser.enable(JsonParser.Feature.ALLOW_NUMERIC_LEADING_ZEROS);</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (jsonParser.nextToken() != JsonToken.END_OBJECT) &#123;</span><br><span class="line">            String fieldname = jsonParser.getCurrentName();</span><br><span class="line">            <span class="keyword">if</span> (<span class="string">"age"</span>.equals(fieldname)) &#123;</span><br><span class="line">                jsonParser.nextToken();</span><br><span class="line">                System.out.println(jsonParser.getIntValue());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，输出：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">com.fasterxml.jackson.core.JsonParseException: Invalid numeric value: Leading zeroes not allowed</span><br><span class="line"> at [Source: (String)<span class="string">"&#123;"</span>age<span class="string">" : 00018 &#125;"</span>; line: <span class="number">1</span>, column: <span class="number">11</span>]</span><br><span class="line"> ...</span><br></pre></td></tr></table></figure>
+<p>放开注掉的代码，再次运行程序，一切正常。输出<code>18</code>。</p>
+<h4 id="ALLOW-LEADING-DECIMAL-POINT-FOR-NUMBERS-false"><a href="#ALLOW-LEADING-DECIMAL-POINT-FOR-NUMBERS-false" class="headerlink" title="ALLOW_LEADING_DECIMAL_POINT_FOR_NUMBERS(false)"></a><del>ALLOW_LEADING_DECIMAL_POINT_FOR_NUMBERS(false)</del></h4><blockquote>
+<p>自2.10版本后，使用<code>JsonReadFeature#ALLOW_LEADING_DECIMAL_POINT_FOR_NUMBERS</code>代替</p>
+</blockquote>
+<p>是否允许小数点<code>.</code>打头，也就是说<code>.1</code>这种小数格式是否合法。默认是不合法的，需要开启此特征才能支持，例子就略了，基本同上。</p>
+<h4 id="ALLOW-NON-NUMERIC-NUMBERS-false"><a href="#ALLOW-NON-NUMERIC-NUMBERS-false" class="headerlink" title="ALLOW_NON_NUMERIC_NUMBERS(false)"></a><del>ALLOW_NON_NUMERIC_NUMBERS(false)</del></h4><blockquote>
+<p>自2.10版本后，使用<code>JsonReadFeature#ALLOW_NON_NUMERIC_NUMBERS</code>代替</p>
+</blockquote>
+<p>是否允许一些解析器识别一组<strong>“非数字”(如NaN)</strong>作为合法的浮点数值。这个属性和上篇文章的<code>JsonGenerator#QUOTE_NON_NUMERIC_NUMBERS</code>特征值是遥相呼应的。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test5</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    String jsonStr = <span class="string">"&#123;\"percent\" : NaN &#125;"</span>;</span><br><span class="line"></span><br><span class="line">    JsonFactory factory = <span class="keyword">new</span> JsonFactory();</span><br><span class="line">    <span class="keyword">try</span> (JsonParser jsonParser = factory.createParser(jsonStr)) &#123;</span><br><span class="line">        <span class="comment">// jsonParser.enable(JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS);</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (jsonParser.nextToken() != JsonToken.END_OBJECT) &#123;</span><br><span class="line">            String fieldname = jsonParser.getCurrentName();</span><br><span class="line">            <span class="keyword">if</span> (<span class="string">"percent"</span>.equals(fieldname)) &#123;</span><br><span class="line">                jsonParser.nextToken();</span><br><span class="line">                System.out.println(jsonParser.getFloatValue());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，抛错：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">com.fasterxml.jackson.core.JsonParseException: Non-standard token <span class="string">'NaN'</span>: enable JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS to allow</span><br><span class="line"> at [Source: (String)<span class="string">"&#123;"</span>percent<span class="string">" : NaN &#125;"</span>; line: <span class="number">1</span>, column: <span class="number">17</span>]</span><br></pre></td></tr></table></figure>
+<p>放开注释掉的代码，再次运行，一切正常。输出：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">NaN</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>小贴士：NaN也可以表示一个Float对象，是的你没听错，即使它不是<strong>数字</strong>但它也是Float类型。具体你可以看看Float源码里的那几个常量</p>
+</blockquote>
+<h4 id="ALLOW-MISSING-VALUES-false"><a href="#ALLOW-MISSING-VALUES-false" class="headerlink" title="ALLOW_MISSING_VALUES(false)"></a><del>ALLOW_MISSING_VALUES(false)</del></h4><blockquote>
+<p>自2.10版本后，使用<code>JsonReadFeature#ALLOW_MISSING_VALUES</code>代替</p>
+</blockquote>
+<p>是否允许支持<strong>JSON数组中</strong>“缺失”值。怎么理解：数组中缺失了值表示两个逗号之间，啥都没有，形如这样<code>[value1, , value3]</code>。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test6</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    String jsonStr = <span class="string">"&#123;\"names\" : [\"YourBatman\",,\"A哥\",,] &#125;"</span>;</span><br><span class="line"></span><br><span class="line">    JsonFactory factory = <span class="keyword">new</span> JsonFactory();</span><br><span class="line">    <span class="keyword">try</span> (JsonParser jsonParser = factory.createParser(jsonStr)) &#123;</span><br><span class="line">        <span class="comment">// jsonParser.enable(JsonParser.Feature.ALLOW_MISSING_VALUES);</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (jsonParser.nextToken() != JsonToken.END_OBJECT) &#123;</span><br><span class="line">            String fieldname = jsonParser.getCurrentName();</span><br><span class="line">            <span class="keyword">if</span> (<span class="string">"names"</span>.equals(fieldname)) &#123;</span><br><span class="line">                jsonParser.nextToken();</span><br><span class="line"></span><br><span class="line">                <span class="keyword">while</span> (jsonParser.nextToken() != JsonToken.END_ARRAY) &#123;</span><br><span class="line">                    System.out.println(jsonParser.getText());</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，抛错：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">YourBatman <span class="comment">// 能输出一个，毕竟第一个part（JsonToken）是正常的嘛</span></span><br><span class="line"></span><br><span class="line">com.fasterxml.jackson.core.JsonParseException: <span class="function">Unexpected <span class="title">character</span> <span class="params">(<span class="string">','</span> (code <span class="number">44</span>)</span>): expected a valid <span class="title">value</span> <span class="params">(JSON String, Number, Array, Object or token <span class="string">'null'</span>, <span class="string">'true'</span> or <span class="string">'false'</span>)</span></span></span><br><span class="line"><span class="function"> at [Source: <span class="params">(String)</span>"</span>&#123;<span class="string">"names"</span> : [<span class="string">"YourBatman"</span>,,<span class="string">"A哥"</span>,,] &#125;<span class="string">"; line: 1, column: 27]</span></span><br></pre></td></tr></table></figure>
+<p>放开注释掉的代码，再次运行，一切正常，结果为：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">YourBatman</span><br><span class="line"><span class="keyword">null</span></span><br><span class="line">A哥</span><br><span class="line"><span class="keyword">null</span></span><br><span class="line"><span class="keyword">null</span></span><br></pre></td></tr></table></figure>
+<p>请注意：此时数组的长度是5哦。</p>
+<blockquote>
+<p>小贴士：此处用的String类型展示结果，是因为null可以作为String类型（<code>jsonParser.getText()</code>得到null是合法的）。但如果你使用的int类型（或者bool类型），那么如果是null的话就报错喽<code>Current token (VALUE_NULL) not of boolean type</code>，有兴趣的亲可自行尝试，巩固下理解的效果。报错原因文上已有说明~</p>
+</blockquote>
+<h4 id="ALLOW-TRAILING-COMMA-false"><a href="#ALLOW-TRAILING-COMMA-false" class="headerlink" title="ALLOW_TRAILING_COMMA(false)"></a><del>ALLOW_TRAILING_COMMA(false)</del></h4><blockquote>
+<p>自2.10版本后，使用<code>JsonReadFeature#ALLOW_TRAILING_COMMA</code>代替</p>
+</blockquote>
+<p>是否允许最后一个多余的逗号（一定是最后一个）。这个特征是<strong>非常重要</strong>的，若开关打开，有如下效果：</p>
+<ul>
+<li>[true,true,]等价于[true, true]</li>
+<li>{“a”: true,}等价于{“a”: true}</li>
+</ul>
+<p>当这个特征和上面的<code>ALLOW_MISSING_VALUES</code>特征同时使用时，本特征优先级更高。也就是说：会先去除掉最后一个逗号后，再进行数组长度的计算。</p>
+<p>举个例子：当然这两个特征开关都打开时，[true,true,]等价于[true, true]好理解；<strong>并且呢，<code>[true,true,,]</code>是等价于<code>[true, true, null]</code>的哦，可千万别忽略最后的这个null</strong>。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test7</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    String jsonStr = <span class="string">"&#123;\"results\" : [true,true,,] &#125;"</span>;</span><br><span class="line"></span><br><span class="line">    JsonFactory factory = <span class="keyword">new</span> JsonFactory();</span><br><span class="line">    <span class="keyword">try</span> (JsonParser jsonParser = factory.createParser(jsonStr)) &#123;</span><br><span class="line">        jsonParser.enable(JsonParser.Feature.ALLOW_MISSING_VALUES);</span><br><span class="line">        <span class="comment">// jsonParser.enable(JsonParser.Feature.ALLOW_TRAILING_COMMA);</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (jsonParser.nextToken() != JsonToken.END_OBJECT) &#123;</span><br><span class="line">            String fieldname = jsonParser.getCurrentName();</span><br><span class="line">            <span class="keyword">if</span> (<span class="string">"results"</span>.equals(fieldname)) &#123;</span><br><span class="line">                jsonParser.nextToken();</span><br><span class="line"></span><br><span class="line">                <span class="keyword">while</span> (jsonParser.nextToken() != JsonToken.END_ARRAY) &#123;</span><br><span class="line">                    System.out.println(jsonParser.getBooleanValue());</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，输出：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">YourBatman</span><br><span class="line"><span class="keyword">null</span></span><br><span class="line">A哥</span><br><span class="line"><span class="keyword">null</span></span><br><span class="line"><span class="keyword">null</span></span><br></pre></td></tr></table></figure>
+<p>这完全就是上例的效果嘛。现在我放开注释掉的代码，再次运行，结果为：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">YourBatman</span><br><span class="line"><span class="keyword">null</span></span><br><span class="line">A哥</span><br><span class="line"><span class="keyword">null</span></span><br></pre></td></tr></table></figure>
+<p><strong>请注意对比前后的结果差异，并自己能能自己合理解释</strong>。</p>
+<h3 id="校验相关"><a href="#校验相关" class="headerlink" title="校验相关"></a>校验相关</h3><p>Jackson在JSON标准<strong>之外</strong>，给出了两个校验相关的特征。</p>
+<h4 id="STRICT-DUPLICATE-DETECTION-false"><a href="#STRICT-DUPLICATE-DETECTION-false" class="headerlink" title="STRICT_DUPLICATE_DETECTION(false)"></a>STRICT_DUPLICATE_DETECTION(false)</h4><blockquote>
+<p>自2.10版本后，使用<code>StreamReadFeature#STRICT_DUPLICATE_DETECTION</code>代替</p>
+</blockquote>
+<p>是否允许JSON串有两个相同的属性key，默认是<strong>允许的</strong>。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test8</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    String jsonStr = <span class="string">"&#123;\"age\":18, \"age\": 28 &#125;"</span>;</span><br><span class="line"></span><br><span class="line">    JsonFactory factory = <span class="keyword">new</span> JsonFactory();</span><br><span class="line">    <span class="keyword">try</span> (JsonParser jsonParser = factory.createParser(jsonStr)) &#123;</span><br><span class="line">        <span class="comment">// jsonParser.enable(JsonParser.Feature.STRICT_DUPLICATE_DETECTION);</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (jsonParser.nextToken() != JsonToken.END_OBJECT) &#123;</span><br><span class="line">            String fieldname = jsonParser.getCurrentName();</span><br><span class="line">            <span class="keyword">if</span> (<span class="string">"age"</span>.equals(fieldname)) &#123;</span><br><span class="line">                jsonParser.nextToken();</span><br><span class="line">                System.out.println(jsonParser.getIntValue());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，正常输出：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="number">18</span></span><br><span class="line"><span class="number">28</span></span><br></pre></td></tr></table></figure>
+<p>若放开注释代码，再次运行，则抛错：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="number">18</span> <span class="comment">// 第一个数字还是能正常输出的哟</span></span><br><span class="line"></span><br><span class="line">com.fasterxml.jackson.core.JsonParseException: Duplicate field <span class="string">'age'</span></span><br><span class="line"> at [Source: (String)<span class="string">"&#123;"</span>age<span class="string">":18, "</span>age<span class="string">": 28 &#125;"</span>; line: <span class="number">1</span>, column: <span class="number">17</span>]</span><br></pre></td></tr></table></figure>
+
+<h4 id="IGNORE-UNDEFINED-false"><a href="#IGNORE-UNDEFINED-false" class="headerlink" title="IGNORE_UNDEFINED(false)"></a>IGNORE_UNDEFINED(false)</h4><blockquote>
+<p>自2.10版本后，使用<code>StreamReadFeature#IGNORE_UNDEFINED</code>代替</p>
+</blockquote>
+<p>是否忽略<strong>没有定义</strong>的属性key。和<code>JsonGenerator.Feature#IGNORE_UNKNOWN</code>的这个特征一样，它作用于预先定义了格式的数据类型，如<code>Avro、protobuf</code>等等，JSON是不需要预先定义的哦~</p>
+<p>同样的，你可以通过这个API预先设置格式：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">JsonParser:</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setSchema</span><span class="params">(FormatSchema schema)</span> </span>&#123;</span><br><span class="line">    	...</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h3><h4 id="INCLUDE-SOURCE-IN-LOCATION-true"><a href="#INCLUDE-SOURCE-IN-LOCATION-true" class="headerlink" title="INCLUDE_SOURCE_IN_LOCATION(true)"></a>INCLUDE_SOURCE_IN_LOCATION(true)</h4><blockquote>
+<p>自2.10版本后，使用<code>StreamReadFeature#INCLUDE_SOURCE_IN_LOCATION</code>代替</p>
+</blockquote>
+<p>是否构建<code>JsonLocation</code>对象来表示每个part的来源，你可以通过<code>JsonParser#getCurrentLocation()</code>来访问。作用不大，就此略过。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>本文介绍了底层流式API JsonParser读JSON的方式，它不仅仅能够处理<strong>标准JSON</strong>，也能通过Feature特征值来控制，开启对一些非标准但又比较常用的JSON串的支持，这不正式一个优秀框架/库应有的态度麽：<strong>兼容性</strong>。</p>
+<p>结合上篇文章对写JSON时<code>JsonGenerator</code>的描述，能够总结出两点原则：</p>
+<ul>
+<li>写：100%遵循规范</li>
+<li>读：最大程度<strong>兼容</strong>并包</li>
+</ul>
+<p>写代表你的输出，遵循规范的输出能确保第三方在用你输出的数据时不至于对你破口大骂，所以这是你应该做好的<strong>本分</strong>。读代表你的输入，能够处理规范的格式是你的职责，但我若还能额外的处理一些非标准格式（一般为常用的），那绝对是闪耀点，也就是你给的<strong>情分</strong>。本分是你应该做的，而情分就是你的加分项。<br><img data-src="https://img-blog.csdnimg.cn/20200725135421852.png" alt=""></p>
+<h5 id="相关推荐："><a href="#相关推荐：" class="headerlink" title="相关推荐："></a>相关推荐：</h5><ul>
+<li><a href="https://mp.weixin.qq.com/s/z6T9n9YvwjmDwuj-YTa0_w" target="_blank" rel="noopener">Fastjson到了说再见的时候了</a></li>
+<li><a href="https://mp.weixin.qq.com/s/iqSN4HUoIdX0kGcSdnD7EA" target="_blank" rel="noopener">1. 初识Jackson – 世界上最好的JSON库</a></li>
+<li><a href="https://mp.weixin.qq.com/s/p6cwP2BVrC8VxkN-T3uAxg" target="_blank" rel="noopener">2. 妈呀，Jackson原来是这样写JSON的</a></li>
+<li><a href="https://mp.weixin.qq.com/s/ZHb3P06IC4xElHwJqDepxw" target="_blank" rel="noopener">3. 懂了这些，方敢在简历上说会用Jackson写JSON</a></li>
+</ul>]]></content>
+      <categories>
+        <category>缺省</category>
+      </categories>
+      <tags>
+        <tag>Jackson</tag>
+        <tag>JSON</tag>
+        <tag>Fastjson</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>搞事情？Spring Boot今天一口气发布三个版本</title>
     <url>/x2y/a3cba048.html</url>
     <content><![CDATA[<blockquote>
@@ -522,8 +733,8 @@
       </categories>
       <tags>
         <tag>Jackson</tag>
-        <tag>Fastjson</tag>
         <tag>JSON</tag>
+        <tag>Fastjson</tag>
       </tags>
   </entry>
   <entry>
@@ -720,8 +931,8 @@
       </categories>
       <tags>
         <tag>Jackson</tag>
-        <tag>Fastjson</tag>
         <tag>JSON</tag>
+        <tag>Fastjson</tag>
       </tags>
   </entry>
   <entry>
@@ -1595,8 +1806,8 @@
         <category>Spring static关键字</category>
       </categories>
       <tags>
-        <tag>Spring Framework</tag>
         <tag>Spring Boot</tag>
+        <tag>Spring Framework</tag>
         <tag>static</tag>
       </tags>
   </entry>
@@ -2886,64 +3097,6 @@
       </tags>
   </entry>
   <entry>
-    <title>【Java高工、架构师】系列群群规</title>
-    <url>/x2y/wechat-gauge.html</url>
-    <content><![CDATA[<blockquote class="blockquote-center">
-            <i class="fa fa-quote-left"></i>
-            <p>久旱逢甘雨，一滴；<br>他乡遇故知，债主；<br>洞房花烛夜，隔壁；<br>金榜题名时，重名。</p>
-
-            <i class="fa fa-quote-right"></i>
-          </blockquote>
-
-<p><img data-src="https://img-blog.csdnimg.cn/20200613101159736.png" alt=""></p>
-<div style="margin-top: 50px; margin-bottom: 50px; text-align: center; font-weight: bolder; color: grey; font-size: 20px;">
-😄本系列群是由A哥搭建起的纯技术交流平台，无任何商业属性。秉承着做技术我们是认真的态度，有一些规则需要你遵守😄
-</div>
-<div class="tabs" id="唯一名称(写上，不然有warn警告)"><ul class="nav-tabs"><li class="tab active"><a href="#唯一名称(写上，不然有warn警告)-1">关于推文</a></li><li class="tab"><a href="#唯一名称(写上，不然有warn警告)-2">关于广告</a></li><li class="tab"><a href="#唯一名称(写上，不然有warn警告)-3">关于群</a></li><li class="tab"><a href="#唯一名称(写上，不然有warn警告)-4">群福利</a></li></ul><div class="tab-content"><div class="tab-pane active" id="唯一名称(写上，不然有warn警告)-1"><div style="text-align: center; color: red; font-weight: bolder; font-size: 18px; }" class="note danger">
-禁止一切未经允许的推文
-</div>
-
-<p>目的：避免沦为推文群、僵尸群，同时提高文章质量，旨在帮群友筛选出真正的干货。因此需要对推文方面作出一些限制：</p>
-<div class="note warning">
-            <ol><li>禁止一切未经允许的推文</li><li>目前【仅】10群开放自由推文限制（但也不能是广告文、太水的文），若你是号主or你希望看到更多“不一样”的文章，可私聊A哥邀请你进入10群</li><li>除了10群外，其它群推文采用【申请授权】方式，A哥已组件好了小团队会定期进行审核，通过后会通知到你便可在指定群推文了。<a href="https://shimo.im/sheets/QtqXwKgCVJxJjhtJ/MODOC" target="_blank" rel="noopener">申请登记地址</a></li><li>为了避免信息爆炸，每个群允许通过授权的数量目前定在【5个】，后期会根据实际情况加以调整</li></ol>
-          </div></div><div class="tab-pane" id="唯一名称(写上，不然有warn警告)-2"><div style="text-align: center; color: red; font-weight: bolder; font-size: 18px; }" class="note danger">
-所有群禁止一切未经允许的广告
-</div>
-目的：你懂的，咱们是纯净版技术群，是有B格的。广告最容易让一个群死翘翘了，所以禁止它无需多言：
-<div class="note warning">
-            <ol><li>所有群禁止一切未经允许的广告（包括但不限于：商业广告、推广、拼单、拉票、招聘广告…）</li><li>禁止一切发送二维码的广告行为，且严令禁止</li><li>为了照顾有些群友确实在找工作，所以会定期允许几个【招聘广告】发出，但是这是有前提的：<ol><li>请务必先发给群主“审核”允许后，才允许发出</li><li>群并不独属于群主，因此广告发出需要配额一定数量红包（金额10元起步，数量最大30个）</li></ol></li><li>需要注意的是：目前仅规则性允许招聘广告，其它广告类型一律拒绝</li></ol>
-          </div></div><div class="tab-pane" id="唯一名称(写上，不然有warn警告)-3"><div style="text-align: center; color: red; font-weight: bolder; font-size: 18px; }" class="note danger">
-禁止群内私加好友行为，欢迎举报
-</div>
-目的：例举一些基本规则，希望你能遵守
-<div class="note info">
-            <ol><li>禁止群内私加好友行为，欢迎举报</li><li>禁聊政治敏感话题</li><li>文明聊天，拒绝黄赌毒。那些总是喜欢开车的小伙伴们啊，请低速驾驶，超速者将吊销你的驾驶证</li><li>为了避免人员重复，原则上每个人【只允许】呆在本系列群一个群内（10群除外），管理员会定期检测T出重复人员</li><li>群内问问题小技巧：<ol><li>请把你的问题描述完整再问，因为程序运行都要有context，何况人呢？</li><li>代码尽量用截图形式发出，这样能保持格式，以及也方便你对敏感信息打码</li><li>帮你是情分，不帮你是本分。若你很希望此问题有人可以帮你，发个小小红包以示感谢效果会更好</li></ol></li></ol>
-          </div></div><div class="tab-pane" id="唯一名称(写上，不然有warn警告)-4"><p>😄你造的，目前单单【公益】（意思就是你一分钱不用花，快递费都不用出呢）活动，A哥就已经送出了超200个公仔了，这对于本就贫穷的我，不是个小数目了😄，相较于一般的群还是不错的哈。</p>
-<table>
-<thead>
-<tr>
-<th align="left"><img data-src="https://img-blog.csdnimg.cn/20200612225136939.png" alt="A哥私人微信"></th>
-<th align="left"><img data-src="https://img-blog.csdnimg.cn/20200613092818287.gif" alt="A哥私人公众号"></th>
-</tr>
-</thead>
-</table>
-<p>关于A哥的介绍，你可以<a href="/about">点击这里</a>。除了这些，你还可以：</p>
-<div class="note info">
-            <ol><li>扫码加A哥好友，和一个很有技术范的coder做朋友（如果已经是群友，建议你务必添加好友，方便我做群管理）</li><li>如果你是个对技术有研究热情的，就扫码关注我的公众号吧（BAT的乌托邦：只做有深度的文章分享，拒绝浅尝辄止）</li><li>近期正在筹划线下面基，扩大下朋友圈。当然地点只是北京，若你有兴趣可下面留言</li></ol>
-          </div></div></div></div>
-
-<p>公众号转载开白，请在<a href="/x2y/wechat-white-list.html">此处登记</a><br>公众号转载开白，请在<a href="/x2y/wechat-white-list.html">此处登记</a><br>公众号转载开白，请在<a href="/x2y/wechat-white-list.html">此处登记</a></p>
-<div style="margin-top: 50px; margin-bottom: 50px; text-align: center; font-weight: bolder; color: grey; font-size: 20px;">
-😄希望大家遵守群规，群内不求能大富大贵。但可以聚集在一起做个俗人：贪财好色，岂不更快乐些不是😄
-</div>]]></content>
-      <categories>
-        <category>公众号</category>
-      </categories>
-      <tags>
-        <tag>公众号</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>【BAT的乌托邦】公众号开白申请</title>
     <url>/x2y/wechat-white-list.html</url>
     <content><![CDATA[<div class="note primary">
@@ -2999,8 +3152,66 @@
         <category>公众号</category>
       </categories>
       <tags>
-        <tag>公众号</tag>
         <tag>白名单</tag>
+        <tag>公众号</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【Java高工、架构师】系列群群规</title>
+    <url>/x2y/wechat-gauge.html</url>
+    <content><![CDATA[<blockquote class="blockquote-center">
+            <i class="fa fa-quote-left"></i>
+            <p>久旱逢甘雨，一滴；<br>他乡遇故知，债主；<br>洞房花烛夜，隔壁；<br>金榜题名时，重名。</p>
+
+            <i class="fa fa-quote-right"></i>
+          </blockquote>
+
+<p><img data-src="https://img-blog.csdnimg.cn/20200613101159736.png" alt=""></p>
+<div style="margin-top: 50px; margin-bottom: 50px; text-align: center; font-weight: bolder; color: grey; font-size: 20px;">
+😄本系列群是由A哥搭建起的纯技术交流平台，无任何商业属性。秉承着做技术我们是认真的态度，有一些规则需要你遵守😄
+</div>
+<div class="tabs" id="唯一名称(写上，不然有warn警告)"><ul class="nav-tabs"><li class="tab active"><a href="#唯一名称(写上，不然有warn警告)-1">关于推文</a></li><li class="tab"><a href="#唯一名称(写上，不然有warn警告)-2">关于广告</a></li><li class="tab"><a href="#唯一名称(写上，不然有warn警告)-3">关于群</a></li><li class="tab"><a href="#唯一名称(写上，不然有warn警告)-4">群福利</a></li></ul><div class="tab-content"><div class="tab-pane active" id="唯一名称(写上，不然有warn警告)-1"><div style="text-align: center; color: red; font-weight: bolder; font-size: 18px; }" class="note danger">
+禁止一切未经允许的推文
+</div>
+
+<p>目的：避免沦为推文群、僵尸群，同时提高文章质量，旨在帮群友筛选出真正的干货。因此需要对推文方面作出一些限制：</p>
+<div class="note warning">
+            <ol><li>禁止一切未经允许的推文</li><li>目前【仅】10群开放自由推文限制（但也不能是广告文、太水的文），若你是号主or你希望看到更多“不一样”的文章，可私聊A哥邀请你进入10群</li><li>除了10群外，其它群推文采用【申请授权】方式，A哥已组件好了小团队会定期进行审核，通过后会通知到你便可在指定群推文了。<a href="https://shimo.im/sheets/QtqXwKgCVJxJjhtJ/MODOC" target="_blank" rel="noopener">申请登记地址</a></li><li>为了避免信息爆炸，每个群允许通过授权的数量目前定在【5个】，后期会根据实际情况加以调整</li></ol>
+          </div></div><div class="tab-pane" id="唯一名称(写上，不然有warn警告)-2"><div style="text-align: center; color: red; font-weight: bolder; font-size: 18px; }" class="note danger">
+所有群禁止一切未经允许的广告
+</div>
+目的：你懂的，咱们是纯净版技术群，是有B格的。广告最容易让一个群死翘翘了，所以禁止它无需多言：
+<div class="note warning">
+            <ol><li>所有群禁止一切未经允许的广告（包括但不限于：商业广告、推广、拼单、拉票、招聘广告…）</li><li>禁止一切发送二维码的广告行为，且严令禁止</li><li>为了照顾有些群友确实在找工作，所以会定期允许几个【招聘广告】发出，但是这是有前提的：<ol><li>请务必先发给群主“审核”允许后，才允许发出</li><li>群并不独属于群主，因此广告发出需要配额一定数量红包（金额10元起步，数量最大30个）</li></ol></li><li>需要注意的是：目前仅规则性允许招聘广告，其它广告类型一律拒绝</li></ol>
+          </div></div><div class="tab-pane" id="唯一名称(写上，不然有warn警告)-3"><div style="text-align: center; color: red; font-weight: bolder; font-size: 18px; }" class="note danger">
+禁止群内私加好友行为，欢迎举报
+</div>
+目的：例举一些基本规则，希望你能遵守
+<div class="note info">
+            <ol><li>禁止群内私加好友行为，欢迎举报</li><li>禁聊政治敏感话题</li><li>文明聊天，拒绝黄赌毒。那些总是喜欢开车的小伙伴们啊，请低速驾驶，超速者将吊销你的驾驶证</li><li>为了避免人员重复，原则上每个人【只允许】呆在本系列群一个群内（10群除外），管理员会定期检测T出重复人员</li><li>群内问问题小技巧：<ol><li>请把你的问题描述完整再问，因为程序运行都要有context，何况人呢？</li><li>代码尽量用截图形式发出，这样能保持格式，以及也方便你对敏感信息打码</li><li>帮你是情分，不帮你是本分。若你很希望此问题有人可以帮你，发个小小红包以示感谢效果会更好</li></ol></li></ol>
+          </div></div><div class="tab-pane" id="唯一名称(写上，不然有warn警告)-4"><p>😄你造的，目前单单【公益】（意思就是你一分钱不用花，快递费都不用出呢）活动，A哥就已经送出了超200个公仔了，这对于本就贫穷的我，不是个小数目了😄，相较于一般的群还是不错的哈。</p>
+<table>
+<thead>
+<tr>
+<th align="left"><img data-src="https://img-blog.csdnimg.cn/20200612225136939.png" alt="A哥私人微信"></th>
+<th align="left"><img data-src="https://img-blog.csdnimg.cn/20200613092818287.gif" alt="A哥私人公众号"></th>
+</tr>
+</thead>
+</table>
+<p>关于A哥的介绍，你可以<a href="/about">点击这里</a>。除了这些，你还可以：</p>
+<div class="note info">
+            <ol><li>扫码加A哥好友，和一个很有技术范的coder做朋友（如果已经是群友，建议你务必添加好友，方便我做群管理）</li><li>如果你是个对技术有研究热情的，就扫码关注我的公众号吧（BAT的乌托邦：只做有深度的文章分享，拒绝浅尝辄止）</li><li>近期正在筹划线下面基，扩大下朋友圈。当然地点只是北京，若你有兴趣可下面留言</li></ol>
+          </div></div></div></div>
+
+<p>公众号转载开白，请在<a href="/x2y/wechat-white-list.html">此处登记</a><br>公众号转载开白，请在<a href="/x2y/wechat-white-list.html">此处登记</a><br>公众号转载开白，请在<a href="/x2y/wechat-white-list.html">此处登记</a></p>
+<div style="margin-top: 50px; margin-bottom: 50px; text-align: center; font-weight: bolder; color: grey; font-size: 20px;">
+😄希望大家遵守群规，群内不求能大富大贵。但可以聚集在一起做个俗人：贪财好色，岂不更快乐些不是😄
+</div>]]></content>
+      <categories>
+        <category>公众号</category>
+      </categories>
+      <tags>
+        <tag>公众号</tag>
       </tags>
   </entry>
   <entry>
@@ -3105,8 +3316,8 @@
         <category>Spring配置类</category>
       </categories>
       <tags>
-        <tag>@Configuration</tag>
         <tag>Spring Boot</tag>
+        <tag>@Configuration</tag>
         <tag>@AutoConfigureBefore</tag>
       </tags>
   </entry>
