@@ -77,6 +77,116 @@
       </tags>
   </entry>
   <entry>
+    <title>IntelliJ IDEA 2020.2正式发布，诸多亮点总有几款能助你提效</title>
+    <url>/x2y/c21d2a8e.html</url>
+    <content><![CDATA[<blockquote>
+<p>向工具人致敬。本文已被 <a href="https://www.yourbatman.cn"><strong>https://www.yourbatman.cn</strong></a> 收录，里面一并有Spring技术栈、MyBatis、JVM、中间件等小而美的<strong>专栏</strong>供以免费学习。关注公众号【<strong>BAT的乌托邦</strong>】逐个击破，深入掌握，拒绝浅尝辄止。</p>
+</blockquote>
+<p><img data-src="https://img-blog.csdnimg.cn/20200729184018857.png" alt=""></p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>各位小伙伴大家好，我是A哥。IDEA上个较大版本的发布，要追溯到4月份了：<br><img data-src="https://img-blog.csdnimg.cn/20200729132634729.png" alt=""><br>时隔近4个月，北京时间2020-07-28深夜，<code>IntelliJ IDEA</code>再迎更新，这是2020年的第二个里程碑版本。</p>
+<p>之前提到过，2020年是<code>Jetbrain公司</code>的20周年（小伙子长成大男孩了），有理由相信官方会立些Flag。所以自从官方在2020-01-20发布了其<strong>2020年的Roadmap</strong>后，我个人是有保持持续关注的，毕竟一方面是公司20周年，另一方面是21世纪的“新10年”，这么好的契机很适合搞事情。</p>
+<p>上个版本（2020.1）发布后，带来了众多实用新特性，比如：<strong>中文支持、禅模式、Javadoc渲染</strong>等等，某些新功能可以显著提高效率，因此反响是一片叫好。无独有偶，作为2020年的第二个里程碑版本，它能给我们带来什么样的期许呢？</p>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>按照惯例，来一张最新版IDEA启动图尝尝鲜：<br><img data-src="https://img-blog.csdnimg.cn/20200729133934485.png" alt=""><br>我把<strong>2020.1</strong>版本启动图也扔在这供你对比，哪个更好看？</p>
+<p><img data-src="https://img-blog.csdnimg.cn/2020041022460850.png" alt=""></p>
+<h2 id="what’s-new（新特性）"><a href="#what’s-new（新特性）" class="headerlink" title="what’s new（新特性）"></a>what’s new（新特性）</h2><p>IntelliJ IDEA 2020.2做的改进重点体现在<strong>完全控制GitHub请求</strong>，包括在IDE中审查、合并 GitHub PR等。同时还提供了对Java15、Jakarta EE 9的支持，还包括Quarkus、microaut等等。</p>
+<h3 id="1、支持Java-15"><a href="#1、支持Java-15" class="headerlink" title="1、支持Java 15"></a>1、支持Java 15</h3><p>尽管Java 15将在9月发布，IntelliJ IDEA 2020.2已经提前为此做好了准备，反应不可为不灵活，给个大大的赞👍。</p>
+<blockquote>
+<p>说明：Java 15新特性啥的本文不提，毕竟这不是本文关注点所在</p>
+</blockquote>
+<p>题外话：<strong>从JDK9之后</strong>，Oracle采用了新的发布周期：每6个月发布一个版本，每3年发布一个LTS版本。JDK15是继JDK9之后发布的第七个版本， 该版本依旧为非LTS版本，最新的LTS版本为JDK11（JDK17还未发布）。<br><img data-src="https://img-blog.csdnimg.cn/20200729135501542.png" alt=""></p>
+<h3 id="2、相关问题内嵌提示"><a href="#2、相关问题内嵌提示" class="headerlink" title="2、相关问题内嵌提示"></a>2、相关问题内嵌提示</h3><p>这个功能非常好用，特别对有些不使用<code>RENAME</code>功能的小伙伴来说是福音。</p>
+<p>如果您通过更改具有<strong>外部使用</strong>的类、方法或字段的签名而引入了编译错误，IDE将用<strong>镶嵌提示</strong>通知您。单击相关嵌入提示，IDE将自动帮你打开Find工具窗口，列出了在外部文件中发生的所有相关问题。</p>
+<p>看完这段话是不是还有点蒙，来吧，A哥给你准备了示例：</p>
+<p>Person.java文件：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">eat</span><span class="params">(String food)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"SUCCESS"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Demo.java文件：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> Person().eat(<span class="string">"大鱼"</span>);</span><br><span class="line">        <span class="keyword">new</span> Person().eat(<span class="string">"大肉"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这时编译肯定一切正常。现在我做出改变：更改Person类的<code>eat()</code>方法名为<code>eatDish()</code>，结果如下图：<br><img data-src="https://img-blog.csdnimg.cn/20200729152511552.png" alt=""><br>鼠标单击提示，自动帮你打开Find框且定位到问题所在：<br><img data-src="https://img-blog.csdnimg.cn/20200729152615381.png" alt=""><br>就问你，这个功能爽不爽，实用不实用？</p>
+<blockquote>
+<p>小贴士：在同一个<code>.java</code>文件内（即使是不同class），是不会类似提示的哦</p>
+</blockquote>
+<h3 id="3、运行时异常原因分析"><a href="#3、运行时异常原因分析" class="headerlink" title="3、运行时异常原因分析"></a>3、运行时异常原因分析</h3><p>一听这个功能名称，就觉得很厉害。快速定位问题一直是程序员的痛点，现在让工具来辅助你完成，效率更上一层楼。</p>
+<p>新版IDEA为异常堆栈跟踪分析添加了数据流分析。点击堆栈跟踪时，IDE 可能会将您带到代码中出现异常的确切位置，并<strong>提供建议</strong>来帮助您了解发生此错误的原因。</p>
+<p>下面用一个NPE异常作为示例感受一把，代码如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    Integer i = <span class="keyword">null</span>;</span><br><span class="line">    System.out.println(i.toString());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，抛出异常，控制台显示：<br><img data-src="https://img-blog.csdnimg.cn/20200729153158227.png" alt=""><br>如红框所示，IDEA给出的建议是让我们创建一个断点，单击此“按钮”即弹出断点创建对话框：<br><img data-src="https://img-blog.csdnimg.cn/20200729153310506.png" alt=""><br>不得不说，真的是方便了很多。</p>
+<p><strong>附</strong>：老版本中效果截图，用以对比：<br><img data-src="https://img-blog.csdnimg.cn/20200729153456509.png" alt=""></p>
+<h3 id="4、更好Stream-API自动补全"><a href="#4、更好Stream-API自动补全" class="headerlink" title="4、更好Stream API自动补全"></a>4、更好Stream API自动补全</h3><p><strong>Stream API</strong>在开发中太太太常用了，因此哪怕只是更智能一丁点的，带来的效率提升都可谓是大大的。</p>
+<p>可以直接在<strong>集合或数组</strong>中直接输入Stream API方法名，IDEA 会自动插入 <code>stream()</code>。这适用于任何流操作（map、reduce、collect等所有操作都行）。</p>
+<blockquote>
+<p>话外音：以后你就不用自己的手动的多写一步<code>stream()</code>了，开不开森</p>
+</blockquote>
+<p>话不多说，来个栗子：<br><img data-src="https://img-blog.csdnimg.cn/20200729154009816.png" alt=""><br><img data-src="https://img-blog.csdnimg.cn/20200729154050630.png" alt=""></p>
+<p><strong>附</strong>：老版本中效果截图，用以对比：很明显根本就不支持嘛<br><img data-src="https://img-blog.csdnimg.cn/2020072915421223.png" alt=""></p>
+<h3 id="5、Live-Templates新增Java分组"><a href="#5、Live-Templates新增Java分组" class="headerlink" title="5、Live Templates新增Java分组"></a>5、Live Templates新增Java分组</h3><p>相信这是很多小伙伴一直以来的一个痛点，毕竟咱们都是Java程序员，使用<code>Live Templates</code>几乎100%都是针对于Java代码的，然后老版本竟然还<strong>没有</strong>个Java分组，实在难受，我还记得我刚开始使用IDEA时就默默吐槽了这点。</p>
+<p>现在好了，这个版本终于补上喽：<br><img data-src="https://img-blog.csdnimg.cn/2020072915550291.png" alt=""></p>
+<blockquote>
+<p>小贴士：你之前放在自定义分组里的还在那，不会给你自动挪过来的</p>
+</blockquote>
+<p><strong>附</strong>：老版本中效果截图，用以对比：JavaScript分组都有竟然没有Java分组，服气<br><img data-src="https://img-blog.csdnimg.cn/20200729155623917.png" alt=""><br>特别强调：此窗口是新增的，老版本并无此能力，也并无此窗口。所以，升吗？🙂</p>
+<h3 id="6、新增Problems窗口"><a href="#6、新增Problems窗口" class="headerlink" title="6、新增Problems窗口"></a>6、新增Problems窗口</h3><p>此版本新增了一个Problems窗口，简直不要太赞。</p>
+<p>显示<strong>与当前文件有关</strong>的警告和错误以及问题描述。在此工具窗口中，可以右键点击问题导航到遇到问题的代码行，方便你逐个修复。<br><img data-src="https://img-blog.csdnimg.cn/20200729160254928.png" alt=""><br>另外，它在文件<strong>右上角</strong>还有问题总数、上/下导航按钮，可谓非常贴心：<br><img data-src="https://img-blog.csdnimg.cn/20200729160353542.png" alt=""></p>
+<h3 id="7、操作意图预览"><a href="#7、操作意图预览" class="headerlink" title="7、操作意图预览"></a>7、操作意图预览</h3><p>咋一看还以为人工智能呢，都能预览我的意图了。</p>
+<p>此功能可以让你在将它们实际应用到代码<strong>之前</strong>预览它们的结果。按<code>Alt+Enter</code>调用显示上下文动作并选择你需要的意图动作，然后按相应快捷键显示结果预览（Windows和Linux上按Ctrl+Shift+I，macOS上按Alt+Space）。</p>
+<p>例如如下代码：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    List&lt;Integer&gt; ids = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (Integer id : ids) &#123;</span><br><span class="line">        <span class="keyword">if</span> (id &gt; <span class="number">10</span>) &#123;</span><br><span class="line">            System.out.println(id);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在for处按<code>Alt+Enter</code>：<br><img data-src="https://img-blog.csdnimg.cn/20200729162027506.png" alt=""><br>再按<code>Ctrl+Shift+I</code>（我是windows），即可看见结果预览：<br><img data-src="https://img-blog.csdnimg.cn/20200729162119946.png" alt=""></p>
+<h3 id="8、改进的拼写检查"><a href="#8、改进的拼写检查" class="headerlink" title="8、改进的拼写检查"></a>8、改进的拼写检查</h3><p>IDEA使用spell checker做拼写检查，看你单词也没有写错啥的。这次改进主要提升了性能和准确性，然而我一般都是把此项禁用的，毕竟有时候我需要用拼音命名😄。</p>
+<h3 id="9、完整的GitHub-pull-requests支持"><a href="#9、完整的GitHub-pull-requests支持" class="headerlink" title="9、完整的GitHub pull requests支持"></a>9、完整的GitHub pull requests支持</h3><p>现在整个 GitHub PR 工作流程全部可以<strong>直接在</strong> IntelliJ IDEA 完成。包括浏览、指派、管理以及合并 PR、查看时间线和内联评论、提交评论、审查以及接受更改。</p>
+<p>简单点，我就不用实际案例了。引用官方提供的三张图作为示例了哈：<br><img data-src="https://img-blog.csdnimg.cn/20200729163406501.png" alt=""><br><img data-src="https://img-blog.csdnimg.cn/20200729163414845.png" alt=""><br><img data-src="https://img-blog.csdnimg.cn/20200729163423792.png" alt=""><br>我想说，这个功能区，对做Java开源社区开发的工作者绝对是<strong>福音</strong>，可以多睡会了~</p>
+<h3 id="10、改进的Git操作对话框"><a href="#10、改进的Git操作对话框" class="headerlink" title="10、改进的Git操作对话框"></a>10、改进的Git操作对话框</h3><p>主要体现在<strong>merge、pull和rebase</strong>对话框的视觉一致性上。此外还改进了对话框，使其可以清楚地标识<strong>待执行</strong>的 Git 命令，并加入一些缺失选项，比如向Pull和 Merge对话框<strong>分别</strong>添加了<code>--rebase</code>和<code>--no-verify</code>。<br><img data-src="https://img-blog.csdnimg.cn/20200729164202515.png" alt=""></p>
+<p><strong>附</strong>：老版本中效果截图，用以对比：<br><img data-src="https://img-blog.csdnimg.cn/20200729181509932.png" alt=""></p>
+<h3 id="11、支持Jakarta-EE-9"><a href="#11、支持Jakarta-EE-9" class="headerlink" title="11、支持Jakarta EE 9"></a>11、支持Jakarta EE 9</h3><p>Jakarta EE 9同Java 15一样也将会在今年9月份发布，但IDEA已早早的提供了支持。并且号称是已经支持到了Jakarta EE的所有可用特性（典型的13种技术嘛）。</p>
+<p>题外话：2018年3月初，Java EE正式更名为JakartaEE，<strong>至此再无 JavaEE</strong>。<br><img data-src="https://img-blog.csdnimg.cn/20200729165154694.png" alt=""></p>
+<h3 id="12、创建企业项目向导"><a href="#12、创建企业项目向导" class="headerlink" title="12、创建企业项目向导"></a>12、创建企业项目向导</h3><p>如果需要创建Java EE 8或Jakarta EE 9项目，可以使用IDEA的创建向导。<br><img data-src="https://img-blog.csdnimg.cn/20200729165437160.png" alt=""><br><img data-src="https://img-blog.csdnimg.cn/20200729165447970.png" alt=""><br>这对于天朝的程序员来说貌似没啥卵用，因为我们都用Spring，所以大都使用<code>Spring Initializr</code>来创建工程。</p>
+<h3 id="12、HPROF内存查看器"><a href="#12、HPROF内存查看器" class="headerlink" title="12、HPROF内存查看器"></a>12、HPROF内存查看器</h3><p>我们知道IntelliJ IDEA 2020.1版本就可以打开<code>.hprof</code>内存转储文件，有助于识别内存泄漏，并找到优化内存使用率的方法。那时候功能还非常的简陋，IDEA官方承诺会持续改进的，果不其然这个版本带来了功能提升。</p>
+<p>下面通过案例使用一把。代码如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">    List&lt;Integer&gt; ids = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    TimeUnit.MINUTES.sleep(<span class="number">10</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>先使用jps找到你的进程id（这个都会吧，我就不截图了），然后使用<code>jmap -dump:file=test.hprof,format=b 你的pid</code>拿到一份dump文件：<code>test.hprof</code>。<br><img data-src="https://img-blog.csdnimg.cn/202007291706323.png" alt=""><br>然后使用IDEA的此功能把该文件读取进来：<br><img data-src="https://img-blog.csdnimg.cn/20200729170657377.png" alt=""><br>文件读取进来后，可在其“专属视窗”看到分析结果：<br><img data-src="https://img-blog.csdnimg.cn/20200729170859587.png" alt=""></p>
+<p>指出使用大量内存的代码部分，并检测内存泄漏的原因。HPROF内存查看器显示了计算的对象保留大小、到垃圾收集器根的最短路径、对象(保留的对象)的支配器树和传入的引用。</p>
+<p><strong>附</strong>：上个版本（2020.1）效果截图，用以对比：<br><img data-src="https://img-blog.csdnimg.cn/20200411011115802.png" alt=""><br>新版本还是感觉到明显的<strong>功能提升</strong>的。上个版本官方不建议你用于生产分析，很明显这个版本已经没有这样的字眼了，用吧骚年。</p>
+<h3 id="12、使用预先构建好的indexes"><a href="#12、使用预先构建好的indexes" class="headerlink" title="12、使用预先构建好的indexes"></a>12、使用预先构建好的indexes</h3><p>IDEA在每打开一个项目时都会它进行index建立索引，以确保你后续时候过程中的编码流畅度（代码补全、代码跳转…），而这个建立索引阶段一般来说是比较耗时的。</p>
+<p>同一个项目一般会被N多人使用、开发，那么能不能只需要构建<strong>一次</strong>索引，别人直接用就行了呢？IDEA此版本对此痛点提供了支持。</p>
+<p>现在，通过在<strong>另一台机器</strong>上生成的索引（我们可以弄台机器专门来生成索引），而不用再在本地构建，索引文件拿来就用，可以加快索引速度。</p>
+<blockquote>
+<p>小贴士：此功能需要安装共享索引<strong>插件</strong>提供额外支持</p>
+</blockquote>
+<h3 id="13、正在索引中也可编码"><a href="#13、正在索引中也可编码" class="headerlink" title="13、正在索引中也可编码"></a>13、正在索引中也可编码</h3><p>当我们打开一个项目时，如果正在构建索引，代码的颜色是这样的（预示先别编码，请等待）：<br><img data-src="https://img-blog.csdnimg.cn/20200729171750615.png" alt=""><br>说明：颜色灰色并不是说你不能敲字，只是没有代码提示了</p>
+<p>索引构建好后，颜色恢复正常，你可以正常编码了：<br><img data-src="https://img-blog.csdnimg.cn/20200729171930276.png" alt=""></p>
+<p>然后在IntelliJ IDEA 2020.2版本中，当在为你的项目构建索引时，你现在可以<strong>继续</strong>编写代码了。IDE现在能在索引期间为Java提供代码完成建议（也就是最重要的代码补全提示能力）。</p>
+<h3 id="14、支持Maven-Wrapper"><a href="#14、支持Maven-Wrapper" class="headerlink" title="14、支持Maven Wrapper"></a>14、支持Maven Wrapper</h3><p>IntelliJ IDEA 2020.2现在支持Maven包装器，它会自动将所需的Maven版本安装到您的项目中。如果提供并配置了Maven包装器，IDE会自动使用它并在需要时导入更改。</p>
+<p>Maven Wrapper（Maven包装器）是什么？嗯嗯，建议你可以自己了解一下了~</p>
+<h3 id="15、其它"><a href="#15、其它" class="headerlink" title="15、其它"></a>15、其它</h3><p>其它的还有诸如对<code>JavaScript</code>语言的代码自动补全支持、Database链接数据库的UI/功能优化、Scala语言支持等，因为用的人着实不多（主要是我自己也不用😄），所以就不做详解了哈。</p>
+<p>当然喽，新版IDEA怎么少得了对云原生技术<code>Docker</code>和<code>Kubernetes</code>的优化支持呢？这些主要体现在对它们配置文件的支持上，在实际使用时你会感受出来。</p>
+<h2 id="升级建议"><a href="#升级建议" class="headerlink" title="升级建议"></a>升级建议</h2><p><strong>升</strong>。</p>
+<blockquote>
+<p>以前我的建议很保守，现在明确点，毕竟仅仅只是建议😄</p>
+</blockquote>
+<h2 id="关于破解"><a href="#关于破解" class="headerlink" title="关于破解"></a>关于破解</h2><p>如果你是付费党（土豪），或者是开源committer，或者是edu邮箱拥有者，请忽略此part哈。</p>
+<ul>
+<li><p>若你升级到了<code>2020.2</code>最新版本，你可以享有这些新特性功能，提升编码效率。但是，<strong>暂时</strong>破解没戏，这不我也试用着呢（就不信1个月后还不能破解😄）：<br><img data-src="https://img-blog.csdnimg.cn/20200729182720118.png" alt=""></p>
+</li>
+<li><p>若你仍决定停留在<code>2020.1</code>甚至之前版本，那么是可以实现破解的。<strong>破解方式可在公众号后台回复“IDEA破解”获得</strong>，白嫖去吧~</p>
+</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>作为2020年的第二个版本，虽然说没有第一个版本（2020.1）提供的新功能那么的博人眼球，但好些新特性依旧是可圈可点，值得称赞。</p>
+<p>最后，依旧要向那些孜孜不倦为IT行业提供优秀工具的人们致敬！！！特别是捷克的那些创造者们，你们创造了非常好的工具提高了生产力，<strong>推动了社会某些产业的进步，功勋卓越！！！</strong></p>
+<h5 id="推荐你看："><a href="#推荐你看：" class="headerlink" title="推荐你看："></a>推荐你看：</h5><ul>
+<li><a href="https://mp.weixin.qq.com/s/z6T9n9YvwjmDwuj-YTa0_w" target="_blank" rel="noopener">Fastjson到了说再见的时候了</a></li>
+<li><a href="https://mp.weixin.qq.com/s/iqSN4HUoIdX0kGcSdnD7EA" target="_blank" rel="noopener">1. 初识Jackson – 世界上最好的JSON库</a></li>
+<li><a href="https://mp.weixin.qq.com/s/p6cwP2BVrC8VxkN-T3uAxg" target="_blank" rel="noopener">2. 妈呀，Jackson原来是这样写JSON的</a></li>
+<li><a href="https://mp.weixin.qq.com/s/ZHb3P06IC4xElHwJqDepxw" target="_blank" rel="noopener">3. 懂了这些，方敢在简历上说会用Jackson写JSON</a></li>
+<li><a href="https://mp.weixin.qq.com/s/syAOETfEawiGItaQO35mLA" target="_blank" rel="noopener">4. JSON字符串是如何被解析的？JsonParser了解一下</a></li>
+<li><a href="https://mp.weixin.qq.com/s/0ZaDYb_ueFLbvOf3FbetfQ" target="_blank" rel="noopener">5. JsonFactory工厂而已，还蛮有料，这是我没想到的</a></li>
+</ul>]]></content>
+      <categories>
+        <category>新特性</category>
+      </categories>
+      <tags>
+        <tag>IntelliJ IDEA</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>4. JSON字符串是如何被解析的？JsonParser了解一下</title>
     <url>/x2y/a47cf2f7.html</url>
     <content><![CDATA[<blockquote>
@@ -1635,8 +1745,8 @@
         <category>Spring static关键字</category>
       </categories>
       <tags>
-        <tag>Spring Boot</tag>
         <tag>Spring Framework</tag>
+        <tag>Spring Boot</tag>
         <tag>static</tag>
       </tags>
   </entry>
@@ -3097,66 +3207,6 @@
       </tags>
   </entry>
   <entry>
-    <title>【BAT的乌托邦】公众号开白申请</title>
-    <url>/x2y/wechat-white-list.html</url>
-    <content><![CDATA[<div class="note primary">
-            <ul><li>公众号：BAT的乌托邦</li><li>作者：A哥<ul><li>A哥的介绍：<ul><li><a href="/about">PC版</a></li><li><a href="https://mp.weixin.qq.com/s/PGIFtpI7aZaxY7es0F6C6Q" target="_blank" rel="noopener">手机版</a></li></ul></li><li>示例文章：<a href="https://mp.weixin.qq.com/s/PYVD8BvT7Nux0jiSomSG0A" target="_blank" rel="noopener">点击这里</a></li></ul></li><li>定位：专注Java领域，只做有深度的专栏文章分享，拒绝浅尝辄止</li><li>首篇文章时间：2020-05-03   <a href="https://mp.weixin.qq.com/s/PGIFtpI7aZaxY7es0F6C6Q" target="_blank" rel="noopener">查看首篇文章</a></li></ul>
-          </div>
-
-<h3 id="转载请著名出处，示例（文首-文末）："><a href="#转载请著名出处，示例（文首-文末）：" class="headerlink" title="转载请著名出处，示例（文首 + 文末）："></a>转载请著名出处，示例（文首 + 文末）：</h3><p><img data-src="https://img-blog.csdnimg.cn/20200616122117470.png" alt="文首"><br><img data-src="https://img-blog.csdnimg.cn/20200616122910584.png" alt="文末"></p>
-<div style="text-align: center;color: #8c8888;font-size: 8px;margin-top: -10px;">文案请从此处复制：本文转载自公众号【BAT的乌托邦】，专注Java领域，只做有深度的专栏文章分享，拒绝浅尝辄止。</div>
-
-<div style="margin-top: 50px; margin-bottom: 50px; text-align: center; font-weight: bolder; color: grey; font-size: 20px;">
-😄申请【开长白】请在本文下面留言，开白成功后我会登记入下表，谢谢合作😄
-</div>
-<div style="text-align: center; font-weight: bolder; color: #7d7d7d; font-size: 11px;margin-top: -50px;margin-bottom: 20px;">
-(留言时请输入正确邮箱号，这样开白成功会给你发邮件提醒)
-</div>
-<div class="table-container"><table>
-    <thead>
-        <tr>
-            <th align="center">公众号</th>
-            <th align="center">操作时间</th>
-            <th align="center">是否长白</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td align="center">学习Java的小姐姐</td>
-            <td align="center">2020.06.24</td>
-            <td align="center">是</td>
-        </tr>
-        <tr>
-            <td align="center">自由程序人</td>
-            <td align="center">2020.06.16</td>
-            <td align="center">是</td>
-        </tr>
-        <tr>
-            <td align="center">softech华山论剑</td>
-            <td align="center">2020.06.14</td>
-            <td align="center">是</td>
-        </tr>
-        <tr>
-            <td align="center">石杉的架构笔记</td>
-            <td align="center">2020.06.09</td>
-            <td align="center">是</td>
-        </tr>
-        <tr>
-            <td align="center">源码笔记</td>
-            <td align="center">2020.06.04</td>
-            <td align="center">是</td>
-        </tr>
-    </tbody>
-</table></div>]]></content>
-      <categories>
-        <category>公众号</category>
-      </categories>
-      <tags>
-        <tag>白名单</tag>
-        <tag>公众号</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>【Java高工、架构师】系列群群规</title>
     <url>/x2y/wechat-gauge.html</url>
     <content><![CDATA[<blockquote class="blockquote-center">
@@ -3212,6 +3262,66 @@
       </categories>
       <tags>
         <tag>公众号</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【BAT的乌托邦】公众号开白申请</title>
+    <url>/x2y/wechat-white-list.html</url>
+    <content><![CDATA[<div class="note primary">
+            <ul><li>公众号：BAT的乌托邦</li><li>作者：A哥<ul><li>A哥的介绍：<ul><li><a href="/about">PC版</a></li><li><a href="https://mp.weixin.qq.com/s/PGIFtpI7aZaxY7es0F6C6Q" target="_blank" rel="noopener">手机版</a></li></ul></li><li>示例文章：<a href="https://mp.weixin.qq.com/s/PYVD8BvT7Nux0jiSomSG0A" target="_blank" rel="noopener">点击这里</a></li></ul></li><li>定位：专注Java领域，只做有深度的专栏文章分享，拒绝浅尝辄止</li><li>首篇文章时间：2020-05-03   <a href="https://mp.weixin.qq.com/s/PGIFtpI7aZaxY7es0F6C6Q" target="_blank" rel="noopener">查看首篇文章</a></li></ul>
+          </div>
+
+<h3 id="转载请著名出处，示例（文首-文末）："><a href="#转载请著名出处，示例（文首-文末）：" class="headerlink" title="转载请著名出处，示例（文首 + 文末）："></a>转载请著名出处，示例（文首 + 文末）：</h3><p><img data-src="https://img-blog.csdnimg.cn/20200616122117470.png" alt="文首"><br><img data-src="https://img-blog.csdnimg.cn/20200616122910584.png" alt="文末"></p>
+<div style="text-align: center;color: #8c8888;font-size: 8px;margin-top: -10px;">文案请从此处复制：本文转载自公众号【BAT的乌托邦】，专注Java领域，只做有深度的专栏文章分享，拒绝浅尝辄止。</div>
+
+<div style="margin-top: 50px; margin-bottom: 50px; text-align: center; font-weight: bolder; color: grey; font-size: 20px;">
+😄申请【开长白】请在本文下面留言，开白成功后我会登记入下表，谢谢合作😄
+</div>
+<div style="text-align: center; font-weight: bolder; color: #7d7d7d; font-size: 11px;margin-top: -50px;margin-bottom: 20px;">
+(留言时请输入正确邮箱号，这样开白成功会给你发邮件提醒)
+</div>
+<div class="table-container"><table>
+    <thead>
+        <tr>
+            <th align="center">公众号</th>
+            <th align="center">操作时间</th>
+            <th align="center">是否长白</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td align="center">学习Java的小姐姐</td>
+            <td align="center">2020.06.24</td>
+            <td align="center">是</td>
+        </tr>
+        <tr>
+            <td align="center">自由程序人</td>
+            <td align="center">2020.06.16</td>
+            <td align="center">是</td>
+        </tr>
+        <tr>
+            <td align="center">softech华山论剑</td>
+            <td align="center">2020.06.14</td>
+            <td align="center">是</td>
+        </tr>
+        <tr>
+            <td align="center">石杉的架构笔记</td>
+            <td align="center">2020.06.09</td>
+            <td align="center">是</td>
+        </tr>
+        <tr>
+            <td align="center">源码笔记</td>
+            <td align="center">2020.06.04</td>
+            <td align="center">是</td>
+        </tr>
+    </tbody>
+</table></div>]]></content>
+      <categories>
+        <category>公众号</category>
+      </categories>
+      <tags>
+        <tag>公众号</tag>
+        <tag>白名单</tag>
       </tags>
   </entry>
   <entry>
@@ -3316,8 +3426,8 @@
         <category>Spring配置类</category>
       </categories>
       <tags>
-        <tag>Spring Boot</tag>
         <tag>@Configuration</tag>
+        <tag>Spring Boot</tag>
         <tag>@AutoConfigureBefore</tag>
       </tags>
   </entry>
