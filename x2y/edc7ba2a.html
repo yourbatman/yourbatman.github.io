@@ -24,29 +24,31 @@
     var CONFIG = {"hostname":"www.yourbatman.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},"motion":{"enable":false,"async":true,"transition":{"post_block":"flipBounceYIn","post_header":"flipXIn","post_body":"flipBounceXIn","coll_header":"expandIn","sidebar":"shrinkIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="调整配置的顺序，如是而已">
+  <meta name="description" content="请写文章摘要">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用@AutoConfigureBefore调整配置顺序竟没生效？">
-<meta property="og:url" content="https://www.yourbatman.cn/x2y/3aa2234d.html">
+<meta property="og:title" content="7. Jackson用树模型处理JSON是必备技能，不信你看">
+<meta property="og:url" content="https://www.yourbatman.cn/x2y/edc7ba2a.html">
 <meta property="og:site_name" content="BAT的乌托邦">
-<meta property="og:description" content="调整配置的顺序，如是而已">
+<meta property="og:description" content="请写文章摘要">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/2020050916181352.png#x200">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200418160820903.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2Y2NDEzODU3MTI=,size_16,color_FFFFFF,t_70#x330">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200509163634888.png#x200">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200509165554902.jpg#x200">
-<meta property="article:published_time" content="2020-05-09T04:40:10.000Z">
-<meta property="article:modified_time" content="2020-06-14T08:17:44.947Z">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200821210157583.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200728214449119.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200820212454191.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200821184426585.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2020082119261653.png#pic_center">
+<meta property="article:published_time" content="2020-08-25T05:31:41.000Z">
+<meta property="article:modified_time" content="2020-08-25T05:34:19.269Z">
 <meta property="article:author" content="A哥(YourBatman)">
 <meta property="article:tag" content="BAT的乌托邦">
 <meta property="article:tag" content="A哥">
 <meta property="article:tag" content="YourBatman">
-<meta property="article:tag" content="Spring Boot">
-<meta property="article:tag" content="@AutoConfigureBefore">
+<meta property="article:tag" content="Jackson">
+<meta property="article:tag" content="ObjectMapper">
+<meta property="article:tag" content="树模型">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/2020050916181352.png#x200">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20200821210157583.png#pic_center">
 
-<link rel="canonical" href="https://www.yourbatman.cn/x2y/3aa2234d.html">
+<link rel="canonical" href="https://www.yourbatman.cn/x2y/edc7ba2a.html">
 
 
 <script id="page-configurations">
@@ -59,7 +61,7 @@
   };
 </script>
 
-  <title>使用@AutoConfigureBefore调整配置顺序竟没生效？ | BAT的乌托邦</title>
+  <title>7. Jackson用树模型处理JSON是必备技能，不信你看 | BAT的乌托邦</title>
   
 
 
@@ -241,7 +243,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.yourbatman.cn/x2y/3aa2234d.html">
+    <link itemprop="mainEntityOfPage" href="https://www.yourbatman.cn/x2y/edc7ba2a.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://img-blog.csdnimg.cn/20200511100304592.jpg">
@@ -254,7 +256,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          使用@AutoConfigureBefore调整配置顺序竟没生效？
+          7. Jackson用树模型处理JSON是必备技能，不信你看
         </h1>
 
         <div class="post-meta">
@@ -266,7 +268,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-05-09 12:40:10" itemprop="dateCreated datePublished" datetime="2020-05-09T12:40:10+08:00">2020-05-09</time>
+              <time title="创建时间：2020-08-25 13:31:41" itemprop="dateCreated datePublished" datetime="2020-08-25T13:31:41+08:00">2020-08-25</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -274,12 +276,12 @@
               </span>
               <span class="post-meta-item-text">收录于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Spring%E9%85%8D%E7%BD%AE%E7%B1%BB/" itemprop="url" rel="index"><span itemprop="name">Spring配置类</span></a>
+                  <a href="/categories/%E7%BC%BA%E7%9C%81/" itemprop="url" rel="index"><span itemprop="name">缺省</span></a>
                 </span>
             </span>
 
           
-            <span id="/x2y/3aa2234d.html" class="post-meta-item leancloud_visitors" data-flag-title="使用@AutoConfigureBefore调整配置顺序竟没生效？" title="阅读次数">
+            <span id="/x2y/edc7ba2a.html" class="post-meta-item leancloud_visitors" data-flag-title="7. Jackson用树模型处理JSON是必备技能，不信你看" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -294,8 +296,8 @@
       </span>
       <span class="post-meta-item-text">评论数：</span>
     
-    <a title="valine" href="/x2y/3aa2234d.html#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/x2y/3aa2234d.html" itemprop="commentCount"></span>
+    <a title="valine" href="/x2y/edc7ba2a.html#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/x2y/edc7ba2a.html" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -308,14 +310,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>7.7k</span>
+              <span>8.4k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>7 分钟</span>
+              <span>8 分钟</span>
             </span>
 
           <!-- 本文作者 -->
@@ -339,100 +341,106 @@
 
       
         <blockquote>
-<p>一个人的价值体现在能够帮助多少人。自己编码好，价值能得到很好的体现。若你做出来的东西能够帮助别人开发，大大减少开发的时间，那就功德无量。<br><strong>作者</strong>：A哥（YourBatman）<br><strong>公众号</strong>：BAT的乌托邦（ID：BAT-utopia）<br><strong>文末是否有彩蛋</strong>：有</p>
+<p>每棵大树，都曾只是一粒种子。本文已被 <a href="https://www.yourbatman.cn"><strong>https://www.yourbatman.cn</strong></a> 收录，里面一并有Spring技术栈、MyBatis、JVM、中间件等小而美的<strong>专栏</strong>供以免费学习。关注公众号【<strong>BAT的乌托邦</strong>】逐个击破，深入掌握，拒绝浅尝辄止。</p>
 </blockquote>
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>各位小伙伴大家好，我是A哥。<code>Spring Boot</code>是Spring家族具有划时代意义的一款产品，它发展自<code>Spring Framework</code>却又高于它，这种高于主要表现在其最重要的<strong>三大特性</strong>，而相较于这三大特性中更为重要的便是<strong>Spring Boot的自动配置</strong>（<code>AutoConfiguration</code>）。与其说是自动，倒不如说是“智能”，该框架看起来好像“更聪明”了。因此它也顺理成章的成为了构建微服务的基础设施，稳坐第一宝座。</p>
-<p>生活之道，在于取舍。编程何尝不是，任何决定都会是一把双刃剑，<code>Spring Boot</code>的自动配置解决了Spring Framework使用起来的众多痛点，让开发效率可以得到<strong>指数级提升</strong>（想一想，这不就是功德无量吗？）。成也萧何败也萧何，也正是因为它的太智能，倘若出了问题就会让程序员两眼一抹黑，无从下手。</p>
-<blockquote>
-<p>瑕不掩瑜，Spring Boot前进的步伐浩浩荡荡，学就完了</p>
-</blockquote>
-<p>这不，我就在前几天收到一个“求助”，希望使用<code>@AutoConfigureBefore</code>来<strong>控制配置的顺序</strong>，但并未能如愿。本文就针对这个场景case稍作展开，讨论下使用<code>@AutoConfigureBefore、@AutoConfigureAfter、@AutoConfigureOrder</code>三大注解控制自动配置执行顺序的<strong>正确姿势</strong>。</p>
-<blockquote>
-<p>提示：Spring Boot的自动配置是通过@EnableAutoConfiguration注解驱动的，默认是开启状态。你也可以通过<code>spring.boot.enableautoconfiguration = false</code>来关闭它，回退到Spring Framework时代。显然这不是本文需要讨论的内容~</p>
-</blockquote>
-<p><img data-src="https://img-blog.csdnimg.cn/2020050916181352.png#x200" alt=""></p>
-<hr>
-<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><p>本文将要聊的重点是Spring Boot自动配置 + 顺序控制，自动配置大家都耳熟能详，那么“首当其冲”就是知晓这个问题：配置类的执行为何需要控制顺序？</p>
-<hr>
-<h2 id="配置类为何需要顺序？"><a href="#配置类为何需要顺序？" class="headerlink" title="配置类为何需要顺序？"></a>配置类为何需要顺序？</h2><p>我们已经知道Spring容器它对Bean的初始化是<strong>无序</strong>的，我们并不能想当然的通过<code>@Order</code>注解来控制其执行顺序。一般来说，对于容器内普通的Bean我们只需要关注依赖关系即可，而并不需要关心其绝对的顺序，而依赖关系的管理Spring的是做得很好的，这不连<strong>循环依赖</strong>它都可以搞定麽。</p>
-<p><code>@Configuration</code>配置类它也是一个Bean，但对于配置类来说，某些场景下的执行顺序是<strong>必须的</strong>，是需要得到保证的。比如很典型的一个非A即B的case：若容器内已经存在A了，就不要再把B放进来。这种case即使用中文理解，就能知道对A的“判断”必须要放在B的前面，否则可能导致程序出问题。</p>
-<p>那么针对于配置的执行顺序，传统Spring和Spring Boot下各自是如何处理的，表现如何呢？</p>
-<hr>
-<h3 id="Spring下控制配置执行顺序"><a href="#Spring下控制配置执行顺序" class="headerlink" title="Spring下控制配置执行顺序"></a>Spring下控制配置执行顺序</h3><p>在传统的<code>Spring Framework</code>里，一个<code>@Configuration</code>注解标注的类就代表一个配置类，当存在多个<code>@Configuration</code>时，他们的<strong>执行顺序</strong>是由使用者靠手动指定的，就像这样：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 手动控制Config1 Config2的顺序</span></span><br><span class="line">ApplicationContext context = <span class="keyword">new</span> AnnotationConfigApplicationContext(Config1<span class="class">.<span class="keyword">class</span>, <span class="title">Config2</span>.<span class="title">class</span>)</span>;</span><br></pre></td></tr></table></figure>
-<p>当然，你可能就疑问了说：即使在传统Spirng里，我也从没有自己使用过<code>AnnotationConfigApplicationContext</code>来显示加载配置啊，都是使用<code>@Configuration</code>定义好配置类后，点击<code>Run</code>一把唆的。没错，那是因为你是在web环境下使用Spring，IoC容器是借助web容器（如Tomcat等）来驱动的，Spring对此部分封装得非常好，所以做到了对使用者几乎无感知。</p>
-<p>关于这部分的内容，此处就不深究了，毕竟本文重点不在这嘛。但可以给出给小结论：<code>@Configuration</code>配置被加载进容器的方式大体上可分为两种：</p>
+<p><img data-src="https://img-blog.csdnimg.cn/20200821210157583.png#pic_center" alt=""></p>
+<h1 id="✍前言"><a href="#✍前言" class="headerlink" title="✍前言"></a>✍前言</h1><p>你好，我是YourBatman。</p>
+<p><a href="https://mp.weixin.qq.com/s/VYy1QVeFLRkciymFHueb5w" target="_blank" rel="noopener">上篇文章</a> 体验了一把ObjectMapper在<strong>数据绑定</strong>方面的应用，用起来还是蛮方便的有木有，为啥不少人说它难用呢，着实费解。我群里问了问，主要原因是它不是静态方法调用，并且方法名取得不那么见名之意……</p>
+<p>虽然<code>ObjectMapper</code>在数据绑定上既可以处理简单类型（如Integer、List、Map等），也能处理完全类型（如POJO），看似无所不能。但是，若有如下场景它依旧<strong>不太好实现</strong>：</p>
 <ol>
-<li>手动。构建<code>ApplicationContext</code>时由构建者手动传入，可手动控制顺序</li>
-<li>自动。被<code>@ComponentScan</code>自动扫描进去，无法控制顺序</li>
+<li>硕大的JSON串中我只想要<strong>某一个</strong>（某几个）属性的值而已</li>
+<li>临时使用，我并不想创建一个POJO与之对应，只想直接使用<strong>值</strong>即可（类型转换什么的我自己来就好）</li>
+<li>数据结构高度<strong>动态化</strong></li>
 </ol>
-<p>绝大多数情况下我们都是使用<strong>自动</strong>的方式，所以在Spring下对配置的顺序并无感知。其实这也是需求驱使，因为在传统Spring下我们并无此需求，所以对它无感是合乎逻辑的。另说一句，虽然我们并不能控制Bean的顺序，但是我们是可以干涉它的，比如：控制依赖关系、提升优先级、“间接”控制执行顺序…当然喽这是后面文章的内容，敬请关注。</p>
-<hr>
-<h3 id="Spring-Boot下控制配置执行顺序"><a href="#Spring-Boot下控制配置执行顺序" class="headerlink" title="Spring Boot下控制配置执行顺序"></a>Spring Boot下控制配置执行顺序</h3><p><code>Spring Boot</code>下对<strong>自动配置</strong>的管理对比于Spring它就是黑盒，它会根据当前容器内的情况来<strong>动态的</strong>判断自动配置类的加载与否、以及加载的顺序，所以可以说：Spring Boot的自动配置它对顺序是有<strong>强要求</strong>的。需求驱使，Spring Boot给我们提供了<code>@AutoConfigureBefore、@AutoConfigureAfter、@AutoConfigureOrder</code>（下面统称这三个注解为“三大注解”）这三个注解来帮我们解决这种诉求。</p>
-<p>需要注意的是：三大注解是Spring Boot提供的而非Spring Framework。其中前两个是1.0.0就有了，<code>@AutoConfigureOrder</code>属于1.3.0版本新增，表示绝对顺序（数字越小，优先级越高）。另外，这几个注解<strong>并不互斥</strong>，可以同时标注在同一个<code>@Configuration</code>自动配置类上。</p>
-<hr>
-<h2 id="Spring-Boot内置的控制配置顺序举例"><a href="#Spring-Boot内置的控制配置顺序举例" class="headerlink" title="Spring Boot内置的控制配置顺序举例"></a>Spring Boot内置的控制配置顺序举例</h2><p>为方便大家理解，我列出一个Spring Boot它自己的使用作为示例学一学。以大家最为熟悉的WebMvc的自动配置场景为例：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span>(proxyBeanMethods = <span class="keyword">false</span>)</span><br><span class="line"><span class="meta">@AutoConfigureOrder</span>(Ordered.HIGHEST_PRECEDENCE + <span class="number">10</span>)</span><br><span class="line"><span class="meta">@AutoConfigureAfter</span>(&#123; DispatcherServletAutoConfiguration<span class="class">.<span class="keyword">class</span>, <span class="title">TaskExecutionAutoConfiguration</span>.<span class="title">class</span>, <span class="title">ValidationAutoConfiguration</span>.<span class="title">class</span> &#125;)</span></span><br><span class="line"><span class="class"><span class="title">public</span> <span class="title">class</span> <span class="title">WebMvcAutoConfiguration</span> </span>&#123; ... &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@Configuration</span>(proxyBeanMethods = <span class="keyword">false</span>)</span><br><span class="line"><span class="meta">@AutoConfigureOrder</span>(Ordered.HIGHEST_PRECEDENCE)</span><br><span class="line"><span class="meta">@AutoConfigureAfter</span>(ServletWebServerFactoryAutoConfiguration<span class="class">.<span class="keyword">class</span>)</span></span><br><span class="line"><span class="class"><span class="title">public</span> <span class="title">class</span> <span class="title">DispatcherServletAutoConfiguration</span> </span>&#123; ... &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@Configuration</span>(proxyBeanMethods = <span class="keyword">false</span>)</span><br><span class="line"><span class="meta">@AutoConfigureOrder</span>(Ordered.HIGHEST_PRECEDENCE)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ServletWebServerFactoryAutoConfiguration</span> </span>&#123; ... &#125;</span><br></pre></td></tr></table></figure>
-<p>这几个配置是WebMVC的核心配置，他们之间是有顺序关系的：</p>
+<p>为了解决这些问题，Jackson提供了强大的<strong>树模型</strong> API供以使用，这也就是本文的主要的内容。</p>
+<blockquote>
+<p>小贴士：树模型虽然是jackson-core模块里定义的，但是是由jackson-databind高级模块提供的实现</p>
+</blockquote>
+<h2 id="版本约定"><a href="#版本约定" class="headerlink" title="版本约定"></a>版本约定</h2><ul>
+<li>Jackson版本：<code>2.11.0</code></li>
+<li>Spring Framework版本：<code>5.2.6.RELEASE</code></li>
+<li>Spring Boot版本：<code>2.3.0.RELEASE</code></li>
+</ul>
+<h1 id="✍正文"><a href="#✍正文" class="headerlink" title="✍正文"></a>✍正文</h1><p>树模型可能比数据绑定<strong>更方便，更灵活</strong>。特别是在结构高度<strong>动态</strong>或者不能很好地映射到Java类的情况下，它就显得更有价值了。</p>
+<h2 id="树模型"><a href="#树模型" class="headerlink" title="树模型"></a>树模型</h2><p>树模型是JSON数据内存树的表示形式，这是最灵活的方法，它就类似于XML的DOM解析器。Jackson提供了树模型API来<strong>生成和解析</strong> JSON串，主要用到如下三个核心类：</p>
 <ul>
-<li><code>WebMvcAutoConfiguration</code>被加载的前提是：<code>DispatcherServletAutoConfiguration、TaskExecutionAutoConfiguration、ValidationAutoConfiguration</code>这三个哥们都已经完成初始化</li>
-<li><code>DispatcherServletAutoConfiguration</code>被加载的前提是：<code>ServletWebServerFactoryAutoConfiguration</code>已经完成初始化</li>
-<li><code>ServletWebServerFactoryAutoConfiguration</code>被加载的前提是：<code>@AutoConfigureOrder(Ordered.HIGHEST_PRECEDENCE)</code>最高优先级，也就是说它无其它依赖，<strong>希望自己是最先被初始化的</strong><ul>
-<li>当碰到多个配置都是最高优先级的时候，且互相之前没有关系的话，顺序也是不定的。但若互相之间存在依赖关系（如本利的<code>DispatcherServletAutoConfiguration</code>和<code>ServletWebServerFactoryAutoConfiguration</code>），那就按照相对顺序走</li>
+<li><code>JsonNodeFactory</code>：顾名思义，用来构造各种JsonNode节点的工厂。例如对象节点ObjectNode、数组节点ArrayNode等等</li>
+<li><code>JsonNode</code>：表示json节点。可以往里面塞值，从而最终构造出一颗json树</li>
+<li><code>ObjectMapper</code>：实现JsonNode和JSON字符串的互转</li>
 </ul>
-</li>
-</ul>
-<p><img data-src="https://img-blog.csdnimg.cn/20200418160820903.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2Y2NDEzODU3MTI=,size_16,color_FFFFFF,t_70#x330" alt=""></p>
-<p>在<code>WebMvcAutoConfiguration</code>加载<strong>后</strong>，在它<strong>之后</strong>其实还有很多配置会尝试执行，例如：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@AutoConfigureAfter</span>(WebMvcAutoConfiguration<span class="class">.<span class="keyword">class</span>)</span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">FreeMarkerServletWebConfiguration</span> <span class="keyword">extends</span> <span class="title">AbstractFreeMarkerConfiguration</span> </span>&#123; ... &#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@AutoConfigureAfter</span>(WebMvcAutoConfiguration<span class="class">.<span class="keyword">class</span>)</span></span><br><span class="line"><span class="class"><span class="title">public</span> <span class="title">class</span> <span class="title">GroovyTemplateAutoConfiguration</span> </span>&#123; ... &#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@AutoConfigureAfter</span>(&#123; WebMvcAutoConfiguration<span class="class">.<span class="keyword">class</span>, <span class="title">WebFluxAutoConfiguration</span>.<span class="title">class</span> &#125;)</span></span><br><span class="line"><span class="class"><span class="title">public</span> <span class="title">class</span> <span class="title">ThymeleafAutoConfiguration</span> </span>&#123; ... &#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@AutoConfigureAfter</span>(WebMvcAutoConfiguration<span class="class">.<span class="keyword">class</span>)</span></span><br><span class="line"><span class="class"><span class="title">public</span> <span class="title">class</span> <span class="title">LifecycleMvcEndpointAutoConfiguration</span> </span>&#123; ... &#125;</span><br></pre></td></tr></table></figure>
-<p>这些都很容易理解：如果都不是Web环境，加载一些模版引擎的并无必要嘛。</p>
-<hr>
-<h2 id="三大注解使用的误区（重要）"><a href="#三大注解使用的误区（重要）" class="headerlink" title="三大注解使用的误区（重要）"></a>三大注解使用的误区（重要）</h2><p>根据我的切身体会，针对这三大注解，实在有太多人把它<strong>误用</strong>了，想用但是用了却又不生效，于是就容易触发一波“骂街”操作，其实这也是我书写本文的最大动力所在：纠正你的错误使用，告诉你正确姿势。</p>
-<hr>
-<h3 id="错误使用示例"><a href="#错误使用示例" class="headerlink" title="错误使用示例"></a>错误使用示例</h3><p>我见到的非常多的小伙伴这么来使用三大注解：我这里使用“伪代码”进行模拟</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">B_ParentConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    B_ParentConfig() &#123;</span><br><span class="line">        System.out.println(<span class="string">"配置类ParentConfig构造器被执行..."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">A_SonConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    A_SonConfig() &#123;</span><br><span class="line">        System.out.println(<span class="string">"配置类SonConfig构造器被执行..."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">C_DemoConfig</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">C_DemoConfig</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"我是被自动扫描的配置，初始化啦...."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Application</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(Application<span class="class">.<span class="keyword">class</span>, <span class="title">args</span>).<span class="title">close</span>()</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>通过名称能知道我想要的达到的效果是：<strong>ParentConfig先加载，SonConfig后加载</strong>。（DemoConfig作为一个参考配置，作为日志参考使用即可）</p>
-<p>启动应用，控制台打印：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">配置类SonConfig构造器被执行...</span><br><span class="line">配置类ParentConfig构造器被执行...</span><br><span class="line">我是被自动扫描的配置，初始化啦....</span><br></pre></td></tr></table></figure>
-<p>Son优先于Parent被加载了，这明显<strong>不符合要求</strong>。因此，我看到很多小伙伴就这么干：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@AutoConfigureBefore</span>(A_SonConfig<span class="class">.<span class="keyword">class</span>)</span></span><br><span class="line"><span class="class">@<span class="title">Configuration</span></span></span><br><span class="line"><span class="class"><span class="title">public</span> <span class="title">class</span> <span class="title">B_ParentConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    B_ParentConfig() &#123;</span><br><span class="line">        System.out.println(<span class="string">"配置类ParentConfig构造器被执行..."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>通过<code>@AutoConfigureBefore</code>控制，表示在<code>A_SonConfig</code>之前执行此配置。语义层面上看，貌似没有任何问题，再次启动应用：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">配置类SonConfig构造器被执行...</span><br><span class="line">配置类ParentConfig构造器被执行...</span><br><span class="line">我是被自动扫描的配置，初始化啦....</span><br></pre></td></tr></table></figure>
-<p>what a fuck。看到没，我没骗你吧，骂街了骂街了</p>
-<p><img data-src="https://img-blog.csdnimg.cn/20200509163634888.png#x200" alt=""><br>竟然没生效？代码不会骗人，<code>@AutoConfigureBefore</code>的语义也没有问题，而是你使用的姿势不对，下面我会给你正确姿势。</p>
-<hr>
-<h2 id="三大注解使用的正确姿势"><a href="#三大注解使用的正确姿势" class="headerlink" title="三大注解使用的正确姿势"></a>三大注解使用的正确姿势</h2><p>针对以上case，要想达到预期效果，正确姿势只需要下面两步：</p>
-<ol>
-<li>把<code>A_SonConfig</code>和<code>B_ParentConfig</code>挪动到Application<strong>扫描不到</strong>的包内，切记：一定且必须是扫描不到的包内</li>
-<li>当前工程里增加配置<code>META-INF/spring.factories</code>，内容为(配置里Son和Parent前后顺序对结果无影响)：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.fsx.autoconfig.A_SonConfig,com.fsx.autoconfig.B_ParentConfig</span><br></pre></td></tr></table></figure>
-再次启动应用看看，打印输出：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">我是被自动扫描的配置，初始化啦....</span><br><span class="line">配置类ParentConfig构造器被执行...</span><br><span class="line">配置类SonConfig构造器被执行...</span><br></pre></td></tr></table></figure></li>
-</ol>
-<p><strong>完美</strong>。符合预期，Parent终于在Son之前完成了初始化，也就是说我们的<code>@AutoConfigureBefore</code>注解生效了。</p>
-<hr>
-<h3 id="使用细节注意事项"><a href="#使用细节注意事项" class="headerlink" title="使用细节注意事项"></a>使用细节注意事项</h3><p>针对此使用姿势，虽然很正确，并不是完全没有“副作用”的，有如下细节平时也需要引起注意：</p>
+<p>这里有个萌新的概念：JsonNode。它贯穿于整个树模型中，所以有必要先来认识它。</p>
+<h2 id="JsonNode"><a href="#JsonNode" class="headerlink" title="JsonNode"></a>JsonNode</h2><p>JSON节点，可类比XML的DOM树节点结构来辅助理解。JsonNode是所有JSON节点的基类，它是一个抽象类，它有一个较大的特点：绝大多数的get方法均放在了此抽象类里（即使它没有实现），目的是：<strong>在不进行类型强制转换的情况下遍历结构</strong>。但是，大多数的<strong>修改方法</strong>都必须通过特定的子类类型去调用，这其实是合理的。因为在构建/修改某个Node节点时，类型类型信息一般是明确的，而在读取Node节点时大多数时候并不    太关心节点类型。</p>
+<p>多个JsonNode节点构成Jackson实现的JSON树模型的基础，它是流式API中<code>com.fasterxml.jackson.core.TreeNode</code>接口的实现，同时它还实现了<code>Iterable</code>迭代器接口。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">JsonNode</span> <span class="keyword">extends</span> <span class="title">JsonSerializable</span>.<span class="title">Base</span> </span></span><br><span class="line"><span class="class">	<span class="keyword">implements</span> <span class="title">TreeNode</span>, <span class="title">Iterable</span>&lt;<span class="title">JsonNode</span>&gt; </span>&#123;</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>JsonNode的继承图谱如下（部分）：<br><img data-src="https://img-blog.csdnimg.cn/20200728214449119.png" alt=""><br>一目了然了吧，基本上每个数据类型都会有一个JsonNode的实现类型对应。譬如数组节点<code>ArrayNode</code>、数字节点<code>NumericNode</code>等等。</p>
+<p>一般情况下，我们并不需要通过new关键字去构建一个JsonNode实例，而是借助<code>JsonNodeFactory</code>工厂来做。</p>
+<h2 id="JsonNodeFactory"><a href="#JsonNodeFactory" class="headerlink" title="JsonNodeFactory"></a>JsonNodeFactory</h2><p>构建JsonNode工厂类。话不多说，用几个例子跑一跑。</p>
+<h3 id="值类型节点（ValueNode）"><a href="#值类型节点（ValueNode）" class="headerlink" title="值类型节点（ValueNode）"></a>值类型节点（ValueNode）</h3><p>此类节点均为<code>ValueNode</code>的子类，特点是：一个节点表示一个值。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    JsonNodeFactory factory = JsonNodeFactory.instance;</span><br><span class="line"></span><br><span class="line">    System.out.println(<span class="string">"------ValueNode值节点示例------"</span>);</span><br><span class="line">    <span class="comment">// 数字节点</span></span><br><span class="line">    JsonNode node = factory.numberNode(<span class="number">1</span>);</span><br><span class="line">    System.out.println(node.isNumber() + <span class="string">":"</span> + node.intValue());</span><br><span class="line"></span><br><span class="line">    <span class="comment">// null节点</span></span><br><span class="line">    node = factory.nullNode();</span><br><span class="line">    System.out.println(node.isNull() + <span class="string">":"</span> + node.asText());</span><br><span class="line"></span><br><span class="line">    <span class="comment">// missing节点</span></span><br><span class="line">    node = factory.missingNode();</span><br><span class="line">    System.out.println(node.isMissingNode() + <span class="string">"_"</span> + node.asText());</span><br><span class="line"></span><br><span class="line">    <span class="comment">// POJONode节点</span></span><br><span class="line">    node = factory.pojoNode(<span class="keyword">new</span> Person(<span class="string">"YourBatman"</span>, <span class="number">18</span>));</span><br><span class="line">    System.out.println(node.isPojo() + <span class="string">":"</span> + node.asText());</span><br><span class="line"></span><br><span class="line">    System.out.println(<span class="string">"---"</span> + node.isValueNode() + <span class="string">"---"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，输出：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">------ValueNode值节点示例------</span><br><span class="line"><span class="keyword">true</span>:<span class="number">1</span></span><br><span class="line"><span class="keyword">true</span>:<span class="keyword">null</span></span><br><span class="line">true_</span><br><span class="line"><span class="keyword">true</span>:Person(name=YourBatman, age=<span class="number">18</span>)</span><br><span class="line">---<span class="keyword">true</span>---</span><br></pre></td></tr></table></figure>
+
+<h3 id="容器类型节点（ContainerNode）"><a href="#容器类型节点（ContainerNode）" class="headerlink" title="容器类型节点（ContainerNode）"></a>容器类型节点（ContainerNode）</h3><p>此类节点均为<code>ContainerNode</code>的子类，特点是：本节点代表一个容器，里面可以装任何其它节点。</p>
+<p>Java中容器有两种：Map和Collection。对应的Jackson也提供了两种容器节点用于表述此类数据结构：</p>
 <ul>
-<li>若你不用<code>@AutoConfigureBefore</code>这个注解，单单就想依赖于spring.factories里的先后顺序的来控制实际的加载顺序，答案是<strong>不可以</strong>，控制不了</li>
-<li>例子中有个小细节：我每次都故意输出了<code>我是被自动扫描的配置，初始化啦....</code>这句话，可以发现被扫描进去配置实例化是在它前面（见错误示例），而通过<code>spring.factories</code>方式进去是在它的后面（见正确姿势）</li>
-<li>从这个小细节可以衍生得到结论：<code>Spring Boot</code>的自动配置均是通过<code>spring.factories</code>来指定的，它的优先级最低（执行时机是最晚的）；通过扫描进来的一般都是你自己自定义的配置类，所以优先级是最高的，<strong>肯定在自动配置之前加载</strong><ul>
-<li>从这你应该学到：若你要指定扫描的包名，请千万不要扫描到形如<code>org.springframework</code>这种包名，否则“天下大乱”（当然喽为了防止这种情况出现，Spring Boot做了容错的。它有一个类专门检测这个case防止你配置错了，具体参见<code>ComponentScanPackageCheck</code>默认实现）</li>
+<li><code>ObjectNode</code>：类比Map，采用K-V结构存储。比如一个JSON结构，<strong>根节点</strong> 就是一个ObjectNode</li>
+<li><code>ArrayNode</code>：类比Collection、数组。里面可以放置任何节点</li>
 </ul>
-</li>
-<li>请尽量不要让自动配置类既被扫描到了，又放在<code>spring.factories</code>配置了，否则后者会覆盖前者，很容易造成莫名其妙的错误</li>
-</ul>
-<p>小总结，对于三大注解的正确使用姿势是应该是：请使用在你的<strong>自动配置</strong>里（一般是你自定义starter时使用），而不是使用在你业务工程中的<code>@Configuration</code>里，因为那会毫无效果。</p>
-<p><img data-src="https://img-blog.csdnimg.cn/20200509165554902.jpg#x200" alt=""></p>
-<h2 id="三大注解解析时机浅析"><a href="#三大注解解析时机浅析" class="headerlink" title="三大注解解析时机浅析"></a>三大注解解析时机浅析</h2><p>为了更好的辅助理解，加强记忆，本文将这三大注解解析时机<strong>简要的</strong>絮叨一下，知道了它被解析的时机，自然就很好解释为何你那么写是无效的喽。</p>
-<p>这三个注解的解析都是交给<code>AutoConfigurationSorter</code>来排序、处理的，做法类似于<code>AnnotationAwareOrderComparator</code>去解析排序<code>@Order</code>注解。核心代码如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AutoConfigurationSorter</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 唯一给外部调用的方法：返回排序好的Names，因此返回的是个List嘛（ArrayList）</span></span><br><span class="line">	<span class="function">List&lt;String&gt; <span class="title">getInPriorityOrder</span><span class="params">(Collection&lt;String&gt; classNames)</span> </span>&#123;</span><br><span class="line">		...</span><br><span class="line">		<span class="comment">// 先按照自然顺序排一波</span></span><br><span class="line">		Collections.sort(orderedClassNames);</span><br><span class="line">		<span class="comment">// 在按照@AutoConfigureBefore这三个注解排一波</span></span><br><span class="line">		orderedClassNames = sortByAnnotation(classes, orderedClassNames);</span><br><span class="line">		<span class="keyword">return</span> orderedClassNames;</span><br><span class="line">	&#125;</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>此排序器被两个地方使用到：</p>
+<p>下面用示例感受一下它们的使用：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    JsonNodeFactory factory = JsonNodeFactory.instance;</span><br><span class="line"></span><br><span class="line">    System.out.println(<span class="string">"------构建一个JSON结构数据------"</span>);</span><br><span class="line">    ObjectNode rootNode = factory.objectNode();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 添加普通值节点</span></span><br><span class="line">    rootNode.put(<span class="string">"zhName"</span>, <span class="string">"A哥"</span>); <span class="comment">// 效果完全同：rootNode.set("zhName", factory.textNode("A哥"))</span></span><br><span class="line">    rootNode.put(<span class="string">"enName"</span>, <span class="string">"YourBatman"</span>);</span><br><span class="line">    rootNode.put(<span class="string">"age"</span>, <span class="number">18</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 添加数组容器节点</span></span><br><span class="line">    ArrayNode arrayNode = factory.arrayNode();</span><br><span class="line">    arrayNode.add(<span class="string">"java"</span>)</span><br><span class="line">            .add(<span class="string">"javascript"</span>)</span><br><span class="line">            .add(<span class="string">"python"</span>);</span><br><span class="line">    rootNode.set(<span class="string">"languages"</span>, arrayNode);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 添加对象节点</span></span><br><span class="line">    ObjectNode dogNode = factory.objectNode();</span><br><span class="line">    dogNode.put(<span class="string">"name"</span>, <span class="string">"大黄"</span>)</span><br><span class="line">            .put(<span class="string">"age"</span>, <span class="number">3</span>);</span><br><span class="line">    rootNode.set(<span class="string">"dog"</span>, dogNode);</span><br><span class="line"></span><br><span class="line">    System.out.println(rootNode);</span><br><span class="line">    System.out.println(rootNode.get(<span class="string">"dog"</span>).get(<span class="string">"name"</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，输出：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">------构建一个JSON结构数据------</span><br><span class="line">&#123;<span class="string">"zhName"</span>:<span class="string">"A哥"</span>,<span class="string">"enName"</span>:<span class="string">"YourBatman"</span>,<span class="string">"age"</span>:<span class="number">18</span>,<span class="string">"languages"</span>:[<span class="string">"java"</span>,<span class="string">"javascript"</span>,<span class="string">"python"</span>],<span class="string">"dog"</span>:&#123;<span class="string">"name"</span>:<span class="string">"大黄"</span>,<span class="string">"age"</span>:<span class="number">3</span>&#125;&#125;</span><br><span class="line"><span class="string">"大黄"</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="ObjectMapper中的树模型"><a href="#ObjectMapper中的树模型" class="headerlink" title="ObjectMapper中的树模型"></a>ObjectMapper中的树模型</h2><p>树模型其实是底层<strong>流式API</strong>所提出和支持的，典型API便是<code>com.fasterxml.jackson.core.TreeNode</code>。但通过前面文章的示例讲解可以知道：底层流式API仅定义了接口而并未提供任何实现，甚至半成品都算不上。所以说要使用Jackson的树模型还得看ObjectMapper，它提供了TreeNode等API的完整实现。</p>
+<p>不乏很多小伙伴对<code>ObjectMapper</code>的树模型是一知半解的，甚至从来都没有用过，其实它是<strong>非常灵活</strong>和强大的。有了上面的基础示例做支撑，再来了解它的实现就得心应手多了。</p>
+<p>ObjectMapper中提供了树模型(tree model) API 来生成和解析 json 字符串。如果你不想为你的 json 结构单独建类与之对应的话，则可以选择该 API，如下图所示：<br><img data-src="https://img-blog.csdnimg.cn/20200820212454191.png#pic_center" alt=""><br>ObjectMapper在读取JSON后提供指向树的根节点的指针， 根节点可用于<strong>遍历</strong>完整的树。 同样的，我们可从读（反序列化）、写（序列化）两个方面来展开。</p>
+<h3 id="写（序列化）"><a href="#写（序列化）" class="headerlink" title="写（序列化）"></a>写（序列化）</h3><p>将Object写为JsonNode，ObjectMapper给我们提供了三个实用API俩操作它：<br><img data-src="https://img-blog.csdnimg.cn/20200821184426585.png#pic_center" alt=""></p>
+<h4 id="1、valueToTree-Object"><a href="#1、valueToTree-Object" class="headerlink" title="1、valueToTree(Object)"></a>1、valueToTree(Object)</h4><p>该方法属相对较为常用：将任意对象（包括null）写为一个JsonNode树模型。功能上类似于先将Object序列化为JSON串，再读为JsonNode，但很明显这样一步到位更加高效。</p>
+<blockquote>
+<p>小贴士：高效不代表性能高，因为其内部实现好还是调用了<code>readTree()</code>方法的</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ObjectMapper mapper = <span class="keyword">new</span> ObjectMapper();</span><br><span class="line"></span><br><span class="line">    Person person = <span class="keyword">new</span> Person();</span><br><span class="line">    person.setName(<span class="string">"YourBatman"</span>);</span><br><span class="line">    person.setAge(<span class="number">18</span>);</span><br><span class="line"></span><br><span class="line">    person.setDog(<span class="keyword">new</span> Person.Dog(<span class="string">"旺财"</span>, <span class="number">3</span>));</span><br><span class="line"></span><br><span class="line">    JsonNode node = mapper.valueToTree(person);</span><br><span class="line"></span><br><span class="line">    System.out.println(person);</span><br><span class="line">    <span class="comment">// 遍历打印所有属性</span></span><br><span class="line">    Iterator&lt;JsonNode&gt; it = node.iterator();</span><br><span class="line">    <span class="keyword">while</span> (it.hasNext()) &#123;</span><br><span class="line">        JsonNode nextNode = it.next();</span><br><span class="line">        <span class="keyword">if</span> (nextNode.isContainerNode()) &#123;</span><br><span class="line">            <span class="keyword">if</span> (nextNode.isObject()) &#123;</span><br><span class="line">                System.out.println(<span class="string">"狗的属性：：："</span>);</span><br><span class="line"></span><br><span class="line">                System.out.println(nextNode.get(<span class="string">"name"</span>));</span><br><span class="line">                System.out.println(nextNode.get(<span class="string">"age"</span>));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            System.out.println(nextNode.asText());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 直接获取</span></span><br><span class="line">    System.out.println(<span class="string">"---------------------------------------"</span>);</span><br><span class="line">    System.out.println(node.get(<span class="string">"dog"</span>).get(<span class="string">"name"</span>));</span><br><span class="line">    System.out.println(node.get(<span class="string">"dog"</span>).get(<span class="string">"age"</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，控制台输出：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Person(name=YourBatman, age=18, dog=Person.Dog(name=旺财, age=3))</span><br><span class="line">YourBatman</span><br><span class="line"><span class="number">18</span></span><br><span class="line">狗的属性：：：</span><br><span class="line"><span class="string">"旺财"</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line">---------------------------------------</span><br><span class="line"><span class="string">"旺财"</span></span><br><span class="line"><span class="number">3</span></span><br></pre></td></tr></table></figure>
+<p>对于JsonNode在这里补充一个要点：读取其属性，你既可以用迭代器遍历，也可以根据key（属性）直接获取，是不是和Map的使用几乎一毛一样？</p>
+<h4 id="2、writeTree-JsonGenerator-JsonNode"><a href="#2、writeTree-JsonGenerator-JsonNode" class="headerlink" title="2、writeTree(JsonGenerator, JsonNode)"></a>2、writeTree(JsonGenerator, JsonNode)</h4><p>顾名思义：将一个JsonNode使用JsonGenerator写到输出流里，此方法直接使用到了JsonGenerator这个API，灵活度杠杠的，但相对偏底层，本处仍旧给个示例玩玩吧（底层API更多详解，请参见本系列前面几篇文章）：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test2</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    ObjectMapper mapper = <span class="keyword">new</span> ObjectMapper();</span><br><span class="line"></span><br><span class="line">    JsonFactory factory = <span class="keyword">new</span> JsonFactory();</span><br><span class="line">    <span class="keyword">try</span> (JsonGenerator jsonGenerator = factory.createGenerator(System.err, JsonEncoding.UTF8)) &#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 1、得到一个jsonNode（为了方便我直接用上面API生成了哈）</span></span><br><span class="line">        Person person = <span class="keyword">new</span> Person();</span><br><span class="line">        person.setName(<span class="string">"YourBatman"</span>);</span><br><span class="line">        person.setAge(<span class="number">18</span>);</span><br><span class="line">        JsonNode jsonNode = mapper.valueToTree(person);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 使用JsonGenerator写到输出流</span></span><br><span class="line">        mapper.writeTree(jsonGenerator, jsonNode);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，控制台输出：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">"name"</span>:<span class="string">"YourBatman"</span>,<span class="attr">"age"</span>:<span class="number">18</span>,<span class="attr">"dog"</span>:<span class="literal">null</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3、writeTree-JsonGenerator-TreeNode"><a href="#3、writeTree-JsonGenerator-TreeNode" class="headerlink" title="3、writeTree(JsonGenerator,TreeNode)"></a>3、writeTree(JsonGenerator,TreeNode)</h4><p>JsonNode是TreeNode的实现类，上面方法已经给出了使用示例，所以本方法不在赘述你应该不会有意见了吧。</p>
+<h3 id="读（反序列化）"><a href="#读（反序列化）" class="headerlink" title="读（反序列化）"></a>读（反序列化）</h3><p>将一个资源（如字符串）读取为一个JsonNode树模型。<br><img data-src="https://img-blog.csdnimg.cn/2020082119261653.png#pic_center" alt=""><br>这是典型的方法重载设计，API更加友好，所有方法底层均为<code>_readTreeAndClose()</code>这个protected方法，可谓“万剑归宗”。</p>
+<p>下面以最为常见的：读取JSON字符串为例，其它的举一反三即可。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test3</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    ObjectMapper mapper = <span class="keyword">new</span> ObjectMapper();</span><br><span class="line"></span><br><span class="line">    String jsonStr = <span class="string">"&#123;\"name\":\"YourBatman\",\"age\":18,\"dog\":null&#125;"</span>;</span><br><span class="line">    <span class="comment">// 直接映射为一个实体对象</span></span><br><span class="line">    <span class="comment">// mapper.readValue(jsonStr, Person.class);</span></span><br><span class="line">    <span class="comment">// 读取为一个树模型</span></span><br><span class="line">    JsonNode node = mapper.readTree(jsonStr);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// ... 略</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>至于底层<code>_readTreeAndClose(JsonParser)</code>方法的具体实现，就有得捞了。不过鉴于它过于枯燥和稍有些烧脑，后面撰有专文详解，有兴趣可持续关注。</p>
+<h2 id="场景演练"><a href="#场景演练" class="headerlink" title="场景演练"></a>场景演练</h2><p>理论和示例讲完了，<strong>光说不练假把式</strong>，下面A哥根据经验，举两个树模型的实际使用示例供你参考。</p>
+<h3 id="1、偌大JSON串中仅需1个值"><a href="#1、偌大JSON串中仅需1个值" class="headerlink" title="1、偌大JSON串中仅需1个值"></a>1、偌大JSON串中仅需1个值</h3><p>这种场景其实还蛮常见的，比如有个很经典的场景便是在MQ消费中：生产者一般会恨不得把它能吐出来的属性尽可能都扔出来，但对于不同的消费者而言它们的所需往往是不一样的：</p>
 <ul>
-<li><code>AutoConfigurationImportSelector</code>：Spring自动配置处理器，用于加载所有的自动配置类。它实现了<code>DeferredImportSelector</code>接口：这也顺便解释了为何自动配置是最后执行的原因~</li>
-<li><code>AutoConfigurations</code>：表示自动配置@Configuration类。</li>
+<li>需要较多的属性值，这时候用<strong>完全数据绑定</strong>转换成POJO来操作更为方便和合理</li>
+<li>需要1个(较少)的属性值，这时候“杀鸡岂能用牛刀”呢，这种case使用树模型来做就显得更为优雅和高效了</li>
 </ul>
-<p>这个排序的“解析/排序”过程还是比较复杂的，本文点到为止，观其大意即可。你可以简单粗暴的记住结论：<code>@AutoConfigureBefore、@AutoConfigureAfter、@AutoConfigureOrder</code>这三个注解只能作用于<strong>自动配置类</strong>，而不能是自定义的@Configuration配置类。</p>
-<hr>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>关于Spring Boot自动配置顺序相关的三大注解<code>@AutoConfigureBefore、@AutoConfigureAfter、@AutoConfigureOrder</code>就先介绍到这了，本文主要用意是为了帮助大家规范此些“常用注解”的使用，规避一些误区，端正使用姿势，避免犯错时又丈二和尚。</p>
-<p>我看到不少文章、生产上的代码都使用错了（估计有没有效果自己的都不知道，又或者刚好歪打正着确实是在xxx后面执行而以为生效了），希望本文能帮助到你。</p>
+<p>譬如，生产者生产的消息JSON串如下（模拟数据，总之你就当做它属性很多、嵌套很深就对了）：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">"name"</span>:<span class="string">"YourBatman"</span>,<span class="attr">"age"</span>:<span class="number">18</span>,<span class="attr">"dog"</span>:&#123;<span class="attr">"name"</span>:<span class="string">"旺财"</span>,<span class="attr">"color"</span>:<span class="string">"WHITE"</span>&#125;,<span class="attr">"hobbies"</span>:[<span class="string">"篮球"</span>,<span class="string">"football"</span>]&#125;</span><br></pre></td></tr></table></figure>
+<p>这时候，我仅关心狗的颜色，肿么办呢？相信你已经想到了：树模型</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test4</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    ObjectMapper mapper = <span class="keyword">new</span> ObjectMapper();</span><br><span class="line"></span><br><span class="line">    String jsonStr = <span class="string">"&#123;\"name\":\"YourBatman\",\"age\":18,\"dog\":&#123;\"name\":\"旺财\",\"color\":\"WHITE\"&#125;,\"hobbies\":[\"篮球\",\"football\"]&#125;"</span>;</span><br><span class="line">    JsonNode node = mapper.readTree(jsonStr);</span><br><span class="line"></span><br><span class="line">    System.out.println(node.get(<span class="string">"dog"</span>).get(<span class="string">"color"</span>).asText());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，控制台输出：<code>WHITE</code>，目标达成。值得注意的是：如果<code>node.get(&quot;dog&quot;)</code>没有这个节点(或者值为null)，是会抛出<code>NPE</code>异常的，因此请你自己保证代码的健壮性。</p>
+<p>当你不想创建一个Java Bean与JSON属性相对应时，树模型的<strong>所见即所得</strong>特性就很好解决了这个问题。</p>
+<h3 id="2、数据结构高度动态化"><a href="#2、数据结构高度动态化" class="headerlink" title="2、数据结构高度动态化"></a>2、数据结构高度动态化</h3><p>当数据结构高度动态化（随时可能新增、删除节点）时，使用树模型去处理是一个较好的方案（稳定之后再转为Java Bean即可）。这主要是利用了树模型它具有动态可扩展的特性，满足我们日益变化的结构：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test5</span><span class="params">()</span> <span class="keyword">throws</span> JsonProcessingException </span>&#123;</span><br><span class="line">    String jsonStr = <span class="string">"&#123;\"name\":\"YourBatman\",\"age\":18&#125;"</span>;</span><br><span class="line"></span><br><span class="line">    JsonNode node = <span class="keyword">new</span> ObjectMapper().readTree(jsonStr);</span><br><span class="line"></span><br><span class="line">    System.out.println(<span class="string">"-------------向结构里动态添加节点------------"</span>);</span><br><span class="line">    <span class="comment">// 动态添加一个myDiy节点，并且该节点还是ObjectNode节点</span></span><br><span class="line">    ((ObjectNode) node).with(<span class="string">"myDiy"</span>).put(<span class="string">"contry"</span>, <span class="string">"China"</span>);</span><br><span class="line"></span><br><span class="line">    System.out.println(node);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，控制台输出：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-------------向结构里动态添加节点------------</span><br><span class="line">&#123;<span class="attr">"name"</span>:<span class="string">"YourBatman"</span>,<span class="attr">"age"</span>:<span class="number">18</span>,<span class="attr">"myDiy"</span>:&#123;<span class="attr">"contry"</span>:<span class="string">"China"</span>&#125;&#125;</span><br></pre></td></tr></table></figure>
+<p>说白了，也没啥特殊的。拿到一个<code>JsonNode</code>后你可以任意的造它，就像<code>Map&lt;Object,Object&gt;</code>一样~</p>
+<h1 id="✍总结"><a href="#✍总结" class="headerlink" title="✍总结"></a>✍总结</h1><p>树模型(tree model) API比Jackson 流式(Streaming) API 简单了很多，不管是生成 json字符串还是解析json字符串。但是相对于<strong>自动化</strong>的数据绑定而言还是比较复杂的。</p>
+<p>树模型(tree model) API在只需要取出一个大json串中的几个值时比较方便。如果json中每个（大部分）值都需要获得，那么这种方式便显得比较繁琐了。因此在实际应用中具体问题具体分析，<strong>但是，Jackson的树模型你必须得掌握</strong>。</p>
+<h5 id="✔推荐阅读："><a href="#✔推荐阅读：" class="headerlink" title="✔推荐阅读："></a>✔推荐阅读：</h5><ul>
+<li><a href="https://mp.weixin.qq.com/s/z6T9n9YvwjmDwuj-YTa0_w" target="_blank" rel="noopener">Fastjson到了说再见的时候了</a></li>
+<li><a href="https://mp.weixin.qq.com/s/iqSN4HUoIdX0kGcSdnD7EA" target="_blank" rel="noopener">1. 初识Jackson – 世界上最好的JSON库</a></li>
+<li><a href="https://mp.weixin.qq.com/s/p6cwP2BVrC8VxkN-T3uAxg" target="_blank" rel="noopener">2. 妈呀，Jackson原来是这样写JSON的</a></li>
+<li><a href="https://mp.weixin.qq.com/s/ZHb3P06IC4xElHwJqDepxw" target="_blank" rel="noopener">3. 懂了这些，方敢在简历上说会用Jackson写JSON</a></li>
+<li><a href="https://mp.weixin.qq.com/s/syAOETfEawiGItaQO35mLA" target="_blank" rel="noopener">4. JSON字符串是如何被解析的？JsonParser了解一下</a></li>
+<li><a href="https://mp.weixin.qq.com/s/0ZaDYb_ueFLbvOf3FbetfQ" target="_blank" rel="noopener">5. JsonFactory工厂而已，还蛮有料，这是我没想到的</a></li>
+<li><a href="https://mp.weixin.qq.com/s/VYy1QVeFLRkciymFHueb5w" target="_blank" rel="noopener">6. 二十不惑，ObjectMapper使用也不再迷惑</a></li>
+</ul>
         <!-- ....这里是正文内容的底部（首页不会展示）... -->
         <style>
 .table-container img{
@@ -499,22 +507,22 @@
   <div class="popular-posts-header">你可能还喜欢：</div>
   <ul class="popular-posts">
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\x2y\1db87a14.html" rel="bookmark">Spring配置类深度剖析-总结篇(手绘流程图，可白嫖)</a></div>
+      <div class="popular-posts-title"><a href="\x2y\4834a651.html" rel="bookmark">6. 二十不惑，ObjectMapper使用也不再迷惑</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\x2y\f3b61b38.html" rel="bookmark">521我发誓读完本文，再也不会担心Spring配置类问题了</a></div>
+      <div class="popular-posts-title"><a href="\x2y\1f2d2fb8.html" rel="bookmark">5. JsonFactory工厂而已，还蛮有料，这是我没想到的</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\x2y\6dd28e9b.html" rel="bookmark">你自我介绍说很懂Spring配置类，那你怎么解释这个现象？</a></div>
+      <div class="popular-posts-title"><a href="\x2y\a47cf2f7.html" rel="bookmark">4. JSON字符串是如何被解析的？JsonParser了解一下</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\x2y\8e3281a7.html" rel="bookmark">配置类需要标注@Configuration却不知原因？那这次就不能给你涨薪喽</a></div>
+      <div class="popular-posts-title"><a href="\x2y\cae3349a.html" rel="bookmark">3. 懂了这些，方敢在简历上说会用Jackson写JSON</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\x2y\e097f687.html" rel="bookmark">真懂Spring的@Configuration配置类？你可能自我感觉太良好</a></div>
+      <div class="popular-posts-title"><a href="\x2y\cf41a8ab.html" rel="bookmark">2. 妈呀，Jackson原来是这样写JSON的</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\x2y\a3cba048.html" rel="bookmark">搞事情？Spring Boot今天一口气发布三个版本</a></div>
+      <div class="popular-posts-title"><a href="\x2y\dc384b1c.html" rel="bookmark">1. 初识Jackson -- 世界上最好的JSON库</a></div>
     </li>
   </ul>
 
@@ -524,17 +532,17 @@
 <ul class="post-copyright">
   <li class="post-copyright-title">
     <strong>本文标题： </strong>
-    《使用@AutoConfigureBefore调整配置顺序竟没生效？》
+    《7. Jackson用树模型处理JSON是必备技能，不信你看》
   </li>
   <li class="post-copyright-author">
     <strong>本文作者： </strong>A哥(YourBatman)
   </li>
   <li class="post-copyright-date">
-    <strong>发布时间： </strong>2020-05-09 12:40:10
+    <strong>发布时间： </strong>2020-08-25 13:31:41
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://www.yourbatman.cn/x2y/3aa2234d.html" title="使用@AutoConfigureBefore调整配置顺序竟没生效？">https://www.yourbatman.cn/x2y/3aa2234d.html</a>
+    <a href="https://www.yourbatman.cn/x2y/edc7ba2a.html" title="7. Jackson用树模型处理JSON是必备技能，不信你看">https://www.yourbatman.cn/x2y/edc7ba2a.html</a>
   </li>
   <li class="post-copyright-license">
     <strong>许可协议： </strong>本站所有文章均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载：No！转发：Yes！
@@ -570,9 +578,9 @@
       <footer class="post-footer">
           
           <div class="post-tags">
-              <a href="/tags/Configuration/" rel="tag"><i class="fa fa-tag"></i> @Configuration</a>
-              <a href="/tags/Spring-Boot/" rel="tag"><i class="fa fa-tag"></i> Spring Boot</a>
-              <a href="/tags/AutoConfigureBefore/" rel="tag"><i class="fa fa-tag"></i> @AutoConfigureBefore</a>
+              <a href="/tags/Jackson/" rel="tag"><i class="fa fa-tag"></i> Jackson</a>
+              <a href="/tags/ObjectMapper/" rel="tag"><i class="fa fa-tag"></i> ObjectMapper</a>
+              <a href="/tags/%E6%A0%91%E6%A8%A1%E5%9E%8B/" rel="tag"><i class="fa fa-tag"></i> 树模型</a>
           </div>
 
         <!-- 导入投票模块 -->
@@ -589,13 +597,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/x2y/78afedd2.html" rel="prev" title="不懂SpringApplication生命周期事件？那就等于不会Spring Boot嘛">
-      <i class="fa fa-chevron-left"></i> 不懂SpringApplication生命周期事件？那就等于不会Spring Boot嘛
+    <a href="/x2y/4834a651.html" rel="prev" title="6. 二十不惑，ObjectMapper使用也不再迷惑">
+      <i class="fa fa-chevron-left"></i> 6. 二十不惑，ObjectMapper使用也不再迷惑
     </a></div>
-      <div class="post-nav-item">
-    <a href="/x2y/wechat-gauge.html" rel="next" title="【Java高工、架构师】系列群群规">
-      【Java高工、架构师】系列群群规 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -661,7 +666,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#正文"><span class="nav-number">2.</span> <span class="nav-text">正文</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#配置类为何需要顺序？"><span class="nav-number">2.1.</span> <span class="nav-text">配置类为何需要顺序？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring下控制配置执行顺序"><span class="nav-number">2.1.1.</span> <span class="nav-text">Spring下控制配置执行顺序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring-Boot下控制配置执行顺序"><span class="nav-number">2.1.2.</span> <span class="nav-text">Spring Boot下控制配置执行顺序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring-Boot内置的控制配置顺序举例"><span class="nav-number">2.2.</span> <span class="nav-text">Spring Boot内置的控制配置顺序举例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三大注解使用的误区（重要）"><span class="nav-number">2.3.</span> <span class="nav-text">三大注解使用的误区（重要）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#错误使用示例"><span class="nav-number">2.3.1.</span> <span class="nav-text">错误使用示例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三大注解使用的正确姿势"><span class="nav-number">2.4.</span> <span class="nav-text">三大注解使用的正确姿势</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用细节注意事项"><span class="nav-number">2.4.1.</span> <span class="nav-text">使用细节注意事项</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三大注解解析时机浅析"><span class="nav-number">2.5.</span> <span class="nav-text">三大注解解析时机浅析</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#✍前言"><span class="nav-number">1.</span> <span class="nav-text">✍前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#版本约定"><span class="nav-number">1.1.</span> <span class="nav-text">版本约定</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#✍正文"><span class="nav-number">2.</span> <span class="nav-text">✍正文</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#树模型"><span class="nav-number">2.1.</span> <span class="nav-text">树模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JsonNode"><span class="nav-number">2.2.</span> <span class="nav-text">JsonNode</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JsonNodeFactory"><span class="nav-number">2.3.</span> <span class="nav-text">JsonNodeFactory</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#值类型节点（ValueNode）"><span class="nav-number">2.3.1.</span> <span class="nav-text">值类型节点（ValueNode）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#容器类型节点（ContainerNode）"><span class="nav-number">2.3.2.</span> <span class="nav-text">容器类型节点（ContainerNode）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ObjectMapper中的树模型"><span class="nav-number">2.4.</span> <span class="nav-text">ObjectMapper中的树模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#写（序列化）"><span class="nav-number">2.4.1.</span> <span class="nav-text">写（序列化）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、valueToTree-Object"><span class="nav-number">2.4.1.1.</span> <span class="nav-text">1、valueToTree(Object)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、writeTree-JsonGenerator-JsonNode"><span class="nav-number">2.4.1.2.</span> <span class="nav-text">2、writeTree(JsonGenerator, JsonNode)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、writeTree-JsonGenerator-TreeNode"><span class="nav-number">2.4.1.3.</span> <span class="nav-text">3、writeTree(JsonGenerator,TreeNode)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#读（反序列化）"><span class="nav-number">2.4.2.</span> <span class="nav-text">读（反序列化）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#场景演练"><span class="nav-number">2.5.</span> <span class="nav-text">场景演练</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、偌大JSON串中仅需1个值"><span class="nav-number">2.5.1.</span> <span class="nav-text">1、偌大JSON串中仅需1个值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、数据结构高度动态化"><span class="nav-number">2.5.2.</span> <span class="nav-text">2、数据结构高度动态化</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#✍总结"><span class="nav-number">3.</span> <span class="nav-text">✍总结</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#✔推荐阅读："><span class="nav-number">3.0.0.0.1.</span> <span class="nav-text">✔推荐阅读：</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
