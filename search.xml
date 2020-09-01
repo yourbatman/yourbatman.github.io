@@ -77,6 +77,182 @@
       </tags>
   </entry>
   <entry>
+    <title>1. 不吹不擂，第一篇就能提升你对Bean Validation数据校验的认知</title>
+    <url>/x2y/55d56c0b.html</url>
+    <content><![CDATA[<blockquote>
+<p>乔丹是我听过的篮球之神，科比是我亲眼见过的篮球之神。本文已被 <a href="https://www.yourbatman.cn"><strong>https://www.yourbatman.cn</strong></a> 收录，里面一并有Spring技术栈、MyBatis、JVM、中间件等小而美的<strong>专栏</strong>供以免费学习。关注公众号【<strong>BAT的乌托邦</strong>】逐个击破，深入掌握，拒绝浅尝辄止。</p>
+</blockquote>
+<p><img data-src="https://img-blog.csdnimg.cn/20200826163523464.png#pic_center" alt=""></p>
+<h1 id="✍前言"><a href="#✍前言" class="headerlink" title="✍前言"></a>✍前言</h1><p>你好，我是YourBatman。</p>
+<p>作为一个开发者，聊起数据校验（Bean Validation），不管是前、中、后端都耳熟能详，并且心里暗爽：so easy。</p>
+<p>的确，对数据做校验是一个程序员的基本素质，它不难但发生在我们程序的几乎每个角落，就像下面这幅图所示：<strong>每一层都需要做校验</strong>。<br><img data-src="https://img-blog.csdnimg.cn/20200823222913467.png#pic_center" alt=""><br>如果你真的这么去写代码的话（每一层都写一份），肯定是不太合适的，良好的状态应该如下图所示：<br><img data-src="https://img-blog.csdnimg.cn/20200826173214449.png#pic_center" alt=""></p>
+<p>作为一个Java开发者，在Spring大行其道的今天，很多小伙伴了解数据校验来自于<code>Spring MVC</code>场景，甚至<strong>止步于此</strong>。殊不知，Java EE早已把它抽象成了JSR标准技术，并且Spring还是借助整合它完成了自我救赎呢。</p>
+<p>在我看来，按<strong>Spring的3C战略</strong>标准来比，Bean Validation数据校验这块是没有能够完成对传统Java EE的超越，自身设计存在过重、过度设计等特点。</p>
+<p>本专栏命名为Bean Validation（数据校验），将先从JSR标准开始，再逐渐深入到具体实现Hibernate Validation、整合Spring使用场景等等。因此本专栏将让你将得到一份系统数据校验的知识。</p>
+<h1 id="✍正文"><a href="#✍正文" class="headerlink" title="✍正文"></a>✍正文</h1><p><strong>在任何时候</strong>，当你要处理一个应用程序的业务逻辑，数据校验是你必须要考虑和面对的事情。应用程序必须通过<strong>某种手段</strong>来确保输入进来的数据从语义上来讲是正确的，比如生日必须是过去时，年龄必须&gt;0等等。<br><img data-src="https://img-blog.csdnimg.cn/20200825210148248.png#pic_center" alt=""></p>
+<h2 id="为什么要有数据校验？"><a href="#为什么要有数据校验？" class="headerlink" title="为什么要有数据校验？"></a>为什么要有数据校验？</h2><p>数据校验是非常常见的工作，在日常的开发中贯穿于代码的<strong>各个层次</strong>，从上层的View层到后端业务处理层，甚至底层的数据层。</p>
+<p>我们知道通常情况下程序肯定是分层的，不同的层可能由不同的人来开发或者调用。若你是一个有经验的程序员，我相信你肯定见过在<strong>不同的层了都出现了相同的校验代码</strong>，这就是某种意义上的<strong>垃圾代码</strong>：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">queryValueByKey</span><span class="params">(String zhName, String enName, Integer age)</span> </span>&#123;</span><br><span class="line">    checkNotNull(zhName, <span class="string">"zhName must be not null"</span>);</span><br><span class="line">    checkNotNull(enName, <span class="string">"enName must be not null"</span>);</span><br><span class="line">    checkNotNull(age, <span class="string">"age must be not null"</span>);</span><br><span class="line">    validAge(age, <span class="string">"age must be positive"</span>);</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>从这个简单的方法入参校验至少能发现如下问题：</p>
+<ol>
+<li>需要写大量的代码来进行参数基本验证（这种代码多了就算垃圾代码）</li>
+<li>需要通过文字注释来知道每个入参的约束是什么（否则别人咋看得懂）</li>
+<li>每个程序员做参数验证的方式可能不一样，参数验证抛出的异常也不一样，导致后期几乎没法维护</li>
+</ol>
+<p>如上会导致代码冗余和一些管理的问题（代码量越大，管理起来维护起来就越困难），比如说语义的一致性问题。为了避免这样的情况发生，最好是将<strong>验证逻辑与相应的域模型进行绑定</strong>，这就是本文将要提供的一个新思路：<code>Bean Validation</code>。</p>
+<h2 id="关于Jakarta-EE"><a href="#关于Jakarta-EE" class="headerlink" title="关于Jakarta EE"></a>关于Jakarta EE</h2><p>2018年03月， Oracle 决定把 JavaEE 移交给开源组织 <strong>Eclipse 基金会</strong>，并且不再使用Java EE这个名称。这是它的新logo：<br><img data-src="https://img-blog.csdnimg.cn/20200825212646977.png#pic_center" alt=""></p>
+<p>对应的名称修改还包括：<br>旧名称     | 新名称<br>——– | —–<br><strong>Java EE</strong>  | Jakarta EE<br><strong>Glassfish</strong>  | Eclipse Glassfish<br><strong>Java Community Process (JCP)</strong>  | Eclipse EE.next Working Group (EE.next)<br><strong>Oracle development management</strong> | Eclipse Enterprise for Java (EE4J)  和 Project Management Committee (PMC)</p>
+<p>JCP 将继续支持 Java SE社区。 但是，<strong>Jakarta EE规范自此将不会在JCP下开发</strong>。Jakarta EE标准大概由Eclipse Glassfish、Apache TomEE、Wildfly、Oracle WebLogic、JBoss、IBM、Websphere Liberty等组织来制定</p>
+<h3 id="迁移"><a href="#迁移" class="headerlink" title="迁移"></a>迁移</h3><p>既然名字都改了，那接下来就是迁移喽，毕竟Java EE这个名称（javax包名）不能再用了嘛。Eclipse接手后发布的首个<code>Enterprise Java</code>将是 Jakarta EE 9，该版本将以Java EE 8作为其基准版本（最低版本要求是Java8）。</p>
+<p>有个意思的现象是：Java EE 8是<code>2019.09.10</code>发布的，但实际上官方名称是<code>Jakarta EE 8</code>了。很明显该版本并非由新组织设计和制定的，不是它们的产物。但是，彼时平台已更名为Jakarta有几个月了，因此对于一些Jar你在maven市场上经常能看见两种坐标：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>javax.validation<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>validation-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.0.1.Final<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>jakarta.validation<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jakarta.validation-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.0.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>虽然坐标不一样，但是<strong>内容是100%一样的</strong>（包名均还为javax.*），很明显这是更名的过度期，为后期全面更名做准备呢。</p>
+<blockquote>
+<p>严格来讲：只要大版本号（第一个数字）还一样，包名是<strong>不可能</strong>变化的，因此一般来说均具有向下兼容性</p>
+</blockquote>
+<p>既然Jakarta释放出了更名信号，那么下一步就是彻彻底底的改变喽。果不其然，这些都在<code>Jakarta EE 9</code>里得到实施。</p>
+<h3 id="Jakarta-EE-9"><a href="#Jakarta-EE-9" class="headerlink" title="Jakarta EE 9"></a>Jakarta EE 9</h3><p><strong>2020.08.31</strong>，Jakarta后的第一个企业级平台Jakarta EE 9正式发布。如果说Jakarta EE 8只是冠了个名，那么这个就名正言顺了。</p>
+<blockquote>
+<p>小贴士：我写本文时还没到2020.08.31呢，这个时间是我在官网趴来的，因此肯定准确</p>
+</blockquote>
+<p>这次企业平台的升级最大的亮点是：</p>
+<ol>
+<li>把旗下30于种技术的<strong>大版本号</strong>全部+1（Jakarta RESTful Web Services除外）</li>
+<li>包名<strong>全部</strong>去<code>javax.*</code>化，全部改为<code>jakarta.*</code></li>
+<li>JavaSE基准版本要求依旧保持为Java 8（而并非Java9哦）</li>
+</ol>
+<p>可以发现本次升级的主要目的并着眼于功能点，仍旧是名字的替换。虽然大家对Java EE的javax有较深的情节，但旧的不去新的不来。我们以后开发过中遇到<code>jakarta.*</code>这种包名就不用再感到惊讶了，提前准备总是好的。</p>
+<h2 id="Jakarta-Bean-Validation"><a href="#Jakarta-Bean-Validation" class="headerlink" title="Jakarta Bean Validation"></a>Jakarta Bean Validation</h2><p>Jakarta Bean Validation不仅仅是一个规范，它还是一个生态。</p>
+<p>之前名为Java Bean Validation，2018年03月之后就得改名叫Jakarta Bean Validation<br>喽，这不官网早已这么称呼了：<br><img data-src="https://img-blog.csdnimg.cn/2020082609460389.png#pic_center" alt=""></p>
+<p>Bean Validation技术隶属于Java EE规范，期间有多个JSR（<code>Java Specification Requests</code>）支持，截止到稿前共有三次JSR标准发布：<br><img data-src="https://img-blog.csdnimg.cn/20200826094826549.png#pic_center" alt=""><br>说明：JCP这个组织就是来定义Java标准的，在Java行业鼎鼎有名的公司大都是JCP的成员，可以共同参与Java标准的制定，影响着世界。包括掌门人Oracle以及Eclipse、Redhat、JetBrains等等。值得天朝人自豪的是：2018年5月17日<strong>阿里巴巴作为一员正式加入JCP组织，成为唯一一家中国公司</strong>。</p>
+<p>Bean Validation是标准，它的参考实现除了有我们熟悉的<code>Hibernate Validator</code>外还有<code>Apache BVal</code>，但是后者使用非常小众，忘了它吧。实际使用中，基本可以认为Hibernate Validator是Bean Validation规范的唯一参考实现，是对等的。</p>
+<blockquote>
+<p>小贴士：Apache BVal胜在轻量级上，只有不到1m空间所以非常轻量，有些选手还是忠爱的（此项目还在发展中，并未停更哦，有兴趣你可以自己使用试试）</p>
+</blockquote>
+<h3 id="JSR303"><a href="#JSR303" class="headerlink" title="JSR303"></a>JSR303</h3><p>这个JSR提出很早了（2009年），它为 <strong>基于注解的</strong> JavaBean验证定义元数据模型和API，通过使用XML验证描述符覆盖和扩展元数据。JSR-303主要是对JavaBean进行验证，如方法级别（方法参数/返回值）、依赖注入等的验证是没有指定的。</p>
+<p>作为开山之作，它规定了Java数据校验的模型和API，<strong>这就是Java Bean Validation 1.0版本</strong>。</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>javax.validation<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>validation-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0.0.GA<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>该版本提供了常见的校验注解（共计13个）：<br>注解     | 支持类型 | 含义 | null值是否校验<br>——– | —– | —– | —–<br>@AssertFalse  | bool | 元素必须是false | 否<br>@AssertTrue  | bool | 元素必须是true | 否<br>@DecimalMax  | Number的子类型（浮点数除外）以及String | 元素必须是一个数字，且值必须&lt;=最大值 | 否<br>@DecimalMin  | 同上 | 元素必须是一个数字，且值必须&gt;=最大值 | 否<br>@Max  | 同上  | 同上 | 否<br>@Min | 同上  | 同上 | 否<br>@Digits  |  同上  | 元素构成是否合法（整数部分和小数部分） | 否<br>@Future  | 时间类型(包括JSR310) |  元素必须为一个<strong>将来</strong>（不包含相等）的日期(比较精确到毫秒) | 否<br>@Past |  同上 | 元素必须为一个<strong>过去</strong>（不包含相等）的日期(比较精确到毫秒) | 否<br>@NotNull | any | 元素不能为null | 是<br>@Null | any | 元素必须为null | 是<br>@Pattern | 字符串 | 元素需符合指定的正则表达式 | 否<br>@Size | String/Collection/Map/Array | 元素<strong>大小</strong>需在指定范围中 | 否</p>
+<blockquote>
+<p>所有注解均可标注在：方法、字段、注解、构造器、入参等几乎任何地方</p>
+</blockquote>
+<p>可以看到这些注解均为平时开发中比较常用的注解，但是在使用过程中有如下事项你仍旧需要注意：</p>
+<ol>
+<li><strong>以上所有注解对null是免疫的</strong>，也就是说如果你的值是null，是不会触发对应的校验逻辑的（也就说null是合法的），当然喽@NotNull / @Null除外</li>
+<li>对于时间类型的校验注解（@Future/@Past），是开区间（不包含相等）。也就是说：如果相等就是不合法的，必须是大于或者小于<ol>
+<li>这种case比较容易出现在LocalDate这种只有日期上面，必须是将来/过去日期，<strong>当天属于非法日期</strong></li>
+</ol>
+</li>
+<li><code>@Digits</code>它并不规定数字的范围，只规定了数字的结构。如：整数位最多多少位，小数位最多多少位</li>
+<li><code>@Size</code>规定了集合类型的范围（包括字符串），这个范围是<strong>闭区间</strong></li>
+<li><code>@DecimalMax和@Max</code>作用基本类似，大部分情况下可通用。不同点在于：@DecimalMax设置最大值是用字符串形式表示（只要合法都行，比如科学计数法），而@Max最大值设置是个long值<ol>
+<li>我个人一般用@Max即可，因为够用了~ </li>
+</ol>
+</li>
+</ol>
+<p>另外可能有人会问：为毛没看见<code>@NotEmpty、@Email、@Positive</code>等常用注解？那么带着兴趣和疑问，继续往下看吧~</p>
+<h3 id="JSR349"><a href="#JSR349" class="headerlink" title="JSR349"></a>JSR349</h3><p>该规范是2013年完成的，伴随着<code>Java EE 7</code>一起发布，它就是我们比较熟悉的Bean Validation 1.1。</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>javax.validation<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>validation-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.1.0.Final<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>相较于1.0版本，它主要的改进/优化有如下几点：</p>
+<ol>
+<li>标准化了Java平台的约束定义、描述、和验证</li>
+<li><strong>支持方法级验证(入参或返回值的验证)</strong></li>
+<li>Bean验证组件的依赖注入</li>
+<li>与上下文和DI依赖注入集成</li>
+<li>使用<strong>EL表达式</strong>的错误消息插值，让错误消息动态化起来（强依赖于ElManager）</li>
+<li>跨参数验证。比如密码和验证密码必须相同</li>
+</ol>
+<blockquote>
+<p>小贴士：注解个数上，相较于1.0版本并没新增~</p>
+</blockquote>
+<p>它的官方参考实现如下：<br><img data-src="https://img-blog.csdnimg.cn/20200826132517420.png#pic_center" alt=""><br>可以看到，Java Bean Validation 1.1版本实现对应的是Hibernate Validator 5.x(1.0版本对应的是4.x)</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.hibernate<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>hibernate-validator<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.4.3.Final<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>当你导入了<code>hibernate-validator</code>后，无需再显示导入<code>javax.validation</code>。hibernate-validator 5.x版本基本已停更，只有严重bug才会修复。因此若非特殊情况，不再建议你使用此版本，也就是不建议再使用Bean Validation 1.1版本，更别谈1.0版本喽。</p>
+<blockquote>
+<p>小贴士：Spring Boot1.5.x默认集成的还是Bean Validation 1.1哦，但到了Boot 2.x后就彻底摒弃了老旧版本</p>
+</blockquote>
+<h3 id="JSR380"><a href="#JSR380" class="headerlink" title="JSR380"></a>JSR380</h3><p>当下主流版本，也就是我们所说的<strong>Java Bean Validation 2.0</strong>和<strong>Jakarta Bean Validation 2.0</strong>版本。关于这两种版本的差异，官方做出了解释：<br><img data-src="https://img-blog.csdnimg.cn/20200826135712644.png#pic_center" alt=""><br>他俩除了叫法不一样、除了GAV上有变化，其它地方没任何改变。它们各自的GAV如下：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>javax.validation<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>validation-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.0.1.Final<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>jakarta.validation<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jakarta.validation-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.0.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>现在应该不能再叫<code>Java EE</code>了，而应该是<code>Jakarta EE</code>。两者是一样的意思，你懂的。<code>Jakarta Bean Validation 2.0</code>是在2019年8月发布的，属于<code>Jakarta EE 8</code>的一部分。它的官方参考实现只有唯一的Hibernate validator了：<br><img data-src="https://img-blog.csdnimg.cn/20200826144936989.png#pic_center" alt=""></p>
+<p>此版本具有很重要的现实意义，它主要提供如下亮点：</p>
+<ol>
+<li>支持通过注解参数化类型（泛型类型）参数来验证容器内的元素，如：<code>List&lt;@Positive Integer&gt; positiveNumbers</code><ol>
+<li>更灵活的集合类型级联验证;例如，现在可以验证映射的值和键，如：<code>Map&lt;@Valid CustomerType, @Valid Customer&gt; customersByType</code></li>
+<li>支持java.util.Optional类型，并且支持通过插入额外的值提取器来支持自定义容器类型</li>
+</ol>
+</li>
+<li>让@Past/@Future注解支持注解在JSR310时间上</li>
+<li>新增内建的注解类型（共9个）：@Email, @NotEmpty, @NotBlank, @Positive, @PositiveOrZero, @Negative, @NegativeOrZero, @PastOrPresent和@FutureOrPresent</li>
+<li>所有内置的约束现在都支持<strong>重复标记</strong></li>
+<li>使用反射检索参数名称，也就是入参名，详见这个API：ParameterNameProvider<ol>
+<li>很明显这是需要Java 8的启动参数支持的 </li>
+</ol>
+</li>
+<li>Bean验证XML描述符的名称空间已更改为：<ol>
+<li><code>META-INF/validation.xml</code> -&gt;  <a href="http://xmlns.jcp.org/xml/ns/validation/configuration" target="_blank" rel="noopener">http://xmlns.jcp.org/xml/ns/validation/configuration</a></li>
+<li><code>mapping files</code> -&gt; <a href="http://xmlns.jcp.org/xml/ns/validation/mapping" target="_blank" rel="noopener">http://xmlns.jcp.org/xml/ns/validation/mapping</a></li>
+</ol>
+</li>
+<li>JDK最低版本要求：JDK 8</li>
+</ol>
+<p><code>Hibernate Validator</code>自6.x版本开始对<code>JSR 380</code>规范提供完整支持，除了支持标准外，自己也做了相应的优化，比如性能改进、减少内存占用等等，因此用最新的版本肯定是没错的，毕竟只会越来越好嘛。</p>
+<h4 id="新增注解"><a href="#新增注解" class="headerlink" title="新增注解"></a>新增注解</h4><p>相较于1.x版本，2.0版本在其基础上新增了9个实用注解，总数到了22个。现对新增的9个注解解释如下：<br>注解     | 支持类型 | 含义 | null值是否校验<br>——– | —– | —– | —–<br>@Email | 字符串 |  元素必须为电子邮箱地址 | 否<br>@NotEmpty | 容器类型 | 集合的Size必须大于0  | <strong>是</strong><br>@NotBlank | 字符串 | 字符串必须包含至少一个非空白的字符  | <strong>是</strong><br>@Positive | 数字类型 | 元素必须为正数（不包括0）  | 否<br>@PositiveOrZero | 同上 | 同上（包括0）  | 否<br>@Negative | 同上 |  元素必须为负数（不包括0） | 否<br>@NegativeOrZero | 同上 | 同上（包括0）  | 否<br>@PastOrPresent | 时间类型 |  在@Past基础上包括相等  | 否<br>@FutureOrPresent | 时间类型 | 在@Futrue基础上包括相等  | 否</p>
+<p>像<code>@Email、@NotEmpty、@NotBlank</code>之前是Hibernate额外提供的，2.0标准后hibernate自动<strong>退位让贤</strong>并且标注为过期了。Bean Validation 2.0的JSR规范制定负责人就职于Hibernate，所以这么做就很自然了。就是他：<br><img data-src="https://img-blog.csdnimg.cn/20200826154306198.png#pic_center" alt=""></p>
+<blockquote>
+<p>小贴士：除了JSR标准提供的这22个注解外，Hibernate Validator还提供了一些非常实用的注解，这在后面讲述Hibernate Validator时再解释吧</p>
+</blockquote>
+<h3 id="使用示例"><a href="#使用示例" class="headerlink" title="使用示例"></a>使用示例</h3><p>导入实现包：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.hibernate.validator<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>hibernate-validator<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>6.1.5.Final<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="校验Java-Bean"><a href="#校验Java-Bean" class="headerlink" title="校验Java Bean"></a>校验Java Bean</h4><p>书写JavaBean和校验程序（全部使用JSR标准API哦）：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@ToString</span></span><br><span class="line"><span class="meta">@Setter</span></span><br><span class="line"><span class="meta">@Getter</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@NotNull</span></span><br><span class="line">    <span class="keyword">public</span> String name;</span><br><span class="line">    <span class="meta">@NotNull</span></span><br><span class="line">    <span class="meta">@Min</span>(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">public</span> Integer age;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    Person person = <span class="keyword">new</span> Person();</span><br><span class="line">    person.setAge(-<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 1、使用【默认配置】得到一个校验工厂  这个配置可以来自于provider、SPI提供</span></span><br><span class="line">    ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();</span><br><span class="line">    <span class="comment">// 2、得到一个校验器</span></span><br><span class="line">    Validator validator = validatorFactory.getValidator();</span><br><span class="line">    <span class="comment">// 3、校验Java Bean（解析注解） 返回校验结果</span></span><br><span class="line">    Set&lt;ConstraintViolation&lt;Person&gt;&gt; result = validator.validate(person);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 输出校验结果</span></span><br><span class="line">    result.stream().map(v -&gt; v.getPropertyPath() + <span class="string">" "</span> + v.getMessage() + <span class="string">": "</span> + v.getInvalidValue()).forEach(System.out::println);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，不幸抛错：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Caused by: java.lang.ClassNotFoundException: javax.el.ELManager</span><br><span class="line">	at java.net.URLClassLoader.findClass(URLClassLoader.java:<span class="number">382</span>)</span><br><span class="line">	at java.lang.ClassLoader.loadClass(ClassLoader.java:<span class="number">418</span>)</span><br><span class="line">	at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:<span class="number">355</span>)</span><br><span class="line">	...</span><br></pre></td></tr></table></figure>
+<p>上面说了，从1.1版本起就需要El管理器支持用于错误消息动态插值，因此需要自己额外导入EL的实现。</p>
+<blockquote>
+<p>小贴士：EL也属于Java EE标准技术，可认为是一种表达式语言工具，它并不仅仅是只能用于Web（即使你绝大部分情况下都是用于web的jsp里），可以用于任意地方（类比Spring的SpEL）</p>
+</blockquote>
+<p>这是EL技术规范的API：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 规范API --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>javax.el<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>javax.el-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.0.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>Expression Language 3.0表达式语言规范发版于2013-4-29发布的，Tomcat 8、Jetty 9、GlasshFish 4都已经支持<strong>实现</strong>了EL 3.0，因此随意导入一个都可（如果你是web环境，根本就不用自己手动导入这玩意了）。</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.tomcat.embed<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>tomcat-embed-el<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>9.0.22<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>添加好后，再次运行程序，控制台正常输出校验失败的消息：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">age 最小不能小于<span class="number">0</span>: -<span class="number">1</span></span><br><span class="line">name 不能为<span class="keyword">null</span>: <span class="keyword">null</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="校验方法-校验构造器"><a href="#校验方法-校验构造器" class="headerlink" title="校验方法/校验构造器"></a>校验方法/校验构造器</h4><p>请移步下文详解。</p>
+<h2 id="加餐：Bean-Validation-3-0"><a href="#加餐：Bean-Validation-3-0" class="headerlink" title="加餐：Bean Validation 3.0"></a>加餐：Bean Validation 3.0</h2><p>伴随着<code>Jakarta EE 9</code>的发布，<code>Jakarta Bean Validation 3.0</code>也正式公诸于世。</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>jakarta.validation<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jakarta.validation-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.0.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>它最大的改变，甚至可以说<strong>唯一</strong>的改变就是包名的变化：<br><img data-src="https://img-blog.csdnimg.cn/20200826171201515.png#pic_center" alt=""><br>至此不仅GAV上实现了更名，对代码执行有重要影响的包名也彻彻底底的去<code>javax.*</code>化了。因为实际的类并没有改变，因此仍旧可以认为它是JSR380的实现（虽然不再由JCP组织制定标准了）。</p>
+<h3 id="参考实现"><a href="#参考实现" class="headerlink" title="参考实现"></a>参考实现</h3><p>毫无疑问，参考实现那必然是<code>Hibernate Validator</code>。它的步伐也跟得非常的紧，退出了7.x版本用于支持<code>Jakarta Bean Validation 3.0</code>。虽然是大版本号的升级，但是在新特性方面你可认为是<strong>无</strong>：<br><img data-src="https://img-blog.csdnimg.cn/20200826171630270.png#pic_center" alt=""></p>
+<h1 id="✍总结"><a href="#✍总结" class="headerlink" title="✍总结"></a>✍总结</h1><p>本文着眼于讲解<strong>JSR规范、Bean Validation校验标准、官方参考实现Hibernate Validator</strong>，把它们之间的关系进行了关联，并且对差异进行了鉴别。我认为这篇文章对一般读者来说是能够刷新对数据校验的认知的。</p>
+<blockquote>
+<p>wow，数据校验背后还有这么广阔的天地</p>
+</blockquote>
+<p>数据校验是日常工组中接触非常非常频繁的一块知识点，我认为掌握它并且熟练运用于实际工作中，能起到事半功倍的效果，让代码更加的优雅，甚至还能实现别人加班你加薪呢。<strong>所以又是一个投出产出比颇高的小而美专栏在路上……</strong></p>
+<p>作为本专栏的第一篇文章以JSR标准作为切入点进行讲解，是希望理论和实践能结合起来学习，毕竟理论的指导作用不可或缺。有了理论铺垫的基石，后面实践将更加流畅，正所谓着地走路更加踏实嘛。</p>
+<h5 id="✔推荐阅读："><a href="#✔推荐阅读：" class="headerlink" title="✔推荐阅读："></a>✔推荐阅读：</h5><ul>
+<li><a href="https://mp.weixin.qq.com/s/z6T9n9YvwjmDwuj-YTa0_w" target="_blank" rel="noopener">Fastjson到了说再见的时候了</a></li>
+<li><a href="https://mp.weixin.qq.com/s/iqSN4HUoIdX0kGcSdnD7EA" target="_blank" rel="noopener">1. 初识Jackson – 世界上最好的JSON库</a></li>
+<li><a href="https://mp.weixin.qq.com/s/p6cwP2BVrC8VxkN-T3uAxg" target="_blank" rel="noopener">2. 妈呀，Jackson原来是这样写JSON的</a></li>
+<li><a href="https://mp.weixin.qq.com/s/ZHb3P06IC4xElHwJqDepxw" target="_blank" rel="noopener">3. 懂了这些，方敢在简历上说会用Jackson写JSON</a></li>
+<li><a href="https://mp.weixin.qq.com/s/syAOETfEawiGItaQO35mLA" target="_blank" rel="noopener">4. JSON字符串是如何被解析的？JsonParser了解一下</a></li>
+<li><a href="https://mp.weixin.qq.com/s/0ZaDYb_ueFLbvOf3FbetfQ" target="_blank" rel="noopener">5. JsonFactory工厂而已，还蛮有料，这是我没想到的</a></li>
+<li><a href="https://mp.weixin.qq.com/s/VYy1QVeFLRkciymFHueb5w" target="_blank" rel="noopener">6. 二十不惑，ObjectMapper使用也不再迷惑</a></li>
+<li><a href="https://mp.weixin.qq.com/s/hPRdt-6sHt4rZaW2_jhdWQ" target="_blank" rel="noopener">7. Jackson用树模型处理JSON是必备技能，不信你看</a></li>
+</ul>]]></content>
+      <categories>
+        <category>A哥学数据校验</category>
+      </categories>
+      <tags>
+        <tag>Bean Validation</tag>
+        <tag>Hibernate Validator</tag>
+        <tag>数据校验</tag>
+        <tag>JSR380</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Java二进制和位运算，这一万字准能喂饱你</title>
     <url>/x2y/dbefe51a.html</url>
     <content><![CDATA[<blockquote>
@@ -993,8 +1169,8 @@
       </categories>
       <tags>
         <tag>Jackson</tag>
-        <tag>Fastjson</tag>
         <tag>JSON</tag>
+        <tag>Fastjson</tag>
       </tags>
   </entry>
   <entry>
@@ -1272,8 +1448,8 @@
       </categories>
       <tags>
         <tag>Jackson</tag>
-        <tag>Fastjson</tag>
         <tag>JSON</tag>
+        <tag>Fastjson</tag>
       </tags>
   </entry>
   <entry>
@@ -1470,8 +1646,8 @@
       </categories>
       <tags>
         <tag>Jackson</tag>
-        <tag>Fastjson</tag>
         <tag>JSON</tag>
+        <tag>Fastjson</tag>
       </tags>
   </entry>
   <entry>
