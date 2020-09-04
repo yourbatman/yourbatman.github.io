@@ -24,18 +24,32 @@
     var CONFIG = {"hostname":"www.yourbatman.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},"motion":{"enable":false,"async":true,"transition":{"post_block":"flipBounceYIn","post_header":"flipXIn","post_body":"flipBounceXIn","coll_header":"expandIn","sidebar":"shrinkIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="我这有故事，你那有酒吗？">
-<meta property="og:type" content="website">
-<meta property="og:title" content="BAT的乌托邦">
-<meta property="og:url" content="https://www.yourbatman.cn/tags/static/index.html">
+  <meta name="description" content="Jackson安全漏洞：CVE-2020-24616">
+<meta property="og:type" content="article">
+<meta property="og:title" content="再爆安全漏洞，这次轮到Jackson了，竟由阿里云上报">
+<meta property="og:url" content="https://www.yourbatman.cn/x2y/56130cb.html">
 <meta property="og:site_name" content="BAT的乌托邦">
-<meta property="og:description" content="我这有故事，你那有酒吗？">
+<meta property="og:description" content="Jackson安全漏洞：CVE-2020-24616">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200903160133765.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200903161041763.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2020090316440136.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200903164802786.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200903164918154.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200903170343262.png#pic_center">
+<meta property="article:published_time" content="2020-09-04T06:05:32.000Z">
+<meta property="article:modified_time" content="2020-09-04T06:11:47.658Z">
 <meta property="article:author" content="A哥(YourBatman)">
-<meta property="article:tag" content="Java | Spring | Spring Boot | Spring Cloud | Dubbo | Netflix | BAT">
+<meta property="article:tag" content="BAT的乌托邦">
+<meta property="article:tag" content="A哥">
+<meta property="article:tag" content="YourBatman">
+<meta property="article:tag" content="Jackson">
+<meta property="article:tag" content="Fastjson">
+<meta property="article:tag" content="安全漏洞">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20200903160133765.png#pic_center">
 
-<link rel="canonical" href="https://www.yourbatman.cn/tags/static/">
+<link rel="canonical" href="https://www.yourbatman.cn/x2y/56130cb.html">
 
 
 <script id="page-configurations">
@@ -43,12 +57,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>标签: static | BAT的乌托邦</title>
+  <title>再爆安全漏洞，这次轮到Jackson了，竟由阿里云上报 | BAT的乌托邦</title>
   
 
 
@@ -218,97 +232,361 @@
         <div class="content-wrap">
           
 
-          <div class="content tag">
+          <div class="content post posts-expand">
             
 
+    
   
   
   
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h2 class="collection-header">static
-          <small>标签</small>
-        </h2>
-      </div>
+    <div id="yourbatman">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.yourbatman.cn/x2y/56130cb.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://img-blog.csdnimg.cn/20200511100304592.jpg">
+      <meta itemprop="name" content="A哥(YourBatman)">
+      <meta itemprop="description" content="我这有故事，你那有酒吗？">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BAT的乌托邦">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          再爆安全漏洞，这次轮到Jackson了，竟由阿里云上报
+        </h1>
+
+        <div class="post-meta">
+          <!-- 精品文章 精华帖 -->
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-09-04 14:05:32" itemprop="dateCreated datePublished" datetime="2020-09-04T14:05:32+08:00">2020-09-04</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">收录于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%BA%E7%9C%81/" itemprop="url" rel="index"><span itemprop="name">缺省</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/x2y/56130cb.html" class="post-meta-item leancloud_visitors" data-flag-title="再爆安全漏洞，这次轮到Jackson了，竟由阿里云上报" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">评论数：</span>
+    
+    <a title="valine" href="/x2y/56130cb.html#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/x2y/56130cb.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+          <!-- 置顶 可以写top:true  也可以写数字top:1/2/3  顺序规则同Spring-->
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.6k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+          <!-- 本文作者 -->
+          <span class="post-meta-item" title="阅读时长">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-user fa-fw"></i>
+            </span>
+            <span class="post-meta-item-text">本文作者：</span>
+            <a href="/about/" itemprop="url" rel="index">
+              <span>A哥(YourBatman)</span>
+            </a>
+          </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2020</span>
+        <blockquote>
+<p>冤冤相报何时了，得饶人处且饶人。本文已被 <a href="https://www.yourbatman.cn"><strong>https://www.yourbatman.cn</strong></a> 收录，里面一并有Spring技术栈、MyBatis、JVM、中间件等小而美的<strong>专栏</strong>供以免费学习。关注公众号【<strong>BAT的乌托邦</strong>】逐个击破，深入掌握，拒绝浅尝辄止。</p>
+</blockquote>
+<p><img data-src="https://img-blog.csdnimg.cn/20200903160133765.png#pic_center" alt=""></p>
+<h1 id="✍前言"><a href="#✍前言" class="headerlink" title="✍前言"></a>✍前言</h1><p>你好，我是YourBatman。</p>
+<p>今天中午收到我司安全部发了一封邮件：Jackson存在安全漏洞。查了一下，这件事并不算很新鲜了（已经过了10天的样子），本文来聊聊吧。</p>
+<p>说起来还蛮戏剧化：阿里云向Jackson官方提交了一个Jackson序列化安全漏洞。众所周知，在国内关于JSON库使用有两大主要阵营：<strong>国际著名的Jackson库</strong>和<strong>国内阿里巴巴出品的Fastjson</strong>。</p>
+<p>同样的功能定位，不存在竞争想想也觉得不可能嘛。所以当我看到这个漏洞竟是阿里云上报的，就觉得这关系还蛮微妙呢，默默的腹黑了3秒钟，哈哈。</p>
+<p>附：FasterXML/jackson-databind是一个简单基于Java应用库，Jackson可以轻松的将Java对象转换成json对象和xml文档，同样也可以将json、xml转换成Java对象。Jackson是美国FasterXML公司的一款适用于Java的数据处理工具。jackson-databind是其中的一个具有数据绑定功能的组件。<br><img data-src="https://img-blog.csdnimg.cn/20200903161041763.png#pic_center" alt=""></p>
+<h1 id="✍正文"><a href="#✍正文" class="headerlink" title="✍正文"></a>✍正文</h1><p>熟悉A哥的小伙伴知道，自从Fastjson上次爆出重大安全漏洞之后，我彻底的投入到了Jackson的阵营，工作中也慢慢去Fastjson化。这不还专门撰写了一篇文章来说明此事：<a href="https://mp.weixin.qq.com/s/z6T9n9YvwjmDwuj-YTa0_w" target="_blank" rel="noopener">Fastjson到了说再见的时候了</a>。为了顺利完成“迁移”，我还专门写了一个，也有可能是全网唯一一个Jackson专栏，虽然很小众但就是干了~</p>
+<h2 id="关于本次漏洞"><a href="#关于本次漏洞" class="headerlink" title="关于本次漏洞"></a>关于本次漏洞</h2><p>2020年8月25日，jackson-databind（官方）发布了Jackson-databind序列化漏洞的安全通告，漏洞编号为CVE-2020-24616。</p>
+<h3 id="漏洞详情"><a href="#漏洞详情" class="headerlink" title="漏洞详情"></a>漏洞详情</h3><p>该漏洞源于不安全的反序列化。远程攻击者可通过精心构造的恶意载荷利用该漏洞在系统执行任意代码。</p>
+<p>其实上它的底层原理是利用某些类的反序列化<strong>利用链</strong>，可以绕过 jackson-databind <strong>黑名单限制</strong>，远程攻击者通过向<strong>使用该组件</strong>的web服务接口发送特制请求包（精心构造的JSON），可以造成远程代码执行影响。</p>
+<h3 id="漏洞评级"><a href="#漏洞评级" class="headerlink" title="漏洞评级"></a>漏洞评级</h3><table>
+<thead>
+<tr>
+<th>评定方式</th>
+<th>等级</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>威胁等级</td>
+<td>高危</td>
+</tr>
+<tr>
+<td>影响面</td>
+<td><strong>有限</strong></td>
+</tr>
+<tr>
+<td>漏洞评分</td>
+<td>75</td>
+</tr>
+</tbody></table>
+<p>对此评级没有概念？那就来个参照物比一比嘛，我把Fastjson上次（2020-05）的安全漏洞评级给你做对比：<br>评定方式     | 等级<br>——– | —–<br>威胁等级  | 高危<br>影响面  | <strong>广泛</strong><br>漏洞评分  | 75</p>
+<p>有限和广泛的的区别到底有多大，用文字不太好描述。打个比方，我觉得可类比<strong>艾滋病和新冠病毒</strong>的区别，前者对社会生态影响并不大，而后者恨不得让全球都停摆了，即使它致死率还远没有前者那么高，这就是影响范围的“力量”。</p>
+<h3 id="影响版本"><a href="#影响版本" class="headerlink" title="影响版本"></a>影响版本</h3><p>jackson-databind &lt; 2.9.10.6</p>
+<p>因为现在大家都基于Spring Boot开发，针对版本号我<strong>扩展一下</strong>，方便你对号入座哈：<br>Spring Boot版本    | Jackson版本<br>——– | —–<br>1.5.22.RELEASE  | 2.8.x<br>2.0.9.RELEASE  | 2.9.x<br><strong>2.1.16.RELEASE</strong>  | 2.9.10.5<br>2.2.9.RELEASE | 2.10.x<br>2.3.3.RELEASE | 2.11.x</p>
+<p>Spring Boot2.1.x应该是现行主流使用版本，因此从版本号上来看，大概率都在此次漏洞的射程范围内。</p>
+<h3 id="安全版本"><a href="#安全版本" class="headerlink" title="安全版本"></a>安全版本</h3><p>jackson-databind 2.9.10.6或者2.10.x及以后版本</p>
+<h3 id="故事时间轴"><a href="#故事时间轴" class="headerlink" title="故事时间轴"></a>故事时间轴</h3><p>2020-08-05，<strong>阿里云安全组</strong>同学向Jackson官方上报了这个安全漏洞：<br><img data-src="https://img-blog.csdnimg.cn/2020090316440136.png#pic_center" alt=""><br>当天，官方回复预计会在8-15左右发布bug修复版本修复次问题（waht？知道问题了还得10后修复？）：<br><img data-src="https://img-blog.csdnimg.cn/20200903164802786.png#pic_center" alt=""><br>可结果是10天都不止。直到8.25这天，Jackson发布2.9.10.6版本修复了此问题，并向外界发公告公布此漏洞：<br><img data-src="https://img-blog.csdnimg.cn/20200903164918154.png#pic_center" alt=""></p>
+<p>从8.5号Jackson官方知晓此漏洞，到8.25号最终发版解决此问题，<strong>整整20天</strong>，为何需要这么久？我想真像只有一个：此漏洞影响真的不大，或者说影响范围较窄。回忆下上次Fastjson出现的那个安全漏洞，24h内就给与了修复版本，并不是因为我们反映迅速，而是因为影响重大等不了…</p>
+<h2 id="修复建议"><a href="#修复建议" class="headerlink" title="修复建议"></a>修复建议</h2><p>一股脑的全部升级到2.9.10.6或以上版本当然能规避此安全问题，但是你是否想过，你负责多少个服务？你团队、公司一共有多少个服务？你品，你细品，头大吗？</p>
+<p>从官方对此次漏洞做出的反射弧时间来看，本次漏洞影响是相对较小的，因此我总结了下修复建议，倘若你<strong>同时满足</strong>如下三个条件，那么需要立马修复，否则可暂不理会：</p>
+<ol>
+<li>对公网提供API接口</li>
+<li>Jackson版本小于2.9.10.6</li>
+<li>工程内<strong>有</strong>使用（或者引入）如下4个类任意一个：<ol>
+<li>br.com.anteros.dbcp.AnterosDBCPDataSource</li>
+<li>com.pastdev.httpcomponents.configuration.JndiConfiguration</li>
+<li>com.nqadmin.rowset.JdbcRowSetImpl</li>
+<li>org.arrah.framework.rdbms.UpdatableJdbcRowsetImpl</li>
+</ol>
+</li>
+</ol>
+<p>条件3的理论支撑是我对比2.9.10.6版本release改动源码 + 我和我司安全组人员的讨论结果。修复方案也仅仅是在黑名单里新增了这4个类，截图如下：<br><img data-src="https://img-blog.csdnimg.cn/20200903170343262.png#pic_center" alt=""></p>
+<h1 id="✍总结"><a href="#✍总结" class="headerlink" title="✍总结"></a>✍总结</h1><p>外行看热闹，内行看门道。千万不能说Fastjson出了个漏洞，Jackson也来一个就得出结论说打平手了，那会稍显外行。正所谓假设可以大胆，但小心求证，下结论需要谨慎。</p>
+<p>总的来说，此次漏洞影响甚小，不用大惊小怪，我就继续我的Jackson之旅啦。</p>
+<h5 id="✔推荐阅读："><a href="#✔推荐阅读：" class="headerlink" title="✔推荐阅读："></a>✔推荐阅读：</h5><ul>
+<li><a href="https://mp.weixin.qq.com/s/z6T9n9YvwjmDwuj-YTa0_w" target="_blank" rel="noopener">Fastjson到了说再见的时候了</a></li>
+<li><a href="https://mp.weixin.qq.com/s/iqSN4HUoIdX0kGcSdnD7EA" target="_blank" rel="noopener">1. 初识Jackson – 世界上最好的JSON库</a></li>
+<li><a href="https://mp.weixin.qq.com/s/p6cwP2BVrC8VxkN-T3uAxg" target="_blank" rel="noopener">2. 妈呀，Jackson原来是这样写JSON的</a></li>
+<li><a href="https://mp.weixin.qq.com/s/ZHb3P06IC4xElHwJqDepxw" target="_blank" rel="noopener">3. 懂了这些，方敢在简历上说会用Jackson写JSON</a></li>
+<li><a href="https://mp.weixin.qq.com/s/syAOETfEawiGItaQO35mLA" target="_blank" rel="noopener">4. JSON字符串是如何被解析的？JsonParser了解一下</a></li>
+<li><a href="https://mp.weixin.qq.com/s/0ZaDYb_ueFLbvOf3FbetfQ" target="_blank" rel="noopener">5. JsonFactory工厂而已，还蛮有料，这是我没想到的</a></li>
+<li><a href="https://mp.weixin.qq.com/s/VYy1QVeFLRkciymFHueb5w" target="_blank" rel="noopener">6. 二十不惑，ObjectMapper使用也不再迷惑</a></li>
+<li><a href="https://mp.weixin.qq.com/s/hPRdt-6sHt4rZaW2_jhdWQ" target="_blank" rel="noopener">7. Jackson用树模型处理JSON是必备技能，不信你看</a></li>
+</ul>
+        <!-- ....这里是正文内容的底部（首页不会展示）... -->
+        <style>
+.table-container img{
+    display: inherit;
+    margin-top: 5px;
+    margin-bottom: 0px;
+    margin-right: 10px;
+}
+</style>
+<hr>
+<h1 style="text-align: left;">关注A哥</h1>
+
+<div><table>
+<thead>
+<tr>
+<th>Author</th>
+<th>A哥(YourBatman)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>个人站点</td>
+<td><a href="https://www.yourbatman.cn" rel="nofollow" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc">www.yourbatman.cn</a></td>
+</tr>
+<tr>
+<td>E-mail</td>
+<td>yourbatman@qq.com</td>
+</tr>
+<tr>
+<td><strong>微 信</strong></td>
+<td><a href="https://www.yourbatman.cn/images/wechat.png" rel="nofollow" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc">fsx641385712</a></td>
+</tr>
+<tr>
+<td><strong><code>活跃平台</code></strong></td>
+<td><a href="https://www.yourbatman.cn" rel="nofollow" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/2020071015182276.png" alt=""></a> <a href="https://fangshixiang.blog.csdn.net/" target="_blank" rel="nofollow noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/20200710151913394.png" alt=""></a><a href="https://yourbatman.cnblogs.com" target="_blank" rel="nofollow noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/20200710151929355.png" alt=""></a><a href="https://juejin.im/user/5b44d178f265da0fa1220efe/posts" target="_blank" rel="nofollow noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/20200710151938937.png" alt=""></a><a href="https://www.zhihu.com/people/fangshixiang/posts" target="_blank" rel="nofollow noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/20200710151950629.png" alt=""></a><a href="https://www.jianshu.com/u/8740f1fdd684" target="_blank" rel="nofollow noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/20200710152000530.png" alt=""></a><a href="https://segmentfault.com/u/yourbatman/articles" target="_blank" rel="nofollow noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/20200710152008726.png" alt=""></a><a href="https://github.com/yourbatman" target="_blank" rel="noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/20200710152015895.png" alt=""></a></td>
+</tr>
+<tr>
+<td><strong>公众号</strong></td>
+<td><a href="https://www.yourbatman.cn/images/wechat_channel.jpg" rel="nofollow" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc">BAT的乌托邦（ID：BAT-utopia）</a></td>
+</tr>
+<tr>
+<td>知识星球</td>
+<td><a href="https://t.zsxq.com/nQBi66I" target="_blank" rel="nofollow noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc">BAT的乌托邦</a></td>
+</tr>
+<tr>
+<td>每日文章推荐</td>
+<td><a href="https://github.com/yourbatman/reading/issues" target="_blank" rel="noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc">文字</a></td>
+</tr>
+</tbody>
+</table></div>
+
+<p>
+<img src="https://img-blog.csdnimg.cn/20200710160552549.gif" alt="BAT的乌托邦">
+</p>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    
+    
+    
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-06-07T13:42:05+08:00"
-              content="2020-06-07">
-          06-07
-        </time>
+    <!-- 相关阅读（你可能还喜欢） -->
+      
+  <div class="popular-posts-header">你可能还喜欢：</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\x2y\221f1084.html" rel="bookmark">Fastjson到了说再见的时候了</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\x2y\a47cf2f7.html" rel="bookmark">4. JSON字符串是如何被解析的？JsonParser了解一下</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\x2y\cae3349a.html" rel="bookmark">3. 懂了这些，方敢在简历上说会用Jackson写JSON</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\x2y\cf41a8ab.html" rel="bookmark">2. 妈呀，Jackson原来是这样写JSON的</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\x2y\dc384b1c.html" rel="bookmark">1. 初识Jackson -- 世界上最好的JSON库</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\x2y\edc7ba2a.html" rel="bookmark">7. Jackson用树模型处理JSON是必备技能，不信你看</a></div>
+    </li>
+  </ul>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-title">
+    <strong>本文标题： </strong>
+    《再爆安全漏洞，这次轮到Jackson了，竟由阿里云上报》
+  </li>
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>A哥(YourBatman)
+  </li>
+  <li class="post-copyright-date">
+    <strong>发布时间： </strong>2020-09-04 14:05:32
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://www.yourbatman.cn/x2y/56130cb.html" title="再爆安全漏洞，这次轮到Jackson了，竟由阿里云上报">https://www.yourbatman.cn/x2y/56130cb.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>许可协议： </strong>本站所有文章均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载：No！转发：Yes！
+  </li>
+</ul>
+</div>
+
+
+      <!-- 添加“本文结束”标记 -->
+      <div class="read-over" style="text-align: center;margin-top: 25px;color: rgba(234,16,61,.569);font-size: 16px">-------------您已触及底线 <i class="fa fa-paw"></i> 感谢阅读-------------</div>
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    请A哥喝水
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="https://img-blog.csdnimg.cn/20200612080128384.png" alt="A哥(YourBatman) 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="https://img-blog.csdnimg.cn/20200612080128343.png" alt="A哥(YourBatman) 支付宝">
+        <p>支付宝</p>
       </div>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/x2y/8d076785.html" itemprop="url">
-            <span itemprop="name">想用@Autowired注入static静态成员？官方不推荐你却还偏要这么做</span>
-          </a>
-      </div>
+  </div>
+</div>
 
-    </header>
-  </article>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-06-03T13:42:01+08:00"
-              content="2020-06-03">
-          06-03
-        </time>
-      </div>
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Jackson/" rel="tag"><i class="fa fa-tag"></i> Jackson</a>
+              <a href="/tags/Fastjson/" rel="tag"><i class="fa fa-tag"></i> Fastjson</a>
+              <a href="/tags/%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E/" rel="tag"><i class="fa fa-tag"></i> 安全漏洞</a>
+          </div>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/x2y/fa005713.html" itemprop="url">
-            <span itemprop="name">static关键字有何魔法？竟让Spring Boot搞出那么多静态内部类</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-05-31T13:41:58+08:00"
-              content="2020-05-31">
-          05-31
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/x2y/6abf4a82.html" itemprop="url">
-            <span itemprop="name">static关键字真能提高Bean的优先级吗？答：真能</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
+        <!-- 导入投票模块 -->
+        
+  <!-- 投票功能 -->
+  <div class="post-widgets">
+    <div style="color: #ea778c;font-size: 14px;">(>兄台请留步，看完记得六星好评哦<)</div>
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
     </div>
   </div>
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/x2y/9088caa6.html" rel="prev" title="2. Bean Validation声明式校验方法的参数、返回值">
+      <i class="fa fa-chevron-left"></i> 2. Bean Validation声明式校验方法的参数、返回值
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
   
   
   
 
+    </div>
+  
+  
+  
   
 
 
 
           </div>
           
+    <div class="comments" id="valine-comments"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -355,6 +633,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#✍前言"><span class="nav-number">1.</span> <span class="nav-text">✍前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#✍正文"><span class="nav-number">2.</span> <span class="nav-text">✍正文</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#关于本次漏洞"><span class="nav-number">2.1.</span> <span class="nav-text">关于本次漏洞</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#漏洞详情"><span class="nav-number">2.1.1.</span> <span class="nav-text">漏洞详情</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#漏洞评级"><span class="nav-number">2.1.2.</span> <span class="nav-text">漏洞评级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#影响版本"><span class="nav-number">2.1.3.</span> <span class="nav-text">影响版本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安全版本"><span class="nav-number">2.1.4.</span> <span class="nav-text">安全版本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#故事时间轴"><span class="nav-number">2.1.5.</span> <span class="nav-text">故事时间轴</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修复建议"><span class="nav-number">2.2.</span> <span class="nav-text">修复建议</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#✍总结"><span class="nav-number">3.</span> <span class="nav-text">✍总结</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#✔推荐阅读："><span class="nav-number">3.0.0.0.1.</span> <span class="nav-text">✔推荐阅读：</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
