@@ -24,30 +24,28 @@
     var CONFIG = {"hostname":"www.yourbatman.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},"motion":{"enable":false,"async":true,"transition":{"post_block":"flipBounceYIn","post_header":"flipXIn","post_body":"flipBounceXIn","coll_header":"expandIn","sidebar":"shrinkIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="来自硅谷大佬，对依赖注入Dependency Injection的很简约易懂的解释">
+  <meta name="description" content="面向这些规范接口编程，是你完成数据校验的第一步">
 <meta property="og:type" content="article">
-<meta property="og:title" content="系统设计：你的service要用Dependency Injection吗?">
-<meta property="og:url" content="https://www.yourbatman.cn/x2y/5715d235.html">
+<meta property="og:title" content="3. 站在使用层面，Bean Validation这些标准接口你需要烂熟于胸">
+<meta property="og:url" content="https://www.yourbatman.cn/x2y/4fe71a34.html">
 <meta property="og:site_name" content="BAT的乌托邦">
-<meta property="og:description" content="来自硅谷大佬，对依赖注入Dependency Injection的很简约易懂的解释">
+<meta property="og:description" content="面向这些规范接口编程，是你完成数据校验的第一步">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/2020061807003859.png#x200">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200618070204992.png#x200">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200618070513198.png#x200">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/2020061807072948.png#x200">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/2020061807103662.png#x200">
-<meta property="article:published_time" content="2020-06-17T23:17:57.000Z">
-<meta property="article:modified_time" content="2020-06-17T23:24:59.149Z">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200902115418572.jpg#pic_center">
+<meta property="article:published_time" content="2020-09-07T04:09:47.000Z">
+<meta property="article:modified_time" content="2020-09-07T04:15:28.646Z">
 <meta property="article:author" content="A哥(YourBatman)">
 <meta property="article:tag" content="BAT的乌托邦">
 <meta property="article:tag" content="A哥">
 <meta property="article:tag" content="YourBatman">
-<meta property="article:tag" content="依赖注入">
-<meta property="article:tag" content="Dependency Injection">
+<meta property="article:tag" content="Bean Validation">
+<meta property="article:tag" content="Hibernate Validator">
+<meta property="article:tag" content="数据校验">
+<meta property="article:tag" content="JSR380">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/2020061807003859.png#x200">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20200902115418572.jpg#pic_center">
 
-<link rel="canonical" href="https://www.yourbatman.cn/x2y/5715d235.html">
+<link rel="canonical" href="https://www.yourbatman.cn/x2y/4fe71a34.html">
 
 
 <script id="page-configurations">
@@ -60,7 +58,7 @@
   };
 </script>
 
-  <title>系统设计：你的service要用Dependency Injection吗? | BAT的乌托邦</title>
+  <title>3. 站在使用层面，Bean Validation这些标准接口你需要烂熟于胸 | BAT的乌托邦</title>
   
 
 
@@ -242,7 +240,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.yourbatman.cn/x2y/5715d235.html">
+    <link itemprop="mainEntityOfPage" href="https://www.yourbatman.cn/x2y/4fe71a34.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://img-blog.csdnimg.cn/20200511100304592.jpg">
@@ -255,7 +253,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          系统设计：你的service要用Dependency Injection吗?
+          3. 站在使用层面，Bean Validation这些标准接口你需要烂熟于胸
         </h1>
 
         <div class="post-meta">
@@ -267,7 +265,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-06-18 07:17:57" itemprop="dateCreated datePublished" datetime="2020-06-18T07:17:57+08:00">2020-06-18</time>
+              <time title="创建时间：2020-09-07 12:09:47" itemprop="dateCreated datePublished" datetime="2020-09-07T12:09:47+08:00">2020-09-07</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -275,12 +273,12 @@
               </span>
               <span class="post-meta-item-text">收录于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/" itemprop="url" rel="index"><span itemprop="name">系统设计</span></a>
+                  <a href="/categories/A%E5%93%A5%E5%AD%A6%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/" itemprop="url" rel="index"><span itemprop="name">A哥学数据校验</span></a>
                 </span>
             </span>
 
           
-            <span id="/x2y/5715d235.html" class="post-meta-item leancloud_visitors" data-flag-title="系统设计：你的service要用Dependency Injection吗?" title="阅读次数">
+            <span id="/x2y/4fe71a34.html" class="post-meta-item leancloud_visitors" data-flag-title="3. 站在使用层面，Bean Validation这些标准接口你需要烂熟于胸" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -295,8 +293,8 @@
       </span>
       <span class="post-meta-item-text">评论数：</span>
     
-    <a title="valine" href="/x2y/5715d235.html#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/x2y/5715d235.html" itemprop="commentCount"></span>
+    <a title="valine" href="/x2y/4fe71a34.html#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/x2y/4fe71a34.html" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -309,14 +307,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2.2k</span>
+              <span>8.3k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
+              <span>8 分钟</span>
             </span>
 
           <!-- 本文作者 -->
@@ -326,7 +324,7 @@
             </span>
             <span class="post-meta-item-text">本文作者：</span>
             <a href="/about/" itemprop="url" rel="index">
-              <span>大西Xi</span>
+              <span>A哥(YourBatman)</span>
             </a>
           </span>
 
@@ -340,36 +338,98 @@
 
       
         <blockquote>
-<p>当大潮退去，才知道谁在裸泳。<br><strong>作者</strong>：A哥（YourBatman）<br><strong>公众号</strong>：BAT的乌托邦（ID：BAT-utopia）<br><strong>文末是否有彩蛋</strong>：有</p>
+<p>乔丹是我听过的篮球之神，科比是我亲眼见过的篮球之神。本文已被 <a href="https://www.yourbatman.cn"><strong>https://www.yourbatman.cn</strong></a> 收录，里面一并有Spring技术栈、MyBatis、JVM、中间件等小而美的<strong>专栏</strong>供以免费学习。关注公众号【<strong>BAT的乌托邦</strong>】逐个击破，深入掌握，拒绝浅尝辄止。</p>
 </blockquote>
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>各位小伙伴大家好，我是A哥。<strong>以下文章来源于硅谷成长攻略 ，作者大西Xi</strong>。</p>
-<p>依赖注入，它不仅仅是Spring，而是一种通用思想。本文硅谷大佬用简短的语句道出了其核心思想，值得参阅。</p>
-<hr>
-<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><p>我最近在给一个Go service升级重构framework。我和一个朋友提了下，他点评到，搞这种基础升级，就是悟道啊，类似于《禅与摩托车维修艺术》。<br><img data-src="https://img-blog.csdnimg.cn/2020061807003859.png#x200" alt=""><br>他这个说法挺有道理的，大家平时写业务代码，更多是站在地面想着怎么快速完成目标。只有趁升级的时候，才有空飞在1000公里天上，想想为啥要这么设计的哲学问题。</p>
-<p>今天就给大家介绍一个重要的基本设计原则：Dependency Injection。这个设计模式在复杂的业务service非常有用，没有它，每次改一个模块的初始化接口，你都要把用到这个模块的代码都改一遍，非常麻烦。</p>
-<p><strong>今天很多主流的开源framework都用到了它</strong>，比如：</p>
-<ul>
-<li>Guice: Google 维护的一个基于Java的 lightweight dependency injection framework</li>
-<li>Fx: Uber 维护的一个基于Go的dependency injection framework</li>
-<li>AngularJS: Google 维护的基于JavaScript的前端 framework</li>
-<li>Wire: Google维护的Compile-time Dependency Injection for Go</li>
+<p><img data-src="https://img-blog.csdnimg.cn/20200902115418572.jpg#pic_center" alt=""></p>
+<h1 id="✍前言"><a href="#✍前言" class="headerlink" title="✍前言"></a>✍前言</h1><p>你好，我是YourBatman。</p>
+<p>通过前两篇文章的叙述，相信能勾起你对<strong>Bean Validation</strong>的兴趣。那么本文就站在一个使用者的角度来看，要使用Bean Validation完成校验的话我们应该掌握、熟悉哪些接口、接口方法呢？</p>
+<h2 id="版本约定"><a href="#版本约定" class="headerlink" title="版本约定"></a>版本约定</h2><ul>
+<li>Bean Validation版本：<code>2.0.2</code></li>
+<li>Hibernate Validator版本：<code>6.1.5.Final</code></li>
 </ul>
-<hr>
-<h3 id="什么是Dependency-Injection？"><a href="#什么是Dependency-Injection？" class="headerlink" title="什么是Dependency Injection？"></a>什么是Dependency Injection？</h3><p>这个翻译成中文叫做依赖注入，用大白话解释就是即插即用。</p>
-<p>举个例子，假设你的service里面有个模块A叫“笔记本”，它有个依赖叫“耳机”，用了这个设计原则，你需要听音乐，只用插”耳机“就可以了。后端service中常见的“耳机”依赖有哪些？比如Logging，输出Metrics等。<br><img data-src="https://img-blog.csdnimg.cn/20200618070204992.png#x200" alt=""><br>下面的代码是用 <strong>Dependency Injection</strong> 创建模块A的伪代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">func <span class="title">CreateLaptopService</span><span class="params">()</span> *LaptopService </span>&#123;</span><br><span class="line">	panic(wire.Build(</span><br><span class="line">		wire.Struct(<span class="keyword">new</span>(Logger), <span class="string">"*"</span>),</span><br><span class="line">		NewHttpClient,</span><br><span class="line">		NewHeadphoneService,</span><br><span class="line">	))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="✍正文"><a href="#✍正文" class="headerlink" title="✍正文"></a>✍正文</h1><p>Bean Validation属于Java EE标准技术，拥有对应的JSR抽象，因此我们实际使用过程中仅需要面向标准使用即可，并不需要关心具体实现（是hibernate实现，还是apache的实现并不重要），也就是我们常说的<strong>面向接口编程</strong>。</p>
+<p>Tips：为了方便下面做示例讲解，对一些简单、公用的方法抽取如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">ValidatorUtil</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ValidatorFactory <span class="title">obtainValidatorFactory</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Validation.buildDefaultValidatorFactory();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Validator <span class="title">obtainValidator</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> obtainValidatorFactory().getValidator();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ExecutableValidator <span class="title">obtainExecutableValidator</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> obtainValidator().forExecutables();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function"><span class="keyword">void</span> <span class="title">printViolations</span><span class="params">(Set&lt;ConstraintViolation&lt;T&gt;&gt; violations)</span> </span>&#123;</span><br><span class="line">        violations.stream().map(v -&gt; v.getPropertyPath() + <span class="string">" "</span> + v.getMessage() + <span class="string">": "</span> + v.getInvalidValue()).forEach(System.out::println);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<hr>
-<h3 id="不用这个原则，有什么后果？"><a href="#不用这个原则，有什么后果？" class="headerlink" title="不用这个原则，有什么后果？"></a>不用这个原则，有什么后果？</h3><p>你需要自己搞一堆耳机的原材料，然后自己组装配置。模块A需要耳机的时候，手动装一遍，模块B需要耳机的时候，再手动装一遍。<br><img data-src="https://img-blog.csdnimg.cn/20200618070513198.png#x200" alt=""><br>下面是不用Dependency Injection，创建模块A的伪代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">func <span class="title">CreateLaptopService</span><span class="params">()</span> *LaptopService </span>&#123;</span><br><span class="line">	logger := &amp;Logger&#123;&#125;</span><br><span class="line">	headphone := &amp;Headphone&#123;&#125;</span><br><span class="line">	client := NewHttpClient(logger)</span><br><span class="line">	<span class="keyword">return</span> NewLaptopService(logger,client,headphone)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>如果service很简单，还可以忍受。但是在业务很复杂时，项目里有上百个依赖的时候就更痛苦了。每次配置”耳机“，你都需要手动把所有模块的接口配置一遍。<br><img data-src="https://img-blog.csdnimg.cn/2020061807072948.png#x200" alt=""><br>下面是不用<strong>Dependency Injection</strong>，再创建模块B的伪代码:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">func <span class="title">CreateDesktopService</span><span class="params">()</span> *DesktopService </span>&#123;</span><br><span class="line">	logger := &amp;Logger&#123;&#125;</span><br><span class="line">	headphone := &amp;Headphone&#123;&#125;</span><br><span class="line">	client := NewHttpClient(logger)</span><br><span class="line">	cdDisk := &amp;CdDisk&#123;&#125;</span><br><span class="line">	cdDrive := &amp;CdDrive&#123;cdDisk&#125;</span><br><span class="line">	headphone := &amp;Headphone&#123;&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> NewLaptopService(logger, client, headphone, cdDrive)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Validator"><a href="#Validator" class="headerlink" title="Validator"></a>Validator</h2><p><strong>校验器接口：校验的入口</strong>，可实现对Java Bean、某个属性、方法、构造器等完成校验。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Validator</span> </span>&#123;</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>它是使用者接触得<strong>最多</strong>的一个API，当然也是最重要的喽。因此下面对其每个方法做出解释+使用示例。</p>
+<h3 id="validate：校验Java-Bean"><a href="#validate：校验Java-Bean" class="headerlink" title="validate：校验Java Bean"></a>validate：校验Java Bean</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;T&gt; Set&lt;ConstraintViolation&lt;T&gt;&gt; validate(T object, Class&lt;?&gt;... groups);</span><br></pre></td></tr></table></figure>
+<p>验证Java Bean对象上的<strong>所有</strong>约束。示例如下：</p>
+<p>Java Bean：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ScriptAssert</span>(script = <span class="string">"_this.name==_this.fullName"</span>, lang = <span class="string">"javascript"</span>)</span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@NotNull</span></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Length</span>(min = <span class="number">20</span>)</span><br><span class="line">    <span class="meta">@NotNull</span></span><br><span class="line">    <span class="keyword">private</span> String fullName;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test5</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    User user = <span class="keyword">new</span> User();</span><br><span class="line">    user.setName(<span class="string">"YourBatman"</span>);</span><br><span class="line"></span><br><span class="line">    Set&lt;ConstraintViolation&lt;User&gt;&gt; result = ValidatorUtil.obtainValidator().validate(user);</span><br><span class="line">    ValidatorUtil.printViolations(result);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>说明：<code>@ScriptAssert</code>是Hibernate Validator提供的一个脚本约束注解，可以实现垮字段逻辑校验，功能非常之强大，后面详解</p>
+</blockquote>
+<p>运行程序，控制台输出：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">执行脚本表达式<span class="string">"_this.name==_this.fullName"</span>没有返回期望结果: User(name=YourBatman, fullName=<span class="keyword">null</span>)</span><br><span class="line">fullName 不能为<span class="keyword">null</span>: <span class="keyword">null</span></span><br></pre></td></tr></table></figure>
+<p>符合预期。值得注意的是：针对fullName中的@Length约束来说，null是合法的哟，所以不会有相应日志输出的</p>
+<p>校验Java Bean所有约束中的所有包括：<br>1、属性上的约束<br>2、<strong>类上的约束</strong></p>
+<h3 id="validateProperty：校验指定属性"><a href="#validateProperty：校验指定属性" class="headerlink" title="validateProperty：校验指定属性"></a>validateProperty：校验指定属性</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;T&gt; Set&lt;ConstraintViolation&lt;T&gt;&gt; validateProperty(T object, String propertyName, Class&lt;?&gt;... groups);</span><br></pre></td></tr></table></figure>
+<p>校验某个Java Bean中的<strong>某个属性</strong>上的所有约束。示例如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test6</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    User user = <span class="keyword">new</span> User();</span><br><span class="line">    user.setFullName(<span class="string">"YourBatman"</span>);</span><br><span class="line"></span><br><span class="line">    Set&lt;ConstraintViolation&lt;User&gt;&gt; result = ValidatorUtil.obtainValidator().validateProperty(user, <span class="string">"fullName"</span>);</span><br><span class="line">    ValidatorUtil.printViolations(result);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，控制台输出：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fullName 长度需要在<span class="number">20</span>和<span class="number">2147483647</span>之间: YourBatman</span><br></pre></td></tr></table></figure>
+<p>符合预期。它会校验属性上的<strong>所有</strong>约束，注意只是属性上的哦，其它地方的不管。</p>
+<h3 id="validateValue：校验value值"><a href="#validateValue：校验value值" class="headerlink" title="validateValue：校验value值"></a>validateValue：校验value值</h3><p>校验某个value值，是否符合指定属性上的<strong>所有约束</strong>。可理解为：若我把这个value值赋值给这个属性，是否合法？</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;T&gt; Set&lt;ConstraintViolation&lt;T&gt;&gt; validateValue(Class&lt;T&gt; beanType,</span><br><span class="line">										  	String propertyName,</span><br><span class="line">										  	Object value,</span><br><span class="line">										  	Class&lt;?&gt;... groups);</span><br></pre></td></tr></table></figure>
+<p>这个校验方法比较特殊：<strong>不用先存在对象实例</strong>，直接校验某个值是否满足某个属性的所有约束，所以它可以做事钱校验判断，还是挺好用的。示例如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test7</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Set&lt;ConstraintViolation&lt;User&gt;&gt; result = ValidatorUtil.obtainValidator().validateValue(User.class, "fullName", "A哥");</span><br><span class="line">    ValidatorUtil.printViolations(result);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，输出：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fullName 长度需要在<span class="number">20</span>和<span class="number">2147483647</span>之间: A哥</span><br></pre></td></tr></table></figure>
+<p>若程序改为：<code>.validateValue(User.class, &quot;fullName&quot;, &quot;YourBatman-YourBatman&quot;);</code>，再次运行程序，控制台将不再输出（字符串长度超过20，合法了嘛）。</p>
+<h3 id="获取Class类型描述信息"><a href="#获取Class类型描述信息" class="headerlink" title="获取Class类型描述信息"></a>获取Class类型描述信息</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">BeanDescriptor <span class="title">getConstraintsForClass</span><span class="params">(Class&lt;?&gt; clazz)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>这个clazz可以是类or接口类型。<code>BeanDescriptor</code>：描述受约束的Java Bean和与其关联的约束。示例如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test8</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    BeanDescriptor beanDescriptor = obtainValidator().getConstraintsForClass(User<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">    System.out.println(<span class="string">"此类是否需要校验："</span> + beanDescriptor.isBeanConstrained());</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取属性、方法、构造器的约束</span></span><br><span class="line">    Set&lt;PropertyDescriptor&gt; constrainedProperties = beanDescriptor.getConstrainedProperties();</span><br><span class="line">    Set&lt;MethodDescriptor&gt; constrainedMethods = beanDescriptor.getConstrainedMethods(MethodType.GETTER);</span><br><span class="line">    Set&lt;ConstructorDescriptor&gt; constrainedConstructors = beanDescriptor.getConstrainedConstructors();</span><br><span class="line">    System.out.println(<span class="string">"需要校验的属性："</span> + constrainedProperties);</span><br><span class="line">    System.out.println(<span class="string">"需要校验的方法："</span> + constrainedMethods);</span><br><span class="line">    System.out.println(<span class="string">"需要校验的构造器："</span> + constrainedConstructors);</span><br><span class="line"></span><br><span class="line">    PropertyDescriptor fullNameDesc = beanDescriptor.getConstraintsForProperty(<span class="string">"fullName"</span>);</span><br><span class="line">    System.out.println(fullNameDesc);</span><br><span class="line">    System.out.println(<span class="string">"fullName属性的约束注解个数："</span>fullNameDesc.getConstraintDescriptors().size());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，输出：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">此类是否需要校验：<span class="keyword">true</span></span><br><span class="line">需要校验的属性：[PropertyDescriptorImpl&#123;propertyName=name, cascaded=<span class="keyword">false</span>&#125;, PropertyDescriptorImpl&#123;propertyName=fullName, cascaded=<span class="keyword">false</span>&#125;]</span><br><span class="line">需要校验的方法：[]</span><br><span class="line">需要校验的构造器：[]</span><br><span class="line">PropertyDescriptorImpl&#123;propertyName=fullName, cascaded=<span class="keyword">false</span>&#125;</span><br><span class="line">fullName属性的约束注解个数：<span class="number">2</span></span><br></pre></td></tr></table></figure>
 
-<h4 id="优点一：减少依赖关系、方便重复使用"><a href="#优点一：减少依赖关系、方便重复使用" class="headerlink" title="优点一：减少依赖关系、方便重复使用"></a>优点一：减少依赖关系、方便重复使用</h4><p>有了Dependency Injection，每次配置时，模块A和模块B都是连接到同一个设置的耳机，你只要组装一次耳机。即使有100个模块都需要用耳机，你也只需要组装一次。<br><img data-src="https://img-blog.csdnimg.cn/2020061807103662.png#x200" alt=""></p>
-<h4 id="优点二：提高可维护性"><a href="#优点二：提高可维护性" class="headerlink" title="优点二：提高可维护性"></a>优点二：提高可维护性</h4><p>而对于更复杂的场景，模块B依赖于一个”CD机“，而”CD机“又需要一个”CD碟片“。如果有100个类似的模块都有”CD机“，而你需要做的只是更改”CD机”里的CD碟片，有了Dependency Injection，你也可以省去在“电子厂”里面翻找所有”CD机“的时间，只需要换一张”CD碟片“。</p>
-<h4 id="优点三：简化测试流程"><a href="#优点三：简化测试流程" class="headerlink" title="优点三：简化测试流程"></a>优点三：简化测试流程</h4><p>每次升级时，只需要测试”耳机“本身的性能，测试不需要和使用”耳机“的代码有任何关联。</p>
-<hr>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>最后，划一下重点，Dependency Injection适用的场景，是复杂的大型系统，有很多个服务相互依赖的情况。它能够避免一些重复劳动带来的小错误，提高生产力。如果是一个人写的小玩具，那杀鸡就不用牛刀啦。</p>
+<h3 id="获得Executable校验器"><a href="#获得Executable校验器" class="headerlink" title="获得Executable校验器"></a>获得Executable校验器</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@since</span> <span class="number">1.1</span></span><br><span class="line"><span class="function">ExecutableValidator <span class="title">forExecutables</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+<p>Validator这个API是1.0就提出的，它只能校验Java Bean，对于方法、构造器的参数、返回值等校验还无能为力。</p>
+<p>这不1.1版本就提供了<code>ExecutableValidator</code>这个API解决这类需求，它的实例可通过调用Validator的该方法获得，非常方便。关于<code>ExecutableValidator</code>的具体使用请移步<a href="https://mp.weixin.qq.com/s/-KeOCq2rsXCvrqD8HYHSpQ" target="_blank" rel="noopener">上篇文章</a>。</p>
+<h2 id="ConstraintViolation"><a href="#ConstraintViolation" class="headerlink" title="ConstraintViolation"></a>ConstraintViolation</h2><p><strong>约束违反详情</strong>。此对象保存了<strong>违反约束的上下文</strong>以及描述消息。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// &lt;T&gt;：root bean</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ConstraintViolation</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>简单的说，它保存着执行完所有约束后（不管是Java Bean约束、方法约束等等）的结果，提供了访问结果的API，比较简单：</p>
+<blockquote>
+<p>小贴士：只有违反的约束才会生成此对象哦。违反一个约束对应一个实例</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 已经插值（interpolated）的消息</span></span><br><span class="line"><span class="function">String <span class="title">getMessage</span><span class="params">()</span></span>;</span><br><span class="line"><span class="comment">// 未插值的消息模版（里面变量还未替换，若存在的话）</span></span><br><span class="line"><span class="function">String <span class="title">getMessageTemplate</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 从rootBean开始的属性路径。如：parent.fullName</span></span><br><span class="line"><span class="function">Path <span class="title">getPropertyPath</span><span class="params">()</span></span>;</span><br><span class="line"><span class="comment">// 告诉是哪个约束没有通过（的详情）</span></span><br><span class="line">ConstraintDescriptor&lt;?&gt; getConstraintDescriptor();</span><br></pre></td></tr></table></figure>
+<p>示例：略。</p>
+<h2 id="ValidatorContext"><a href="#ValidatorContext" class="headerlink" title="ValidatorContext"></a>ValidatorContext</h2><p>校验器上下文，根据此上下文创建Validator实例。不同的上下文可以创建出不同实例（这里的不同指的是内部组件不同），满足各种个性化的定制需求。</p>
+<p>ValidatorContext接口提供设置方法可以定制校验器的核心组件，它们就是Validator校验器的五大核心组件：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ValidatorContext</span> </span>&#123;</span><br><span class="line">	<span class="function">ValidatorContext <span class="title">messageInterpolator</span><span class="params">(MessageInterpolator messageInterpolator)</span></span>;</span><br><span class="line">	<span class="function">ValidatorContext <span class="title">traversableResolver</span><span class="params">(TraversableResolver traversableResolver)</span></span>;</span><br><span class="line">	<span class="function">ValidatorContext <span class="title">constraintValidatorFactory</span><span class="params">(ConstraintValidatorFactory factory)</span></span>;</span><br><span class="line">	<span class="function">ValidatorContext <span class="title">parameterNameProvider</span><span class="params">(ParameterNameProvider parameterNameProvider)</span></span>;</span><br><span class="line">	<span class="function">ValidatorContext <span class="title">clockProvider</span><span class="params">(ClockProvider clockProvider)</span></span>;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// @since 2.0 值提取器。</span></span><br><span class="line">	<span class="comment">// 注意：它是add方法，属于添加哦</span></span><br><span class="line">	<span class="function">ValidatorContext <span class="title">addValueExtractor</span><span class="params">(ValueExtractor&lt;?&gt; extractor)</span></span>;</span><br><span class="line">	<span class="function">Validator <span class="title">getValidator</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以通过这些方法设置不同的组件实现，设置好后再来个<code>getValidator()</code>就得到一个定制化的校验器，不再千篇一律喽。所以呢，首先就是要得到ValidatorContext实例，下面介绍两种方法。</p>
+<h3 id="方式一：自己new"><a href="#方式一：自己new" class="headerlink" title="方式一：自己new"></a>方式一：自己new</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ValidatorFactoryImpl validatorFactory = (ValidatorFactoryImpl) ValidatorUtil.obtainValidatorFactory();</span><br><span class="line">    <span class="comment">// 使用默认的Context上下文，并且初始化一个Validator实例</span></span><br><span class="line">    <span class="comment">// 必须传入一个校验器工厂实例哦</span></span><br><span class="line">    ValidatorContext validatorContext = <span class="keyword">new</span> ValidatorContextImpl(validatorFactory)</span><br><span class="line">            .parameterNameProvider(<span class="keyword">new</span> DefaultParameterNameProvider())</span><br><span class="line">            .clockProvider(DefaultClockProvider.INSTANCE);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 通过该上下文，生成校验器实例（注意：调用多次，生成实例是多个哟）</span></span><br><span class="line">    System.out.println(validatorContext.getValidator());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，控制台输出：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">org.hibernate.validator.internal.engine.ValidatorImpl@<span class="number">1757</span>cd72</span><br></pre></td></tr></table></figure>
+<p>这种是<strong>最直接</strong>的方式，想要啥就new啥嘛。不过这么使用是有缺陷的，主要体现在这两个方面：</p>
+<ol>
+<li>不够抽象。new的方式嘛，和抽象谈不上关系</li>
+<li>强耦合了Hibernate Validator的API，如：<code>org.hibernate.validator.internal.engine.ValidatorContextImpl#ValidatorContextImpl</code></li>
+</ol>
+<h3 id="方式二：工厂生成"><a href="#方式二：工厂生成" class="headerlink" title="方式二：工厂生成"></a>方式二：工厂生成</h3><p>上面即使通过自己new的方式得到<code>ValidatorContext</code>实例也需要传入校验器工厂，那还不如直接使用工厂生成呢。恰好<code>ValidatorFactory</code>也提供了对应的方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ValidatorContext <span class="title">usingContext</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+<p>该方法用于得到一个ValidatorContext实例，它具有高度抽象、与底层API无关的特点，<strong>是推荐的获取方式</strong>，并且使用起来有流式编程的效果，如下所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test3</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Validator validator = ValidatorUtil.obtainValidatorFactory().usingContext()</span><br><span class="line">            .parameterNameProvider(<span class="keyword">new</span> DefaultParameterNameProvider())</span><br><span class="line">            .clockProvider(DefaultClockProvider.INSTANCE)</span><br><span class="line">            .getValidator();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>很明显，这种方式是被<strong>推荐</strong>的。</p>
+<h2 id="获得Validator实例的两种姿势"><a href="#获得Validator实例的两种姿势" class="headerlink" title="获得Validator实例的两种姿势"></a>获得Validator实例的两种姿势</h2><p>在文章最后，再回头看看Validator实例获取的两种姿势。<code>Validator</code>校验器接口是完成数据校验（Java Bean校验、方法校验等）最主要API，经过了上面的讲述，下面可以来个获取方式的小总结了。</p>
+<h3 id="方式一：工厂直接获取"><a href="#方式一：工厂直接获取" class="headerlink" title="方式一：工厂直接获取"></a>方式一：工厂直接获取</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test3</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Validator validator = ValidatorUtil.obtainValidatorFactory().getValidator();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这种方式十分简单、简约，对初学者十分的友好，入门简单，优点明显。各组件全部使用默认方式，省心。如果要挑缺点那肯定也是有的：无法满足个性化、定制化需求，说白了：无法自定义五大组件 + 值提取器的实现。</p>
+<p>作为这么优秀的Java EE标准技术，怎么少得了对扩展的开放呢？继续方式二吧~</p>
+<h3 id="方式二：从上下文获取"><a href="#方式二：从上下文获取" class="headerlink" title="方式二：从上下文获取"></a>方式二：从上下文获取</h3><p>校验器上下文也就是ValidatorContext喽，它的步骤是先得到上下文实例，然后做定制，再通过上下文实例创建出Validator校验器实例了。</p>
+<p>示例代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test3</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Validator validator = ValidatorUtil.obtainValidatorFactory().usingContext()</span><br><span class="line">            .parameterNameProvider(<span class="keyword">new</span> DefaultParameterNameProvider())</span><br><span class="line">            .clockProvider(DefaultClockProvider.INSTANCE)</span><br><span class="line">            .getValidator();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这种方式给与了极大的定制性，你可以任意指定核心组件实现，来达到自己的要求。</p>
+<p>这两种方式结合起来，不就是典型的<strong>默认 + 定制扩展</strong>的搭配麽？另外，Validator是线程安全的，一般来说一个应用只需要初始化<strong>一个</strong> Validator实例即可，所以推荐使用方式二进行初始化，对个性扩展更友好。</p>
+<h1 id="✍总结"><a href="#✍总结" class="headerlink" title="✍总结"></a>✍总结</h1><p>本文站在一个使用者的角度去看如何使用Bean Validation，以及哪些<strong>标准的</strong>接口API是必须掌握了，有了这些知识点在平时绝大部分case都能应对自如了。</p>
+<blockquote>
+<p>规范接口/标准接口一般能解决绝大多数问题，这就是规范的边界，有些可为，有些不为</p>
+</blockquote>
+<p>当然喽，这些是基本功。要想深入理解Bean Validation的功能，必须深入了解Hibernate Validator实现，因为有些比较常用的case它做了很好的补充，咱们下文见。</p>
+<h5 id="✔推荐阅读："><a href="#✔推荐阅读：" class="headerlink" title="✔推荐阅读："></a>✔推荐阅读：</h5><ul>
+<li><a href="https://mp.weixin.qq.com/s/g04HMhrjbvbPn1Mb9JYa5g" target="_blank" rel="noopener">1. 不吹不擂，第一篇就能提升你对Bean Validation数据校验的认知</a></li>
+<li><a href="https://mp.weixin.qq.com/s/-KeOCq2rsXCvrqD8HYHSpQ" target="_blank" rel="noopener">2. Bean Validation声明式校验方法的参数、返回值</a></li>
+</ul>
         <!-- ....这里是正文内容的底部（首页不会展示）... -->
         <style>
 .table-container img{
@@ -433,6 +493,15 @@
 
     <!-- 相关阅读（你可能还喜欢） -->
       
+  <div class="popular-posts-header">你可能还喜欢：</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\x2y\9088caa6.html" rel="bookmark">2. Bean Validation声明式校验方法的参数、返回值</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\x2y\55d56c0b.html" rel="bookmark">1. 不吹不擂，第一篇就能提升你对Bean Validation数据校验的认知</a></div>
+    </li>
+  </ul>
 
         
 
@@ -440,17 +509,17 @@
 <ul class="post-copyright">
   <li class="post-copyright-title">
     <strong>本文标题： </strong>
-    《系统设计：你的service要用Dependency Injection吗?》
+    《3. 站在使用层面，Bean Validation这些标准接口你需要烂熟于胸》
   </li>
   <li class="post-copyright-author">
-    <strong>本文作者： </strong>大西Xi
+    <strong>本文作者： </strong>A哥(YourBatman)
   </li>
   <li class="post-copyright-date">
-    <strong>发布时间： </strong>2020-06-18 07:17:57
+    <strong>发布时间： </strong>2020-09-07 12:09:47
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://www.yourbatman.cn/x2y/5715d235.html" title="系统设计：你的service要用Dependency Injection吗?">https://www.yourbatman.cn/x2y/5715d235.html</a>
+    <a href="https://www.yourbatman.cn/x2y/4fe71a34.html" title="3. 站在使用层面，Bean Validation这些标准接口你需要烂熟于胸">https://www.yourbatman.cn/x2y/4fe71a34.html</a>
   </li>
   <li class="post-copyright-license">
     <strong>许可协议： </strong>本站所有文章均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载：No！转发：Yes！
@@ -486,8 +555,10 @@
       <footer class="post-footer">
           
           <div class="post-tags">
-              <a href="/tags/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/" rel="tag"><i class="fa fa-tag"></i> 依赖注入</a>
-              <a href="/tags/Dependency-Injection/" rel="tag"><i class="fa fa-tag"></i> Dependency Injection</a>
+              <a href="/tags/Bean-Validation/" rel="tag"><i class="fa fa-tag"></i> Bean Validation</a>
+              <a href="/tags/Hibernate-Validator/" rel="tag"><i class="fa fa-tag"></i> Hibernate Validator</a>
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/" rel="tag"><i class="fa fa-tag"></i> 数据校验</a>
+              <a href="/tags/JSR380/" rel="tag"><i class="fa fa-tag"></i> JSR380</a>
           </div>
 
         <!-- 导入投票模块 -->
@@ -504,13 +575,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/x2y/da0c5a61.html" rel="prev" title="技术​选型的艺术">
-      <i class="fa fa-chevron-left"></i> 技术​选型的艺术
+    <a href="/x2y/56130cb.html" rel="prev" title="再爆安全漏洞，这次轮到Jackson了，竟由阿里云上报">
+      <i class="fa fa-chevron-left"></i> 再爆安全漏洞，这次轮到Jackson了，竟由阿里云上报
     </a></div>
-      <div class="post-nav-item">
-    <a href="/x2y/221f1084.html" rel="next" title="Fastjson到了说再见的时候了">
-      Fastjson到了说再见的时候了 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -576,7 +644,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#正文"><span class="nav-number">2.</span> <span class="nav-text">正文</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是Dependency-Injection？"><span class="nav-number">2.0.1.</span> <span class="nav-text">什么是Dependency Injection？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不用这个原则，有什么后果？"><span class="nav-number">2.0.2.</span> <span class="nav-text">不用这个原则，有什么后果？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#优点一：减少依赖关系、方便重复使用"><span class="nav-number">2.0.2.1.</span> <span class="nav-text">优点一：减少依赖关系、方便重复使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#优点二：提高可维护性"><span class="nav-number">2.0.2.2.</span> <span class="nav-text">优点二：提高可维护性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#优点三：简化测试流程"><span class="nav-number">2.0.2.3.</span> <span class="nav-text">优点三：简化测试流程</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#✍前言"><span class="nav-number">1.</span> <span class="nav-text">✍前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#版本约定"><span class="nav-number">1.1.</span> <span class="nav-text">版本约定</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#✍正文"><span class="nav-number">2.</span> <span class="nav-text">✍正文</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Validator"><span class="nav-number">2.1.</span> <span class="nav-text">Validator</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#validate：校验Java-Bean"><span class="nav-number">2.1.1.</span> <span class="nav-text">validate：校验Java Bean</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#validateProperty：校验指定属性"><span class="nav-number">2.1.2.</span> <span class="nav-text">validateProperty：校验指定属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#validateValue：校验value值"><span class="nav-number">2.1.3.</span> <span class="nav-text">validateValue：校验value值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取Class类型描述信息"><span class="nav-number">2.1.4.</span> <span class="nav-text">获取Class类型描述信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获得Executable校验器"><span class="nav-number">2.1.5.</span> <span class="nav-text">获得Executable校验器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ConstraintViolation"><span class="nav-number">2.2.</span> <span class="nav-text">ConstraintViolation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ValidatorContext"><span class="nav-number">2.3.</span> <span class="nav-text">ValidatorContext</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方式一：自己new"><span class="nav-number">2.3.1.</span> <span class="nav-text">方式一：自己new</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方式二：工厂生成"><span class="nav-number">2.3.2.</span> <span class="nav-text">方式二：工厂生成</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获得Validator实例的两种姿势"><span class="nav-number">2.4.</span> <span class="nav-text">获得Validator实例的两种姿势</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方式一：工厂直接获取"><span class="nav-number">2.4.1.</span> <span class="nav-text">方式一：工厂直接获取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方式二：从上下文获取"><span class="nav-number">2.4.2.</span> <span class="nav-text">方式二：从上下文获取</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#✍总结"><span class="nav-number">3.</span> <span class="nav-text">✍总结</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#✔推荐阅读："><span class="nav-number">3.0.0.0.1.</span> <span class="nav-text">✔推荐阅读：</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
