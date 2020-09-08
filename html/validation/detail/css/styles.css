@@ -1,0 +1,158 @@
+*, *:before, *:after {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body {
+  background: #1C182F;
+}
+
+.demo {
+    overflow: hidden;
+    position: absolute;
+    background: #CDDBEE;
+    left: 15px;
+    bottom: 15px;
+    top: 100px;
+    right: 15px;
+}
+.demo__close-menu {
+  position: absolute;
+  left: 22px;
+  top: 22px;
+  width: 29px;
+  cursor: pointer;
+}
+.demo__close-menu:before, .demo__close-menu:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 100%;
+  height: 4px;
+  background: #7097B0;
+}
+.demo__close-menu:before {
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+.demo__close-menu:after {
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+}
+.demo__section {
+  z-index: 1;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  padding: 14px 0 0 65px;
+  border-radius: inherit;
+  -webkit-transition: -webkit-transform 0.4s;
+  transition: -webkit-transform 0.4s;
+  transition: transform 0.4s;
+  transition: transform 0.4s, -webkit-transform 0.4s;
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+  will-change: transform;
+  padding-right: 15px;
+}
+.demo.menu-active .demo__section-1 {
+  -webkit-transform: translate3d(20px, 60px, 0);
+          transform: translate3d(20px, 60px, 0);
+}
+.demo__section-1.inactive {
+  -webkit-transform: translate3d(100%, 60px, 0);
+          transform: translate3d(100%, 60px, 0);
+}
+.demo.menu-active .demo__section-2 {
+  -webkit-transform: translate3d(40px, 120px, 0);
+          transform: translate3d(40px, 120px, 0);
+}
+.demo__section-2.inactive {
+  -webkit-transform: translate3d(100%, 120px, 0);
+          transform: translate3d(100%, 120px, 0);
+}
+.demo.menu-active .demo__section-3 {
+  -webkit-transform: translate3d(60px, 180px, 0);
+          transform: translate3d(60px, 180px, 0);
+}
+.demo__section-3.inactive {
+  -webkit-transform: translate3d(100%, 180px, 0);
+          transform: translate3d(100%, 180px, 0);
+}
+.demo.menu-active .demo__section-4 {
+  -webkit-transform: translate3d(80px, 240px, 0);
+          transform: translate3d(80px, 240px, 0);
+}
+.demo__section-4.inactive {
+  -webkit-transform: translate3d(100%, 240px, 0);
+          transform: translate3d(100%, 240px, 0);
+}
+.demo.menu-active .demo__section-5 {
+  -webkit-transform: translate3d(100px, 300px, 0);
+          transform: translate3d(100px, 300px, 0);
+}
+.demo__section-5.inactive {
+  -webkit-transform: translate3d(100%, 300px, 0);
+          transform: translate3d(100%, 300px, 0);
+}
+.demo.menu-active .demo__section {
+  cursor: pointer;
+}
+.demo__section-1 {
+  background: #434A54;
+}
+
+.demo__section-2 {
+  background: #967ADC;
+}
+
+.demo__section-3 {
+  background: #37BC9B;
+}
+
+.demo__section-4 {
+  background: #D770AD;
+}
+.demo__section-5 {
+  background: #4A89DC;
+}
+
+.demo__section-heading {
+  -webkit-transition: -webkit-transform 0.4s;
+  transition: -webkit-transform 0.4s;
+  transition: transform 0.4s;
+  transition: transform 0.4s, -webkit-transform 0.4s;
+  margin:0;
+}
+.demo.menu-active .demo__section-heading {
+  -webkit-transform: translateX(-45px);
+          transform: translateX(-45px);
+}
+.demo__menu-btn {
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  width: 28px;
+  height: 22px;
+  -webkit-transition: opacity 0.2s 0.2s;
+  transition: opacity 0.2s 0.2s;
+  cursor: pointer;
+}
+.demo.menu-active .demo__menu-btn {
+  pointer-events: none;
+  opacity: 0;
+  -webkit-transition: opacity 0.2s;
+  transition: opacity 0.2s;
+}
+.demo__menu-btn:before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 3px;
+  border-radius: 2px;
+  background: currentColor;
+  box-shadow: 0 8px, 0 16px;
+}
