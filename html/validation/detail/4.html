@@ -2,7 +2,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Spring奇淫之术之【依赖注入】</title>
+    <title>场景实战，能解决实际问题才是目的</title>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/animate.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
@@ -16,8 +16,8 @@
             <div class="slide__darkbg slide--1__darkbg"></div>
             <div class="container-fluid">
                 <!-- one -->
-                <div class="m-center fz-lg">Spring
-                    <p style="font-size: 30px;text-align: center">奇淫之术之【依赖注入】</p>
+                <div class="m-center fz-lg" style="font-size: 70px;">场景实战
+                    <p style="font-size: 30px;text-align: center">能解决实际问题才是目的</p>
                 </div>
             </div>
         </div>
@@ -27,17 +27,8 @@
             <div class="container-fluid">
                 <div class="m-center fz-md">
                     <ul class="items">
-                        <li class="animated" data-class="fadeInRight" data-delay="1s">1.
-                            JSR-250/330的注解：@PostConstruct/@Resource/@Inject/@Named
-                        </li>
-                        <li class="animated" data-class="fadeInRight" data-delay="2s">2. @Autowired和@Qualifier</li>
-                        <li class="animated" data-class="fadeInRight" data-delay="3s">
-                            <font color="red">3. @Resource or @Inject or @Autowired</font>
-                        </li>
-                        <li class="animated" data-class="fadeInRight" data-delay="4s">
-                            <font color="red" style="font-weight: bolder">4.
-                                依赖注入的Bean必须交给Spring容器管理吗？</font>
-                        </li>
+                        <li class="animated" data-class="fadeInRight" data-delay="1s">1. 场景实战</li>
+                        <li class="animated" data-class="fadeInRight" data-delay="3s"><font color="red">2. 小思考</font></li>
                     </ul>
                 </div>
             </div>
@@ -46,31 +37,21 @@
         <div class="slide slide--3">
             <div class="slide__darkbg slide--3__darkbg"></div>
             <div class="container-fluid">
-                <!-- three -->
+                <!-- four-->
                 <div class="row marginb">
                     <div class="col-sm-8 subject animated" data-class="pulse" data-delay="1s">
-                        <h1>一、JSR-250的注解<span class="dot-right"></span></h1>
+                        <h1>一、场景实战<span class="dot-right"></span></h1>
                     </div>
                 </div>
-                <div class="demo">
-                    <div class="demo__close-menu"></div>
-                    <div class="demo__section demo__section-1 active" data-section="1">
-                        <div class="demo__menu-btn"></div>
-                        <h2 class="demo__section-heading">
-                            @PostConstruct/@Resource/@Inject/@Named/@Qualifier</h2>
-                        <div class="demo-container">
-                            <div class="border-r1 animated" data-class="zoomInDown" data-delay="3s">
-                                @Resource装配顺序解释：
-                            </div>
-                            <h2>1、既没有指定name也没指定type; 先byName，再byType</h2>
-                            <h2>2、同时指定name和type; 两者都得符合条件</h2>
-                            <h2>3、只指定name; 根据beanName查找，没找到抛异常</h2>
-                            <h2>4、只指定type; 找不到或找到多个，均抛异常</h2>
-                        </div>
-                    </div>
+                <div class="demo-container">
+                    <h3>● 字段约束 vs 属性约束。领域模型验证方案</h3>
+                    <h3>● 容器元素约束</h3>
+                    <h3>● 类级别约束</h3>
+                    <h3>● 跨参数约束</h3>
                 </div>
             </div>
         </div>
+
 
         <div class="slide slide--4">
             <div class="slide__darkbg slide--4__darkbg"></div>
@@ -78,69 +59,34 @@
                 <!-- four-->
                 <div class="row marginb">
                     <div class="col-sm-8 subject animated" data-class="pulse" data-delay="1s">
-                        <h1>二、@Autowired和@Qualifier<span class="dot-right"></span></h1>
+                        <h1>二、小思考<span class="dot-right"></span></h1>
                     </div>
                 </div>
                 <div class="demo">
                     <div class="demo__close-menu"></div>
                     <div class="demo__section demo__section-1 active" data-section="1">
                         <div class="demo__menu-btn"></div>
-                        <h2 class="demo__section-heading">下面是关于Autowired的描述，<span style="color: red">正确与否？</span></h2>
+                        <h2 class="demo__section-heading">Bean Validation几乎能100%覆盖所有验证场景，还有如下问题需要思考：</h2>
                         <div class="demo-container">
-                            <h2>1、@Autowired根据类型进行注入，若没有找到该类型Bean会报错</h2>
-                            <h2>2、@Autowired根据类型进行注入， 若出现多个类型的Bean，会报错</h2>
-                            <h2>3、@Resource根据名称进入注入</h2>
+                            <h3>1️⃣：如何支持自定义的容器类型元素验证，如Result&lt;T&gt;</h3>
+                            <h3>2️⃣：如何让脚本约束支持我们熟悉的SpEL？</h3>
+                            <h3>3️⃣：约束，你应该写在接口，还是写在实现上？</h3>
+                            <h3>4️⃣：Spring MVC里用@Validated还是@Valid？</h3>
+                        </div>
+                        <div class="img-container">
+                            <div class="img-block" style="margin-left: -23%;
+    position: absolute;margin-left: 8%;"><img style="height: 300px;" src="img/sikao.jfif"/></div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-
-        <div class="slide slide--5">
-            <div class="slide__darkbg slide--5__darkbg"></div>
-            <div class="container-fluid">
-                <!-- four-->
-                <div class="row marginb">
-                    <div class="col-sm-8 subject animated" data-class="pulse" data-delay="1s">
-                        <h1>三、@Resource or @Inject or @Autowired<span class="dot-right"></span></h1>
-                    </div>
-                </div>
-                <div class="demo">
-                    <div class="demo__close-menu"></div>
-                    <div class="demo__section demo__section-1 active" data-section="1">
-                        <div class="demo__menu-btn"></div>
-                        <h2 class="demo__section-heading">最佳实践为：@Autowired(亲儿子)</h2>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="slide slide--6">
-            <div class="slide__darkbg slide--6__darkbg"></div>
-            <div class="container-fluid">
-                <!-- five-->
-                <div class="row marginb">
-                    <div class="col-sm-8 subject animated" data-class="pulse" data-delay="1s">
-                        <h1>四. 容器内的Bean才能使用依赖注入吗？<span class="dot-right"></span></h1>
-                    </div>
-                </div>
-                <div class="demo">
-                    <div class="demo__close-menu"></div>
-                    <div class="demo__section demo__section-1 active" data-section="1">
-                        <div class="demo__menu-btn"></div>
-                        <h2 class="demo__section-heading">比如：DispatcherServlet</h2>
-                        <div class="demo-container">
-                            <h3 style="color: green">Demo Show</h3>
-                        </div>
-                    </div>
-                </div>
+                </hr>
             </div>
         </div>
 
     </div>
 
     <!--页码-->
-    <span class="page">1/6</span>
+    <span class="page">1/4</span>
 </div>
 
 <script type="text/javascript" src="js/jquery-2.1.4.js"></script>
@@ -152,7 +98,7 @@
         var animSpd = 1000; //速度
         var curSlide = 1;     //初始
         var animation = false;   //滚动标志
-        var numOfCities = 6;   //页面个数
+        var numOfCities = 4;   //页面个数
 
         //标记防止连续滚动
         function flag() {

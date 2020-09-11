@@ -2,7 +2,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Bean Validation规范</title>
+    <title>Bean Validation-为何被需要？</title>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/animate.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
@@ -17,7 +17,7 @@
             <div class="container-fluid">
                 <!-- one -->
                 <div class="m-center fz-lg" style="font-size: 70px;">Bean Validation
-                    <p style="font-size: 30px;text-align: center">规范</p>
+                    <p style="font-size: 30px;text-align: center">为何被需要？</p>
                 </div>
             </div>
         </div>
@@ -27,8 +27,9 @@
             <div class="container-fluid">
                 <div class="m-center fz-md">
                     <ul class="items">
-                        <li class="animated" data-class="fadeInRight" data-delay="1s">1. 为何需要有Bean Validation？</li>
-                        <li class="animated" data-class="fadeInRight" data-delay="2s">2. 什么是Jakarta Bean Validation？</li>
+                        <li class="animated" data-class="fadeInRight" data-delay="1s"><span style="font-weight: bolder;">1. 抹平差异，能力共享</span></li>
+                        <li class="animated" data-class="fadeInRight" data-delay="2s">2. 契约编程，提效赋能</li>
+                        <li class="animated" data-class="fadeInRight" data-delay="3s">3. 晚期大众，接受度高</li>
                     </ul>
                 </div>
             </div>
@@ -40,18 +41,20 @@
                 <!-- three -->
                 <div class="row marginb">
                     <div class="col-sm-8 subject animated" data-class="pulse" data-delay="1s">
-                        <h1>一、为何需要有Bean Validation？<span class="dot-right"></span></h1>
+                        <h1>1. 抹平差异，能力共享<span class="dot-right"></span></h1>
                     </div>
                 </div>
                 <div class="demo">
                     <div class="demo__close-menu"></div>
                     <div class="demo__section demo__section-1 active" data-section="1">
-                        <div class="demo__menu-btn"></div>
-                        <h2 class="demo__section-heading">
-                            每一层都需要被校验；重复代码过多就等于垃圾代码；积重难返容易积累技术债；</h2>
                         <div class="demo-container">
-                            <div class="border-r1 animated" data-class="zoomInDown" data-delay="5s">
-                                验证逻辑和业务逻辑分离，代码清晰；验证逻辑需要被轻松复用；<br/>只有高内聚才能低耦合；契约编程，提效赋能；
+                            <h3>1️⃣：每一层都需要校验</h3>
+                            <h3>2️⃣：无营养、臃肿代码过多，实为垃圾代码</h3>
+                            <h3>3️⃣：积重难返，容易积累技术债</h3>
+                        </div>
+                        <div class="demo-container">
+                            <div class="border-r1 animated" data-class="zoomInDown" data-delay="20s">
+                                验证逻辑和业务逻辑分离，代码清晰；<br/>只有高内聚才能低耦合；
                             </div>
                         </div>
                         <div class="img-container">
@@ -71,19 +74,59 @@
                 <!-- four-->
                 <div class="row marginb">
                     <div class="col-sm-8 subject animated" data-class="pulse" data-delay="1s">
-                        <h1>二、什么是Jakarta Bean Validation？<span class="dot-right"></span></h1>
+                        <h1>二、契约编程，提效赋能<span class="dot-right"></span></h1>
+                    </div>
+                </div>
+                <div class="demo">
+                    <div class="demo__close-menu"></div>
+                    <div class="demo__section demo__section-1 active" data-section="1">
+                        <div class="demo-container">
+                            <h3>1️⃣：提供方履行义务，使用方才有权利</h3>
+                            <h3>2️⃣：明确方法之界限，展示声明式规则</h3>
+                            <h3>3️⃣：契约遵守在于双方，契约损毁的唯一原因理应只有：程序bug</h3>
+                            <h3>4️⃣：契约式编程 > 防御式编程</h3>
+                        </div>
+                        <div class="demo-container">
+                            <div class="border-r1 animated" data-class="zoomInDown" data-delay="20s">
+                                契约编程，无人理会；防御编程，惨不忍睹；难道它是乌托邦？<br/>
+                                契约编程让每个人对自己写的代码负责，辅以防御式编程才是平衡的艺术
+                            </div>
+                        </div>
+                        <div class="img-container">
+                            <div class="img-block" style="margin-left: -23%;
+    position: absolute;"><img src="img/qiyue-01.png"/></div>
+                            <div class="img-block" style="    margin-left: 20%;
+    position: absolute;"><img src="img/qiyue-02.png"/></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide slide--5">
+            <div class="slide__darkbg slide--5__darkbg"></div>
+            <div class="container-fluid">
+                <!-- four-->
+                <div class="row marginb">
+                    <div class="col-sm-8 subject animated" data-class="pulse" data-delay="1s">
+                        <h1>三、晚期大众，接受度高<span class="dot-right"></span></h1>
                     </div>
                 </div>
                 <div class="demo">
                     <div class="demo__close-menu"></div>
                     <div class="demo__section demo__section-1 active" data-section="1">
                         <div class="demo__menu-btn"></div>
-                        <h2 class="demo__section-heading">1.why Jakarta？2018年3月Java EE移交给Eclipse基金会改名。2020.08.31发布Jakarta EE 9</h2>
+                        <h2 class="demo__section-heading">Java按技术采用生命周期分为：</h2>
                         <div class="demo-container">
-                            <h2>2、JSR303 Bean Validation 1.0。支持Java Bean校验</h2>
-                            <h3>3、JSR349 Bean validation 1.1。支持方法参数校验</h3>
-                            <h4 style="margin-top: 50px">4、JSR380 Bean Validation 2.0。支持容器内校验，新增注解</h4>
-                            <div class="text-s animated" data-class="shake" data-delay="10s">Demo</div>
+                            <h3>1️⃣：创新者。勇敢的先行者，推动创新，如OpenJDK、Java14、TiDB等</h3>
+                            <h3>2️⃣：早期采用者。引领时尚，享受新技术红利，如KOL（Oracle、IBM、阿里巴巴）等</h3>
+                            <h3>3️⃣：早期大众。相对愿意接受颠覆和变革，如Kotlin、Java 11等</h3>
+                            <h3>4️⃣：晚期大众。Java8、SB、SC、Dubbo、K8S、Jakarta EE各种技术等</h3>
+                        </div>
+                        <div class="demo-container">
+                            <div class="border-r1 animated" data-class="zoomInDown" data-delay="20s">
+                                一般的公司只会使用晚期大众技术，因为业务型公司，<span style="font-weight: bolder;">稳定压倒一切</span><br/>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -92,7 +135,7 @@
     </div>
 
     <!--页码-->
-    <span class="page">1/7</span>
+    <span class="page">1/5</span>
 </div>
 
 <script type="text/javascript" src="js/jquery-2.1.4.js"></script>
@@ -104,7 +147,7 @@
         var animSpd = 1000; //速度
         var curSlide = 1;     //初始
         var animation = false;   //滚动标志
-        var numOfCities = 4;   //页面个数
+        var numOfCities = 5;   //页面个数
 
         //标记防止连续滚动
         function flag() {

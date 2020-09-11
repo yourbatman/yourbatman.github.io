@@ -2,7 +2,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>FeignClient和MapperScan</title>
+    <title>Spring校验被BV救赎？</title>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/animate.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
@@ -16,8 +16,8 @@
             <div class="slide__darkbg slide--1__darkbg"></div>
             <div class="container-fluid">
                 <!-- one -->
-                <div class="m-center fz-lg">FeignClient
-                    <p style="font-size: 30px;text-align: center">和MapperScan</p>
+                <div class="m-center fz-lg" style="font-size: 70px;">Spring校验
+                    <p style="font-size: 30px;text-align: center">被BV救赎？</p>
                 </div>
             </div>
         </div>
@@ -27,12 +27,9 @@
             <div class="container-fluid">
                 <div class="m-center fz-md">
                     <ul class="items">
-                        <li class="animated" data-class="fadeInRight" data-delay="1s">1.FeignClient引起的Controller
-                            URL重名导致启动失败问题
-                        </li>
-                        <li class="animated" data-class="fadeInRight" data-delay="2s">2.手动使用FeignClient</li>
+                        <li class="animated" data-class="fadeInRight" data-delay="1s">1. Spring的“3C”战略</li>
                         <li class="animated" data-class="fadeInRight" data-delay="3s">
-                            <font color="red">3. 使用Feign的正确姿势</font>
+                            <font color="red" style="font-weight: bolder">2. 过轻的设计 + 过重的设计</font>
                         </li>
                     </ul>
                 </div>
@@ -40,24 +37,62 @@
         </div>
 
         <div class="slide slide--3">
-            <div class="slide__darkbg slide--2__darkbg"></div>
+            <div class="slide__darkbg slide--3__darkbg"></div>
             <div class="container-fluid">
-                <div class="m-center fz-md">
-                    <ul class="items">
-                        <li class="animated" data-class="fadeInRight" data-delay="1s">1.MapperScan基本原理
-                        </li>
-                        <li class="animated" data-class="fadeInRight" data-delay="2s">2.MapperScan禁止使用通配符</li>
-                        <li class="animated" data-class="fadeInRight" data-delay="3s">
-                            <font color="red">3. @MapperScan or @Mapper？</font>
-                        </li>
-                    </ul>
+                <!-- three -->
+                <div class="row marginb">
+                    <div class="col-sm-8 subject animated" data-class="pulse" data-delay="1s">
+                        <h1>1. Spring的“3C”战略<span class="dot-right"></span></h1>
+                    </div>
+                </div>
+                <div class="demo">
+                    <div class="demo__close-menu"></div>
+                    <div class="demo__section demo__section-1 active" data-section="1">
+                        <div class="demo-container">
+                            <h3>1️⃣：战略上被高估，战术上被低估</h3>
+                            <h3>2️⃣：3C：抄袭，超越，<span style="color: moccasin;">潮流</span></h3>
+                            <h3>3️⃣：成功：web、异步、AOP、事务、Data、JPA等等，失败：校验</h3>
+                        </div>
+                        <div class="img-container" style="margin-top: 5%;">
+                            <div class="img-block" style="margin-left: -23%;
+    position: absolute;"><img style="max-height: 200px;" src="img/3c-01.jfif"/></div>
+                            <div class="img-block" style="margin-left: 20%;
+    position: absolute;"><img style="max-height: 200px;" src="img/3C-02.jfif"/></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide slide--4">
+            <div class="slide__darkbg slide--4__darkbg"></div>
+            <div class="container-fluid">
+                <!-- four-->
+                <div class="row marginb">
+                    <div class="col-sm-8 subject animated" data-class="pulse" data-delay="1s">
+                        <h1>二、过轻的设计 + 过重的设计<span class="dot-right"></span></h1>
+                    </div>
+                </div>
+                <div class="demo">
+                    <div class="demo__close-menu"></div>
+                    <div class="demo__section demo__section-1 active" data-section="1">
+                        <div class="demo-container">
+                            <h3>1️⃣：过轻的org.springframework.validation.Validator，过去式的校验方式且四不像</h3>
+                            <h3>2️⃣：过重的org.springframework.validation.Errors，复杂得不会使用</h3>
+                            <h3>3️⃣：使用自己擅长的AOP + BV深度整合完成救赎</h3>
+                        </div>
+                        <div class="img-container">
+                            <div class="img-block" style="margin-left: -23%;
+    position: absolute;"><img src="img/self.jpg"/></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <!--页码-->
-    <span class="page">1/3</span>
+    <span class="page">1/4</span>
 </div>
 
 <script type="text/javascript" src="js/jquery-2.1.4.js"></script>
@@ -69,7 +104,7 @@
         var animSpd = 1000; //速度
         var curSlide = 1;     //初始
         var animation = false;   //滚动标志
-        var numOfCities = 3;   //页面个数
+        var numOfCities = 4;   //页面个数
 
         //标记防止连续滚动
         function flag() {

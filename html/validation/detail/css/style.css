@@ -2,7 +2,7 @@ html { box-sizing: border-box; font-family: "microsoft yahei"}
 *, *:before, *:after { box-sizing: inherit; margin: 0; padding: 0; }
 body { background-color: #000; overflow: hidden;color: #fff;}
 ul{list-style: none;}
-.m-container { background: #000 url("source/html/validationation/detail/img/bg.jpg") center center no-repeat;  position: relative; height: 100vh; overflow: hidden;  }
+.m-container { background: #000 url("../img/bg.jpg") center center no-repeat;  position: relative; height: 100vh; overflow: hidden;  }
 .slider { position: relative; height: 100%; -webkit-transform: translate3d(0, 0, 0); transform: translate3d(0, 0, 0); will-change: transform; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
 .slider.animation {-webkit-transition: -webkit-transform 750ms ease-in-out; transition: -webkit-transform 750ms ease-in-out; transition: transform 750ms ease-in-out; transition: transform 750ms ease-in-out, -webkit-transform 750ms ease-in-out; }
 .slider.animation .slide__darkbg { -webkit-transition: -webkit-transform 750ms ease-in-out; transition: -webkit-transform 750ms ease-in-out; transition: transform 750ms ease-in-out; transition: transform 750ms ease-in-out, -webkit-transform 750ms ease-in-out; }
@@ -18,25 +18,25 @@ ul{list-style: none;}
 .slide--9 { left: 800%; }
 .slide--10 { left: 900%; }
 .slide__darkbg { position: absolute; width: 100%; height: 100%; top: 0; left: 0; -webkit-transform: translate3d(0, 0, 0); transform: translate3d(0, 0, 0); will-change: transform; }
-.slide--1__darkbg { left: 0%; background: url("source/html/validationation/detail/img/bg1.jpg") center center no-repeat; background-size: cover; background-position: 0px center, 0px center; -webkit-transform: translate3d(0, 0, 0); transform: translate3d(0, 0, 0); will-change: transform; }
+.slide--1__darkbg { left: 0%; background: url("../img/bg1.jpg") center center no-repeat; background-size: cover; background-position: 0px center, 0px center; -webkit-transform: translate3d(0, 0, 0); transform: translate3d(0, 0, 0); will-change: transform; }
 .slide--1__darkbg:after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(11, 15, 39, 0.83); }
-.slide--2__darkbg { left: -50%; background: url("source/html/validationation/detail/img/bg2.jpg") center center no-repeat; background-size: cover; background-position: 0px center, 0px center; -webkit-transform: translate3d(0, 0, 0); transform: translate3d(0, 0, 0); will-change: transform; }
+.slide--2__darkbg { left: -50%; background: url("../img/bg2.jpg") center center no-repeat; background-size: cover; background-position: 0px center, 0px center; -webkit-transform: translate3d(0, 0, 0); transform: translate3d(0, 0, 0); will-change: transform; }
 .slide--2__darkbg:after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(11, 15, 39, 0.83); }
-.slide--3__darkbg { left: -100%; background: url("source/html/validationation/detail/img/bg3.jpg") center center no-repeat; background-size: cover; background-position: 0px center, 0px center; -webkit-transform: translate3d(0, 0, 0); transform: translate3d(0, 0, 0); will-change: transform; }
+.slide--3__darkbg { left: -100%; background: url("../img/bg3.jpg") center center no-repeat; background-size: cover; background-position: 0px center, 0px center; -webkit-transform: translate3d(0, 0, 0); transform: translate3d(0, 0, 0); will-change: transform; }
 .slide--3__darkbg:after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(11, 15, 39, 0.83); }
-.slide--4__darkbg { left: -150%; background: url("source/html/validationation/detail/img/bg4.jpg") center center no-repeat; background-size: cover; background-position: 0px center, 0px center; -webkit-transform: translate3d(0, 0, 0); transform: translate3d(0, 0, 0); will-change: transform; }
+.slide--4__darkbg { left: -150%; background: url("../img/bg4.jpg") center center no-repeat; background-size: cover; background-position: 0px center, 0px center; -webkit-transform: translate3d(0, 0, 0); transform: translate3d(0, 0, 0); will-change: transform; }
 .slide--4__darkbg:after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(11, 15, 39, 0.83); }
-.slide--5__darkbg { left: -200%; background: url("source/html/validationation/detail/img/bg5.jpg") center center no-repeat; background-size: cover; background-position: 0px center, 0px center; -webkit-transform: translate3d(0, 0, 0); transform: translate3d(0, 0, 0); will-change: transform; }
+.slide--5__darkbg { left: -200%; background: url("../img/bg5.jpg") center center no-repeat; background-size: cover; background-position: 0px center, 0px center; -webkit-transform: translate3d(0, 0, 0); transform: translate3d(0, 0, 0); will-change: transform; }
 .slide--5__darkbg:after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(11, 15, 39, 0.83); }
-.slide--6__darkbg { left: -250%; background: url("source/html/validationation/detail/img/bg6.jpg") center center no-repeat; background-size: cover; background-position: 0px center, 0px center; -webkit-transform: translate3d(0, 0, 0); transform: translate3d(0, 0, 0); will-change: transform; }
+.slide--6__darkbg { left: -250%; background: url("../img/bg6.jpg") center center no-repeat; background-size: cover; background-position: 0px center, 0px center; -webkit-transform: translate3d(0, 0, 0); transform: translate3d(0, 0, 0); will-change: transform; }
 .slide--6__darkbg:after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(11, 15, 39, 0.83); }
-.slide--7__darkbg { left: -300%; background: url("source/html/validationation/detail/img/bg7.jpg") center center no-repeat; background-size: cover; background-position: 0px center, 0px center; -webkit-transform: translate3d(0, 0, 0); transform: translate3d(0, 0, 0); will-change: transform; }
+.slide--7__darkbg { left: -300%; background: url("../img/bg7.jpg") center center no-repeat; background-size: cover; background-position: 0px center, 0px center; -webkit-transform: translate3d(0, 0, 0); transform: translate3d(0, 0, 0); will-change: transform; }
 .slide--7__darkbg:after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(11, 15, 39, 0.83); }
-.slide--8__darkbg { left: -350%; background: url("source/html/validationation/detail/img/bg8.jpg") center center no-repeat; background-size: cover; background-position: 0px center, 0px center; -webkit-transform: translate3d(0, 0, 0); transform: translate3d(0, 0, 0); will-change: transform; }
+.slide--8__darkbg { left: -350%; background: url("../img/bg8.jpg") center center no-repeat; background-size: cover; background-position: 0px center, 0px center; -webkit-transform: translate3d(0, 0, 0); transform: translate3d(0, 0, 0); will-change: transform; }
 .slide--8__darkbg:after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(11, 15, 39, 0.83); }
-.slide--9__darkbg { left: -400%; background: url("source/html/validationation/detail/img/bg9.jpg") center center no-repeat; background-size: cover; background-position: 0px center, 0px center; -webkit-transform: translate3d(0, 0, 0); transform: translate3d(0, 0, 0); will-change: transform; }
+.slide--9__darkbg { left: -400%; background: url("../img/bg9.jpg") center center no-repeat; background-size: cover; background-position: 0px center, 0px center; -webkit-transform: translate3d(0, 0, 0); transform: translate3d(0, 0, 0); will-change: transform; }
 .slide--9__darkbg:after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(11, 15, 39, 0.83); }
-.slide--10__darkbg { left: -450%; background: url("source/html/validationation/detail/img/bg10.jpg") center center no-repeat; background-size: cover; background-position: 0px center, 0px center; -webkit-transform: translate3d(0, 0, 0); transform: translate3d(0, 0, 0); will-change: transform; }
+.slide--10__darkbg { left: -450%; background: url("../img/bg10.jpg") center center no-repeat; background-size: cover; background-position: 0px center, 0px center; -webkit-transform: translate3d(0, 0, 0); transform: translate3d(0, 0, 0); will-change: transform; }
 .slide--10__darkbg:after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(11, 15, 39, 0.83); }
 
 
