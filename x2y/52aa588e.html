@@ -24,60 +24,30 @@
     var CONFIG = {"hostname":"www.yourbatman.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},"motion":{"enable":false,"async":true,"transition":{"post_block":"flipBounceYIn","post_header":"flipXIn","post_body":"flipBounceXIn","coll_header":"expandIn","sidebar":"shrinkIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="来自一个大龄程序员的坎坷职业生涯：作者万字自述">
+  <meta name="description" content="你发任你发，我用Java8。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="程序人生 | 春风得意马蹄疾，一日看尽长安花">
-<meta property="og:url" content="https://www.yourbatman.cn/x2y/f3891d18.html">
+<meta property="og:title" content="JDK15正式发布，划时代的ZGC同时宣布转正">
+<meta property="og:url" content="https://www.yourbatman.cn/x2y/52aa588e.html">
 <meta property="og:site_name" content="BAT的乌托邦">
-<meta property="og:description" content="来自一个大龄程序员的坎坷职业生涯：作者万字自述">
+<meta property="og:description" content="你发任你发，我用Java8。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200501112754274.gif#x200">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200501152235624.gif#x200">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200501153842562.png#x200">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200503075759424.png#x200">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200501235156545.png#x240">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200501163855811.png#x140">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200501163456824.png#x190">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/2020050116575085.png#x200">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200502162941843.png#x200">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200502083058268.jpg#x240">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200502083201660.png#x240">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200502084107913.png#x240">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200502085016530.png#x120">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200502090138416.png#x140">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200502090045791.png#x140">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200502092317430.png#x180">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/2020050209263857.png#x180">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200502093634269.png#x180">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200502094312405.png#x180">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200502094615186.png#x220">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200502095427946.gif#x200">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200501213536411.png#x130">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200501212324861.png#x70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200501214929958.png#x200">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200501194859280.png#x200">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200501191907957.png#x60">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200501200208879.png#x140">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200502170253871.png#x240">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200502170423795.png#x160">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200502170525951.png#x160">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200502170617912.png#x160">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200502202004133.jpg#x160">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200502153624653.png#x200">
-<meta property="article:published_time" content="2020-05-11T03:00:00.000Z">
-<meta property="article:modified_time" content="2020-07-28T04:28:22.018Z">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200916140714904.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200916142447336.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200916141534643.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200916143406758.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200916180320241.png#pic_center">
+<meta property="article:published_time" content="2020-09-17T03:54:27.000Z">
+<meta property="article:modified_time" content="2020-09-17T03:56:34.064Z">
 <meta property="article:author" content="A哥(YourBatman)">
 <meta property="article:tag" content="BAT的乌托邦">
 <meta property="article:tag" content="A哥">
 <meta property="article:tag" content="YourBatman">
-<meta property="article:tag" content="大龄程序员">
-<meta property="article:tag" content="梦幻西游">
-<meta property="article:tag" content="Java">
-<meta property="article:tag" content="传智播客">
+<meta property="article:tag" content="JDK15">
+<meta property="article:tag" content="ZGC">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20200501112754274.gif#x200">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20200916140714904.png#pic_center">
 
-<link rel="canonical" href="https://www.yourbatman.cn/x2y/f3891d18.html">
+<link rel="canonical" href="https://www.yourbatman.cn/x2y/52aa588e.html">
 
 
 <script id="page-configurations">
@@ -90,7 +60,7 @@
   };
 </script>
 
-  <title>程序人生 | 春风得意马蹄疾，一日看尽长安花 | BAT的乌托邦</title>
+  <title>JDK15正式发布，划时代的ZGC同时宣布转正 | BAT的乌托邦</title>
   
 
 
@@ -272,7 +242,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.yourbatman.cn/x2y/f3891d18.html">
+    <link itemprop="mainEntityOfPage" href="https://www.yourbatman.cn/x2y/52aa588e.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://img-blog.csdnimg.cn/20200511100304592.jpg">
@@ -285,7 +255,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          程序人生 | 春风得意马蹄疾，一日看尽长安花
+          JDK15正式发布，划时代的ZGC同时宣布转正
         </h1>
 
         <div class="post-meta">
@@ -300,7 +270,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-05-11 11:00:00" itemprop="dateCreated datePublished" datetime="2020-05-11T11:00:00+08:00">2020-05-11</time>
+              <time title="创建时间：2020-09-17 11:54:27" itemprop="dateCreated datePublished" datetime="2020-09-17T11:54:27+08:00">2020-09-17</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -308,12 +278,12 @@
               </span>
               <span class="post-meta-item-text">收录于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F/" itemprop="url" rel="index"><span itemprop="name">程序人生</span></a>
+                  <a href="/categories/A%E5%93%A5%E5%AD%A6Java/" itemprop="url" rel="index"><span itemprop="name">A哥学Java</span></a>
                 </span>
             </span>
 
           
-            <span id="/x2y/f3891d18.html" class="post-meta-item leancloud_visitors" data-flag-title="程序人生 | 春风得意马蹄疾，一日看尽长安花" title="阅读次数">
+            <span id="/x2y/52aa588e.html" class="post-meta-item leancloud_visitors" data-flag-title="JDK15正式发布，划时代的ZGC同时宣布转正" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -328,8 +298,8 @@
       </span>
       <span class="post-meta-item-text">评论数：</span>
     
-    <a title="valine" href="/x2y/f3891d18.html#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/x2y/f3891d18.html" itemprop="commentCount"></span>
+    <a title="valine" href="/x2y/52aa588e.html#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/x2y/52aa588e.html" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -342,14 +312,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>8.4k</span>
+              <span>5.8k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>8 分钟</span>
+              <span>5 分钟</span>
             </span>
 
           <!-- 本文作者 -->
@@ -373,166 +343,102 @@
 
       
         <blockquote>
-<p>当大潮退去，才知道谁在裸泳。<br><strong>作者</strong>：A哥（YourBatman）<br><strong>公众号</strong>：BAT的乌托邦（ID：BAT-utopia）<br><strong>文末是否有彩蛋</strong>：有</p>
+<p>你发任你发，我用Java8。本文已被 <a href="https://www.yourbatman.cn"><strong>https://www.yourbatman.cn</strong></a> 收录，里面一并有Spring技术栈、MyBatis、JVM、中间件等小而美的<strong>专栏</strong>供以免费学习。关注公众号【<strong>BAT的乌托邦</strong>】逐个击破，深入掌握，拒绝浅尝辄止。</p>
 </blockquote>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>各位小伙伴大家好，我是A哥，一个前25年还不会写Hallo World的半残程序猿。也许你看到这个介绍心里一阵美滋滋：<strong>卧槽，终于有一个不是大佬（话外音：并不优秀）的人可以关注了</strong>，一下子阳光了起来有木有。</p>
+<p><img data-src="https://img-blog.csdnimg.cn/20200916140714904.png#pic_center" alt=""></p>
+<h1 id="✍前言"><a href="#✍前言" class="headerlink" title="✍前言"></a>✍前言</h1><p>2020年9月15日，JDK15正式发布，可谓如约而至。按照Java SE的发展路线图，JDK14自此停止更新。值得注意的是JDK15并非<strong>LTS</strong>版本，Oracle官方对Java SE的支持路线图如下：<br><img data-src="https://img-blog.csdnimg.cn/20200916142447336.png#pic_center" alt=""><br>JDK8的扩展支持时间超过了JDK11，Oracle你是认真的吗？开个玩笑~</p>
+<p>那么自Java11之后，哪个版本才是LTS版本呢？Oracle官方并没给出具体参考路线图，但可参考OpenJDK的这张：<br><img data-src="https://img-blog.csdnimg.cn/20200916141534643.png#pic_center" alt=""><br>可以看到<strong>JDK17</strong>将是下一个LTS版本，预计发版日期是2021年9月份。当然喽这只是OpenJDK的发版线路图，并不代表Oracle官方，因此仅供参考，不过一般八九不离十。</p>
 <blockquote>
-<p>啊，问我多大了？反正是大龄程序员一枚没跑了😁 </p>
+<p>小贴士：OpenJDK和Oracle JDK自从JDK11后，就共享了绝大部分代码了，节奏基本保持一致。</p>
 </blockquote>
-<p>近期，在我朋友圈看了不下5篇的“个人介绍”文章，看完之后我每每只能附上本就匮乏的赞美之词：666、牛逼牛逼、大佬带带我……每看完一篇，我的心是这样的：</p>
-<p><img data-src="https://img-blog.csdnimg.cn/20200501112754274.gif#x200" alt=""><br>24岁买房，25岁年薪50万+，26岁孩子可以帮忙打酱油……有些人过着开挂式人生，而有些人也过着“开挂式人生”~</p>
+<p>从JDK9之后，Oracle采用了新的发布周期：每6个月发布一个版本，每3年发布一个LTS版本。JDK14是继JDK9之后发布的第四个版本， 该版本为非LTS版本，<strong>最新的LTS版本为JDK11</strong>。因为是小鹿快跑，快速迭代，因此此处解释下这两个词：孵化器模块（Incubator）和预览特性（Preview）。</p>
+<h3 id="孵化器模块（孵化版-实验版）"><a href="#孵化器模块（孵化版-实验版）" class="headerlink" title="孵化器模块（孵化版/实验版）"></a>孵化器模块（孵化版/实验版）</h3><p>尚未定稿的API/工具，主要用于从Java社区收集使用反馈，稳定性无保障，后期有较大可能性移除</p>
+<h3 id="预览特性（预览版）"><a href="#预览特性（预览版）" class="headerlink" title="预览特性（预览版）"></a>预览特性（预览版）</h3><p>规格已成型，实现已确定，但还未最终定稿。这些特性还是存在被移除的可能性，但一般来说最后都会被固定下来。</p>
+<h1 id="✍正文"><a href="#✍正文" class="headerlink" title="✍正文"></a>✍正文</h1><p>JDK15是Java SE平台的第15个版本，由<strong>JSR 390</strong>在Java社区进程中指定。</p>
 <blockquote>
-<p>画外音：我们同样都有腰间盘，为何大佬们如此突出呢？得看看医生了呀😄</p>
+<p>OpenJDK 15是9-15发布的，Oracle同步跟上。其它厂商的对应JDK版本也会随后跟上</p>
 </blockquote>
-<p><img data-src="https://img-blog.csdnimg.cn/20200501152235624.gif#x200" alt=""><br>这就是强者的世界，大多数人（那必须包括我啊）所向往的世界。人生是一个漫长的过程，我们怀有太多的期望，亦会遇到太多的失望，但请记住：<strong>烧不死的鸟才是火凤凰，烧死的都成烤乳鸽了</strong>。爱因斯坦告诉我们：成功 = 99%汗水 + 1%天赋，但是你活到现在或许才发现，那1%的天赋才是至关重要的。所以不要一味地模仿，因为大多数的“成功”并不可复制。</p>
-<p>我曲折的人生经验告诉我：听马云如何解决问题，如何应对困难对你不会有任何帮助，因为级别差得太多，不具备效仿的意义。只有身边的人和事，说白了就是和你Level等级相差无几的人才能促使你进步。如果你觉得那些开挂人生的大佬给你压力，那么就关注我吧，看完我的个人介绍，会发现我是来给你送安慰的，<strong>因为你大概率比我优秀得多得多</strong>。</p>
-<p>人生已经很艰难，对自己好点，别压力过大，<strong>毕竟活得长，胜算才最大</strong>，比如想想司马懿。所以呀，咱们一起做个技术人，产生共鸣；一起做个俗人，贪财好色。</p>
-<hr>
-<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>我的人生比较曲折，总体上分为三个阶段介绍：</p>
+<p>该版本共提供14个新特性，通过这些JEP来表示，截图如下：<br><img data-src="https://img-blog.csdnimg.cn/20200916143406758.png#pic_center" alt=""><br>下面针对其中对开发者日常编程关系较大的特性拉出来解释，并给出对应的使用示例（其实就是JEP 378喽）。</p>
+<h2 id="JDK14新特性回顾"><a href="#JDK14新特性回顾" class="headerlink" title="JDK14新特性回顾"></a>JDK14新特性回顾</h2><p>老规矩，在进行JDK15的新特性介绍之前，先回顾下JDK14的主要特性有哪些。JDK 14于2020年3月17日发布。</p>
+<h3 id="一、Switch表达式"><a href="#一、Switch表达式" class="headerlink" title="一、Switch表达式"></a>一、Switch表达式</h3><p>新的Switch表达式其实早在JDK 12、13中都已存在了，但只是<strong>预览版</strong>，到了JDK 14就彻底变为稳定版了，可以放心商用。</p>
+<blockquote>
+<p>小贴士：预览版特性是有可能在后续版本中被移除的，但稳定版后几乎不可能被移除</p>
+</blockquote>
+<p>switch新的表达式有两个显著的特点：</p>
 <ul>
-<li><strong>1、贫苦大众 游戏人生</strong></li>
-<li><strong>2、迷茫大学 似梦年华</strong></li>
-<li><strong>3、凤凰涅槃 程序生涯</strong></li>
+<li>支持箭头表达式返回</li>
+<li>支持yield和return返回值。</li>
 </ul>
+<h4 id="1、箭头表达式返回"><a href="#1、箭头表达式返回" class="headerlink" title="1、箭头表达式返回"></a>1、箭头表达式返回</h4><p>JDK14之前写法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printLetterCount</span><span class="params">(DayOfWeek dayOfWeek)</span></span>&#123;</span><br><span class="line">    <span class="keyword">switch</span> (dayOfWeek) &#123;</span><br><span class="line">        <span class="keyword">case</span> MONDAY:</span><br><span class="line">        <span class="keyword">case</span> FRIDAY:</span><br><span class="line">        <span class="keyword">case</span> SUNDAY:</span><br><span class="line">            System.out.println(<span class="number">6</span>);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> TUESDAY:</span><br><span class="line">            System.out.println(<span class="number">7</span>);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> THURSDAY:</span><br><span class="line">        <span class="keyword">case</span> SATURDAY:</span><br><span class="line">            System.out.println(<span class="number">8</span>);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> WEDNESDAY:</span><br><span class="line">            System.out.println(<span class="number">9</span>);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>要点：break可千万别忘记写，否则就是个大bug，并且还比较<strong>隐蔽</strong>，定位起来稍显困难。</p>
+<p>JDK14等效的新写法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printLetterCount</span><span class="params">(DayOfWeek dayOfWeek)</span></span>&#123;</span><br><span class="line">    <span class="keyword">switch</span> (dayOfWeek) &#123;</span><br><span class="line">        <span class="keyword">case</span> MONDAY, FRIDAY, SUNDAY -&gt; System.out.println(<span class="number">6</span>);</span><br><span class="line">        <span class="keyword">case</span> TUESDAY                -&gt; System.out.println(<span class="number">7</span>);</span><br><span class="line">        <span class="keyword">case</span> THURSDAY, SATURDAY     -&gt; System.out.println(<span class="number">8</span>);</span><br><span class="line">        <span class="keyword">case</span> WEDNESDAY              -&gt; System.out.println(<span class="number">9</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可明显看到新写法不需要一个个break了，从<strong>语法层面</strong>规避了我们犯错的可能性。</p>
+<h4 id="2、yield返回"><a href="#2、yield返回" class="headerlink" title="2、yield返回"></a>2、yield返回</h4><p>JDK14之前写法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getLetterCount</span><span class="params">(DayOfWeek dayOfWeek)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> letterCount;</span><br><span class="line">    <span class="keyword">switch</span> (dayOfWeek) &#123;</span><br><span class="line">        <span class="keyword">case</span> MONDAY:</span><br><span class="line">        <span class="keyword">case</span> FRIDAY:</span><br><span class="line">        <span class="keyword">case</span> SUNDAY:</span><br><span class="line">            letterCount = <span class="number">6</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> TUESDAY:</span><br><span class="line">            letterCount = <span class="number">7</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> THURSDAY:</span><br><span class="line">        <span class="keyword">case</span> SATURDAY:</span><br><span class="line">            letterCount = <span class="number">8</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> WEDNESDAY:</span><br><span class="line">            letterCount = <span class="number">9</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">"非法: "</span> + dayOfWeek);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> letterCount;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>JDK14等效的新写法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getLetterCount</span><span class="params">(DayOfWeek dayOfWeek)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">switch</span> (dayOfWeek) &#123;</span><br><span class="line">        <span class="keyword">case</span> MONDAY, FRIDAY, SUNDAY -&gt; <span class="number">6</span>;</span><br><span class="line">        <span class="keyword">case</span> TUESDAY                -&gt; <span class="number">7</span>;</span><br><span class="line">        <span class="keyword">case</span> THURSDAY, SATURDAY     -&gt; <span class="number">8</span>;</span><br><span class="line">        <span class="keyword">case</span> WEDNESDAY              -&gt; <span class="number">9</span>;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用箭头操作符操作效果立竿见影。当然，你还可以使用<code>yield</code>关键字返回：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getLetterCount</span><span class="params">(DayOfWeek dayOfWeek)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">switch</span> (dayOfWeek) &#123;</span><br><span class="line">        <span class="keyword">case</span> MONDAY  -&gt; <span class="number">6</span>;</span><br><span class="line">        <span class="keyword">default</span>      -&gt; &#123;</span><br><span class="line">            <span class="keyword">int</span> letterCount = dayOfWeek.toString().length();</span><br><span class="line">            yield letterCount;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="二、instanceof的模式匹配（预览）"><a href="#二、instanceof的模式匹配（预览）" class="headerlink" title="二、instanceof的模式匹配（预览）"></a>二、instanceof的模式匹配（预览）</h3><p>该功能在JDK14中处理<strong>预览版</strong>。</p>
+<p>JDK14之前写法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    Object o = <span class="string">"hello world"</span>;</span><br><span class="line">    <span class="keyword">if</span>(o <span class="keyword">instanceof</span> String )&#123;</span><br><span class="line">        String str = String<span class="class">.<span class="keyword">class</span>.<span class="title">cast</span>(<span class="title">o</span>)</span>;</span><br><span class="line">        System.out.println(str);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>JDK14等效的新写法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    Object o = <span class="string">"hello world"</span>;</span><br><span class="line">    <span class="comment">// 屁股里直接可写个变量名，不再需要强转了</span></span><br><span class="line">    <span class="keyword">if</span>(o <span class="keyword">instanceof</span> String str)&#123;</span><br><span class="line">        System.out.println(str);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">再如：</span><br><span class="line"><span class="keyword">if</span> (obj <span class="keyword">instanceof</span> String s &amp;&amp; s.length() &gt; <span class="number">5</span>) &#123;</span><br><span class="line">	s.contains(..)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果你运行时有如下错误：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">java: <span class="keyword">instanceof</span> 中的模式匹配 是预览功能，默认情况下禁用。</span><br><span class="line">  （请使用 --enable-preview 以启用 <span class="keyword">instanceof</span> 中的模式匹配）</span><br></pre></td></tr></table></figure>
+<p>那是因为此功能是<strong>预览特性</strong>，需要你主动开启，如下：<br><img data-src="https://img-blog.csdnimg.cn/20200916180320241.png#pic_center" alt=""><br>注意：此特性在<strong>JDK15</strong>中依旧为预览版。</p>
+<h3 id="三、实用的NullPointerException"><a href="#三、实用的NullPointerException" class="headerlink" title="三、实用的NullPointerException"></a>三、实用的NullPointerException</h3><p>略。</p>
+<h3 id="四、Record（预览）"><a href="#四、Record（预览）" class="headerlink" title="四、Record（预览）"></a>四、Record（预览）</h3><p>Java年纪太大，语法不够新潮，有时候确实太麻烦，因此有了Record的出现：干掉那些get/set、toString、equals等方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> record <span class="title">Person</span><span class="params">(String name,Integer age)</span> </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    Person person= <span class="keyword">new</span> Person(<span class="string">"YourBatman"</span>, <span class="number">18</span>);</span><br><span class="line">    System.out.println(person);</span><br><span class="line">    System.out.println(person.name());</span><br><span class="line">    System.out.println(person.age());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，结果打印：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Person[name=YourBatman, age=<span class="number">18</span>]</span><br><span class="line">YourBatman</span><br><span class="line"><span class="number">18</span></span><br></pre></td></tr></table></figure>
+<p>注意：此特性在<strong>JDK15</strong>中依旧为预览版。</p>
+<h3 id="五、文本块Text-Blocks（二次预览）"><a href="#五、文本块Text-Blocks（二次预览）" class="headerlink" title="五、文本块Text Blocks（二次预览）"></a>五、文本块Text Blocks（二次预览）</h3><p>这个特性可是非常好用，它属于二次预览：已在JDK 13预览过一次。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    String html = <span class="string">""</span><span class="string">"</span></span><br><span class="line"><span class="string">          &lt;html&gt;</span></span><br><span class="line"><span class="string">              &lt;body&gt;</span></span><br><span class="line"><span class="string">                  &lt;p&gt;hello world&lt;/p&gt;</span></span><br><span class="line"><span class="string">              &lt;/body&gt;</span></span><br><span class="line"><span class="string">          &lt;/html&gt;</span></span><br><span class="line"><span class="string">          "</span><span class="string">""</span>;</span><br><span class="line">    String query = <span class="string">""</span><span class="string">"</span></span><br><span class="line"><span class="string">           SELECT * from USER</span></span><br><span class="line"><span class="string">           WHERE `id` = 1</span></span><br><span class="line"><span class="string">           ORDER BY `id`, `name`;</span></span><br><span class="line"><span class="string">           "</span><span class="string">""</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在JDK13中，这种是<strong>有</strong>换行的。在JDK14中，可以加上一个符号让其不让换行：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    String query = <span class="string">""</span><span class="string">"</span></span><br><span class="line"><span class="string">           SELECT * from USER \</span></span><br><span class="line"><span class="string">           WHERE `id` = 1 \</span></span><br><span class="line"><span class="string">           ORDER BY `id`, `name`;\</span></span><br><span class="line"><span class="string">           "</span><span class="string">""</span>;</span><br><span class="line">    System.out.println(query);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，输出（可以看到展示为一行了）：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * from USER WHERE `id` = <span class="number">1</span> ORDER BY `id`, `name`;</span><br></pre></td></tr></table></figure>
+<p>注意：此特性在<strong>JDK15</strong>中已经为正式版。</p>
+<h3 id="六、删除CMS垃圾收集器"><a href="#六、删除CMS垃圾收集器" class="headerlink" title="六、删除CMS垃圾收集器"></a>六、删除CMS垃圾收集器</h3><p>这款著名的垃圾回收器从这个版本就彻底被删除了。JDK9开始使用G1作为<strong>默认</strong>的垃圾回收器（JDK11中ZGC开始崭露头角），就已经把CMS标记为过期了，在此版本正式删除。</p>
+<h3 id="七、ZGC垃圾回收器（实验）"><a href="#七、ZGC垃圾回收器（实验）" class="headerlink" title="七、ZGC垃圾回收器（实验）"></a>七、ZGC垃圾回收器（实验）</h3><p>革命性的ZGC：任意堆大小（TB级别）都能保证延迟在10ms以内，是以低延迟为首要目标的一款垃圾回收器。</p>
+<blockquote>
+<p>在JDK14之前，ZGC只能用于Linux上，现在也可使用在windows上了</p>
+</blockquote>
+<p>注意：此特性在<strong>JDK15</strong>中已经为正式版（JDK11开始出现）。</p>
 <hr>
-<h3 id="1、贫苦大众-游戏人生"><a href="#1、贫苦大众-游戏人生" class="headerlink" title="1、贫苦大众 游戏人生"></a>1、贫苦大众 游戏人生</h3><h4 id="1-1-家徒四壁-呱呱坠地"><a href="#1-1-家徒四壁-呱呱坠地" class="headerlink" title="1.1 家徒四壁 呱呱坠地"></a>1.1 家徒四壁 呱呱坠地</h4><p><img data-src="https://img-blog.csdnimg.cn/20200501153842562.png#x200" alt=""><br>这是我2019年春节爬到山顶拍摄的我家乡县城全景图：<strong>湖北省通山县</strong>。对你没看错，属于这次全国疫情最严重的地区湖北省的一个县。通山二字含义为：通通是山。环视整个中华大地，凡是这种地貌的省市/地区，一般都会这么形容他：远离闹市喧嚣，尽享静谧人生。</p>
-<blockquote>
-<p>话外音：你那山多树木多，空气非常的好呀，适合养身。经济嘛，不好意思，我有事先走了</p>
-</blockquote>
-<p>层层叠叠的山峰自然地“阻断”了交通，所以同样的一瓶可乐，在武汉市（平原地区）卖3块钱，但在我们县买就是要贵5毛钱，你说气不气。好在去年（2019年），我们县脱贫啦，在政策帮助下顺利“摘帽”（此处应有掌声）：</p>
-<p><img data-src="https://img-blog.csdnimg.cn/20200503075759424.png#x200" alt=""></p>
-<p>至于我的出生嘛，建议携带纸巾阅读（皮一下~）。我出生在通山县一个地地道道的农村家庭，怎么形容家境呢？当时也不可能有照片嘛，费好大力气找来一张2004年的老照片（分辨率低，不清晰），便可大概逆推出来当时喽：</p>
-<p><img data-src="https://img-blog.csdnimg.cn/20200501235156545.png#x240" alt=""><br>说到了这，我把一个深藏已久的小秘密也公布了哈：<strong>我是一个早产儿，还不满8个月</strong>便因为我妈妈挺着大肚子还坚持下田干农活，然后，然后，我就意外的提前出来了。</p>
-<blockquote>
-<p>你可能会好奇：怀孕7个多月还下农田干粗活？？？如果不是生活所迫，谁愿默默承受！</p>
-</blockquote>
-<p>早产其实并不可怕，只是在当时的条件下，提前这么长时间早产的，只会有一个结果：孩子没了。可别想着说去医院生，没有的事，因为那里只属于有钱人。最终呢，在几乎没人看好的情况下，我以小强般顽强的生命力挺了过来，这不，现在还坐在电脑前写公众号着嘛。</p>
-<p>这么算来，我也是<strong>度过生死劫</strong>的人哈，会不会大难不死必有后福呢？这我不知道，但我知道没什么能比健康活着更重要的事了，若用这种心态去生活，岂不处处皆阳光麽。</p>
-<blockquote>
-<p>Tips：若后福已至，那当属我已娶得娇妻一枚喽</p>
-</blockquote>
-<hr>
-<h4 id="1-2-被耽误的高中-回不去的青春"><a href="#1-2-被耽误的高中-回不去的青春" class="headerlink" title="1.2 被耽误的高中 回不去的青春"></a>1.2 被耽误的高中 回不去的青春</h4><p><img data-src="https://img-blog.csdnimg.cn/20200501163855811.png#x140" alt=""><br><img data-src="https://img-blog.csdnimg.cn/20200501163456824.png#x190" alt=""><br>听着《长寿村》这个背乐敲打这段文字，单曲循环，泪水打湿了眼眶，<strong>像青春致敬，还有几个人会像我这样怀念梦幻吗</strong>？</p>
-<p>上高中，来到了县城上学，开始了住校生活。第一次接触电脑，第一次知道网吧长啥样，第一次知道了上网和电网是有区别的……<br>可能和你们不一样，我的上网不是从学着使用word、excel、ppt开始的，而是一切起源于<strong>看片</strong>（懂的自然懂，不懂的不用懂），所以上高中后我也就有了第一次（别想歪了）……</p>
-<p>到县城上学因为是住校，所以每周有60元生活费（人生首次有如此多自由支配的钱）。但因为迷恋上了网络游戏，所以高中生活很长一段时间每天只吃1-2餐。原因很简单嘛，钱是固定的，上网多了，吃饭自然就少了。高中阶段是我长身体的最关键时期，但由于经常“废寝忘食”，所以导致了我现在身高并不高，成了我最痛的回忆。</p>
-<blockquote>
-<p>别光顾吃瓜哈，我还是没拉男性平均身高的后退滴​</p>
-</blockquote>
-<p>很快，接触到<strong>梦幻西游</strong>这款游戏：申请一个号，从0开始。<strong>人物角色：龙太子，门派：龙宫</strong>。没错，就是他：</p>
-<p><img data-src="https://img-blog.csdnimg.cn/2020050116575085.png#x200" alt=""><br>首次接触游戏并无经验，所以昵称取名为<strong>光能英雄</strong>，在那个非主流文化盛行的年代，这个名字简直土到掉渣。正因为这个名字，被玩伴们硬生生的“嘲笑”好几年，哪怕现在聊起来还不忘调侃我的这个取名处女秀。</p>
-<blockquote>
-<p>其实我本意是想取名为：<strong>光能使者</strong>（发现没，这个名字还是蛮高大上的嘛）。但是使者二字属于固定NPC，官方不让用，所以……</p>
-</blockquote>
-<p>还记得当时游戏没点了就偷家里钱去充点卡，明知会挨打的，还偏要去偷。花了30多块买了个<strong>将军令</strong>，别在裤腰带里每天带着，感觉非常吊的样子。梦幻西游可以窗口化、双开，所以每次通宵都是一边游戏一边看片（别想歪了，是正常电影），偶尔也挂机，挂着挂着就睡着了。如今再来回忆过去，时间真的过得太快了，好想停留在当初，不想长大！</p>
-<p>记忆很深是当时拜了一个师傅，我15级，她75级。那会没有微信更没有手机，每次只能中午偷跑出去网吧通过QQ跟师傅约个晚上通宵的时间，好让她带我做剧情任务、副本任务、整宿整宿的扫大雁塔、抓鬼……她带我的话自己经验是非常少的，基本属于纯帮忙的那种，那时候的人真好，真纯粹。印象特别深的是我过40级剧情的时候，师傅她刚满90级，带我过了3次都还没过去，并且她自己因打不赢还死了2次（死亡是有掉装备风险的），本以为当晚是没戏了。但让我特别惊喜的是：她半夜打电话把朋友叫醒，把朋友125级的登上来帮我过了，这件事现在回想起来好暖</p>
-<p>后来，我满60级了，师傅领着我去长安城国子监祭酒处，我出师了…….<br>再后来，我90级了，我也收了徒弟。师傅125级了，但是我俩一起做任务的机会越来越少了，偶尔在龙宫里能碰见就唠几句……<br>再再后来，师傅把她的号送给了我，而我也已经没有再继续玩下去的欲望了……</p>
-<p>虽十几年过去了，现在回味起来别有滋味。今天听着《长寿村》，泡了一会吧，看着吧友们的回复，感触良多。<strong>作为曾经国内最为流行的游戏</strong>，相信感同身受的人是可以蛮多的，因此顺道也分享一些吧友话给你吧：</p>
+<h2 id="JDK15新特性"><a href="#JDK15新特性" class="headerlink" title="JDK15新特性"></a>JDK15新特性</h2><p>有了JDK14新特性回顾做铺垫，再来了解JDK15的新特性就方便很多了。</p>
+<p>特别说明：运行JDK15需要IDEA 2020.2才能支持哦（JDK14要求IDEA 2020.1），然后关于IDEA 2020.2的使用教程（新特性），请移步我公众号前面发的这篇文章：<a href="https://mp.weixin.qq.com/s/8voJSbmcBbdfNUCUBIcKcA" target="_blank" rel="noopener">IntelliJ IDEA 2020.2正式发布，诸多亮点总有几款能助你提效</a></p>
+<h3 id="一、文本块Text-Blocks"><a href="#一、文本块Text-Blocks" class="headerlink" title="一、文本块Text Blocks"></a>一、文本块Text Blocks</h3><p>Text Blocks首次是在JDK 13中以预览功能出现的，然后在JDK 14中又预览了一次，终于在JDK 15中被确定下来，可放心使用了（使用示例请参考文上）。</p>
+<h3 id="二、ZGC转正"><a href="#二、ZGC转正" class="headerlink" title="二、ZGC转正"></a>二、ZGC转正</h3><p>ZGC是Java 11引入的新的垃圾收集器（JDK9以后默认的垃圾回收器是G1），经过了多个实验阶段，自此终于成为正式特性。</p>
+<p>ZGC是一个重新设计的并发的垃圾回收器，可以极大的提升GC的性能。支持任意堆大小而保持稳定的低延迟（10ms以内），性能非常可观。</p>
+<p>打开方式：使用-XX:+UseZGC命令行参数打开，相信不久的将来它必将成为<strong>默认的</strong>垃圾回收器。</p>
+<h3 id="三、Shenandoah转正"><a href="#三、Shenandoah转正" class="headerlink" title="三、Shenandoah转正"></a>三、Shenandoah转正</h3><p>怎么形容Shenandoah和ZGC的关系呢？异同点大概如下：</p>
 <ul>
-<li>每周日：12门派闯关、守军之争、英雄大会、长安保卫战、挑战首席大弟子，这些活动你都还熟悉吗？</li>
-<li>十几年前，那时候刚入梦幻，0级，到处跑，看到发光的圈圈（传送点），觉得好神奇，不知不觉就走到了沉船底下，进去后，竟不知道怎么走出来，后来是被海毛虫和巨蛙打死了，才回到建邺城的，因为等级太低，那时候不会自动升级，要手动升级。爱上梦幻，就是从那一刻开始的，但是现在太商业了，已经失去了当年的味道</li>
-<li>感觉好多回忆，现在已经是孩子妈了，还是很怀念</li>
-<li>长寿的配乐是最缠绵伤感的，十年前那时经常通宵抓鬼或者押镖累了过来长寿听着背乐站一站，遐想、发呆</li>
-<li>2012年之后就再也没玩过梦幻。之前玩了近八年。现在听着这音乐心里有种说不出的感觉</li>
-<li>……</li>
+<li>相同点：性能几乎可认为是相同的</li>
+<li><strong>不同点</strong>：ZGC是Oracle JDK的，根正苗红。而Shenandoah只存在于OpenJDK中，因此使用时需注意你的JDK版本</li>
 </ul>
-<p>被耽误的高中，回不去的青春。当初介绍我玩梦幻西游的小伙伴，我是该谢谢你呢，还是谢谢你呢？</p>
-<hr>
-<h3 id="2、迷茫大学-似梦年华"><a href="#2、迷茫大学-似梦年华" class="headerlink" title="2、迷茫大学 似梦年华"></a>2、迷茫大学 似梦年华</h3><h4 id="2-1-疲于奔命的大学四年"><a href="#2-1-疲于奔命的大学四年" class="headerlink" title="2.1 疲于奔命的大学四年"></a>2.1 疲于奔命的大学四年</h4><p><img data-src="https://img-blog.csdnimg.cn/20200502162941843.png#x200" alt=""></p>
-<p>还记得当时轰动中国、获得<strong>2009感动中国人物特别奖</strong>荣誉的“长江大学1024人链”感人事件吗？是的，它就出自这所英雄大学。</p>
-<p>整个高中阶段都被<strong>梦幻西游</strong>“耽误”了，自然就没有个好大学上喽。从全国排名上看，它绝对算不上一个很好的大学。和大学时期的你一样，在校时候没少骂过母校，但现在不会了，因为人生最美好的四年，都在这里度过。母校是什么？母校是我可以一天骂他一百次，但是不允许别人骂他一次的地方。</p>
+<p>打开方式：使用-XX:+UseShenandoahGC命令行参数打开。</p>
+<h3 id="四、删除Nashorn-JavaScript-Engine"><a href="#四、删除Nashorn-JavaScript-Engine" class="headerlink" title="四、删除Nashorn JavaScript Engine"></a>四、删除Nashorn JavaScript Engine</h3><p>Nashorn是在JDK提出的脚本执行引擎，早在JDK11就已经把它标记为过期了，JDK15完全移除。</p>
+<p>在JDK11中取以代之的是GraalVM。GraalVM是一个运行时平台，它支持Java和其他基于Java字节码的语言，但也支持其他语言，如JavaScript，Ruby，Python或LLVM。<strong>性能是Nashorn的2倍以上</strong>。</p>
+<h3 id="五、CharSequence新增isEmpty默认方法"><a href="#五、CharSequence新增isEmpty默认方法" class="headerlink" title="五、CharSequence新增isEmpty默认方法"></a>五、CharSequence新增isEmpty默认方法</h3><p>啥都不说，源码一看便知：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@since</span> <span class="number">15</span></span><br><span class="line"><span class="function"><span class="keyword">default</span> <span class="keyword">boolean</span> <span class="title">isEmpty</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.length() == <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>String实现了CharSequence接口的，这应该地球人都知道吧。</p>
+<h2 id="升级建议"><a href="#升级建议" class="headerlink" title="升级建议"></a>升级建议</h2><p>自己玩玩就行，毕竟不是LTS版本。</p>
+<p><strong>但是</strong>，虽然说仅限于自己玩玩就行，但不代表就没有关注的意义哈。还是那个道理，如果JDK12、13、14、15…都不关注些的话，到时候突然来个JDK17的LTS版本，接受起来就会稍显困难。</p>
+<h1 id="✍总结"><a href="#✍总结" class="headerlink" title="✍总结"></a>✍总结</h1><p>JDK15整体来看新特性方面并不算很亮眼，它主要是对之前版本<strong>预览特性</strong>的功能做了确定，如文本块、ZGC等，这么一来我们就可以放心大胆的使用啦。</p>
+<p>半年一次的发版速度真心学不动了，不过还好我有我的坚持：<strong>你发任你发，我用Java8。</strong></p>
 <blockquote>
-<p>话外音：耳边可容不得别人骂它，否则就拔刀吧</p>
+<p>公众号后台回复：JDK15，一键打包获取IDEA2020.2.2 + JDK15安装包（mac + windows）</p>
 </blockquote>
-<p>我的大学生涯，不可谓不“丰富多彩”：</p>
-<ul>
-<li>协会、社团、学生会</li>
-<li>创意设计大赛</li>
-<li>校园销售团队</li>
-<li>商学院招聘</li>
-<li>开餐馆</li>
-<li>全市最大圣诞节校园苹果鲜花销售</li>
-<li>全市最大暑期家教团（名校高分）</li>
-<li>……<br><img data-src="https://img-blog.csdnimg.cn/20200502083058268.jpg#x240" alt=""><br><img data-src="https://img-blog.csdnimg.cn/20200502083201660.png#x240" alt=""><br><img data-src="https://img-blog.csdnimg.cn/20200502084107913.png#x240" alt=""></li>
+<h5 id="✔推荐阅读："><a href="#✔推荐阅读：" class="headerlink" title="✔推荐阅读："></a>✔推荐阅读：</h5><ul>
+<li><a href="https://mp.weixin.qq.com/s/8voJSbmcBbdfNUCUBIcKcA" target="_blank" rel="noopener">IntelliJ IDEA 2020.2正式发布，诸多亮点总有几款能助你提效</a></li>
+<li><a href="https://mp.weixin.qq.com/s/ikI9c3XyR_czOSmsu6FLMw" target="_blank" rel="noopener">Spring Boot 2.3.0正式发布：优雅停机、配置文件位置通配符新特性一览</a></li>
+<li><a href="https://mp.weixin.qq.com/s/nb4oT02dlU4pxINZw9aLLw" target="_blank" rel="noopener">搞事情？Spring Boot今天一口气发布三个版本</a></li>
 </ul>
-<p>因为有了一群志同道合的伙伴，实现了很多学生时代的“梦想”：在大桥底下过夜、下雪天光膀子沿操场跑50圈、通宵KTV、以及在学校隔壁的四星级酒店开party……<strong>再多各自牛逼的时光，也比不上一起傻逼的岁月</strong>。</p>
-<hr>
-<h4 id="2-2-跌落深渊的毕业答辩"><a href="#2-2-跌落深渊的毕业答辩" class="headerlink" title="2.2 跌落深渊的毕业答辩"></a>2.2 跌落深渊的毕业答辩</h4><p>上面列出的很多条目，没有一条与学习/专业有关。我似乎是一个最分不清主次的学生，忘乎了学生最主要的职责其实是学业，大学期间我做了几乎你所有想干的事，<strong>除了学习</strong>。补考成为了我每年必做的事，60元一个学分，补考费在当时来说也算天价，每次缴得让我心痛。</p>
-<blockquote>
-<p>没有补考过的大学，不算完整的大学。我tm现在想问了：这是谁说的哪门子歪理论呢？尽霍霍我了😭</p>
-</blockquote>
-<p><img data-src="https://img-blog.csdnimg.cn/20200502085016530.png#x120" alt=""><br>但这还不是最痛的，和我的毕业比起来，补考只是小儿科。大四下学期准备毕业论文，我在某宝花了120块钱买了一篇，包售后的那种，结果首次答辩没有通过，参加二次答辩，结果。。。还是没给过</p>
-<p><img data-src="https://img-blog.csdnimg.cn/20200502090138416.png#x140" alt=""><br>面临着<strong>延迟毕业</strong>的危险，眼瞅着其他同学陆陆续续离开学校参加工作去了，心里暗自神伤，悔不当初。炎炎夏日，所有寝室里只剩下我和同班的另外一位“难友”。拿不到毕业证不能正常毕业，对人生的影响是极大的，那会承受的心里负担、压力乃至到现在拿来比较，都还没有什么事情可与之比拟。作为好学生的你，可能是永远无法体会到我当时的那种恐慌，这种gap就像：法海与爱。</p>
-<p>当然喽，庆幸的是结局是好的：没有延迟毕业，我如期毕业了。这底下的一波操作实在感人，这段黑历史这里就不公开了哈，有兴趣可以底部给我留言咱们促膝单聊~</p>
-<hr>
-<h4 id="2-3-百无一成的初出茅庐"><a href="#2-3-百无一成的初出茅庐" class="headerlink" title="2.3 百无一成的初出茅庐"></a>2.3 百无一成的初出茅庐</h4><p><img data-src="https://img-blog.csdnimg.cn/20200502090045791.png#x140" alt=""><br>这段路程，是我毕业之后的两年经历，最难的两年。期间大小换过5次工作，且都是那种被认为门槛最低，无技术含量的，如你所见：</p>
-<p><strong>大智慧炒股</strong>：北京。是的，你当时如果正在使用它看股票，看涨跌，或许你就接听过我给你打的电话</p>
-<p><img data-src="https://img-blog.csdnimg.cn/20200502092317430.png#x180" alt=""><br><strong>兴麟房产</strong>：宁夏银川。是的，就是你现在常常骂的“黑中介”中的一员。这份工作是我做的时间最长的，干了有近一年的时间。最让我值得回味的并非那些对大叔大妈的“忽悠”，也并非工作本身。而是在宁夏银川结识的一些朋友，那种豪气，那种爽快，那种喝大酒，非我们一般南方人所能比，期待我找个机会回去银川时再相聚。</p>
-<p><img data-src="https://img-blog.csdnimg.cn/2020050209263857.png#x180" alt=""><br><strong>奶茶店</strong>：湖北荆州。和朋友一起在荆州呆了一个多月，目的是在学校旁边盘个奶茶店，谈了几个并且考察了相关流程，但最后也搁浅了。这段时间一直蜗居在宾馆里，好在学校附近嘛，房费并不算贵</p>
-<p><img data-src="https://img-blog.csdnimg.cn/20200502093634269.png#x180" alt=""><br><strong>百度糯米</strong>：湖北武汉。公司听起来还不错，但干的就是最底层最累的LBS的活。说白了：打电话、陌拜、地推邀请商户入驻百度糯米提供团购。在这里我知道了餐饮利润没过50%就不要干餐饮、各行各业的毛利率水平、当然也见证了Robbin李老板当时说投资200亿到百度糯米到现在的啪啪啪打脸……</p>
-<p><img data-src="https://img-blog.csdnimg.cn/20200502094312405.png#x180" alt=""><br><strong>豪大大香鸡排</strong>：湖北武汉。加盟豪大大，我的鸡排梦</p>
-<p><img data-src="https://img-blog.csdnimg.cn/20200502094615186.png#x220" alt=""><br>以上，就是我毕业后整整2年的艰辛之路，用一事无成来形容都高估了自己。人在江湖飘，哪有不挨刀，这个阶段的我真可谓满目疮痍，被压死仅需最后一根稻草。</p>
-<hr>
-<h3 id="3、凤凰涅槃-程序生涯"><a href="#3、凤凰涅槃-程序生涯" class="headerlink" title="3、凤凰涅槃 程序生涯"></a>3、凤凰涅槃 程序生涯</h3><p><img data-src="https://img-blog.csdnimg.cn/20200502095427946.gif#x200" alt=""></p>
-<p>时间到了毕业已2年了，审视现在的自己：何止是“三无产品”，竟连一件可以拿出来絮叨的事儿都没有。最为致命的是，自己仍旧啥技能都没不会。想回去“继承父业”（家里有农田可耕嘛），但自己却又<strong>肩不能扛手不能提</strong>，有着一堆“公子病”。如何破局？在这个节骨眼上，相信作为读者的你都能感受到我当时是有多么的迷茫，无力感是有多么的强，此时，没有人比我更需要改变。</p>
-<hr>
-<h4 id="3-1-欲练此功-必先闭关"><a href="#3-1-欲练此功-必先闭关" class="headerlink" title="3.1 欲练此功 必先闭关"></a>3.1 欲练此功 必先闭关</h4><p><img data-src="https://img-blog.csdnimg.cn/20200501213536411.png#x130" alt=""><br>当自己没有退路可选的时候，只能毕其功于一役。经过了很长时间挣扎和重择业，最终决定选择回到我曾经在大学期间<strong>最畏惧</strong>的行业：程序员。依稀记得，大四时我多次在公开场合说到：毕业后一定以及肯定不会从事编程行业。现在回头再看，这脸打得……挺痛</p>
-<blockquote>
-<p>人性的弱点：越缺什么，就越强调什么。我本人其实十分羡慕IT行业，只奈何当初完全不上道……</p>
-</blockquote>
-<p>所以喽，痛定思痛，我开始了我的<strong>100天闭关学习计划</strong>：切断一切外界联系，从0开始，每天保证至少12小时+的高效学习时间，足不出户。这期间陪伴我时间最长的就是这两套视频：<br><img data-src="https://img-blog.csdnimg.cn/20200501212324861.png#x70" alt=""><br>现在依旧记得风清扬老师那磁性的声音和他心目中的女神：林青霞（东方不败）；崔希凡老师操着一口东北话和赐予的三尺白绫。您们幽默风趣的教学风格，给我闭关枯燥的学习增添了不少乐趣，这才让我坚持了下来，真心的感谢二位老师。</p>
-<blockquote>
-<p>感谢二位老师，后来我也联系到了二位老师加微信表示了感谢，祝福传智播客越来越好</p>
-</blockquote>
-<p>说句题外话：我收到过一些小伙伴咨询问我要不要报名去培训机构锻造，对此我一直持<strong>中立态度</strong>。中立是因为它收费（一般价格还不菲），如果撇开收费这个关键要素（比如收费没有那么的贵），是非常有价值的，因为不吹不黑，大多数机构的老师都是非常有水平的。</p>
-<p>伴随着这100个日日夜夜，我完成了基础的学习，但实在还是手生，打代码还得看键盘。还好当时的互联网环境欣欣向荣，所以我才敢硬着头皮上：海投。</p>
-<blockquote>
-<p>这100天的意外收获：把驾驶证拿到手了（可见我大学是多么的“忙”，在校期间竟连驾照都没考）。</p>
-</blockquote>
-<hr>
-<h4 id="3-2-崭新篇章-程序人生"><a href="#3-2-崭新篇章-程序人生" class="headerlink" title="3.2 崭新篇章 程序人生"></a>3.2 崭新篇章 程序人生</h4><p><img data-src="https://img-blog.csdnimg.cn/20200501214929958.png#x200" alt=""><br>100天的闭关结束后，自然而然的开始了我的程序员生涯。但这条路开始走得并不顺利……</p>
-<p>为了第一份工作，我<strong>连续的天天面试，每天1-2家</strong>，持续足足两周共计面了20+家公司，才在最后一个周末拿到了唯一一个offer：外包公司，<strong>月薪试用期3500</strong>。伙计，北京耶，我还得吃饭还得住宿呀，那会可都5102年了，回忆一下你那会大学生活费是不是都破2000了？</p>
-<p>虽然非常的窘迫，开的条件也很“简陋”，但我心里还是高兴的。因为终于有公司愿意接收我了，从此成为了一个真正的技术人，有一技之长啦。进入这个公司后的我丝毫不敢懈怠，那会给自己定的唯一目标是：<strong>努力转正，不要被开除</strong>。毕竟作为一个打代码还得靠一指禅、看键盘的我，真的很担心露馅。</p>
-<blockquote>
-<p>科班出生vs非科班的明显差异：其它条件都一致情况下，科班4年大学学习折算成实际经验值至少能高出非科班2年甚至更多。也就说1年经验的科班生，是远比1年非科班生的基础、技术熟练度要好非常多的。</p>
-</blockquote>
-<p>好在自己小有“天赋”（主要靠努力、靠死撑），在不断的努力下，得到的回馈也比较乐观，小开挂了一波：提前转正、年度优秀、职位升级、<strong>破格涨薪</strong>。仅7个月时间，我的薪水从3.5k涨到了12k，这种“速度”公司里是没有前例可寻的，所以需要特批~</p>
-<p>跟第一个东家没过太久就分手了，虽然让领导觉得可惜甚至失望（毕竟对我这么好嘛），但分手还算和平。我离开的原因也很冰冷：外包公司嘛，呆久了对职业生涯没多大好处，俺对技术是有追求滴，追求可持续发展。</p>
-<p>从此，我不再是空中飘着的云，随风而逝。脚踏实地的感觉真好，有一件事可以让自己当作事业来做，全情投入的感觉是很妙的。我的人生前半部分算是正式宣告翻篇了，开启了崭新的篇章。</p>
-<hr>
-<h3 id="笔耕不辍-钟情翰墨"><a href="#笔耕不辍-钟情翰墨" class="headerlink" title="笔耕不辍 钟情翰墨"></a>笔耕不辍 钟情翰墨</h3><p>眼瞅着当码农快3年了，3年是一个典型从业年限数字。看看那些招聘信息，大都写着工作经验要求3-5年，并且这一条似乎是HR筛选简历的硬核条件，因此需要好好把握这个时间节点。</p>
-<blockquote>
-<p>话外音：倘若你从业满了3年，可视区域可就大了很多</p>
-</blockquote>
-<p>一路走来，默默的把自己和身边（普通）同事compare以自省，渐渐的自己把逝去的那些时间补回来了，挺起腰板正式入编到“正规科班”行列。</p>
-<p>积累了知识，多了些经验，但总感觉还是不够扎实，知识不成体系，而且很容易捡了芝麻忘了西瓜，因此我选择采用写下来的方式，把它持久化掉。起初，我仅仅只想找一个<strong>云笔记本</strong>记录下我关心的技术关键点，以便日后自己“复习”使用，所以我最初使用的是有道云笔记（很low有木有，不过够用就行嘛）：</p>
-<p><img data-src="https://img-blog.csdnimg.cn/20200501194859280.png#x200" alt=""></p>
-<hr>
-<h4 id="2018年：CSDN"><a href="#2018年：CSDN" class="headerlink" title="2018年：CSDN"></a>2018年：CSDN</h4><p>用有道云笔记持续记录了有一段时间，直到有一次我给团队做分享时，有个同事看到我收录了不少技术内容，然后他就建议我可以把这些内容整理到博客里，显得更专业些。这不，我选择了<strong>CSDN平台</strong>，并在2018-5-17发了第一篇文章：</p>
-<p><img data-src="https://img-blog.csdnimg.cn/20200501191907957.png#x60" alt=""><br>虽然期间也接触过其它技术社区平台，但文章首发均在CSDN。时至现在，坚持了有近2年之久，可以为自己鼓个掌喽。</p>
-<p>这2年间以CSDN作为创作平台，坚持<strong>只输出技术文章</strong>（确切的说只输出Java相关技术文），收获到了一些志同道合的粉丝，这些给与了我程序生涯非常大的鼓励，坚定了信心。同时，也得到过CSDN官方的认可：CSDN官网首页顶部轮播图首位、CSDN官方公众号推文首文、2019年度博客之星评选……当然还有我这些花花绿绿的勋章，这是对自己“成绩”的最好官方证明：</p>
-<blockquote>
-<p>整整两排勋章，有点收集癖哈哈。有木有比我多的？亮出来呗</p>
-</blockquote>
-<p><img data-src="https://img-blog.csdnimg.cn/20200501200208879.png#x140" alt=""><br>相较于官方给与的肯定，对于我而言，这些匿名好友的评价和鼓励更能给我带来刺激感，赋予动力。让我觉得当初的再择业时选择程序员这条路并没有错，谢谢你们：</p>
-<p><img data-src="https://img-blog.csdnimg.cn/20200502170253871.png#x240" alt=""><br><img data-src="https://img-blog.csdnimg.cn/20200502170423795.png#x160" alt=""><br><img data-src="https://img-blog.csdnimg.cn/20200502170525951.png#x160" alt=""><br>此处顺便再声明一下：A哥跟享学课堂、享学科技什么的真的没有半毛钱关系，纯名字撞了而已：</p>
-<p><img data-src="https://img-blog.csdnimg.cn/20200502170617912.png#x160" alt=""><br>通过CSDN平台能收获到这些好友的共鸣声，属于我意外的收获。起初仅仅只想把它作为自己的一个markdown笔记本来用，无心插柳柳成荫，后来慢慢的有读者给我反馈，给我打气加油，这才决定坚持写下去，并且更加用心了。</p>
-<p>关于我的CSDN阅读量说句题外话：纯技术文章的阅读量一般都不会很高（当然不排除也有高手能把技术讲得生动有趣的），况且我还不会标题党（我只会直抒胸臆），所以即使写了2年，我的博客总阅读量也并不算高，粉丝量也不很多（但我相信都是爱技术的真爱粉），关键我还没有渠道导流不是。“水文”相对来说较容易抓人眼球获得阅读量，因为读起来确实有意思，我也蛮喜欢读的。我曾经尝试过写了几篇，但发现自己真不是那块料，告辞了。所以痛定思痛，还是把精力花在力所能及的事上吧：<strong>我只会写纯技术文，找到属于自己的一片小众空间心满意足</strong>，至于流量文那些，我玩不来。</p>
-<blockquote>
-<p>话外音：我内心深处其实很想写出流量文，但奈何文笔确实不行，所以还是乖乖的做个技术人吧，别瞎折腾了</p>
-</blockquote>
-<p>开始写公众号并不代表不再维护CSDN了，because我的伙食费还需要它的支援勒😄。仍旧会同现在一样，持续保持更新哒~</p>
-<blockquote>
-<p>CSDN平台永不停更，但更新的速度一般会滞后于公众号1-2天，欢迎CSDN的粉丝关注我的公众号哟</p>
-</blockquote>
-<hr>
-<h4 id="2020年：微信公众号"><a href="#2020年：微信公众号" class="headerlink" title="2020年：微信公众号"></a>2020年：微信公众号</h4><p>都2020年了你才开始搞公众号？是的，这还是我的第一篇文章呢。有些人做公众号是出于兴趣，有些人做公众号是为了发展副业，而我又不一样了：<strong>我是为了把技术分享切换到一个大家更易接受、更喜欢的平台上，仅此而已</strong>。我的粉丝是小众的，我写不出流量文章，所以流量红利我是享受不到喽，依旧保持CSDN平台一样的初心就好：不忘初心，砥砺前行。</p>
-<p>其实早在2018年末，就有大佬建议我切换到公众号平台去分享，我当时也听进去了建议，申请了帐号。只是后来我觉得在公众号里发技术文太麻烦了（不支持Markdown还得自己转换），并且手机里看示例代码效果实在太差，所以公号仅运营了一周就彻底搁浅了。因为我当时对于技术分享，心里只有一个想法：<strong>同样是内容，放哪都一样</strong>，所以我更倾向于可以大屏观看的CSDN平台。</p>
-<p>但为何今年我却动摇了呢？并不是初心变了，而是不止一个大佬建议我搞个公众号，因为有些很现实的问题：CSDN已是过去时了，如果你还在用CSDN推文，很多技术好友他们是心存抵触心里的，而且使用体验上也不如公众号。我品，我细品一番确实是这么个道理：<strong>大家都使用IPhone X用微信语音聊天了，而你还在使用诺基亚打电话吗？</strong><br><img data-src="https://img-blog.csdnimg.cn/20200502202004133.jpg#x160" alt=""></p>
-<hr>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>过去的这些年，我的人生是非常曲折的，是具有教育意义的人生轨迹，简直就是负面教材嘛。这不现在过年我回去，还有村民让我给他家孩子上思想政治课呢，让我教育教育他孩子要好好读书少玩游戏，不要走弯路。咋地，我这“名声”都传村里去了？用脚丫子想都知道这是我妈的“功劳”~</p>
-<p>截止到现在，我的漫漫人生中，即使只从高中算起，<strong>我有小10年的路是完全走歪的</strong>，偏离了主航道。不敢说这些路对我一丁点帮助都没有，但从客观上来说错就是错，是无法回避的事实。现在回味起来，一声叹息，毕竟人生有几个10年呢？</p>
-<p><img data-src="https://img-blog.csdnimg.cn/20200502153624653.png#x200" alt=""><br>人生就像一场马拉松，获胜的关键不在于瞬间的爆发，而在于途中的坚持。你纵有千百个理由放弃，也要给自己一个坚持下去的理由。很多时候，成功就是多坚持一分钟，这一分钟不放弃，下一分钟就会有希望。漫漫人生途中，有的人跑的是上半场，有的人会在下半场爆发，每个人都是24h，充满希望的生活才会更有意义。</p>
-<p><strong>截止到今天，我还差几个月就在北京缴纳社保满5年了，祝愿自己在小汽车摇号时，一发中第。</strong></p>
         <!-- ....这里是正文内容的底部（首页不会展示）... -->
         <style>
 .table-container img{
@@ -596,12 +502,6 @@
 
     <!-- 相关阅读（你可能还喜欢） -->
       
-  <div class="popular-posts-header">你可能还喜欢：</div>
-  <ul class="popular-posts">
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\x2y\e1bcb9c1.html" rel="bookmark">A哥感悟到的2019关键词：裁员、技术驱动、分享精神、能力边界</a></div>
-    </li>
-  </ul>
 
         
 
@@ -609,17 +509,17 @@
 <ul class="post-copyright">
   <li class="post-copyright-title">
     <strong>本文标题： </strong>
-    《程序人生 | 春风得意马蹄疾，一日看尽长安花》
+    《JDK15正式发布，划时代的ZGC同时宣布转正》
   </li>
   <li class="post-copyright-author">
     <strong>本文作者： </strong>A哥(YourBatman)
   </li>
   <li class="post-copyright-date">
-    <strong>发布时间： </strong>2020-05-11 11:00:00
+    <strong>发布时间： </strong>2020-09-17 11:54:27
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://www.yourbatman.cn/x2y/f3891d18.html" title="程序人生 | 春风得意马蹄疾，一日看尽长安花">https://www.yourbatman.cn/x2y/f3891d18.html</a>
+    <a href="https://www.yourbatman.cn/x2y/52aa588e.html" title="JDK15正式发布，划时代的ZGC同时宣布转正">https://www.yourbatman.cn/x2y/52aa588e.html</a>
   </li>
   <li class="post-copyright-license">
     <strong>许可协议： </strong>本站所有文章均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载：No！转发：Yes！
@@ -655,7 +555,8 @@
       <footer class="post-footer">
           
           <div class="post-tags">
-              <a href="/tags/%E8%81%8C%E4%B8%9A%E7%94%9F%E6%B6%AF/" rel="tag"><i class="fa fa-tag"></i> 职业生涯</a>
+              <a href="/tags/JDK15/" rel="tag"><i class="fa fa-tag"></i> JDK15</a>
+              <a href="/tags/ZGC/" rel="tag"><i class="fa fa-tag"></i> ZGC</a>
           </div>
 
         <!-- 导入投票模块 -->
@@ -672,13 +573,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/x2y/wechat-white-list.html" rel="prev" title="【BAT的乌托邦】公众号开白申请">
-      <i class="fa fa-chevron-left"></i> 【BAT的乌托邦】公众号开白申请
+    <a href="/x2y/4fe71a34.html" rel="prev" title="3. 站在使用层面，Bean Validation这些标准接口你需要烂熟于胸">
+      <i class="fa fa-chevron-left"></i> 3. 站在使用层面，Bean Validation这些标准接口你需要烂熟于胸
     </a></div>
-      <div class="post-nav-item">
-    <a href="/x2y/tencent+.html" rel="next" title="2020-4-17群福利：腾讯云+社区公仔寄送公示">
-      2020-4-17群福利：腾讯云+社区公仔寄送公示 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -744,7 +642,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正文"><span class="nav-number">2.</span> <span class="nav-text">正文</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、贫苦大众-游戏人生"><span class="nav-number">2.1.</span> <span class="nav-text">1、贫苦大众 游戏人生</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-家徒四壁-呱呱坠地"><span class="nav-number">2.1.1.</span> <span class="nav-text">1.1 家徒四壁 呱呱坠地</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-被耽误的高中-回不去的青春"><span class="nav-number">2.1.2.</span> <span class="nav-text">1.2 被耽误的高中 回不去的青春</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、迷茫大学-似梦年华"><span class="nav-number">2.2.</span> <span class="nav-text">2、迷茫大学 似梦年华</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-疲于奔命的大学四年"><span class="nav-number">2.2.1.</span> <span class="nav-text">2.1 疲于奔命的大学四年</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-跌落深渊的毕业答辩"><span class="nav-number">2.2.2.</span> <span class="nav-text">2.2 跌落深渊的毕业答辩</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-百无一成的初出茅庐"><span class="nav-number">2.2.3.</span> <span class="nav-text">2.3 百无一成的初出茅庐</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、凤凰涅槃-程序生涯"><span class="nav-number">2.3.</span> <span class="nav-text">3、凤凰涅槃 程序生涯</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-欲练此功-必先闭关"><span class="nav-number">2.3.1.</span> <span class="nav-text">3.1 欲练此功 必先闭关</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-崭新篇章-程序人生"><span class="nav-number">2.3.2.</span> <span class="nav-text">3.2 崭新篇章 程序人生</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#笔耕不辍-钟情翰墨"><span class="nav-number">2.4.</span> <span class="nav-text">笔耕不辍 钟情翰墨</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2018年：CSDN"><span class="nav-number">2.4.1.</span> <span class="nav-text">2018年：CSDN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2020年：微信公众号"><span class="nav-number">2.4.2.</span> <span class="nav-text">2020年：微信公众号</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#✍前言"><span class="nav-number">1.</span> <span class="nav-text">✍前言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#孵化器模块（孵化版-实验版）"><span class="nav-number">1.0.1.</span> <span class="nav-text">孵化器模块（孵化版&#x2F;实验版）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#预览特性（预览版）"><span class="nav-number">1.0.2.</span> <span class="nav-text">预览特性（预览版）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#✍正文"><span class="nav-number">2.</span> <span class="nav-text">✍正文</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#JDK14新特性回顾"><span class="nav-number">2.1.</span> <span class="nav-text">JDK14新特性回顾</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、Switch表达式"><span class="nav-number">2.1.1.</span> <span class="nav-text">一、Switch表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、箭头表达式返回"><span class="nav-number">2.1.1.1.</span> <span class="nav-text">1、箭头表达式返回</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、yield返回"><span class="nav-number">2.1.1.2.</span> <span class="nav-text">2、yield返回</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、instanceof的模式匹配（预览）"><span class="nav-number">2.1.2.</span> <span class="nav-text">二、instanceof的模式匹配（预览）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、实用的NullPointerException"><span class="nav-number">2.1.3.</span> <span class="nav-text">三、实用的NullPointerException</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、Record（预览）"><span class="nav-number">2.1.4.</span> <span class="nav-text">四、Record（预览）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五、文本块Text-Blocks（二次预览）"><span class="nav-number">2.1.5.</span> <span class="nav-text">五、文本块Text Blocks（二次预览）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#六、删除CMS垃圾收集器"><span class="nav-number">2.1.6.</span> <span class="nav-text">六、删除CMS垃圾收集器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#七、ZGC垃圾回收器（实验）"><span class="nav-number">2.1.7.</span> <span class="nav-text">七、ZGC垃圾回收器（实验）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JDK15新特性"><span class="nav-number">2.2.</span> <span class="nav-text">JDK15新特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、文本块Text-Blocks"><span class="nav-number">2.2.1.</span> <span class="nav-text">一、文本块Text Blocks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、ZGC转正"><span class="nav-number">2.2.2.</span> <span class="nav-text">二、ZGC转正</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、Shenandoah转正"><span class="nav-number">2.2.3.</span> <span class="nav-text">三、Shenandoah转正</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、删除Nashorn-JavaScript-Engine"><span class="nav-number">2.2.4.</span> <span class="nav-text">四、删除Nashorn JavaScript Engine</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五、CharSequence新增isEmpty默认方法"><span class="nav-number">2.2.5.</span> <span class="nav-text">五、CharSequence新增isEmpty默认方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#升级建议"><span class="nav-number">2.3.</span> <span class="nav-text">升级建议</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#✍总结"><span class="nav-number">3.</span> <span class="nav-text">✍总结</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#✔推荐阅读："><span class="nav-number">3.0.0.0.1.</span> <span class="nav-text">✔推荐阅读：</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

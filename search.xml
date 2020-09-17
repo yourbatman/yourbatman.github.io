@@ -77,6 +77,114 @@
       </tags>
   </entry>
   <entry>
+    <title>JDK15正式发布，划时代的ZGC同时宣布转正</title>
+    <url>/x2y/52aa588e.html</url>
+    <content><![CDATA[<blockquote>
+<p>你发任你发，我用Java8。本文已被 <a href="https://www.yourbatman.cn"><strong>https://www.yourbatman.cn</strong></a> 收录，里面一并有Spring技术栈、MyBatis、JVM、中间件等小而美的<strong>专栏</strong>供以免费学习。关注公众号【<strong>BAT的乌托邦</strong>】逐个击破，深入掌握，拒绝浅尝辄止。</p>
+</blockquote>
+<p><img data-src="https://img-blog.csdnimg.cn/20200916140714904.png#pic_center" alt=""></p>
+<h1 id="✍前言"><a href="#✍前言" class="headerlink" title="✍前言"></a>✍前言</h1><p>2020年9月15日，JDK15正式发布，可谓如约而至。按照Java SE的发展路线图，JDK14自此停止更新。值得注意的是JDK15并非<strong>LTS</strong>版本，Oracle官方对Java SE的支持路线图如下：<br><img data-src="https://img-blog.csdnimg.cn/20200916142447336.png#pic_center" alt=""><br>JDK8的扩展支持时间超过了JDK11，Oracle你是认真的吗？开个玩笑~</p>
+<p>那么自Java11之后，哪个版本才是LTS版本呢？Oracle官方并没给出具体参考路线图，但可参考OpenJDK的这张：<br><img data-src="https://img-blog.csdnimg.cn/20200916141534643.png#pic_center" alt=""><br>可以看到<strong>JDK17</strong>将是下一个LTS版本，预计发版日期是2021年9月份。当然喽这只是OpenJDK的发版线路图，并不代表Oracle官方，因此仅供参考，不过一般八九不离十。</p>
+<blockquote>
+<p>小贴士：OpenJDK和Oracle JDK自从JDK11后，就共享了绝大部分代码了，节奏基本保持一致。</p>
+</blockquote>
+<p>从JDK9之后，Oracle采用了新的发布周期：每6个月发布一个版本，每3年发布一个LTS版本。JDK14是继JDK9之后发布的第四个版本， 该版本为非LTS版本，<strong>最新的LTS版本为JDK11</strong>。因为是小鹿快跑，快速迭代，因此此处解释下这两个词：孵化器模块（Incubator）和预览特性（Preview）。</p>
+<h3 id="孵化器模块（孵化版-实验版）"><a href="#孵化器模块（孵化版-实验版）" class="headerlink" title="孵化器模块（孵化版/实验版）"></a>孵化器模块（孵化版/实验版）</h3><p>尚未定稿的API/工具，主要用于从Java社区收集使用反馈，稳定性无保障，后期有较大可能性移除</p>
+<h3 id="预览特性（预览版）"><a href="#预览特性（预览版）" class="headerlink" title="预览特性（预览版）"></a>预览特性（预览版）</h3><p>规格已成型，实现已确定，但还未最终定稿。这些特性还是存在被移除的可能性，但一般来说最后都会被固定下来。</p>
+<h1 id="✍正文"><a href="#✍正文" class="headerlink" title="✍正文"></a>✍正文</h1><p>JDK15是Java SE平台的第15个版本，由<strong>JSR 390</strong>在Java社区进程中指定。</p>
+<blockquote>
+<p>OpenJDK 15是9-15发布的，Oracle同步跟上。其它厂商的对应JDK版本也会随后跟上</p>
+</blockquote>
+<p>该版本共提供14个新特性，通过这些JEP来表示，截图如下：<br><img data-src="https://img-blog.csdnimg.cn/20200916143406758.png#pic_center" alt=""><br>下面针对其中对开发者日常编程关系较大的特性拉出来解释，并给出对应的使用示例（其实就是JEP 378喽）。</p>
+<h2 id="JDK14新特性回顾"><a href="#JDK14新特性回顾" class="headerlink" title="JDK14新特性回顾"></a>JDK14新特性回顾</h2><p>老规矩，在进行JDK15的新特性介绍之前，先回顾下JDK14的主要特性有哪些。JDK 14于2020年3月17日发布。</p>
+<h3 id="一、Switch表达式"><a href="#一、Switch表达式" class="headerlink" title="一、Switch表达式"></a>一、Switch表达式</h3><p>新的Switch表达式其实早在JDK 12、13中都已存在了，但只是<strong>预览版</strong>，到了JDK 14就彻底变为稳定版了，可以放心商用。</p>
+<blockquote>
+<p>小贴士：预览版特性是有可能在后续版本中被移除的，但稳定版后几乎不可能被移除</p>
+</blockquote>
+<p>switch新的表达式有两个显著的特点：</p>
+<ul>
+<li>支持箭头表达式返回</li>
+<li>支持yield和return返回值。</li>
+</ul>
+<h4 id="1、箭头表达式返回"><a href="#1、箭头表达式返回" class="headerlink" title="1、箭头表达式返回"></a>1、箭头表达式返回</h4><p>JDK14之前写法：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printLetterCount</span><span class="params">(DayOfWeek dayOfWeek)</span></span>&#123;</span><br><span class="line">    <span class="keyword">switch</span> (dayOfWeek) &#123;</span><br><span class="line">        <span class="keyword">case</span> MONDAY:</span><br><span class="line">        <span class="keyword">case</span> FRIDAY:</span><br><span class="line">        <span class="keyword">case</span> SUNDAY:</span><br><span class="line">            System.out.println(<span class="number">6</span>);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> TUESDAY:</span><br><span class="line">            System.out.println(<span class="number">7</span>);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> THURSDAY:</span><br><span class="line">        <span class="keyword">case</span> SATURDAY:</span><br><span class="line">            System.out.println(<span class="number">8</span>);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> WEDNESDAY:</span><br><span class="line">            System.out.println(<span class="number">9</span>);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>要点：break可千万别忘记写，否则就是个大bug，并且还比较<strong>隐蔽</strong>，定位起来稍显困难。</p>
+<p>JDK14等效的新写法：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printLetterCount</span><span class="params">(DayOfWeek dayOfWeek)</span></span>&#123;</span><br><span class="line">    <span class="keyword">switch</span> (dayOfWeek) &#123;</span><br><span class="line">        <span class="keyword">case</span> MONDAY, FRIDAY, SUNDAY -&gt; System.out.println(<span class="number">6</span>);</span><br><span class="line">        <span class="keyword">case</span> TUESDAY                -&gt; System.out.println(<span class="number">7</span>);</span><br><span class="line">        <span class="keyword">case</span> THURSDAY, SATURDAY     -&gt; System.out.println(<span class="number">8</span>);</span><br><span class="line">        <span class="keyword">case</span> WEDNESDAY              -&gt; System.out.println(<span class="number">9</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可明显看到新写法不需要一个个break了，从<strong>语法层面</strong>规避了我们犯错的可能性。</p>
+<h4 id="2、yield返回"><a href="#2、yield返回" class="headerlink" title="2、yield返回"></a>2、yield返回</h4><p>JDK14之前写法：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getLetterCount</span><span class="params">(DayOfWeek dayOfWeek)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> letterCount;</span><br><span class="line">    <span class="keyword">switch</span> (dayOfWeek) &#123;</span><br><span class="line">        <span class="keyword">case</span> MONDAY:</span><br><span class="line">        <span class="keyword">case</span> FRIDAY:</span><br><span class="line">        <span class="keyword">case</span> SUNDAY:</span><br><span class="line">            letterCount = <span class="number">6</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> TUESDAY:</span><br><span class="line">            letterCount = <span class="number">7</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> THURSDAY:</span><br><span class="line">        <span class="keyword">case</span> SATURDAY:</span><br><span class="line">            letterCount = <span class="number">8</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> WEDNESDAY:</span><br><span class="line">            letterCount = <span class="number">9</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">"非法: "</span> + dayOfWeek);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> letterCount;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>JDK14等效的新写法：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getLetterCount</span><span class="params">(DayOfWeek dayOfWeek)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">switch</span> (dayOfWeek) &#123;</span><br><span class="line">        <span class="keyword">case</span> MONDAY, FRIDAY, SUNDAY -&gt; <span class="number">6</span>;</span><br><span class="line">        <span class="keyword">case</span> TUESDAY                -&gt; <span class="number">7</span>;</span><br><span class="line">        <span class="keyword">case</span> THURSDAY, SATURDAY     -&gt; <span class="number">8</span>;</span><br><span class="line">        <span class="keyword">case</span> WEDNESDAY              -&gt; <span class="number">9</span>;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用箭头操作符操作效果立竿见影。当然，你还可以使用<code>yield</code>关键字返回：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getLetterCount</span><span class="params">(DayOfWeek dayOfWeek)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">switch</span> (dayOfWeek) &#123;</span><br><span class="line">        <span class="keyword">case</span> MONDAY  -&gt; <span class="number">6</span>;</span><br><span class="line">        <span class="keyword">default</span>      -&gt; &#123;</span><br><span class="line">            <span class="keyword">int</span> letterCount = dayOfWeek.toString().length();</span><br><span class="line">            yield letterCount;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="二、instanceof的模式匹配（预览）"><a href="#二、instanceof的模式匹配（预览）" class="headerlink" title="二、instanceof的模式匹配（预览）"></a>二、instanceof的模式匹配（预览）</h3><p>该功能在JDK14中处理<strong>预览版</strong>。</p>
+<p>JDK14之前写法：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    Object o = <span class="string">"hello world"</span>;</span><br><span class="line">    <span class="keyword">if</span>(o <span class="keyword">instanceof</span> String )&#123;</span><br><span class="line">        String str = String<span class="class">.<span class="keyword">class</span>.<span class="title">cast</span>(<span class="title">o</span>)</span>;</span><br><span class="line">        System.out.println(str);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>JDK14等效的新写法：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    Object o = <span class="string">"hello world"</span>;</span><br><span class="line">    <span class="comment">// 屁股里直接可写个变量名，不再需要强转了</span></span><br><span class="line">    <span class="keyword">if</span>(o <span class="keyword">instanceof</span> String str)&#123;</span><br><span class="line">        System.out.println(str);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">再如：</span><br><span class="line"><span class="keyword">if</span> (obj <span class="keyword">instanceof</span> String s &amp;&amp; s.length() &gt; <span class="number">5</span>) &#123;</span><br><span class="line">	s.contains(..)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果你运行时有如下错误：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">java: <span class="keyword">instanceof</span> 中的模式匹配 是预览功能，默认情况下禁用。</span><br><span class="line">  （请使用 --enable-preview 以启用 <span class="keyword">instanceof</span> 中的模式匹配）</span><br></pre></td></tr></table></figure>
+<p>那是因为此功能是<strong>预览特性</strong>，需要你主动开启，如下：<br><img data-src="https://img-blog.csdnimg.cn/20200916180320241.png#pic_center" alt=""><br>注意：此特性在<strong>JDK15</strong>中依旧为预览版。</p>
+<h3 id="三、实用的NullPointerException"><a href="#三、实用的NullPointerException" class="headerlink" title="三、实用的NullPointerException"></a>三、实用的NullPointerException</h3><p>略。</p>
+<h3 id="四、Record（预览）"><a href="#四、Record（预览）" class="headerlink" title="四、Record（预览）"></a>四、Record（预览）</h3><p>Java年纪太大，语法不够新潮，有时候确实太麻烦，因此有了Record的出现：干掉那些get/set、toString、equals等方法。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> record <span class="title">Person</span><span class="params">(String name,Integer age)</span> </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    Person person= <span class="keyword">new</span> Person(<span class="string">"YourBatman"</span>, <span class="number">18</span>);</span><br><span class="line">    System.out.println(person);</span><br><span class="line">    System.out.println(person.name());</span><br><span class="line">    System.out.println(person.age());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，结果打印：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Person[name=YourBatman, age=<span class="number">18</span>]</span><br><span class="line">YourBatman</span><br><span class="line"><span class="number">18</span></span><br></pre></td></tr></table></figure>
+<p>注意：此特性在<strong>JDK15</strong>中依旧为预览版。</p>
+<h3 id="五、文本块Text-Blocks（二次预览）"><a href="#五、文本块Text-Blocks（二次预览）" class="headerlink" title="五、文本块Text Blocks（二次预览）"></a>五、文本块Text Blocks（二次预览）</h3><p>这个特性可是非常好用，它属于二次预览：已在JDK 13预览过一次。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    String html = <span class="string">""</span><span class="string">"</span></span><br><span class="line"><span class="string">          &lt;html&gt;</span></span><br><span class="line"><span class="string">              &lt;body&gt;</span></span><br><span class="line"><span class="string">                  &lt;p&gt;hello world&lt;/p&gt;</span></span><br><span class="line"><span class="string">              &lt;/body&gt;</span></span><br><span class="line"><span class="string">          &lt;/html&gt;</span></span><br><span class="line"><span class="string">          "</span><span class="string">""</span>;</span><br><span class="line">    String query = <span class="string">""</span><span class="string">"</span></span><br><span class="line"><span class="string">           SELECT * from USER</span></span><br><span class="line"><span class="string">           WHERE `id` = 1</span></span><br><span class="line"><span class="string">           ORDER BY `id`, `name`;</span></span><br><span class="line"><span class="string">           "</span><span class="string">""</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在JDK13中，这种是<strong>有</strong>换行的。在JDK14中，可以加上一个符号让其不让换行：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    String query = <span class="string">""</span><span class="string">"</span></span><br><span class="line"><span class="string">           SELECT * from USER \</span></span><br><span class="line"><span class="string">           WHERE `id` = 1 \</span></span><br><span class="line"><span class="string">           ORDER BY `id`, `name`;\</span></span><br><span class="line"><span class="string">           "</span><span class="string">""</span>;</span><br><span class="line">    System.out.println(query);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，输出（可以看到展示为一行了）：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">SELECT * from USER WHERE `id` = <span class="number">1</span> ORDER BY `id`, `name`;</span><br></pre></td></tr></table></figure>
+<p>注意：此特性在<strong>JDK15</strong>中已经为正式版。</p>
+<h3 id="六、删除CMS垃圾收集器"><a href="#六、删除CMS垃圾收集器" class="headerlink" title="六、删除CMS垃圾收集器"></a>六、删除CMS垃圾收集器</h3><p>这款著名的垃圾回收器从这个版本就彻底被删除了。JDK9开始使用G1作为<strong>默认</strong>的垃圾回收器（JDK11中ZGC开始崭露头角），就已经把CMS标记为过期了，在此版本正式删除。</p>
+<h3 id="七、ZGC垃圾回收器（实验）"><a href="#七、ZGC垃圾回收器（实验）" class="headerlink" title="七、ZGC垃圾回收器（实验）"></a>七、ZGC垃圾回收器（实验）</h3><p>革命性的ZGC：任意堆大小（TB级别）都能保证延迟在10ms以内，是以低延迟为首要目标的一款垃圾回收器。</p>
+<blockquote>
+<p>在JDK14之前，ZGC只能用于Linux上，现在也可使用在windows上了</p>
+</blockquote>
+<p>注意：此特性在<strong>JDK15</strong>中已经为正式版（JDK11开始出现）。</p>
+<hr>
+<h2 id="JDK15新特性"><a href="#JDK15新特性" class="headerlink" title="JDK15新特性"></a>JDK15新特性</h2><p>有了JDK14新特性回顾做铺垫，再来了解JDK15的新特性就方便很多了。</p>
+<p>特别说明：运行JDK15需要IDEA 2020.2才能支持哦（JDK14要求IDEA 2020.1），然后关于IDEA 2020.2的使用教程（新特性），请移步我公众号前面发的这篇文章：<a href="https://mp.weixin.qq.com/s/8voJSbmcBbdfNUCUBIcKcA" target="_blank" rel="noopener">IntelliJ IDEA 2020.2正式发布，诸多亮点总有几款能助你提效</a></p>
+<h3 id="一、文本块Text-Blocks"><a href="#一、文本块Text-Blocks" class="headerlink" title="一、文本块Text Blocks"></a>一、文本块Text Blocks</h3><p>Text Blocks首次是在JDK 13中以预览功能出现的，然后在JDK 14中又预览了一次，终于在JDK 15中被确定下来，可放心使用了（使用示例请参考文上）。</p>
+<h3 id="二、ZGC转正"><a href="#二、ZGC转正" class="headerlink" title="二、ZGC转正"></a>二、ZGC转正</h3><p>ZGC是Java 11引入的新的垃圾收集器（JDK9以后默认的垃圾回收器是G1），经过了多个实验阶段，自此终于成为正式特性。</p>
+<p>ZGC是一个重新设计的并发的垃圾回收器，可以极大的提升GC的性能。支持任意堆大小而保持稳定的低延迟（10ms以内），性能非常可观。</p>
+<p>打开方式：使用-XX:+UseZGC命令行参数打开，相信不久的将来它必将成为<strong>默认的</strong>垃圾回收器。</p>
+<h3 id="三、Shenandoah转正"><a href="#三、Shenandoah转正" class="headerlink" title="三、Shenandoah转正"></a>三、Shenandoah转正</h3><p>怎么形容Shenandoah和ZGC的关系呢？异同点大概如下：</p>
+<ul>
+<li>相同点：性能几乎可认为是相同的</li>
+<li><strong>不同点</strong>：ZGC是Oracle JDK的，根正苗红。而Shenandoah只存在于OpenJDK中，因此使用时需注意你的JDK版本</li>
+</ul>
+<p>打开方式：使用-XX:+UseShenandoahGC命令行参数打开。</p>
+<h3 id="四、删除Nashorn-JavaScript-Engine"><a href="#四、删除Nashorn-JavaScript-Engine" class="headerlink" title="四、删除Nashorn JavaScript Engine"></a>四、删除Nashorn JavaScript Engine</h3><p>Nashorn是在JDK提出的脚本执行引擎，早在JDK11就已经把它标记为过期了，JDK15完全移除。</p>
+<p>在JDK11中取以代之的是GraalVM。GraalVM是一个运行时平台，它支持Java和其他基于Java字节码的语言，但也支持其他语言，如JavaScript，Ruby，Python或LLVM。<strong>性能是Nashorn的2倍以上</strong>。</p>
+<h3 id="五、CharSequence新增isEmpty默认方法"><a href="#五、CharSequence新增isEmpty默认方法" class="headerlink" title="五、CharSequence新增isEmpty默认方法"></a>五、CharSequence新增isEmpty默认方法</h3><p>啥都不说，源码一看便知：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@since</span> <span class="number">15</span></span><br><span class="line"><span class="function"><span class="keyword">default</span> <span class="keyword">boolean</span> <span class="title">isEmpty</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.length() == <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>String实现了CharSequence接口的，这应该地球人都知道吧。</p>
+<h2 id="升级建议"><a href="#升级建议" class="headerlink" title="升级建议"></a>升级建议</h2><p>自己玩玩就行，毕竟不是LTS版本。</p>
+<p><strong>但是</strong>，虽然说仅限于自己玩玩就行，但不代表就没有关注的意义哈。还是那个道理，如果JDK12、13、14、15…都不关注些的话，到时候突然来个JDK17的LTS版本，接受起来就会稍显困难。</p>
+<h1 id="✍总结"><a href="#✍总结" class="headerlink" title="✍总结"></a>✍总结</h1><p>JDK15整体来看新特性方面并不算很亮眼，它主要是对之前版本<strong>预览特性</strong>的功能做了确定，如文本块、ZGC等，这么一来我们就可以放心大胆的使用啦。</p>
+<p>半年一次的发版速度真心学不动了，不过还好我有我的坚持：<strong>你发任你发，我用Java8。</strong></p>
+<blockquote>
+<p>公众号后台回复：JDK15，一键打包获取IDEA2020.2.2 + JDK15安装包（mac + windows）</p>
+</blockquote>
+<h5 id="✔推荐阅读："><a href="#✔推荐阅读：" class="headerlink" title="✔推荐阅读："></a>✔推荐阅读：</h5><ul>
+<li><a href="https://mp.weixin.qq.com/s/8voJSbmcBbdfNUCUBIcKcA" target="_blank" rel="noopener">IntelliJ IDEA 2020.2正式发布，诸多亮点总有几款能助你提效</a></li>
+<li><a href="https://mp.weixin.qq.com/s/ikI9c3XyR_czOSmsu6FLMw" target="_blank" rel="noopener">Spring Boot 2.3.0正式发布：优雅停机、配置文件位置通配符新特性一览</a></li>
+<li><a href="https://mp.weixin.qq.com/s/nb4oT02dlU4pxINZw9aLLw" target="_blank" rel="noopener">搞事情？Spring Boot今天一口气发布三个版本</a></li>
+</ul>]]></content>
+      <categories>
+        <category>A哥学Java</category>
+      </categories>
+      <tags>
+        <tag>JDK15</tag>
+        <tag>ZGC</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>3. 站在使用层面，Bean Validation这些标准接口你需要烂熟于胸</title>
     <url>/x2y/4fe71a34.html</url>
     <content><![CDATA[<blockquote>
@@ -4856,17 +4964,6 @@
 <li>CSDN</li>
 <li>微信公众号</li>
 </ol>]]></content>
-      <categories>
-        <category>缺省</category>
-      </categories>
-      <tags>
-        <tag>缺省</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hallo World</title>
-    <url>/x2y/43fc112c.html</url>
-    <content><![CDATA[<p>你好同学，欢迎来到A哥的博客：BAT的乌托邦</p>]]></content>
       <categories>
         <category>缺省</category>
       </categories>
