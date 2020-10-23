@@ -24,37 +24,28 @@
     var CONFIG = {"hostname":"www.yourbatman.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},"motion":{"enable":false,"async":true,"transition":{"post_block":"flipBounceYIn","post_header":"flipXIn","post_body":"flipBounceXIn","coll_header":"expandIn","sidebar":"shrinkIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="你，还学得动吗？">
+  <meta name="description" content="1024，撸起袖子继续干">
 <meta property="og:type" content="article">
-<meta property="og:title" content="搞事情？Spring Boot今天一口气发布三个版本">
-<meta property="og:url" content="https://www.yourbatman.cn/x2y/a3cba048.html">
+<meta property="og:title" content="5. Bean Validation声明式验证四大级别：字段、属性、容器元素、类">
+<meta property="og:url" content="https://www.yourbatman.cn/x2y/a0e8d910.html">
 <meta property="og:site_name" content="BAT的乌托邦">
-<meta property="og:description" content="你，还学得动吗？">
+<meta property="og:description" content="1024，撸起袖子继续干">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200725232718273.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200725213616518.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200725233253231.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200725215806663.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200725221151805.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200725220629806.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200725224007874.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200725224446430.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200725224517894.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200725230447674.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200725230905400.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200725231628798.png">
-<meta property="article:published_time" content="2020-07-26T00:39:54.000Z">
-<meta property="article:modified_time" content="2020-07-26T00:43:14.590Z">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201023161125192.jpg">
+<meta property="article:published_time" content="2020-10-23T23:40:14.000Z">
+<meta property="article:modified_time" content="2020-10-23T23:46:54.218Z">
 <meta property="article:author" content="A哥(YourBatman)">
 <meta property="article:tag" content="BAT的乌托邦">
 <meta property="article:tag" content="A哥">
 <meta property="article:tag" content="YourBatman">
-<meta property="article:tag" content="Spring Boot">
-<meta property="article:tag" content="新特性">
+<meta property="article:tag" content="Bean Validation">
+<meta property="article:tag" content="Hibernate Validator">
+<meta property="article:tag" content="数据校验">
+<meta property="article:tag" content="1024程序员节">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20200725232718273.png">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20201023161125192.jpg">
 
-<link rel="canonical" href="https://www.yourbatman.cn/x2y/a3cba048.html">
+<link rel="canonical" href="https://www.yourbatman.cn/x2y/a0e8d910.html">
 
 
 <script id="page-configurations">
@@ -67,7 +58,7 @@
   };
 </script>
 
-  <title>搞事情？Spring Boot今天一口气发布三个版本 | BAT的乌托邦</title>
+  <title>5. Bean Validation声明式验证四大级别：字段、属性、容器元素、类 | BAT的乌托邦</title>
   
 
 
@@ -249,7 +240,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.yourbatman.cn/x2y/a3cba048.html">
+    <link itemprop="mainEntityOfPage" href="https://www.yourbatman.cn/x2y/a0e8d910.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://img-blog.csdnimg.cn/20200511100304592.jpg">
@@ -262,7 +253,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          搞事情？Spring Boot今天一口气发布三个版本
+          5. Bean Validation声明式验证四大级别：字段、属性、容器元素、类
         </h1>
 
         <div class="post-meta">
@@ -274,7 +265,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-07-26 08:39:54" itemprop="dateCreated datePublished" datetime="2020-07-26T08:39:54+08:00">2020-07-26</time>
+              <time title="创建时间：2020-10-24 07:40:14" itemprop="dateCreated datePublished" datetime="2020-10-24T07:40:14+08:00">2020-10-24</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -282,12 +273,12 @@
               </span>
               <span class="post-meta-item-text">收录于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Spring-Boot/" itemprop="url" rel="index"><span itemprop="name">Spring Boot</span></a>
+                  <a href="/categories/A%E5%93%A5%E5%AD%A6%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/" itemprop="url" rel="index"><span itemprop="name">A哥学数据校验</span></a>
                 </span>
             </span>
 
           
-            <span id="/x2y/a3cba048.html" class="post-meta-item leancloud_visitors" data-flag-title="搞事情？Spring Boot今天一口气发布三个版本" title="阅读次数">
+            <span id="/x2y/a0e8d910.html" class="post-meta-item leancloud_visitors" data-flag-title="5. Bean Validation声明式验证四大级别：字段、属性、容器元素、类" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -302,8 +293,8 @@
       </span>
       <span class="post-meta-item-text">评论数：</span>
     
-    <a title="valine" href="/x2y/a3cba048.html#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/x2y/a3cba048.html" itemprop="commentCount"></span>
+    <a title="valine" href="/x2y/a0e8d910.html#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/x2y/a0e8d910.html" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -316,14 +307,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2.1k</span>
+              <span>5.6k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
+              <span>5 分钟</span>
             </span>
 
           <!-- 本文作者 -->
@@ -347,80 +338,127 @@
 
       
         <blockquote>
-<p>学无止境？本文已被 <a href="https://www.yourbatman.cn"><strong>https://www.yourbatman.cn</strong></a> 收录，里面一并有Spring技术栈、MyBatis、JVM、中间件等小而美的<strong>专栏</strong>供以免费学习。关注公众号【<strong>BAT的乌托邦</strong>】逐个击破，深入掌握，拒绝浅尝辄止。</p>
+<p>1024，代码改变世界。本文已被 <a href="https://www.yourbatman.cn"><strong>https://www.yourbatman.cn</strong></a> 收录，里面一并有Spring技术栈、MyBatis、JVM、中间件等小而美的<strong>专栏</strong>供以免费学习。关注公众号【<strong>BAT的乌托邦</strong>】逐个击破，深入掌握，拒绝浅尝辄止。</p>
 </blockquote>
-<p><img data-src="https://img-blog.csdnimg.cn/20200725232718273.png" alt=""></p>
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>各位好，我是A哥(YourBatman)。今天是2020-07-25，上午我正从<strong><a href="https://start.spring.io" target="_blank" rel="noopener">https://start.spring.io</a></strong>准备down一个工程下来的时候，打开页面发现默认选中的Spring Boot版本号是<code>2.3.2</code>：<br><img data-src="https://img-blog.csdnimg.cn/20200725213616518.png" alt=""><br>并非我刻意的去找到这个变化，而是由于我<strong>昨天</strong> down下来的工程使用的Spring Boot版本是<strong>2.3.1</strong>，印象还在，所以今天一下子就发现了差异。</p>
-<p>既然升级了（虽然是小版本号），那就去官方楼一眼呗。不看不知道，一看还真让发现些内容：<strong>Spring Boot在同一天（2020-07-25）一口气发布了三个版本，这是要搞事情啊？</strong><br><img data-src="https://img-blog.csdnimg.cn/20200725233253231.png" alt=""></p>
-<blockquote>
-<p>小贴士：本文所有时间若未做特殊说明，指的均是<strong>北京时间</strong></p>
-</blockquote>
-<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><p>Spring Boot目前还处于<strong>Active</strong>活跃的分支共有三个：<br><img data-src="https://img-blog.csdnimg.cn/20200725215806663.png" alt=""><br>因此就在今天，<strong>同一天</strong>里Spring Boot对它的这三条线做了更新：</p>
-<ul>
-<li>Spring Boot 2.3.1 -&gt; <strong>Spring Boot 2.3.2</strong></li>
-<li>Spring Boot 2.2.8 -&gt; <strong>Spring Boot 2.2.9</strong></li>
-<li>Spring Boot 2.1.15 -&gt; <strong>Spring Boot 2.1.16</strong></li>
+<p><img data-src="https://img-blog.csdnimg.cn/20201023161125192.jpg" alt=""></p>
+<h1 id="✍前言"><a href="#✍前言" class="headerlink" title="✍前言"></a>✍前言</h1><p>你好，我是YourBatman。又一年1024程序员节，你快乐吗？还是在加班上线呢？</p>
+<p><a href="https://mp.weixin.qq.com/s/jzOv67ZTSx2rByj0aeUTgw" target="_blank" rel="noopener">上篇文章</a> 介绍了Validator校验器的五大核心组件，在结合前面几篇所讲，相信你对Bean Validation已有了一个整体认识了。</p>
+<p>本文将<strong>非常实用</strong>，因为将要讲述的是Bean Validation在4个层级上的验证方式，它将覆盖你使用过程中的方方面面，不信你看。</p>
+<h2 id="版本约定"><a href="#版本约定" class="headerlink" title="版本约定"></a>版本约定</h2><ul>
+<li>Bean Validation版本：<code>2.0.2</code></li>
+<li>Hibernate Validator版本：<code>6.1.5.Final</code></li>
 </ul>
-<p><img data-src="https://img-blog.csdnimg.cn/20200725221151805.png" alt=""><br>此次发版，距离上次<strong>正式</strong>发版（不区分分支）已足足有<strong>44天</strong>之久。<br><img data-src="https://img-blog.csdnimg.cn/20200725220629806.png" alt=""></p>
-<h2 id="有哪些升级？"><a href="#有哪些升级？" class="headerlink" title="有哪些升级？"></a>有哪些升级？</h2><p>参考github上的Release详情，三个分支<strong>都</strong>有如下三方面的改进：</p>
+<h1 id="✍正文"><a href="#✍正文" class="headerlink" title="✍正文"></a>✍正文</h1><p>Jakarta Bean它的验证约束是通过声明式方式（注解）来表达的，我们知道Java注解几乎可以标注在任何地方（package上都可标注注解你敢信？），那么Jakarta Bean支持哪些呢？</p>
+<p><strong>Jakarta Bean</strong>共支持四个级别的约束：</p>
 <ol>
-<li>🐞 修复bug</li>
-<li>📔 文档同步</li>
-<li>🔨 升级依赖</li>
+<li>字段约束（Field）</li>
+<li>属性约束（Property）</li>
+<li>容器<strong>元素</strong>约束（Container Element）</li>
+<li>类约束（Class）</li>
 </ol>
-<h3 id="🐞-修复bug"><a href="#🐞-修复bug" class="headerlink" title="🐞 修复bug"></a>🐞 修复bug</h3><p>小版本号的升级，最重要的使命就是<strong>修复bug</strong>，这是它存在的意义。针对这三个版本，各自的bug修复总数如下：</p>
-<ul>
-<li><strong>2.3.2</strong>：34个。遥遥领先</li>
-<li><strong>2.2.9</strong>：10个。</li>
-<li><strong>2.1.16</strong>：1个。</li>
-</ul>
-<p>能发现规律吧，<strong>版本越新，bug越多</strong>，这是符合常理的。另外，从小版本号里能知道：2.1.x版本都修复16次bug了，而2.3.x才第2次修复，正处于bug井喷阶段呢。所以一味的追新的话，还需谨慎哈。</p>
-<p>也许你会吐槽，Spring Boot这啥编码水平，咋这么多bug？其实非也，个数虽多（其实也还好），但每一个都是<strong>非严重bug</strong>，影响甚微，无需大惊小怪。</p>
-<p>另外，从bug的原因上来看，不少bug是各个版本都有的共性问题。比如2.1.x版本那个唯一的bug，其它两个版本均有：<br><img data-src="https://img-blog.csdnimg.cn/20200725224007874.png" alt=""></p>
-<h3 id="📔-文档同步"><a href="#📔-文档同步" class="headerlink" title="📔 文档同步"></a>📔 文档同步</h3><p>此part用于对文档上的改变做出一些说明，比如文字描述错误、排班不正确等等。举例本次的一个修复：</p>
-<p>修复前：<br><img data-src="https://img-blog.csdnimg.cn/20200725224446430.png" alt=""><br>修复后：<br><img data-src="https://img-blog.csdnimg.cn/20200725224517894.png" alt=""><br>不得不说，这老外还挺较真（挺仔细）的。</p>
-<h3 id="🔨-升级依赖"><a href="#🔨-升级依赖" class="headerlink" title="🔨 升级依赖"></a>🔨 升级依赖</h3><p>由于是小版本的升级，因此对应的依赖也是小版本升级。举例：</p>
-<ul>
-<li>Tomcat升级到9.0.37</li>
-<li>Spring Framework升级到5.2.8（此版本4天前发布）</li>
-</ul>
-<p>值得注意的是，拿<code>Spring Framework</code>的升级举例：Spring Boot的2.2.x和2.3.x都是升级到了5.2.8版本，而Spring Boot的2.1.x分支依赖的是<code>Spring Framework 5.1.17</code>版本哦。</p>
-<hr>
-<p><strong>除此之外</strong>，Spring Boot它的最新版本，也就是2.3.2里还新增了3个新特性，了解一下：</p>
+<p>值得注意的是，并不是所有的<strong>约束注解</strong>都能够标注在上面四种级别上。现实情况是：Bean Validation自带的22个标准约束全部支持1/2/3级别，且全部<strong>不支持</strong>第4级别（类级别）约束。当然喽，作为补充的<code>Hibernate-Validator</code>它提供了一些专门用于类级别的约束注解，如<code>org.hibernate.validator.constraints.@ScriptAssert</code>就是一常用案例。</p>
+<p>说明：为简化接下来示例代码，共用工具代码提前展示如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">ValidatorUtil</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ValidatorFactory <span class="title">obtainValidatorFactory</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Validation.buildDefaultValidatorFactory();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Validator <span class="title">obtainValidator</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> obtainValidatorFactory().getValidator();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ExecutableValidator <span class="title">obtainExecutableValidator</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> obtainValidator().forExecutables();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function"><span class="keyword">void</span> <span class="title">printViolations</span><span class="params">(Set&lt;ConstraintViolation&lt;T&gt;&gt; violations)</span> </span>&#123;</span><br><span class="line">        violations.stream().map(v -&gt; v.getPropertyPath()  + v.getMessage() + <span class="string">"，但你的值是： "</span> + v.getInvalidValue()).forEach(System.out::println);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="1、字段级别约束（Field）"><a href="#1、字段级别约束（Field）" class="headerlink" title="1、字段级别约束（Field）"></a>1、字段级别约束（Field）</h2><p>这是我们<strong>最为常用</strong>的一种约束方式：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Room</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@NotNull</span></span><br><span class="line">    <span class="keyword">public</span> String name;</span><br><span class="line">    <span class="meta">@AssertTrue</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">boolean</span> finished;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>书写测试用例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    Room bean = <span class="keyword">new</span> Room();</span><br><span class="line">    bean.finished = <span class="keyword">false</span>;</span><br><span class="line">    ValidatorUtil.printViolations(ValidatorUtil.obtainValidator().validate(bean));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，输出：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">finished只能为<span class="keyword">true</span>，但你的值是： <span class="keyword">false</span></span><br><span class="line">name不能为<span class="keyword">null</span>，但你的值是： <span class="keyword">null</span></span><br></pre></td></tr></table></figure>
+<p>当把约束标注在Field字段上时，Bean Validation将使用字段的访问策略来校验，<strong>不会调用任何方法</strong>，即使你提供了对应的get/set方法也不会触碰。</p>
+<blockquote>
+<p>话外音：使用<code>Field#get()</code>得到字段的值</p>
+</blockquote>
+<h3 id="使用细节"><a href="#使用细节" class="headerlink" title="使用细节"></a>使用细节</h3><ol>
+<li>字段约束可以应用于<strong>任何访问修饰符</strong>的字段</li>
+<li>不支持对静态字段的约束（static静态字段使用约束无效）</li>
+</ol>
+<p>若你的对象会被<strong>字节码增强</strong>，那么请不要使用Field约束，而是使用下面介绍的属性级别约束更为合适。</p>
+<blockquote>
+<p>原因：增强过的类并不一定能通过字段反射去获取到它的值</p>
+</blockquote>
+<p>绝大多数情况下，对Field字段做约束的话均是POJO，被增强的可能性极小，因此此种方式是<strong>被推荐的</strong>，看着清爽。</p>
+<h2 id="2、属性级别约束（Property）"><a href="#2、属性级别约束（Property）" class="headerlink" title="2、属性级别约束（Property）"></a>2、属性级别约束（Property）</h2><p>若一个Bean遵循<strong>Java Bean规范</strong>，那么也可以使用属性约束来代替字段约束。比如上例可改写为如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Room</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String name;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">boolean</span> finished;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@NotNull</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@AssertTrue</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isFinished</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> finished;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>执行上面相同的测试用例，输出：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">finished只能为<span class="keyword">true</span>，但你的值是： <span class="keyword">false</span></span><br><span class="line">name不能为<span class="keyword">null</span>，但你的值是： <span class="keyword">null</span></span><br></pre></td></tr></table></figure>
+<p>效果“完全”一样。</p>
+<p>当把约束标注在Property属性上时，将采用属性访问策略来获取要验证的值。说白了：会调用你的Method来获取待校验的值。</p>
+<h3 id="使用细节-1"><a href="#使用细节-1" class="headerlink" title="使用细节"></a>使用细节</h3><ol>
+<li>约束放在get方法上<strong>优于</strong>放在set方法上，这样只读属性（没有get方法）依然可以执行约束逻辑</li>
+<li>不要在<strong>属性和字段</strong>上都标注注解，否则会重复执行约束逻辑（有多少个注解就执行多少次）</li>
+<li>不要既在属性的get方法上又在set方法上标注约束注解</li>
+</ol>
+<h2 id="3、容器元素级别约束（Container-Element）"><a href="#3、容器元素级别约束（Container-Element）" class="headerlink" title="3、容器元素级别约束（Container Element）"></a>3、容器元素级别约束（Container Element）</h2><p>还有一种非常非常常见的验证场景：验证容器内（每个）元素，也就验证参数化类型<code>parameterized type</code>。形如<code>List&lt;Room&gt;</code>希望里面装的每个Room都是合法的，传统的做法是在for循环里对每个room进行验证：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Room&gt; beans = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"><span class="keyword">for</span> (Room bean : beans) &#123;</span><br><span class="line">    validate(bean);</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>很明显这么做至少存在下面两个不足：</p>
 <ol>
-<li>改进 Kubernates Liveness/Readiness 健康指标和探针配置</li>
-<li>添加运行镜像选项用于Docker镜像构建</li>
-<li>增加对reactive Elasticsearch的健康检查</li>
+<li>验证逻辑具有侵入性</li>
+<li>验证逻辑是黑匣子（不看内部源码无法知道你有哪些约束），非声明式</li>
 </ol>
+<p>在本专栏<a href="https://mp.weixin.qq.com/s/g04HMhrjbvbPn1Mb9JYa5g" target="_blank" rel="noopener">第一篇</a>知道了从Bean Validation 2.0开始就支持容器元素校验了（本专栏使用版本为：<code>2.02</code>），下面我们来体验一把：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Room</span> </span>&#123;</span><br><span class="line">    <span class="meta">@NotNull</span></span><br><span class="line">    <span class="keyword">public</span> String name;</span><br><span class="line">    <span class="meta">@AssertTrue</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">boolean</span> finished;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>书写测试用例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    List&lt;<span class="meta">@NotNull</span> Room&gt; rooms = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    rooms.add(<span class="keyword">null</span>);</span><br><span class="line">    rooms.add(<span class="keyword">new</span> Room());</span><br><span class="line"></span><br><span class="line">    Room room = <span class="keyword">new</span> Room();</span><br><span class="line">    room.name = <span class="string">"YourBatman"</span>;</span><br><span class="line">    rooms.add(room);</span><br><span class="line"></span><br><span class="line">    ValidatorUtil.printViolations(ValidatorUtil.obtainValidator().validate(rooms));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，<strong>没有任何输出</strong>，也就是说并没有对rooms立面的元素进行验证。这里有一个误区：Bean Validator是基于<strong>Java Bean</strong>进行验证的，而此处你的<code>rooms</code>仅仅只是一个容器类型的变量而已，因此不会验证。</p>
 <blockquote>
-<p>小贴士：小版本号的升级是可以新增这种很小的功能点的，但不允许新增大功能</p>
+<p>其实它是把List当作一个Bean，去验证List里面的标注有约束注解的属性/方法。很显然，List里面不可能标注有约束注解嘛，所以什么都不输出喽</p>
 </blockquote>
-<h2 id="三个版本核心依赖的区别"><a href="#三个版本核心依赖的区别" class="headerlink" title="三个版本核心依赖的区别"></a>三个版本核心依赖的区别</h2><p>Spring Boot目前活跃的分支有3个，也就是这三个<strong>主线版本</strong>。那么他们三在核心依赖上有啥区别呢？A哥特意翻资料帮你整理了一下，绘制如下表：</p>
+<p>为了让验证生效，我们只需这么做：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@NoArgsConstructor</span></span><br><span class="line"><span class="meta">@AllArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Rooms</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> List&lt;<span class="meta">@Valid</span> <span class="meta">@NotNull</span> Room&gt; rooms;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    List&lt;<span class="meta">@NotNull</span> Room&gt; beans = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    beans.add(<span class="keyword">null</span>);</span><br><span class="line">    beans.add(<span class="keyword">new</span> Room());</span><br><span class="line"></span><br><span class="line">    Room room = <span class="keyword">new</span> Room();</span><br><span class="line">    room.name = <span class="string">"YourBatman"</span>;</span><br><span class="line">    beans.add(room);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 必须基于Java Bean，验证才会生效</span></span><br><span class="line">    Rooms rooms = <span class="keyword">new</span> Rooms(beans);</span><br><span class="line">    ValidatorUtil.printViolations(ValidatorUtil.obtainValidator().validate(rooms));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，输出：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">rooms[<span class="number">0</span>].&lt;list element&gt;不能为<span class="keyword">null</span>，但你的值是： <span class="keyword">null</span></span><br><span class="line">rooms[<span class="number">2</span>].finished只能为<span class="keyword">true</span>，但你的值是： <span class="keyword">false</span></span><br><span class="line">rooms[<span class="number">1</span>].name不能为<span class="keyword">null</span>，但你的值是： <span class="keyword">null</span></span><br><span class="line">rooms[<span class="number">1</span>].finished只能为<span class="keyword">true</span>，但你的值是： <span class="keyword">false</span></span><br><span class="line">rooms[<span class="number">1</span>].finished只能为<span class="keyword">true</span>，但你的值是： <span class="keyword">false</span></span><br></pre></td></tr></table></figure>
+<p>从日志中可以看出，元素的验证顺序是不保证的。</p>
 <blockquote>
-<p>说明：因为表格兼容性不太好，所以我以图片方式展示</p>
+<p>小贴士：在HV 6.0 <strong>之前</strong>的版本中，验证容器元素时@Valid是必须，也就是必须写成这样：<code>List&lt;@Valid @NotNull Room&gt; rooms</code>才有效。在HV 6.0之后@Valid这个注解就不是必须的了</p>
 </blockquote>
-<p><img data-src="https://img-blog.csdnimg.cn/20200725230447674.png" alt=""></p>
-<h2 id="关于1-5-x和2-0-x版本"><a href="#关于1-5-x和2-0-x版本" class="headerlink" title="关于1.5.x和2.0.x版本"></a>关于1.5.x和2.0.x版本</h2><p>这两个分支已经是古董分支了：<br><img data-src="https://img-blog.csdnimg.cn/20200725230905400.png" alt=""></p>
-<blockquote>
-<p>stale中文意思：不新鲜的，老掉牙的，没有新意的</p>
-</blockquote>
-<p>它们<strong>早已</strong>寿终正寝，最后一个版本和发布时间为：</p>
+<h3 id="使用细节-2"><a href="#使用细节-2" class="headerlink" title="使用细节"></a>使用细节</h3><ol>
+<li>若约束注解想标注在容器元素上，那么注解定义的<code>@Target</code>里必须包含<code>TYPE_USE</code>（Java8新增）这个类型<ol>
+<li>BV和HV（除了Class级别）的<strong>所有注解</strong>均能标注在容器元素上</li>
+</ol>
+</li>
+<li>BV规定了可以验证容器内元素，HV提供实现。它默认支持如下容器类型：<ol>
+<li><code>java.util.Iterable</code>的实现（如List、Set）</li>
+<li><code>java.util.Map</code>的实现，支持key和value</li>
+<li><code>java.util.Optional/OptionalInt/OptionalDouble...</code></li>
+<li>JavaFX的<code>javafx.beans.observable.ObservableValue</code></li>
+<li>自定义容器类型（自定义很重要，详见下篇文章）</li>
+</ol>
+</li>
+</ol>
+<h2 id="4、类级别约束（Class）"><a href="#4、类级别约束（Class）" class="headerlink" title="4、类级别约束（Class）"></a>4、类级别约束（Class）</h2><p>类级别的约束验证是很多同学不太熟悉的一块，但它却很是重要。</p>
+<p>其实Hibernate-Validator已内置提供了一部分能力，但可能还不够，很多场景需要自己动手优雅解决。为了体现此part的重要性，我决定专门撰文描述，当然还有<strong>自定义容器类型</strong>类型的校验喽，我们下文见。</p>
+<h2 id="字段约束和属性约束的区别"><a href="#字段约束和属性约束的区别" class="headerlink" title="字段约束和属性约束的区别"></a>字段约束和属性约束的区别</h2><p>字段（Field）   VS   属性（Property）本身就属于一对“近义词”，很多时候口头上我们并不做区分，是因为<strong>在POJO里</strong>他俩一般都同时存在，因此大多数情况下可以对等沟通。比如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Room</span> </span>&#123;</span><br><span class="line">    <span class="meta">@NotNull</span></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="meta">@AssertTrue</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> finished;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="字段和属性的区别"><a href="#字段和属性的区别" class="headerlink" title="字段和属性的区别"></a>字段和属性的区别</h3><ol>
+<li>字段具有存储功能：字段是类的一个成员，值在内存中真实存在；而属性它不具有存储功能，属于Java Bean规范抽象出来的一个叫法</li>
+<li>字段一般用于类<strong>内部</strong>（一般是private），而属性可供外部访问（get/set一般是public）<ol>
+<li>这指的是一般情况下的规律</li>
+</ol>
+</li>
+<li>字段的本质是Field，属性的本质是Method</li>
+<li>属性并<strong>不依赖于</strong>字段而存在，只是他们一般都成双成对出现<ol>
+<li>如<code>getClass()</code>你可认为它有名为class的属性，但是它并没有名为class的字段</li>
+</ol>
+</li>
+</ol>
+<p>知晓了字段和属性的区别，再去理解<strong>字段约束</strong>和<strong>属性约束</strong>的差异就简单了，它俩的差异仅仅体现在<strong>待验证值</strong>访问策略上的区别：</p>
 <ul>
-<li>1.5.22.RELEASE，2019.08</li>
-<li>2.0.9.RELEASE，2019.04</li>
+<li>字段约束：直接反射访问字段的值 -&gt; Field#get（不会执行get方法体）</li>
+<li>属性约束：调用属性get方法 -&gt; getXXX（会执行get方法体）</li>
 </ul>
-<p>有意思的是，<strong>2.0.x</strong>版本的生命周期非常的短暂，几乎刚好一年（2018.3 - 2019.4）。但是不可否认2.0.x版本是具有划时代意义的，在1.5.x的基础上垮了一大步，上了一个大台阶。</p>
-<p>所以如果你的项目还在使用这两个版本，特别是1.5.x，那么尽快升级吧。官方推荐的是使用最新的2.3.x分支，这也是当前最为活跃的分支。</p>
 <blockquote>
-<p>小贴士：1.5.x升级到2.x.x属于阻断式升级，需要十分谨慎</p>
+<p>小贴士：如果你希望执行了验证就输出一句日志，又或者你的POJO被字节码增强了，那么属性约束更适合你。否则，推荐使用字段约束</p>
 </blockquote>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>Spring Boot作为微服务、云原生开发的基础设施，每个Java开发者都应该理解它、跟上它、学习它，才得以保证自己不掉队，不被<strong>后浪</strong>拍死。</p>
-<p>但是，如此之快的更新速度，Spring官方是认真的，但你能认真起来吗？歪果仁，这是周末唉，你们不用休息的吗？疫情期间在家办公就这么任性？<br><img data-src="https://img-blog.csdnimg.cn/20200725231628798.png" alt=""></p>
-<h5 id="相关推荐："><a href="#相关推荐：" class="headerlink" title="相关推荐："></a>相关推荐：</h5><ul>
-<li><a href="https://mp.weixin.qq.com/s/z6T9n9YvwjmDwuj-YTa0_w" target="_blank" rel="noopener">Fastjson到了说再见的时候了</a></li>
-<li><a href="https://mp.weixin.qq.com/s/iqSN4HUoIdX0kGcSdnD7EA" target="_blank" rel="noopener">1. 初识Jackson – 世界上最好的JSON库</a></li>
-<li><a href="https://mp.weixin.qq.com/s/p6cwP2BVrC8VxkN-T3uAxg" target="_blank" rel="noopener">2. 妈呀，Jackson原来是这样写JSON的</a></li>
-<li><a href="https://mp.weixin.qq.com/s/ZHb3P06IC4xElHwJqDepxw" target="_blank" rel="noopener">3. 懂了这些，方敢在简历上说会用Jackson写JSON</a></li>
+<h1 id="✍总结"><a href="#✍总结" class="headerlink" title="✍总结"></a>✍总结</h1><p>嗯，这篇文章还不错吧，总体浏览下来行文简单，但内容还是挺干的哈，毕竟1024节嘛，不来点的干的心里有愧。</p>
+<p>作为此part姊妹篇的<strong>上篇</strong>，它是每个同学都有必要掌握的使用方式。而<strong>下篇</strong>我觉得应该更为兴奋些，毕竟那里才能加分。1024，撸起袖子继续干。</p>
+<h5 id="✔推荐阅读："><a href="#✔推荐阅读：" class="headerlink" title="✔推荐阅读："></a>✔推荐阅读：</h5><ul>
+<li><a href="https://mp.weixin.qq.com/s/g04HMhrjbvbPn1Mb9JYa5g" target="_blank" rel="noopener">1. 不吹不擂，第一篇就能提升你对Bean Validation数据校验的认知</a></li>
+<li><a href="https://mp.weixin.qq.com/s/-KeOCq2rsXCvrqD8HYHSpQ" target="_blank" rel="noopener">2. Bean Validation声明式校验方法的参数、返回值</a></li>
+<li><a href="https://mp.weixin.qq.com/s/MQjXG0cg8domRtwf3ArvHw" target="_blank" rel="noopener">3. 站在使用层面，Bean Validation这些标准接口你需要烂熟于胸</a></li>
+<li><a href="https://mp.weixin.qq.com/s/jzOv67ZTSx2rByj0aeUTgw" target="_blank" rel="noopener">4. Validator校验器的五大核心组件，一个都不能少</a></li>
 </ul>
         <!-- ....这里是正文内容的底部（首页不会展示）... -->
         <style>
@@ -488,16 +526,13 @@
   <div class="popular-posts-header">你可能还喜欢：</div>
   <ul class="popular-posts">
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\x2y\fa005713.html" rel="bookmark">static关键字有何魔法？竟让Spring Boot搞出那么多静态内部类</a></div>
+      <div class="popular-posts-title"><a href="\x2y\4fe71a34.html" rel="bookmark">3. 站在使用层面，Bean Validation这些标准接口你需要烂熟于胸</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\x2y\84b12bae.html" rel="bookmark">Spring Boot 2.3.0正式发布：优雅停机、配置文件位置通配符新特性一览</a></div>
+      <div class="popular-posts-title"><a href="\x2y\9088caa6.html" rel="bookmark">2. Bean Validation声明式校验方法的参数、返回值</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\x2y\3aa2234d.html" rel="bookmark">使用@AutoConfigureBefore调整配置顺序竟没生效？</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\x2y\78afedd2.html" rel="bookmark">不懂SpringApplication生命周期事件？那就等于不会Spring Boot嘛</a></div>
+      <div class="popular-posts-title"><a href="\x2y\55d56c0b.html" rel="bookmark">1. 不吹不擂，第一篇就能提升你对Bean Validation数据校验的认知</a></div>
     </li>
   </ul>
 
@@ -507,17 +542,17 @@
 <ul class="post-copyright">
   <li class="post-copyright-title">
     <strong>本文标题： </strong>
-    《搞事情？Spring Boot今天一口气发布三个版本》
+    《5. Bean Validation声明式验证四大级别：字段、属性、容器元素、类》
   </li>
   <li class="post-copyright-author">
     <strong>本文作者： </strong>A哥(YourBatman)
   </li>
   <li class="post-copyright-date">
-    <strong>发布时间： </strong>2020-07-26 08:39:54
+    <strong>发布时间： </strong>2020-10-24 07:40:14
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://www.yourbatman.cn/x2y/a3cba048.html" title="搞事情？Spring Boot今天一口气发布三个版本">https://www.yourbatman.cn/x2y/a3cba048.html</a>
+    <a href="https://www.yourbatman.cn/x2y/a0e8d910.html" title="5. Bean Validation声明式验证四大级别：字段、属性、容器元素、类">https://www.yourbatman.cn/x2y/a0e8d910.html</a>
   </li>
   <li class="post-copyright-license">
     <strong>许可协议： </strong>本站所有文章均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载：No！转发：Yes！
@@ -553,8 +588,10 @@
       <footer class="post-footer">
           
           <div class="post-tags">
-              <a href="/tags/Spring-Boot/" rel="tag"><i class="fa fa-tag"></i> Spring Boot</a>
-              <a href="/tags/%E6%96%B0%E7%89%B9%E6%80%A7/" rel="tag"><i class="fa fa-tag"></i> 新特性</a>
+              <a href="/tags/Bean-Validation/" rel="tag"><i class="fa fa-tag"></i> Bean Validation</a>
+              <a href="/tags/Hibernate-Validator/" rel="tag"><i class="fa fa-tag"></i> Hibernate Validator</a>
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C/" rel="tag"><i class="fa fa-tag"></i> 数据校验</a>
+              <a href="/tags/JSR380/" rel="tag"><i class="fa fa-tag"></i> JSR380</a>
           </div>
 
         <!-- 导入投票模块 -->
@@ -571,13 +608,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/x2y/2d980889.html" rel="prev" title="蚂蚁金服上市了，我不想努力了">
-      <i class="fa fa-chevron-left"></i> 蚂蚁金服上市了，我不想努力了
+    <a href="/x2y/52aa588e.html" rel="prev" title="JDK15正式发布，划时代的ZGC同时宣布转正">
+      <i class="fa fa-chevron-left"></i> JDK15正式发布，划时代的ZGC同时宣布转正
     </a></div>
-      <div class="post-nav-item">
-    <a href="/x2y/a47cf2f7.html" rel="next" title="4. JSON字符串是如何被解析的？JsonParser了解一下">
-      4. JSON字符串是如何被解析的？JsonParser了解一下 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -643,7 +677,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#正文"><span class="nav-number">2.</span> <span class="nav-text">正文</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#有哪些升级？"><span class="nav-number">2.1.</span> <span class="nav-text">有哪些升级？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#🐞-修复bug"><span class="nav-number">2.1.1.</span> <span class="nav-text">🐞 修复bug</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#📔-文档同步"><span class="nav-number">2.1.2.</span> <span class="nav-text">📔 文档同步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#🔨-升级依赖"><span class="nav-number">2.1.3.</span> <span class="nav-text">🔨 升级依赖</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三个版本核心依赖的区别"><span class="nav-number">2.2.</span> <span class="nav-text">三个版本核心依赖的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于1-5-x和2-0-x版本"><span class="nav-number">2.3.</span> <span class="nav-text">关于1.5.x和2.0.x版本</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#相关推荐："><span class="nav-number">3.0.0.0.1.</span> <span class="nav-text">相关推荐：</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#✍前言"><span class="nav-number">1.</span> <span class="nav-text">✍前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#版本约定"><span class="nav-number">1.1.</span> <span class="nav-text">版本约定</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#✍正文"><span class="nav-number">2.</span> <span class="nav-text">✍正文</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、字段级别约束（Field）"><span class="nav-number">2.1.</span> <span class="nav-text">1、字段级别约束（Field）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用细节"><span class="nav-number">2.1.1.</span> <span class="nav-text">使用细节</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、属性级别约束（Property）"><span class="nav-number">2.2.</span> <span class="nav-text">2、属性级别约束（Property）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用细节-1"><span class="nav-number">2.2.1.</span> <span class="nav-text">使用细节</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、容器元素级别约束（Container-Element）"><span class="nav-number">2.3.</span> <span class="nav-text">3、容器元素级别约束（Container Element）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用细节-2"><span class="nav-number">2.3.1.</span> <span class="nav-text">使用细节</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4、类级别约束（Class）"><span class="nav-number">2.4.</span> <span class="nav-text">4、类级别约束（Class）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字段约束和属性约束的区别"><span class="nav-number">2.5.</span> <span class="nav-text">字段约束和属性约束的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#字段和属性的区别"><span class="nav-number">2.5.1.</span> <span class="nav-text">字段和属性的区别</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#✍总结"><span class="nav-number">3.</span> <span class="nav-text">✍总结</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#✔推荐阅读："><span class="nav-number">3.0.0.0.1.</span> <span class="nav-text">✔推荐阅读：</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
