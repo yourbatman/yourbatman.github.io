@@ -24,21 +24,16 @@
     var CONFIG = {"hostname":"www.yourbatman.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},"motion":{"enable":false,"async":true,"transition":{"post_block":"flipBounceYIn","post_header":"flipXIn","post_body":"flipBounceXIn","coll_header":"expandIn","sidebar":"shrinkIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="了解核心组件，就算站稳脚跟">
+  <meta name="description" content="1024，撸起袖子继续干">
 <meta property="og:type" content="article">
-<meta property="og:title" content="4. Validator校验器的五大核心组件，一个都不能少">
+<meta property="og:title" content="5. Bean Validation声明式验证四大级别：字段、属性、容器元素、类">
 <meta property="og:url" content="https://www.yourbatman.cn/x2y/a0e8d910.html">
 <meta property="og:site_name" content="BAT的乌托邦">
-<meta property="og:description" content="了解核心组件，就算站稳脚跟">
+<meta property="og:description" content="1024，撸起袖子继续干">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/2020090218282143.png#pic_center">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200901214251873.png#pic_center">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200902103551768.png#pic_center">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200902104023147.png#pic_center">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200902163234854.png#pic_center">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200902165457234.png#pic_center">
-<meta property="article:published_time" content="2020-10-23T17:40:14.000Z">
-<meta property="article:modified_time" content="2020-10-24T23:09:39.883Z">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201023161125192.jpg">
+<meta property="article:published_time" content="2020-10-23T23:40:14.000Z">
+<meta property="article:modified_time" content="2020-10-23T23:47:15.112Z">
 <meta property="article:author" content="A哥(YourBatman)">
 <meta property="article:tag" content="BAT的乌托邦">
 <meta property="article:tag" content="A哥">
@@ -48,7 +43,7 @@
 <meta property="article:tag" content="数据校验">
 <meta property="article:tag" content="1024程序员节">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/2020090218282143.png#pic_center">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20201023161125192.jpg">
 
 <link rel="canonical" href="https://www.yourbatman.cn/x2y/a0e8d910.html">
 
@@ -63,7 +58,7 @@
   };
 </script>
 
-  <title>4. Validator校验器的五大核心组件，一个都不能少 | BAT的乌托邦</title>
+  <title>5. Bean Validation声明式验证四大级别：字段、属性、容器元素、类 | BAT的乌托邦</title>
   
 
 
@@ -258,7 +253,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          4. Validator校验器的五大核心组件，一个都不能少
+          5. Bean Validation声明式验证四大级别：字段、属性、容器元素、类
         </h1>
 
         <div class="post-meta">
@@ -270,7 +265,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-10-24 01:40:14" itemprop="dateCreated datePublished" datetime="2020-10-24T01:40:14+08:00">2020-10-24</time>
+              <time title="创建时间：2020-10-24 07:40:14" itemprop="dateCreated datePublished" datetime="2020-10-24T07:40:14+08:00">2020-10-24</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -283,7 +278,7 @@
             </span>
 
           
-            <span id="/x2y/a0e8d910.html" class="post-meta-item leancloud_visitors" data-flag-title="4. Validator校验器的五大核心组件，一个都不能少" title="阅读次数">
+            <span id="/x2y/a0e8d910.html" class="post-meta-item leancloud_visitors" data-flag-title="5. Bean Validation声明式验证四大级别：字段、属性、容器元素、类" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -312,14 +307,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>7k</span>
+              <span>5.6k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>6 分钟</span>
+              <span>5 分钟</span>
             </span>
 
           <!-- 本文作者 -->
@@ -343,69 +338,127 @@
 
       
         <blockquote>
-<p>困难是弹簧，你弱它就强。本文已被 <a href="https://www.yourbatman.cn"><strong>https://www.yourbatman.cn</strong></a> 收录，里面一并有Spring技术栈、MyBatis、JVM、中间件等小而美的<strong>专栏</strong>供以免费学习。关注公众号【<strong>BAT的乌托邦</strong>】逐个击破，深入掌握，拒绝浅尝辄止。</p>
+<p>1024，代码改变世界。本文已被 <a href="https://www.yourbatman.cn"><strong>https://www.yourbatman.cn</strong></a> 收录，里面一并有Spring技术栈、MyBatis、JVM、中间件等小而美的<strong>专栏</strong>供以免费学习。关注公众号【<strong>BAT的乌托邦</strong>】逐个击破，深入掌握，拒绝浅尝辄止。</p>
 </blockquote>
-<p><img data-src="https://img-blog.csdnimg.cn/2020090218282143.png#pic_center" alt=""></p>
-<h1 id="✍前言"><a href="#✍前言" class="headerlink" title="✍前言"></a>✍前言</h1><p>你好，我是YourBatman。</p>
-<p><a href="">上篇文章</a>介绍了校验器上下文ValidatorContext，知道它可以对校验器Validator的核心五大组件分别进行定制化设置，那么这些核心组件在校验过程中到底扮演着什么样的角色呢，本文一探究竟。</p>
-<p>作为核心组件，是有必要多探究一分的。以此为基，再扩散开了解和使用其它功能模块便将如鱼得水。但是过程枯燥是真的，所以需要坚持呀。</p>
+<p><img data-src="https://img-blog.csdnimg.cn/20201023161125192.jpg" alt=""></p>
+<h1 id="✍前言"><a href="#✍前言" class="headerlink" title="✍前言"></a>✍前言</h1><p>你好，我是YourBatman。又一年1024程序员节，你快乐吗？还是在加班上线呢？</p>
+<p><a href="https://mp.weixin.qq.com/s/jzOv67ZTSx2rByj0aeUTgw" target="_blank" rel="noopener">上篇文章</a> 介绍了Validator校验器的五大核心组件，在结合前面几篇所讲，相信你对Bean Validation已有了一个整体认识了。</p>
+<p>本文将<strong>非常实用</strong>，因为将要讲述的是Bean Validation在4个层级上的验证方式，它将覆盖你使用过程中的方方面面，不信你看。</p>
 <h2 id="版本约定"><a href="#版本约定" class="headerlink" title="版本约定"></a>版本约定</h2><ul>
 <li>Bean Validation版本：<code>2.0.2</code></li>
 <li>Hibernate Validator版本：<code>6.1.5.Final</code></li>
 </ul>
-<h1 id="✍正文"><a href="#✍正文" class="headerlink" title="✍正文"></a>✍正文</h1><p>Bean Validation校验器的这五大核心组件通过ValidatorContext可以分别设置：若没设置（或为null），那就回退到使用ValidatorFactory默认的组件。</p>
-<p>准备好的组件，统一通过ValidatorFactory暴露出来予以访问：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ValidatorFactory</span> <span class="keyword">extends</span> <span class="title">AutoCloseable</span> </span>&#123;</span><br><span class="line">	...</span><br><span class="line">	<span class="function">MessageInterpolator <span class="title">getMessageInterpolator</span><span class="params">()</span></span>;</span><br><span class="line">	<span class="function">TraversableResolver <span class="title">getTraversableResolver</span><span class="params">()</span></span>;</span><br><span class="line">	<span class="function">ConstraintValidatorFactory <span class="title">getConstraintValidatorFactory</span><span class="params">()</span></span>;</span><br><span class="line">	<span class="function">ParameterNameProvider <span class="title">getParameterNameProvider</span><span class="params">()</span></span>;</span><br><span class="line">	<span class="meta">@since</span> <span class="number">2.0</span></span><br><span class="line">	<span class="function">ClockProvider <span class="title">getClockProvider</span><span class="params">()</span></span>;</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="✍正文"><a href="#✍正文" class="headerlink" title="✍正文"></a>✍正文</h1><p>Jakarta Bean它的验证约束是通过声明式方式（注解）来表达的，我们知道Java注解几乎可以标注在任何地方（package上都可标注注解你敢信？），那么Jakarta Bean支持哪些呢？</p>
+<p><strong>Jakarta Bean</strong>共支持四个级别的约束：</p>
+<ol>
+<li>字段约束（Field）</li>
+<li>属性约束（Property）</li>
+<li>容器<strong>元素</strong>约束（Container Element）</li>
+<li>类约束（Class）</li>
+</ol>
+<p>值得注意的是，并不是所有的<strong>约束注解</strong>都能够标注在上面四种级别上。现实情况是：Bean Validation自带的22个标准约束全部支持1/2/3级别，且全部<strong>不支持</strong>第4级别（类级别）约束。当然喽，作为补充的<code>Hibernate-Validator</code>它提供了一些专门用于类级别的约束注解，如<code>org.hibernate.validator.constraints.@ScriptAssert</code>就是一常用案例。</p>
+<p>说明：为简化接下来示例代码，共用工具代码提前展示如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">ValidatorUtil</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ValidatorFactory <span class="title">obtainValidatorFactory</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Validation.buildDefaultValidatorFactory();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Validator <span class="title">obtainValidator</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> obtainValidatorFactory().getValidator();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ExecutableValidator <span class="title">obtainExecutableValidator</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> obtainValidator().forExecutables();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function"><span class="keyword">void</span> <span class="title">printViolations</span><span class="params">(Set&lt;ConstraintViolation&lt;T&gt;&gt; violations)</span> </span>&#123;</span><br><span class="line">        violations.stream().map(v -&gt; v.getPropertyPath()  + v.getMessage() + <span class="string">"，但你的值是： "</span> + v.getInvalidValue()).forEach(System.out::println);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="MessageInterpolator"><a href="#MessageInterpolator" class="headerlink" title="MessageInterpolator"></a>MessageInterpolator</h2><p>直译为：消息插值器。按字面不太好理解：简单的说就是对message内容进行<strong>格式化</strong>，若有占位符<code>{}</code>或者el表达式<code>${}</code>就执行替换和计算。对于语法错误应该尽量的宽容。</p>
-<p>校验失败的消息模版交给它处理就成为了<strong>人能看得懂</strong>的消息格式，因此它能够处理<strong>消息的国际化</strong>：消息的key是同一个，但根据不同的Locale展示不同的消息模版。最后在替换/技术模版里面的占位符即可~</p>
-<p>这是Bean Validation的标准接口，Hibernate Validator提供了实现：<br><img data-src="https://img-blog.csdnimg.cn/20200901214251873.png#pic_center" alt=""><br>Hibernate Validation它使用的是ResourceBundleMessageInterpolator来既支持参数，也支持EL表达式。内部使用了<strong>javax.el.ExpressionFactory</strong>这个API来支持EL表达式<code>${}</code>的，形如这样：<code>must be greater than ${inclusive == true ? &#39;or equal to &#39; : &#39;&#39;}{value}</code>它是能够动态计算出<code>${inclusive == true ? &#39;or equal to &#39; : &#39;&#39;}</code>这部分的值的。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">MessageInterpolator</span> </span>&#123;</span><br><span class="line">	<span class="function">String <span class="title">interpolate</span><span class="params">(String messageTemplate, Context context)</span></span>;</span><br><span class="line">	<span class="function">String <span class="title">interpolate</span><span class="params">(String messageTemplate, Context context,  Locale locale)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>接口方法直接了当：根据上下文Context填充消息模版messageTemplate。它的具体工作流程我用图示如下：<br><img data-src="https://img-blog.csdnimg.cn/20200902103551768.png#pic_center" alt=""><br><code>context</code>上下文里一般是拥有需要被替换的key的键值对的，如下图所示：<br><img data-src="https://img-blog.csdnimg.cn/20200902104023147.png#pic_center" alt=""><br>Hibernate对Context的实现中<strong>扩展出</strong>了如图的两个Map（非JSR标准），可以让你<strong>优先于</strong> constraintDescriptor取值，取不到再fallback到标准模式的<code>ConstraintDescriptor</code>里取值，也就是注解的属性值。具体取值代码如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">ParameterTermResolver：</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> Object <span class="title">getVariable</span><span class="params">(Context context, String parameter)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// 先从hibernate扩展出来的方式取值</span></span><br><span class="line">		<span class="keyword">if</span> (context <span class="keyword">instanceof</span> HibernateMessageInterpolatorContext) &#123;</span><br><span class="line">			Object variable = ( (HibernateMessageInterpolatorContext) context ).getMessageParameters().get( parameter );</span><br><span class="line">			<span class="keyword">if</span> ( variable != <span class="keyword">null</span> ) &#123;</span><br><span class="line">				<span class="keyword">return</span> variable;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// fallback到标准模式：从注解属性里取值</span></span><br><span class="line">		<span class="keyword">return</span> context.getConstraintDescriptor().getAttributes().get( parameter );</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-<p>大部分情况下我们只用得到注解属性里面的值，也就是错误消息里可以使用<code>{注解属性名}</code>这种方式动态获取到注解属性值，给与友好错误提示。</p>
-<p>上下文里的Message参数和Expression参数如何放进去的？在后续高级使用部分，会自定义k-v替换参数，也就会使用到本部分的高级应用知识，后文见。</p>
-<h2 id="TraversableResolver"><a href="#TraversableResolver" class="headerlink" title="TraversableResolver"></a>TraversableResolver</h2><p>能跨越的处理器。从字面是非常不好理解，用粗暴的语言解释为：<strong>确定某个属性是否能被ValidationProvider访问</strong>，当妹访问一个属性时都会通过它来判断一下子，提供两个判断方法：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">TraversableResolver</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 是否是可达的</span></span><br><span class="line">	<span class="function"><span class="keyword">boolean</span> <span class="title">isReachable</span><span class="params">(Object traversableObject,</span></span></span><br><span class="line"><span class="function"><span class="params">						Node traversableProperty,</span></span></span><br><span class="line"><span class="function"><span class="params">						Class&lt;?&gt; rootBeanType,</span></span></span><br><span class="line"><span class="function"><span class="params">						Path pathToTraversableObject,</span></span></span><br><span class="line"><span class="function"><span class="params">						ElementType elementType)</span></span>;</span><br><span class="line">						</span><br><span class="line">	<span class="comment">// 是否是可级联的（是否标注有@Valid注解）</span></span><br><span class="line">	<span class="function"><span class="keyword">boolean</span> <span class="title">isCascadable</span><span class="params">(Object traversableObject,</span></span></span><br><span class="line"><span class="function"><span class="params">						 Node traversableProperty,</span></span></span><br><span class="line"><span class="function"><span class="params">						 Class&lt;?&gt; rootBeanType,</span></span></span><br><span class="line"><span class="function"><span class="params">						 Path pathToTraversableObject,</span></span></span><br><span class="line"><span class="function"><span class="params">						 ElementType elementType)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>该接口主要根据配置项来进行判断，并不负责。内部使用，调用者基本无需关心，也不见更改其默认机制，暂且略过。</p>
-<h2 id="ConstraintValidatorFactory"><a href="#ConstraintValidatorFactory" class="headerlink" title="ConstraintValidatorFactory"></a>ConstraintValidatorFactory</h2><p>约束校验器工厂。ConstraintValidator约束校验器我们应该不陌生：每个约束注解都得指定一个/多个约束校验器，形如这样：<code>@Constraint(validatedBy = { xxx.class })</code>。</p>
-<p>ConstraintValidatorFactory就是工厂：可以根据Class生成对象实例。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ConstraintValidatorFactory</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 生成实例：接口并不规定你的生成方式</span></span><br><span class="line">	&lt;T extends ConstraintValidator&lt;?, ?&gt;&gt; <span class="function">T <span class="title">getInstance</span><span class="params">(Class&lt;T&gt; key)</span></span>;</span><br><span class="line">	<span class="comment">// 释放实例。标记此实例不需要再使用，一般为空实现</span></span><br><span class="line">	<span class="comment">// 和Spring容器集成时 .destroyBean(instance)时会调用此方法</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">releaseInstance</span><span class="params">(ConstraintValidator&lt;?, ?&gt; instance)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Hibernate提供了唯一实现ConstraintValidatorFactoryImpl：使用空构造器生成实例 <code>clazz.getConstructor().newInstance();</code>。</p>
-<blockquote>
-<p>小贴士：接口并没规定你如何生成实例，Hibernate Validator是使用空构造这么实现的而已~</p>
-</blockquote>
-<h2 id="ParameterNameProvider"><a href="#ParameterNameProvider" class="headerlink" title="ParameterNameProvider"></a>ParameterNameProvider</h2><p>参数名提供器。这个组件和Spring的<code>ParameterNameDiscoverer</code>作用是一毛一样的：获取方法/构造器的<strong>参数名</strong>。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ParameterNameProvider</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="function">List&lt;String&gt; <span class="title">getParameterNames</span><span class="params">(Constructor&lt;?&gt; constructor)</span></span>;</span><br><span class="line">	<span class="function">List&lt;String&gt; <span class="title">getParameterNames</span><span class="params">(Method method)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>提供的实现：<br><img data-src="https://img-blog.csdnimg.cn/20200902163234854.png#pic_center" alt=""></p>
-<ul>
-<li><code>DefaultParameterNameProvider</code>：基于Java反射API <code>Executable#getParameters()</code>实现</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test9</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ParameterNameProvider parameterNameProvider = <span class="keyword">new</span> DefaultParameterNameProvider();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 拿到Person的无参构造和有参构造（@NoArgsConstructor和@AllArgsConstructor）</span></span><br><span class="line">    Arrays.stream(Person<span class="class">.<span class="keyword">class</span>.<span class="title">getConstructors</span>()).<span class="title">forEach</span>(<span class="title">c</span> -&gt; <span class="title">System</span>.<span class="title">out</span>.<span class="title">println</span>(<span class="title">parameterNameProvider</span>.<span class="title">getParameterNames</span>(<span class="title">c</span>)))</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="1、字段级别约束（Field）"><a href="#1、字段级别约束（Field）" class="headerlink" title="1、字段级别约束（Field）"></a>1、字段级别约束（Field）</h2><p>这是我们<strong>最为常用</strong>的一种约束方式：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Room</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@NotNull</span></span><br><span class="line">    <span class="keyword">public</span> String name;</span><br><span class="line">    <span class="meta">@AssertTrue</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">boolean</span> finished;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>书写测试用例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    Room bean = <span class="keyword">new</span> Room();</span><br><span class="line">    bean.finished = <span class="keyword">false</span>;</span><br><span class="line">    ValidatorUtil.printViolations(ValidatorUtil.obtainValidator().validate(bean));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>运行程序，输出：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[arg0, arg1, arg2, arg3]</span><br><span class="line">[]</span><br></pre></td></tr></table></figure>
-<p>一样的，若你想要打印出<strong>明确的</strong>参数名，请在编译参数上加上<code>-parameters</code>参数。</p>
-<ul>
-<li><code>ReflectionParameterNameProvider</code>：<strong>已过期</strong>。请使用上面的default代替</li>
-<li><code>ParanamerParameterNameProvider</code>：基于<code>com.thoughtworks.paranamer.Paranamer</code>实现参数名的获取，需要额外导入相应的包才行。嗯，这里我就不试了哈~</li>
-</ul>
-<h2 id="ClockProvider"><a href="#ClockProvider" class="headerlink" title="ClockProvider"></a>ClockProvider</h2><p>时钟提供器。这个接口很简单，就是提供一个Clock，给<code>@Past、@Future</code>等阅读判断提供参考。唯一实现为DefaultClockProvider：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DefaultClockProvider</span> <span class="keyword">implements</span> <span class="title">ClockProvider</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> DefaultClockProvider INSTANCE = <span class="keyword">new</span> DefaultClockProvider();</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="title">DefaultClockProvider</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 默认是系统时钟</span></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Clock <span class="title">getClock</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> Clock.systemDefaultZone();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>默认使用当前系统时钟作为参考。若你的系统有全局统一的参考标准，比如<strong>统一时钟</strong>，那就可以通过此接口实现自己的Clock时钟，毕竟每台服务器的时间并不能保证是完全一样的不是，这对于时间敏感的应用场景（如竞标）需要这么做。</p>
-<p>以上就是对Validator校验器的五个核心组件的一个描述，总体上还是比较简单。其中第一个组件：MessageInterpolator插值器我认为是最为重要的，需要理解好了。对后面做自定义消息模版、国际化消息都有用。</p>
-<h2 id="加餐：ValueExtractor"><a href="#加餐：ValueExtractor" class="headerlink" title="加餐：ValueExtractor"></a>加餐：ValueExtractor</h2><p>值提取器。2.0版本新增一个比较重要的组件API，作用：把值从容器内提取出来。这里的容器包括：数组、集合、Map、Optional等等。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// T：待提取的容器类型</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ValueExtractor</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 从原始值originalValue提取到receiver里</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">extractValues</span><span class="params">(T originalValue, ValueReceiver receiver)</span></span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 提供一组方法，用于接收ValueExtractor提取出来的值</span></span><br><span class="line">	<span class="class"><span class="keyword">interface</span> <span class="title">ValueReceiver</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">		<span class="comment">// 接收从对象中提取的值</span></span><br><span class="line">		<span class="function"><span class="keyword">void</span> <span class="title">value</span><span class="params">(String nodeName, Object object)</span></span>;</span><br><span class="line">		<span class="comment">// 接收可以迭代的值，如List、Map、Iterable等</span></span><br><span class="line">		<span class="function"><span class="keyword">void</span> <span class="title">iterableValue</span><span class="params">(String nodeName, Object object)</span></span>;</span><br><span class="line">		<span class="comment">// 接收有索引的值，如List Array</span></span><br><span class="line">		<span class="comment">// i：索引值</span></span><br><span class="line">		<span class="function"><span class="keyword">void</span> <span class="title">indexedValue</span><span class="params">(String nodeName, <span class="keyword">int</span> i, Object object)</span></span>;</span><br><span class="line">		<span class="comment">// 接收键值对的值，如Map</span></span><br><span class="line">		<span class="function"><span class="keyword">void</span> <span class="title">keyedValue</span><span class="params">(String nodeName, Object key, Object object)</span></span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>容易想到，ValueExtractor的实现类就非常之多（所有的实现类都是内建的，非public的，这就是默认情况下支持的容器类型）：<br><img data-src="https://img-blog.csdnimg.cn/20200902165457234.png#pic_center" alt=""><br>举例两个典型实现：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 提取List里的值   LIST_ELEMENT_NODE_NAME -&gt; &lt;list element&gt;</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ListValueExtractor</span> <span class="keyword">implements</span> <span class="title">ValueExtractor</span>&lt;<span class="title">List</span>&lt;@<span class="title">ExtractedValue</span> ?&gt;&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">final</span> ValueExtractorDescriptor DESCRIPTOR = <span class="keyword">new</span> ValueExtractorDescriptor( <span class="keyword">new</span> ListValueExtractor() );</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="title">ListValueExtractor</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">extractValues</span><span class="params">(List&lt;?&gt; originalValue, ValueReceiver receiver)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">for</span> ( <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; originalValue.size(); i++ ) &#123;</span><br><span class="line">			receiver.indexedValue( NodeImpl.LIST_ELEMENT_NODE_NAME, i, originalValue.get( i ) );</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 提取Optional里的值</span></span><br><span class="line"><span class="meta">@UnwrapByDefault</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">OptionalLongValueExtractor</span> <span class="keyword">implements</span> <span class="title">ValueExtractor</span>&lt;@<span class="title">ExtractedValue</span>(<span class="title">type</span> </span>= Long<span class="class">.<span class="keyword">class</span>) <span class="title">OptionalLong</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">final</span> ValueExtractorDescriptor DESCRIPTOR = <span class="keyword">new</span> ValueExtractorDescriptor( <span class="keyword">new</span> OptionalLongValueExtractor() );</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">extractValues</span><span class="params">(OptionalLong originalValue, ValueReceiver receiver)</span> </span>&#123;</span><br><span class="line">		receiver.value( <span class="keyword">null</span>, originalValue.isPresent() ? originalValue.getAsLong() : <span class="keyword">null</span> );</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>校验器Validator通过它把值从容器内<strong>提取出来</strong>参与校验，从这你应该就能理解为毛从Bean Validation2.0开始就支持验证<strong>容器内</strong>的元素了吧，形如这样：<code>List&lt;@NotNull @Valid Person&gt;、Optional&lt;@NotNull @Valid Person&gt;</code>，可谓大大的方便了使用。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">finished只能为<span class="keyword">true</span>，但你的值是： <span class="keyword">false</span></span><br><span class="line">name不能为<span class="keyword">null</span>，但你的值是： <span class="keyword">null</span></span><br></pre></td></tr></table></figure>
+<p>当把约束标注在Field字段上时，Bean Validation将使用字段的访问策略来校验，<strong>不会调用任何方法</strong>，即使你提供了对应的get/set方法也不会触碰。</p>
 <blockquote>
-<p>若你有自定义容器，需要提取的需求，那么你可以自定义一个<code>ValueExtractor</code>实现，然后通过<code>ValidatorContext#addValueExtractor()</code>添加进去即可</p>
+<p>话外音：使用<code>Field#get()</code>得到字段的值</p>
 </blockquote>
-<h1 id="✍总结"><a href="#✍总结" class="headerlink" title="✍总结"></a>✍总结</h1><p>本文主要介绍了Validator校验器的五大核心组件的作用，Bean Validation2.0提供了ValueExtractor组件来实现<strong>容器内</strong>元素的校验，大大简化了对容器元素的校验复杂性，值得点赞。</p>
+<h3 id="使用细节"><a href="#使用细节" class="headerlink" title="使用细节"></a>使用细节</h3><ol>
+<li>字段约束可以应用于<strong>任何访问修饰符</strong>的字段</li>
+<li>不支持对静态字段的约束（static静态字段使用约束无效）</li>
+</ol>
+<p>若你的对象会被<strong>字节码增强</strong>，那么请不要使用Field约束，而是使用下面介绍的属性级别约束更为合适。</p>
+<blockquote>
+<p>原因：增强过的类并不一定能通过字段反射去获取到它的值</p>
+</blockquote>
+<p>绝大多数情况下，对Field字段做约束的话均是POJO，被增强的可能性极小，因此此种方式是<strong>被推荐的</strong>，看着清爽。</p>
+<h2 id="2、属性级别约束（Property）"><a href="#2、属性级别约束（Property）" class="headerlink" title="2、属性级别约束（Property）"></a>2、属性级别约束（Property）</h2><p>若一个Bean遵循<strong>Java Bean规范</strong>，那么也可以使用属性约束来代替字段约束。比如上例可改写为如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Room</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String name;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">boolean</span> finished;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@NotNull</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@AssertTrue</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isFinished</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> finished;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>执行上面相同的测试用例，输出：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">finished只能为<span class="keyword">true</span>，但你的值是： <span class="keyword">false</span></span><br><span class="line">name不能为<span class="keyword">null</span>，但你的值是： <span class="keyword">null</span></span><br></pre></td></tr></table></figure>
+<p>效果“完全”一样。</p>
+<p>当把约束标注在Property属性上时，将采用属性访问策略来获取要验证的值。说白了：会调用你的Method来获取待校验的值。</p>
+<h3 id="使用细节-1"><a href="#使用细节-1" class="headerlink" title="使用细节"></a>使用细节</h3><ol>
+<li>约束放在get方法上<strong>优于</strong>放在set方法上，这样只读属性（没有get方法）依然可以执行约束逻辑</li>
+<li>不要在<strong>属性和字段</strong>上都标注注解，否则会重复执行约束逻辑（有多少个注解就执行多少次）</li>
+<li>不要既在属性的get方法上又在set方法上标注约束注解</li>
+</ol>
+<h2 id="3、容器元素级别约束（Container-Element）"><a href="#3、容器元素级别约束（Container-Element）" class="headerlink" title="3、容器元素级别约束（Container Element）"></a>3、容器元素级别约束（Container Element）</h2><p>还有一种非常非常常见的验证场景：验证容器内（每个）元素，也就验证参数化类型<code>parameterized type</code>。形如<code>List&lt;Room&gt;</code>希望里面装的每个Room都是合法的，传统的做法是在for循环里对每个room进行验证：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Room&gt; beans = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"><span class="keyword">for</span> (Room bean : beans) &#123;</span><br><span class="line">    validate(bean);</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>很明显这么做至少存在下面两个不足：</p>
+<ol>
+<li>验证逻辑具有侵入性</li>
+<li>验证逻辑是黑匣子（不看内部源码无法知道你有哪些约束），非声明式</li>
+</ol>
+<p>在本专栏<a href="https://mp.weixin.qq.com/s/g04HMhrjbvbPn1Mb9JYa5g" target="_blank" rel="noopener">第一篇</a>知道了从Bean Validation 2.0开始就支持容器元素校验了（本专栏使用版本为：<code>2.02</code>），下面我们来体验一把：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Room</span> </span>&#123;</span><br><span class="line">    <span class="meta">@NotNull</span></span><br><span class="line">    <span class="keyword">public</span> String name;</span><br><span class="line">    <span class="meta">@AssertTrue</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">boolean</span> finished;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>书写测试用例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    List&lt;<span class="meta">@NotNull</span> Room&gt; rooms = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    rooms.add(<span class="keyword">null</span>);</span><br><span class="line">    rooms.add(<span class="keyword">new</span> Room());</span><br><span class="line"></span><br><span class="line">    Room room = <span class="keyword">new</span> Room();</span><br><span class="line">    room.name = <span class="string">"YourBatman"</span>;</span><br><span class="line">    rooms.add(room);</span><br><span class="line"></span><br><span class="line">    ValidatorUtil.printViolations(ValidatorUtil.obtainValidator().validate(rooms));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，<strong>没有任何输出</strong>，也就是说并没有对rooms立面的元素进行验证。这里有一个误区：Bean Validator是基于<strong>Java Bean</strong>进行验证的，而此处你的<code>rooms</code>仅仅只是一个容器类型的变量而已，因此不会验证。</p>
+<blockquote>
+<p>其实它是把List当作一个Bean，去验证List里面的标注有约束注解的属性/方法。很显然，List里面不可能标注有约束注解嘛，所以什么都不输出喽</p>
+</blockquote>
+<p>为了让验证生效，我们只需这么做：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@NoArgsConstructor</span></span><br><span class="line"><span class="meta">@AllArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Rooms</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> List&lt;<span class="meta">@Valid</span> <span class="meta">@NotNull</span> Room&gt; rooms;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    List&lt;<span class="meta">@NotNull</span> Room&gt; beans = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    beans.add(<span class="keyword">null</span>);</span><br><span class="line">    beans.add(<span class="keyword">new</span> Room());</span><br><span class="line"></span><br><span class="line">    Room room = <span class="keyword">new</span> Room();</span><br><span class="line">    room.name = <span class="string">"YourBatman"</span>;</span><br><span class="line">    beans.add(room);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 必须基于Java Bean，验证才会生效</span></span><br><span class="line">    Rooms rooms = <span class="keyword">new</span> Rooms(beans);</span><br><span class="line">    ValidatorUtil.printViolations(ValidatorUtil.obtainValidator().validate(rooms));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，输出：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">rooms[<span class="number">0</span>].&lt;list element&gt;不能为<span class="keyword">null</span>，但你的值是： <span class="keyword">null</span></span><br><span class="line">rooms[<span class="number">2</span>].finished只能为<span class="keyword">true</span>，但你的值是： <span class="keyword">false</span></span><br><span class="line">rooms[<span class="number">1</span>].name不能为<span class="keyword">null</span>，但你的值是： <span class="keyword">null</span></span><br><span class="line">rooms[<span class="number">1</span>].finished只能为<span class="keyword">true</span>，但你的值是： <span class="keyword">false</span></span><br><span class="line">rooms[<span class="number">1</span>].finished只能为<span class="keyword">true</span>，但你的值是： <span class="keyword">false</span></span><br></pre></td></tr></table></figure>
+<p>从日志中可以看出，元素的验证顺序是不保证的。</p>
+<blockquote>
+<p>小贴士：在HV 6.0 <strong>之前</strong>的版本中，验证容器元素时@Valid是必须，也就是必须写成这样：<code>List&lt;@Valid @NotNull Room&gt; rooms</code>才有效。在HV 6.0之后@Valid这个注解就不是必须的了</p>
+</blockquote>
+<h3 id="使用细节-2"><a href="#使用细节-2" class="headerlink" title="使用细节"></a>使用细节</h3><ol>
+<li>若约束注解想标注在容器元素上，那么注解定义的<code>@Target</code>里必须包含<code>TYPE_USE</code>（Java8新增）这个类型<ol>
+<li>BV和HV（除了Class级别）的<strong>所有注解</strong>均能标注在容器元素上</li>
+</ol>
+</li>
+<li>BV规定了可以验证容器内元素，HV提供实现。它默认支持如下容器类型：<ol>
+<li><code>java.util.Iterable</code>的实现（如List、Set）</li>
+<li><code>java.util.Map</code>的实现，支持key和value</li>
+<li><code>java.util.Optional/OptionalInt/OptionalDouble...</code></li>
+<li>JavaFX的<code>javafx.beans.observable.ObservableValue</code></li>
+<li>自定义容器类型（自定义很重要，详见下篇文章）</li>
+</ol>
+</li>
+</ol>
+<h2 id="4、类级别约束（Class）"><a href="#4、类级别约束（Class）" class="headerlink" title="4、类级别约束（Class）"></a>4、类级别约束（Class）</h2><p>类级别的约束验证是很多同学不太熟悉的一块，但它却很是重要。</p>
+<p>其实Hibernate-Validator已内置提供了一部分能力，但可能还不够，很多场景需要自己动手优雅解决。为了体现此part的重要性，我决定专门撰文描述，当然还有<strong>自定义容器类型</strong>类型的校验喽，我们下文见。</p>
+<h2 id="字段约束和属性约束的区别"><a href="#字段约束和属性约束的区别" class="headerlink" title="字段约束和属性约束的区别"></a>字段约束和属性约束的区别</h2><p>字段（Field）   VS   属性（Property）本身就属于一对“近义词”，很多时候口头上我们并不做区分，是因为<strong>在POJO里</strong>他俩一般都同时存在，因此大多数情况下可以对等沟通。比如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Room</span> </span>&#123;</span><br><span class="line">    <span class="meta">@NotNull</span></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="meta">@AssertTrue</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> finished;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="字段和属性的区别"><a href="#字段和属性的区别" class="headerlink" title="字段和属性的区别"></a>字段和属性的区别</h3><ol>
+<li>字段具有存储功能：字段是类的一个成员，值在内存中真实存在；而属性它不具有存储功能，属于Java Bean规范抽象出来的一个叫法</li>
+<li>字段一般用于类<strong>内部</strong>（一般是private），而属性可供外部访问（get/set一般是public）<ol>
+<li>这指的是一般情况下的规律</li>
+</ol>
+</li>
+<li>字段的本质是Field，属性的本质是Method</li>
+<li>属性并<strong>不依赖于</strong>字段而存在，只是他们一般都成双成对出现<ol>
+<li>如<code>getClass()</code>你可认为它有名为class的属性，但是它并没有名为class的字段</li>
+</ol>
+</li>
+</ol>
+<p>知晓了字段和属性的区别，再去理解<strong>字段约束</strong>和<strong>属性约束</strong>的差异就简单了，它俩的差异仅仅体现在<strong>待验证值</strong>访问策略上的区别：</p>
+<ul>
+<li>字段约束：直接反射访问字段的值 -&gt; Field#get（不会执行get方法体）</li>
+<li>属性约束：调用属性get方法 -&gt; getXXX（会执行get方法体）</li>
+</ul>
+<blockquote>
+<p>小贴士：如果你希望执行了验证就输出一句日志，又或者你的POJO被字节码增强了，那么属性约束更适合你。否则，推荐使用字段约束</p>
+</blockquote>
+<h1 id="✍总结"><a href="#✍总结" class="headerlink" title="✍总结"></a>✍总结</h1><p>嗯，这篇文章还不错吧，总体浏览下来行文简单，但内容还是挺干的哈，毕竟1024节嘛，不来点的干的心里有愧。</p>
+<p>作为此part姊妹篇的<strong>上篇</strong>，它是每个同学都有必要掌握的使用方式。而<strong>下篇</strong>我觉得应该更为兴奋些，毕竟那里才能加分。1024，撸起袖子继续干。</p>
 <h5 id="✔推荐阅读："><a href="#✔推荐阅读：" class="headerlink" title="✔推荐阅读："></a>✔推荐阅读：</h5><ul>
 <li><a href="https://mp.weixin.qq.com/s/g04HMhrjbvbPn1Mb9JYa5g" target="_blank" rel="noopener">1. 不吹不擂，第一篇就能提升你对Bean Validation数据校验的认知</a></li>
 <li><a href="https://mp.weixin.qq.com/s/-KeOCq2rsXCvrqD8HYHSpQ" target="_blank" rel="noopener">2. Bean Validation声明式校验方法的参数、返回值</a></li>
 <li><a href="https://mp.weixin.qq.com/s/MQjXG0cg8domRtwf3ArvHw" target="_blank" rel="noopener">3. 站在使用层面，Bean Validation这些标准接口你需要烂熟于胸</a></li>
+<li><a href="https://mp.weixin.qq.com/s/jzOv67ZTSx2rByj0aeUTgw" target="_blank" rel="noopener">4. Validator校验器的五大核心组件，一个都不能少</a></li>
 </ul>
         <!-- ....这里是正文内容的底部（首页不会展示）... -->
         <style>
@@ -473,6 +526,9 @@
   <div class="popular-posts-header">你可能还喜欢：</div>
   <ul class="popular-posts">
     <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\x2y\c8011cdb.html" rel="bookmark">4. Validator校验器的五大核心组件，一个都不能少</a></div>
+    </li>
+    <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="\x2y\4fe71a34.html" rel="bookmark">3. 站在使用层面，Bean Validation这些标准接口你需要烂熟于胸</a></div>
     </li>
     <li class="popular-posts-item">
@@ -489,17 +545,17 @@
 <ul class="post-copyright">
   <li class="post-copyright-title">
     <strong>本文标题： </strong>
-    《4. Validator校验器的五大核心组件，一个都不能少》
+    《5. Bean Validation声明式验证四大级别：字段、属性、容器元素、类》
   </li>
   <li class="post-copyright-author">
     <strong>本文作者： </strong>A哥(YourBatman)
   </li>
   <li class="post-copyright-date">
-    <strong>发布时间： </strong>2020-10-24 01:40:14
+    <strong>发布时间： </strong>2020-10-24 07:40:14
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://www.yourbatman.cn/x2y/a0e8d910.html" title="4. Validator校验器的五大核心组件，一个都不能少">https://www.yourbatman.cn/x2y/a0e8d910.html</a>
+    <a href="https://www.yourbatman.cn/x2y/a0e8d910.html" title="5. Bean Validation声明式验证四大级别：字段、属性、容器元素、类">https://www.yourbatman.cn/x2y/a0e8d910.html</a>
   </li>
   <li class="post-copyright-license">
     <strong>许可协议： </strong>本站所有文章均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载：No！转发：Yes！
@@ -555,13 +611,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/x2y/52aa588e.html" rel="prev" title="JDK15正式发布，划时代的ZGC同时宣布转正">
-      <i class="fa fa-chevron-left"></i> JDK15正式发布，划时代的ZGC同时宣布转正
+    <a href="/x2y/c8011cdb.html" rel="prev" title="4. Validator校验器的五大核心组件，一个都不能少">
+      <i class="fa fa-chevron-left"></i> 4. Validator校验器的五大核心组件，一个都不能少
     </a></div>
-      <div class="post-nav-item">
-    <a href="/x2y/a0e8d910.html" rel="next" title="5. Bean Validation声明式验证四大级别：字段、属性、容器元素、类">
-      5. Bean Validation声明式验证四大级别：字段、属性、容器元素、类 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -627,7 +680,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#✍前言"><span class="nav-number">1.</span> <span class="nav-text">✍前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#版本约定"><span class="nav-number">1.1.</span> <span class="nav-text">版本约定</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#✍正文"><span class="nav-number">2.</span> <span class="nav-text">✍正文</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#MessageInterpolator"><span class="nav-number">2.1.</span> <span class="nav-text">MessageInterpolator</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TraversableResolver"><span class="nav-number">2.2.</span> <span class="nav-text">TraversableResolver</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ConstraintValidatorFactory"><span class="nav-number">2.3.</span> <span class="nav-text">ConstraintValidatorFactory</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ParameterNameProvider"><span class="nav-number">2.4.</span> <span class="nav-text">ParameterNameProvider</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ClockProvider"><span class="nav-number">2.5.</span> <span class="nav-text">ClockProvider</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#加餐：ValueExtractor"><span class="nav-number">2.6.</span> <span class="nav-text">加餐：ValueExtractor</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#✍总结"><span class="nav-number">3.</span> <span class="nav-text">✍总结</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#✔推荐阅读："><span class="nav-number">3.0.0.0.1.</span> <span class="nav-text">✔推荐阅读：</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#✍前言"><span class="nav-number">1.</span> <span class="nav-text">✍前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#版本约定"><span class="nav-number">1.1.</span> <span class="nav-text">版本约定</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#✍正文"><span class="nav-number">2.</span> <span class="nav-text">✍正文</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、字段级别约束（Field）"><span class="nav-number">2.1.</span> <span class="nav-text">1、字段级别约束（Field）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用细节"><span class="nav-number">2.1.1.</span> <span class="nav-text">使用细节</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、属性级别约束（Property）"><span class="nav-number">2.2.</span> <span class="nav-text">2、属性级别约束（Property）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用细节-1"><span class="nav-number">2.2.1.</span> <span class="nav-text">使用细节</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、容器元素级别约束（Container-Element）"><span class="nav-number">2.3.</span> <span class="nav-text">3、容器元素级别约束（Container Element）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用细节-2"><span class="nav-number">2.3.1.</span> <span class="nav-text">使用细节</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4、类级别约束（Class）"><span class="nav-number">2.4.</span> <span class="nav-text">4、类级别约束（Class）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字段约束和属性约束的区别"><span class="nav-number">2.5.</span> <span class="nav-text">字段约束和属性约束的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#字段和属性的区别"><span class="nav-number">2.5.1.</span> <span class="nav-text">字段和属性的区别</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#✍总结"><span class="nav-number">3.</span> <span class="nav-text">✍总结</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#✔推荐阅读："><span class="nav-number">3.0.0.0.1.</span> <span class="nav-text">✔推荐阅读：</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -688,7 +741,7 @@
           </li>
         
           <li>
-            <a href="/x2y/a0e8d910.html" title="4. Validator校验器的五大核心组件，一个都不能少" target="_blank">
+            <a href="/x2y/c8011cdb.html" title="4. Validator校验器的五大核心组件，一个都不能少" target="_blank">
             <i class="fa fa-check-square"></i> 4. Validator校验器的五大核心组件，一个都不能少
             </a>
           </li>
@@ -1159,13 +1212,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">本站总字数：</span>
-    <span title="本站总字数">310k</span>
+    <span title="本站总字数">312k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">本站总阅读时长 &asymp;</span>
-    <span title="本站总阅读时长">4:42</span>
+    <span title="本站总阅读时长">4:43</span>
 </div>
   <div class="addthis_inline_share_toolbox">
     <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5eb7b6f6b64d54f6" async="async"></script>
