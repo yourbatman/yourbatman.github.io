@@ -27,7 +27,7 @@
   <meta name="description" content="我这有故事，你那有酒吗？">
 <meta property="og:type" content="website">
 <meta property="og:title" content="BAT的乌托邦">
-<meta property="og:url" content="https://www.yourbatman.cn/tags/Fastjson/index.html">
+<meta property="og:url" content="https://www.yourbatman.cn/page/8/index.html">
 <meta property="og:site_name" content="BAT的乌托邦">
 <meta property="og:description" content="我这有故事，你那有酒吗？">
 <meta property="og:locale" content="zh_CN">
@@ -35,20 +35,20 @@
 <meta property="article:tag" content="Java | Spring | Spring Boot | Spring Cloud | Dubbo | Netflix | BAT">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://www.yourbatman.cn/tags/Fastjson/">
+<link rel="canonical" href="https://www.yourbatman.cn/page/8/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : false,
+    isHome : true,
     isPost : false,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>标签: Fastjson | BAT的乌托邦</title>
+  <title>BAT的乌托邦 - 当大潮退去，才知道谁在裸泳</title>
   
 
 
@@ -218,152 +218,501 @@
         <div class="content-wrap">
           
 
-          <div class="content tag">
+          <div class="content index posts-expand">
             
 
   
-  
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h2 class="collection-header">Fastjson
-          <small>标签</small>
-        </h2>
-      </div>
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<style type="text/css">
+
+.post-block-top {
+    background: transparent;
+    border-radius: 10px 10px 10px 10px;
+    line-height: 1.75;
+    padding: 0px;
+    border: 0px;
+    overflow: hidden;
+}
+
+.for_ad {
+    background-image: linear-gradient(to top left,#CD853F , #CD69C9);
+    border-radius: 5px;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    margin-top: 10px;
+    opacity: 0.7;
+}
+
+.glyphicon-chevron-left:before{
+	content: "《"
+}
+.glyphicon-chevron-right:before{
+	content: "》"
+}
+
+/*在手机上：只显示轮播图 右边的隐藏  所以轮播图100%喽*/
+@media (max-width: 767px){
+	.rights{
+		display: none;
+	}
+	.carousel{
+		width: 100% !important;
+		height: 100% !important;
+	}
+	.slide{
+		width: 100% !important;
+		height: 100% !important;
+	}
+
+  .post-block-top {
+    margin-bottom: 10px;
+  }
+
+}
+
+/* 在PC里 */
+.carousel{
+	width: 65%;
+	height: 100%;
+	position: relative;
+}
+
+.carousel-inner {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+.carousel-inner > .item {
+  display: none;
+  position: relative;
+  -webkit-transition: 0.6s ease-in-out left;
+  -o-transition: 0.6s ease-in-out left;
+  transition: 0.6s ease-in-out left;
+}
+.carousel-inner > .item > img,
+.carousel-inner > .item > a > img {
+  line-height: 1;
+}
+@media all and (transform-3d), (-webkit-transform-3d) {
+  .carousel-inner > .item {
+    -webkit-transition: -webkit-transform 0.6s ease-in-out;
+    -moz-transition: -moz-transform 0.6s ease-in-out;
+    -o-transition: -o-transform 0.6s ease-in-out;
+    transition: transform 0.6s ease-in-out;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-perspective: 1000px;
+    -moz-perspective: 1000px;
+    perspective: 1000px;
+  }
+  .carousel-inner > .item.next,
+  .carousel-inner > .item.active.right {
+    -webkit-transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0);
+    left: 0;
+  }
+  .carousel-inner > .item.prev,
+  .carousel-inner > .item.active.left {
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+    left: 0;
+  }
+  .carousel-inner > .item.next.left,
+  .carousel-inner > .item.prev.right,
+  .carousel-inner > .item.active {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    left: 0;
+  }
+}
+.carousel-inner > .active,
+.carousel-inner > .next,
+.carousel-inner > .prev {
+  display: block;
+}
+.carousel-inner > .active {
+  left: 0;
+}
+.carousel-inner > .next,
+.carousel-inner > .prev {
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+.carousel-inner > .next {
+  left: 100%;
+}
+.carousel-inner > .prev {
+  left: -100%;
+}
+.carousel-inner > .next.left,
+.carousel-inner > .prev.right {
+  left: 0;
+}
+.carousel-inner > .active.left {
+  left: -100%;
+}
+.carousel-inner > .active.right {
+  left: 100%;
+}
+.carousel-control {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 15%;
+  opacity: 0.5;
+  border-radius: 10px;
+  filter: alpha(opacity=50);
+  font-size: 20px;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0);
+}
+.carousel-control.left {
+  background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.0001) 100%);
+  background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.0001) 100%);
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.0001) 100%);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#80000000', endColorstr='#00000000', GradientType=1);
+}
+.carousel-control.right {
+  left: auto;
+  right: 0;
+  background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.0001) 0%, rgba(0, 0, 0, 0.5) 100%);
+  background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0.0001) 0%, rgba(0, 0, 0, 0.5) 100%);
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.0001) 0%, rgba(0, 0, 0, 0.5) 100%);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#80000000', GradientType=1);
+}
+.carousel-control:hover,
+.carousel-control:focus {
+  outline: 0;
+  color: #fff;
+  text-decoration: none;
+  opacity: 0.9;
+  filter: alpha(opacity=90);
+}
+.carousel-control .icon-prev,
+.carousel-control .icon-next,
+.carousel-control .glyphicon-chevron-left,
+.carousel-control .glyphicon-chevron-right {
+  position: absolute;
+  top: 50%;
+  margin-top: -10px;
+  z-index: 5;
+  display: inline-block;
+}
+.carousel-control .icon-prev,
+.carousel-control .glyphicon-chevron-left {
+  left: 50%;
+  margin-left: -10px;
+}
+.carousel-control .icon-next,
+.carousel-control .glyphicon-chevron-right {
+  right: 50%;
+  margin-right: -10px;
+}
+.carousel-control .icon-prev,
+.carousel-control .icon-next {
+  width: 20px;
+  height: 20px;
+  line-height: 1;
+  font-family: serif;
+}
+.carousel-control .icon-prev:before {
+  content: '\2039';
+}
+.carousel-control .icon-next:before {
+  content: '\203a';
+}
+.carousel-indicators {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  z-index: 15;
+  width: 60%;
+  margin-left: -30%;
+  padding-left: 0;
+  list-style: none;
+  text-align: center;
+}
+.carousel-indicators li {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin: 1px;
+  text-indent: -999px;
+  border: 1px solid #fff;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: #000 \9;
+  background-color: rgba(0, 0, 0, 0);
+}
+.carousel-indicators .active {
+  margin: 0;
+  width: 12px;
+  height: 12px;
+  background-color: #fff;
+}
+.carousel-caption {
+  position: absolute;
+  left: 15%;
+  right: 15%;
+  bottom: 20px;
+  z-index: 10;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+.carousel-caption .btn {
+  text-shadow: none;
+}
+@media screen and (min-width: 768px) {
+  .carousel-control .glyphicon-chevron-left,
+  .carousel-control .glyphicon-chevron-right,
+  .carousel-control .icon-prev,
+  .carousel-control .icon-next {
+    width: 30px;
+    height: 30px;
+    margin-top: -10px;
+    font-size: 30px;
+  }
+  .carousel-control .glyphicon-chevron-left,
+  .carousel-control .icon-prev {
+    margin-left: -10px;
+  }
+  .carousel-control .glyphicon-chevron-right,
+  .carousel-control .icon-next {
+    margin-right: -10px;
+  }
+  .carousel-caption {
+    left: 20%;
+    right: 20%;
+    padding-bottom: 30px;
+  }
+  .carousel-indicators {
+    bottom: 20px;
+  }
+}
+</style>
+<div width="100%" height="320px" class="post-block-top" scrolling="no">
+
+  <!-- 轮播图区域 -->
+	<div id="myCarousel" class="carousel slide" data-ride="carousel" style="float:left" data-interval="3500" >
+		<!-- 轮播（Carousel）指标 -->
+		<ol class="carousel-indicators">
+		
+		
+			<li data-target="#myCarousel" data-slide-to="0"></li>
+			
+		
+			<li data-target="#myCarousel" data-slide-to="1"></li>
+			
+		
+			<li data-target="#myCarousel" data-slide-to="2"></li>
+			
+		
+			<li data-target="#myCarousel" data-slide-to="3"></li>
+			
+		
+		</ol>
+		<!-- 轮播（Carousel）项目 -->
+		<div class="carousel-inner" style="height: 280px; border-radius: 10px; width: 100%;">
+		
+		 
+	    	
+				<a class="item active" href="/x2y/552c674f.html" target="_blank" style="height: 100%;">
+					<img src="https://img-blog.csdnimg.cn/20200614164027391.png"   style="width: 100%; height: 100%" >
+				</a>
+				
+				
+		
+	    	
+					<a class="item" href="/categories/" target="_blank" style="height: 100%;">
+						<img src="https://img-blog.csdnimg.cn/20200512181055556.png"  style="width: 100%; height: 100%;" >
+					</a>
+			
+		
+	    	
+					<a class="item" href="/posts/x2y/f3891d18.html" target="_blank" style="height: 100%;">
+						<img src="https://img-blog.csdnimg.cn/2020051218142232.png"  style="width: 100%; height: 100%;" >
+					</a>
+			
+		
+	    	
+					<a class="item" href="https://t.zsxq.com/nQBi66I"" target="_blank" style="height: 100%;">
+						<img src="https://img-blog.csdnimg.cn/20200512183930568.jpg"  style="width: 100%; height: 100%;" >
+					</a>
+			
+		
+		</div>
+
+		<!-- 轮播（Carousel）导航 按钮-->
+		<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+		    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+		</a>
+		<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+		    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+		</a>
+	</div>
+
+  <!-- 右边栏 天气、关于博主  天气此处显示北京的 今明两天-->
+  <div class="rights" style="width:30%;height:300px;margin-right:0;margin-left:10px;float:left;">
+      <iframe class="blog-weather" width="420" scrolling="no" height="15%" frameborder="0" allowtransparency="true" src="https://i.tianqi.com/index.php?c=code&amp;id=12&amp;icon=3&amp;py=beijing&amp;num=3&amp;site=12" style="max-width: 110%;"></iframe>
+
+      <!-- 其它导航性质的按钮 -->
+       <div style="margin-top: 10px;">
+          <div class="for_ad" style="background-image: linear-gradient(to top left,#f7f8ff , #7b4076);"><a href="/x2y/f3891d18.html" target="_blank" style="color: white;">> A哥的万字自我介绍 <</a></div>
+          <div class="for_ad" style="background-image: linear-gradient(to top left,#79d46e , #f5eaf4);"><a href="/x2y/e1bcb9c1.html" target="_blank" style="color: tomato;">> 2019年总结 <</a></div>
+          <div class="for_ad" style="background-image: linear-gradient(to bottom right,#abad2d , #ff3463);"><a href="/categories/" target="_blank" style="color: yellow;">> 专栏汇总 <</a></div>
+          <div class="for_ad" style="background-image: linear-gradient(to bottom left,#fcff22 , #f5eaf4);"><a href="/about/" target="_blank" style="color: blueviolet;">> 留下脚印 <</a></div>
+       </div>
+  </div>
+</div>
+
 
       
-    <div class="collection-year">
-      <span class="collection-header">2020</span>
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.yourbatman.cn/x2y/889a54a1.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://img-blog.csdnimg.cn/20200511100304592.jpg">
+      <meta itemprop="name" content="A哥(YourBatman)">
+      <meta itemprop="description" content="我这有故事，你那有酒吗？">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BAT的乌托邦">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/x2y/889a54a1.html" class="post-title-link" itemprop="url">静态类、静态方法、内部类、匿名内部类、非静态类的一些实践</a>
+        </h2>
+
+        <div class="post-meta">
+          <!-- 精品文章 精华帖 -->
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-05-17 09:00:10" itemprop="dateCreated datePublished" datetime="2018-05-17T09:00:10+08:00">2018-05-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">收录于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/A%E5%93%A5%E5%AD%A6Java/" itemprop="url" rel="index"><span itemprop="name">A哥学Java</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/x2y/889a54a1.html" class="post-meta-item leancloud_visitors" data-flag-title="静态类、静态方法、内部类、匿名内部类、非静态类的一些实践" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">评论数：</span>
+    
+    <a title="valine" href="/x2y/889a54a1.html#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/x2y/889a54a1.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+          <!-- 置顶 可以写top:true  也可以写数字top:1/2/3  顺序规则同Spring-->
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+          <!-- 本文作者 -->
+          <span class="post-meta-item" title="阅读时长">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-user fa-fw"></i>
+            </span>
+            <span class="post-meta-item-text">本文作者：</span>
+            <a href="/about/" itemprop="url" rel="index">
+              <span>A哥(YourBatman)</span>
+            </a>
+          </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <div class="homepage">
+在实际开发中，关于静态类、静态方法、内部类、匿名内部类、非静态类一般都会遇到，特别是你在研究开源框架源码的时候很是常见，它是内聚性的体现。本文针对这些“概念”的实战，做些总结。
+</div>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/x2y/889a54a1.html" rel="contents">
+                More &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    
+    
+    
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-09-04T14:05:32+08:00"
-              content="2020-09-04">
-          09-04
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/x2y/56130cb.html" itemprop="url">
-            <span itemprop="name">再爆安全漏洞，这次轮到Jackson了，竟由阿里云上报</span>
-          </a>
-      </div>
-
-    </header>
+    <!-- 相关阅读（你可能还喜欢） -->
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
   </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-07-28T12:23:59+08:00"
-              content="2020-07-28">
-          07-28
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/x2y/a47cf2f7.html" itemprop="url">
-            <span itemprop="name">4. JSON字符串是如何被解析的？JsonParser了解一下</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-07-20T21:20:21+08:00"
-              content="2020-07-20">
-          07-20
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/x2y/cae3349a.html" itemprop="url">
-            <span itemprop="name">3. 懂了这些，方敢在简历上说会用Jackson写JSON</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-07-17T17:54:02+08:00"
-              content="2020-07-17">
-          07-17
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/x2y/cf41a8ab.html" itemprop="url">
-            <span itemprop="name">2. 妈呀，Jackson原来是这样写JSON的</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-07-07T20:09:39+08:00"
-              content="2020-07-07">
-          07-07
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/x2y/dc384b1c.html" itemprop="url">
-            <span itemprop="name">1. 初识Jackson -- 世界上最好的JSON库</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-07-02T21:14:39+08:00"
-              content="2020-07-02">
-          07-02
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/x2y/221f1084.html" itemprop="url">
-            <span itemprop="name">Fastjson到了说再见的时候了</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-    </div>
-  </div>
   
   
   
 
+
   
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span>
+  </nav>
 
 
 

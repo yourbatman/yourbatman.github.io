@@ -77,6 +77,111 @@
       </tags>
   </entry>
   <entry>
+    <title>6. 自定义容器类型元素验证，类级别验证（多字段联合验证）</title>
+    <url>/x2y/787ed03b.html</url>
+    <content><![CDATA[<blockquote>
+<p>今天搬砖不狠，明天地位不稳。本文已被 <a href="https://www.yourbatman.cn"><strong>https://www.yourbatman.cn</strong></a> 收录，里面一并有Spring技术栈、MyBatis、JVM、中间件等小而美的<strong>专栏</strong>供以免费学习。关注公众号【<strong>BAT的乌托邦</strong>】逐个击破，深入掌握，拒绝浅尝辄止。</p>
+</blockquote>
+<p><img data-src="https://img-blog.csdnimg.cn/20201025205032222.jpg" alt=""></p>
+<h1 id="✍前言"><a href="#✍前言" class="headerlink" title="✍前言"></a>✍前言</h1><p>你好，我是YourBatman。</p>
+<p>本文是上篇文章的续篇，个人建议可先花3分钟移步上篇文章浏览一下：<a href="https://mp.weixin.qq.com/s/6_7gZ9jmQcDSRiARO6D-yw" target="_blank" rel="noopener">5. Bean Validation声明式验证四大级别：字段、属性、容器元素、类</a></p>
+<p>很多人说Bean Validation只能验证单属性（单字段），但我却说它能完成99.99%的Bean验证，不信你可继续阅读本文，能否解你疑惑。</p>
+<h2 id="版本约定"><a href="#版本约定" class="headerlink" title="版本约定"></a>版本约定</h2><ul>
+<li>Bean Validation版本：<code>2.0.2</code></li>
+<li>Hibernate Validator版本：<code>6.1.5.Final</code></li>
+</ul>
+<h1 id="✍正文"><a href="#✍正文" class="headerlink" title="✍正文"></a>✍正文</h1><p>本文接上文叙述，继续介绍Bean Validation声明式验证四大级别中的：容器元素验证（自定义容器类型）以及类级别验证（也叫多字段联合验证）。</p>
+<p>据我了解，很多小伙伴对这部分内容并不熟悉，遇到类似场景往往被迫只能是<strong>一半BV验证 + 一半事务脚本验证</strong>的方式，显得洋不洋俗不俗。 本文将给出具体案例场景，然后统一使用BV来解决数据验证问题，希望可以帮助到你，给予参考之作用。</p>
+<h2 id="自定义容器类型元素验证"><a href="#自定义容器类型元素验证" class="headerlink" title="自定义容器类型元素验证"></a>自定义容器类型元素验证</h2><p>通过<a href="https://mp.weixin.qq.com/s/6_7gZ9jmQcDSRiARO6D-yw" target="_blank" rel="noopener">上文</a>我们已经知道了Bean Validation是可以对形如List、Set、Map这样的容器类型<strong>里面的元素</strong>进行验证的，内置支持的容器虽然能cover大部分的使用场景，但不免有的场景依旧不能覆盖，而且这个可能还非常常用。</p>
+<p>譬如我们都不陌生的方法返回值容器<code>Result&lt;T&gt;</code>，结构形如这样（最简形式，仅供参考）：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">Result</span>&lt;<span class="title">T</span>&gt; <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> success = <span class="keyword">true</span>;</span><br><span class="line">    <span class="keyword">private</span> T data = <span class="keyword">null</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> String errCode;</span><br><span class="line">    <span class="keyword">private</span> String errMsg;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Controller层用它包装（装载）数据data，形如这样：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@GetMapping</span>(<span class="string">"/room"</span>)</span><br><span class="line"><span class="function">Result&lt;Room&gt; <span class="title">room</span><span class="params">()</span> </span>&#123; ... &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Room</span> </span>&#123;</span><br><span class="line">    <span class="meta">@NotNull</span></span><br><span class="line">    <span class="keyword">public</span> String name;</span><br><span class="line">    <span class="meta">@AssertTrue</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">boolean</span> finished;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个时候希望对<code>Result&lt;Room&gt;</code>里面的<code>Room</code>进行合法性验证：借助BV进行声明式验证而非硬编码。希望这么写就可以了：<code>Result&lt;@Notnull @Valid LoggedAccountResp&gt;</code>。显然，缺省情况下即使这样声明了约束注解也是无效的，毕竟Bean Validation根本就“不认识”Result这个“容器”，更别提验证其元素了。</p>
+<p>好在Bean Validation对此提供了扩展点。下面我将一步一步的来对此提供实现，让验证优雅再次起来。</p>
+<ul>
+<li>自定义一个可以从<code>Result&lt;T&gt;</code>里提取出T值的<code>ValueExtractor</code>值提取器 </li>
+</ul>
+<p>Bean Validation允许我们对<strong>自定义容器</strong>元素类型进行支持。通过前面这篇文章：<a href="https://mp.weixin.qq.com/s/jzOv67ZTSx2rByj0aeUTgw" target="_blank" rel="noopener">4. Validator校验器的五大核心组件，一个都不能少</a> 知道要想支持自定义的容器类型，需要注册一个自定义的<code>ValueExtractor</code>用于值的提取。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 在此处添加备注信息</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> yourbatman</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@site</span> https://www.yourbatman.cn</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2020/10/25 10:01</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@see</span> Result</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ResultValueExtractor</span> <span class="keyword">implements</span> <span class="title">ValueExtractor</span>&lt;<span class="title">Result</span>&lt;@<span class="title">ExtractedValue</span> ?&gt;&gt; </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">extractValues</span><span class="params">(Result&lt;?&gt; originalValue, ValueReceiver receiver)</span> </span>&#123;</span><br><span class="line">        receiver.value(<span class="keyword">null</span>, originalValue.getData());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>将此自定义的值提取器注册进验证器Validator里，并提供测试代码：</li>
+</ul>
+<p>把Result作为一个Filed字段装进Java Bean里：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ResultDemo</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> Result&lt;<span class="meta">@Valid</span> Room&gt; roomResult;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>测试代码：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    Room room = <span class="keyword">new</span> Room();</span><br><span class="line">    room.name = <span class="string">"YourBatman"</span>;</span><br><span class="line">    Result&lt;Room&gt; result = <span class="keyword">new</span> Result&lt;&gt;();</span><br><span class="line">    result.setData(room);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 把Result作为属性放进去</span></span><br><span class="line">    ResultDemo resultDemo = <span class="keyword">new</span> ResultDemo();</span><br><span class="line">    resultDemo.roomResult = result;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 注册自定义的值提取器</span></span><br><span class="line">    Validator validator = ValidatorUtil.obtainValidatorFactory()</span><br><span class="line">            .usingContext()</span><br><span class="line">            .addValueExtractor(<span class="keyword">new</span> ResultValueExtractor())</span><br><span class="line">            .getValidator();</span><br><span class="line">    ValidatorUtil.printViolations(validator.validate(resultDemo));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行测试程序，输出：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">roomResult.finished只能为<span class="keyword">true</span>，但你的值是： <span class="keyword">false</span></span><br></pre></td></tr></table></figure>
+<p>完美的实现了对Result“容器”里的元素进行了验证。</p>
+<blockquote>
+<p>小贴士：本例是把Result作为Java Bean的属性进行试验的。实际上大多数情况下是把它作为<strong>方法返回值</strong>进行校验。方式类似，有兴趣的同学可自行举一反三哈</p>
+</blockquote>
+<p>在此弱弱补一句，若在Spring Boot场景下你想像这样对<code>Result&lt;T&gt;</code>提供支持，那么你需要自行提供一个验证器来<strong>覆盖掉</strong>自动装配进去的，可参考<code>ValidationAutoConfiguration</code>。</p>
+<h2 id="类级别验证（多字段联合验证）"><a href="#类级别验证（多字段联合验证）" class="headerlink" title="类级别验证（多字段联合验证）"></a>类级别验证（多字段联合验证）</h2><p>约束也可以放在<strong>类级别</strong>上（也就说注解标注在类上）。在这种情况下，验证的主体不是单个属性，而是整个对象。如果验证依赖于对象的<strong>几个属性</strong>之间的相关性，那么类级别约束就能搞定这一切。</p>
+<p>这个需求场景在平时开发中也非常常见，比如此处我举个场景案例：<code>Room</code>表示一个教室，<code>maxStuNum</code>表示该教室允许的最大学生数，<code>studentNames</code>表示教室里面的学生们。很明显这里存在这么样一个规则：学生总数不能大于教室允许的最大值，即<code>studentNames.size() &lt;=  maxStuNum</code>。如果用事务脚本来实现这个验证规则，那么你的代码里肯定穿插着类似这样的代码：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (room.getStudentNames().size() &gt; room.getMaxStuNum()) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"..."</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>虽然这么做也能达到校验的效果，但很明显这不够优雅。期望这种case依旧能借助Bean Validation来优雅实现，下面我来走一把。</p>
+<p>相较于前面但字段/属性验证的使用case，这个需要验证的是<strong>整个对象</strong>（多个字段）。下面呀，我给出<strong>两种</strong>实现方式，供以参考。</p>
+<h3 id="方式一：基于内置的-ScriptAssert实现"><a href="#方式一：基于内置的-ScriptAssert实现" class="headerlink" title="方式一：基于内置的@ScriptAssert实现"></a>方式一：基于内置的@ScriptAssert实现</h3><p>虽说Bean Validation没有内置任何类级别的注解，但Hibernate-Validator却对此提供了增强，弥补了其不足。<code>@ScriptAssert</code>就是HV内置的一个非常强大的、可以用于类级别验证注解，它可以很容易的处理这种case：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@ScriptAssert</span>(lang = <span class="string">"javascript"</span>, alias = <span class="string">"_"</span>, script = <span class="string">"_.maxStuNum &gt;= _.studentNames.length"</span>)</span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Room</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Positive</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> maxStuNum;</span><br><span class="line">    <span class="meta">@NotNull</span></span><br><span class="line">    <span class="keyword">private</span> List&lt;String&gt; studentNames;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>@ScriptAssert</code>支持写脚本来完成验证逻辑，这里使用的是javascript（缺省情况下的唯一选择，也是默认选择）</p>
+</blockquote>
+<p>测试用例：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    Room room = <span class="keyword">new</span> Room();</span><br><span class="line">    ValidatorUtil.printViolations(ValidatorUtil.obtainValidator().validate(room));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，抛错：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Caused by: &lt;eval&gt;:<span class="number">1</span> TypeError: Cannot get property <span class="string">"length"</span> of <span class="keyword">null</span></span><br><span class="line">	at jdk.nashorn.internal.runtime.ECMAErrors.error(ECMAErrors.java:<span class="number">57</span>)</span><br><span class="line">	at jdk.nashorn.internal.runtime.ECMAErrors.typeError(ECMAErrors.java:<span class="number">213</span>)</span><br><span class="line">	...</span><br></pre></td></tr></table></figure>
+
+<p>这个报错意思是<code>_.studentNames</code>值为null，也就是<code>room.studentNames</code>字段的值为null。</p>
+<p>what？它头上不明明标了<code>@NotNull</code>注解吗，怎么可能为null呢？这其实涉及到前面所讲到的一个小知识点，这里提一嘴：<strong>所有的约束注解都会执行，不存在短路效果</strong>（除非校验程序抛异常），只要你敢标，我就敢执行，所以这里为嘛报错你懂了吧。</p>
+<blockquote>
+<p>小贴士：@ScriptAssert对null值并不免疫，不管咋样它都会执行的，因此书写脚本时注意判空哦</p>
+</blockquote>
+<p>当然喽，多个约束之间的执行也是可以排序（有序的），这就涉及到多个约束的执行顺序（序列）问题，本文暂且绕过。例子种先给填上一个值，后续再专文详解多个约束注解执行序列问题和案例剖析。</p>
+<p>修改测试脚本（增加一个学生，让其不为null）：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    Room room = <span class="keyword">new</span> Room();</span><br><span class="line">    room.setStudentNames(Collections.singletonList(<span class="string">"YourBatman"</span>));</span><br><span class="line"></span><br><span class="line">    ValidatorUtil.printViolations(ValidatorUtil.obtainValidator().validate(room));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>再次运行，输出：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">执行脚本表达式<span class="string">"_.maxStuNum &gt;= _.studentNames.length"</span>没有返回期望结果，但你的值是： Room(maxStuNum=<span class="number">0</span>, studentNames=[YourBatman])</span><br><span class="line">maxStuNum必须是正数，但你的值是： <span class="number">0</span></span><br></pre></td></tr></table></figure>
+<p>验证结果符合预期：0（maxStuNum） &lt; 1（studentNames.length）。</p>
+<blockquote>
+<p>小贴士：若测试脚本中增加一句<code>room.setMaxStuNum(1);</code>，那么请问结果又如何呢？</p>
+</blockquote>
+<h3 id="方式二：自定义注解方式实现"><a href="#方式二：自定义注解方式实现" class="headerlink" title="方式二：自定义注解方式实现"></a>方式二：自定义注解方式实现</h3><p>虽说BV自定义注解前文还暂没提到，但这并不难，因此这里先混个脸熟，也可在阅读到后面文章后再杀个回马枪回来。</p>
+<ul>
+<li>自定义一个约束注解，并且提供约束逻辑的实现<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Target</span>(&#123;TYPE, ANNOTATION_TYPE&#125;)</span><br><span class="line"><span class="meta">@Retention</span>(RUNTIME)</span><br><span class="line"><span class="meta">@Constraint</span>(validatedBy = &#123;ValidStudentCountConstraintValidator<span class="class">.<span class="keyword">class</span>&#125;)</span></span><br><span class="line"><span class="class"><span class="title">public</span> @<span class="title">interface</span> <span class="title">ValidStudentCount</span> </span>&#123;</span><br><span class="line">    <span class="function">String <span class="title">message</span><span class="params">()</span> <span class="keyword">default</span> "学生人数超过最大限额"</span>;</span><br><span class="line">    Class&lt;?&gt;[] groups() <span class="keyword">default</span> &#123;&#125;;</span><br><span class="line">    Class&lt;? extends Payload&gt;[] payload() <span class="keyword">default</span> &#123;&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ValidStudentCountConstraintValidator</span> <span class="keyword">implements</span> <span class="title">ConstraintValidator</span>&lt;<span class="title">ValidStudentCount</span>, <span class="title">Room</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">initialize</span><span class="params">(ValidStudentCount constraintAnnotation)</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isValid</span><span class="params">(Room room, ConstraintValidatorContext context)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (room == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">boolean</span> isValid = <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">if</span> (room.getStudentNames().size() &lt;= room.getMaxStuNum()) &#123;</span><br><span class="line">            isValid = <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 自定义提示语（当然你也可以不自定义，那就使用注解里的message字段的值）</span></span><br><span class="line">        <span class="keyword">if</span> (!isValid) &#123;</span><br><span class="line">            context.disableDefaultConstraintViolation();</span><br><span class="line">            context.buildConstraintViolationWithTemplate(<span class="string">"校验失败xxx"</span>)</span><br><span class="line">                    .addPropertyNode(<span class="string">"studentNames"</span>)</span><br><span class="line">                    .addConstraintViolation();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> isValid;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>书写测试脚本<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    Room room = <span class="keyword">new</span> Room();</span><br><span class="line">    room.setStudentNames(Collections.singletonList(<span class="string">"YourBatman"</span>));</span><br><span class="line"></span><br><span class="line">    ValidatorUtil.printViolations(ValidatorUtil.obtainValidator().validate(room));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+运行程序，输出：<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">maxStuNum必须是正数，但你的值是： <span class="number">0</span></span><br><span class="line">studentNames校验失败xxx，但你的值是： Room(maxStuNum=<span class="number">0</span>, studentNames=[YourBatman])</span><br></pre></td></tr></table></figure>
+完美，完全符合预期。</li>
+</ul>
+<p>这两种方式都可以实现类级别的验证，它俩可以说各有优劣，主要体现在如下方面：</p>
+<ul>
+<li><code>@ScriptAssert</code>是内置就提供的，因此使用起来非常的方便和通用。但缺点也是因为过于通用，因此语义上不够明显，需要阅读脚本才知。推荐少量（非重复使用）、逻辑较为简单时使用</li>
+<li>自定义注解方式。缺点当然是“开箱使用”起来稍显麻烦，但它的优点就是语义明确，灵活且不易出错，即使是复杂的验证逻辑也能轻松搞定</li>
+</ul>
+<p>总之，若你的验证逻辑只用一次（只一个地方使用）且简单（比如只是简单判断而已），推荐使用<code>@ScriptAssert</code>更为轻巧。否则，你懂的~</p>
+<h1 id="✍总结"><a href="#✍总结" class="headerlink" title="✍总结"></a>✍总结</h1><p>如果说能熟练使用Bean Validation进行字段、属性、容器元素级别的验证是及格60分的话，那么能够使用BV解决本文中几个场景问题的话就应该达到优秀级80分了。</p>
+<p>本文举例的两个场景：<code>Result&lt;T&gt;</code>和多字段联合验证均属于平时开发中比较常见的场景，如果能让Bean Validation介入帮解决此类问题，相信对提效是很有帮助的，说不定你还能成为团队中最靓的仔呢。</p>
+<h5 id="✔推荐阅读："><a href="#✔推荐阅读：" class="headerlink" title="✔推荐阅读："></a>✔推荐阅读：</h5><ul>
+<li><a href="https://mp.weixin.qq.com/s/g04HMhrjbvbPn1Mb9JYa5g" target="_blank" rel="noopener">1. 不吹不擂，第一篇就能提升你对Bean Validation数据校验的认知</a></li>
+<li><a href="https://mp.weixin.qq.com/s/-KeOCq2rsXCvrqD8HYHSpQ" target="_blank" rel="noopener">2. Bean Validation声明式校验方法的参数、返回值</a></li>
+<li><a href="https://mp.weixin.qq.com/s/MQjXG0cg8domRtwf3ArvHw" target="_blank" rel="noopener">3. 站在使用层面，Bean Validation这些标准接口你需要烂熟于胸</a></li>
+<li><a href="https://mp.weixin.qq.com/s/jzOv67ZTSx2rByj0aeUTgw" target="_blank" rel="noopener">4. Validator校验器的五大核心组件，一个都不能少</a></li>
+<li><a href="https://mp.weixin.qq.com/s/6_7gZ9jmQcDSRiARO6D-yw" target="_blank" rel="noopener">5. Bean Validation声明式验证四大级别：字段、属性、容器元素、类</a></li>
+</ul>]]></content>
+      <categories>
+        <category>A哥学数据校验</category>
+      </categories>
+      <tags>
+        <tag>Bean Validation</tag>
+        <tag>Hibernate Validator</tag>
+        <tag>数据校验</tag>
+        <tag>JSR380</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Spring改变版本号命名规则：此举对非英语国家很友好</title>
     <url>/x2y/78d89441.html</url>
     <content><![CDATA[<blockquote>
@@ -4840,66 +4945,6 @@
       </tags>
   </entry>
   <entry>
-    <title>【BAT的乌托邦】公众号开白申请</title>
-    <url>/x2y/wechat-white-list.html</url>
-    <content><![CDATA[<div class="note primary">
-            <ul><li>公众号：BAT的乌托邦</li><li>作者：A哥<ul><li>A哥的介绍：<ul><li><a href="/about">PC版</a></li><li><a href="https://mp.weixin.qq.com/s/PGIFtpI7aZaxY7es0F6C6Q" target="_blank" rel="noopener">手机版</a></li></ul></li><li>示例文章：<a href="https://mp.weixin.qq.com/s/PYVD8BvT7Nux0jiSomSG0A" target="_blank" rel="noopener">点击这里</a></li></ul></li><li>定位：专注Java领域，只做有深度的专栏文章分享，拒绝浅尝辄止</li><li>首篇文章时间：2020-05-03   <a href="https://mp.weixin.qq.com/s/PGIFtpI7aZaxY7es0F6C6Q" target="_blank" rel="noopener">查看首篇文章</a></li></ul>
-          </div>
-
-<h3 id="转载请著名出处，示例（文首-文末）："><a href="#转载请著名出处，示例（文首-文末）：" class="headerlink" title="转载请著名出处，示例（文首 + 文末）："></a>转载请著名出处，示例（文首 + 文末）：</h3><p><img data-src="https://img-blog.csdnimg.cn/20200616122117470.png" alt="文首"><br><img data-src="https://img-blog.csdnimg.cn/20200616122910584.png" alt="文末"></p>
-<div style="text-align: center;color: #8c8888;font-size: 8px;margin-top: -10px;">文案请从此处复制：本文转载自公众号【BAT的乌托邦】，专注Java领域，只做有深度的专栏文章分享，拒绝浅尝辄止。</div>
-
-<div style="margin-top: 50px; margin-bottom: 50px; text-align: center; font-weight: bolder; color: grey; font-size: 20px;">
-😄申请【开长白】请在本文下面留言，开白成功后我会登记入下表，谢谢合作😄
-</div>
-<div style="text-align: center; font-weight: bolder; color: #7d7d7d; font-size: 11px;margin-top: -50px;margin-bottom: 20px;">
-(留言时请输入正确邮箱号，这样开白成功会给你发邮件提醒)
-</div>
-<div class="table-container"><table>
-    <thead>
-        <tr>
-            <th align="center">公众号</th>
-            <th align="center">操作时间</th>
-            <th align="center">是否长白</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td align="center">学习Java的小姐姐</td>
-            <td align="center">2020.06.24</td>
-            <td align="center">是</td>
-        </tr>
-        <tr>
-            <td align="center">自由程序人</td>
-            <td align="center">2020.06.16</td>
-            <td align="center">是</td>
-        </tr>
-        <tr>
-            <td align="center">softech华山论剑</td>
-            <td align="center">2020.06.14</td>
-            <td align="center">是</td>
-        </tr>
-        <tr>
-            <td align="center">石杉的架构笔记</td>
-            <td align="center">2020.06.09</td>
-            <td align="center">是</td>
-        </tr>
-        <tr>
-            <td align="center">源码笔记</td>
-            <td align="center">2020.06.04</td>
-            <td align="center">是</td>
-        </tr>
-    </tbody>
-</table></div>]]></content>
-      <categories>
-        <category>公众号</category>
-      </categories>
-      <tags>
-        <tag>白名单</tag>
-        <tag>公众号</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>【Java高工、架构师】系列群群规</title>
     <url>/x2y/wechat-gauge.html</url>
     <content><![CDATA[<blockquote class="blockquote-center">
@@ -4955,6 +5000,66 @@
       </categories>
       <tags>
         <tag>公众号</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【BAT的乌托邦】公众号开白申请</title>
+    <url>/x2y/wechat-white-list.html</url>
+    <content><![CDATA[<div class="note primary">
+            <ul><li>公众号：BAT的乌托邦</li><li>作者：A哥<ul><li>A哥的介绍：<ul><li><a href="/about">PC版</a></li><li><a href="https://mp.weixin.qq.com/s/PGIFtpI7aZaxY7es0F6C6Q" target="_blank" rel="noopener">手机版</a></li></ul></li><li>示例文章：<a href="https://mp.weixin.qq.com/s/PYVD8BvT7Nux0jiSomSG0A" target="_blank" rel="noopener">点击这里</a></li></ul></li><li>定位：专注Java领域，只做有深度的专栏文章分享，拒绝浅尝辄止</li><li>首篇文章时间：2020-05-03   <a href="https://mp.weixin.qq.com/s/PGIFtpI7aZaxY7es0F6C6Q" target="_blank" rel="noopener">查看首篇文章</a></li></ul>
+          </div>
+
+<h3 id="转载请著名出处，示例（文首-文末）："><a href="#转载请著名出处，示例（文首-文末）：" class="headerlink" title="转载请著名出处，示例（文首 + 文末）："></a>转载请著名出处，示例（文首 + 文末）：</h3><p><img data-src="https://img-blog.csdnimg.cn/20200616122117470.png" alt="文首"><br><img data-src="https://img-blog.csdnimg.cn/20200616122910584.png" alt="文末"></p>
+<div style="text-align: center;color: #8c8888;font-size: 8px;margin-top: -10px;">文案请从此处复制：本文转载自公众号【BAT的乌托邦】，专注Java领域，只做有深度的专栏文章分享，拒绝浅尝辄止。</div>
+
+<div style="margin-top: 50px; margin-bottom: 50px; text-align: center; font-weight: bolder; color: grey; font-size: 20px;">
+😄申请【开长白】请在本文下面留言，开白成功后我会登记入下表，谢谢合作😄
+</div>
+<div style="text-align: center; font-weight: bolder; color: #7d7d7d; font-size: 11px;margin-top: -50px;margin-bottom: 20px;">
+(留言时请输入正确邮箱号，这样开白成功会给你发邮件提醒)
+</div>
+<div class="table-container"><table>
+    <thead>
+        <tr>
+            <th align="center">公众号</th>
+            <th align="center">操作时间</th>
+            <th align="center">是否长白</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td align="center">学习Java的小姐姐</td>
+            <td align="center">2020.06.24</td>
+            <td align="center">是</td>
+        </tr>
+        <tr>
+            <td align="center">自由程序人</td>
+            <td align="center">2020.06.16</td>
+            <td align="center">是</td>
+        </tr>
+        <tr>
+            <td align="center">softech华山论剑</td>
+            <td align="center">2020.06.14</td>
+            <td align="center">是</td>
+        </tr>
+        <tr>
+            <td align="center">石杉的架构笔记</td>
+            <td align="center">2020.06.09</td>
+            <td align="center">是</td>
+        </tr>
+        <tr>
+            <td align="center">源码笔记</td>
+            <td align="center">2020.06.04</td>
+            <td align="center">是</td>
+        </tr>
+    </tbody>
+</table></div>]]></content>
+      <categories>
+        <category>公众号</category>
+      </categories>
+      <tags>
+        <tag>公众号</tag>
+        <tag>白名单</tag>
       </tags>
   </entry>
   <entry>
@@ -5495,10 +5600,10 @@
         <category>程序人生</category>
       </categories>
       <tags>
-        <tag>职业生涯</tag>
         <tag>2019</tag>
         <tag>2020</tag>
         <tag>裁员</tag>
+        <tag>职业生涯</tag>
       </tags>
   </entry>
   <entry>
