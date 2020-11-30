@@ -77,6 +77,251 @@
       </tags>
   </entry>
   <entry>
+    <title>Spring Boot 2.4.0正式发布，全新的配置文件加载机制（不向下兼容）</title>
+    <url>/x2y/943b0f62.html</url>
+    <content><![CDATA[<blockquote>
+<p>千里之行，始于足下。关注公众号【<strong>BAT的乌托邦</strong>】，有Spring技术栈、MyBatis、JVM、中间件等小而美的<strong>原创专栏</strong>供以免费学习。分享、成长，拒绝浅尝辄止。本文已被 <a href="https://www.yourbatman.cn"><strong>https://www.yourbatman.cn</strong></a> 收录。</p>
+</blockquote>
+<p><img data-src="https://img-blog.csdnimg.cn/20201122153939319.jpg" alt=""></p>
+<h1 id="✍前言"><a href="#✍前言" class="headerlink" title="✍前言"></a>✍前言</h1><p>你好，我是YourBatman。</p>
+<p>北京时间2020-11-12，<code>Spring Boot 2.4.0</code>正式发布。2.4.0是第一个使用<strong>新版本方案</strong>的Spring Boot发行版本。</p>
+<blockquote>
+<p>注意：2.4.0版本号没有<code>.RELEASE</code>后缀，没有<code>.RELEASE</code>后缀，没有<code>.RELEASE</code>后缀。使用的是Spring最新的版本发布规则。此规则详解请参考上篇文章：<a href="https://mp.weixin.qq.com/s/ZoUG9h1TndW2QpnPyGeIQA" target="_blank" rel="noopener">Spring改变版本号命名规则：此举对非英语国家很友好</a></p>
+</blockquote>
+<p>还记得<code>Spring Boot 2.3.0.RELEASE</code>版本发布时那会麽？前后相差将好半年：<br><img data-src="https://img-blog.csdnimg.cn/20201114170514555.png?#pic_center" alt=""><br>直达电梯：<a href="https://mp.weixin.qq.com/s/ikI9c3XyR_czOSmsu6FLMw" target="_blank" rel="noopener">Spring Boot 2.3.0正式发布：优雅停机、配置文件位置通配符新特性一览</a></p>
+<p>一般来说，次版本号的升级会有点料，根据之前的爆料此次升级据说是做了大量的更新和改进。那么老规矩，作为小白鼠的我先代你玩一玩，初体验吧。</p>
+<blockquote>
+<p>也可参见官方的更新日志：<a href="https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.4-Release-Notes" target="_blank" rel="noopener">Spring Boot 2.4.0 Release Notes</a></p>
+</blockquote>
+<h1 id="✍正文"><a href="#✍正文" class="headerlink" title="✍正文"></a>✍正文</h1><p>除了刚发布的Spring Boot 2.4.0，Spring Boot 2.3.x/2.2.x仍旧是<strong>活跃的</strong>维护的版本。Spring Boot遵循的是<code>Pivotal OSS</code>支持策略，从发布日期起支持主要版本<strong>3年</strong>（注意：是主要版本）。下面是详情：</p>
+<ul>
+<li><code>2.3.x</code>：<strong>支持的版本</strong>。2020.05发布，是现在的活跃的主干</li>
+<li><code>2.2.x</code>：<strong>支持的版本</strong>。2019.10发布，是现在的活跃的主干</li>
+<li><code>2.1.x</code>：2018.10发布，支持到2020.10月底，<strong>建议尽快升级</strong></li>
+</ul>
+<p><strong>EOL分支</strong>：</p>
+<ul>
+<li><code>2.0.x</code>：2018.3发布，2019.4.3停止维护</li>
+<li><code>1.5.x</code>：生命已终止的版本。2017.1发布，是最后一个1.x分支，2019.8.1停止维护</li>
+</ul>
+<p><img data-src="https://img-blog.csdnimg.cn/20201116071254550.png#pic_center" alt=""></p>
+<h2 id="回忆2-3版本的新特性"><a href="#回忆2-3版本的新特性" class="headerlink" title="回忆2.3版本的新特性"></a>回忆2.3版本的新特性</h2><p>可能大部分小伙伴都还没用过2.3.x分支，没想到2.4.x就已发布。因此这里先对2.3.x版本的新特性，来波简单回忆：</p>
+<ol>
+<li>优雅停机。这是<strong>2.3.x主打的新特性</strong>：在关闭时，web服务器将不再允许新的请求，并将等待完成的请求给个宽限期让它完成。这个宽限期是可以设置的：可以使用<code>spring.lifecycle.timeout-per-shutdown-phase=xxx</code>来配置，默认值是30s。</li>
+<li>配置文件位置支持通配符。简单的说，如果你有MySql的配置和Redis配置的话，你就可以把他们分开来放置，这个新特性也是棒棒哒。隔离性更好目录也更加清晰了（注意：此格式只支持放在classpath外部）：<ol>
+<li>mysql：<code>/config/mysql/application.properties</code></li>
+<li>redis：<code>/config/redis/application.properties</code></li>
+</ol>
+</li>
+<li>核心依赖升级。<ol>
+<li>Spring Data Neumann。备注：很明显这个还是旧的命名方式。在Spirng新的版本规则下，Spring Data最新版本为Spring Data 2020.0.0</li>
+<li>Spring Session Dragonfruit（很明显这个也还是旧的命名方式）</li>
+<li>Spring Security 5.3</li>
+<li><strong>Spring Framework</strong> 没有升级，使用的依旧是和Spring Boot 2.2相同的<code>5.2.x</code>版本<ol>
+<li>说明：小版本号的升级对于新特性来说一般选择性忽略</li>
+</ol>
+</li>
+<li>关于<strong>Bean Validation</strong>：从此版本开始，<code>spring-boot-starter-web</code>不会再把validation带进来，所以若使用到，你需要自己添加这个<code>spring-boot-starter-validation</code>依赖<ol>
+<li>一般来说建议你手动引入，毕竟Bean Validation的使用还是很广泛，并且真的非常非常好用</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<p>做足功课后，就开始最新的Spring Boot 2.4.0之旅吧。</p>
+<h2 id="2-4-0主要新特性"><a href="#2-4-0主要新特性" class="headerlink" title="2.4.0主要新特性"></a>2.4.0主要新特性</h2><h3 id="全新的配置文件处理-properties-yaml"><a href="#全新的配置文件处理-properties-yaml" class="headerlink" title="全新的配置文件处理(properties/yaml)"></a>全新的配置文件处理(properties/yaml)</h3><p>这个改变<strong>最为重磅</strong>，本次改变了配置文件的加载逻辑，旨在<strong>简化</strong>和<strong>合理化</strong>外部配置的加载方式，它可能具有不向下兼容性。</p>
+<p>Spring Boot 2.4改变了处理<code>application.properties</code>和<code>application.yml</code>文件的方式：</p>
+<ul>
+<li>若你只是简单的文件application.properties/yaml，那么升级对你是<strong>无缝</strong>的，你感受不到任何变化</li>
+<li>若你使用了比较复杂的文件，如<code>application-profile.properties/yaml</code>这种（或者使用了Spirng Cloud的配置中心、（带有分隔符—-的）多yaml文件），那么默认是不向下兼容的，需要你显式的做出些更改</li>
+</ul>
+<p>因为配置文件隶属于程序的一部分，特别是我们现在几乎都会使用到配置中心。因此下面针对于老版本升级到Spring Boot 2.4.0做个简单的迁移指导。</p>
+<blockquote>
+<p>说明：因配置文件加载逻辑完全进行了重写，因此详细版本我放到了下文专文讲解，有兴趣可保持关注</p>
+</blockquote>
+<h4 id="老版本版本配置属性迁移指南"><a href="#老版本版本配置属性迁移指南" class="headerlink" title="老版本版本配置属性迁移指南"></a>老版本版本配置属性迁移指南</h4><p>老版本：2.4.0之前的版本都叫老版本。</p>
+<p>Spring Boot 2.4对<code>application.poperties/yaml</code>的处理做了更新/升级。旨在简化和合理化外部配置的加载方式。它还提供了新功能：<code>spring.config.import</code>支持。所以呢，对于Spring Boot 2.4.0之前的版本（老版本）若升级到2.4.0需要做些修改，指导建议如下：</p>
+<h5 id="方式一：恢复旧模式（不推荐）"><a href="#方式一：恢复旧模式（不推荐）" class="headerlink" title="方式一：恢复旧模式（不推荐）"></a>方式一：恢复旧模式（不推荐）</h5><p>如果你还未准备好做配置迁移的修改，Spring Boot也帮你考虑到了，提供了<strong>一键切换</strong>到旧模式的“按钮”。具体做法是：只需要在<code>Environment</code>里增加一个属性<code>spring.config.use-legacy-processing = true</code>就搞定。最简的方式就是把这个属性放在application.poperties/yaml里即可。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">spring.config.use-legacy-processing = <span class="keyword">true</span></span><br></pre></td></tr></table></figure>
+
+<p>增加此配置后，Spring Boot对配置文件的解析恢复到原来模式：仍旧使用<code>ConfigFileApplicationListener</code>去解析。</p>
+<blockquote>
+<p><code>ConfigFileApplicationListener</code>属于Spring Boot非常核心的底层代码，这次做了不向下兼容的改进，可见它对进击云原生的决心</p>
+</blockquote>
+<p>值得注意的是：此API在2.4.0已被标记为过期：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// @since 1.0.0</span></span><br><span class="line"><span class="comment">// @deprecated since 2.4.0 in favor of &#123;@link ConfigDataEnvironmentPostProcessor&#125;</span></span><br><span class="line"><span class="meta">@Deprecated</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConfigFileApplicationListener</span> <span class="keyword">implements</span> <span class="title">EnvironmentPostProcessor</span>, <span class="title">SmartApplicationListener</span>, <span class="title">Ordered</span> </span>&#123;</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>按照Spring Boot的版本策略，此类将在Spring Boot 2.6.0版本被移除。因此：若不是迫不得已（时间紧急），并不建议你用兼容手法这么去做，因为这将成为技术债，迟早要还的。</p>
+<blockquote>
+<p>说明：很多RD其实只会看到当前的方便，获得利益（比如快速上线获奖），坑交给后人。我个人认为作为程序员应该有一定自我修养，自我追求，不为一时的爽而持续给团队积累债务，毕竟积重难返。</p>
+</blockquote>
+<h5 id="方式二：按新规则迁移（推荐）"><a href="#方式二：按新规则迁移（推荐）" class="headerlink" title="方式二：按新规则迁移（推荐）"></a>方式二：按新规则迁移（推荐）</h5><p>若你对配置文件的使用有如下情行，那么你需要做迁移：</p>
+<ol>
+<li>多文档的yaml文件（带有—-分隔符的文件）</li>
+<li>在Jar外使用配置文件，或者使用形如application-{xxx}.properties/yaml这种配置</li>
+<li>若在多文档yaml中使用到了<code>spring.profiles</code>配置项</li>
+<li>…</li>
+</ol>
+<p>Spring Boot 2.4.0升级对配置文件的改动是最大的，并且还<strong>不具备向下兼容性</strong>，简单的说就是从此版本开始要把Spring Boot的配置文件加载机制重学一遍（比如还增加了<code>spring.config.import</code>，增加了对kubernetes配置的支持等等），并且还要学会如何迁移。</p>
+<p><strong>为了更好的描述好这个非常非常重要的知识点，下篇文章我会用专文来全面介绍 Spring Boot这套全新的配置文件加载机制，并且辅以原理，以及和过去方式的比较，帮助你更全面、更快速、更劳的掌握它，欢迎持续关注。</strong></p>
+<blockquote>
+<p>说明：Spring Boot的配置文件加载机制非常非常重要，因为你也知道你平时开发中很大程度实际上是在跟它的配置项打交道。新的配置加载方式比老的更加优秀，适应发展，敬请期待</p>
+</blockquote>
+<h3 id="从spring-boot-starter-test中删除Vintage-Engine"><a href="#从spring-boot-starter-test中删除Vintage-Engine" class="headerlink" title="从spring-boot-starter-test中删除Vintage Engine"></a>从spring-boot-starter-test中删除Vintage Engine</h3><p><code>Spring Boot 2.2.0</code>版本开始就引入JUnit 5作为单元测试<strong>默认库</strong>，在此之前，spring-boot-starter-test包含的是JUnit 4的依赖，Spring Boot 2.2.0版本之后替换成了Junit Jupiter（Junit5）。</p>
+<p>Vintage Engine属于Junit5的一个模块，它的作用是：允许用JUnit 5运行用JUnit 4编写的测试，从而提供了向下兼容的能力。</p>
+<p>从2.2.0到现在经过了2个版本的迭代，到<code>Spring Boot 2.4.0</code>这个版本决定了把Vintage Engine从spring-boot-starter-test正式移除。因此：若你的工程仍需要对JUnit4支持，那么请手动引入依赖项（如果工程量不大，强烈建议使用JUnit5，比4好用太多）：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.junit.vintage<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>junit-vintage-engine<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">exclusions</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.hamcrest<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>hamcrest-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>说明：其实在2.4.0之前，若你是从<code>https://start.spring.io</code>生成的项目其实也是不会带有vintage-engine的。只不过它是通过显式的在pom里通过exclusion标签来排除的</p>
+</blockquote>
+<h3 id="嵌入式数据库检测"><a href="#嵌入式数据库检测" class="headerlink" title="嵌入式数据库检测"></a>嵌入式数据库检测</h3><p>改进嵌入式数据库检测机制：仅当数据库在<strong>内存中</strong>时才将其视为嵌入式数据库。所以如果使用H2、HSQL等产品，<strong>但是</strong>你是基于文件的持久性或使用的是服务器模式，那么将不会检测为内存数据库。而对于<strong>非内存</strong>数据库，你可能需要额外做如下动作：</p>
+<ol>
+<li>sa用户名将不会再被主动设置。所以如果你的数据库需要用户名，请增加配置项：<code>spring.datasource.username = sa</code></li>
+<li>这种数据库将不会再被自动初始化，若要使用请根据需要更改<code>spring.datasource.initialization-mode</code>的值</li>
+</ol>
+<h3 id="Logback配置属性"><a href="#Logback配置属性" class="headerlink" title="Logback配置属性"></a>Logback配置属性</h3><p>Logback一些配置项改名了，更加表名了它是logback的配置项。</p>
+<blockquote>
+<p>新增了配置类<code>LogbackLoggingSystemProperties</code>用于对应，它继承自之前的<code>LoggingSystemProperties</code></p>
+</blockquote>
+<p>之前的配置项有些被废弃（此版本还未删除，后续版本肯定会删除的），对应关系如下：</p>
+<table>
+<thead>
+<tr>
+<th><del>老(已废弃)</del></th>
+<th>新</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><del>logging.pattern.rolling-file-name</del></td>
+<td>logging.logback.rollingpolicy.file-name-pattern</td>
+</tr>
+<tr>
+<td><del>logging.file.clean-history-on-start</del></td>
+<td>logging.logback.rollingpolicy.clean-history-on-start</td>
+</tr>
+<tr>
+<td><del>logging.file.max-size</del></td>
+<td>logging.logback.rollingpolicy.max-file-size</td>
+</tr>
+<tr>
+<td><del>logging.file.total-size-cap</del></td>
+<td>logging.logback.rollingpolicy.total-size-cap</td>
+</tr>
+<tr>
+<td><del>logging.file.max-history</del></td>
+<td>logging.logback.rollingpolicy.max-history</td>
+</tr>
+</tbody></table>
+<p>一些属性是被放到system environment里面的：</p>
+<table>
+<thead>
+<tr>
+<th><del>老(已废弃)</del></th>
+<th>新</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><del>ROLLING_FILE_NAME_PATTERN ~</del></td>
+<td>LOGBACK_ROLLINGPOLICY_FILE_NAME_PATTERN</td>
+</tr>
+<tr>
+<td><del>LOG_FILE_CLEAN_HISTORY_ON_START</del></td>
+<td>LOGBACK_ROLLINGPOLICY_CLEAN_HISTORY_ON_START</td>
+</tr>
+<tr>
+<td><del>LOG_FILE_MAX_SIZE</del></td>
+<td>LOGBACK_ROLLINGPOLICY_MAX_FILE_SIZE</td>
+</tr>
+<tr>
+<td><del>LOG_FILE_TOTAL_SIZE_CAP</del></td>
+<td>LOGBACK_ROLLINGPOLICY_TOTAL_SIZE_CAP</td>
+</tr>
+<tr>
+<td><del>LOG_FILE_MAX_HISTORY</del></td>
+<td>LOGBACK_ROLLINGPOLICY_MAX_HISTORY</td>
+</tr>
+</tbody></table>
+<h3 id="不再注册DefaultServlet"><a href="#不再注册DefaultServlet" class="headerlink" title="不再注册DefaultServlet"></a>不再注册DefaultServlet</h3><p>从Spring Boot 2.4开始，默认将不会再注册<code>DefaultServlet</code>。因为在绝大多数的应用中，Spring MVC提供的<code>DispatcherServlet</code>是<strong>唯一</strong>需要被注册的Servlet。从源码处感受下这次改动：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">AbstractServletWebServerFactory：</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2.4.0之前版本，默认值是true</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">boolean</span> registerDefaultServlet = <span class="keyword">true</span>;</span><br><span class="line"><span class="comment">// 2.4.0以及之后版本，默认值是false</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">boolean</span> registerDefaultServlet = <span class="keyword">false</span>;</span><br></pre></td></tr></table></figure>
+<p>当然喽，若你的工程强依赖于此Servelt，那么可以通过此配置项<code>server.servlet.register-default-servlet = true</code>把它注册上去。</p>
+<h4 id="补课：什么是DefaultServlet？"><a href="#补课：什么是DefaultServlet？" class="headerlink" title="补课：什么是DefaultServlet？"></a>补课：什么是DefaultServlet？</h4><p>它是Java EE提供的标准技术，如Tomcat、Jetty等都提供了这个类。简而言之它的作用就是兜底（拦截<code>/</code>），当别的servlet都没匹配上时就交给它来处理，一般用于处理静态资源如<code>.jpg,.html,.js</code>这类的静态文件。</p>
+<p><code>DefaultServlet</code>在传统web容器里，会被配置在tomcat目录（此处以tomcat为例）下的<code>conf/web.xml</code>里：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">servlet</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>default<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>org.apache.catalina.servlets.DefaultServlet<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>debug<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>0<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>listings<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>false<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">load-on-startup</span>&gt;</span>1<span class="tag">&lt;/<span class="name">load-on-startup</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>default<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>说明：tomcat下的web.xml对其加载的所有的Application都生效，并且最终和Application自己的web.xml内容合并，遇相同的话后者优先级更高</p>
+</blockquote>
+<p>在Spring Boot <strong>嵌入式容器</strong>里配置是这样的（完全等价于xml配置）：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">addDefaultServlet</span><span class="params">(Context context)</span> </span>&#123;</span><br><span class="line">	Wrapper defaultServlet = context.createWrapper();</span><br><span class="line">	defaultServlet.setName(<span class="string">"default"</span>);</span><br><span class="line">	defaultServlet.setServletClass(<span class="string">"org.apache.catalina.servlets.DefaultServlet"</span>);</span><br><span class="line">	defaultServlet.addInitParameter(<span class="string">"debug"</span>, <span class="string">"0"</span>);</span><br><span class="line">	defaultServlet.addInitParameter(<span class="string">"listings"</span>, <span class="string">"false"</span>);</span><br><span class="line">	defaultServlet.setLoadOnStartup(<span class="number">1</span>);</span><br><span class="line">	<span class="comment">// Otherwise the default location of a Spring DispatcherServlet cannot be set</span></span><br><span class="line">	defaultServlet.setOverridable(<span class="keyword">true</span>);</span><br><span class="line">	context.addChild(defaultServlet);</span><br><span class="line">	context.addServletMappingDecoded(<span class="string">"/"</span>, <span class="string">"default"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>值得注意的是：Spring Boot注册的<code>DispatcherServlet</code>的path也是<code>/</code>（覆盖掉了<code>DefaultServelt</code>）。在Spring MVC环境下倘若是静态资源，也不用DefaultServelt费心，Spring MVC专门提供了一个<code>DefaultServletHttpRequestHandler</code>用于处理静态资源（虽然最终还是Dispatcher给<code>defaultServlet</code>去搞定）。</p>
+<p>现在的Spring Boot服务大都是REST服务，并无静态资源需要提供，因此就没有必要启用<code>DefaultServletHttpRequestHandler</code>和注册<code>DefaultServlet</code>来增加不必要的开销喽。</p>
+<h3 id="HTTP-traces不再包含cookie头"><a href="#HTTP-traces不再包含cookie头" class="headerlink" title="HTTP traces不再包含cookie头"></a>HTTP traces不再包含cookie头</h3><p>Http traces默认将不再包含请求头<code>Cookie</code>以及响应头<code>Set-Cookie</code>。源码处感受一下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">org.springframework.boot.actuate.trace.http.Include：</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2.4.0版本之前：包含COOKIE_HEADERS这个头</span></span><br><span class="line"><span class="keyword">static</span> &#123;</span><br><span class="line">	Set&lt;Include&gt; defaultIncludes = <span class="keyword">new</span> LinkedHashSet&lt;&gt;();</span><br><span class="line">	defaultIncludes.add(Include.REQUEST_HEADERS);</span><br><span class="line">	defaultIncludes.add(Include.RESPONSE_HEADERS);</span><br><span class="line">	defaultIncludes.add(Include.COOKIE_HEADERS);</span><br><span class="line">	defaultIncludes.add(Include.TIME_TAKEN);</span><br><span class="line">	DEFAULT_INCLUDES = Collections.unmodifiableSet(defaultIncludes);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 2.4.0版本以及之后：不包含COOKIE_HEADERS这个头</span></span><br><span class="line"><span class="keyword">static</span> &#123;</span><br><span class="line">	Set&lt;Include&gt; defaultIncludes = <span class="keyword">new</span> LinkedHashSet&lt;&gt;();</span><br><span class="line">	defaultIncludes.add(Include.REQUEST_HEADERS);</span><br><span class="line">	defaultIncludes.add(Include.RESPONSE_HEADERS);</span><br><span class="line">	defaultIncludes.add(Include.TIME_TAKEN);</span><br><span class="line">	DEFAULT_INCLUDES = Collections.unmodifiableSet(defaultIncludes);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>若你仍旧想保留老的习惯，那么请用配置项<code>management.trace.http.include = cookies, errors, request-headers, response-headers</code>自行控制。</p>
+<h3 id="Neo4j"><a href="#Neo4j" class="headerlink" title="Neo4j"></a>Neo4j</h3><p>这个版本对Neo4j的支持进行了重大调整。直接用源码来说明差异：</p>
+<p>Spring Boot 2.4.0之前版本：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@ConfigurationProperties</span>(prefix = <span class="string">"spring.data.neo4j"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Neo4jProperties</span> <span class="keyword">implements</span> <span class="title">ApplicationContextAware</span> </span>&#123; ... &#125;</span><br><span class="line"><span class="comment">// 无Neo4jDataProperties配置类</span></span><br></pre></td></tr></table></figure>
+<p>Spring Boot 2.4.0以及之后版本：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@ConfigurationProperties</span>(prefix = <span class="string">"spring.neo4j"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Neo4jProperties</span> </span>&#123; ... &#125;</span><br><span class="line"><span class="meta">@ConfigurationProperties</span>(prefix = <span class="string">"spring.data.neo4j"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Neo4jDataProperties</span> </span>&#123; ... &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="其它升级关注点"><a href="#其它升级关注点" class="headerlink" title="其它升级关注点"></a>其它升级关注点</h2><ul>
+<li><strong>Spring Framework 5.3</strong>：Spring Boot 2.4.0使用的是5.3.0主线分支（之前使用的5.2.x或更低）<ul>
+<li>Spring Framework 5.3的新特性应该<strong>重点关注</strong>，请移步我上篇文章：<a href="https://mp.weixin.qq.com/s/Sw6EqAY0DmF-p2qPoaetUg" target="_blank" rel="noopener">Spring Framework 5.3.0正式发布，在云原生路上继续发力</a></li>
+</ul>
+</li>
+<li><strong>Spring Data 2020.0</strong>：Spring Boot 2.4.0使用的是最新发布的Spring Data 2020.0<ul>
+<li>此版本的命名方式不同于之前，是因为使用了Spirng最新的release train命名方式。Spring在2020年4月份发布了最新的版本命名方式，可参考前面这篇文章：<a href="https://mp.weixin.qq.com/s/ZoUG9h1TndW2QpnPyGeIQA" target="_blank" rel="noopener">Spring改变版本号命名规则：此举对非英语国家很友好</a></li>
+</ul>
+</li>
+<li><strong>支持Java 15</strong>：此版本的Spring Boot完全支持Java 15，最小支持依旧是Java 8</li>
+<li>自定义属性名支持：当使用<strong>构造函数绑定</strong>时，属性的名称需要和参数名称保持一样。如果您想使用Java保留关键字，这可能是一个问题。如下例子：<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@ConfigurationProperties</span>(prefix = <span class="string">"sample"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SampleConfigurationProperties</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">final</span> String importValue;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// import是Java关键字</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">SampleConfigurationProperties</span><span class="params">(@Name(<span class="string">"import"</span>)</span> String importValue) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.importValue = importValue;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>@Name注解是Spring Boot 2.4.0新增的注解，能标注在<code>ElementType.PARAMETER</code>上</p>
+</blockquote>
+</li>
+<li><strong>支持导入无扩展名的配置文件</strong>：如果您有这样的需求，现在就可以通过向Spring Boot引导提供关于内容类型的提示来导入这些文件<ul>
+<li>此版本对Spring Boot的配置文件加载进行了完全重新改造，并且不向下兼容，具体参见<strong>下篇文章</strong></li>
+</ul>
+</li>
+<li><strong>新增StartupEndpoint</strong>：显示有关应用程序启动的信息。此端点可以帮助您识别启动时间超过预期的bean<ul>
+<li>此端点依赖于Spring Framework 5.3.0新提供的应用启动追踪新特性。具体可参考<code>ApplicationStartup</code>和<code>StartupStep</code>这个两个API是如何做追踪的</li>
+</ul>
+</li>
+<li><strong>新增RedisCacheMetrics</strong>：用于监控使用redis时的puts、gets、deletes以及缓存命中率等信息<ul>
+<li>此指标信息默认不开启，需你增加配置<code>spring.cache.redis.enable-statistics = true</code></li>
+</ul>
+</li>
+<li><strong>新增些Web配置项</strong>：<code>spring.web.locale、spring.web.locale-resolver、spring.web.resources.*、management.server.base-path</code>，这些属性既支持Servlet也支持WebFlux<ul>
+<li>对应的<strong>只能用于</strong> Spring MVC或servelt下配置项<code>spring.mvc.locale/spring.mvc.locale-resolver/spring.resources.*/management.server.servlet.context-path</code>均以标注为过期</li>
+</ul>
+</li>
+<li><strong>支持Flyway 7</strong>：这个版本升级到Flyway 7，带来了一些额外的属性。如：<code>spring.flyway.url/user/password</code>（开源版本）；<code>spring.flyway.cherry-pick/jdbc-properties...</code>（团队版本）</li>
+<li><strong>H2数据库控制台支持配置密码</strong>：可通过<code>spring.h2.console.settings.web-admin-password</code>属性配置通过密码访问H2控制台</li>
+<li><strong>增强的错误分析器FailureAnalizers</strong>：现在即使你还没有创建ApplicationContext，FailureAnalizers都会生效来帮你定位错误位置</li>
+<li><strong>处理/标注Spring Boot 2.2和2.3中过期项</strong>：按照Spring Boot的<strong>版本兼容性政策</strong>，在2.2版本已被标记为<code>@Deprecated</code>的在2.4.0版本会被删除，在2.3版本中被标记为<code>@Deprecated</code>的计划在2.5.0版本中将其移除</li>
+</ul>
+<h1 id="✍总结"><a href="#✍总结" class="headerlink" title="✍总结"></a>✍总结</h1><p>这是A哥奉给大家的，对Spring Boot2.4.0版本新特性的介绍，希望对你有些帮助。</p>
+<p>Spring Boot 2.4.0版本的升级目标，基本和Spring Framework 5.3.0保持一致：<strong>为云原生做努力</strong>。表现在除了删除些无用类，禁止不需要的类的加载外，重点还会体现在它对<strong>配置文件加载机制</strong>的重构上，这将是下文的内容，也是本次升级的重头戏，敬请关注。</p>
+<p>Spring Boot重写了对配置文件的加载机制，并且新引入了近40个类来处理（老方式仅有区区几个类），可见其重视、重要程度。因此，为了适应未来的发展，你一定要掌握，并且越早越好，下篇将为你揭晓。</p>
+<hr>
+<h5 id="✔推荐阅读："><a href="#✔推荐阅读：" class="headerlink" title="✔推荐阅读："></a>✔推荐阅读：</h5><ul>
+<li><a href="https://mp.weixin.qq.com/s/SZUJ0sy4vM7UH10pk6NM3g" target="_blank" rel="noopener">如果程序员和产品经理都用凡尔赛文学对话……</a></li>
+<li><a href="https://mp.weixin.qq.com/s/Sw6EqAY0DmF-p2qPoaetUg" target="_blank" rel="noopener">Spring Framework 5.3.0正式发布，在云原生路上继续发力</a></li>
+<li><a href="https://mp.weixin.qq.com/s/ZoUG9h1TndW2QpnPyGeIQA" target="_blank" rel="noopener">Spring改变版本号命名规则：此举对非英语国家很友好</a></li>
+<li><a href="https://mp.weixin.qq.com/s/3QaiUGzj5nW2N4Aipm47PQ" target="_blank" rel="noopener">JDK15正式发布，划时代的ZGC同时宣布转正</a></li>
+<li><a href="https://mp.weixin.qq.com/s/8voJSbmcBbdfNUCUBIcKcA" target="_blank" rel="noopener">IntelliJ IDEA 2020.2正式发布，诸多亮点总有几款能助你提效</a></li>
+<li><a href="https://mp.weixin.qq.com/s/ikI9c3XyR_czOSmsu6FLMw" target="_blank" rel="noopener">Spring Boot 2.3.0正式发布：优雅停机、配置文件位置通配符新特性一览</a></li>
+<li><a href="https://mp.weixin.qq.com/s/nb4oT02dlU4pxINZw9aLLw" target="_blank" rel="noopener">搞事情？Spring Boot今天一口气发布三个版本</a></li>
+</ul>]]></content>
+      <categories>
+        <category>新特性</category>
+      </categories>
+      <tags>
+        <tag>Spring Boot</tag>
+        <tag>云原生</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>如果程序员和产品经理都用凡尔赛文学对话......</title>
     <url>/x2y/6992bf65.html</url>
     <content><![CDATA[<blockquote>
@@ -2232,8 +2477,8 @@
       </categories>
       <tags>
         <tag>Jackson</tag>
-        <tag>Fastjson</tag>
         <tag>JSON</tag>
+        <tag>Fastjson</tag>
       </tags>
   </entry>
   <entry>
@@ -2511,8 +2756,8 @@
       </categories>
       <tags>
         <tag>Jackson</tag>
-        <tag>Fastjson</tag>
         <tag>JSON</tag>
+        <tag>Fastjson</tag>
       </tags>
   </entry>
   <entry>
@@ -2709,8 +2954,8 @@
       </categories>
       <tags>
         <tag>Jackson</tag>
-        <tag>Fastjson</tag>
         <tag>JSON</tag>
+        <tag>Fastjson</tag>
       </tags>
   </entry>
   <entry>
