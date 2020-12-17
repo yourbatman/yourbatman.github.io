@@ -77,6 +77,203 @@
       </tags>
   </entry>
   <entry>
+    <title>3. 搞定收工，PropertyEditor就到这</title>
+    <url>/x2y/7889cb09.html</url>
+    <content><![CDATA[<blockquote>
+<p>分享、成长，拒绝浅藏辄止。搜索公众号【<strong>BAT的乌托邦</strong>】，回复关键字<code>专栏</code>有Spring技术栈、中间件等小而美的<strong>原创专栏</strong>供以免费学习。本文已被 <a href="https://www.yourbatman.cn"><strong>https://www.yourbatman.cn</strong></a> 收录。</p>
+</blockquote>
+<p><img data-src="https://img-blog.csdnimg.cn/20201213183612314.png#pic_center" alt=""></p>
+<h1 id="✍前言"><a href="#✍前言" class="headerlink" title="✍前言"></a>✍前言</h1><p>你好，我是YourBatman。</p>
+<p><a href="https://mp.weixin.qq.com/s/Afu8YYyREoynAXS6YrJe7g" target="_blank" rel="noopener">上篇文章</a>介绍了PropertyEditor在类型转换里的作用，以及举例说明了Spring内置实现的PropertyEditor们，它们各司其职完成 <code>String &lt;-&gt; 各种类型</code> 的互转。</p>
+<p>在知晓了这些基础知识后，本文将更进一步，为你介绍Spring是如何注册、管理这些转换器，以及如何自定义转换器去实现<strong>私有</strong>转换协议。</p>
+<h2 id="版本约定"><a href="#版本约定" class="headerlink" title="版本约定"></a>版本约定</h2><ul>
+<li>Spring Framework：5.3.1</li>
+<li>Spring Boot：2.4.0</li>
+</ul>
+<h1 id="✍正文"><a href="#✍正文" class="headerlink" title="✍正文"></a>✍正文</h1><p>稍微熟悉点Spring Framework的小伙伴就知道，Spring特别擅长API设计、模块化设计。<strong>后缀模式</strong>是它常用的一种管理手段，比如<code>xxxRegistry</code>注册中心在Spring内部就有非常多：<br><img data-src="https://img-blog.csdnimg.cn/20201213100621495.png#pic_center" alt=""><br><code>xxxRegistry</code>用于<strong>管理</strong>（注册、修改、删除、查找）一类组件，当组件类型较多时使用注册中心统一管理是一种非常有效的手段。诚然，<code>PropertyEditor</code>就属于这种场景，管理它们的注册中心是<code>PropertyEditorRegistry</code>。</p>
+<h2 id="PropertyEditorRegistry"><a href="#PropertyEditorRegistry" class="headerlink" title="PropertyEditorRegistry"></a>PropertyEditorRegistry</h2><p>它是管理PropertyEditor的中心接口，负责注册、查找对应的PropertyEditor。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// @since 1.2.6</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">PropertyEditorRegistry</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 注册一个转换器：该type类型【所有的属性】都将交给此转换器去转换（即使是个集合类型）</span></span><br><span class="line">    <span class="comment">// 效果等同于调用下方法：registerCustomEditor(type,null,editor);</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">registerCustomEditor</span><span class="params">(Class&lt;?&gt; requiredType, PropertyEditor propertyEditor)</span></span>;</span><br><span class="line">	<span class="comment">// 注册一个转换器：该type类型的【propertyPath】属性将交给此转换器</span></span><br><span class="line">	<span class="comment">// 此方法是重点，详解见下文</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">registerCustomEditor</span><span class="params">(Class&lt;?&gt; requiredType, String propertyPath, PropertyEditor propertyEditor)</span></span>;</span><br><span class="line">	<span class="comment">// 查找到一个合适的转换器</span></span><br><span class="line">	<span class="function">PropertyEditor <span class="title">findCustomEditor</span><span class="params">(Class&lt;?&gt; requiredType, String propertyPath)</span></span>;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>说明：该API是<code>1.2.6</code>这个小版本新增的。Spring <strong>一般</strong> 不会在小版本里新增核心API以确保稳定性，但这并非100%。Spring认为该API对使用者无感的话（你不可能会用到它），增/减也是有可能的</p>
+</blockquote>
+<p>此接口的继承树如下：<br><img data-src="https://img-blog.csdnimg.cn/2020121310482599.png#pic_center" alt=""><br>值得注意的是：虽然此接口看似实现者众多，但其实其它<strong>所有的</strong>实现关于PropertyEditor的管理部分都是委托给<code>PropertyEditorRegistrySupport</code>来管理，<strong>无一例外</strong>。因此，本文只需关注PropertyEditorRegistrySupport足矣，这为后面的高级应用（如数据绑定、BeanWrapper等）打好坚实基础。</p>
+<blockquote>
+<p>用不太正确的理解可这么认为：PropertyEditorRegistry接口的唯一实现只有PropertyEditorRegistrySupport</p>
+</blockquote>
+<h2 id="PropertyEditorRegistrySupport"><a href="#PropertyEditorRegistrySupport" class="headerlink" title="PropertyEditorRegistrySupport"></a>PropertyEditorRegistrySupport</h2><p>它是PropertyEditorRegistry接口的实现，提供对<code>default editors</code>和<code>custom editors</code>的管理，最终主要为<code>BeanWrapperImpl</code>和<code>DataBinder</code>服务。</p>
+<p>一般来说，Registry注册中心内部会使用多个Map来维护，代表注册表。此处也不例外：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 装载【默认的】编辑器们，初始化的时候会注册好</span></span><br><span class="line"><span class="keyword">private</span> Map&lt;Class&lt;?&gt;, PropertyEditor&gt; defaultEditors;</span><br><span class="line"><span class="comment">// 如果想覆盖掉【默认行为】，可通过此Map覆盖（比如处理Charset类型你不想用默认的编辑器处理）</span></span><br><span class="line"><span class="comment">// 通过API：overrideDefaultEditor(...)放进此Map里</span></span><br><span class="line"><span class="keyword">private</span> Map&lt;Class&lt;?&gt;, PropertyEditor&gt; overriddenDefaultEditors;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ======================注册自定义的编辑器======================</span></span><br><span class="line"><span class="comment">// 通过API：registerCustomEditor(...)放进此Map里（若没指定propertyPath）</span></span><br><span class="line"><span class="keyword">private</span> Map&lt;Class&lt;?&gt;, PropertyEditor&gt; customEditors;</span><br><span class="line"><span class="comment">// 通过API：registerCustomEditor(...)放进此Map里（若指定了propertyPath）</span></span><br><span class="line"><span class="keyword">private</span> Map&lt;String, CustomEditorHolder&gt; customEditorsForPath;</span><br></pre></td></tr></table></figure>
+<p>PropertyEditorRegistrySupport使用了<strong>4个</strong> Map来维护不同来源的编辑器，作为查找的 <strong>“数据源”</strong>。<br><img data-src="https://img-blog.csdnimg.cn/20201213113728994.png#pic_center" alt=""><br>这4个Map可分为两大组，并且有如下规律：</p>
+<ul>
+<li>默认编辑器组：defaultEditors和overriddenDefaultEditors<ul>
+<li>overriddenDefaultEditors优先级 <strong>高于</strong> defaultEditors</li>
+</ul>
+</li>
+<li>自定义编辑器组：customEditors和customEditorsForPath<ul>
+<li>它俩为互斥关系</li>
+</ul>
+</li>
+</ul>
+<p>细心的小伙伴会发现还有一个Map咱还未提到：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> Map&lt;Class&lt;?&gt;, PropertyEditor&gt; customEditorCache;</span><br></pre></td></tr></table></figure>
+<p>从属性名上理解，它表示<code>customEditors</code>属性的缓存。那么问题来了：customEditors和customEditorCache的数据结构一毛一样（都是Map），谈何缓存呢？直接从customEditors里获取值不更香吗？</p>
+<h3 id="customEditorCache作用解释"><a href="#customEditorCache作用解释" class="headerlink" title="customEditorCache作用解释"></a>customEditorCache作用解释</h3><p>customEditorCache用于缓存自定义的编辑器，辅以成员属性customEditors属性一起使用。具体（唯一）使用方式在私有方法：根据类型获取自定义编辑器<code>PropertyEditorRegistrySupport#getCustomEditor</code></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> PropertyEditor <span class="title">getCustomEditor</span><span class="params">(Class&lt;?&gt; requiredType)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (requiredType == <span class="keyword">null</span> || <span class="keyword">this</span>.customEditors == <span class="keyword">null</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	PropertyEditor editor = <span class="keyword">this</span>.customEditors.get(requiredType);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 重点：若customEditors没有并不代表处理不了，因为还得考虑父子关系、接口关系</span></span><br><span class="line">	<span class="keyword">if</span> (editor == <span class="keyword">null</span>) &#123;</span><br><span class="line">		<span class="comment">// 去缓存里查询，是否存在父子类作为key的情况</span></span><br><span class="line">		<span class="keyword">if</span> (<span class="keyword">this</span>.customEditorCache != <span class="keyword">null</span>) &#123;</span><br><span class="line">			editor = <span class="keyword">this</span>.customEditorCache.get(requiredType);</span><br><span class="line">		&#125;</span><br><span class="line">	</span><br><span class="line">		<span class="comment">// 若缓存没命中，就得遍历customEditors了，时间复杂度为O(n)</span></span><br><span class="line">		<span class="keyword">if</span> (editor == <span class="keyword">null</span>) &#123;</span><br><span class="line">			<span class="keyword">for</span> (Iterator&lt;Class&lt;?&gt;&gt; it = <span class="keyword">this</span>.customEditors.keySet().iterator(); it.hasNext() &amp;&amp; editor == <span class="keyword">null</span>;) &#123;</span><br><span class="line">				Class&lt;?&gt; key = it.next();</span><br><span class="line">				<span class="keyword">if</span> (key.isAssignableFrom(requiredType)) &#123;</span><br><span class="line">					editor = <span class="keyword">this</span>.customEditors.get(key);</span><br><span class="line">					<span class="keyword">if</span> (<span class="keyword">this</span>.customEditorCache == <span class="keyword">null</span>) &#123;</span><br><span class="line">						<span class="keyword">this</span>.customEditorCache = <span class="keyword">new</span> HashMap&lt;Class&lt;?&gt;, PropertyEditor&gt;();</span><br><span class="line">					&#125;</span><br><span class="line">					<span class="keyword">this</span>.customEditorCache.put(requiredType, editor);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> editor;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这段逻辑不难理解，此流程用一张图可描绘如下：<br><img data-src="https://img-blog.csdnimg.cn/20201213144711754.png#pic_center" alt=""><br>因为遍历<code>customEditors</code>属于比较重的操作（复杂度为O(n)），从而使用了customEditorCache避免每次出现父子类的匹配情况就去遍历一次，大大提高匹配效率。</p>
+<p>什么时候customEditorCache会发挥作用？也就说什么时候会出现父子类匹配情况呢？为了加深理解，下面搞个例子玩一玩</p>
+<h4 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h4><p>准备两个具有继承关系的实体类型</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Animal</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Long id;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Cat</span> <span class="keyword">extends</span> <span class="title">Animal</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>书写针对于父类（父接口）类型的编辑器：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AnimalPropertyEditor</span> <span class="keyword">extends</span> <span class="title">PropertyEditorSupport</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getAsText</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAsText</span><span class="params">(String text)</span> <span class="keyword">throws</span> IllegalArgumentException </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>说明：由于此部分只关注查找/匹配过程逻辑，因此对编辑器内部处理逻辑并不关心</p>
+</blockquote>
+<p>注册此编辑器，对应的类型为<strong>父类型</strong>：Animal</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test5</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    PropertyEditorRegistry propertyEditorRegistry = <span class="keyword">new</span> PropertyEditorRegistrySupport();</span><br><span class="line">    propertyEditorRegistry.registerCustomEditor(Animal<span class="class">.<span class="keyword">class</span>, <span class="title">new</span> <span class="title">AnimalPropertyEditor</span>())</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 付类型、子类型均可匹配上对应的编辑器</span></span><br><span class="line">    PropertyEditor customEditor1 = propertyEditorRegistry.findCustomEditor(Cat<span class="class">.<span class="keyword">class</span>, <span class="title">null</span>)</span>;</span><br><span class="line">    PropertyEditor customEditor2 = propertyEditorRegistry.findCustomEditor(Animal<span class="class">.<span class="keyword">class</span>, <span class="title">null</span>)</span>;</span><br><span class="line">    System.out.println(customEditor1 == customEditor2);</span><br><span class="line">    System.out.println(customEditor1.getClass().getSimpleName());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，结果为：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">true</span></span><br><span class="line">AnimalPropertyEditor</span><br></pre></td></tr></table></figure>
+<p><strong>结论</strong>：</p>
+<ul>
+<li>类型精确匹配优先级最高</li>
+<li>若没精确匹配到结果且本类型的<strong>父类型</strong>已注册上去，则最终也会匹配成功</li>
+</ul>
+<p><img data-src="https://img-blog.csdnimg.cn/20201213152403888.png#pic_center" alt=""><br>customEditorCache的作用可总结为一句话：帮助customEditors属性装载对已匹配上的子类型的编辑器，从而避免了每次全部遍历，有效的提升了匹配效率。</p>
+<p><strong>值得注意的是，每次调用API向<code>customEditors</code>添加新元素时，customEditorCache就会被清空，因此因尽量避免在运行期注册编辑器，以避免缓存失效而降低性能</strong></p>
+<h3 id="customEditorsForPath作用解释"><a href="#customEditorsForPath作用解释" class="headerlink" title="customEditorsForPath作用解释"></a>customEditorsForPath作用解释</h3><p>上面说了，它是和customEditors互斥的。</p>
+<p>customEditorsForPath的作用是能够实现<strong>更精准匹配</strong>，针对属性级别精准处理。此Map的值通过此API注册进来：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">registerCustomEditor</span><span class="params">(Class&lt;?&gt; requiredType, String propertyPath, PropertyEditor propertyEditor)</span></span>;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>说明：propertyPath不能为null才进此处，否则会注册进customEditors喽</p>
+</blockquote>
+<p>可能你会想，有了customEditors为何还需要customEditorsForPath呢？这里就不得不说两者的最大区别了：</p>
+<ul>
+<li><code>customEditors</code>：粒度较粗，通用性强。key为类型，即该类型的转换<strong>全部</strong>交给此编辑器处理<ul>
+<li>如：<code>registerCustomEditor(UUID.class,new UUIDEditor())</code>，那么此编辑器就能处理全天下所有的<code>String &lt;-&gt; UUID</code> 转换工作</li>
+</ul>
+</li>
+<li><code>customEditorsForPath</code>：粒度细精确到属性（字段）级别，有点专车专座的意思<ul>
+<li>如：<code>registerCustomEditor(Person.class, &quot;cat.uuid&quot; , new UUIDEditor())</code>，那么此编辑器就有且仅能处理<code>Person.cat.uuid</code>属性，其它的一概不管</li>
+</ul>
+</li>
+</ul>
+<p>有了这种区别，注册中心在<code>findCustomEditor(requiredType,propertyPath)</code>匹配的时候也是按照优先级顺序执行匹配的：</p>
+<ol>
+<li>若指定了propertyPath（不为null），就先去<code>customEditorsForPath</code>里找。否则就去<code>customEditors</code>里找</li>
+<li>若没有指定propertyPath（为null)，就直接去<code>customEditors</code>里找</li>
+</ol>
+<p>为了加深理解，讲上场景用代码实现如下。</p>
+<h4 id="代码示例-1"><a href="#代码示例-1" class="headerlink" title="代码示例"></a>代码示例</h4><p>创建一个Person类，关联Cat</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Cat</span> <span class="keyword">extends</span> <span class="title">Animal</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> UUID uuid;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Long id;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> Cat cat;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在的需求场景是：</p>
+<ul>
+<li>UUID类型统一交给UUIDEditor处理（当然包括Cat里面的UUID类型）</li>
+<li>Person类里面的Cat的UUID类型，需要单独<strong>特殊处理</strong>，因此格式不一样需要“特殊照顾”</li>
+</ul>
+<p>很明显这就需要两个不同的属性编辑器来实现，然后组织起来协同工作。Spring内置了UUIDEditor可以处理一般性的UUID类型（通用），而Person <strong>专用的</strong> UUID编辑器，自定义如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PersonCatUUIDEditor</span> <span class="keyword">extends</span> <span class="title">UUIDEditor</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String SUFFIX = <span class="string">"_YourBatman"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getAsText</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.getAsText().concat(SUFFIX);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAsText</span><span class="params">(String text)</span> <span class="keyword">throws</span> IllegalArgumentException </span>&#123;</span><br><span class="line">        text = text.replace(SUFFIX, <span class="string">""</span>);</span><br><span class="line">        <span class="keyword">super</span>.setAsText(text);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>向注册中心注册编辑器，并且书写测试代码如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test6</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    PropertyEditorRegistry propertyEditorRegistry = <span class="keyword">new</span> PropertyEditorRegistrySupport();</span><br><span class="line">    <span class="comment">// 通用的</span></span><br><span class="line">    propertyEditorRegistry.registerCustomEditor(UUID<span class="class">.<span class="keyword">class</span>, <span class="title">new</span> <span class="title">UUIDEditor</span>())</span>;</span><br><span class="line">    <span class="comment">// 专用的</span></span><br><span class="line">    propertyEditorRegistry.registerCustomEditor(Person.class, "cat.uuid", new PersonCatUUIDEditor());</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    String uuidStr = <span class="string">"1-2-3-4-5"</span>;</span><br><span class="line">    String personCatUuidStr = <span class="string">"1-2-3-4-5_YourBatman"</span>;</span><br><span class="line"></span><br><span class="line">    PropertyEditor customEditor = propertyEditorRegistry.findCustomEditor(UUID<span class="class">.<span class="keyword">class</span>, <span class="title">null</span>)</span>;</span><br><span class="line">    <span class="comment">// customEditor.setAsText(personCatUuidStr); // 抛异常：java.lang.NumberFormatException: For input string: "5_YourBatman"</span></span><br><span class="line">    customEditor.setAsText(uuidStr);</span><br><span class="line">    System.out.println(customEditor.getAsText());</span><br><span class="line"></span><br><span class="line">    customEditor = propertyEditorRegistry.findCustomEditor(Person.class, "cat.uuid");</span><br><span class="line">    customEditor.setAsText(personCatUuidStr);</span><br><span class="line">    System.out.println(customEditor.getAsText());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，打印输出：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="number">00000001</span>-<span class="number">0002</span>-<span class="number">0003</span>-<span class="number">0004</span>-<span class="number">000000000005</span></span><br><span class="line"><span class="number">00000001</span>-<span class="number">0002</span>-<span class="number">0003</span>-<span class="number">0004</span>-<span class="number">000000000005</span>_YourBatman</span><br></pre></td></tr></table></figure>
+<p><strong>完美。</strong></p>
+<p>customEditorsForPath相当于给你留了钩子，当你在某些特殊情况需要特殊照顾的时候，你可以借助它来搞定，十分的方便。</p>
+<p><strong>此方式有必要记住并且尝试，在实际开发中使用得还是比较多的。特别在你不想全局定义，且要确保向下兼容性的时候，使用抽象接口类型 + 此种方式缩小影响范围将十分有用</strong></p>
+<blockquote>
+<p>说明：propertyPath不仅支持Java Bean导航方式，还支持集合数组方式，如<code>Person.cats[0].uuid</code>这样格式也是ok的</p>
+</blockquote>
+<h2 id="PropertyEditorRegistrar"><a href="#PropertyEditorRegistrar" class="headerlink" title="PropertyEditorRegistrar"></a>PropertyEditorRegistrar</h2><p>Registrar：登记员。它一般和xxxRegistry配合使用，其实内核还是Registry，只是运用了<strong>倒排思想</strong>屏蔽一些内部实现而已。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">PropertyEditorRegistrar</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">registerCustomEditors</span><span class="params">(PropertyEditorRegistry registry)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>同样的，Spring内部也有很多类似实现模式：<br><img data-src="https://img-blog.csdnimg.cn/20201213163801803.png#pic_center" alt=""></p>
+<p>PropertyEditorRegistrar接口在Spring体系内唯一实现为：<code>ResourceEditorRegistrar</code>。它可值得我们絮叨絮叨。</p>
+<h3 id="ResourceEditorRegistrar"><a href="#ResourceEditorRegistrar" class="headerlink" title="ResourceEditorRegistrar"></a>ResourceEditorRegistrar</h3><p>从命名上就知道它和Resource资源有关，实际上也确实如此：主要负责将<code>ResourceEditor</code>注册到注册中心里面去，用于处理形如Resource、File、URI等这些资源类型。</p>
+<blockquote>
+<p>你配置classpath:xxx.xml用来启动Spring容器的配置文件，String -&gt; Resource转换就是它的功劳喽</p>
+</blockquote>
+<p>唯一构造器为：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ResourceEditorRegistrar</span><span class="params">(ResourceLoader resourceLoader, PropertyResolver propertyResolver)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">this</span>.resourceLoader = resourceLoader;</span><br><span class="line">	<span class="keyword">this</span>.propertyResolver = propertyResolver;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>resourceLoader：一般传入ApplicationContext</li>
+<li>propertyResolver：一般传入Environment</li>
+</ul>
+<p>很明显，它的设计就是服务于ApplicationContext上下文，在Bean创建过程中辅助<code>BeanWrapper</code>实现资源加载、转换。</p>
+<p><code>BeanFactory</code>在初始化的<strong>准备过程中</strong>就将它实例化，从而具备资源处理能力：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">AbstractApplicationContext：</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">prepareBeanFactory</span><span class="params">(ConfigurableListableBeanFactory beanFactory)</span> </span>&#123;</span><br><span class="line">		</span><br><span class="line">		...</span><br><span class="line">		beanFactory.setBeanExpressionResolver(<span class="keyword">new</span> StandardBeanExpressionResolver(beanFactory.getBeanClassLoader()));</span><br><span class="line">		beanFactory.addPropertyEditorRegistrar(<span class="keyword">new</span> ResourceEditorRegistrar(<span class="keyword">this</span>, getEnvironment()));</span><br><span class="line">		...</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p>这也是PropertyEditorRegistrar在Spring Framework的<strong>唯一</strong>使用处，值的关注。</p>
+<h2 id="PropertyEditor自动发现机制"><a href="#PropertyEditor自动发现机制" class="headerlink" title="PropertyEditor自动发现机制"></a>PropertyEditor自动发现机制</h2><p>最后介绍一个使用中的奇淫小技巧：PropertyEditor自动发现机制。</p>
+<p>一般来说，我们自定义一个PropertyEditor是为了实现<strong>自定义类型 &lt;-&gt; 字符串</strong>的自动转换，它一般需要有如下步骤：</p>
+<ol>
+<li>为自定义类型写好一个xxxPropertyEditor（实现PropertyEditor接口）</li>
+<li>将写好的编辑器注册到注册中心PropertyEditorRegistry</li>
+</ol>
+<p>显然步骤1属个性化行为无法替代，但步骤2属于标准行为，重复劳动是可以标准化的。自动发现机制就是用来解决此问题，对自定义的编辑器制定了如下标准：</p>
+<ol>
+<li>实现了PropertyEditor接口，具有<strong>空构造器</strong></li>
+<li>与自定义类型<strong>同包</strong>（在同一个package内），名称必须为：<code>targetType.getName() + &quot;Editor&quot;</code></li>
+</ol>
+<p>这样你就无需再手动注册到注册中心了（当然手动注册了也不碍事），Spring能够自动发现它，这在有大量自定义类型编辑器的需要的时候将很有用。</p>
+<blockquote>
+<p>说明：此段核心逻辑在<code>BeanUtils#findEditorByConvention()</code>里，有兴趣者可看看</p>
+</blockquote>
+<p>值得注意的是：此机制属Spring遵循Java Bean规范而单独提供，在单独使用<code>PropertyEditorRegistry</code>时并未开启，而是在使用Spring产品级能力<code>TypeConverter</code>时有提供，这在后文将有体现，欢迎保持关注。</p>
+<h1 id="✍总结"><a href="#✍总结" class="headerlink" title="✍总结"></a>✍总结</h1><p>本文在了解PropertyEditor基础支持之上，主要介绍了其注册中心<code>PropertyEditorRegistry</code>的使用。PropertyEditorRegistrySupport作为其“唯一”实现，负责管理PropertyEditor，包括通用处理和专用处理。最后介绍了PropertyEditor的自动发现机制，其实在实际生产中我并<strong>不</strong>建议使用自动机制，因为对于可能发生改变的因素，<strong>显示指定优于隐式约定</strong>。</p>
+<p>关于Spring类型转换PropertyEditor相关内容就介绍到这了，虽然它很“古老”但并没有退出历史舞台，在排查问题，甚至日常扩展开发中还经常会碰到，因此<strong>强烈建议你掌握</strong>。下面起将介绍Spring类型转换的另外一个重点：新时代的类型转换服务<code>ConversionService</code>及其周边。</p>
+<hr>
+<h3 id="✔✔✔推荐阅读✔✔✔"><a href="#✔✔✔推荐阅读✔✔✔" class="headerlink" title="✔✔✔推荐阅读✔✔✔"></a>✔✔✔推荐阅读✔✔✔</h3><p>【Spring类型转换】系列：</p>
+<ul>
+<li><a href="https://mp.weixin.qq.com/s/5daOOdhIFqrGbpgtnuQMNw" target="_blank" rel="noopener">1. 揭秘Spring类型转换 - 框架设计的基石</a></li>
+<li><a href="https://mp.weixin.qq.com/s/Afu8YYyREoynAXS6YrJe7g" target="_blank" rel="noopener">2. Spring早期类型转换，基于PropertyEditor实现</a></li>
+<li><a href="https://mp.weixin.qq.com/s/--UO3pH1nxTW3f5nQvEnkg" target="_blank" rel="noopener">3. 搞定收工，PropertyEditor就到这</a></li>
+</ul>
+<p>【Jackson】系列：</p>
+<ul>
+<li><a href="https://mp.weixin.qq.com/s/iqSN4HUoIdX0kGcSdnD7EA" target="_blank" rel="noopener">1. 初识Jackson – 世界上最好的JSON库</a></li>
+<li><a href="https://mp.weixin.qq.com/s/p6cwP2BVrC8VxkN-T3uAxg" target="_blank" rel="noopener">2. 妈呀，Jackson原来是这样写JSON的</a></li>
+<li><a href="https://mp.weixin.qq.com/s/ZHb3P06IC4xElHwJqDepxw" target="_blank" rel="noopener">3. 懂了这些，方敢在简历上说会用Jackson写JSON</a></li>
+<li><a href="https://mp.weixin.qq.com/s/syAOETfEawiGItaQO35mLA" target="_blank" rel="noopener">4. JSON字符串是如何被解析的？JsonParser了解一下</a></li>
+<li><a href="https://mp.weixin.qq.com/s/0ZaDYb_ueFLbvOf3FbetfQ" target="_blank" rel="noopener">5. JsonFactory工厂而已，还蛮有料，这是我没想到的</a></li>
+<li><a href="https://mp.weixin.qq.com/s/VYy1QVeFLRkciymFHueb5w" target="_blank" rel="noopener">6. 二十不惑，ObjectMapper使用也不再迷惑</a></li>
+<li><a href="https://mp.weixin.qq.com/s/hPRdt-6sHt4rZaW2_jhdWQ" target="_blank" rel="noopener">7. Jackson用树模型处理JSON是必备技能，不信你看</a></li>
+</ul>
+<p>【数据校验Bean Validation】系列：</p>
+<ul>
+<li><a href="https://mp.weixin.qq.com/s/g04HMhrjbvbPn1Mb9JYa5g" target="_blank" rel="noopener">1. 不吹不擂，第一篇就能提升你对Bean Validation数据校验的认知</a></li>
+<li><a href="https://mp.weixin.qq.com/s/-KeOCq2rsXCvrqD8HYHSpQ" target="_blank" rel="noopener">2. Bean Validation声明式校验方法的参数、返回值</a></li>
+<li><a href="https://mp.weixin.qq.com/s/MQjXG0cg8domRtwf3ArvHw" target="_blank" rel="noopener">3. 站在使用层面，Bean Validation这些标准接口你需要烂熟于胸</a></li>
+<li><a href="https://mp.weixin.qq.com/s/jzOv67ZTSx2rByj0aeUTgw" target="_blank" rel="noopener">4. Validator校验器的五大核心组件，一个都不能少</a></li>
+<li><a href="https://mp.weixin.qq.com/s/6_7gZ9jmQcDSRiARO6D-yw" target="_blank" rel="noopener">5. Bean Validation声明式验证四大级别：字段、属性、容器元素、类</a></li>
+<li><a href="https://mp.weixin.qq.com/s/MN-_JCGnsEWpPJs9xQ_qZA" target="_blank" rel="noopener">6. 自定义容器类型元素验证，类级别验证（多字段联合验证）</a></li>
+</ul>
+<p>【新特性】系列：</p>
+<ul>
+<li><a href="https://mp.weixin.qq.com/s/vNnfKEGRm7R3PN_lCtXJDA" target="_blank" rel="noopener">IntelliJ IDEA 2020.3正式发布，年度最后一个版本很讲武德</a></li>
+<li><a href="https://mp.weixin.qq.com/s/8voJSbmcBbdfNUCUBIcKcA" target="_blank" rel="noopener">IntelliJ IDEA 2020.2正式发布，诸多亮点总有几款能助你提效</a></li>
+<li><a href="">IntelliJ IDEA 2020.1正式发布，你要的Almost都在这！</a></li>
+<li><a href="https://mp.weixin.qq.com/s/Sw6EqAY0DmF-p2qPoaetUg" target="_blank" rel="noopener">Spring Framework 5.3.0正式发布，在云原生路上继续发力</a></li>
+<li><a href="https://mp.weixin.qq.com/s/KywpJkLDHZbZTxUf4WFxhw" target="_blank" rel="noopener">Spring Boot 2.4.0正式发布，全新的配置文件加载机制（不向下兼容）</a></li>
+<li><a href="https://mp.weixin.qq.com/s/ZoUG9h1TndW2QpnPyGeIQA" target="_blank" rel="noopener">Spring改变版本号命名规则：此举对非英语国家很友好</a></li>
+<li><a href="https://mp.weixin.qq.com/s/3QaiUGzj5nW2N4Aipm47PQ" target="_blank" rel="noopener">JDK15正式发布，划时代的ZGC同时宣布转正</a></li>
+</ul>
+<p>【程序人生】系列：</p>
+<ul>
+<li><a href="https://mp.weixin.qq.com/s/oEShE0fiHSGG8D89NRQYGw" target="_blank" rel="noopener">蚂蚁金服上市了，我不想努力了</a></li>
+<li><a href="https://mp.weixin.qq.com/s/SZUJ0sy4vM7UH10pk6NM3g" target="_blank" rel="noopener">如果程序员和产品经理都用凡尔赛文学对话……</a></li>
+<li><a href="https://mp.weixin.qq.com/s/PGIFtpI7aZaxY7es0F6C6Q" target="_blank" rel="noopener">程序人生 | 春风得意马蹄疾，一日看尽长安花</a></li>
+</ul>
+<p>还有诸如【Spring配置类】【Spring-static】【Spring数据绑定】【Spring Cloud Netflix】【Feign】【Ribbon】【Hystrix】…更多原创专栏，关注<code>BAT的乌托邦</code>回复<code>专栏</code>二字即可全部获取，分享、成长，拒绝浅藏辄止。</p>
+<blockquote>
+<p>有些专栏<strong>已完结</strong>，有些正在<strong>连载中</strong>，期待你的关注、共同进步</p>
+</blockquote>]]></content>
+      <categories>
+        <category>A哥学类型转换</category>
+      </categories>
+      <tags>
+        <tag>Spring Framework</tag>
+        <tag>类型转换</tag>
+        <tag>PropertyEditor</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>2. Spring早期类型转换，基于PropertyEditor实现</title>
     <url>/x2y/e715a0e7.html</url>
     <content><![CDATA[<blockquote>
@@ -5728,66 +5925,6 @@
       </tags>
   </entry>
   <entry>
-    <title>【BAT的乌托邦】公众号开白申请</title>
-    <url>/x2y/wechat-white-list.html</url>
-    <content><![CDATA[<div class="note primary">
-            <ul><li>公众号：BAT的乌托邦</li><li>作者：A哥<ul><li>A哥的介绍：<ul><li><a href="/about">PC版</a></li><li><a href="https://mp.weixin.qq.com/s/PGIFtpI7aZaxY7es0F6C6Q" target="_blank" rel="noopener">手机版</a></li></ul></li><li>示例文章：<a href="https://mp.weixin.qq.com/s/PYVD8BvT7Nux0jiSomSG0A" target="_blank" rel="noopener">点击这里</a></li></ul></li><li>定位：专注Java领域，只做有深度的专栏文章分享，拒绝浅尝辄止</li><li>首篇文章时间：2020-05-03   <a href="https://mp.weixin.qq.com/s/PGIFtpI7aZaxY7es0F6C6Q" target="_blank" rel="noopener">查看首篇文章</a></li></ul>
-          </div>
-
-<h3 id="转载请著名出处，示例（文首-文末）："><a href="#转载请著名出处，示例（文首-文末）：" class="headerlink" title="转载请著名出处，示例（文首 + 文末）："></a>转载请著名出处，示例（文首 + 文末）：</h3><p><img data-src="https://img-blog.csdnimg.cn/20200616122117470.png" alt="文首"><br><img data-src="https://img-blog.csdnimg.cn/20200616122910584.png" alt="文末"></p>
-<div style="text-align: center;color: #8c8888;font-size: 8px;margin-top: -10px;">文案请从此处复制：本文转载自公众号【BAT的乌托邦】，专注Java领域，只做有深度的专栏文章分享，拒绝浅尝辄止。</div>
-
-<div style="margin-top: 50px; margin-bottom: 50px; text-align: center; font-weight: bolder; color: grey; font-size: 20px;">
-😄申请【开长白】请在本文下面留言，开白成功后我会登记入下表，谢谢合作😄
-</div>
-<div style="text-align: center; font-weight: bolder; color: #7d7d7d; font-size: 11px;margin-top: -50px;margin-bottom: 20px;">
-(留言时请输入正确邮箱号，这样开白成功会给你发邮件提醒)
-</div>
-<div class="table-container"><table>
-    <thead>
-        <tr>
-            <th align="center">公众号</th>
-            <th align="center">操作时间</th>
-            <th align="center">是否长白</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td align="center">学习Java的小姐姐</td>
-            <td align="center">2020.06.24</td>
-            <td align="center">是</td>
-        </tr>
-        <tr>
-            <td align="center">自由程序人</td>
-            <td align="center">2020.06.16</td>
-            <td align="center">是</td>
-        </tr>
-        <tr>
-            <td align="center">softech华山论剑</td>
-            <td align="center">2020.06.14</td>
-            <td align="center">是</td>
-        </tr>
-        <tr>
-            <td align="center">石杉的架构笔记</td>
-            <td align="center">2020.06.09</td>
-            <td align="center">是</td>
-        </tr>
-        <tr>
-            <td align="center">源码笔记</td>
-            <td align="center">2020.06.04</td>
-            <td align="center">是</td>
-        </tr>
-    </tbody>
-</table></div>]]></content>
-      <categories>
-        <category>公众号</category>
-      </categories>
-      <tags>
-        <tag>白名单</tag>
-        <tag>公众号</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>【Java高工、架构师】系列群群规</title>
     <url>/x2y/wechat-gauge.html</url>
     <content><![CDATA[<blockquote class="blockquote-center">
@@ -5843,6 +5980,66 @@
       </categories>
       <tags>
         <tag>公众号</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【BAT的乌托邦】公众号开白申请</title>
+    <url>/x2y/wechat-white-list.html</url>
+    <content><![CDATA[<div class="note primary">
+            <ul><li>公众号：BAT的乌托邦</li><li>作者：A哥<ul><li>A哥的介绍：<ul><li><a href="/about">PC版</a></li><li><a href="https://mp.weixin.qq.com/s/PGIFtpI7aZaxY7es0F6C6Q" target="_blank" rel="noopener">手机版</a></li></ul></li><li>示例文章：<a href="https://mp.weixin.qq.com/s/PYVD8BvT7Nux0jiSomSG0A" target="_blank" rel="noopener">点击这里</a></li></ul></li><li>定位：专注Java领域，只做有深度的专栏文章分享，拒绝浅尝辄止</li><li>首篇文章时间：2020-05-03   <a href="https://mp.weixin.qq.com/s/PGIFtpI7aZaxY7es0F6C6Q" target="_blank" rel="noopener">查看首篇文章</a></li></ul>
+          </div>
+
+<h3 id="转载请著名出处，示例（文首-文末）："><a href="#转载请著名出处，示例（文首-文末）：" class="headerlink" title="转载请著名出处，示例（文首 + 文末）："></a>转载请著名出处，示例（文首 + 文末）：</h3><p><img data-src="https://img-blog.csdnimg.cn/20200616122117470.png" alt="文首"><br><img data-src="https://img-blog.csdnimg.cn/20200616122910584.png" alt="文末"></p>
+<div style="text-align: center;color: #8c8888;font-size: 8px;margin-top: -10px;">文案请从此处复制：本文转载自公众号【BAT的乌托邦】，专注Java领域，只做有深度的专栏文章分享，拒绝浅尝辄止。</div>
+
+<div style="margin-top: 50px; margin-bottom: 50px; text-align: center; font-weight: bolder; color: grey; font-size: 20px;">
+😄申请【开长白】请在本文下面留言，开白成功后我会登记入下表，谢谢合作😄
+</div>
+<div style="text-align: center; font-weight: bolder; color: #7d7d7d; font-size: 11px;margin-top: -50px;margin-bottom: 20px;">
+(留言时请输入正确邮箱号，这样开白成功会给你发邮件提醒)
+</div>
+<div class="table-container"><table>
+    <thead>
+        <tr>
+            <th align="center">公众号</th>
+            <th align="center">操作时间</th>
+            <th align="center">是否长白</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td align="center">学习Java的小姐姐</td>
+            <td align="center">2020.06.24</td>
+            <td align="center">是</td>
+        </tr>
+        <tr>
+            <td align="center">自由程序人</td>
+            <td align="center">2020.06.16</td>
+            <td align="center">是</td>
+        </tr>
+        <tr>
+            <td align="center">softech华山论剑</td>
+            <td align="center">2020.06.14</td>
+            <td align="center">是</td>
+        </tr>
+        <tr>
+            <td align="center">石杉的架构笔记</td>
+            <td align="center">2020.06.09</td>
+            <td align="center">是</td>
+        </tr>
+        <tr>
+            <td align="center">源码笔记</td>
+            <td align="center">2020.06.04</td>
+            <td align="center">是</td>
+        </tr>
+    </tbody>
+</table></div>]]></content>
+      <categories>
+        <category>公众号</category>
+      </categories>
+      <tags>
+        <tag>公众号</tag>
+        <tag>白名单</tag>
       </tags>
   </entry>
   <entry>
