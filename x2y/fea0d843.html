@@ -1,0 +1,1447 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="baidu-site-verification" content="FdPXpeNylP">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.yourbatman.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},"motion":{"enable":false,"async":true,"transition":{"post_block":"flipBounceYIn","post_header":"flipXIn","post_body":"flipBounceXIn","coll_header":"expandIn","sidebar":"shrinkIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="20张图，看完不会，就来砍我">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GMT UTC CST ISO 夏令时 时间戳，都是些什么鬼？">
+<meta property="og:url" content="https://www.yourbatman.cn/x2y/fea0d843.html">
+<meta property="og:site_name" content="BAT的乌托邦">
+<meta property="og:description" content="20张图，看完不会，就来砍我">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210114224027488.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210115162815864.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210115170326156.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210114235109914.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210114232903414.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210114233252665.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210114232608828.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210115015940827.gif#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2021011510074818.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210115000842588.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210115003114776.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210115034730892.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210115022940268.gif#pic_center#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210115023648355.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210115025822315.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210115030722275.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210115034821415.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210115034600405.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210115035736486.png#pic_center">
+<meta property="article:published_time" content="2021-01-18T12:08:46.000Z">
+<meta property="article:modified_time" content="2021-01-18T12:10:01.113Z">
+<meta property="article:author" content="A哥(YourBatman)">
+<meta property="article:tag" content="BAT的乌托邦">
+<meta property="article:tag" content="A哥">
+<meta property="article:tag" content="YourBatman">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20210114224027488.png#pic_center">
+
+<link rel="canonical" href="https://www.yourbatman.cn/x2y/fea0d843.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>GMT UTC CST ISO 夏令时 时间戳，都是些什么鬼？ | BAT的乌托邦</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?2ad49a2290d0249428335633c45e2806";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">BAT的乌托邦</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">当大潮退去，才知道谁在裸泳</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于A哥/留言板</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">68</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>专栏<span class="badge">16</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>时间轴<span class="badge">58</span></a>
+
+  </li>
+        <li class="menu-item menu-item-top">
+
+    <a href="/top/" rel="section"><i class="fa fa-signal fa-fw"></i>热门文章</a>
+
+  </li>
+        <li class="menu-item menu-item-books">
+
+    <a href="/books/" rel="section"><i class="fa fa-book fa-fw"></i>图书馆</a>
+
+  </li>
+        <li class="menu-item menu-item-links">
+
+    <a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友情债</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="请输入关键字检索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/yourbatman" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  
+    <div id="yourbatman">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.yourbatman.cn/x2y/fea0d843.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://img-blog.csdnimg.cn/20200511100304592.jpg">
+      <meta itemprop="name" content="A哥(YourBatman)">
+      <meta itemprop="description" content="我这有故事，你那有酒吗？">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BAT的乌托邦">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          GMT UTC CST ISO 夏令时 时间戳，都是些什么鬼？
+        </h1>
+
+        <div class="post-meta">
+          <!-- 精品文章 精华帖 -->
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-01-18 20:08:46" itemprop="dateCreated datePublished" datetime="2021-01-18T20:08:46+08:00">2021-01-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">收录于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4/" itemprop="url" rel="index"><span itemprop="name">Java日期时间</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/x2y/fea0d843.html" class="post-meta-item leancloud_visitors" data-flag-title="GMT UTC CST ISO 夏令时 时间戳，都是些什么鬼？" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">评论数：</span>
+    
+    <a title="valine" href="/x2y/fea0d843.html#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/x2y/fea0d843.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+          <!-- 置顶 可以写top:true  也可以写数字top:1/2/3  顺序规则同Spring-->
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>6.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>6 分钟</span>
+            </span>
+
+          <!-- 本文作者 -->
+          <span class="post-meta-item" title="阅读时长">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-user fa-fw"></i>
+            </span>
+            <span class="post-meta-item-text">本文作者：</span>
+            <a href="/about/" itemprop="url" rel="index">
+              <span>A哥(YourBatman)</span>
+            </a>
+          </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img data-src="https://img-blog.csdnimg.cn/20210114224027488.png#pic_center" alt=""></p>
+<p>你好，我是A哥(YourBatman)。</p>
+<p>日期/时间的处理是平时开发中非常常见的场景，若只是简单的格式化场景那就还好，一旦涉及到时区、跨地域跨时区时间转换场景，甚至当还有GMT时间、UTC时间等一堆概念堆上来的时候，总是心理发虚，招架不住。</p>
+<p>在地球村的信息化时代背景下，跨国企业/跨国做生意的公司越来越多，所以我们程序员遇到不同时区之间的日期/时间转换/显示的概率大大增加。譬如说：电商平台的商品下单时间，你给中国人页面里展示北京时间是ok的，但你总不能给美国人也展示北京时间吧？否则美国人看到很多订单的下单时间是凌晨1、2点，还以为午夜凶铃呢。</p>
+<p><img data-src="https://img-blog.csdnimg.cn/20210115162815864.png#pic_center" alt=""></p>
+<p>Java在版本8之前用Date类型来表示日期/时间，自版本8起引入了JSR 310日期/时间类型。两套体系对于本地时间、时区时间、带时区的格式化都有着不同的处理办法。</p>
+<p>A哥因为跨时区日期转换问题，最近搞了一起<strong>生产事故</strong>，为此我痛定思痛，决定把经验整理成文，目的是以后再也不踩这方面的坑，同时也帮助大家。</p>
+<p>本部分一共会分两篇文章叙述：</p>
+<ol>
+<li>概念篇：科普GMT、UTC、时区、时间戳、夏令时等常见概念以及背景</li>
+<li>实战篇：在1的基础上（概念必须先知晓，否则实战无法进行），Java是如何来处理GMT/UTC时间、时区、偏移量、夏令时…的</li>
+</ol>
+<p>这两篇文章搞完，自己再也不用不担心在日期/时间方面埋bug了。<strong>相信我，这两篇文章十分具有收藏价值</strong>。</p>
+<h2 id="本文提纲"><a href="#本文提纲" class="headerlink" title="本文提纲"></a>本文提纲</h2><p><img data-src="https://img-blog.csdnimg.cn/20210115170326156.png#pic_center" alt=""></p>
+<h2 id="版本约定"><a href="#版本约定" class="headerlink" title="版本约定"></a>版本约定</h2><ul>
+<li>JDK：8</li>
+</ul>
+<h1 id="✍正文"><a href="#✍正文" class="headerlink" title="✍正文"></a>✍正文</h1><p>下面将围绕一些日期/时间的概念分别做主题讲解，这些名词你无一例外的都听过，但我猜测大概率你并不理解，甚至是知晓它们的区别。</p>
+<h2 id="GMT：格林威治时间"><a href="#GMT：格林威治时间" class="headerlink" title="GMT：格林威治时间"></a>GMT：格林威治时间</h2><p>格林威治（也称：格林尼治）时间，也叫世界时（Universal Time），也叫世界标准时间。是指位于<strong>英国伦敦</strong>郊区的【皇家格林尼治天文台】的标准时间，是本初子午线上的地方时，是<strong>0时区</strong>的区时。<img data-src="https://img-blog.csdnimg.cn/20210114235109914.png#pic_center" alt="本初子午线"></p>
+<p>众所周知，天朝统一用的北京时间是位于东八区（+8）与标准时间相差8小时。什么含义？举个例子：若GMT（英国伦敦的格林威治）现在是上午11点，那中国北京时间现在就是 11 + 8 = 19点（下午7点）。<br><img data-src="https://img-blog.csdnimg.cn/20210114232903414.png#pic_center" alt=""></p>
+<p>将这个公式再抽象一下，可表示为：本地时间=GMT＋时区差<br><img data-src="https://img-blog.csdnimg.cn/20210114233252665.png#pic_center" alt=""></p>
+<p>北京位于东八区，则时区差N=+8，美国纽约位于西五区，则时区差N=-5。这么算来，若北京时间是晚上23点的话，美国纽约时间就是<strong>当天</strong>上午10点（23 - 8 - 5 = 10）</p>
+<h3 id="凭什么格林威治作为标准时间？"><a href="#凭什么格林威治作为标准时间？" class="headerlink" title="凭什么格林威治作为标准时间？"></a>凭什么格林威治作为标准时间？</h3><p>你可能会问，大家都有腰间盘，为何格林威治的那么突出呢？</p>
+<p>大背景是这样子的：19世纪开始，世界各国来往开始频繁，而欧洲大陆、美洲大陆和亚洲大陆都有各自的时区，为提高沟通效率避免混乱，各国的代表1884年在美国华盛顿召开了国际大会，选出英国伦敦的格林威治作为全球时间的<strong>中心点</strong>，并由它负责维护和计算，从1924年开始，格林威治天文台每小时就会向全世界播报时间（截止到1979年）。</p>
+<blockquote>
+<p>在美国华盛顿开会，确定英国伦敦作为时间中心点，还蛮滑稽O(∩_∩)O哈哈~</p>
+</blockquote>
+<p>其实选择英国格林威治最主要原因是：当时大部分的船只都<strong>已经</strong>以格林威治子午线做为参考标准，毕竟曾经的英国可是日不落帝国，大航海时代末便开始称霸世界，拳头里面出政权。</p>
+<p>格林威治天文台在计时领域的权威是非常大的，譬如离我们最近的一次“时间风波”：在即将跨世纪的时候，世界各国对21世纪到底应该从2000年开始还是从2001年开始争论不休，最终还是格林威治天文台出面平息了争论，开新闻发布会宣布<strong>21世纪始于2001年</strong>。<br><img data-src="https://img-blog.csdnimg.cn/20210114232608828.png#pic_center" alt="格林威治天文台（旧址）"></p>
+<h3 id="地球自转"><a href="#地球自转" class="headerlink" title="地球自转"></a>地球自转</h3><p>地球绕自转轴<strong>自西向东</strong>的转动（太阳东起西落），所以东时区的人会比西时区的人<strong>早</strong>一些看到太阳，从而时间上会早一点。</p>
+<p><img data-src="https://img-blog.csdnimg.cn/20210115015940827.gif#pic_center" alt=""></p>
+<p>以本初子午线为中心，按照地球自转方向，每隔经度15°划分一个时区的方法，全球共分为24个时区：东1区至东12区，西1区至西12区，其中东西12区跨度都是7.5°也叫半时区。</p>
+<h3 id="中国有哪几个时区？"><a href="#中国有哪几个时区？" class="headerlink" title="中国有哪几个时区？"></a>中国有哪几个时区？</h3><p>1个，这是一个错得比较合理的答案。合理是因为中国虽然幅员辽阔，但全国使用统一的北京时间，所以很容易被误以为只有一个时区。</p>
+<p>错是因为拍脑袋想一想就知道，中国东西横跨5000+公里，怎么可能只躺在一个时区呢？正确答案是：中国大陆共横跨<strong>5</strong>个时区，各个时区大致的方位图如下：</p>
+<p><img data-src="https://img-blog.csdnimg.cn/2021011510074818.png#pic_center" alt=""></p>
+<p>看图就清晰明了的知道天朝为何选用东八区时间作为全国标准时间了吧？没错，仅就因为北京在东八区，即使地图上只有弹丸大小，但就是这么豪横。</p>
+<p>中国用统一时间在沟通上确实方便得多，减少了很多不必要的麻烦。但是也带来一些“小问题”，比如新疆的朋友（位于东5/6区）实际比东八区的北京时间<strong>晚了</strong> 2-3个小时，我们正常7点天黑准备吃完饭的时候，新疆那边还太阳当空照呢，还蛮有意思的~</p>
+<h4 id="美国有哪几个时区？"><a href="#美国有哪几个时区？" class="headerlink" title="美国有哪几个时区？"></a>美国有哪几个时区？</h4><p>说到时区，就不得不提及计划再次伟大的美国了。美国同样的幅员辽阔，横跨了4个时区：</p>
+<p><img data-src="https://img-blog.csdnimg.cn/20210115000842588.png#pic_center" alt=""></p>
+<p>如图所示共有四个时区时间，按照图中颜色划分开（并非严格划分，不然出现同一小区隔壁时间比你晚1小时就尴尬了），从右到左依次为：</p>
+<ol>
+<li><strong>东部时区（ET）</strong>：西5区，代表城市：华盛顿特区、纽约、迈阿密等，也称纽约时间。北京时间 = ET + 13h</li>
+<li><strong>中部时区（CT）</strong>：西6区，代表城市：芝加哥、休斯顿等。北京时间 = CT + 14h</li>
+<li><strong>山地时区（MT）</strong>：西7区，代表城市：丹佛、凤凰城等。北京时间 = MT + 15h</li>
+<li><strong>太平洋时区（PST）</strong>：西8区，代表城市：洛杉矶、拉斯维加斯、西雅图等。北京时间 = PST + 16h</li>
+</ol>
+<h3 id="GMT和Http协议的渊源"><a href="#GMT和Http协议的渊源" class="headerlink" title="GMT和Http协议的渊源"></a>GMT和Http协议的渊源</h3><p>这是我“偶遇”的一个知识点，在这里也一并分享给你。</p>
+<p>Http 1.1协议对日期时间传输格式是有严格规定的，支持如下三种格式：</p>
+<p><img data-src="https://img-blog.csdnimg.cn/20210115003114776.png#pic_center" alt=""></p>
+<p>其中第一种格式是互联网传输的<strong>标准格式</strong>，也是现行的标准。2、3种纯是为了兼容Http 1.0而设计，现在基本已经淘汰没人再会使用，所以事实上的格式只有第一种这1种，作为一个有经验的程序员对这种格式应该不陌生。</p>
+<p>另外，还有个关键的知识点：所有HTTP日期/时间戳都必须用格林威治标准时间(GMT)表示，<strong>没有例外</strong>。对于HTTP来说，GMT完全等于UTC(协调世界时)。</p>
+<blockquote>
+<p>当然喽，这一切都是由浏览器自动帮你完成的，毕竟Http协议是浏览器去搞的不是</p>
+</blockquote>
+<h2 id="UTC：世界标准时间"><a href="#UTC：世界标准时间" class="headerlink" title="UTC：世界标准时间"></a>UTC：世界标准时间</h2><p>Coordinated Universal Time直译为：世界协调时间。它是以<strong>原子时</strong>作为计量单位的时间，计算结果极其严谨和精密。它比GMT时间更来得精准，误差值必须保持在0.9秒以内，倘若大于0.9秒就会通过<strong>闰秒</strong>来“解决”。</p>
+<p><img data-src="https://img-blog.csdnimg.cn/20210115034730892.png#pic_center" alt=""></p>
+<p>原子时：物质的原子内部发射的电磁振荡频率为基准的时间计量系统。美国的物理实验市在2014年造出了人类历史上最精确的原子钟，<strong>50亿年误差1s</strong>，可谓相当靠谱了。中国的铯原子钟也能确保2000万年误差不超过1s。</p>
+<p>大事记：1979年12月初内瓦举行的世界无线电行政大会通过决议，确定用“世界协调时间（UTC时间）”取代“格林威治时间（GMT时间）”，作为无线电通信领域内的<strong>国际标准</strong>时间。</p>
+<h3 id="UTC和GMT的区别"><a href="#UTC和GMT的区别" class="headerlink" title="UTC和GMT的区别"></a>UTC和GMT的区别</h3><p>UTC和GMT都称作世界标准时间，为毛有了GMT还搞出个UTC，到底有何区别，下面做出简述。</p>
+<p><strong>GMT</strong>：老的时间计量标准，根据地球的自转和公转来计算时间的，自转一圈是一天，公转一圈是一年。但是呢，地球公转的轨道是椭圆形的：</p>
+<p><img data-src="https://img-blog.csdnimg.cn/20210115022940268.gif#pic_center#pic_center" alt=""></p>
+<p>并且后来人们发现地球的自转时间也并不是恒定的，这么一来就会造成有一天时间长一些，有一天时间短一些的情况，误差较大给人感觉时间不那么“精准”了，因此迫切需要一个更加精准的方案来计时，UTC诞生了。</p>
+<p><strong>UTC</strong>：1967年人类制作出原子钟，从而“发明”了UTC时间正式投入使用。它是真正意义上的标准时间，以原子钟所定义的秒长为基础，UTC时间认为一个太阳日（一天）总是恒定的86400秒（24小时）。</p>
+<p><img data-src="https://img-blog.csdnimg.cn/20210115023648355.png#pic_center" alt=""></p>
+<p>UTC是协调时间，含义为：<strong>一切以我为基准，全部想我看齐</strong>。所以称它为世界标准时间是没毛病的，而把GMT称作格林威治当地时间更为合适（也叫旧的标准时间）。</p>
+<h3 id="UTC和GMT的联系"><a href="#UTC和GMT的联系" class="headerlink" title="UTC和GMT的联系"></a>UTC和GMT的联系</h3><p>由于在大多数情况下，UTC时间能与GMT时间互换。对此很多同学就丈二和尚摸不着头脑了，他俩这不就一样的吗？</p>
+<p>其实非也。这里用通俗易懂的一句话来告知它俩的联系：UTC是标准时间参照，像GMT（格林威治时间）、ET（美国东部时间）、PST（太平洋时间）、CST（北京时间）等等都是<strong>具体</strong>的时区时间。GMT能和UTC直接转换，仅仅是因为碰巧GMT是0时区时间，数值上刚好和UTC是相等的（不需要精确到秒的情况下，二者可以视为相等），看起来一样，但是概念含义上请务必区分开来哈。</p>
+<h3 id="UTC与偏移量"><a href="#UTC与偏移量" class="headerlink" title="UTC与偏移量"></a>UTC与偏移量</h3><p>在日常生活中，我们所使用的时间肯定是<strong>本地时间</strong>。在只有GMT的时候，本地时间是通过时区计算出来的，而现在UTC才是标准参考，因此采用UTC和偏移量（Offset）的方式来表示本地时间：</p>
+<p><img data-src="https://img-blog.csdnimg.cn/20210115025822315.png#pic_center" alt=""></p>
+<p>这个偏移量可表示为：<code>UTC -</code>或<code>UTC +</code>，后面接<code>小时数,分钟数</code>。如：UTC +9:30表示澳大利亚中央标准时间，UTC +8表示中国标准时间。偏移量常见的表示形式有：<code>±[hh]:[mm]</code>、<code>±[hh][mm]</code>、<code>±[hh]</code>这三种方式均可。</p>
+<p>举个例子：现在UTC时间是<code>10:30z</code>（z表示偏移量=0），那么北京时间现在若是<code>1630 +0800</code>（下午4点半），对应的纽约时间就是<code>0530 -0500</code>（早上5点半）。</p>
+<blockquote>
+<p>注意：在UTC的世界里并无时区的概念，而是偏移量（时间点跟上偏移量才是一个正规的UTC时间），它和时区并无直接关系</p>
+</blockquote>
+<p>可以看到偏移量可以精确到分钟级别控制，非常精细化。全球只有24个时区（只能精确到小时），但偏移量有“无数个”。当然喽为了方便沟通，时间日期联盟组织把世界主要国家/城市的偏移量汇总起来且都给取了个<code>Time zone name</code>名称用于沟通，共好几百个，部分截图如下：</p>
+<p><img data-src="https://img-blog.csdnimg.cn/20210115030722275.png#pic_center" alt=""></p>
+<p>偏移量和国家/城市名称的全部对应关系，请参考网址（直接访问，无需梯子）：<a href="https://www.timeanddate.com/time/zones" target="_blank" rel="noopener">https://www.timeanddate.com/time/zones</a></p>
+<h2 id="CST"><a href="#CST" class="headerlink" title="CST"></a>CST</h2><p>CST这个缩写比较尴尬的是它可以同时代表四个不同的时间：</p>
+<ul>
+<li>CST (China Standard Time) ：中国标准时间 UTC+8:00</li>
+<li>Central Standard Time (USA) UTC-6:00</li>
+<li>Central Standard Time (Australia) UTC+9:30</li>
+<li>Cuba Standard Time UTC-4:00</li>
+</ul>
+<p>CST到底啥意思就看如何翻译喽，所以需要根据上下文语境自行抉择哈。</p>
+<h2 id="ISO"><a href="#ISO" class="headerlink" title="ISO"></a>ISO</h2><p>在时间日期上它全称是ISO 8601，是一种日期/时间表示方法的规范。规定了一种明确的、国际上都能理解的日历和时钟格式。</p>
+<p><img data-src="https://img-blog.csdnimg.cn/20210115034821415.png#pic_center" alt=""></p>
+<p>这一ISO标准有助于消除各种日-日惯例、文化和时区对全球业务产生的影响。它提供了一种显示日期和时间的方式，这种方式是明确定义的，对人和机器都是可以理解的。当日期用数字表示时，它们可以以不同的方式进行解释。例如，01/05/12可以表示2012年1月5日或2012年5月1日。在个人层面上，这种不确定性可能非常令人沮丧，在商业环境中，它可能非常昂贵。在日期不明确的情况下，组织会议和交付、书写合同和购买机票都是非常困难的。</p>
+<p>ISO 8601通过制定一种国际公认的日期表示方式来解决这种不确定性：<code>YYYY-MM-DD</code>。例如 September 27, 2012就会被表示为2012-09-27。</p>
+<p>很多开发语言内置了一些常用的ISO标准日期/时间格式，如Java中的：</p>
+<ul>
+<li><strong>ISO.DATE</strong>：yyyy-MM-dd, e.g. “2000-10-31”</li>
+<li><strong>ISO.TIME</strong>：HH:mm:ss.SSSXXX, e.g. “01:30:00.000-05:00”</li>
+<li><strong>ISO.DATE_TIME</strong>：yyyy-MM-dd’T’HH:mm:ss.SSSXXX, e.g. “2000-10-31T01:30:00.000-05:00”.</li>
+</ul>
+<h2 id="夏令时"><a href="#夏令时" class="headerlink" title="夏令时"></a>夏令时</h2><p>DST（Daylight Saving Time），夏令时又称夏季时间（可没有冬令时哦）。它是为节约能源而<strong>人为规定</strong>地方时间的制度（鼓励人们早睡早起，不要浪费电，夏天日照时间长尽量多用自然资源），全球约40%的国家在夏季使用夏令时，其他国家则全年只使用标准时间。正在使用夏令时的代表国家：美国、欧盟、俄罗斯等等。</p>
+<p><img data-src="https://img-blog.csdnimg.cn/20210115034600405.png#pic_center" alt=""></p>
+<p>每年的夏令时时间段还不一样（一般在3月的第2个周日开始），比如美国2020年夏令时时间是：2020年3月8日 - 2020年11月1日。具体做法是：在3.8号这天将时钟往前拨拨1个小时，11.1号这天还原回来。</p>
+<blockquote>
+<p>中国在1986 - 1992年短暂搞过一段时间，但太麻烦就“废弃”了</p>
+</blockquote>
+<p>大事记：目前全世界有近110个国家每年要实行夏令时。 自2011年3月27日开始俄罗斯<strong>永久使用</strong>夏令时，把时间拨快一小时，不再调回。</p>
+<h2 id="时间戳"><a href="#时间戳" class="headerlink" title="时间戳"></a>时间戳</h2><p>现实生活的世界里，时间是不断向前的，如果向前追溯时间的起点，可能是宇宙出生时，又或是是宇宙出现之前，但肯定是我们目前无法找到的，我们不知道现在距离时间原点的精确距离。所以我们要表示时间， 就需要<strong>人为</strong>定义一个原点。它就是：格林威治时间(GMT)1970年1月1日的午夜0点0分0秒。</p>
+<p>时间戳一般指的UNIX时间，或类UNIX系统（比如Linux、MacOS等）使用的时间表示方式。定义为：从UTC时间的<code>1970-1-1 0:0:0</code>起到现在的总秒数（秒是毫秒、微妙、纳秒的总称）。</p>
+<p><img data-src="https://img-blog.csdnimg.cn/20210115035736486.png#pic_center" alt=""></p>
+<p>但是不可忽略的一个case：由于闰秒的存在，那么当闰秒发生时，就极有可能出现同一个时间戳表示两个时刻的情况（类似时钟回拨），而且闰秒还没规律所以无法程序式的避免，怎么破？</p>
+<p>这个时候就需要一种专门的对时协议来保证了，它就是：网络时间协议。</p>
+<h3 id="网络时间协议"><a href="#网络时间协议" class="headerlink" title="网络时间协议"></a>网络时间协议</h3><p>网络时间协议 Network Time Protocol（NTP）是用来使计算机时间同步化的一种协议，它可以使计算机对其服务器或时钟源（如石英钟，GPS等等)做同步化，它可以提供<strong>高精准度</strong>的时间校正（LAN上与标准间差小于1毫秒，WAN上几十毫秒），且可介由加密确认的方式来防止恶毒的协议攻击。</p>
+<p>NTP的目的是在无序的Internet环境中提供精确和健壮的时间服务，各大操作系统（windows/Linux）对NTP都有实现。</p>
+<h1 id="✍总结"><a href="#✍总结" class="headerlink" title="✍总结"></a>✍总结</h1><p>简单地讲呢，GMT格林威治时间可认为是以前的标准时间，而UTC时间是现在在使用的世界时间标准；时区是以本初子午线为中心来划分的，东为正西为负，本处子午线就位于英国伦敦的格林威治；夏令时是地方的时间制度（并非全球标准），施行夏令时的地方，每年有2天很特殊，即一天只有23个小时，另一天则有25个小时。</p>
+<p>从源头上彻底了解了这些概念，将会让我们在处理与时间相关的问题时如虎添翼。本文介绍了好些个日期/时间方面的概念，文字偏多，所以建议你收藏起来当作参考书来使用。</p>
+<p>下篇文章将会接着本文内容，站在实战的角度，介绍Java是如何实现GMT和UTC时间的，以及各种case下的使用和避坑指南，欢迎关注我。</p>
+<h2 id="♨本文思考题♨"><a href="#♨本文思考题♨" class="headerlink" title="♨本文思考题♨"></a>♨本文思考题♨</h2><p>看完了不一定懂，看懂了不一定会。来，文末3个思考题帮你复盘：</p>
+<ol>
+<li>中国是南半球还是北半球？东半球还是西半球？</li>
+<li>GMT时间和UTC时间有何区别和联系？</li>
+<li>中国有夏令时没？</li>
+</ol>
+<h2 id="☀推荐阅读☀"><a href="#☀推荐阅读☀" class="headerlink" title="☀推荐阅读☀"></a>☀推荐阅读☀</h2><ul>
+<li>……</li>
+<li><a href="https://mp.weixin.qq.com/s/ENKwVqPE1cuOgE51ODJnnw" target="_blank" rel="noopener"><strong>7. JDK拍了拍你：字符串拼接一定记得用MessageFormat#format</strong></a></li>
+<li><a href="https://mp.weixin.qq.com/s/1ucfodKYZx7se-lPalxsBA" target="_blank" rel="noopener"><strong>8. 格式化器大一统 – Spring的Formatter抽象</strong></a></li>
+<li><a href="https://mp.weixin.qq.com/s/P-MPPrY2gKYEah7EkxtVJg" target="_blank" rel="noopener"><strong>9. 细节见真章，Formatter注册中心的设计很讨巧</strong></a></li>
+<li>……</li>
+</ul>
+<h2 id="♚声明♚"><a href="#♚声明♚" class="headerlink" title="♚声明♚"></a>♚声明♚</h2><p>本文所属专栏：<strong>Java进阶</strong>，公号后台回复专栏名即可获取全部内容。</p>
+<blockquote>
+<p>分享、成长，拒绝浅藏辄止。关注【BAT的乌托邦】，回复关键字<strong>专栏</strong>有Spring技术栈、中间件等小而美的<strong>原创专栏</strong>供以免费学习。本文已被 <a href="https://www.yourbatman.cn">https://www.yourbatman.cn</a> 收录。</p>
+</blockquote>
+<p>本文是 A哥(YourBatman)原创文章，未经作者允许/开白不得转载，谢谢合作。</p>
+        <!-- ....这里是正文内容的底部（首页不会展示）... -->
+        <style>
+.table-container img{
+    display: inherit;
+    margin-top: 5px;
+    margin-bottom: 0px;
+    margin-right: 10px;
+}
+</style>
+<hr>
+<h1 style="text-align: left;">关注YourBatman</h1>
+
+<div><table>
+<thead>
+<tr>
+<th>Author</th>
+<th>A哥(YourBatman)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>个人站点</td>
+<td><a href="https://www.yourbatman.cn" rel="nofollow" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc">www.yourbatman.cn</a></td>
+</tr>
+<tr>
+<td>E-mail</td>
+<td>yourbatman@qq.com</td>
+</tr>
+<tr>
+<td><strong>微 信</strong></td>
+<td><a href="https://www.yourbatman.cn/images/wechat.png" rel="nofollow" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc">fsx1056342982</a></td>
+</tr>
+<tr>
+<td><strong><code>活跃平台</code></strong></td>
+<td><a href="https://www.yourbatman.cn" rel="nofollow" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/2020071015182276.png" alt=""></a> <a href="https://fangshixiang.blog.csdn.net/" target="_blank" rel="nofollow noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/20200710151913394.png" alt=""></a><a href="https://yourbatman.cnblogs.com" target="_blank" rel="nofollow noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/20200710151929355.png" alt=""></a><a href="https://juejin.im/user/5b44d178f265da0fa1220efe/posts" target="_blank" rel="nofollow noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/20200710151938937.png" alt=""></a><a href="https://www.zhihu.com/people/fangshixiang/posts" target="_blank" rel="nofollow noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/20200710151950629.png" alt=""></a><a href="https://www.jianshu.com/u/8740f1fdd684" target="_blank" rel="nofollow noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/20200710152000530.png" alt=""></a><a href="https://segmentfault.com/u/yourbatman/articles" target="_blank" rel="nofollow noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/20200710152008726.png" alt=""></a><a href="https://github.com/yourbatman" target="_blank" rel="noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/20200710152015895.png" alt=""></a></td>
+</tr>
+<tr>
+<td><strong>公众号</strong></td>
+<td><a href="https://www.yourbatman.cn/images/wechat_channel.jpg" rel="nofollow" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc">BAT的乌托邦（ID：BAT-utopia）</a></td>
+</tr>
+<tr>
+<td>知识星球</td>
+<td><a href="https://t.zsxq.com/nQBi66I" target="_blank" rel="nofollow noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc">BAT的乌托邦</a></td>
+</tr>
+<tr>
+<td>每日文章推荐</td>
+<td><a href="https://github.com/yourbatman/reading/issues" target="_blank" rel="noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc">每日文章推荐</a></td>
+</tr>
+</tbody>
+</table></div>
+
+<p>
+<img src="https://img-blog.csdnimg.cn/20200710160552549.gif" alt="BAT的乌托邦">
+</p>
+
+    </div>
+
+    
+    
+    
+
+    <!-- 相关阅读（你可能还喜欢） -->
+      
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-title">
+    <strong>本文标题： </strong>
+    《GMT UTC CST ISO 夏令时 时间戳，都是些什么鬼？》
+  </li>
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>A哥(YourBatman)
+  </li>
+  <li class="post-copyright-date">
+    <strong>发布时间： </strong>2021-01-18 20:08:46
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://www.yourbatman.cn/x2y/fea0d843.html" title="GMT UTC CST ISO 夏令时 时间戳，都是些什么鬼？">https://www.yourbatman.cn/x2y/fea0d843.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>许可协议： </strong>本站所有文章均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载：No！转发：Yes！
+  </li>
+</ul>
+</div>
+
+
+      <!-- 添加“本文结束”标记 -->
+      <div class="read-over" style="text-align: center;margin-top: 25px;color: rgba(234,16,61,.569);font-size: 16px">-------------您已触及底线 <i class="fa fa-paw"></i> 感谢阅读-------------</div>
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    请A哥喝水
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="https://img-blog.csdnimg.cn/20200612080128384.png" alt="A哥(YourBatman) 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="https://img-blog.csdnimg.cn/20200612080128343.png" alt="A哥(YourBatman) 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/GMT/" rel="tag"><i class="fa fa-tag"></i> GMT</a>
+              <a href="/tags/UTC/" rel="tag"><i class="fa fa-tag"></i> UTC</a>
+              <a href="/tags/%E5%A4%8F%E4%BB%A4%E6%97%B6/" rel="tag"><i class="fa fa-tag"></i> 夏令时</a>
+              <a href="/tags/%E6%97%B6%E9%97%B4%E6%88%B3/" rel="tag"><i class="fa fa-tag"></i> 时间戳</a>
+          </div>
+
+        <!-- 导入投票模块 -->
+        
+  <!-- 投票功能 -->
+  <div class="post-widgets">
+    <div style="color: #ea778c;font-size: 14px;">(>兄台请留步，看完记得六星好评哦<)</div>
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/x2y/6fc3459b.html" rel="prev" title="9. 细节见真章，Formatter注册中心的设计很讨巧">
+      <i class="fa fa-chevron-left"></i> 9. 细节见真章，Formatter注册中心的设计很讨巧
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+    </div>
+  
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#本文提纲"><span class="nav-number">1.</span> <span class="nav-text">本文提纲</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#版本约定"><span class="nav-number">2.</span> <span class="nav-text">版本约定</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#✍正文"><span class="nav-number"></span> <span class="nav-text">✍正文</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#GMT：格林威治时间"><span class="nav-number">1.</span> <span class="nav-text">GMT：格林威治时间</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#凭什么格林威治作为标准时间？"><span class="nav-number">1.1.</span> <span class="nav-text">凭什么格林威治作为标准时间？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#地球自转"><span class="nav-number">1.2.</span> <span class="nav-text">地球自转</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#中国有哪几个时区？"><span class="nav-number">1.3.</span> <span class="nav-text">中国有哪几个时区？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#美国有哪几个时区？"><span class="nav-number">1.3.1.</span> <span class="nav-text">美国有哪几个时区？</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GMT和Http协议的渊源"><span class="nav-number">1.4.</span> <span class="nav-text">GMT和Http协议的渊源</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UTC：世界标准时间"><span class="nav-number">2.</span> <span class="nav-text">UTC：世界标准时间</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#UTC和GMT的区别"><span class="nav-number">2.1.</span> <span class="nav-text">UTC和GMT的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UTC和GMT的联系"><span class="nav-number">2.2.</span> <span class="nav-text">UTC和GMT的联系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UTC与偏移量"><span class="nav-number">2.3.</span> <span class="nav-text">UTC与偏移量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CST"><span class="nav-number">3.</span> <span class="nav-text">CST</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ISO"><span class="nav-number">4.</span> <span class="nav-text">ISO</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#夏令时"><span class="nav-number">5.</span> <span class="nav-text">夏令时</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#时间戳"><span class="nav-number">6.</span> <span class="nav-text">时间戳</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#网络时间协议"><span class="nav-number">6.1.</span> <span class="nav-text">网络时间协议</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#✍总结"><span class="nav-number"></span> <span class="nav-text">✍总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#♨本文思考题♨"><span class="nav-number">1.</span> <span class="nav-text">♨本文思考题♨</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#☀推荐阅读☀"><span class="nav-number">2.</span> <span class="nav-text">☀推荐阅读☀</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#♚声明♚"><span class="nav-number">3.</span> <span class="nav-text">♚声明♚</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="A哥(YourBatman)"
+      src="https://img-blog.csdnimg.cn/20200511100304592.jpg">
+  <p class="site-author-name" itemprop="name">A哥(YourBatman)</p>
+  <div class="site-description" itemprop="description">我这有故事，你那有酒吗？</div>
+</div>
+<div class="site-author motion-element" style="border-top: 1px dotted #ccc;padding-top: 10px;opacity: 0.7" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img itemprop="image" alt="A哥(YourBatman)" style="max-width: 120px;"
+      src="https://img-blog.csdnimg.cn/20200608214500399.png">
+  <div style="color: #e36a7c;font-size: 10px;" itemprop="description">加A哥好友(备注:Java入群)</div>
+</div>
+  <div class="sidebar-button motion-element">
+    <a onclick="tidioChatApi.open();"><i class="fa fa-comment"></i>
+    私聊A哥
+  </a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://fangshixiang.blog.csdn.net/" title="https:&#x2F;&#x2F;fangshixiang.blog.csdn.net&#x2F;" rel="noopener" target="_blank">CSDN</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/yourbatman/" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;yourbatman&#x2F;" rel="noopener" target="_blank">博客园</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://juejin.im/user/5b44d178f265da0fa1220efe/posts" title="https:&#x2F;&#x2F;juejin.im&#x2F;user&#x2F;5b44d178f265da0fa1220efe&#x2F;posts" rel="noopener" target="_blank">掘金</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.zhihu.com/people/fangshixiang" title="https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;fangshixiang" rel="noopener" target="_blank">知乎</a>
+        </li>
+    </ul>
+  </div>
+
+<!-- 近期文章（源代码） -->
+
+    <div class="recent_posts links-of-blogroll motion-element links-of-blogroll-block">
+      <div class="links-of-blogroll-title">
+        <!-- modify icon to fire by szw -->
+        <i class="fa fa-history fa-" aria-hidden="true"></i>
+        最新文章
+      </div>
+      <ul class="links-of-blogroll-list">
+        
+        
+          <li>
+            <a href="/x2y/fea0d843.html" title="GMT UTC CST ISO 夏令时 时间戳，都是些什么鬼？" target="_blank">
+            <i class="fa fa-check-square"></i> GMT UTC CST ISO 夏令时 时间戳，都是些什么鬼？
+            </a>
+          </li>
+        
+          <li>
+            <a href="/x2y/6fc3459b.html" title="9. 细节见真章，Formatter注册中心的设计很讨巧" target="_blank">
+            <i class="fa fa-check-square"></i> 9. 细节见真章，Formatter注册中心的设计很讨巧
+            </a>
+          </li>
+        
+          <li>
+            <a href="/x2y/ff31c4c6.html" title="8. 格式化器大一统 -- Spring的Formatter抽象" target="_blank">
+            <i class="fa fa-check-square"></i> 8. 格式化器大一统 -- Spring的Formatter抽象
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+
+
+      </div>
+
+      <!-- canvas粒子时钟效果  放在侧边栏最下面 -->
+      <div style="">
+  <canvas id="canvas" style="width:50%;margin-top:10px;margin-bottom: -10px;" width="820" height="250">当前浏览器不支持canvas，建议使用谷歌浏览器再试</canvas>
+</div>
+<script>
+(function(){
+    var WINDOW_WIDTH = 820;
+    var WINDOW_HEIGHT = 250;
+    var RADIUS = 7; //球半径
+    var NUMBER_GAP = 10; //数字之间的间隙
+    var u=0.65; //碰撞能量损耗系数
+    var context; //Canvas绘制上下文
+    var balls = []; //存储彩色的小球
+    const colors = ["#33B5E5","#0099CC","#AA66CC","#9933CC","#99CC00","#669900","#FFBB33","#FF8800","#FF4444","#CC0000"]; //彩色小球的颜色
+    var currentNums = []; //屏幕显示的8个字符
+    var digit =
+        [
+            [
+                [0,0,1,1,1,0,0],
+                [0,1,1,0,1,1,0],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [0,1,1,0,1,1,0],
+                [0,0,1,1,1,0,0]
+            ],//0
+            [
+                [0,0,0,1,1,0,0],
+                [0,1,1,1,1,0,0],
+                [0,0,0,1,1,0,0],
+                [0,0,0,1,1,0,0],
+                [0,0,0,1,1,0,0],
+                [0,0,0,1,1,0,0],
+                [0,0,0,1,1,0,0],
+                [0,0,0,1,1,0,0],
+                [0,0,0,1,1,0,0],
+                [1,1,1,1,1,1,1]
+            ],//1
+            [
+                [0,1,1,1,1,1,0],
+                [1,1,0,0,0,1,1],
+                [0,0,0,0,0,1,1],
+                [0,0,0,0,1,1,0],
+                [0,0,0,1,1,0,0],
+                [0,0,1,1,0,0,0],
+                [0,1,1,0,0,0,0],
+                [1,1,0,0,0,0,0],
+                [1,1,0,0,0,1,1],
+                [1,1,1,1,1,1,1]
+            ],//2
+            [
+                [1,1,1,1,1,1,1],
+                [0,0,0,0,0,1,1],
+                [0,0,0,0,1,1,0],
+                [0,0,0,1,1,0,0],
+                [0,0,1,1,1,0,0],
+                [0,0,0,0,1,1,0],
+                [0,0,0,0,0,1,1],
+                [0,0,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [0,1,1,1,1,1,0]
+            ],//3
+            [
+                [0,0,0,0,1,1,0],
+                [0,0,0,1,1,1,0],
+                [0,0,1,1,1,1,0],
+                [0,1,1,0,1,1,0],
+                [1,1,0,0,1,1,0],
+                [1,1,1,1,1,1,1],
+                [0,0,0,0,1,1,0],
+                [0,0,0,0,1,1,0],
+                [0,0,0,0,1,1,0],
+                [0,0,0,1,1,1,1]
+            ],//4
+            [
+                [1,1,1,1,1,1,1],
+                [1,1,0,0,0,0,0],
+                [1,1,0,0,0,0,0],
+                [1,1,1,1,1,1,0],
+                [0,0,0,0,0,1,1],
+                [0,0,0,0,0,1,1],
+                [0,0,0,0,0,1,1],
+                [0,0,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [0,1,1,1,1,1,0]
+            ],//5
+            [
+                [0,0,0,0,1,1,0],
+                [0,0,1,1,0,0,0],
+                [0,1,1,0,0,0,0],
+                [1,1,0,0,0,0,0],
+                [1,1,0,1,1,1,0],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [0,1,1,1,1,1,0]
+            ],//6
+            [
+                [1,1,1,1,1,1,1],
+                [1,1,0,0,0,1,1],
+                [0,0,0,0,1,1,0],
+                [0,0,0,0,1,1,0],
+                [0,0,0,1,1,0,0],
+                [0,0,0,1,1,0,0],
+                [0,0,1,1,0,0,0],
+                [0,0,1,1,0,0,0],
+                [0,0,1,1,0,0,0],
+                [0,0,1,1,0,0,0]
+            ],//7
+            [
+                [0,1,1,1,1,1,0],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [0,1,1,1,1,1,0],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [0,1,1,1,1,1,0]
+            ],//8
+            [
+                [0,1,1,1,1,1,0],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [0,1,1,1,0,1,1],
+                [0,0,0,0,0,1,1],
+                [0,0,0,0,0,1,1],
+                [0,0,0,0,1,1,0],
+                [0,0,0,1,1,0,0],
+                [0,1,1,0,0,0,0]
+            ],//9
+            [
+                [0,0,0,0],
+                [0,0,0,0],
+                [0,1,1,0],
+                [0,1,1,0],
+                [0,0,0,0],
+                [0,0,0,0],
+                [0,1,1,0],
+                [0,1,1,0],
+                [0,0,0,0],
+                [0,0,0,0]
+            ]//:
+        ];
+
+    function drawDatetime(cxt){
+        var nums = [];
+
+        context.fillStyle="#005eac"
+        var date = new Date();
+        var offsetX = 70, offsetY = 30;
+        var hours = date.getHours();
+        var num1 = Math.floor(hours/10);
+        var num2 = hours%10;
+        nums.push({num: num1});
+        nums.push({num: num2});
+        nums.push({num: 10}); //冒号
+        var minutes = date.getMinutes();
+        var num1 = Math.floor(minutes/10);
+        var num2 = minutes%10;
+        nums.push({num: num1});
+        nums.push({num: num2});
+        nums.push({num: 10}); //冒号
+        var seconds = date.getSeconds();
+        var num1 = Math.floor(seconds/10);
+        var num2 = seconds%10;
+        nums.push({num: num1});
+        nums.push({num: num2});
+
+        for(var x = 0;x<nums.length;x++){
+            nums[x].offsetX = offsetX;
+            offsetX = drawSingleNumber(offsetX,offsetY, nums[x].num,cxt);
+            //两个数字连一块，应该间隔一些距离
+            if(x<nums.length-1){
+                if((nums[x].num!=10) &&(nums[x+1].num!=10)){
+                    offsetX+=NUMBER_GAP;
+                }
+            }
+        }
+
+        //说明这是初始化
+        if(currentNums.length ==0){
+            currentNums = nums;
+        }else{
+            //进行比较
+            for(var index = 0;index<currentNums.length;index++){
+                if(currentNums[index].num!=nums[index].num){
+                    //不一样时，添加彩色小球
+                    addBalls(nums[index]);
+                    currentNums[index].num=nums[index].num;
+                }
+            }
+        }
+        renderBalls(cxt);
+        updateBalls();
+
+        return date;
+    }
+
+    function addBalls (item) {
+        var num = item.num;
+        var numMatrix = digit[num];
+        for(var y = 0;y<numMatrix.length;y++){
+            for(var x = 0;x<numMatrix[y].length;x++){
+                if(numMatrix[y][x]==1){
+                    var ball={
+                        offsetX:item.offsetX+RADIUS+RADIUS*2*x,
+                        offsetY:30+RADIUS+RADIUS*2*y,
+                        color:colors[Math.floor(Math.random()*colors.length)],
+                        g:1.5+Math.random(),
+                        vx:Math.pow(-1, Math.ceil(Math.random()*10))*4+Math.random(),
+                        vy:-5
+                    }
+                    balls.push(ball);
+                }
+            }
+        }
+    }
+
+    function renderBalls(cxt){
+        for(var index = 0;index<balls.length;index++){
+            cxt.beginPath();
+            cxt.fillStyle=balls[index].color;
+            cxt.arc(balls[index].offsetX, balls[index].offsetY, RADIUS, 0, 2*Math.PI);
+            cxt.fill();
+        }
+    }
+
+    function updateBalls () {
+        var i =0;
+        for(var index = 0;index<balls.length;index++){
+            var ball = balls[index];
+            ball.offsetX += ball.vx;
+            ball.offsetY += ball.vy;
+            ball.vy+=ball.g;
+            if(ball.offsetY > (WINDOW_HEIGHT-RADIUS)){
+                ball.offsetY= WINDOW_HEIGHT-RADIUS;
+                ball.vy=-ball.vy*u;
+            }
+            if(ball.offsetX>RADIUS&&ball.offsetX<(WINDOW_WIDTH-RADIUS)){
+
+                balls[i]=balls[index];
+                i++;
+            }
+        }
+        //去除出边界的球
+        for(;i<balls.length;i++){
+            balls.pop();
+        }
+    }
+    function drawSingleNumber(offsetX, offsetY, num, cxt){
+        var numMatrix = digit[num];
+        for(var y = 0;y<numMatrix.length;y++){
+            for(var x = 0;x<numMatrix[y].length;x++){
+                if(numMatrix[y][x]==1){
+                    cxt.beginPath();
+                    cxt.arc(offsetX+RADIUS+RADIUS*2*x,offsetY+RADIUS+RADIUS*2*y,RADIUS,0,2*Math.PI);
+                    cxt.fill();
+                }
+            }
+        }
+        cxt.beginPath();
+        offsetX += numMatrix[0].length*RADIUS*2;
+        return offsetX;
+    }
+
+    var canvas = document.getElementById("canvas");
+    canvas.width=WINDOW_WIDTH;
+    canvas.height=WINDOW_HEIGHT;
+    context = canvas.getContext("2d");
+
+    //记录当前绘制的时刻
+    var currentDate = new Date();
+
+    setInterval(function(){
+        //清空整个Canvas，重新绘制内容
+        context.clearRect(0, 0, context.canvas.width, context.canvas.height);
+        drawDatetime(context);
+    }, 50)
+})();
+</script>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+
+     <!-- 此处为新加的代码 -->
+     
+<script src="https://my.openwrite.cn/js/readmore.js" type="text/javascript"></script>
+<script>
+    const btw = new BTWPlugin();
+    btw.init({
+        id: 'yourbatman',
+        blogId: '10059-1591593090091-727',
+        name: 'BAT的乌托邦',
+        qrcode: 'https://img-blog.csdnimg.cn/20200511100304545.jpg',
+        keyword: 'vip',
+    });
+</script>
+
+
+     <script src="https://cdn.staticfile.org/jquery/3.1.1/jquery.min.js"></script>
+<script>
+    //暂时储存文章中的内容
+    var div = $('.post-body');
+    //暂时储存目录的内容
+    var toc=$('.post-toc')
+    function password() {
+        if(''){
+            //将文章内容删除
+            div.remove();
+            //将目录删除
+            toc.remove();
+            //将文章删除后，向原来文章的地方添加，应该出现的提示用户输入密码的样式
+            //下面这里的第一个用textarea是因为如果在手机端的时候只能显示一部分文字，
+            //只是拓展:input里面的字只能显示一行，不会自动换行，目前上网搜索没有发现好的办法，所以用了textarea，右下角的小三角通过resize:none 去掉。
+            $('.post-header').after(
+            '<span class="description" value="请输入密码，然后按 Enter 键阅读全文" style="font-style: oblique;font-weight: bold;border: none;display: block;'+
+            'width: 60%;margin: 0 auto;text-align: center;outline: none;margin-bottom: 40px;resize:none; margin-top: 20px;">'+
+            '<i class="fa fa-heartbeat" id="myheartbeat"></i>'+
+            '请输入密码，然后按 Enter 键阅读全文' +
+            '<i class="fa fa-heartbeat" id="myheartbeat"></i>'+
+            '</span>' +
+            '<div class="qiang" style="height: 100px;width: 60%;margin:0 auto">' +
+            '<input class="password"  type="password" autocomplete="new-password" autofocus="autofocus" value="" style="border-radius: 5px;height: 30px;border: none;display: block;border-bottom: 1px solid #ccc;' +
+            'margin: 0 auto;outline: none;width:95%"/>' +
+            '</div>')
+            //绑定点击事件，如果是点击的.password 这个div就改变样式，如果是document中除了div之外的其他任何元素，就变回原来的样式。
+            document.onclick = function (event) {
+                var e = event || window.event;
+                var elem = e.srcElement || e.target;
+
+                while (elem) {
+                    if (elem != document) {
+                        if (elem.className == "password") {
+                            //$(".password").animate({paddingTop:"30px",width:"100%",borderWidth:"2px"},300)
+                            return;
+                        }
+                        elem = elem.parentNode;
+                    } else {
+                        //$(".password").animate({paddingTop:"0px",width:"95%",borderWidth:"1px"},300)
+                        return;
+                    }
+                }
+            }
+            //绑定enter键按下后离开的事件
+            $(document).keyup(function(event){
+                if(event.keyCode ==13&&$('.password').length>0){
+                    //console.log($('.password').val())
+                    //console.log('')
+                    if ($('.password').val() == '') {
+                        //恢复文章内容
+                        (div).appendTo($(".post-header"))
+                        //恢复目录
+                        toc.appendTo($(".sidebar-inner"))
+                        //删除本页面的输入密码组件
+                        $(".description").remove();
+                        $(".qiang").remove();
+                        $(".password").remove();
+
+                        //重新处理pjax事件,如果没有加pjax的从下面这行起到下面的else之间的代码需要去掉。
+                        //图片懒加载，没有加入此功能的这个函数需要去掉
+                        $('img').lazyload({
+                            placeholder: '/images/loading.gif',
+                            effect: 'fadeIn',
+                            threshold : 100,
+                            failure_limit : 20,
+                            skip_invisible : false
+                        });
+                        //pjax后出现文章不显示，没有pjax的下面四行需要去掉
+                        $(".post-block").css({opacity:1});
+                        $(".post-header").css({opacity:1});
+                        $(".post-body").css({opacity:1});
+                        $(".pagination").css({opacity:1});
+                    }else {
+                        alert("密码不对，请重新输入~")
+                    }
+                }
+                //将document的keyup移除，防止在pjax的情况下会重复绑定事件
+            });
+        }
+    }
+    password();
+</script>
+
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        <!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<span id="times" style="margin-right: 10px;">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("05/03/2020 12:00:00");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "小破站已苟活"+dnum+"天";
+        document.getElementById("times").innerHTML = hnum + "小时" + mnum + "分" + snum + "秒";
+    }
+    setInterval("createtime()",250);
+
+    // 自定义邮箱审核规则（目前校验：邮箱必填，且格式必须正确 昵称也必须填写）
+    document.body.addEventListener('click', function(e) {
+        if (e.target.classList.contains('vsubmit')) {
+            const email = document.querySelector('input[type=email]');
+            const nick = document.querySelector('input[name=nick]');
+            const reg = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+            if (!email.value || !nick.value || !reg.test(email.value)) {
+                const str = `<div class="valert text-center"><div class="vtext">请填写正确的昵称和邮箱！</div></div>`;
+                const vmark = document.querySelector('.vmark');
+                vmark.innerHTML = str;
+                vmark.style.display = 'block';
+                setTimeout(function() {
+                    vmark.style.display = 'none';
+                    vmark.innerHTML = '';
+                }, 2500);
+            }
+        }
+    })
+</script>
+  <span class="beian"><a href="http://www.beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备12009483号 </a>
+  </span>
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">A哥(YourBatman)</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">本站总字数：</span>
+    <span title="本站总字数">467k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">本站总阅读时长 &asymp;</span>
+    <span title="本站总阅读时长">7:05</span>
+</div>
+  <div class="addthis_inline_share_toolbox">
+    <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5eb7b6f6b64d54f6" async="async"></script>
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        承蒙 <span id="busuanzi_value_site_uv"></span> 位朋友
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        共造访本站 <span id="busuanzi_value_site_pv"></span> 次
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+  <script>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id    : 25645,
+      el    : 'wpac-rating',
+      color : 'fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+  <script src="//code.tidio.co/imnhfpyrju0tgipwdxke6moou6p9kbdu.js"></script>
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 1, // 打开或关闭导航空格和选项卡 1:打开 0:关闭
+    scrollbar: 1, // 打开/关闭滚动条
+    toolbar  : 1, // 打开/关闭工具栏
+    statusbar: 1, // 打开或关闭状态栏
+    pagemode : 'thumbs', // 侧边栏状态，显示书签或缩略图 接受值：none，thumbs，bookmarks，attachments
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+
+  
+
+  
+
+
+  <!-- 自定义的js效果 -->
+  <script type="text/javascript">
+    (function() {
+var a_idx = 0;
+ 
+        $("body").click(function(e) {
+            //var a = new Array(
+            //    "富强", "民主", "文明", "和谐",
+            //    "自由", "平等", "公正", "法治",
+            //    "爱国", "敬业", "诚信", "友善"
+            //    );
+            var a = new Array(
+            "耕耘","挑灯","悬梁","废寝",
+            "映雪","刺骨","囊萤","凿壁",
+            "勤奋","刻苦","打拼","砥砺");
+
+            var $i = $("<span/>").text(a[a_idx]);
+            a_idx = (a_idx + 1) % a.length;
+            var x = e.pageX,
+            y = e.pageY;
+            $i.css({
+                "z-index": 144469,
+                "top": y - 20,
+                "left": x,
+                "position": "absolute",
+                "font-weight": "bold",
+                "color": "#f00"
+            });
+            $("body").append($i);
+            $i.animate({
+                "top": y - 180,
+                "opacity": 0
+            },
+            1500,
+            function() {
+                $i.remove()
+            })
+        });
+    })();
+  </script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'GL1AoYvDSErHS8idMvn35STX-gzGzoHsz',
+      appKey     : 'flstBFF7gvWX8emTwJooV0bB',
+      placeholder: "各位道友📢📢📢：&#10;1、填写昵称和【正确邮箱号】；&#10;2、有邮箱可收到回复的邮件提醒；&#10;3、礼貌言辞，拒绝黄赌毒；",
+      avatar     : 'robohash',
+      meta       : guest,
+      pageSize   : '6' || 10,
+      visitor    : true,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
