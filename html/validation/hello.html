@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试FormHttpMessageConverter</title>
+</head>
+<body>
+<!-- 表单的enctype一定要标注成multipart形式，否则是拿不到二进制流的 -->
+<form action="http://localhost:8080/demo_war_war/upload" method="post" enctype="multipart/form-data">
+    用户名 <input type="text" name="userName">
+    头像 <input type="file" name="touxiang">
+    <input type="submit">
+</form>
+</body>
+</html>

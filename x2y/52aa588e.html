@@ -1,0 +1,1418 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="baidu-site-verification" content="FdPXpeNylP">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.yourbatman.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},"motion":{"enable":false,"async":true,"transition":{"post_block":"flipBounceYIn","post_header":"flipXIn","post_body":"flipBounceXIn","coll_header":"expandIn","sidebar":"shrinkIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="你发任你发，我用Java8。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JDK15正式发布，划时代的ZGC同时宣布转正">
+<meta property="og:url" content="https://www.yourbatman.cn/x2y/52aa588e.html">
+<meta property="og:site_name" content="BAT的乌托邦">
+<meta property="og:description" content="你发任你发，我用Java8。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200916140714904.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200916142447336.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200916141534643.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200916143406758.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200916180320241.png#pic_center">
+<meta property="article:published_time" content="2020-09-17T03:54:27.000Z">
+<meta property="article:modified_time" content="2021-04-30T13:32:41.874Z">
+<meta property="article:author" content="A哥(YourBatman)">
+<meta property="article:tag" content="BAT的乌托邦">
+<meta property="article:tag" content="A哥">
+<meta property="article:tag" content="YourBatman">
+<meta property="article:tag" content="JDK15">
+<meta property="article:tag" content="ZGC">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20200916140714904.png#pic_center">
+
+<link rel="canonical" href="https://www.yourbatman.cn/x2y/52aa588e.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>JDK15正式发布，划时代的ZGC同时宣布转正 | BAT的乌托邦</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?2ad49a2290d0249428335633c45e2806";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">BAT的乌托邦</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">当大潮退去，才知道谁在裸泳</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于A哥/留言板</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">64</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>专栏<span class="badge">15</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>时间轴<span class="badge">56</span></a>
+
+  </li>
+        <li class="menu-item menu-item-top">
+
+    <a href="/top/" rel="section"><i class="fa fa-signal fa-fw"></i>热门文章</a>
+
+  </li>
+        <li class="menu-item menu-item-books">
+
+    <a href="/books/" rel="section"><i class="fa fa-book fa-fw"></i>图书馆</a>
+
+  </li>
+        <li class="menu-item menu-item-links">
+
+    <a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友情债</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="请输入关键字检索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/yourbatman" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+
+        <!~- 跳转到新站点 start... -->
+        <div style="width: 90%;margin-left: 5%;font-size: 24px;color: yellow;font-weight: bolder; margin-bottom: -20px;">
+          <marquee behavior="alternate" hspace="hexo50px" onMouseOut="this.start()" onMouseOver="this.stop()">
+            本站点已归档（不再维护），点击立即前往新站点：
+              <a href="https://yourbatman.cn" target="_self" title="前往新站点" style="color:whitesmoke;text-decoration: underline;">
+                https://yourbatman.cn
+              </a>
+          </marquee>
+        </div>
+        <!~- 跳转到新站点 end... -->
+
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  
+    <div id="yourbatman">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.yourbatman.cn/x2y/52aa588e.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://img-blog.csdnimg.cn/20200511100304592.jpg">
+      <meta itemprop="name" content="A哥(YourBatman)">
+      <meta itemprop="description" content="我这有故事，你那有酒吗？">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BAT的乌托邦">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          JDK15正式发布，划时代的ZGC同时宣布转正
+        </h1>
+
+        <div class="post-meta">
+          <!-- 精品文章 精华帖 -->
+          
+            <i class="fa fa-anchor" style="background: #00a8c3; padding: 2px 4px 2px 4px; color: #fff;">&nbsp;精华帖</i>
+            <span class="post-meta-divider">|</span>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-09-17 11:54:27" itemprop="dateCreated datePublished" datetime="2020-09-17T11:54:27+08:00">2020-09-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">收录于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/A%E5%93%A5%E5%AD%A6Java/" itemprop="url" rel="index"><span itemprop="name">A哥学Java</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/x2y/52aa588e.html" class="post-meta-item leancloud_visitors" data-flag-title="JDK15正式发布，划时代的ZGC同时宣布转正" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">评论数：</span>
+    
+    <a title="valine" href="/x2y/52aa588e.html#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/x2y/52aa588e.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+          <!-- 置顶 可以写top:true  也可以写数字top:1/2/3  顺序规则同Spring-->
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+          <!-- 本文作者 -->
+          <span class="post-meta-item" title="阅读时长">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-user fa-fw"></i>
+            </span>
+            <span class="post-meta-item-text">本文作者：</span>
+            <a href="/about/" itemprop="url" rel="index">
+              <span>A哥(YourBatman)</span>
+            </a>
+          </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>你发任你发，我用Java8。本文已被 <a href="https://www.yourbatman.cn"><strong>https://www.yourbatman.cn</strong></a> 收录，里面一并有Spring技术栈、MyBatis、JVM、中间件等小而美的<strong>专栏</strong>供以免费学习。关注公众号【<strong>BAT的乌托邦</strong>】逐个击破，深入掌握，拒绝浅尝辄止。</p>
+</blockquote>
+<p><img data-src="https://img-blog.csdnimg.cn/20200916140714904.png#pic_center" alt=""></p>
+<h1 id="✍前言"><a href="#✍前言" class="headerlink" title="✍前言"></a>✍前言</h1><p>2020年9月15日，JDK15正式发布，可谓如约而至。按照Java SE的发展路线图，JDK14自此停止更新。值得注意的是JDK15并非<strong>LTS</strong>版本，Oracle官方对Java SE的支持路线图如下：<br><img data-src="https://img-blog.csdnimg.cn/20200916142447336.png#pic_center" alt=""><br>JDK8的扩展支持时间超过了JDK11，Oracle你是认真的吗？开个玩笑~</p>
+<p>那么自Java11之后，哪个版本才是LTS版本呢？Oracle官方并没给出具体参考路线图，但可参考OpenJDK的这张：<br><img data-src="https://img-blog.csdnimg.cn/20200916141534643.png#pic_center" alt=""><br>可以看到<strong>JDK17</strong>将是下一个LTS版本，预计发版日期是2021年9月份。当然喽这只是OpenJDK的发版线路图，并不代表Oracle官方，因此仅供参考，不过一般八九不离十。</p>
+<blockquote>
+<p>小贴士：OpenJDK和Oracle JDK自从JDK11后，就共享了绝大部分代码了，节奏基本保持一致。</p>
+</blockquote>
+<p>从JDK9之后，Oracle采用了新的发布周期：每6个月发布一个版本，每3年发布一个LTS版本。JDK14是继JDK9之后发布的第四个版本， 该版本为非LTS版本，<strong>最新的LTS版本为JDK11</strong>。因为是小鹿快跑，快速迭代，因此此处解释下这两个词：孵化器模块（Incubator）和预览特性（Preview）。</p>
+<h3 id="孵化器模块（孵化版-实验版）"><a href="#孵化器模块（孵化版-实验版）" class="headerlink" title="孵化器模块（孵化版/实验版）"></a>孵化器模块（孵化版/实验版）</h3><p>尚未定稿的API/工具，主要用于从Java社区收集使用反馈，稳定性无保障，后期有较大可能性移除</p>
+<h3 id="预览特性（预览版）"><a href="#预览特性（预览版）" class="headerlink" title="预览特性（预览版）"></a>预览特性（预览版）</h3><p>规格已成型，实现已确定，但还未最终定稿。这些特性还是存在被移除的可能性，但一般来说最后都会被固定下来。</p>
+<h1 id="✍正文"><a href="#✍正文" class="headerlink" title="✍正文"></a>✍正文</h1><p>JDK15是Java SE平台的第15个版本，由<strong>JSR 390</strong>在Java社区进程中指定。</p>
+<blockquote>
+<p>OpenJDK 15是9-15发布的，Oracle同步跟上。其它厂商的对应JDK版本也会随后跟上</p>
+</blockquote>
+<p>该版本共提供14个新特性，通过这些JEP来表示，截图如下：<br><img data-src="https://img-blog.csdnimg.cn/20200916143406758.png#pic_center" alt=""><br>下面针对其中对开发者日常编程关系较大的特性拉出来解释，并给出对应的使用示例（其实就是JEP 378喽）。</p>
+<h2 id="JDK14新特性回顾"><a href="#JDK14新特性回顾" class="headerlink" title="JDK14新特性回顾"></a>JDK14新特性回顾</h2><p>老规矩，在进行JDK15的新特性介绍之前，先回顾下JDK14的主要特性有哪些。JDK 14于2020年3月17日发布。</p>
+<h3 id="一、Switch表达式"><a href="#一、Switch表达式" class="headerlink" title="一、Switch表达式"></a>一、Switch表达式</h3><p>新的Switch表达式其实早在JDK 12、13中都已存在了，但只是<strong>预览版</strong>，到了JDK 14就彻底变为稳定版了，可以放心商用。</p>
+<blockquote>
+<p>小贴士：预览版特性是有可能在后续版本中被移除的，但稳定版后几乎不可能被移除</p>
+</blockquote>
+<p>switch新的表达式有两个显著的特点：</p>
+<ul>
+<li>支持箭头表达式返回</li>
+<li>支持yield和return返回值。</li>
+</ul>
+<h4 id="1、箭头表达式返回"><a href="#1、箭头表达式返回" class="headerlink" title="1、箭头表达式返回"></a>1、箭头表达式返回</h4><p>JDK14之前写法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printLetterCount</span><span class="params">(DayOfWeek dayOfWeek)</span></span>&#123;</span><br><span class="line">    <span class="keyword">switch</span> (dayOfWeek) &#123;</span><br><span class="line">        <span class="keyword">case</span> MONDAY:</span><br><span class="line">        <span class="keyword">case</span> FRIDAY:</span><br><span class="line">        <span class="keyword">case</span> SUNDAY:</span><br><span class="line">            System.out.println(<span class="number">6</span>);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> TUESDAY:</span><br><span class="line">            System.out.println(<span class="number">7</span>);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> THURSDAY:</span><br><span class="line">        <span class="keyword">case</span> SATURDAY:</span><br><span class="line">            System.out.println(<span class="number">8</span>);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> WEDNESDAY:</span><br><span class="line">            System.out.println(<span class="number">9</span>);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>要点：break可千万别忘记写，否则就是个大bug，并且还比较<strong>隐蔽</strong>，定位起来稍显困难。</p>
+<p>JDK14等效的新写法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printLetterCount</span><span class="params">(DayOfWeek dayOfWeek)</span></span>&#123;</span><br><span class="line">    <span class="keyword">switch</span> (dayOfWeek) &#123;</span><br><span class="line">        <span class="keyword">case</span> MONDAY, FRIDAY, SUNDAY -&gt; System.out.println(<span class="number">6</span>);</span><br><span class="line">        <span class="keyword">case</span> TUESDAY                -&gt; System.out.println(<span class="number">7</span>);</span><br><span class="line">        <span class="keyword">case</span> THURSDAY, SATURDAY     -&gt; System.out.println(<span class="number">8</span>);</span><br><span class="line">        <span class="keyword">case</span> WEDNESDAY              -&gt; System.out.println(<span class="number">9</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可明显看到新写法不需要一个个break了，从<strong>语法层面</strong>规避了我们犯错的可能性。</p>
+<h4 id="2、yield返回"><a href="#2、yield返回" class="headerlink" title="2、yield返回"></a>2、yield返回</h4><p>JDK14之前写法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getLetterCount</span><span class="params">(DayOfWeek dayOfWeek)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> letterCount;</span><br><span class="line">    <span class="keyword">switch</span> (dayOfWeek) &#123;</span><br><span class="line">        <span class="keyword">case</span> MONDAY:</span><br><span class="line">        <span class="keyword">case</span> FRIDAY:</span><br><span class="line">        <span class="keyword">case</span> SUNDAY:</span><br><span class="line">            letterCount = <span class="number">6</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> TUESDAY:</span><br><span class="line">            letterCount = <span class="number">7</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> THURSDAY:</span><br><span class="line">        <span class="keyword">case</span> SATURDAY:</span><br><span class="line">            letterCount = <span class="number">8</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> WEDNESDAY:</span><br><span class="line">            letterCount = <span class="number">9</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">"非法: "</span> + dayOfWeek);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> letterCount;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>JDK14等效的新写法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getLetterCount</span><span class="params">(DayOfWeek dayOfWeek)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">switch</span> (dayOfWeek) &#123;</span><br><span class="line">        <span class="keyword">case</span> MONDAY, FRIDAY, SUNDAY -&gt; <span class="number">6</span>;</span><br><span class="line">        <span class="keyword">case</span> TUESDAY                -&gt; <span class="number">7</span>;</span><br><span class="line">        <span class="keyword">case</span> THURSDAY, SATURDAY     -&gt; <span class="number">8</span>;</span><br><span class="line">        <span class="keyword">case</span> WEDNESDAY              -&gt; <span class="number">9</span>;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用箭头操作符操作效果立竿见影。当然，你还可以使用<code>yield</code>关键字返回：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getLetterCount</span><span class="params">(DayOfWeek dayOfWeek)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">switch</span> (dayOfWeek) &#123;</span><br><span class="line">        <span class="keyword">case</span> MONDAY  -&gt; <span class="number">6</span>;</span><br><span class="line">        <span class="keyword">default</span>      -&gt; &#123;</span><br><span class="line">            <span class="keyword">int</span> letterCount = dayOfWeek.toString().length();</span><br><span class="line">            yield letterCount;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="二、instanceof的模式匹配（预览）"><a href="#二、instanceof的模式匹配（预览）" class="headerlink" title="二、instanceof的模式匹配（预览）"></a>二、instanceof的模式匹配（预览）</h3><p>该功能在JDK14中处理<strong>预览版</strong>。</p>
+<p>JDK14之前写法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    Object o = <span class="string">"hello world"</span>;</span><br><span class="line">    <span class="keyword">if</span>(o <span class="keyword">instanceof</span> String )&#123;</span><br><span class="line">        String str = String<span class="class">.<span class="keyword">class</span>.<span class="title">cast</span>(<span class="title">o</span>)</span>;</span><br><span class="line">        System.out.println(str);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>JDK14等效的新写法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    Object o = <span class="string">"hello world"</span>;</span><br><span class="line">    <span class="comment">// 屁股里直接可写个变量名，不再需要强转了</span></span><br><span class="line">    <span class="keyword">if</span>(o <span class="keyword">instanceof</span> String str)&#123;</span><br><span class="line">        System.out.println(str);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">再如：</span><br><span class="line"><span class="keyword">if</span> (obj <span class="keyword">instanceof</span> String s &amp;&amp; s.length() &gt; <span class="number">5</span>) &#123;</span><br><span class="line">	s.contains(..)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果你运行时有如下错误：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">java: <span class="keyword">instanceof</span> 中的模式匹配 是预览功能，默认情况下禁用。</span><br><span class="line">  （请使用 --enable-preview 以启用 <span class="keyword">instanceof</span> 中的模式匹配）</span><br></pre></td></tr></table></figure>
+<p>那是因为此功能是<strong>预览特性</strong>，需要你主动开启，如下：<br><img data-src="https://img-blog.csdnimg.cn/20200916180320241.png#pic_center" alt=""><br>注意：此特性在<strong>JDK15</strong>中依旧为预览版。</p>
+<h3 id="三、实用的NullPointerException"><a href="#三、实用的NullPointerException" class="headerlink" title="三、实用的NullPointerException"></a>三、实用的NullPointerException</h3><p>略。</p>
+<h3 id="四、Record（预览）"><a href="#四、Record（预览）" class="headerlink" title="四、Record（预览）"></a>四、Record（预览）</h3><p>Java年纪太大，语法不够新潮，有时候确实太麻烦，因此有了Record的出现：干掉那些get/set、toString、equals等方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> record <span class="title">Person</span><span class="params">(String name,Integer age)</span> </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    Person person= <span class="keyword">new</span> Person(<span class="string">"YourBatman"</span>, <span class="number">18</span>);</span><br><span class="line">    System.out.println(person);</span><br><span class="line">    System.out.println(person.name());</span><br><span class="line">    System.out.println(person.age());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，结果打印：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Person[name=YourBatman, age=<span class="number">18</span>]</span><br><span class="line">YourBatman</span><br><span class="line"><span class="number">18</span></span><br></pre></td></tr></table></figure>
+<p>注意：此特性在<strong>JDK15</strong>中依旧为预览版。</p>
+<h3 id="五、文本块Text-Blocks（二次预览）"><a href="#五、文本块Text-Blocks（二次预览）" class="headerlink" title="五、文本块Text Blocks（二次预览）"></a>五、文本块Text Blocks（二次预览）</h3><p>这个特性可是非常好用，它属于二次预览：已在JDK 13预览过一次。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    String html = <span class="string">""</span><span class="string">"</span></span><br><span class="line"><span class="string">          &lt;html&gt;</span></span><br><span class="line"><span class="string">              &lt;body&gt;</span></span><br><span class="line"><span class="string">                  &lt;p&gt;hello world&lt;/p&gt;</span></span><br><span class="line"><span class="string">              &lt;/body&gt;</span></span><br><span class="line"><span class="string">          &lt;/html&gt;</span></span><br><span class="line"><span class="string">          "</span><span class="string">""</span>;</span><br><span class="line">    String query = <span class="string">""</span><span class="string">"</span></span><br><span class="line"><span class="string">           SELECT * from USER</span></span><br><span class="line"><span class="string">           WHERE `id` = 1</span></span><br><span class="line"><span class="string">           ORDER BY `id`, `name`;</span></span><br><span class="line"><span class="string">           "</span><span class="string">""</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在JDK13中，这种是<strong>有</strong>换行的。在JDK14中，可以加上一个符号让其不让换行：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    String query = <span class="string">""</span><span class="string">"</span></span><br><span class="line"><span class="string">           SELECT * from USER \</span></span><br><span class="line"><span class="string">           WHERE `id` = 1 \</span></span><br><span class="line"><span class="string">           ORDER BY `id`, `name`;\</span></span><br><span class="line"><span class="string">           "</span><span class="string">""</span>;</span><br><span class="line">    System.out.println(query);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，输出（可以看到展示为一行了）：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * from USER WHERE `id` = <span class="number">1</span> ORDER BY `id`, `name`;</span><br></pre></td></tr></table></figure>
+<p>注意：此特性在<strong>JDK15</strong>中已经为正式版。</p>
+<h3 id="六、删除CMS垃圾收集器"><a href="#六、删除CMS垃圾收集器" class="headerlink" title="六、删除CMS垃圾收集器"></a>六、删除CMS垃圾收集器</h3><p>这款著名的垃圾回收器从这个版本就彻底被删除了。JDK9开始使用G1作为<strong>默认</strong>的垃圾回收器（JDK11中ZGC开始崭露头角），就已经把CMS标记为过期了，在此版本正式删除。</p>
+<h3 id="七、ZGC垃圾回收器（实验）"><a href="#七、ZGC垃圾回收器（实验）" class="headerlink" title="七、ZGC垃圾回收器（实验）"></a>七、ZGC垃圾回收器（实验）</h3><p>革命性的ZGC：任意堆大小（TB级别）都能保证延迟在10ms以内，是以低延迟为首要目标的一款垃圾回收器。</p>
+<blockquote>
+<p>在JDK14之前，ZGC只能用于Linux上，现在也可使用在windows上了</p>
+</blockquote>
+<p>注意：此特性在<strong>JDK15</strong>中已经为正式版（JDK11开始出现）。</p>
+<hr>
+<h2 id="JDK15新特性"><a href="#JDK15新特性" class="headerlink" title="JDK15新特性"></a>JDK15新特性</h2><p>有了JDK14新特性回顾做铺垫，再来了解JDK15的新特性就方便很多了。</p>
+<p>特别说明：运行JDK15需要IDEA 2020.2才能支持哦（JDK14要求IDEA 2020.1），然后关于IDEA 2020.2的使用教程（新特性），请移步我公众号前面发的这篇文章：<a href="https://mp.weixin.qq.com/s/8voJSbmcBbdfNUCUBIcKcA" target="_blank" rel="noopener">IntelliJ IDEA 2020.2正式发布，诸多亮点总有几款能助你提效</a></p>
+<h3 id="一、文本块Text-Blocks"><a href="#一、文本块Text-Blocks" class="headerlink" title="一、文本块Text Blocks"></a>一、文本块Text Blocks</h3><p>Text Blocks首次是在JDK 13中以预览功能出现的，然后在JDK 14中又预览了一次，终于在JDK 15中被确定下来，可放心使用了（使用示例请参考文上）。</p>
+<h3 id="二、ZGC转正"><a href="#二、ZGC转正" class="headerlink" title="二、ZGC转正"></a>二、ZGC转正</h3><p>ZGC是Java 11引入的新的垃圾收集器（JDK9以后默认的垃圾回收器是G1），经过了多个实验阶段，自此终于成为正式特性。</p>
+<p>ZGC是一个重新设计的并发的垃圾回收器，可以极大的提升GC的性能。支持任意堆大小而保持稳定的低延迟（10ms以内），性能非常可观。</p>
+<p>打开方式：使用-XX:+UseZGC命令行参数打开，相信不久的将来它必将成为<strong>默认的</strong>垃圾回收器。</p>
+<h3 id="三、Shenandoah转正"><a href="#三、Shenandoah转正" class="headerlink" title="三、Shenandoah转正"></a>三、Shenandoah转正</h3><p>怎么形容Shenandoah和ZGC的关系呢？异同点大概如下：</p>
+<ul>
+<li>相同点：性能几乎可认为是相同的</li>
+<li><strong>不同点</strong>：ZGC是Oracle JDK的，根正苗红。而Shenandoah只存在于OpenJDK中，因此使用时需注意你的JDK版本</li>
+</ul>
+<p>打开方式：使用-XX:+UseShenandoahGC命令行参数打开。</p>
+<h3 id="四、删除Nashorn-JavaScript-Engine"><a href="#四、删除Nashorn-JavaScript-Engine" class="headerlink" title="四、删除Nashorn JavaScript Engine"></a>四、删除Nashorn JavaScript Engine</h3><p>Nashorn是在JDK提出的脚本执行引擎，早在JDK11就已经把它标记为过期了，JDK15完全移除。</p>
+<p>在JDK11中取以代之的是GraalVM。GraalVM是一个运行时平台，它支持Java和其他基于Java字节码的语言，但也支持其他语言，如JavaScript，Ruby，Python或LLVM。<strong>性能是Nashorn的2倍以上</strong>。</p>
+<h3 id="五、CharSequence新增isEmpty默认方法"><a href="#五、CharSequence新增isEmpty默认方法" class="headerlink" title="五、CharSequence新增isEmpty默认方法"></a>五、CharSequence新增isEmpty默认方法</h3><p>啥都不说，源码一看便知：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@since</span> <span class="number">15</span></span><br><span class="line"><span class="function"><span class="keyword">default</span> <span class="keyword">boolean</span> <span class="title">isEmpty</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.length() == <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>String实现了CharSequence接口的，这应该地球人都知道吧。</p>
+<h2 id="升级建议"><a href="#升级建议" class="headerlink" title="升级建议"></a>升级建议</h2><p>自己玩玩就行，毕竟不是LTS版本。</p>
+<p><strong>但是</strong>，虽然说仅限于自己玩玩就行，但不代表就没有关注的意义哈。还是那个道理，如果JDK12、13、14、15…都不关注些的话，到时候突然来个JDK17的LTS版本，接受起来就会稍显困难。</p>
+<h1 id="✍总结"><a href="#✍总结" class="headerlink" title="✍总结"></a>✍总结</h1><p>JDK15整体来看新特性方面并不算很亮眼，它主要是对之前版本<strong>预览特性</strong>的功能做了确定，如文本块、ZGC等，这么一来我们就可以放心大胆的使用啦。</p>
+<p>半年一次的发版速度真心学不动了，不过还好我有我的坚持：<strong>你发任你发，我用Java8。</strong></p>
+<blockquote>
+<p>公众号后台回复：JDK15，一键打包获取IDEA2020.2.2 + JDK15安装包（mac + windows）</p>
+</blockquote>
+<h5 id="✔推荐阅读："><a href="#✔推荐阅读：" class="headerlink" title="✔推荐阅读："></a>✔推荐阅读：</h5><ul>
+<li><a href="https://mp.weixin.qq.com/s/8voJSbmcBbdfNUCUBIcKcA" target="_blank" rel="noopener">IntelliJ IDEA 2020.2正式发布，诸多亮点总有几款能助你提效</a></li>
+<li><a href="https://mp.weixin.qq.com/s/ikI9c3XyR_czOSmsu6FLMw" target="_blank" rel="noopener">Spring Boot 2.3.0正式发布：优雅停机、配置文件位置通配符新特性一览</a></li>
+<li><a href="https://mp.weixin.qq.com/s/nb4oT02dlU4pxINZw9aLLw" target="_blank" rel="noopener">搞事情？Spring Boot今天一口气发布三个版本</a></li>
+</ul>
+        <!-- ....这里是正文内容的底部（首页不会展示）... -->
+        <style>
+.table-container img{
+    display: inherit;
+    margin-top: 5px;
+    margin-bottom: 0px;
+    margin-right: 10px;
+}
+</style>
+<hr>
+<h1 style="text-align: left;">关注YourBatman</h1>
+
+<div><table>
+<thead>
+<tr>
+<th>Author</th>
+<th>A哥(YourBatman)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>个人站点</td>
+<td><a href="https://www.yourbatman.cn" rel="nofollow" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc">www.yourbatman.cn</a></td>
+</tr>
+<tr>
+<td>E-mail</td>
+<td>yourbatman@qq.com</td>
+</tr>
+<tr>
+<td><strong>微 信</strong></td>
+<td><a href="https://www.yourbatman.cn/images/wechat.png" rel="nofollow" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc">fsx1056342982</a></td>
+</tr>
+<tr>
+<td><strong><code>活跃平台</code></strong></td>
+<td><a href="https://www.yourbatman.cn" rel="nofollow" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/2020071015182276.png" alt=""></a> <a href="https://fangshixiang.blog.csdn.net/" target="_blank" rel="nofollow noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/20200710151913394.png" alt=""></a><a href="https://yourbatman.cnblogs.com" target="_blank" rel="nofollow noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/20200710151929355.png" alt=""></a><a href="https://juejin.im/user/5b44d178f265da0fa1220efe/posts" target="_blank" rel="nofollow noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/20200710151938937.png" alt=""></a><a href="https://www.zhihu.com/people/fangshixiang/posts" target="_blank" rel="nofollow noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/20200710151950629.png" alt=""></a><a href="https://www.jianshu.com/u/8740f1fdd684" target="_blank" rel="nofollow noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/20200710152000530.png" alt=""></a><a href="https://segmentfault.com/u/yourbatman/articles" target="_blank" rel="nofollow noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/20200710152008726.png" alt=""></a><a href="https://github.com/yourbatman" target="_blank" rel="noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/20200710152015895.png" alt=""></a></td>
+</tr>
+<tr>
+<td><strong>公众号</strong></td>
+<td><a href="https://www.yourbatman.cn/images/wechat_channel.jpg" rel="nofollow" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc">BAT的乌托邦（ID：BAT-utopia）</a></td>
+</tr>
+<tr>
+<td>知识星球</td>
+<td><a href="https://t.zsxq.com/nQBi66I" target="_blank" rel="nofollow noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc">BAT的乌托邦</a></td>
+</tr>
+<tr>
+<td>每日文章推荐</td>
+<td><a href="https://github.com/yourbatman/reading/issues" target="_blank" rel="noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc">每日文章推荐</a></td>
+</tr>
+</tbody>
+</table></div>
+
+<p>
+<img src="https://img-blog.csdnimg.cn/20200710160552549.gif" alt="BAT的乌托邦">
+</p>
+
+    </div>
+
+    
+    
+    
+
+    <!-- 相关阅读（你可能还喜欢） -->
+      
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-title">
+    <strong>本文标题： </strong>
+    《JDK15正式发布，划时代的ZGC同时宣布转正》
+  </li>
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>A哥(YourBatman)
+  </li>
+  <li class="post-copyright-date">
+    <strong>发布时间： </strong>2020-09-17 11:54:27
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://www.yourbatman.cn/x2y/52aa588e.html" title="JDK15正式发布，划时代的ZGC同时宣布转正">https://www.yourbatman.cn/x2y/52aa588e.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>许可协议： </strong>本站所有文章均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载：No！转发：Yes！
+  </li>
+</ul>
+</div>
+
+
+      <!-- 添加“本文结束”标记 -->
+      <div class="read-over" style="text-align: center;margin-top: 25px;color: rgba(234,16,61,.569);font-size: 16px">-------------您已触及底线 <i class="fa fa-paw"></i> 感谢阅读-------------</div>
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    请A哥喝水
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="https://img-blog.csdnimg.cn/20200612080128384.png" alt="A哥(YourBatman) 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="https://img-blog.csdnimg.cn/20200612080128343.png" alt="A哥(YourBatman) 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/JDK15/" rel="tag"><i class="fa fa-tag"></i> JDK15</a>
+              <a href="/tags/ZGC/" rel="tag"><i class="fa fa-tag"></i> ZGC</a>
+          </div>
+
+        <!-- 导入投票模块 -->
+        
+  <!-- 投票功能 -->
+  <div class="post-widgets">
+    <div style="color: #ea778c;font-size: 14px;">(>兄台请留步，看完记得六星好评哦<)</div>
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/x2y/4fe71a34.html" rel="prev" title="3. 站在使用层面，Bean Validation这些标准接口你需要烂熟于胸">
+      <i class="fa fa-chevron-left"></i> 3. 站在使用层面，Bean Validation这些标准接口你需要烂熟于胸
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/x2y/c8011cdb.html" rel="next" title="4. Validator校验器的五大核心组件，一个都不能少">
+      4. Validator校验器的五大核心组件，一个都不能少 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+    </div>
+  
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#✍前言"><span class="nav-number">1.</span> <span class="nav-text">✍前言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#孵化器模块（孵化版-实验版）"><span class="nav-number">1.0.1.</span> <span class="nav-text">孵化器模块（孵化版&#x2F;实验版）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#预览特性（预览版）"><span class="nav-number">1.0.2.</span> <span class="nav-text">预览特性（预览版）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#✍正文"><span class="nav-number">2.</span> <span class="nav-text">✍正文</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#JDK14新特性回顾"><span class="nav-number">2.1.</span> <span class="nav-text">JDK14新特性回顾</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、Switch表达式"><span class="nav-number">2.1.1.</span> <span class="nav-text">一、Switch表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、箭头表达式返回"><span class="nav-number">2.1.1.1.</span> <span class="nav-text">1、箭头表达式返回</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、yield返回"><span class="nav-number">2.1.1.2.</span> <span class="nav-text">2、yield返回</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、instanceof的模式匹配（预览）"><span class="nav-number">2.1.2.</span> <span class="nav-text">二、instanceof的模式匹配（预览）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、实用的NullPointerException"><span class="nav-number">2.1.3.</span> <span class="nav-text">三、实用的NullPointerException</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、Record（预览）"><span class="nav-number">2.1.4.</span> <span class="nav-text">四、Record（预览）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五、文本块Text-Blocks（二次预览）"><span class="nav-number">2.1.5.</span> <span class="nav-text">五、文本块Text Blocks（二次预览）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#六、删除CMS垃圾收集器"><span class="nav-number">2.1.6.</span> <span class="nav-text">六、删除CMS垃圾收集器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#七、ZGC垃圾回收器（实验）"><span class="nav-number">2.1.7.</span> <span class="nav-text">七、ZGC垃圾回收器（实验）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JDK15新特性"><span class="nav-number">2.2.</span> <span class="nav-text">JDK15新特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、文本块Text-Blocks"><span class="nav-number">2.2.1.</span> <span class="nav-text">一、文本块Text Blocks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、ZGC转正"><span class="nav-number">2.2.2.</span> <span class="nav-text">二、ZGC转正</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、Shenandoah转正"><span class="nav-number">2.2.3.</span> <span class="nav-text">三、Shenandoah转正</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、删除Nashorn-JavaScript-Engine"><span class="nav-number">2.2.4.</span> <span class="nav-text">四、删除Nashorn JavaScript Engine</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五、CharSequence新增isEmpty默认方法"><span class="nav-number">2.2.5.</span> <span class="nav-text">五、CharSequence新增isEmpty默认方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#升级建议"><span class="nav-number">2.3.</span> <span class="nav-text">升级建议</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#✍总结"><span class="nav-number">3.</span> <span class="nav-text">✍总结</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#✔推荐阅读："><span class="nav-number">3.0.0.0.1.</span> <span class="nav-text">✔推荐阅读：</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="A哥(YourBatman)"
+      src="https://img-blog.csdnimg.cn/20200511100304592.jpg">
+  <p class="site-author-name" itemprop="name">A哥(YourBatman)</p>
+  <div class="site-description" itemprop="description">我这有故事，你那有酒吗？</div>
+</div>
+<div class="site-author motion-element" style="border-top: 1px dotted #ccc;padding-top: 10px;opacity: 0.7" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img itemprop="image" alt="A哥(YourBatman)" style="max-width: 120px;"
+      src="https://img-blog.csdnimg.cn/20200608214500399.png">
+  <div style="color: #e36a7c;font-size: 10px;" itemprop="description">加A哥好友(备注:Java入群)</div>
+</div>
+  <div class="sidebar-button motion-element">
+    <a onclick="tidioChatApi.open();"><i class="fa fa-comment"></i>
+    私聊A哥
+  </a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://fangshixiang.blog.csdn.net/" title="https:&#x2F;&#x2F;fangshixiang.blog.csdn.net&#x2F;" rel="noopener" target="_blank">CSDN</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/yourbatman/" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;yourbatman&#x2F;" rel="noopener" target="_blank">博客园</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://juejin.im/user/5b44d178f265da0fa1220efe/posts" title="https:&#x2F;&#x2F;juejin.im&#x2F;user&#x2F;5b44d178f265da0fa1220efe&#x2F;posts" rel="noopener" target="_blank">掘金</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.zhihu.com/people/fangshixiang" title="https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;fangshixiang" rel="noopener" target="_blank">知乎</a>
+        </li>
+    </ul>
+  </div>
+
+<!-- 近期文章（源代码） -->
+
+    <div class="recent_posts links-of-blogroll motion-element links-of-blogroll-block">
+      <div class="links-of-blogroll-title">
+        <!-- modify icon to fire by szw -->
+        <i class="fa fa-history fa-" aria-hidden="true"></i>
+        最新文章
+      </div>
+      <ul class="links-of-blogroll-list">
+        
+        
+          <li>
+            <a href="/x2y/ff31c4c6.html" title="8. 格式化器大一统 -- Spring的Formatter抽象" target="_blank">
+            <i class="fa fa-check-square"></i> 8. 格式化器大一统 -- Spring的Formatter抽象
+            </a>
+          </li>
+        
+          <li>
+            <a href="/x2y/9705b9e8.html" title="YourBatman 2020年感悟关键词：科比、裁员、管理层、活着" target="_blank">
+            <i class="fa fa-check-square"></i> YourBatman 2020年感悟关键词：科比、裁员、管理层、活着
+            </a>
+          </li>
+        
+          <li>
+            <a href="/x2y/b6588179.html" title="7. JDK拍了拍你：字符串拼接一定记得用MessageFormat#format" target="_blank">
+            <i class="fa fa-check-square"></i> 7. JDK拍了拍你：字符串拼接一定记得用MessageFormat#format
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+
+
+      </div>
+
+      <!-- canvas粒子时钟效果  放在侧边栏最下面 -->
+      <div style="">
+  <canvas id="canvas" style="width:50%;margin-top:10px;margin-bottom: -10px;" width="820" height="250">当前浏览器不支持canvas，建议使用谷歌浏览器再试</canvas>
+</div>
+<script>
+(function(){
+    var WINDOW_WIDTH = 820;
+    var WINDOW_HEIGHT = 250;
+    var RADIUS = 7; //球半径
+    var NUMBER_GAP = 10; //数字之间的间隙
+    var u=0.65; //碰撞能量损耗系数
+    var context; //Canvas绘制上下文
+    var balls = []; //存储彩色的小球
+    const colors = ["#33B5E5","#0099CC","#AA66CC","#9933CC","#99CC00","#669900","#FFBB33","#FF8800","#FF4444","#CC0000"]; //彩色小球的颜色
+    var currentNums = []; //屏幕显示的8个字符
+    var digit =
+        [
+            [
+                [0,0,1,1,1,0,0],
+                [0,1,1,0,1,1,0],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [0,1,1,0,1,1,0],
+                [0,0,1,1,1,0,0]
+            ],//0
+            [
+                [0,0,0,1,1,0,0],
+                [0,1,1,1,1,0,0],
+                [0,0,0,1,1,0,0],
+                [0,0,0,1,1,0,0],
+                [0,0,0,1,1,0,0],
+                [0,0,0,1,1,0,0],
+                [0,0,0,1,1,0,0],
+                [0,0,0,1,1,0,0],
+                [0,0,0,1,1,0,0],
+                [1,1,1,1,1,1,1]
+            ],//1
+            [
+                [0,1,1,1,1,1,0],
+                [1,1,0,0,0,1,1],
+                [0,0,0,0,0,1,1],
+                [0,0,0,0,1,1,0],
+                [0,0,0,1,1,0,0],
+                [0,0,1,1,0,0,0],
+                [0,1,1,0,0,0,0],
+                [1,1,0,0,0,0,0],
+                [1,1,0,0,0,1,1],
+                [1,1,1,1,1,1,1]
+            ],//2
+            [
+                [1,1,1,1,1,1,1],
+                [0,0,0,0,0,1,1],
+                [0,0,0,0,1,1,0],
+                [0,0,0,1,1,0,0],
+                [0,0,1,1,1,0,0],
+                [0,0,0,0,1,1,0],
+                [0,0,0,0,0,1,1],
+                [0,0,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [0,1,1,1,1,1,0]
+            ],//3
+            [
+                [0,0,0,0,1,1,0],
+                [0,0,0,1,1,1,0],
+                [0,0,1,1,1,1,0],
+                [0,1,1,0,1,1,0],
+                [1,1,0,0,1,1,0],
+                [1,1,1,1,1,1,1],
+                [0,0,0,0,1,1,0],
+                [0,0,0,0,1,1,0],
+                [0,0,0,0,1,1,0],
+                [0,0,0,1,1,1,1]
+            ],//4
+            [
+                [1,1,1,1,1,1,1],
+                [1,1,0,0,0,0,0],
+                [1,1,0,0,0,0,0],
+                [1,1,1,1,1,1,0],
+                [0,0,0,0,0,1,1],
+                [0,0,0,0,0,1,1],
+                [0,0,0,0,0,1,1],
+                [0,0,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [0,1,1,1,1,1,0]
+            ],//5
+            [
+                [0,0,0,0,1,1,0],
+                [0,0,1,1,0,0,0],
+                [0,1,1,0,0,0,0],
+                [1,1,0,0,0,0,0],
+                [1,1,0,1,1,1,0],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [0,1,1,1,1,1,0]
+            ],//6
+            [
+                [1,1,1,1,1,1,1],
+                [1,1,0,0,0,1,1],
+                [0,0,0,0,1,1,0],
+                [0,0,0,0,1,1,0],
+                [0,0,0,1,1,0,0],
+                [0,0,0,1,1,0,0],
+                [0,0,1,1,0,0,0],
+                [0,0,1,1,0,0,0],
+                [0,0,1,1,0,0,0],
+                [0,0,1,1,0,0,0]
+            ],//7
+            [
+                [0,1,1,1,1,1,0],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [0,1,1,1,1,1,0],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [0,1,1,1,1,1,0]
+            ],//8
+            [
+                [0,1,1,1,1,1,0],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [0,1,1,1,0,1,1],
+                [0,0,0,0,0,1,1],
+                [0,0,0,0,0,1,1],
+                [0,0,0,0,1,1,0],
+                [0,0,0,1,1,0,0],
+                [0,1,1,0,0,0,0]
+            ],//9
+            [
+                [0,0,0,0],
+                [0,0,0,0],
+                [0,1,1,0],
+                [0,1,1,0],
+                [0,0,0,0],
+                [0,0,0,0],
+                [0,1,1,0],
+                [0,1,1,0],
+                [0,0,0,0],
+                [0,0,0,0]
+            ]//:
+        ];
+
+    function drawDatetime(cxt){
+        var nums = [];
+
+        context.fillStyle="#005eac"
+        var date = new Date();
+        var offsetX = 70, offsetY = 30;
+        var hours = date.getHours();
+        var num1 = Math.floor(hours/10);
+        var num2 = hours%10;
+        nums.push({num: num1});
+        nums.push({num: num2});
+        nums.push({num: 10}); //冒号
+        var minutes = date.getMinutes();
+        var num1 = Math.floor(minutes/10);
+        var num2 = minutes%10;
+        nums.push({num: num1});
+        nums.push({num: num2});
+        nums.push({num: 10}); //冒号
+        var seconds = date.getSeconds();
+        var num1 = Math.floor(seconds/10);
+        var num2 = seconds%10;
+        nums.push({num: num1});
+        nums.push({num: num2});
+
+        for(var x = 0;x<nums.length;x++){
+            nums[x].offsetX = offsetX;
+            offsetX = drawSingleNumber(offsetX,offsetY, nums[x].num,cxt);
+            //两个数字连一块，应该间隔一些距离
+            if(x<nums.length-1){
+                if((nums[x].num!=10) &&(nums[x+1].num!=10)){
+                    offsetX+=NUMBER_GAP;
+                }
+            }
+        }
+
+        //说明这是初始化
+        if(currentNums.length ==0){
+            currentNums = nums;
+        }else{
+            //进行比较
+            for(var index = 0;index<currentNums.length;index++){
+                if(currentNums[index].num!=nums[index].num){
+                    //不一样时，添加彩色小球
+                    addBalls(nums[index]);
+                    currentNums[index].num=nums[index].num;
+                }
+            }
+        }
+        renderBalls(cxt);
+        updateBalls();
+
+        return date;
+    }
+
+    function addBalls (item) {
+        var num = item.num;
+        var numMatrix = digit[num];
+        for(var y = 0;y<numMatrix.length;y++){
+            for(var x = 0;x<numMatrix[y].length;x++){
+                if(numMatrix[y][x]==1){
+                    var ball={
+                        offsetX:item.offsetX+RADIUS+RADIUS*2*x,
+                        offsetY:30+RADIUS+RADIUS*2*y,
+                        color:colors[Math.floor(Math.random()*colors.length)],
+                        g:1.5+Math.random(),
+                        vx:Math.pow(-1, Math.ceil(Math.random()*10))*4+Math.random(),
+                        vy:-5
+                    }
+                    balls.push(ball);
+                }
+            }
+        }
+    }
+
+    function renderBalls(cxt){
+        for(var index = 0;index<balls.length;index++){
+            cxt.beginPath();
+            cxt.fillStyle=balls[index].color;
+            cxt.arc(balls[index].offsetX, balls[index].offsetY, RADIUS, 0, 2*Math.PI);
+            cxt.fill();
+        }
+    }
+
+    function updateBalls () {
+        var i =0;
+        for(var index = 0;index<balls.length;index++){
+            var ball = balls[index];
+            ball.offsetX += ball.vx;
+            ball.offsetY += ball.vy;
+            ball.vy+=ball.g;
+            if(ball.offsetY > (WINDOW_HEIGHT-RADIUS)){
+                ball.offsetY= WINDOW_HEIGHT-RADIUS;
+                ball.vy=-ball.vy*u;
+            }
+            if(ball.offsetX>RADIUS&&ball.offsetX<(WINDOW_WIDTH-RADIUS)){
+
+                balls[i]=balls[index];
+                i++;
+            }
+        }
+        //去除出边界的球
+        for(;i<balls.length;i++){
+            balls.pop();
+        }
+    }
+    function drawSingleNumber(offsetX, offsetY, num, cxt){
+        var numMatrix = digit[num];
+        for(var y = 0;y<numMatrix.length;y++){
+            for(var x = 0;x<numMatrix[y].length;x++){
+                if(numMatrix[y][x]==1){
+                    cxt.beginPath();
+                    cxt.arc(offsetX+RADIUS+RADIUS*2*x,offsetY+RADIUS+RADIUS*2*y,RADIUS,0,2*Math.PI);
+                    cxt.fill();
+                }
+            }
+        }
+        cxt.beginPath();
+        offsetX += numMatrix[0].length*RADIUS*2;
+        return offsetX;
+    }
+
+    var canvas = document.getElementById("canvas");
+    canvas.width=WINDOW_WIDTH;
+    canvas.height=WINDOW_HEIGHT;
+    context = canvas.getContext("2d");
+
+    //记录当前绘制的时刻
+    var currentDate = new Date();
+
+    setInterval(function(){
+        //清空整个Canvas，重新绘制内容
+        context.clearRect(0, 0, context.canvas.width, context.canvas.height);
+        drawDatetime(context);
+    }, 50)
+})();
+</script>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+
+     <!-- 此处为新加的代码 -->
+     
+<script src="https://my.openwrite.cn/js/readmore.js" type="text/javascript"></script>
+<script>
+    const btw = new BTWPlugin();
+    btw.init({
+        id: 'yourbatman',
+        blogId: '10059-1591593090091-727',
+        name: 'BAT的乌托邦',
+        qrcode: 'https://img-blog.csdnimg.cn/20200511100304545.jpg',
+        keyword: 'vip',
+    });
+</script>
+
+
+     <script src="https://cdn.staticfile.org/jquery/3.1.1/jquery.min.js"></script>
+<script>
+    //暂时储存文章中的内容
+    var div = $('.post-body');
+    //暂时储存目录的内容
+    var toc=$('.post-toc')
+    function password() {
+        if(''){
+            //将文章内容删除
+            div.remove();
+            //将目录删除
+            toc.remove();
+            //将文章删除后，向原来文章的地方添加，应该出现的提示用户输入密码的样式
+            //下面这里的第一个用textarea是因为如果在手机端的时候只能显示一部分文字，
+            //只是拓展:input里面的字只能显示一行，不会自动换行，目前上网搜索没有发现好的办法，所以用了textarea，右下角的小三角通过resize:none 去掉。
+            $('.post-header').after(
+            '<span class="description" value="请输入密码，然后按 Enter 键阅读全文" style="font-style: oblique;font-weight: bold;border: none;display: block;'+
+            'width: 60%;margin: 0 auto;text-align: center;outline: none;margin-bottom: 40px;resize:none; margin-top: 20px;">'+
+            '<i class="fa fa-heartbeat" id="myheartbeat"></i>'+
+            '请输入密码，然后按 Enter 键阅读全文' +
+            '<i class="fa fa-heartbeat" id="myheartbeat"></i>'+
+            '</span>' +
+            '<div class="qiang" style="height: 100px;width: 60%;margin:0 auto">' +
+            '<input class="password"  type="password" autocomplete="new-password" autofocus="autofocus" value="" style="border-radius: 5px;height: 30px;border: none;display: block;border-bottom: 1px solid #ccc;' +
+            'margin: 0 auto;outline: none;width:95%"/>' +
+            '</div>')
+            //绑定点击事件，如果是点击的.password 这个div就改变样式，如果是document中除了div之外的其他任何元素，就变回原来的样式。
+            document.onclick = function (event) {
+                var e = event || window.event;
+                var elem = e.srcElement || e.target;
+
+                while (elem) {
+                    if (elem != document) {
+                        if (elem.className == "password") {
+                            //$(".password").animate({paddingTop:"30px",width:"100%",borderWidth:"2px"},300)
+                            return;
+                        }
+                        elem = elem.parentNode;
+                    } else {
+                        //$(".password").animate({paddingTop:"0px",width:"95%",borderWidth:"1px"},300)
+                        return;
+                    }
+                }
+            }
+            //绑定enter键按下后离开的事件
+            $(document).keyup(function(event){
+                if(event.keyCode ==13&&$('.password').length>0){
+                    //console.log($('.password').val())
+                    //console.log('')
+                    if ($('.password').val() == '') {
+                        //恢复文章内容
+                        (div).appendTo($(".post-header"))
+                        //恢复目录
+                        toc.appendTo($(".sidebar-inner"))
+                        //删除本页面的输入密码组件
+                        $(".description").remove();
+                        $(".qiang").remove();
+                        $(".password").remove();
+
+                        //重新处理pjax事件,如果没有加pjax的从下面这行起到下面的else之间的代码需要去掉。
+                        //图片懒加载，没有加入此功能的这个函数需要去掉
+                        $('img').lazyload({
+                            placeholder: '/images/loading.gif',
+                            effect: 'fadeIn',
+                            threshold : 100,
+                            failure_limit : 20,
+                            skip_invisible : false
+                        });
+                        //pjax后出现文章不显示，没有pjax的下面四行需要去掉
+                        $(".post-block").css({opacity:1});
+                        $(".post-header").css({opacity:1});
+                        $(".post-body").css({opacity:1});
+                        $(".pagination").css({opacity:1});
+                    }else {
+                        alert("密码不对，请重新输入~")
+                    }
+                }
+                //将document的keyup移除，防止在pjax的情况下会重复绑定事件
+            });
+        }
+    }
+    password();
+</script>
+
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        <!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<span id="times" style="margin-right: 10px;">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("05/03/2020 12:00:00");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "小破站已苟活"+dnum+"天";
+        document.getElementById("times").innerHTML = hnum + "小时" + mnum + "分" + snum + "秒";
+    }
+    setInterval("createtime()",250);
+
+    // 自定义邮箱审核规则（目前校验：邮箱必填，且格式必须正确 昵称也必须填写）
+    document.body.addEventListener('click', function(e) {
+        if (e.target.classList.contains('vsubmit')) {
+            const email = document.querySelector('input[type=email]');
+            const nick = document.querySelector('input[name=nick]');
+            const reg = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+            if (!email.value || !nick.value || !reg.test(email.value)) {
+                const str = `<div class="valert text-center"><div class="vtext">请填写正确的昵称和邮箱！</div></div>`;
+                const vmark = document.querySelector('.vmark');
+                vmark.innerHTML = str;
+                vmark.style.display = 'block';
+                setTimeout(function() {
+                    vmark.style.display = 'none';
+                    vmark.innerHTML = '';
+                }, 2500);
+            }
+        }
+    })
+</script>
+  <span class="beian"><a href="http://www.beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备12009483号 </a>
+  </span>
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">A哥(YourBatman)</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">本站总字数：</span>
+    <span title="本站总字数">446k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">本站总阅读时长 &asymp;</span>
+    <span title="本站总阅读时长">6:45</span>
+</div>
+  <div class="addthis_inline_share_toolbox">
+    <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5eb7b6f6b64d54f6" async="async"></script>
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        承蒙 <span id="busuanzi_value_site_uv"></span> 位朋友
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        共造访本站 <span id="busuanzi_value_site_pv"></span> 次
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+  <script>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id    : 25645,
+      el    : 'wpac-rating',
+      color : 'fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+  <script src="//code.tidio.co/imnhfpyrju0tgipwdxke6moou6p9kbdu.js"></script>
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 1, // 打开或关闭导航空格和选项卡 1:打开 0:关闭
+    scrollbar: 1, // 打开/关闭滚动条
+    toolbar  : 1, // 打开/关闭工具栏
+    statusbar: 1, // 打开或关闭状态栏
+    pagemode : 'thumbs', // 侧边栏状态，显示书签或缩略图 接受值：none，thumbs，bookmarks，attachments
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+
+  
+
+  
+
+
+  <!-- 自定义的js效果 -->
+  <script type="text/javascript">
+    (function() {
+var a_idx = 0;
+ 
+        $("body").click(function(e) {
+            //var a = new Array(
+            //    "富强", "民主", "文明", "和谐",
+            //    "自由", "平等", "公正", "法治",
+            //    "爱国", "敬业", "诚信", "友善"
+            //    );
+            var a = new Array(
+            "耕耘","挑灯","悬梁","废寝",
+            "映雪","刺骨","囊萤","凿壁",
+            "勤奋","刻苦","打拼","砥砺");
+
+            var $i = $("<span/>").text(a[a_idx]);
+            a_idx = (a_idx + 1) % a.length;
+            var x = e.pageX,
+            y = e.pageY;
+            $i.css({
+                "z-index": 144469,
+                "top": y - 20,
+                "left": x,
+                "position": "absolute",
+                "font-weight": "bold",
+                "color": "#f00"
+            });
+            $("body").append($i);
+            $i.animate({
+                "top": y - 180,
+                "opacity": 0
+            },
+            1500,
+            function() {
+                $i.remove()
+            })
+        });
+    })();
+  </script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'GL1AoYvDSErHS8idMvn35STX-gzGzoHsz',
+      appKey     : 'flstBFF7gvWX8emTwJooV0bB',
+      placeholder: "各位道友📢📢📢：&#10;1、填写昵称和【正确邮箱号】；&#10;2、有邮箱可收到回复的邮件提醒；&#10;3、礼貌言辞，拒绝黄赌毒；",
+      avatar     : 'robohash',
+      meta       : guest,
+      pageSize   : '6' || 10,
+      visitor    : true,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

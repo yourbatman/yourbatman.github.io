@@ -1,0 +1,1547 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="baidu-site-verification" content="FdPXpeNylP">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.yourbatman.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},"motion":{"enable":false,"async":true,"transition":{"post_block":"flipBounceYIn","post_header":"flipXIn","post_body":"flipBounceXIn","coll_header":"expandIn","sidebar":"shrinkIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Spring配置类专栏研究得最深的一篇，不为别的，只为涨薪">
+<meta property="og:type" content="article">
+<meta property="og:title" content="521我发誓读完本文，再也不会担心Spring配置类问题了">
+<meta property="og:url" content="https://www.yourbatman.cn/x2y/f3b61b38.html">
+<meta property="og:site_name" content="BAT的乌托邦">
+<meta property="og:description" content="Spring配置类专栏研究得最深的一篇，不为别的，只为涨薪">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/202005200813015.png#x200">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200520082130796.png#x200">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200517162902739.png#x80">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200520104347207.png#x200">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200520173703329.png#x140">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200520174102191.png#x200">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200521075138785.png#x200">
+<meta property="article:published_time" content="2020-05-21T05:41:47.000Z">
+<meta property="article:modified_time" content="2021-04-30T13:32:41.870Z">
+<meta property="article:author" content="A哥(YourBatman)">
+<meta property="article:tag" content="BAT的乌托邦">
+<meta property="article:tag" content="A哥">
+<meta property="article:tag" content="YourBatman">
+<meta property="article:tag" content="Spring Framework">
+<meta property="article:tag" content="@Configuration">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/202005200813015.png#x200">
+
+<link rel="canonical" href="https://www.yourbatman.cn/x2y/f3b61b38.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>521我发誓读完本文，再也不会担心Spring配置类问题了 | BAT的乌托邦</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?2ad49a2290d0249428335633c45e2806";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">BAT的乌托邦</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">当大潮退去，才知道谁在裸泳</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于A哥/留言板</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">64</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>专栏<span class="badge">15</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>时间轴<span class="badge">56</span></a>
+
+  </li>
+        <li class="menu-item menu-item-top">
+
+    <a href="/top/" rel="section"><i class="fa fa-signal fa-fw"></i>热门文章</a>
+
+  </li>
+        <li class="menu-item menu-item-books">
+
+    <a href="/books/" rel="section"><i class="fa fa-book fa-fw"></i>图书馆</a>
+
+  </li>
+        <li class="menu-item menu-item-links">
+
+    <a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友情债</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="请输入关键字检索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/yourbatman" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+
+        <!~- 跳转到新站点 start... -->
+        <div style="width: 90%;margin-left: 5%;font-size: 24px;color: yellow;font-weight: bolder; margin-bottom: -20px;">
+          <marquee behavior="alternate" hspace="hexo50px" onMouseOut="this.start()" onMouseOver="this.stop()">
+            本站点已归档（不再维护），点击立即前往新站点：
+              <a href="https://yourbatman.cn" target="_self" title="前往新站点" style="color:whitesmoke;text-decoration: underline;">
+                https://yourbatman.cn
+              </a>
+          </marquee>
+        </div>
+        <!~- 跳转到新站点 end... -->
+
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  
+    <div id="yourbatman">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.yourbatman.cn/x2y/f3b61b38.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://img-blog.csdnimg.cn/20200511100304592.jpg">
+      <meta itemprop="name" content="A哥(YourBatman)">
+      <meta itemprop="description" content="我这有故事，你那有酒吗？">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BAT的乌托邦">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          521我发誓读完本文，再也不会担心Spring配置类问题了
+        </h1>
+
+        <div class="post-meta">
+          <!-- 精品文章 精华帖 -->
+          
+            <i class="fa fa-anchor" style="background: #00a8c3; padding: 2px 4px 2px 4px; color: #fff;">&nbsp;精华帖</i>
+            <span class="post-meta-divider">|</span>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-21 13:41:47" itemprop="dateCreated datePublished" datetime="2020-05-21T13:41:47+08:00">2020-05-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">收录于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Spring%E9%85%8D%E7%BD%AE%E7%B1%BB/" itemprop="url" rel="index"><span itemprop="name">Spring配置类</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/x2y/f3b61b38.html" class="post-meta-item leancloud_visitors" data-flag-title="521我发誓读完本文，再也不会担心Spring配置类问题了" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">评论数：</span>
+    
+    <a title="valine" href="/x2y/f3b61b38.html#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/x2y/f3b61b38.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+          <!-- 置顶 可以写top:true  也可以写数字top:1/2/3  顺序规则同Spring-->
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>20k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>18 分钟</span>
+            </span>
+
+          <!-- 本文作者 -->
+          <span class="post-meta-item" title="阅读时长">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-user fa-fw"></i>
+            </span>
+            <span class="post-meta-item-text">本文作者：</span>
+            <a href="/about/" itemprop="url" rel="index">
+              <span>A哥(YourBatman)</span>
+            </a>
+          </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>当大潮退去，才知道谁在裸泳。<br><strong>作者</strong>：A哥（YourBatman）<br><strong>公众号</strong>：BAT的乌托邦（ID：BAT-utopia）<br><strong>文末是否有彩蛋</strong>：有</p>
+</blockquote>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>各位小伙伴大家好，我是A哥。本文对Spring <code>@Configuration</code>配置类继续进阶，虽然有点烧脑，但目的只有一个：为拿高薪备好弹药。如果说上篇文章已经脑力有点“不适”了，那这里得先给你个下马威：本篇文章内容将更加的让你“感觉不适”。</p>
+<blockquote>
+<p>读本文之前，为确保连贯性，建议你移步先阅读上篇文章内容，直达电梯：<a href="https://mp.weixin.qq.com/s/qKenyoydYm4q2yPnGSdMZw" target="_blank" rel="noopener">你自我介绍说很懂Spring配置类，那你怎么解释这个现象？</a></p>
+</blockquote>
+<p>为什么有些时候我会建议先阅读上篇文章，这确实是无奈之举。技术的内容一般都具有很强相关性，它是需要有Context上下文支撑的，<strong>所以花几分钟先了解相关内容效果更佳</strong>，磨刀不误砍柴工的道理大家都懂。同时呢，这也是写深度分析类的技术文章的尴尬之处：吃力反而不讨好，需要坚持。<br><img data-src="https://img-blog.csdnimg.cn/202005200813015.png#x200" alt=""></p>
+<hr>
+<h2 id="版本约定"><a href="#版本约定" class="headerlink" title="版本约定"></a>版本约定</h2><p>本文内容若没做特殊说明，均基于以下版本：</p>
+<ul>
+<li>JDK：<code>1.8</code></li>
+<li>Spring Framework：<code>5.2.2.RELEASE</code></li>
+</ul>
+<hr>
+<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><p><a href="https://mp.weixin.qq.com/s/qKenyoydYm4q2yPnGSdMZw" target="_blank" rel="noopener">上篇文章</a>介绍了代理对象两个拦截器其中的前者，即<code>BeanFactoryAwareMethodInterceptor</code>，它会拦截<code>setBeanFactory()</code>方法从而完成给代理类指定属性赋值。通过第一个拦截器的讲解，你能够成功“忽悠”很多面试官了，但仍旧不能够解释我们最常使用中的这个疑惑：<strong>为何通过调用@Bean方法最终指向的仍旧是同一个Bean呢？</strong></p>
+<p>带着这个疑问，开始本文的陈诉。请系好安全带，准备发车了…<br><img data-src="https://img-blog.csdnimg.cn/20200520082130796.png#x200" alt=""></p>
+<hr>
+<h2 id="Spring配置类的使用误区"><a href="#Spring配置类的使用误区" class="headerlink" title="Spring配置类的使用误区"></a>Spring配置类的使用误区</h2><p>根据不同的配置方式，展示不同情况。从Lite模式的使用<strong>产生误区</strong>，到使用Full模式解决问题，最后引出解释为何有此效果的原因分析/源码解析。</p>
+<hr>
+<h3 id="Lite模式：错误姿势"><a href="#Lite模式：错误姿势" class="headerlink" title="Lite模式：错误姿势"></a>Lite模式：错误姿势</h3><p>配置类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AppConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Son <span class="title">son</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Son son = <span class="keyword">new</span> Son();</span><br><span class="line">        System.out.println(<span class="string">"son created..."</span> + son.hashCode());</span><br><span class="line">        <span class="keyword">return</span> son;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Parent <span class="title">parent</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Son son = son();</span><br><span class="line">        System.out.println(<span class="string">"parent created...持有的Son是："</span> + son.hashCode());</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Parent(son);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    ApplicationContext context = <span class="keyword">new</span> AnnotationConfigApplicationContext(AppConfig<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line"></span><br><span class="line">    AppConfig appConfig = context.getBean(AppConfig<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">    System.out.println(appConfig);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// bean情况</span></span><br><span class="line">    Son son = context.getBean(Son<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">    Parent parent = context.getBean(Parent<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line"></span><br><span class="line">    System.out.println(<span class="string">"容器内的Son实例："</span> + son.hashCode());</span><br><span class="line">    System.out.println(<span class="string">"容器内Person持有的Son实例："</span> + parent.getSon().hashCode());</span><br><span class="line">    System.out.println(parent.getSon() == son);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">son created...<span class="number">624271064</span></span><br><span class="line">son created...<span class="number">564742142</span></span><br><span class="line">parent created...持有的Son是：<span class="number">564742142</span></span><br><span class="line">com.yourbatman.fullliteconfig.config.AppConfig@<span class="number">1</span>a38c59b</span><br><span class="line">容器内的Son实例：<span class="number">624271064</span></span><br><span class="line">容器内Person持有的Son实例：<span class="number">564742142</span></span><br><span class="line"><span class="keyword">false</span></span><br></pre></td></tr></table></figure>
+<p>结果分析：</p>
+<ul>
+<li>Son实例被<strong>创建了2次</strong>。很明显这两个<strong>不是同一个</strong>实例<ul>
+<li>第一次是由Spring创建并放进容器里（<code>624271064</code>这个）</li>
+<li>第二次是由构造parent时创建，只放进了parent里，并没放进容器里（<code>564742142</code>这个）</li>
+</ul>
+</li>
+</ul>
+<p>这样的话，<strong>就出问题了</strong>。问题表现在这两个方面：</p>
+<ol>
+<li>Son对象被创建了两次，<strong>单例模式被打破</strong></li>
+<li>对Parent实例而言，它依赖的Son不再是IoC容器内的那个Bean，而是一个非常普通的POJO对象而已。所以这个Son对象将不会享有Spring带来的任何“好处”，这在实际场景中一般都是会有问题的</li>
+</ol>
+<p>这种情况在生产上是<strong>一定需要避免</strong>，那怎么破呢？下面给出Lite模式下使用的正确姿势。</p>
+<hr>
+<h3 id="Lite模式：正确姿势"><a href="#Lite模式：正确姿势" class="headerlink" title="Lite模式：正确姿势"></a>Lite模式：正确姿势</h3><p>其实这个问题，现在这么智能的IDE（如IDEA）已经能教你怎么做了：<br><img data-src="https://img-blog.csdnimg.cn/20200517162902739.png#x80" alt=""><br>按照“指示”，可以使用<strong>依赖注入</strong>的方式代替从而避免这种问题，如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// @Bean</span></span><br><span class="line"><span class="comment">// public Parent parent() &#123;</span></span><br><span class="line"><span class="comment">//     Son son = son();</span></span><br><span class="line"><span class="comment">//     System.out.println("parent created...持有的Son是：" + son.hashCode());</span></span><br><span class="line"><span class="comment">//     return new Parent(son);</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Parent <span class="title">parent</span><span class="params">(Son son)</span></span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"parent created...持有的Son是："</span> + son.hashCode());</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Parent(son);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>再次运行程序，结果为：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">son created...<span class="number">624271064</span></span><br><span class="line">parent created...持有的Son是：<span class="number">624271064</span></span><br><span class="line">com.yourbatman.fullliteconfig.config.AppConfig@<span class="number">667</span>a738</span><br><span class="line">容器内的Son实例：<span class="number">624271064</span></span><br><span class="line">容器内Person持有的Son实例：<span class="number">624271064</span></span><br><span class="line"><span class="keyword">true</span></span><br></pre></td></tr></table></figure>
+<p>bingo，<strong>完美解决了问题</strong>。如果你坚持使用Lite模式，那么请注意它的优缺点哦（Full模式和Lite模式的优缺点见<a href="https://mp.weixin.qq.com/s/rXy9T3VgWvdl6Kje1mwCZA" target="_blank" rel="noopener">这篇文章</a>）。</p>
+<p>没有仔细看的同学可能会问：我明明就是按照第一种方式写的，也正常work没问题呀。说你是不细心吧还真是，不信你再回去瞅瞅对比对比。如果你用第一种方式并且能够“正常work”，那请你查查类头上是不是标注有<code>@Configuration</code>注解？<br><img data-src="https://img-blog.csdnimg.cn/20200520104347207.png#x200" alt=""></p>
+<hr>
+<h3 id="Full模式："><a href="#Full模式：" class="headerlink" title="Full模式："></a>Full模式：</h3><p>Full模式是容错性最强的一种方式，你乱造都行，没啥顾虑。</p>
+<blockquote>
+<p>当然喽，方法不能是private/final。但一般情况下谁会在配置里final掉一个方法呢？你说对吧~</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AppConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Son <span class="title">son</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Son son = <span class="keyword">new</span> Son();</span><br><span class="line">        System.out.println(<span class="string">"son created..."</span> + son.hashCode());</span><br><span class="line">        <span class="keyword">return</span> son;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Parent <span class="title">parent</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Son son = son();</span><br><span class="line">        System.out.println(<span class="string">"parent created...持有的Son是："</span> + son.hashCode());</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Parent(son);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，结果输出：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">son created...<span class="number">1797712197</span></span><br><span class="line">parent created...持有的Son是：<span class="number">1797712197</span></span><br><span class="line">com.yourbatman.fullliteconfig.config.AppConfig$$EnhancerBySpringCGLIB$$<span class="number">8</span>ef51461<span class="meta">@be</span>64738</span><br><span class="line">容器内的Son实例：<span class="number">1797712197</span></span><br><span class="line">容器内Person持有的Son实例：<span class="number">1797712197</span></span><br><span class="line"><span class="keyword">true</span></span><br></pre></td></tr></table></figure>
+<p><strong>结果是完美的</strong>。它能够保证你通过调用标注有@Bean的方法得到的是IoC容器里面的实例对象，而非重新创建一个。相比较于Lite模式，它还有另外一个区别：它会为配置类生成一个<code>CGLIB</code>的代理子类对象放进容器，而Lite模式放进容器的是原生对象。</p>
+<p><strong>凡事皆有代价，一切皆在取舍</strong>。原生的才是效率最高的，是对Cloud Native最为友好的方式。但在实际“推荐使用”上，<strong>业务端开发一般只会使用Full模式</strong>，毕竟业务开发的同学水平是残参差不齐的，容错性就显得至关重要了。</p>
+<blockquote>
+<p>如果你是容器开发者、中间件开发者…推荐使用Lite模式配置，为容器化、Cloud Native做好准备嘛~</p>
+</blockquote>
+<p>Full模式既然是面向使用侧为常用的方式，那么接下来就趴一趴Spring到底是施了什么“魔法”，让调用@Bean方法竟然可以不进入方法体内而指向同一个实例。</p>
+<hr>
+<hr>
+<h2 id="BeanMethodInterceptor拦截器"><a href="#BeanMethodInterceptor拦截器" class="headerlink" title="BeanMethodInterceptor拦截器"></a>BeanMethodInterceptor拦截器</h2><p>终于到了今天的主菜。关于前面的流程分析本文就一步跳过，单刀直入分析<code>BeanMethodInterceptor</code>这个拦截器，也也就是所谓的两个拦截器的<strong>后者</strong>。</p>
+<blockquote>
+<p>温馨提示：亲务必确保已经了解过了上篇文章的流程分析哈，不然下面内容很容易造成你<code>脑力不适</code>的</p>
+</blockquote>
+<p>相较于上个拦截器，这个拦截器不可为不复杂。官方解释它的作用为：拦截任何标注有<code>@Bean</code>注解的方法的<strong>调用</strong>，以确保正确处理Bean语义，例如<strong>作用域</strong>（请别忽略它）和AOP代理。</p>
+<p>复杂归复杂，但没啥好怕的，一步一步来呗。同样的，我会按如下两步去了解它：<strong>执行时机</strong> + <strong>做了何事</strong>。</p>
+<hr>
+<h3 id="执行时机"><a href="#执行时机" class="headerlink" title="执行时机"></a>执行时机</h3><p>废话不多说，直接结合源码解释。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">BeanMethodInterceptor：</span><br><span class="line"></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isMatch</span><span class="params">(Method candidateMethod)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> (candidateMethod.getDeclaringClass() != Object<span class="class">.<span class="keyword">class</span> &amp;&amp;</span></span><br><span class="line"><span class="class">			!<span class="title">BeanFactoryAwareMethodInterceptor</span>.<span class="title">isSetBeanFactory</span>(<span class="title">candidateMethod</span>) &amp;&amp;</span></span><br><span class="line"><span class="class">			<span class="title">BeanAnnotationHelper</span>.<span class="title">isBeanAnnotated</span>(<span class="title">candidateMethod</span>))</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>三行代码，三个条件：</p>
+<ol>
+<li>该方法不能是Object的方法（即使你Object的方法标注了@Bean，我也不认）</li>
+<li>不能是<code>setBeanFactory()</code>方法。这很容易理解，它交给上个拦截器搞定即可</li>
+<li><strong>方法必须标注标注有@Bean注解</strong></li>
+</ol>
+<p>简而言之，<strong>标注有@Bean注解方法<code>执行时</code>会被拦截</strong>。</p>
+<p>所以下面例子中的son()和parent()这两个，<strong>以及parent()里面调用的son()方法的执行</strong>它都会拦截（一共拦截3次）~</p>
+<blockquote>
+<p>小细节：方法只要是个Method即可，<strong>无论是static方法</strong>还是普通方法，都会“参与”此判断逻辑哦</p>
+</blockquote>
+<hr>
+<h3 id="做了何事"><a href="#做了何事" class="headerlink" title="做了何事"></a>做了何事</h3><p>这里是具体拦截逻辑，会比第一个拦截器复杂很多。源码不算非常的多，但牵扯到的东西还真不少，比如AOP、比如Scope、比如Bean的创建等等，<strong>理解起来还蛮费劲的</strong>。</p>
+<p>本处以拦截到<code>parent()</code>方法的执行为例，结合源码进行跟踪讲解：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line">BeanMethodInterceptor：</span><br><span class="line"></span><br><span class="line"><span class="comment">// enhancedConfigInstance：被拦截的对象实例，也是代理对象</span></span><br><span class="line"><span class="comment">// beanMethod：parent()方法</span></span><br><span class="line"><span class="comment">// beanMethodArgs：空</span></span><br><span class="line"><span class="comment">// cglibMethodProxy：代理。用于调用其invoke/invokeSuper()来执行对应的方法</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="meta">@Nullable</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">intercept</span><span class="params">(Object enhancedConfigInstance, </span></span></span><br><span class="line"><span class="function"><span class="params">	Method beanMethod, Object[] beanMethodArgs, MethodProxy cglibMethodProxy)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 通过反射，获取到Bean工厂。也就是$$beanFactory这个属性的值~</span></span><br><span class="line">	ConfigurableBeanFactory beanFactory = getBeanFactory(enhancedConfigInstance);</span><br><span class="line">	<span class="comment">// 拿到Bean的名称</span></span><br><span class="line">	String beanName = BeanAnnotationHelper.determineBeanNameFor(beanMethod);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 判断这个方法是否是Scoped代理对象 很明显本利里是没有标注的 暂先略过</span></span><br><span class="line">	<span class="comment">// 简答的说：parent()方法头上是否标注有@Scoped注解~~~</span></span><br><span class="line">	<span class="keyword">if</span> (BeanAnnotationHelper.isScopedProxy(beanMethod)) &#123;</span><br><span class="line">		String scopedBeanName = ScopedProxyCreator.getTargetBeanName(beanName);</span><br><span class="line">		<span class="keyword">if</span> (beanFactory.isCurrentlyInCreation(scopedBeanName)) &#123;</span><br><span class="line">			beanName = scopedBeanName;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// ========下面要处理bean间方法引用的情况了========</span></span><br><span class="line">	<span class="comment">// 首先：检查所请求的Bean是否是FactoryBean。也就是bean名称为`&amp;parent`的Bean是否存在</span></span><br><span class="line">	<span class="comment">// 如果是的话，就创建一个代理子类，拦截它的getObject()方法以返回容器里的实例</span></span><br><span class="line">	<span class="comment">// 这样做保证了方法返回一个FactoryBean和@Bean的语义是效果一样的，确保了不会重复创建多个Bean</span></span><br><span class="line">	<span class="keyword">if</span> (factoryContainsBean(beanFactory, BeanFactory.FACTORY_BEAN_PREFIX + beanName) &amp;&amp;</span><br><span class="line">			factoryContainsBean(beanFactory, beanName)) &#123;</span><br><span class="line">		</span><br><span class="line">		<span class="comment">// 先得到这个工厂Bean</span></span><br><span class="line">		Object factoryBean = beanFactory.getBean(BeanFactory.FACTORY_BEAN_PREFIX + beanName);</span><br><span class="line">		<span class="keyword">if</span> (factoryBean <span class="keyword">instanceof</span> ScopedProxyFactoryBean) &#123;</span><br><span class="line">			<span class="comment">// Scoped proxy factory beans are a special case and should not be further proxied</span></span><br><span class="line">			<span class="comment">// 如果工厂Bean已经是一个Scope代理Bean，则不需要再增强</span></span><br><span class="line">			<span class="comment">// 因为它已经能够满足FactoryBean延迟初始化Bean了~</span></span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="comment">// 继续增强</span></span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> enhanceFactoryBean(factoryBean, beanMethod.getReturnType(), beanFactory, beanName);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="comment">// 检查给定的方法是否与当前调用的容器相对应工厂方法。</span></span><br><span class="line">	<span class="comment">// 比较方法名称和参数列表来确定是否是同一个方法</span></span><br><span class="line">	<span class="comment">// 怎么理解这句话，参照下面详解吧</span></span><br><span class="line">	<span class="keyword">if</span> (isCurrentlyInvokedFactoryMethod(beanMethod)) &#123;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 这是个小细节：若你@Bean返回的是BeanFactoryPostProcessor类型</span></span><br><span class="line">		<span class="comment">// 请你使用static静态方法，否则会打印这句日志的~~~~</span></span><br><span class="line">		<span class="comment">// 因为如果是非静态方法，部分后置处理失效处理不到你，可能对你程序有影像</span></span><br><span class="line">		<span class="comment">// 当然也可能没影响，所以官方也只是建议而已~~~</span></span><br><span class="line">		<span class="keyword">if</span> (logger.isInfoEnabled() &amp;&amp;</span><br><span class="line">				BeanFactoryPostProcessor<span class="class">.<span class="keyword">class</span>.<span class="title">isAssignableFrom</span>(<span class="title">beanMethod</span>.<span class="title">getReturnType</span>())) </span>&#123;</span><br><span class="line">			... <span class="comment">// 输出info日志</span></span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 这表示：当前parent()方法，就是这个被拦截的方法，那就没啥好说的 </span></span><br><span class="line">		<span class="comment">// 相当于在代理代理类里执行了super(xxx);</span></span><br><span class="line">		<span class="comment">// 但是，但是，但是，此时的this依旧是代理类</span></span><br><span class="line">		<span class="keyword">return</span> cglibMethodProxy.invokeSuper(enhancedConfigInstance, beanMethodArgs);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// parent()方法里调用的son()方法会交给这里来执行</span></span><br><span class="line">	<span class="keyword">return</span> resolveBeanReference(beanMethod, beanMethodArgs, beanFactory, beanName);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>步骤总结：</p>
+<ol>
+<li>拿到当前BeanFactory工厂对象。该工厂对象通过第一个拦截器<code>BeanFactoryAwareMethodInterceptor</code>已经完成了设值</li>
+<li>确定Bean名称。<strong>默认是方法名</strong>，若通过@Bean指定了以指定的为准，若指定了多个值以第一个值为准，后面的值当作Bean的alias别名</li>
+<li>判断当前方法(以parent()方法为例)是否是个Scope域代理。也就是方法上是否标注有<code>@Scope</code>注解<ol>
+<li>若是域代理类，那旧以它的方式来处理喽。beanName的变化变化为<code>scopedTarget.parent</code></li>
+<li>判断<code>scopedTarget.parent</code>这个Bean是否正在创建中…若是的，那就把当前beanName替换为<code>scopedTarget.parent</code>，以后就关注这个名称的Bean了~</li>
+<li>试想一下，如果不来这个判断的话，那最终可能的结果是：容器内一个名为parent的Bean，一个名字为<code>scopedTarget.parent</code>的Bean，那岂不又出问题了麽~</li>
+</ol>
+</li>
+<li>判断请求的Bean是否是个FactoryBean工厂Bean。<ol>
+<li>若是工厂Bean，那么就需要enhance增强这个Bean，以拦截它的getObject()方法</li>
+<li>拦截<code>getObject()</code>的做法是：当执行<code>getObject()</code>方法时转为 -&gt; <code>getBean()</code>方法</li>
+<li>为什么需要这么做：是为了确保FactoryBean产生的实例是通过getBean()容器去获取的，而非又自己创建一个出来了</li>
+<li><strong>这种case先打个❓，下面会结合代码示例加以说明</strong></li>
+</ol>
+</li>
+<li>判断这个beanMethod是否是<strong>当前正在被调用的工厂方法</strong>。<ol>
+<li>若是正在创建的方法，那就好说了，直接<code>super(xxx)</code>执行父类方法体完事~</li>
+<li>若不是正在创建的方法，那就需要代理喽，以确保实际调用的仍旧是实际调用<code>getBean</code>方法而保证是同一个Bean</li>
+<li><strong>这种case先打个❓，下面会结合代码示例加以说明</strong>。因为这个case是最常见的主线case，所以先把它搞定</li>
+</ol>
+</li>
+</ol>
+<p>这是该拦截器的执行步骤，留下两个打❓下面我来一一解释（按照倒序）。</p>
+<hr>
+<h4 id="多次调用-Bean方法为何不会产生新实例？"><a href="#多次调用-Bean方法为何不会产生新实例？" class="headerlink" title="多次调用@Bean方法为何不会产生新实例？"></a>多次调用@Bean方法为何不会产生新实例？</h4><p><strong>这是最为常见的case</strong>。示例代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AppConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Son <span class="title">son</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Son son = <span class="keyword">new</span> Son();</span><br><span class="line">        System.out.println(<span class="string">"son created..."</span> + son.hashCode());</span><br><span class="line">        <span class="keyword">return</span> son;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Parent <span class="title">parent</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        notBeanMethod();</span><br><span class="line">        Son son = son();</span><br><span class="line">        System.out.println(<span class="string">"parent created...持有的Son是："</span> + son.hashCode());</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Parent(son);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">notBeanMethod</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"notBeanMethod invoked by 【"</span> + <span class="keyword">this</span> + <span class="string">"】"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>本配置类一共有<strong>三个</strong>方法：</p>
+<ul>
+<li><strong>son()</strong>：标注有@Bean。</li>
+</ul>
+<p><img data-src="https://img-blog.csdnimg.cn/20200520173703329.png#x140" alt=""><br>因此它最终交给<code>cglibMethodProxy.invokeSuper(enhancedConfigInstance, beanMethodArgs);</code>方法直接执行父类（也就是目标类）的方法体：<br><img data-src="https://img-blog.csdnimg.cn/20200520174102191.png#x200" alt=""><br>值得注意的是：<strong>此时所处的对象仍旧是代理对象内</strong>，这个方法体只是通过代理类调用了<code>super(xxx)</code>方法进来的而已嘛~</p>
+<ul>
+<li><strong>parent()</strong>：标注有@Bean。它内部会还会调用notBeanMethod()和son()两个方法</li>
+</ul>
+<p>同上，会走到目标类的方法体里，开始调用 <strong>notBeanMethod()和son()</strong> 这两个方法，这个时候处理的方式就不一样了：</p>
+<ol>
+<li>调用<code>notBeanMethod()</code>方法，因为它没有标注@Bean注解，所以不会被拦截 -&gt; 直接执行方法体</li>
+<li>调用<code>son()</code>方法，因为它标注有@Bean注解，所以会继续进入到拦截器里。但请注意和上面 <strong>直接调用</strong> son()方法不一样的是：<strong>此时当前正在被invoked的方法是parent()方法，而并非son()方法</strong>，所以他会被交给<code>resolveBeanReference()</code>方法来处理：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">BeanMethodInterceptor：</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> Object <span class="title">resolveBeanReference</span><span class="params">(Method beanMethod, Object[] beanMethodArgs,</span></span></span><br><span class="line"><span class="function"><span class="params">		ConfigurableBeanFactory beanFactory, String beanName)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 当前bean（son这个Bean）是否正在创建中... 本处为false嘛</span></span><br><span class="line">	<span class="comment">// 这个判断主要是为了防止后面getBean报错~~~</span></span><br><span class="line">	<span class="keyword">boolean</span> alreadyInCreation = beanFactory.isCurrentlyInCreation(beanName);</span><br><span class="line">	<span class="keyword">try</span> &#123;</span><br><span class="line">		<span class="comment">// 如果该Bean确实正在创建中，先把它标记下，放置后面getBean报错~</span></span><br><span class="line">		<span class="keyword">if</span> (alreadyInCreation) &#123;</span><br><span class="line">			beanFactory.setCurrentlyInCreation(beanName, <span class="keyword">false</span>);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 更具该方法的入参，决定后面使用getBean(beanName)还是getBean(beanName,args)</span></span><br><span class="line">		<span class="comment">// 基本原则是：但凡只要有一个入参为null，就调用getBean(beanName)</span></span><br><span class="line">		<span class="keyword">boolean</span> useArgs = !ObjectUtils.isEmpty(beanMethodArgs);</span><br><span class="line">		<span class="keyword">if</span> (useArgs &amp;&amp; beanFactory.isSingleton(beanName)) &#123;</span><br><span class="line">			<span class="keyword">for</span> (Object arg : beanMethodArgs) &#123;</span><br><span class="line">				<span class="keyword">if</span> (arg == <span class="keyword">null</span>) &#123;</span><br><span class="line">					useArgs = <span class="keyword">false</span>;</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// 通过getBean从容器中拿到这个实例  本处拿出的就是Son实例喽</span></span><br><span class="line">		Object beanInstance = (useArgs ? beanFactory.getBean(beanName, beanMethodArgs) : beanFactory.getBean(beanName));</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 方法返回类型和Bean实际类型做个比较，因为有可能类型不一样</span></span><br><span class="line">		<span class="comment">// 什么时候会出现类型不一样呢？当BeanDefinition定义信息类型被覆盖的时候，就可能出现此现象</span></span><br><span class="line">		<span class="keyword">if</span> (!ClassUtils.isAssignableValue(beanMethod.getReturnType(), beanInstance)) &#123;</span><br><span class="line">			<span class="keyword">if</span> (beanInstance.equals(<span class="keyword">null</span>)) &#123;</span><br><span class="line">				beanInstance = <span class="keyword">null</span>;</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				...</span><br><span class="line">				<span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(msg);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 当前被调用的方法，是parent()方法</span></span><br><span class="line">		Method currentlyInvoked = SimpleInstantiationStrategy.getCurrentlyInvokedFactoryMethod();</span><br><span class="line">		<span class="keyword">if</span> (currentlyInvoked != <span class="keyword">null</span>) &#123;</span><br><span class="line">			String outerBeanName = BeanAnnotationHelper.determineBeanNameFor(currentlyInvoked);</span><br><span class="line">			<span class="comment">// 这一步是注册依赖关系，告诉容器：</span></span><br><span class="line">			<span class="comment">// parent实例的初始化依赖于son实例</span></span><br><span class="line">			beanFactory.registerDependentBean(beanName, outerBeanName);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// 返回实例</span></span><br><span class="line">		<span class="keyword">return</span> beanInstance;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 归还标记：笔记实际确实还在创建中嘛~~~~</span></span><br><span class="line">	<span class="keyword">finally</span> &#123;</span><br><span class="line">		<span class="keyword">if</span> (alreadyInCreation) &#123;</span><br><span class="line">			beanFactory.setCurrentlyInCreation(beanName, <span class="keyword">true</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+这么一来，执行完parent()方法体里的son()方法后，<strong>实际得到的是容器内的实例</strong>，从而保证了我们这么写是不会有问题的。</li>
+</ol>
+<ul>
+<li><strong>notBeanMethod()</strong>：因为没有标注@Bean，所以它并不会被容器调用，而只能是被上面的<code>parent()</code>方法调用到，并且也不会被拦截（值得注意的是：因为此方法不需要被代理，所以此方法可以是<code>private final</code>的哦~）</li>
+</ul>
+<p>以上程序的运行结果是：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">son created...<span class="number">347978868</span></span><br><span class="line">notBeanMethod invoked by 【com.yourbatman.fullliteconfig.config.AppConfig$$EnhancerBySpringCGLIB$$ec611337@<span class="number">12591</span>ac8】</span><br><span class="line">parent created...持有的Son是：<span class="number">347978868</span></span><br><span class="line">com.yourbatman.fullliteconfig.config.AppConfig$$EnhancerBySpringCGLIB$$ec611337@<span class="number">12591</span>ac8</span><br><span class="line">容器内的Son实例：<span class="number">347978868</span></span><br><span class="line">容器内Person持有的Son实例：<span class="number">347978868</span></span><br><span class="line"><span class="keyword">true</span></span><br></pre></td></tr></table></figure>
+<p>可以看到，<strong>Son自始至终都只存在一个实例</strong>，这是符合我们的预期的。</p>
+<hr>
+<h5 id="Lite模式下表现如何？"><a href="#Lite模式下表现如何？" class="headerlink" title="Lite模式下表现如何？"></a>Lite模式下表现如何？</h5><p>同样的代码，在Lite模式下（去掉@Configuration注解即可），不存在“如此复杂”的代理逻辑，所以上例的运行结果是：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">son created...<span class="number">624271064</span></span><br><span class="line">notBeanMethod invoked by 【com.yourbatman.fullliteconfig.config.AppConfig@<span class="number">21</span>a947fe】</span><br><span class="line">son created...<span class="number">90205195</span></span><br><span class="line">parent created...持有的Son是：<span class="number">90205195</span></span><br><span class="line">com.yourbatman.fullliteconfig.config.AppConfig@<span class="number">21</span>a947fe</span><br><span class="line">容器内的Son实例：<span class="number">624271064</span></span><br><span class="line">容器内Person持有的Son实例：<span class="number">90205195</span></span><br><span class="line"><span class="keyword">false</span></span><br></pre></td></tr></table></figure>
+<p>这个结果很好理解，这里我就不再啰嗦了。总之就不能这么用就对了~</p>
+<hr>
+<h4 id="FactoryBean模式剖析"><a href="#FactoryBean模式剖析" class="headerlink" title="FactoryBean模式剖析"></a>FactoryBean模式剖析</h4><p><code>FactoryBean</code>也是向容器提供Bean的一种方式，如最常见的<code>SqlSessionFactoryBean</code>就是这么一个大代表，因为它比较常用，并且这里也作为此拦截器一个<strong>单独的执行分支</strong>，所以很有必要研究一番。</p>
+<p>执行此分支逻辑的条件是：容器内已经存在<code>&amp;beanName</code>和<code>beanName</code>两个Bean。执行的方式是：使用<code>enhanceFactoryBean()</code>方法对<code>FactoryBean</code>进行增强。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">ConfigurationClassEnhancer：</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建一个子类代理，拦截对getObject()的调用，委托给当前的BeanFactory</span></span><br><span class="line"><span class="comment">// 而不是创建一个新的实例。这些代理仅在调用FactoryBean时创建</span></span><br><span class="line"><span class="comment">// factoryBean：从容器内拿出来的那个已经存在的工厂Bean实例（是工厂Bean实例）</span></span><br><span class="line"><span class="comment">// exposedType：@Bean标注的方法的返回值类型</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> Object <span class="title">enhanceFactoryBean</span><span class="params">(Object factoryBean, Class&lt;?&gt; exposedType,</span></span></span><br><span class="line"><span class="function"><span class="params">		ConfigurableBeanFactory beanFactory, String beanName)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">try</span> &#123;</span><br><span class="line">		<span class="comment">// 看看Spring容器内已经存在的这个工厂Bean的情况，看看是否有final</span></span><br><span class="line">		Class&lt;?&gt; clazz = factoryBean.getClass();</span><br><span class="line">		<span class="keyword">boolean</span> finalClass = Modifier.isFinal(clazz.getModifiers());</span><br><span class="line">		<span class="keyword">boolean</span> finalMethod = Modifier.isFinal(clazz.getMethod(<span class="string">"getObject"</span>).getModifiers());</span><br><span class="line">		</span><br><span class="line">		<span class="comment">// 类和方法其中有一个是final，那就只能看看能不能走接口代理喽</span></span><br><span class="line">		<span class="keyword">if</span> (finalClass || finalMethod) &#123;</span><br><span class="line">			<span class="comment">// @Bean标注的方法返回值若是接口类型 尝试走基于接口的JDK动态代理</span></span><br><span class="line">			<span class="keyword">if</span> (exposedType.isInterface()) &#123;</span><br><span class="line">				<span class="comment">// 基于JDK的动态代理</span></span><br><span class="line">				<span class="keyword">return</span> createInterfaceProxyForFactoryBean(factoryBean, exposedType, beanFactory, beanName);</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				<span class="comment">// 类或方法存在final情况，但是呢返回类型又不是</span></span><br><span class="line">				<span class="keyword">return</span> factoryBean;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">catch</span> (NoSuchMethodException ex) &#123;</span><br><span class="line">		<span class="comment">// 没有getObject()方法  很明显，一般不会走到这里</span></span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 到这，说明以上条件不满足：存在final且还不是接口类型</span></span><br><span class="line">	<span class="comment">// 类和方法都不是final，生成一个CGLIB的动态代理</span></span><br><span class="line">	<span class="keyword">return</span> createCglibProxyForFactoryBean(factoryBean, beanFactory, beanName);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>步骤总结：</p>
+<ol>
+<li>拿到容器内已经存在的这个工厂Bean的类型，看看类上、getObject()方法是否用final修饰了</li>
+<li>但凡只需<strong>有一个</strong>被final修饰了，那注定不能使用CGLIB代理了喽，那么就尝试使用基于接口的JDK动态代理：<ol>
+<li>若你标注的@Bean返回的是接口类型（也就是<code>FactoryBean</code>类型），那就ok，使用JDK创建个代理对象返回</li>
+<li>若不是接口（有final又还不是接口），那老衲无能为力了：原样return返回</li>
+</ol>
+</li>
+<li>若以上条件不满足，表示一个final都木有，那就统一使用CGLIB去生成一个代理子类。大多数情况下，都会走到这个分支上，代理是通过CGLIB生成的<blockquote>
+<p>说明：无论是JDK动态代理还是CGLIB的代理实现均非常简单，就是把getObject()方法代理为使用<code>beanFactory.getBean(beanName)</code>去获取实例（要不代理掉的话，每次不就执行你getObject()里面的逻辑了麽，就又会创建新实例啦~）</p>
+</blockquote>
+</li>
+</ol>
+<p><strong>需要明确</strong>，此拦截器对FactoryBean逻辑处理分支的目的是：确保你<strong>通过方法调用</strong>拿到<code>FactoryBean</code>后，再调用其<code>getObject()</code>方法（哪怕调用多次）得到的都是同一个示例（容器内的单例）。因此需要对<code>getObject()</code>方法做拦截嘛，让该方法指向到<code>getBean()</code>，永远从容器里面拿即可。</p>
+<blockquote>
+<p>这个拦截处理逻辑只有在@Bean方法调用时才有意义，比如parent()里调用了son()这样子才会起到作用，否则你就忽略它吧~</p>
+</blockquote>
+<p>针对于此，下面给出不同case下的代码示例，加强理解。</p>
+<hr>
+<h5 id="代码示例（重要）"><a href="#代码示例（重要）" class="headerlink" title="代码示例（重要）"></a>代码示例（重要）</h5><p>准备一个<code>SonFactoryBean</code>用于产生Son实例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SonFactoryBean</span> <span class="keyword">implements</span> <span class="title">FactoryBean</span>&lt;<span class="title">Son</span>&gt; </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Son <span class="title">getObject</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Son();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Class&lt;?&gt; getObjectType() &#123;</span><br><span class="line">        <span class="keyword">return</span> Son<span class="class">.<span class="keyword">class</span></span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>并且在配置类里把它放好：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AppConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> FactoryBean&lt;Son&gt; <span class="title">son</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        SonFactoryBean sonFactoryBean = <span class="keyword">new</span> SonFactoryBean();</span><br><span class="line">        System.out.println(<span class="string">"我使用@Bean定义sonFactoryBean："</span> + sonFactoryBean.hashCode());</span><br><span class="line">        System.out.println(<span class="string">"我使用@Bean定义sonFactoryBean identityHashCode："</span> + System.identityHashCode(sonFactoryBean));</span><br><span class="line">        <span class="keyword">return</span> sonFactoryBean;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Parent <span class="title">parent</span><span class="params">(Son son)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="comment">// 根据前面所学，sonFactoryBean肯定是去容器拿</span></span><br><span class="line">        FactoryBean&lt;Son&gt; sonFactoryBean = son();</span><br><span class="line">        System.out.println(<span class="string">"parent流程使用的sonFactoryBean："</span> + sonFactoryBean.hashCode());</span><br><span class="line">        System.out.println(<span class="string">"parent流程使用的sonFactoryBean identityHashCode："</span> + System.identityHashCode(sonFactoryBean));</span><br><span class="line">        System.out.println(<span class="string">"parent流程使用的sonFactoryBean："</span> + sonFactoryBean.getClass());</span><br><span class="line">        <span class="comment">// 虽然sonFactoryBean是从容器拿的，但是getObject()你可不能保证每次都返回单例哦~</span></span><br><span class="line">        Son sonFromFactory1 = sonFactoryBean.getObject();</span><br><span class="line">        Son sonFromFactory2 = sonFactoryBean.getObject();</span><br><span class="line">        System.out.println(<span class="string">"parent流程使用的sonFromFactory1："</span> + sonFromFactory1.hashCode());</span><br><span class="line">        System.out.println(<span class="string">"parent流程使用的sonFromFactory1："</span> + sonFromFactory2.hashCode());</span><br><span class="line">        System.out.println(<span class="string">"parent流程使用的son和容器内的son是否相等："</span> + (son == sonFromFactory1));</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Parent(sonFromFactory1);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    ApplicationContext context = <span class="keyword">new</span> AnnotationConfigApplicationContext(AppConfig<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line"></span><br><span class="line">    SonFactoryBean sonFactoryBean = context.getBean(<span class="string">"&amp;son"</span>, SonFactoryBean<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">    System.out.println(<span class="string">"Spring容器内的SonFactoryBean："</span> + sonFactoryBean.hashCode());</span><br><span class="line">    System.out.println(<span class="string">"Spring容器内的SonFactoryBean："</span> + System.identityHashCode(sonFactoryBean));</span><br><span class="line">    System.out.println(<span class="string">"Spring容器内的SonFactoryBean："</span> + sonFactoryBean.getClass());</span><br><span class="line"></span><br><span class="line">    System.out.println(<span class="string">"Spring容器内的Son："</span> + context.getBean(<span class="string">"son"</span>).hashCode());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">我使用<span class="meta">@Bean</span>定义sonFactoryBean：<span class="number">313540687</span></span><br><span class="line">我使用<span class="meta">@Bean</span>定义sonFactoryBean identityHashCode：<span class="number">313540687</span></span><br><span class="line"></span><br><span class="line">parent流程使用的sonFactoryBean：<span class="number">313540687</span></span><br><span class="line">parent流程使用的sonFactoryBean identityHashCode：<span class="number">70807318</span></span><br><span class="line">parent流程使用的sonFactoryBean：<span class="class"><span class="keyword">class</span> <span class="title">com</span>.<span class="title">yourbatman</span>.<span class="title">fullliteconfig</span>.<span class="title">config</span>.<span class="title">SonFactoryBean</span>$$<span class="title">EnhancerBySpringCGLIB</span>$$1<span class="title">ccec41d</span></span></span><br><span class="line"><span class="class"><span class="title">parent</span>流程使用的<span class="title">sonFromFactory1</span>：910091170</span></span><br><span class="line"><span class="class"><span class="title">parent</span>流程使用的<span class="title">sonFromFactory1</span>：910091170</span></span><br><span class="line"><span class="class"><span class="title">parent</span>流程使用的<span class="title">son</span>和容器内的<span class="title">son</span>是否相等：<span class="title">true</span></span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class"><span class="title">Spring</span>容器内的<span class="title">SonFactoryBean</span>：313540687</span></span><br><span class="line"><span class="class"><span class="title">Spring</span>容器内的<span class="title">SonFactoryBean</span>：313540687</span></span><br><span class="line"><span class="class"><span class="title">Spring</span>容器内的<span class="title">SonFactoryBean</span>：<span class="title">class</span> <span class="title">com</span>.<span class="title">yourbatman</span>.<span class="title">fullliteconfig</span>.<span class="title">config</span>.<span class="title">SonFactoryBean</span></span></span><br><span class="line"><span class="class"><span class="title">Spring</span>容器内的<span class="title">Son</span>：910091170</span></span><br></pre></td></tr></table></figure>
+<p>结果分析：<br><img data-src="https://img-blog.csdnimg.cn/20200521075138785.png#x200" alt=""><br>达到了预期的效果：parent在调用son()方法时，得到的是在容器内已经存在的<code>SonFactoryBean</code>基础上CGLIB字节码<code>提升过的实例</code>，<strong>拦截成功</strong>，从而getObject()也就实际是去容器里拿对象的。</p>
+<p>通过本例有如下小细节需要指出：</p>
+<ol>
+<li>原始对象和代理/增强后（不管是CGLIB还是JDK动态代理）的实例的<code>.hashCode()</code>以及<code>.equals()</code>方法是一毛一样的，但是<code>identityHashCode()</code>值（实际内存值）不一样哦，因为是不同类型、不同实例，这点请务必注意</li>
+<li>最终存在于容器内的仍旧是原生工厂Bean对象，而非代理后的工厂Bean实例。毕竟拦截器只是拦截了@Bean方法的调用来了个“偷天换日”而已~</li>
+<li>若<code>SonFactoryBean</code>上加个final关键字修饰，根据上面讲述的逻辑，那代理对象会使用JDK动态代理生成喽，形如这样（本处仅作为示例，实际使用中请别这么干）：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">SonFactoryBean</span> <span class="keyword">implements</span> <span class="title">FactoryBean</span>&lt;<span class="title">Son</span>&gt; </span>&#123; ... &#125;</span><br></pre></td></tr></table></figure>
+再次运行程序，结果输出为：执行的结果一样，只是代理方式不一样而已。从这个小细节你也能看出来Spring对代理实现上的偏向：<strong>优先选择CGLIB代理方式，JDK动态代理方式用于兜底</strong>。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="comment">// 使用了JDK的动态代理</span></span><br><span class="line">parent流程使用的sonFactoryBean：<span class="class"><span class="keyword">class</span> <span class="title">com</span>.<span class="title">sun</span>.<span class="title">proxy</span>.$<span class="title">Proxy11</span></span></span><br><span class="line"><span class="class">...</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>提示：若你标注了final关键字了，那么请保证@Bean方法返回的是<code>FactoryBean</code>接口，而不能是<code>SonFactoryBean</code>实现类，否则最终无法代理了，原样输出。因为JDK动态代理和CGLIB都搞不定了嘛~</p>
+</blockquote>
+</li>
+</ol>
+<hr>
+<p>在以上例子的基础上，我给它“加点料”，再看看效果呢：</p>
+<p>使用<code>BeanDefinitionRegistryPostProcessor</code>提前就放进去一个名为son的实例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这两种方式向容器扔bd or singleton bean都行  我就选择第二种喽</span></span><br><span class="line"><span class="comment">// 注意：此处放进去的是BeanFactory工厂，名称是son哦~~~  不要写成了&amp;son</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SonBeanDefinitionRegistryPostProcessor</span> <span class="keyword">implements</span> <span class="title">BeanDefinitionRegistryPostProcessor</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">postProcessBeanDefinitionRegistry</span><span class="params">(BeanDefinitionRegistry registry)</span> <span class="keyword">throws</span> BeansException </span>&#123;</span><br><span class="line">        <span class="comment">// registry.registerBeanDefinition("son", BeanDefinitionBuilder.rootBeanDefinition(SonFactoryBean.class).getBeanDefinition());</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">postProcessBeanFactory</span><span class="params">(ConfigurableListableBeanFactory beanFactory)</span> <span class="keyword">throws</span> BeansException </span>&#123;</span><br><span class="line">        SonFactoryBean sonFactoryBean = <span class="keyword">new</span> SonFactoryBean();</span><br><span class="line">        System.out.println(<span class="string">"初始化时，注册进容器的sonFactoryBean："</span> + sonFactoryBean);</span><br><span class="line">        beanFactory.registerSingleton(<span class="string">"son"</span>, sonFactoryBean);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>再次运行程序，输出结果：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">初始化时最早进容器的sonFactoryBean：<span class="number">2027775614</span></span><br><span class="line">初始化时最早进容器的sonFactoryBean identityHashCode：<span class="number">2027775614</span></span><br><span class="line"></span><br><span class="line">parent流程使用的sonFactoryBean：<span class="number">2027775614</span></span><br><span class="line">parent流程使用的sonFactoryBean identityHashCode：<span class="number">1183888521</span></span><br><span class="line">parent流程使用的sonFactoryBean：<span class="class"><span class="keyword">class</span> <span class="title">com</span>.<span class="title">yourbatman</span>.<span class="title">fullliteconfig</span>.<span class="title">config</span>.<span class="title">SonFactoryBean</span>$$<span class="title">EnhancerBySpringCGLIB</span>$$1<span class="title">ccec41d</span></span></span><br><span class="line"><span class="class"><span class="title">parent</span>流程使用的<span class="title">sonFromFactory1</span>：2041605291</span></span><br><span class="line"><span class="class"><span class="title">parent</span>流程使用的<span class="title">sonFromFactory1</span>：2041605291</span></span><br><span class="line"><span class="class"><span class="title">parent</span>流程使用的<span class="title">son</span>和容器内的<span class="title">son</span>是否相等：<span class="title">true</span></span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class"><span class="title">Spring</span>容器内的<span class="title">SonFactoryBean</span>：2027775614</span></span><br><span class="line"><span class="class"><span class="title">Spring</span>容器内的<span class="title">SonFactoryBean</span>：2027775614</span></span><br><span class="line"><span class="class"><span class="title">Spring</span>容器内的<span class="title">SonFactoryBean</span>：<span class="title">class</span> <span class="title">com</span>.<span class="title">yourbatman</span>.<span class="title">fullliteconfig</span>.<span class="title">config</span>.<span class="title">SonFactoryBean</span></span></span><br><span class="line"><span class="class"><span class="title">Spring</span>容器内的<span class="title">Son</span>：2041605291</span></span><br></pre></td></tr></table></figure>
+<p><strong>效果上并不差异</strong>，从日志上可以看到：你配置类上使用@Bean标注的son()<strong>方法体</strong>并没执行了，而是使用的最开始注册进去的实例，差异仅此而已。</p>
+<blockquote>
+<p>为何是这样的现象？这就不属于本文的内容了，是Spring容器对Bean的实例化、初始化逻辑，本公众号后面依旧会采用专栏式讲解，让你彻底弄懂它。当前有兴趣的可以先自行参考<code>DefaultListableBeanFactory#preInstantiateSingletons</code>的内容~</p>
+</blockquote>
+<hr>
+<h5 id="Lite模式下表现如何？-1"><a href="#Lite模式下表现如何？-1" class="headerlink" title="Lite模式下表现如何？"></a>Lite模式下表现如何？</h5><p>Lite模式下可没这些“加强特性”，所以在Lite模式下（拿掉<code>@Configuration</code>这个注解便可）运行以上程序，结果输出为：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">我使用<span class="meta">@Bean</span>定义sonFactoryBean：<span class="number">477289012</span></span><br><span class="line">我使用<span class="meta">@Bean</span>定义sonFactoryBean identityHashCode：<span class="number">477289012</span></span><br><span class="line"></span><br><span class="line">我使用<span class="meta">@Bean</span>定义sonFactoryBean：<span class="number">2008966511</span></span><br><span class="line">我使用<span class="meta">@Bean</span>定义sonFactoryBean identityHashCode：<span class="number">2008966511</span></span><br><span class="line">parent流程使用的sonFactoryBean：<span class="number">2008966511</span></span><br><span class="line">parent流程使用的sonFactoryBean identityHashCode：<span class="number">2008966511</span></span><br><span class="line">parent流程使用的sonFactoryBean：<span class="class"><span class="keyword">class</span> <span class="title">com</span>.<span class="title">yourbatman</span>.<span class="title">fullliteconfig</span>.<span class="title">config</span>.<span class="title">SonFactoryBean</span></span></span><br><span class="line"><span class="class"><span class="title">parent</span>流程使用的<span class="title">sonFromFactory1</span>：433874882</span></span><br><span class="line"><span class="class"><span class="title">parent</span>流程使用的<span class="title">sonFromFactory1</span>：572191680</span></span><br><span class="line"><span class="class"><span class="title">parent</span>流程使用的<span class="title">son</span>和容器内的<span class="title">son</span>是否相等：<span class="title">false</span></span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class"><span class="title">Spring</span>容器内的<span class="title">SonFactoryBean</span>：477289012</span></span><br><span class="line"><span class="class"><span class="title">Spring</span>容器内的<span class="title">SonFactoryBean</span>：477289012</span></span><br><span class="line"><span class="class"><span class="title">Spring</span>容器内的<span class="title">SonFactoryBean</span>：<span class="title">class</span> <span class="title">com</span>.<span class="title">yourbatman</span>.<span class="title">fullliteconfig</span>.<span class="title">config</span>.<span class="title">SonFactoryBean</span></span></span><br><span class="line"><span class="class"><span class="title">Spring</span>容器内的<span class="title">Son</span>：211968962</span></span><br></pre></td></tr></table></figure>
+<p>结果解释我就不再啰嗦，有了前面的基础就太容易理解了。</p>
+<hr>
+<h5 id="为何是-Scope域代理就不用处理？"><a href="#为何是-Scope域代理就不用处理？" class="headerlink" title="为何是@Scope域代理就不用处理？"></a>为何是@Scope域代理就不用处理？</h5><p>要解释好这个原因，和<code>@Scope</code>代理方式的原理知识强相关。限于篇幅，本文就先卖个关子~</p>
+<p>关于<code>@Scope</code>我个人觉得足够用5篇以上文章专题讲解，虽然在<code>Spring Framework</code>里使用得比较少，但是在理解<code>Spirng Cloud</code>的自定义扩展实现上显得非常非常有必要，所以你可关注我公众号，会近期推出相关专栏的。</p>
+<hr>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>关于Spring配置类这个专栏内容，讲解到这就完成99%了，毫不客气的说关于此部分知识真正可以实现“横扫千军”，据我了解没有解决不了的问题了。</p>
+<p>当然还剩下1%，那自然是缺少一篇总结篇喽：在下一篇总结篇里，我会用<strong>图文并茂</strong>的方式对Spring配置类相关内容的执行流程进行总结，目的是让你<strong>快速掌握</strong>，应付面试嘛。</p>
+<p><strong>本文将近2万字，手真的很累</strong>，如果对你有帮助，帮点个在看哈。最主要的是：关注我的公众号，后期推出的专栏都会很精彩……</p>
+        <!-- ....这里是正文内容的底部（首页不会展示）... -->
+        <style>
+.table-container img{
+    display: inherit;
+    margin-top: 5px;
+    margin-bottom: 0px;
+    margin-right: 10px;
+}
+</style>
+<hr>
+<h1 style="text-align: left;">关注YourBatman</h1>
+
+<div><table>
+<thead>
+<tr>
+<th>Author</th>
+<th>A哥(YourBatman)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>个人站点</td>
+<td><a href="https://www.yourbatman.cn" rel="nofollow" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc">www.yourbatman.cn</a></td>
+</tr>
+<tr>
+<td>E-mail</td>
+<td>yourbatman@qq.com</td>
+</tr>
+<tr>
+<td><strong>微 信</strong></td>
+<td><a href="https://www.yourbatman.cn/images/wechat.png" rel="nofollow" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc">fsx1056342982</a></td>
+</tr>
+<tr>
+<td><strong><code>活跃平台</code></strong></td>
+<td><a href="https://www.yourbatman.cn" rel="nofollow" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/2020071015182276.png" alt=""></a> <a href="https://fangshixiang.blog.csdn.net/" target="_blank" rel="nofollow noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/20200710151913394.png" alt=""></a><a href="https://yourbatman.cnblogs.com" target="_blank" rel="nofollow noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/20200710151929355.png" alt=""></a><a href="https://juejin.im/user/5b44d178f265da0fa1220efe/posts" target="_blank" rel="nofollow noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/20200710151938937.png" alt=""></a><a href="https://www.zhihu.com/people/fangshixiang/posts" target="_blank" rel="nofollow noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/20200710151950629.png" alt=""></a><a href="https://www.jianshu.com/u/8740f1fdd684" target="_blank" rel="nofollow noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/20200710152000530.png" alt=""></a><a href="https://segmentfault.com/u/yourbatman/articles" target="_blank" rel="nofollow noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/20200710152008726.png" alt=""></a><a href="https://github.com/yourbatman" target="_blank" rel="noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/20200710152015895.png" alt=""></a></td>
+</tr>
+<tr>
+<td><strong>公众号</strong></td>
+<td><a href="https://www.yourbatman.cn/images/wechat_channel.jpg" rel="nofollow" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc">BAT的乌托邦（ID：BAT-utopia）</a></td>
+</tr>
+<tr>
+<td>知识星球</td>
+<td><a href="https://t.zsxq.com/nQBi66I" target="_blank" rel="nofollow noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc">BAT的乌托邦</a></td>
+</tr>
+<tr>
+<td>每日文章推荐</td>
+<td><a href="https://github.com/yourbatman/reading/issues" target="_blank" rel="noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc">每日文章推荐</a></td>
+</tr>
+</tbody>
+</table></div>
+
+<p>
+<img src="https://img-blog.csdnimg.cn/20200710160552549.gif" alt="BAT的乌托邦">
+</p>
+
+    </div>
+
+    
+    
+    
+
+    <!-- 相关阅读（你可能还喜欢） -->
+      
+  <div class="popular-posts-header">你可能还喜欢：</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/x2y/1db87a14.html" rel="bookmark">Spring配置类深度剖析-总结篇(手绘流程图，可白嫖)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/x2y/6dd28e9b.html" rel="bookmark">你自我介绍说很懂Spring配置类，那你怎么解释这个现象？</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/x2y/8e3281a7.html" rel="bookmark">配置类需要标注@Configuration却不知原因？那这次就不能给你涨薪喽</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/x2y/e097f687.html" rel="bookmark">真懂Spring的@Configuration配置类？你可能自我感觉太良好</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/x2y/7889cb09.html" rel="bookmark">3. 搞定收工，PropertyEditor就到这</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/x2y/e715a0e7.html" rel="bookmark">2. Spring早期类型转换，基于PropertyEditor实现</a></div>
+    </li>
+  </ul>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-title">
+    <strong>本文标题： </strong>
+    《521我发誓读完本文，再也不会担心Spring配置类问题了》
+  </li>
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>A哥(YourBatman)
+  </li>
+  <li class="post-copyright-date">
+    <strong>发布时间： </strong>2020-05-21 13:41:47
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://www.yourbatman.cn/x2y/f3b61b38.html" title="521我发誓读完本文，再也不会担心Spring配置类问题了">https://www.yourbatman.cn/x2y/f3b61b38.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>许可协议： </strong>本站所有文章均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载：No！转发：Yes！
+  </li>
+</ul>
+</div>
+
+
+      <!-- 添加“本文结束”标记 -->
+      <div class="read-over" style="text-align: center;margin-top: 25px;color: rgba(234,16,61,.569);font-size: 16px">-------------您已触及底线 <i class="fa fa-paw"></i> 感谢阅读-------------</div>
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    请A哥喝水
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="https://img-blog.csdnimg.cn/20200612080128384.png" alt="A哥(YourBatman) 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="https://img-blog.csdnimg.cn/20200612080128343.png" alt="A哥(YourBatman) 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Spring-Framework/" rel="tag"><i class="fa fa-tag"></i> Spring Framework</a>
+              <a href="/tags/Configuration/" rel="tag"><i class="fa fa-tag"></i> @Configuration</a>
+          </div>
+
+        <!-- 导入投票模块 -->
+        
+  <!-- 投票功能 -->
+  <div class="post-widgets">
+    <div style="color: #ea778c;font-size: 14px;">(>兄台请留步，看完记得六星好评哦<)</div>
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/x2y/6dd28e9b.html" rel="prev" title="你自我介绍说很懂Spring配置类，那你怎么解释这个现象？">
+      <i class="fa fa-chevron-left"></i> 你自我介绍说很懂Spring配置类，那你怎么解释这个现象？
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/x2y/84b12bae.html" rel="next" title="Spring Boot 2.3.0正式发布：优雅停机、配置文件位置通配符新特性一览">
+      Spring Boot 2.3.0正式发布：优雅停机、配置文件位置通配符新特性一览 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+    </div>
+  
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#版本约定"><span class="nav-number">1.1.</span> <span class="nav-text">版本约定</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#正文"><span class="nav-number">2.</span> <span class="nav-text">正文</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring配置类的使用误区"><span class="nav-number">2.1.</span> <span class="nav-text">Spring配置类的使用误区</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Lite模式：错误姿势"><span class="nav-number">2.1.1.</span> <span class="nav-text">Lite模式：错误姿势</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lite模式：正确姿势"><span class="nav-number">2.1.2.</span> <span class="nav-text">Lite模式：正确姿势</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Full模式："><span class="nav-number">2.1.3.</span> <span class="nav-text">Full模式：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BeanMethodInterceptor拦截器"><span class="nav-number">2.2.</span> <span class="nav-text">BeanMethodInterceptor拦截器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#执行时机"><span class="nav-number">2.2.1.</span> <span class="nav-text">执行时机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#做了何事"><span class="nav-number">2.2.2.</span> <span class="nav-text">做了何事</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#多次调用-Bean方法为何不会产生新实例？"><span class="nav-number">2.2.2.1.</span> <span class="nav-text">多次调用@Bean方法为何不会产生新实例？</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Lite模式下表现如何？"><span class="nav-number">2.2.2.1.1.</span> <span class="nav-text">Lite模式下表现如何？</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#FactoryBean模式剖析"><span class="nav-number">2.2.2.2.</span> <span class="nav-text">FactoryBean模式剖析</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#代码示例（重要）"><span class="nav-number">2.2.2.2.1.</span> <span class="nav-text">代码示例（重要）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Lite模式下表现如何？-1"><span class="nav-number">2.2.2.2.2.</span> <span class="nav-text">Lite模式下表现如何？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#为何是-Scope域代理就不用处理？"><span class="nav-number">2.2.2.2.3.</span> <span class="nav-text">为何是@Scope域代理就不用处理？</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="A哥(YourBatman)"
+      src="https://img-blog.csdnimg.cn/20200511100304592.jpg">
+  <p class="site-author-name" itemprop="name">A哥(YourBatman)</p>
+  <div class="site-description" itemprop="description">我这有故事，你那有酒吗？</div>
+</div>
+<div class="site-author motion-element" style="border-top: 1px dotted #ccc;padding-top: 10px;opacity: 0.7" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img itemprop="image" alt="A哥(YourBatman)" style="max-width: 120px;"
+      src="https://img-blog.csdnimg.cn/20200608214500399.png">
+  <div style="color: #e36a7c;font-size: 10px;" itemprop="description">加A哥好友(备注:Java入群)</div>
+</div>
+  <div class="sidebar-button motion-element">
+    <a onclick="tidioChatApi.open();"><i class="fa fa-comment"></i>
+    私聊A哥
+  </a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://fangshixiang.blog.csdn.net/" title="https:&#x2F;&#x2F;fangshixiang.blog.csdn.net&#x2F;" rel="noopener" target="_blank">CSDN</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/yourbatman/" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;yourbatman&#x2F;" rel="noopener" target="_blank">博客园</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://juejin.im/user/5b44d178f265da0fa1220efe/posts" title="https:&#x2F;&#x2F;juejin.im&#x2F;user&#x2F;5b44d178f265da0fa1220efe&#x2F;posts" rel="noopener" target="_blank">掘金</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.zhihu.com/people/fangshixiang" title="https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;fangshixiang" rel="noopener" target="_blank">知乎</a>
+        </li>
+    </ul>
+  </div>
+
+<!-- 近期文章（源代码） -->
+
+    <div class="recent_posts links-of-blogroll motion-element links-of-blogroll-block">
+      <div class="links-of-blogroll-title">
+        <!-- modify icon to fire by szw -->
+        <i class="fa fa-history fa-" aria-hidden="true"></i>
+        最新文章
+      </div>
+      <ul class="links-of-blogroll-list">
+        
+        
+          <li>
+            <a href="/x2y/ff31c4c6.html" title="8. 格式化器大一统 -- Spring的Formatter抽象" target="_blank">
+            <i class="fa fa-check-square"></i> 8. 格式化器大一统 -- Spring的Formatter抽象
+            </a>
+          </li>
+        
+          <li>
+            <a href="/x2y/9705b9e8.html" title="YourBatman 2020年感悟关键词：科比、裁员、管理层、活着" target="_blank">
+            <i class="fa fa-check-square"></i> YourBatman 2020年感悟关键词：科比、裁员、管理层、活着
+            </a>
+          </li>
+        
+          <li>
+            <a href="/x2y/b6588179.html" title="7. JDK拍了拍你：字符串拼接一定记得用MessageFormat#format" target="_blank">
+            <i class="fa fa-check-square"></i> 7. JDK拍了拍你：字符串拼接一定记得用MessageFormat#format
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+
+
+      </div>
+
+      <!-- canvas粒子时钟效果  放在侧边栏最下面 -->
+      <div style="">
+  <canvas id="canvas" style="width:50%;margin-top:10px;margin-bottom: -10px;" width="820" height="250">当前浏览器不支持canvas，建议使用谷歌浏览器再试</canvas>
+</div>
+<script>
+(function(){
+    var WINDOW_WIDTH = 820;
+    var WINDOW_HEIGHT = 250;
+    var RADIUS = 7; //球半径
+    var NUMBER_GAP = 10; //数字之间的间隙
+    var u=0.65; //碰撞能量损耗系数
+    var context; //Canvas绘制上下文
+    var balls = []; //存储彩色的小球
+    const colors = ["#33B5E5","#0099CC","#AA66CC","#9933CC","#99CC00","#669900","#FFBB33","#FF8800","#FF4444","#CC0000"]; //彩色小球的颜色
+    var currentNums = []; //屏幕显示的8个字符
+    var digit =
+        [
+            [
+                [0,0,1,1,1,0,0],
+                [0,1,1,0,1,1,0],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [0,1,1,0,1,1,0],
+                [0,0,1,1,1,0,0]
+            ],//0
+            [
+                [0,0,0,1,1,0,0],
+                [0,1,1,1,1,0,0],
+                [0,0,0,1,1,0,0],
+                [0,0,0,1,1,0,0],
+                [0,0,0,1,1,0,0],
+                [0,0,0,1,1,0,0],
+                [0,0,0,1,1,0,0],
+                [0,0,0,1,1,0,0],
+                [0,0,0,1,1,0,0],
+                [1,1,1,1,1,1,1]
+            ],//1
+            [
+                [0,1,1,1,1,1,0],
+                [1,1,0,0,0,1,1],
+                [0,0,0,0,0,1,1],
+                [0,0,0,0,1,1,0],
+                [0,0,0,1,1,0,0],
+                [0,0,1,1,0,0,0],
+                [0,1,1,0,0,0,0],
+                [1,1,0,0,0,0,0],
+                [1,1,0,0,0,1,1],
+                [1,1,1,1,1,1,1]
+            ],//2
+            [
+                [1,1,1,1,1,1,1],
+                [0,0,0,0,0,1,1],
+                [0,0,0,0,1,1,0],
+                [0,0,0,1,1,0,0],
+                [0,0,1,1,1,0,0],
+                [0,0,0,0,1,1,0],
+                [0,0,0,0,0,1,1],
+                [0,0,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [0,1,1,1,1,1,0]
+            ],//3
+            [
+                [0,0,0,0,1,1,0],
+                [0,0,0,1,1,1,0],
+                [0,0,1,1,1,1,0],
+                [0,1,1,0,1,1,0],
+                [1,1,0,0,1,1,0],
+                [1,1,1,1,1,1,1],
+                [0,0,0,0,1,1,0],
+                [0,0,0,0,1,1,0],
+                [0,0,0,0,1,1,0],
+                [0,0,0,1,1,1,1]
+            ],//4
+            [
+                [1,1,1,1,1,1,1],
+                [1,1,0,0,0,0,0],
+                [1,1,0,0,0,0,0],
+                [1,1,1,1,1,1,0],
+                [0,0,0,0,0,1,1],
+                [0,0,0,0,0,1,1],
+                [0,0,0,0,0,1,1],
+                [0,0,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [0,1,1,1,1,1,0]
+            ],//5
+            [
+                [0,0,0,0,1,1,0],
+                [0,0,1,1,0,0,0],
+                [0,1,1,0,0,0,0],
+                [1,1,0,0,0,0,0],
+                [1,1,0,1,1,1,0],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [0,1,1,1,1,1,0]
+            ],//6
+            [
+                [1,1,1,1,1,1,1],
+                [1,1,0,0,0,1,1],
+                [0,0,0,0,1,1,0],
+                [0,0,0,0,1,1,0],
+                [0,0,0,1,1,0,0],
+                [0,0,0,1,1,0,0],
+                [0,0,1,1,0,0,0],
+                [0,0,1,1,0,0,0],
+                [0,0,1,1,0,0,0],
+                [0,0,1,1,0,0,0]
+            ],//7
+            [
+                [0,1,1,1,1,1,0],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [0,1,1,1,1,1,0],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [0,1,1,1,1,1,0]
+            ],//8
+            [
+                [0,1,1,1,1,1,0],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [0,1,1,1,0,1,1],
+                [0,0,0,0,0,1,1],
+                [0,0,0,0,0,1,1],
+                [0,0,0,0,1,1,0],
+                [0,0,0,1,1,0,0],
+                [0,1,1,0,0,0,0]
+            ],//9
+            [
+                [0,0,0,0],
+                [0,0,0,0],
+                [0,1,1,0],
+                [0,1,1,0],
+                [0,0,0,0],
+                [0,0,0,0],
+                [0,1,1,0],
+                [0,1,1,0],
+                [0,0,0,0],
+                [0,0,0,0]
+            ]//:
+        ];
+
+    function drawDatetime(cxt){
+        var nums = [];
+
+        context.fillStyle="#005eac"
+        var date = new Date();
+        var offsetX = 70, offsetY = 30;
+        var hours = date.getHours();
+        var num1 = Math.floor(hours/10);
+        var num2 = hours%10;
+        nums.push({num: num1});
+        nums.push({num: num2});
+        nums.push({num: 10}); //冒号
+        var minutes = date.getMinutes();
+        var num1 = Math.floor(minutes/10);
+        var num2 = minutes%10;
+        nums.push({num: num1});
+        nums.push({num: num2});
+        nums.push({num: 10}); //冒号
+        var seconds = date.getSeconds();
+        var num1 = Math.floor(seconds/10);
+        var num2 = seconds%10;
+        nums.push({num: num1});
+        nums.push({num: num2});
+
+        for(var x = 0;x<nums.length;x++){
+            nums[x].offsetX = offsetX;
+            offsetX = drawSingleNumber(offsetX,offsetY, nums[x].num,cxt);
+            //两个数字连一块，应该间隔一些距离
+            if(x<nums.length-1){
+                if((nums[x].num!=10) &&(nums[x+1].num!=10)){
+                    offsetX+=NUMBER_GAP;
+                }
+            }
+        }
+
+        //说明这是初始化
+        if(currentNums.length ==0){
+            currentNums = nums;
+        }else{
+            //进行比较
+            for(var index = 0;index<currentNums.length;index++){
+                if(currentNums[index].num!=nums[index].num){
+                    //不一样时，添加彩色小球
+                    addBalls(nums[index]);
+                    currentNums[index].num=nums[index].num;
+                }
+            }
+        }
+        renderBalls(cxt);
+        updateBalls();
+
+        return date;
+    }
+
+    function addBalls (item) {
+        var num = item.num;
+        var numMatrix = digit[num];
+        for(var y = 0;y<numMatrix.length;y++){
+            for(var x = 0;x<numMatrix[y].length;x++){
+                if(numMatrix[y][x]==1){
+                    var ball={
+                        offsetX:item.offsetX+RADIUS+RADIUS*2*x,
+                        offsetY:30+RADIUS+RADIUS*2*y,
+                        color:colors[Math.floor(Math.random()*colors.length)],
+                        g:1.5+Math.random(),
+                        vx:Math.pow(-1, Math.ceil(Math.random()*10))*4+Math.random(),
+                        vy:-5
+                    }
+                    balls.push(ball);
+                }
+            }
+        }
+    }
+
+    function renderBalls(cxt){
+        for(var index = 0;index<balls.length;index++){
+            cxt.beginPath();
+            cxt.fillStyle=balls[index].color;
+            cxt.arc(balls[index].offsetX, balls[index].offsetY, RADIUS, 0, 2*Math.PI);
+            cxt.fill();
+        }
+    }
+
+    function updateBalls () {
+        var i =0;
+        for(var index = 0;index<balls.length;index++){
+            var ball = balls[index];
+            ball.offsetX += ball.vx;
+            ball.offsetY += ball.vy;
+            ball.vy+=ball.g;
+            if(ball.offsetY > (WINDOW_HEIGHT-RADIUS)){
+                ball.offsetY= WINDOW_HEIGHT-RADIUS;
+                ball.vy=-ball.vy*u;
+            }
+            if(ball.offsetX>RADIUS&&ball.offsetX<(WINDOW_WIDTH-RADIUS)){
+
+                balls[i]=balls[index];
+                i++;
+            }
+        }
+        //去除出边界的球
+        for(;i<balls.length;i++){
+            balls.pop();
+        }
+    }
+    function drawSingleNumber(offsetX, offsetY, num, cxt){
+        var numMatrix = digit[num];
+        for(var y = 0;y<numMatrix.length;y++){
+            for(var x = 0;x<numMatrix[y].length;x++){
+                if(numMatrix[y][x]==1){
+                    cxt.beginPath();
+                    cxt.arc(offsetX+RADIUS+RADIUS*2*x,offsetY+RADIUS+RADIUS*2*y,RADIUS,0,2*Math.PI);
+                    cxt.fill();
+                }
+            }
+        }
+        cxt.beginPath();
+        offsetX += numMatrix[0].length*RADIUS*2;
+        return offsetX;
+    }
+
+    var canvas = document.getElementById("canvas");
+    canvas.width=WINDOW_WIDTH;
+    canvas.height=WINDOW_HEIGHT;
+    context = canvas.getContext("2d");
+
+    //记录当前绘制的时刻
+    var currentDate = new Date();
+
+    setInterval(function(){
+        //清空整个Canvas，重新绘制内容
+        context.clearRect(0, 0, context.canvas.width, context.canvas.height);
+        drawDatetime(context);
+    }, 50)
+})();
+</script>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+
+     <!-- 此处为新加的代码 -->
+     
+<script src="https://my.openwrite.cn/js/readmore.js" type="text/javascript"></script>
+<script>
+    const btw = new BTWPlugin();
+    btw.init({
+        id: 'yourbatman',
+        blogId: '10059-1591593090091-727',
+        name: 'BAT的乌托邦',
+        qrcode: 'https://img-blog.csdnimg.cn/20200511100304545.jpg',
+        keyword: 'vip',
+    });
+</script>
+
+
+     <script src="https://cdn.staticfile.org/jquery/3.1.1/jquery.min.js"></script>
+<script>
+    //暂时储存文章中的内容
+    var div = $('.post-body');
+    //暂时储存目录的内容
+    var toc=$('.post-toc')
+    function password() {
+        if(''){
+            //将文章内容删除
+            div.remove();
+            //将目录删除
+            toc.remove();
+            //将文章删除后，向原来文章的地方添加，应该出现的提示用户输入密码的样式
+            //下面这里的第一个用textarea是因为如果在手机端的时候只能显示一部分文字，
+            //只是拓展:input里面的字只能显示一行，不会自动换行，目前上网搜索没有发现好的办法，所以用了textarea，右下角的小三角通过resize:none 去掉。
+            $('.post-header').after(
+            '<span class="description" value="请输入密码，然后按 Enter 键阅读全文" style="font-style: oblique;font-weight: bold;border: none;display: block;'+
+            'width: 60%;margin: 0 auto;text-align: center;outline: none;margin-bottom: 40px;resize:none; margin-top: 20px;">'+
+            '<i class="fa fa-heartbeat" id="myheartbeat"></i>'+
+            '请输入密码，然后按 Enter 键阅读全文' +
+            '<i class="fa fa-heartbeat" id="myheartbeat"></i>'+
+            '</span>' +
+            '<div class="qiang" style="height: 100px;width: 60%;margin:0 auto">' +
+            '<input class="password"  type="password" autocomplete="new-password" autofocus="autofocus" value="" style="border-radius: 5px;height: 30px;border: none;display: block;border-bottom: 1px solid #ccc;' +
+            'margin: 0 auto;outline: none;width:95%"/>' +
+            '</div>')
+            //绑定点击事件，如果是点击的.password 这个div就改变样式，如果是document中除了div之外的其他任何元素，就变回原来的样式。
+            document.onclick = function (event) {
+                var e = event || window.event;
+                var elem = e.srcElement || e.target;
+
+                while (elem) {
+                    if (elem != document) {
+                        if (elem.className == "password") {
+                            //$(".password").animate({paddingTop:"30px",width:"100%",borderWidth:"2px"},300)
+                            return;
+                        }
+                        elem = elem.parentNode;
+                    } else {
+                        //$(".password").animate({paddingTop:"0px",width:"95%",borderWidth:"1px"},300)
+                        return;
+                    }
+                }
+            }
+            //绑定enter键按下后离开的事件
+            $(document).keyup(function(event){
+                if(event.keyCode ==13&&$('.password').length>0){
+                    //console.log($('.password').val())
+                    //console.log('')
+                    if ($('.password').val() == '') {
+                        //恢复文章内容
+                        (div).appendTo($(".post-header"))
+                        //恢复目录
+                        toc.appendTo($(".sidebar-inner"))
+                        //删除本页面的输入密码组件
+                        $(".description").remove();
+                        $(".qiang").remove();
+                        $(".password").remove();
+
+                        //重新处理pjax事件,如果没有加pjax的从下面这行起到下面的else之间的代码需要去掉。
+                        //图片懒加载，没有加入此功能的这个函数需要去掉
+                        $('img').lazyload({
+                            placeholder: '/images/loading.gif',
+                            effect: 'fadeIn',
+                            threshold : 100,
+                            failure_limit : 20,
+                            skip_invisible : false
+                        });
+                        //pjax后出现文章不显示，没有pjax的下面四行需要去掉
+                        $(".post-block").css({opacity:1});
+                        $(".post-header").css({opacity:1});
+                        $(".post-body").css({opacity:1});
+                        $(".pagination").css({opacity:1});
+                    }else {
+                        alert("密码不对，请重新输入~")
+                    }
+                }
+                //将document的keyup移除，防止在pjax的情况下会重复绑定事件
+            });
+        }
+    }
+    password();
+</script>
+
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        <!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<span id="times" style="margin-right: 10px;">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("05/03/2020 12:00:00");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "小破站已苟活"+dnum+"天";
+        document.getElementById("times").innerHTML = hnum + "小时" + mnum + "分" + snum + "秒";
+    }
+    setInterval("createtime()",250);
+
+    // 自定义邮箱审核规则（目前校验：邮箱必填，且格式必须正确 昵称也必须填写）
+    document.body.addEventListener('click', function(e) {
+        if (e.target.classList.contains('vsubmit')) {
+            const email = document.querySelector('input[type=email]');
+            const nick = document.querySelector('input[name=nick]');
+            const reg = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+            if (!email.value || !nick.value || !reg.test(email.value)) {
+                const str = `<div class="valert text-center"><div class="vtext">请填写正确的昵称和邮箱！</div></div>`;
+                const vmark = document.querySelector('.vmark');
+                vmark.innerHTML = str;
+                vmark.style.display = 'block';
+                setTimeout(function() {
+                    vmark.style.display = 'none';
+                    vmark.innerHTML = '';
+                }, 2500);
+            }
+        }
+    })
+</script>
+  <span class="beian"><a href="http://www.beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备12009483号 </a>
+  </span>
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">A哥(YourBatman)</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">本站总字数：</span>
+    <span title="本站总字数">446k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">本站总阅读时长 &asymp;</span>
+    <span title="本站总阅读时长">6:45</span>
+</div>
+  <div class="addthis_inline_share_toolbox">
+    <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5eb7b6f6b64d54f6" async="async"></script>
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        承蒙 <span id="busuanzi_value_site_uv"></span> 位朋友
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        共造访本站 <span id="busuanzi_value_site_pv"></span> 次
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+  <script>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id    : 25645,
+      el    : 'wpac-rating',
+      color : 'fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+  <script src="//code.tidio.co/imnhfpyrju0tgipwdxke6moou6p9kbdu.js"></script>
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 1, // 打开或关闭导航空格和选项卡 1:打开 0:关闭
+    scrollbar: 1, // 打开/关闭滚动条
+    toolbar  : 1, // 打开/关闭工具栏
+    statusbar: 1, // 打开或关闭状态栏
+    pagemode : 'thumbs', // 侧边栏状态，显示书签或缩略图 接受值：none，thumbs，bookmarks，attachments
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+
+  
+
+  
+
+
+  <!-- 自定义的js效果 -->
+  <script type="text/javascript">
+    (function() {
+var a_idx = 0;
+ 
+        $("body").click(function(e) {
+            //var a = new Array(
+            //    "富强", "民主", "文明", "和谐",
+            //    "自由", "平等", "公正", "法治",
+            //    "爱国", "敬业", "诚信", "友善"
+            //    );
+            var a = new Array(
+            "耕耘","挑灯","悬梁","废寝",
+            "映雪","刺骨","囊萤","凿壁",
+            "勤奋","刻苦","打拼","砥砺");
+
+            var $i = $("<span/>").text(a[a_idx]);
+            a_idx = (a_idx + 1) % a.length;
+            var x = e.pageX,
+            y = e.pageY;
+            $i.css({
+                "z-index": 144469,
+                "top": y - 20,
+                "left": x,
+                "position": "absolute",
+                "font-weight": "bold",
+                "color": "#f00"
+            });
+            $("body").append($i);
+            $i.animate({
+                "top": y - 180,
+                "opacity": 0
+            },
+            1500,
+            function() {
+                $i.remove()
+            })
+        });
+    })();
+  </script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'GL1AoYvDSErHS8idMvn35STX-gzGzoHsz',
+      appKey     : 'flstBFF7gvWX8emTwJooV0bB',
+      placeholder: "各位道友📢📢📢：&#10;1、填写昵称和【正确邮箱号】；&#10;2、有邮箱可收到回复的邮件提醒；&#10;3、礼貌言辞，拒绝黄赌毒；",
+      avatar     : 'robohash',
+      meta       : guest,
+      pageSize   : '6' || 10,
+      visitor    : true,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

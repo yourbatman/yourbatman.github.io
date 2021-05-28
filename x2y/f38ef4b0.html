@@ -1,0 +1,1595 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="baidu-site-verification" content="FdPXpeNylP">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.yourbatman.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},"motion":{"enable":false,"async":true,"transition":{"post_block":"flipBounceYIn","post_header":"flipXIn","post_body":"flipBounceXIn","coll_header":"expandIn","sidebar":"shrinkIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="再见了Netflix，你好Spring Cloud">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring Cloud 2020.0.0正式发布，再见了Netflix">
+<meta property="og:url" content="https://www.yourbatman.cn/x2y/f38ef4b0.html">
+<meta property="og:site_name" content="BAT的乌托邦">
+<meta property="og:description" content="再见了Netflix，你好Spring Cloud">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201223221110542.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201223185627672.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201223213749175.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2020122406543886.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201223214028434.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201223214714540.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2020122321485778.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201223233224440.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2020122400165972.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201224000042869.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201224004316321.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201224012523158.png#pic_center">
+<meta property="article:published_time" content="2020-12-28T00:02:42.000Z">
+<meta property="article:modified_time" content="2021-04-30T13:32:41.875Z">
+<meta property="article:author" content="A哥(YourBatman)">
+<meta property="article:tag" content="BAT的乌托邦">
+<meta property="article:tag" content="A哥">
+<meta property="article:tag" content="YourBatman">
+<meta property="article:tag" content="Spring Cloud">
+<meta property="article:tag" content="Netflix">
+<meta property="article:tag" content="Spring Cloud Loadbalancer">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20201223221110542.png#pic_center">
+
+<link rel="canonical" href="https://www.yourbatman.cn/x2y/f38ef4b0.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Spring Cloud 2020.0.0正式发布，再见了Netflix | BAT的乌托邦</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?2ad49a2290d0249428335633c45e2806";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">BAT的乌托邦</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">当大潮退去，才知道谁在裸泳</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于A哥/留言板</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">64</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>专栏<span class="badge">15</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>时间轴<span class="badge">56</span></a>
+
+  </li>
+        <li class="menu-item menu-item-top">
+
+    <a href="/top/" rel="section"><i class="fa fa-signal fa-fw"></i>热门文章</a>
+
+  </li>
+        <li class="menu-item menu-item-books">
+
+    <a href="/books/" rel="section"><i class="fa fa-book fa-fw"></i>图书馆</a>
+
+  </li>
+        <li class="menu-item menu-item-links">
+
+    <a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友情债</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="请输入关键字检索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/yourbatman" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+
+        <!~- 跳转到新站点 start... -->
+        <div style="width: 90%;margin-left: 5%;font-size: 24px;color: yellow;font-weight: bolder; margin-bottom: -20px;">
+          <marquee behavior="alternate" hspace="hexo50px" onMouseOut="this.start()" onMouseOver="this.stop()">
+            本站点已归档（不再维护），点击立即前往新站点：
+              <a href="https://yourbatman.cn" target="_self" title="前往新站点" style="color:whitesmoke;text-decoration: underline;">
+                https://yourbatman.cn
+              </a>
+          </marquee>
+        </div>
+        <!~- 跳转到新站点 end... -->
+
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  
+    <div id="yourbatman">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.yourbatman.cn/x2y/f38ef4b0.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://img-blog.csdnimg.cn/20200511100304592.jpg">
+      <meta itemprop="name" content="A哥(YourBatman)">
+      <meta itemprop="description" content="我这有故事，你那有酒吗？">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BAT的乌托邦">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Spring Cloud 2020.0.0正式发布，再见了Netflix
+        </h1>
+
+        <div class="post-meta">
+          <!-- 精品文章 精华帖 -->
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-12-28 08:02:42" itemprop="dateCreated datePublished" datetime="2020-12-28T08:02:42+08:00">2020-12-28</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">收录于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%96%B0%E7%89%B9%E6%80%A7/" itemprop="url" rel="index"><span itemprop="name">新特性</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/x2y/f38ef4b0.html" class="post-meta-item leancloud_visitors" data-flag-title="Spring Cloud 2020.0.0正式发布，再见了Netflix" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">评论数：</span>
+    
+    <a title="valine" href="/x2y/f38ef4b0.html#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/x2y/f38ef4b0.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+          <!-- 置顶 可以写top:true  也可以写数字top:1/2/3  顺序规则同Spring-->
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>8.6k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>8 分钟</span>
+            </span>
+
+          <!-- 本文作者 -->
+          <span class="post-meta-item" title="阅读时长">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-user fa-fw"></i>
+            </span>
+            <span class="post-meta-item-text">本文作者：</span>
+            <a href="/about/" itemprop="url" rel="index">
+              <span>A哥(YourBatman)</span>
+            </a>
+          </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img data-src="https://img-blog.csdnimg.cn/20201223221110542.png#pic_center" alt=""></p>
+<blockquote>
+<p>分享、成长，拒绝浅藏辄止。关注公众号【<strong>BAT的乌托邦</strong>】，回复关键字<code>专栏</code>有Spring技术栈、中间件等小而美的<strong>原创专栏</strong>供以免费学习。本文已被 <a href="https://www.yourbatman.cn">https://www.yourbatman.cn</a> 收录。</p>
+</blockquote>
+<h1 id="✍前言"><a href="#✍前言" class="headerlink" title="✍前言"></a>✍前言</h1><p>你好，我是YourBatman。</p>
+<p>北京时间2020-12-22深夜，<code>Spring Cloud 2020.0.0</code>版本正式发布。2020.0.0是第一个使用新版本方案的Spring Cloud发行版本。</p>
+<p>关于版本号这里啰嗦几句：在这之前，Spring Cloud的Release Train名称采用的是伦敦地铁站命名方式，如：Hoxton、Greenwich等。</p>
+<blockquote>
+<p>说明：2020.0.0版本又名<code>Ilford</code>（地铁站名），因为此项目3月后才按照新规更名，估计是为了团队内沟通方便吧，你也可以理解为它仅是一个内部代号而已，方便沟通</p>
+</blockquote>
+<p>虽按照字母表顺序排列，但仍存在两个致命问题：</p>
+<ul>
+<li>对非英语<strong>母语</strong>国家（比如天朝）非常不友好，无法快速理清版本号关系</li>
+<li>A-Z，倘若版本号到Z了呢？如何继续发展？你品，你细品</li>
+</ul>
+<p><img data-src="https://img-blog.csdnimg.cn/20201223185627672.png#pic_center" alt=""></p>
+<p>Spring团队意识到了这的确是个问题，因此在今年3月份作出了<strong>改变</strong>。详情参考我前面写的一篇文章（<strong>强烈建议</strong>每个进来的你都了解下这次规则变更）：<a href="https://mp.weixin.qq.com/s/ZoUG9h1TndW2QpnPyGeIQA" target="_blank" rel="noopener">Spring改变版本号命名规则：此举对非英语国家很友好</a></p>
+<blockquote>
+<p>说明：版本号规则变更适用于所有Spring技术栈，包含Spring Framework、Spring Boot、Spring Cloud、Spring Data…</p>
+</blockquote>
+<p>文归正传。Spring Cloud早在年初就启动了该版本的研发工作，并在今年4月份就已经发布了其2020.0.0-M1版本（第一个里程碑版本），直到离2020年结束不到10天了才“憋出”大招，正式RELEASE。</p>
+<p>Spring Cloud作为构建在Spring Boot之上的云计算框架，我觉得本次难产的原因主要有二：</p>
+<ol>
+<li>Spring Boot 2.4.0版本2020-11-12才正式RELEASE（Spirng Framework 5.3.0版本2020-10-27才RELEASE）<ol>
+<li><a href="https://mp.weixin.qq.com/s/Sw6EqAY0DmF-p2qPoaetUg" target="_blank" rel="noopener">Spring Framework 5.3.0正式发布，在云原生路上继续发力</a></li>
+<li><a href="https://mp.weixin.qq.com/s/KywpJkLDHZbZTxUf4WFxhw" target="_blank" rel="noopener">Spring Boot 2.4.0正式发布，全新的配置文件加载机制（不向下兼容）</a></li>
+</ol>
+</li>
+<li>改动确实太大，研发、测试、文档编写工作量都是巨大的</li>
+</ol>
+<p>从Spring Framework、Spring Boot、Spring Cloud三者的发版线路图再一次验证了我的那句话：<strong>你对Spring Cloud多了解源自于你对Spring Boot有多了解，你对Spring Boot多了解源自于你对Spring Framework有多了解</strong>。这就是为何我文章花大量笔墨在Spring Framework上而非Spring Boot上的根本原因，底层通透了，上层运用自如。</p>
+<p><img data-src="https://img-blog.csdnimg.cn/20201223213749175.png#pic_center" alt=""></p>
+<h2 id="版本约定"><a href="#版本约定" class="headerlink" title="版本约定"></a>版本约定</h2><ul>
+<li>Spring Framework：5.3.2</li>
+<li>Spring Boot：2.4.1</li>
+<li>Spring Cloud：2020.0.0<ul>
+<li>以上版本为SC“携带”的版本</li>
+</ul>
+</li>
+</ul>
+<p><img data-src="https://img-blog.csdnimg.cn/2020122406543886.png#pic_center" alt=""></p>
+<h1 id="✍正文"><a href="#✍正文" class="headerlink" title="✍正文"></a>✍正文</h1><p>有个有趣的现象，截止稿前（2020-12-23 22:00:00）<strong>官网</strong>还并未同步标注好当前最新版本为2020.0.0版（如图）：</p>
+<p><img data-src="https://img-blog.csdnimg.cn/20201223214028434.png#pic_center" alt=""></p>
+<p>其实早在24h之前官方博客就做出了发版宣告：</p>
+<p><img data-src="https://img-blog.csdnimg.cn/20201223214714540.png#pic_center" alt=""></p>
+<p>并且Maven中央仓库也已存在最新Jar包（证明你正常引包、使用是没问题的了）：</p>
+<p><img data-src="https://img-blog.csdnimg.cn/2020122321485778.png#pic_center" alt=""></p>
+<p>其实，文档层面不止官网这一处没有sync最新版本，我就不一一例举，毕竟不太重要。针对此现象我yy一下，是不是Spring Cloud团队缺人人手不够用呢？请问社招吗？O(∩_∩)O哈哈~</p>
+<h2 id="Spring-Cloud版本管理"><a href="#Spring-Cloud版本管理" class="headerlink" title="Spring Cloud版本管理"></a>Spring Cloud版本管理</h2><p>版本管理对于软件开发来说太重要，在Spring Boot出现之前依赖关系、版本管理让人着实头大（即使有Spring BOM存在），特别是当出现版本<strong>不适配</strong>时很容易就偷走你一下午甚至一整天的时间。</p>
+<p>Spring Cloud作为上层应用框架，底层版本匹配了才能正常work，其中最主要就是和Spring Boot的版本号要对齐。</p>
+<h3 id="与Spring-Boot版本对应关系"><a href="#与Spring-Boot版本对应关系" class="headerlink" title="与Spring Boot版本对应关系"></a>与Spring Boot版本对应关系</h3><p>Spring Boot的出现和流行大大缓解了上述些情况，但使用起Spring Cloud时它和Spring Boot的版本对应关系依旧是需要<strong>特别关注</strong>的。为此我帮你总结出了这个表格：</p>
+<table>
+<thead>
+<tr>
+<th>Release Train</th>
+<th>发布时间</th>
+<th>Spring Boot版本</th>
+<th>SC Commons版本</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>2020.0.x</strong></td>
+<td><strong>2020-12</strong></td>
+<td><strong>2.4.x</strong></td>
+<td><strong>3.0.0</strong></td>
+</tr>
+<tr>
+<td>Hoxton</td>
+<td>2019-07</td>
+<td>2.2.x, 2.3.x (从SR5起)</td>
+<td>2.2.x</td>
+</tr>
+<tr>
+<td>Greenwich</td>
+<td>2018-11</td>
+<td>2.1.x</td>
+<td>2.1.x</td>
+</tr>
+<tr>
+<td>Finchley</td>
+<td>2017-10</td>
+<td><strong>2.0.x</strong></td>
+<td>2.0.x</td>
+</tr>
+<tr>
+<td>Edgware</td>
+<td>2017-08</td>
+<td>1.5.x</td>
+<td>1.3.x</td>
+</tr>
+<tr>
+<td>Dalston</td>
+<td>2017-05</td>
+<td>1.5.x</td>
+<td>1.2.x</td>
+</tr>
+<tr>
+<td>Brixton</td>
+<td>2016-09</td>
+<td>1.3.x</td>
+<td>1.1.x</td>
+</tr>
+<tr>
+<td>Angel</td>
+<td>2016-05</td>
+<td>1.2.x</td>
+<td>1.0.x</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>说明：对于Spring Cloud内部组件、Spring Boot、Spirng Framework、Security等这个庞大体系的版本对照关系，文章已整理好，下篇发出，请记得搜藏哦</p>
+</blockquote>
+<p>特别提醒：<code>spring-cloud-starter-loadbalancer</code>是伴随着Spring Cloud Commons 2.2.0版本才开始商用的（Hoxton版本），这个版本节点请稍微关注下，因为它替代了Ribbon。</p>
+<h3 id="当前支持的版本"><a href="#当前支持的版本" class="headerlink" title="当前支持的版本"></a>当前支持的版本</h3><p>Spring Cloud遵循<strong>Pivotal OSS support policy</strong> 协议对<strong>主要版本</strong>提供3年的支持。此外，在Spring Cloud的主要或次要版本发布后，若存在严重的bug和安全问题，就会再维护一段时间（6-12个月不等）。</p>
+<blockquote>
+<p>特别注意：这里指的<strong>主要版本</strong>才是3年，主要版本可不常有的哦</p>
+</blockquote>
+<p>现在2020.0.0版本已发布，又到了淘汰的时候。现在Spring Cloud官方还会支持的版本有：</p>
+<ul>
+<li><strong>2020.0版本</strong>：（支持Spring Boot 2.4.x）它是<strong>主要版本</strong>，按计划会支持到2023年12月份<ul>
+<li>它是自Finchley后的又一主要版本</li>
+</ul>
+</li>
+<li><strong>Hoxton版本</strong>：（支持Spring Boot 2.2.x和2.3.x）作为Finchley发行系列的一个次要版本，它的常规维护将持续到2021年6月底。从2020-07开始进入到特殊维护期（不加新功能，只改紧急bug），2021-12月底就只会发布重大错误/安全补丁了</li>
+<li><strong>Greenwich版本</strong>：（支持Spring Boot 2.1.x）2020-01就停止维护了，2020-12-31号也将终结它的特殊维护期</li>
+<li><strong>Finchley版本</strong>：（支持Spring Boot 2.0.x）它是一个<strong>主要版本</strong>的开始，2018年发布</li>
+<li><strong>更老版本</strong>：嗯，忘了吧</li>
+</ul>
+<p><img data-src="https://img-blog.csdnimg.cn/20201223233224440.png#pic_center" alt=""></p>
+<p>Spring官方<strong>建议</strong>：尽量使用最新版本。不过建议归建议，作为只使用<strong>晚期大众</strong>技术的我们，坐在第二排甚至第三排看戏才有安全感。但历史的巨浪总归会把前排淘汰，因此早点做足准备总是好的，不至于时至被推至前排时只能<strong>裸泳</strong>。</p>
+<p>Spring Cloud 2020.0作为一个<strong>主要版本</strong>，带来了众多显著的变化，其中进行了一些阻断式更新（不向下兼容）是本文最大看点，来吧上菜。</p>
+<h2 id="阻断式升级（不向下兼容）"><a href="#阻断式升级（不向下兼容）" class="headerlink" title="阻断式升级（不向下兼容）"></a>阻断式升级（不向下兼容）</h2><p>差不多在去年（2019年）的这个时候，Spring Cloud在其Roadmap（之前文章有介绍过）里就宣布将要<strong>终结</strong>的一些库/版本，其中最重要的就是指<strong>Spring Cloud Netflix项目进入维护模式</strong>，然后计划在2020年完全移除。</p>
+<p>Spring Cloud做出这样的决定其实也是“被迫的”。我们知道Spring Cloud一直以来把<code>Netflix OSS</code>套件作为其官方默认的一站式解决方案，那时的Netflix OSS套件恨不得可以跟Spring Cloud划等号。奈何呀，Netflix公司在2018年前后宣布其核心组件Hystrix、Ribbon、Zuul、Archaius等均进入<strong>维护状态</strong>。</p>
+<blockquote>
+<p>虽然有Zuul 2.x，Archaius 2.x，但它们均不能向下兼容，无法平滑升级，因此几乎等于无法使用</p>
+</blockquote>
+<p>从2018年至今处于维护状态的模块有（包括其对应的starter，此处并未列出）：</p>
+<ol>
+<li>spring-cloud-netflix-archaius</li>
+<li>spring-cloud-netflix-hystrix-contract</li>
+<li>spring-cloud-netflix-hystrix-dashboard</li>
+<li>spring-cloud-netflix-hystrix-stream</li>
+<li>spring-cloud-netflix-hystrix</li>
+<li>spring-cloud-netflix-ribbon</li>
+<li>spring-cloud-netflix-turbine-stream</li>
+<li>spring-cloud-netflix-turbine</li>
+<li>spring-cloud-netflix-zuul</li>
+</ol>
+<h3 id="1、再见了，Netflix"><a href="#1、再见了，Netflix" class="headerlink" title="1、再见了，Netflix"></a>1、再见了，Netflix</h3><p>时至今日，Spring Cloud 2020.0正式发布，在这个主要版本里，按既定计划终于对<code>spring-cloud-netflix</code>动刀了。我帮你画了幅<code>spring-cloud-netflix-dependencies</code>的xml文件前后版本主要差异的对比图，一目了然：</p>
+<p><img data-src="https://img-blog.csdnimg.cn/2020122400165972.png#pic_center" alt=""></p>
+<ul>
+<li><code>spring-cloud-netflix-dependencies</code>没有消失哦，它依旧存在，版本号跟随大部队升级为3.0.x版本</li>
+<li>旧版本的<code>spring-cloud-netflix-dependencies</code>管理着Netflix所有组件，包括Hystrix、Ribbon、Zuul、Eureka等。而自2020.0版本起，<strong>它有且只管理Eureka（包括Server和Client）</strong></li>
+</ul>
+<blockquote>
+<p>解释说明：Feign虽然最初属Netflix公司，但从9.x版本开始就移交给OpenFeign组织管理了，因此不再划入Netflix管辖范畴</p>
+</blockquote>
+<p>简单一句话概括：Spring Cloud 2020.0.0版本<strong>彻底删除</strong>掉了Netflix除Eureka外的<strong>所有</strong>组件。至此，我们怀着感恩的心可以对Netflix OSS套件道一声谢谢，并可以对它说再见了。</p>
+<p><img data-src="https://img-blog.csdnimg.cn/20201224000042869.png#pic_center" alt=""></p>
+<blockquote>
+<p>说明：Netflix的Eureka项目仍旧是活跃状态，这个注册中心设计上还是蛮优秀的，综合表现尚可，市场上竞争力依旧可圈可点，因此Spring Cloud暂还未放弃它</p>
+</blockquote>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-netflix-eureka-client<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="Netflix组件替代方案"><a href="#Netflix组件替代方案" class="headerlink" title="Netflix组件替代方案"></a>Netflix组件替代方案</h4><p>Spring Cloud既然把Netflix OSS套件大刀阔斧的砍掉了，那总归得有替代方案吧。那是必然的，Spring Cloud团队给我们推荐了用于替代的产品：</p>
+<table>
+<thead>
+<tr>
+<th>Netflix</th>
+<th>推荐替代品</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Hystrix</td>
+<td>Resilience4j</td>
+<td>Hystrix自己也推荐你使用它代替自己</td>
+</tr>
+<tr>
+<td>Hystrix Dashboard / Turbine</td>
+<td>Micrometer + Monitoring System</td>
+<td>说白了，监控这件事交给更专业的组件去做</td>
+</tr>
+<tr>
+<td>Ribbon</td>
+<td>Spring Cloud Loadbalancer</td>
+<td>忍不住了，Spring终究亲自出手</td>
+</tr>
+<tr>
+<td>Zuul 1</td>
+<td>Spring Cloud Gateway</td>
+<td>忍不住了，Spring终究亲自出手</td>
+</tr>
+<tr>
+<td>Archaius 1</td>
+<td>Spring Boot外部化配置 + Spring Cloud配置</td>
+<td>比Netflix实现的更好、更强大</td>
+</tr>
+</tbody></table>
+<h5 id="Spring-Cloud-LoadBalancer是什么？"><a href="#Spring-Cloud-LoadBalancer是什么？" class="headerlink" title="Spring Cloud LoadBalancer是什么？"></a>Spring Cloud LoadBalancer是什么？</h5><p>以上替代品中，你可能最陌生、最好奇的是<code>Spring Cloud Loadbalancer</code>，它一度只是Spring Cloud <strong>孵化器</strong>里的一个小项目，并且一度搁浅。后再经过重启，发展，现行使其伟大使命，正式用于<strong>完全替换</strong> Ribbon，成为Spring Cloud负载均衡器<strong>唯一实现</strong>。</p>
+<p>值得注意的是：Spring Cloud LoadBalancer首次引入是在Spring Cloud Commons 2.2.0时，也就是Hoxton发布时就引入了，只不过那会还只是备胎/备选，默认依旧是Ribbon挑大梁。下截图是在Hoxton版本的情况：</p>
+<p><img data-src="https://img-blog.csdnimg.cn/20201224004316321.png#pic_center" alt=""></p>
+<p>如图，负载均衡抽象<code>LoadBalancerClient</code>接口有两个实现，而到了Spring Cloud 2020.0版本后，<code>BlockingLoadBalancerClient</code>就是唯一实现了。</p>
+<blockquote>
+<p>关于spring-cloud-loadbalancer负载均衡器的使用，官方有个极其建议教程：<a href="https://spring.io/guides/gs/spring-cloud-loadbalancer。有兴趣可自己玩玩，若没兴趣，那就关注我后面文章分析吧，我会专程介绍它的" target="_blank" rel="noopener">https://spring.io/guides/gs/spring-cloud-loadbalancer。有兴趣可自己玩玩，若没兴趣，那就关注我后面文章分析吧，我会专程介绍它的</a></p>
+</blockquote>
+<h4 id="Spring-Cloud-Alibaba是否可作为替代方案？"><a href="#Spring-Cloud-Alibaba是否可作为替代方案？" class="headerlink" title="Spring Cloud Alibaba是否可作为替代方案？"></a>Spring Cloud Alibaba是否可作为替代方案？</h4><p>嗯，也可以。</p>
+<p>不过它目前来说并不是Spring Cloud官方的推荐的默认方案。期待国人一起努力，能早日送Spring Cloud Alibaba上去，让歪果仁用上咱天朝的框架，提issue必须用中文O(∩_∩)O哈哈~。</p>
+<h4 id="显示导入Netflix包还能否正常work？"><a href="#显示导入Netflix包还能否正常work？" class="headerlink" title="显示导入Netflix包还能否正常work？"></a>显示导入Netflix包还能否正常work？</h4><p>既想升级到最新版本的Spring Cloud，又想保持向下兼容使用Netflix的技术。虽说spring-cloud-netflix-dependencies里不再包含netflix的核心组件，那我手动导包并指定版本号行不行？能否正常work呢？</p>
+<p><strong>答</strong>：我拍脑袋就给你个答案，<strong>不行</strong>。既然我没论证过，但这么使用太畸形了，此方案应被枪毙在萌芽中，不应该有。</p>
+<p>另外，从此事也告诉我们：使用Spring Cloud时尽量面向它的<strong>抽象</strong>编程，这样即使Spirng Cloud换底层组件（如换熔断器、负载均衡器）等等，理论上对我们业务是无影响或者影响很小的，这都得益于它的Spring Cloud Commons抽象，那里是精华。</p>
+<h3 id="2、Bootstrap上下文默认不再启动"><a href="#2、Bootstrap上下文默认不再启动" class="headerlink" title="2、Bootstrap上下文默认不再启动"></a>2、Bootstrap上下文默认不再启动</h3><p>知晓原理的同学知道，Spring Cloud容器是靠<code>Bootstrap Context</code>引导上下文来启动的，对应的类是<code>BootstrapApplicationListener</code>。</p>
+<p>这在2020.0版本发生了改变，<strong>新版本的Spring Cloud不再依赖于此上下文而启动</strong>。因此默认情况下，将不再启动Bootstrap上下文。代码层面的改变发生在这里：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">BootstrapApplicationListener：</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onApplicationEvent</span><span class="params">(ApplicationEnvironmentPreparedEvent event)</span> </span>&#123;</span><br><span class="line">		ConfigurableEnvironment environment = event.getEnvironment();</span><br><span class="line">		<span class="comment">// 在方法开头加了这麽个判断</span></span><br><span class="line">		<span class="keyword">if</span> (!bootstrapEnabled(environment) &amp;&amp; !useLegacyProcessing(environment)) &#123;</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		...</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">PropertyUtils：</span><br><span class="line"></span><br><span class="line">	<span class="comment">// BOOTSTRAP_ENABLED_PROPERTY = spring.cloud.bootstrap.enabled</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">bootstrapEnabled</span><span class="params">(Environment environment)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> environment.getProperty(BOOTSTRAP_ENABLED_PROPERTY, Boolean<span class="class">.<span class="keyword">class</span>, <span class="title">false</span>) || <span class="title">MARKER_CLASS_EXISTS</span></span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// USE_LEGACY_PROCESSING_PROPERTY = spring.config.use-legacy-processing</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">useLegacyProcessing</span><span class="params">(Environment environment)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> environment.getProperty(USE_LEGACY_PROCESSING_PROPERTY, Boolean<span class="class">.<span class="keyword">class</span>, <span class="title">false</span>)</span>;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="开启方式"><a href="#开启方式" class="headerlink" title="开启方式"></a>开启方式</h4><p>若你需要开启Bootstrap上下文，有两种办法可以实现：</p>
+<ol>
+<li>设置值<code>spring.cloud.bootstrap.enabled=true</code>或者 <code>spring.config.use-legacy-processing=true</code>即可。注意：这些个属性值必须确保其能放进环境里才能生效。比如靠谱的方式是：系统属性、环境变量、命令行等</li>
+<li>引入一个Jar：<code>org.springframework.cloud:spring-cloud-starter-bootstrap</code>，然后什么都不用做了<ol>
+<li>说明：这个jar里面有且仅有一个<code>Marker</code>类，作用你懂的，此处不做过多解释</li>
+</ol>
+</li>
+</ol>
+<blockquote>
+<p>说明：手动开启Bootstrap上下文，证明你fallback到老的方式去加载SC，那么一切请按照老方式做即可</p>
+</blockquote>
+<h3 id="3、全新的配置方式"><a href="#3、全新的配置方式" class="headerlink" title="3、全新的配置方式"></a>3、全新的配置方式</h3><p>得益于Spring Boot 2.4.x支持全新的配置文件书写方式，自此可以使用<code>spring.config.import</code>俩导入其它组建的配置。如：</p>
+<ul>
+<li>spring.config.import=configserver:xxx</li>
+<li>spring.config.import=zookeeper:</li>
+<li>…</li>
+</ul>
+<p>这么做更具模块化，更符合云原生环境的要求。</p>
+<h3 id="4、其它"><a href="#4、其它" class="headerlink" title="4、其它"></a>4、其它</h3><ul>
+<li>之前若要禁用Spring Cloud Config Client端的健康指示用的是<code>health.config.enabled=false</code>，现改为<code>management.health.config.enabled=false</code>。保持了和Spring Boot控制端点风格一致</li>
+<li>带有无效字符(破折号)的端点id已经改为符合标准的了，自此启动时再也没有讨厌的警告了，拯救洁癖者。<ul>
+<li>bus-env -&gt; busenv</li>
+<li>bus-refresh -&gt; busrefresh</li>
+<li>service-registry -&gt; serviceregistry</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// old</span></span><br><span class="line"><span class="meta">@Endpoint</span>(id = <span class="string">"service-registry"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ServiceRegistryEndpoint</span> </span>&#123; ... &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// new</span></span><br><span class="line"><span class="meta">@Endpoint</span>(id = <span class="string">"serviceregistry"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ServiceRegistryEndpoint</span> </span>&#123; ... &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="常规式升级"><a href="#常规式升级" class="headerlink" title="常规式升级"></a>常规式升级</h2><p>常规升级这块关注点就没那么多了，主要对其组件如<code>Spring Cloud Commons、Spring Cloud Kubernetes、Spring Cloud Openfeign...</code>等做些常规升级，乏善可陈。</p>
+<p>值得关注的一点：Spirng Cloud所有的Module版本号均升级到了<code>3.0.0</code>（大版本号的升级），除Spring Cloud Circuitbreaker/Spring Cloud Kubernetes（2.0.0）和Spring Cloud Task（2.3.0）之外。</p>
+<h2 id="仍旧存在的问题"><a href="#仍旧存在的问题" class="headerlink" title="仍旧存在的问题"></a>仍旧存在的问题</h2><p>虽然2020.0已经RELEASE了，但是仍存在着未解决的问题，例举几个此版本<strong>现存</strong>的问题：</p>
+<ul>
+<li>若使用<code>spring.config.import=configserver:</code>来配置配置中心，此版本漏掉了支持retry参数<ul>
+<li>解决方案：若你要使用的话，你只得fallback到传统方式喽（写在bootstrap.yaml里）</li>
+</ul>
+</li>
+<li><code>spring-cloud-config-dependencies</code>里出现了一个非release版本的jar（具体看下截图）<ul>
+<li>解决方案：手动指定该jar的版本号</li>
+</ul>
+</li>
+</ul>
+<p><img data-src="https://img-blog.csdnimg.cn/20201224012523158.png#pic_center" alt=""></p>
+<blockquote>
+<p>说明：M1属于里程碑版本，还属于较为早起阶段，可能存在bug，建议你使用时手动指定版本号替换掉这个jar</p>
+</blockquote>
+<p>看来即使强如Spring团队，也会出现各种各样的纰漏呀。这么一想的话，我又敢放心大胆的回去写bug去喽。</p>
+<h1 id="✍总结"><a href="#✍总结" class="headerlink" title="✍总结"></a>✍总结</h1><p>Spring Cloud 2020.0.0是Spring Cloud的<strong>主要版本</strong>，是非常重要的存在，升级、改变也是巨大的。特别体现在Netflix模块的全部移除、Spring Cloud启动方式变了等等。伴随着Spring Boot 2.4.x以及Spirng Cloud 2020.0的发布，并且弃用Netflix OSS套件后，必将走入一个新的<strong>深度编程</strong>体验，满怀惊喜，很是期待。</p>
+<blockquote>
+<p>说明：因为此版本完全摈弃掉了Netflix的一套东西，为了跟上时代，我会使用一段时间后，尽快写出最新版本的系列教程，助你少踩坑</p>
+</blockquote>
+<p>文末有提到2020.0版本虽已发布，但仍旧存在些问题。不过话说回来，那些都属于很小的问题，可能在下个小版本里就得到修复。但尴尬的是，距离2020年结束只有不到10天了，倘若进入到了2021年，按照版本号命名新规，彼时发出的版本将不能再叫2020.x.x而只能是2021.x.x，显然这就属于大版本号的迭代了，需要谨慎啊。</p>
+<p><strong>你觉得Spring Cloud团队在2020年还会发版吗？欢迎在评论区留下你的看法。</strong></p>
+        <!-- ....这里是正文内容的底部（首页不会展示）... -->
+        <style>
+.table-container img{
+    display: inherit;
+    margin-top: 5px;
+    margin-bottom: 0px;
+    margin-right: 10px;
+}
+</style>
+<hr>
+<h1 style="text-align: left;">关注YourBatman</h1>
+
+<div><table>
+<thead>
+<tr>
+<th>Author</th>
+<th>A哥(YourBatman)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>个人站点</td>
+<td><a href="https://www.yourbatman.cn" rel="nofollow" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc">www.yourbatman.cn</a></td>
+</tr>
+<tr>
+<td>E-mail</td>
+<td>yourbatman@qq.com</td>
+</tr>
+<tr>
+<td><strong>微 信</strong></td>
+<td><a href="https://www.yourbatman.cn/images/wechat.png" rel="nofollow" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc">fsx1056342982</a></td>
+</tr>
+<tr>
+<td><strong><code>活跃平台</code></strong></td>
+<td><a href="https://www.yourbatman.cn" rel="nofollow" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/2020071015182276.png" alt=""></a> <a href="https://fangshixiang.blog.csdn.net/" target="_blank" rel="nofollow noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/20200710151913394.png" alt=""></a><a href="https://yourbatman.cnblogs.com" target="_blank" rel="nofollow noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/20200710151929355.png" alt=""></a><a href="https://juejin.im/user/5b44d178f265da0fa1220efe/posts" target="_blank" rel="nofollow noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/20200710151938937.png" alt=""></a><a href="https://www.zhihu.com/people/fangshixiang/posts" target="_blank" rel="nofollow noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/20200710151950629.png" alt=""></a><a href="https://www.jianshu.com/u/8740f1fdd684" target="_blank" rel="nofollow noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/20200710152000530.png" alt=""></a><a href="https://segmentfault.com/u/yourbatman/articles" target="_blank" rel="nofollow noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/20200710152008726.png" alt=""></a><a href="https://github.com/yourbatman" target="_blank" rel="noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/20200710152015895.png" alt=""></a></td>
+</tr>
+<tr>
+<td><strong>公众号</strong></td>
+<td><a href="https://www.yourbatman.cn/images/wechat_channel.jpg" rel="nofollow" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc">BAT的乌托邦（ID：BAT-utopia）</a></td>
+</tr>
+<tr>
+<td>知识星球</td>
+<td><a href="https://t.zsxq.com/nQBi66I" target="_blank" rel="nofollow noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc">BAT的乌托邦</a></td>
+</tr>
+<tr>
+<td>每日文章推荐</td>
+<td><a href="https://github.com/yourbatman/reading/issues" target="_blank" rel="noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc">每日文章推荐</a></td>
+</tr>
+</tbody>
+</table></div>
+
+<p>
+<img src="https://img-blog.csdnimg.cn/20200710160552549.gif" alt="BAT的乌托邦">
+</p>
+
+    </div>
+
+    
+    
+    
+
+    <!-- 相关阅读（你可能还喜欢） -->
+      
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-title">
+    <strong>本文标题： </strong>
+    《Spring Cloud 2020.0.0正式发布，再见了Netflix》
+  </li>
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>A哥(YourBatman)
+  </li>
+  <li class="post-copyright-date">
+    <strong>发布时间： </strong>2020-12-28 08:02:42
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://www.yourbatman.cn/x2y/f38ef4b0.html" title="Spring Cloud 2020.0.0正式发布，再见了Netflix">https://www.yourbatman.cn/x2y/f38ef4b0.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>许可协议： </strong>本站所有文章均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载：No！转发：Yes！
+  </li>
+</ul>
+</div>
+
+
+      <!-- 添加“本文结束”标记 -->
+      <div class="read-over" style="text-align: center;margin-top: 25px;color: rgba(234,16,61,.569);font-size: 16px">-------------您已触及底线 <i class="fa fa-paw"></i> 感谢阅读-------------</div>
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    请A哥喝水
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="https://img-blog.csdnimg.cn/20200612080128384.png" alt="A哥(YourBatman) 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="https://img-blog.csdnimg.cn/20200612080128343.png" alt="A哥(YourBatman) 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Spring-Cloud/" rel="tag"><i class="fa fa-tag"></i> Spring Cloud</a>
+              <a href="/tags/Netflix/" rel="tag"><i class="fa fa-tag"></i> Netflix</a>
+              <a href="/tags/Spring-Cloud-Loadbalancer/" rel="tag"><i class="fa fa-tag"></i> Spring Cloud Loadbalancer</a>
+          </div>
+
+        <!-- 导入投票模块 -->
+        
+  <!-- 投票功能 -->
+  <div class="post-widgets">
+    <div style="color: #ea778c;font-size: 14px;">(>兄台请留步，看完记得六星好评哦<)</div>
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/x2y/79583e2f.html" rel="prev" title="6. 抹平差异，统一类型转换服务ConversionService">
+      <i class="fa fa-chevron-left"></i> 6. 抹平差异，统一类型转换服务ConversionService
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/x2y/b6588179.html" rel="next" title="7. JDK拍了拍你：字符串拼接一定记得用MessageFormat#format">
+      7. JDK拍了拍你：字符串拼接一定记得用MessageFormat#format <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+    </div>
+  
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#✍前言"><span class="nav-number">1.</span> <span class="nav-text">✍前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#版本约定"><span class="nav-number">1.1.</span> <span class="nav-text">版本约定</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#✍正文"><span class="nav-number">2.</span> <span class="nav-text">✍正文</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring-Cloud版本管理"><span class="nav-number">2.1.</span> <span class="nav-text">Spring Cloud版本管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#与Spring-Boot版本对应关系"><span class="nav-number">2.1.1.</span> <span class="nav-text">与Spring Boot版本对应关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#当前支持的版本"><span class="nav-number">2.1.2.</span> <span class="nav-text">当前支持的版本</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#阻断式升级（不向下兼容）"><span class="nav-number">2.2.</span> <span class="nav-text">阻断式升级（不向下兼容）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、再见了，Netflix"><span class="nav-number">2.2.1.</span> <span class="nav-text">1、再见了，Netflix</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Netflix组件替代方案"><span class="nav-number">2.2.1.1.</span> <span class="nav-text">Netflix组件替代方案</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Spring-Cloud-LoadBalancer是什么？"><span class="nav-number">2.2.1.1.1.</span> <span class="nav-text">Spring Cloud LoadBalancer是什么？</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Spring-Cloud-Alibaba是否可作为替代方案？"><span class="nav-number">2.2.1.2.</span> <span class="nav-text">Spring Cloud Alibaba是否可作为替代方案？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#显示导入Netflix包还能否正常work？"><span class="nav-number">2.2.1.3.</span> <span class="nav-text">显示导入Netflix包还能否正常work？</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、Bootstrap上下文默认不再启动"><span class="nav-number">2.2.2.</span> <span class="nav-text">2、Bootstrap上下文默认不再启动</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#开启方式"><span class="nav-number">2.2.2.1.</span> <span class="nav-text">开启方式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、全新的配置方式"><span class="nav-number">2.2.3.</span> <span class="nav-text">3、全新的配置方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、其它"><span class="nav-number">2.2.4.</span> <span class="nav-text">4、其它</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常规式升级"><span class="nav-number">2.3.</span> <span class="nav-text">常规式升级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#仍旧存在的问题"><span class="nav-number">2.4.</span> <span class="nav-text">仍旧存在的问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#✍总结"><span class="nav-number">3.</span> <span class="nav-text">✍总结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="A哥(YourBatman)"
+      src="https://img-blog.csdnimg.cn/20200511100304592.jpg">
+  <p class="site-author-name" itemprop="name">A哥(YourBatman)</p>
+  <div class="site-description" itemprop="description">我这有故事，你那有酒吗？</div>
+</div>
+<div class="site-author motion-element" style="border-top: 1px dotted #ccc;padding-top: 10px;opacity: 0.7" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img itemprop="image" alt="A哥(YourBatman)" style="max-width: 120px;"
+      src="https://img-blog.csdnimg.cn/20200608214500399.png">
+  <div style="color: #e36a7c;font-size: 10px;" itemprop="description">加A哥好友(备注:Java入群)</div>
+</div>
+  <div class="sidebar-button motion-element">
+    <a onclick="tidioChatApi.open();"><i class="fa fa-comment"></i>
+    私聊A哥
+  </a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://fangshixiang.blog.csdn.net/" title="https:&#x2F;&#x2F;fangshixiang.blog.csdn.net&#x2F;" rel="noopener" target="_blank">CSDN</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/yourbatman/" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;yourbatman&#x2F;" rel="noopener" target="_blank">博客园</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://juejin.im/user/5b44d178f265da0fa1220efe/posts" title="https:&#x2F;&#x2F;juejin.im&#x2F;user&#x2F;5b44d178f265da0fa1220efe&#x2F;posts" rel="noopener" target="_blank">掘金</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.zhihu.com/people/fangshixiang" title="https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;fangshixiang" rel="noopener" target="_blank">知乎</a>
+        </li>
+    </ul>
+  </div>
+
+<!-- 近期文章（源代码） -->
+
+    <div class="recent_posts links-of-blogroll motion-element links-of-blogroll-block">
+      <div class="links-of-blogroll-title">
+        <!-- modify icon to fire by szw -->
+        <i class="fa fa-history fa-" aria-hidden="true"></i>
+        最新文章
+      </div>
+      <ul class="links-of-blogroll-list">
+        
+        
+          <li>
+            <a href="/x2y/ff31c4c6.html" title="8. 格式化器大一统 -- Spring的Formatter抽象" target="_blank">
+            <i class="fa fa-check-square"></i> 8. 格式化器大一统 -- Spring的Formatter抽象
+            </a>
+          </li>
+        
+          <li>
+            <a href="/x2y/9705b9e8.html" title="YourBatman 2020年感悟关键词：科比、裁员、管理层、活着" target="_blank">
+            <i class="fa fa-check-square"></i> YourBatman 2020年感悟关键词：科比、裁员、管理层、活着
+            </a>
+          </li>
+        
+          <li>
+            <a href="/x2y/b6588179.html" title="7. JDK拍了拍你：字符串拼接一定记得用MessageFormat#format" target="_blank">
+            <i class="fa fa-check-square"></i> 7. JDK拍了拍你：字符串拼接一定记得用MessageFormat#format
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+
+
+      </div>
+
+      <!-- canvas粒子时钟效果  放在侧边栏最下面 -->
+      <div style="">
+  <canvas id="canvas" style="width:50%;margin-top:10px;margin-bottom: -10px;" width="820" height="250">当前浏览器不支持canvas，建议使用谷歌浏览器再试</canvas>
+</div>
+<script>
+(function(){
+    var WINDOW_WIDTH = 820;
+    var WINDOW_HEIGHT = 250;
+    var RADIUS = 7; //球半径
+    var NUMBER_GAP = 10; //数字之间的间隙
+    var u=0.65; //碰撞能量损耗系数
+    var context; //Canvas绘制上下文
+    var balls = []; //存储彩色的小球
+    const colors = ["#33B5E5","#0099CC","#AA66CC","#9933CC","#99CC00","#669900","#FFBB33","#FF8800","#FF4444","#CC0000"]; //彩色小球的颜色
+    var currentNums = []; //屏幕显示的8个字符
+    var digit =
+        [
+            [
+                [0,0,1,1,1,0,0],
+                [0,1,1,0,1,1,0],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [0,1,1,0,1,1,0],
+                [0,0,1,1,1,0,0]
+            ],//0
+            [
+                [0,0,0,1,1,0,0],
+                [0,1,1,1,1,0,0],
+                [0,0,0,1,1,0,0],
+                [0,0,0,1,1,0,0],
+                [0,0,0,1,1,0,0],
+                [0,0,0,1,1,0,0],
+                [0,0,0,1,1,0,0],
+                [0,0,0,1,1,0,0],
+                [0,0,0,1,1,0,0],
+                [1,1,1,1,1,1,1]
+            ],//1
+            [
+                [0,1,1,1,1,1,0],
+                [1,1,0,0,0,1,1],
+                [0,0,0,0,0,1,1],
+                [0,0,0,0,1,1,0],
+                [0,0,0,1,1,0,0],
+                [0,0,1,1,0,0,0],
+                [0,1,1,0,0,0,0],
+                [1,1,0,0,0,0,0],
+                [1,1,0,0,0,1,1],
+                [1,1,1,1,1,1,1]
+            ],//2
+            [
+                [1,1,1,1,1,1,1],
+                [0,0,0,0,0,1,1],
+                [0,0,0,0,1,1,0],
+                [0,0,0,1,1,0,0],
+                [0,0,1,1,1,0,0],
+                [0,0,0,0,1,1,0],
+                [0,0,0,0,0,1,1],
+                [0,0,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [0,1,1,1,1,1,0]
+            ],//3
+            [
+                [0,0,0,0,1,1,0],
+                [0,0,0,1,1,1,0],
+                [0,0,1,1,1,1,0],
+                [0,1,1,0,1,1,0],
+                [1,1,0,0,1,1,0],
+                [1,1,1,1,1,1,1],
+                [0,0,0,0,1,1,0],
+                [0,0,0,0,1,1,0],
+                [0,0,0,0,1,1,0],
+                [0,0,0,1,1,1,1]
+            ],//4
+            [
+                [1,1,1,1,1,1,1],
+                [1,1,0,0,0,0,0],
+                [1,1,0,0,0,0,0],
+                [1,1,1,1,1,1,0],
+                [0,0,0,0,0,1,1],
+                [0,0,0,0,0,1,1],
+                [0,0,0,0,0,1,1],
+                [0,0,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [0,1,1,1,1,1,0]
+            ],//5
+            [
+                [0,0,0,0,1,1,0],
+                [0,0,1,1,0,0,0],
+                [0,1,1,0,0,0,0],
+                [1,1,0,0,0,0,0],
+                [1,1,0,1,1,1,0],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [0,1,1,1,1,1,0]
+            ],//6
+            [
+                [1,1,1,1,1,1,1],
+                [1,1,0,0,0,1,1],
+                [0,0,0,0,1,1,0],
+                [0,0,0,0,1,1,0],
+                [0,0,0,1,1,0,0],
+                [0,0,0,1,1,0,0],
+                [0,0,1,1,0,0,0],
+                [0,0,1,1,0,0,0],
+                [0,0,1,1,0,0,0],
+                [0,0,1,1,0,0,0]
+            ],//7
+            [
+                [0,1,1,1,1,1,0],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [0,1,1,1,1,1,0],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [0,1,1,1,1,1,0]
+            ],//8
+            [
+                [0,1,1,1,1,1,0],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [0,1,1,1,0,1,1],
+                [0,0,0,0,0,1,1],
+                [0,0,0,0,0,1,1],
+                [0,0,0,0,1,1,0],
+                [0,0,0,1,1,0,0],
+                [0,1,1,0,0,0,0]
+            ],//9
+            [
+                [0,0,0,0],
+                [0,0,0,0],
+                [0,1,1,0],
+                [0,1,1,0],
+                [0,0,0,0],
+                [0,0,0,0],
+                [0,1,1,0],
+                [0,1,1,0],
+                [0,0,0,0],
+                [0,0,0,0]
+            ]//:
+        ];
+
+    function drawDatetime(cxt){
+        var nums = [];
+
+        context.fillStyle="#005eac"
+        var date = new Date();
+        var offsetX = 70, offsetY = 30;
+        var hours = date.getHours();
+        var num1 = Math.floor(hours/10);
+        var num2 = hours%10;
+        nums.push({num: num1});
+        nums.push({num: num2});
+        nums.push({num: 10}); //冒号
+        var minutes = date.getMinutes();
+        var num1 = Math.floor(minutes/10);
+        var num2 = minutes%10;
+        nums.push({num: num1});
+        nums.push({num: num2});
+        nums.push({num: 10}); //冒号
+        var seconds = date.getSeconds();
+        var num1 = Math.floor(seconds/10);
+        var num2 = seconds%10;
+        nums.push({num: num1});
+        nums.push({num: num2});
+
+        for(var x = 0;x<nums.length;x++){
+            nums[x].offsetX = offsetX;
+            offsetX = drawSingleNumber(offsetX,offsetY, nums[x].num,cxt);
+            //两个数字连一块，应该间隔一些距离
+            if(x<nums.length-1){
+                if((nums[x].num!=10) &&(nums[x+1].num!=10)){
+                    offsetX+=NUMBER_GAP;
+                }
+            }
+        }
+
+        //说明这是初始化
+        if(currentNums.length ==0){
+            currentNums = nums;
+        }else{
+            //进行比较
+            for(var index = 0;index<currentNums.length;index++){
+                if(currentNums[index].num!=nums[index].num){
+                    //不一样时，添加彩色小球
+                    addBalls(nums[index]);
+                    currentNums[index].num=nums[index].num;
+                }
+            }
+        }
+        renderBalls(cxt);
+        updateBalls();
+
+        return date;
+    }
+
+    function addBalls (item) {
+        var num = item.num;
+        var numMatrix = digit[num];
+        for(var y = 0;y<numMatrix.length;y++){
+            for(var x = 0;x<numMatrix[y].length;x++){
+                if(numMatrix[y][x]==1){
+                    var ball={
+                        offsetX:item.offsetX+RADIUS+RADIUS*2*x,
+                        offsetY:30+RADIUS+RADIUS*2*y,
+                        color:colors[Math.floor(Math.random()*colors.length)],
+                        g:1.5+Math.random(),
+                        vx:Math.pow(-1, Math.ceil(Math.random()*10))*4+Math.random(),
+                        vy:-5
+                    }
+                    balls.push(ball);
+                }
+            }
+        }
+    }
+
+    function renderBalls(cxt){
+        for(var index = 0;index<balls.length;index++){
+            cxt.beginPath();
+            cxt.fillStyle=balls[index].color;
+            cxt.arc(balls[index].offsetX, balls[index].offsetY, RADIUS, 0, 2*Math.PI);
+            cxt.fill();
+        }
+    }
+
+    function updateBalls () {
+        var i =0;
+        for(var index = 0;index<balls.length;index++){
+            var ball = balls[index];
+            ball.offsetX += ball.vx;
+            ball.offsetY += ball.vy;
+            ball.vy+=ball.g;
+            if(ball.offsetY > (WINDOW_HEIGHT-RADIUS)){
+                ball.offsetY= WINDOW_HEIGHT-RADIUS;
+                ball.vy=-ball.vy*u;
+            }
+            if(ball.offsetX>RADIUS&&ball.offsetX<(WINDOW_WIDTH-RADIUS)){
+
+                balls[i]=balls[index];
+                i++;
+            }
+        }
+        //去除出边界的球
+        for(;i<balls.length;i++){
+            balls.pop();
+        }
+    }
+    function drawSingleNumber(offsetX, offsetY, num, cxt){
+        var numMatrix = digit[num];
+        for(var y = 0;y<numMatrix.length;y++){
+            for(var x = 0;x<numMatrix[y].length;x++){
+                if(numMatrix[y][x]==1){
+                    cxt.beginPath();
+                    cxt.arc(offsetX+RADIUS+RADIUS*2*x,offsetY+RADIUS+RADIUS*2*y,RADIUS,0,2*Math.PI);
+                    cxt.fill();
+                }
+            }
+        }
+        cxt.beginPath();
+        offsetX += numMatrix[0].length*RADIUS*2;
+        return offsetX;
+    }
+
+    var canvas = document.getElementById("canvas");
+    canvas.width=WINDOW_WIDTH;
+    canvas.height=WINDOW_HEIGHT;
+    context = canvas.getContext("2d");
+
+    //记录当前绘制的时刻
+    var currentDate = new Date();
+
+    setInterval(function(){
+        //清空整个Canvas，重新绘制内容
+        context.clearRect(0, 0, context.canvas.width, context.canvas.height);
+        drawDatetime(context);
+    }, 50)
+})();
+</script>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+
+     <!-- 此处为新加的代码 -->
+     
+<script src="https://my.openwrite.cn/js/readmore.js" type="text/javascript"></script>
+<script>
+    const btw = new BTWPlugin();
+    btw.init({
+        id: 'yourbatman',
+        blogId: '10059-1591593090091-727',
+        name: 'BAT的乌托邦',
+        qrcode: 'https://img-blog.csdnimg.cn/20200511100304545.jpg',
+        keyword: 'vip',
+    });
+</script>
+
+
+     <script src="https://cdn.staticfile.org/jquery/3.1.1/jquery.min.js"></script>
+<script>
+    //暂时储存文章中的内容
+    var div = $('.post-body');
+    //暂时储存目录的内容
+    var toc=$('.post-toc')
+    function password() {
+        if(''){
+            //将文章内容删除
+            div.remove();
+            //将目录删除
+            toc.remove();
+            //将文章删除后，向原来文章的地方添加，应该出现的提示用户输入密码的样式
+            //下面这里的第一个用textarea是因为如果在手机端的时候只能显示一部分文字，
+            //只是拓展:input里面的字只能显示一行，不会自动换行，目前上网搜索没有发现好的办法，所以用了textarea，右下角的小三角通过resize:none 去掉。
+            $('.post-header').after(
+            '<span class="description" value="请输入密码，然后按 Enter 键阅读全文" style="font-style: oblique;font-weight: bold;border: none;display: block;'+
+            'width: 60%;margin: 0 auto;text-align: center;outline: none;margin-bottom: 40px;resize:none; margin-top: 20px;">'+
+            '<i class="fa fa-heartbeat" id="myheartbeat"></i>'+
+            '请输入密码，然后按 Enter 键阅读全文' +
+            '<i class="fa fa-heartbeat" id="myheartbeat"></i>'+
+            '</span>' +
+            '<div class="qiang" style="height: 100px;width: 60%;margin:0 auto">' +
+            '<input class="password"  type="password" autocomplete="new-password" autofocus="autofocus" value="" style="border-radius: 5px;height: 30px;border: none;display: block;border-bottom: 1px solid #ccc;' +
+            'margin: 0 auto;outline: none;width:95%"/>' +
+            '</div>')
+            //绑定点击事件，如果是点击的.password 这个div就改变样式，如果是document中除了div之外的其他任何元素，就变回原来的样式。
+            document.onclick = function (event) {
+                var e = event || window.event;
+                var elem = e.srcElement || e.target;
+
+                while (elem) {
+                    if (elem != document) {
+                        if (elem.className == "password") {
+                            //$(".password").animate({paddingTop:"30px",width:"100%",borderWidth:"2px"},300)
+                            return;
+                        }
+                        elem = elem.parentNode;
+                    } else {
+                        //$(".password").animate({paddingTop:"0px",width:"95%",borderWidth:"1px"},300)
+                        return;
+                    }
+                }
+            }
+            //绑定enter键按下后离开的事件
+            $(document).keyup(function(event){
+                if(event.keyCode ==13&&$('.password').length>0){
+                    //console.log($('.password').val())
+                    //console.log('')
+                    if ($('.password').val() == '') {
+                        //恢复文章内容
+                        (div).appendTo($(".post-header"))
+                        //恢复目录
+                        toc.appendTo($(".sidebar-inner"))
+                        //删除本页面的输入密码组件
+                        $(".description").remove();
+                        $(".qiang").remove();
+                        $(".password").remove();
+
+                        //重新处理pjax事件,如果没有加pjax的从下面这行起到下面的else之间的代码需要去掉。
+                        //图片懒加载，没有加入此功能的这个函数需要去掉
+                        $('img').lazyload({
+                            placeholder: '/images/loading.gif',
+                            effect: 'fadeIn',
+                            threshold : 100,
+                            failure_limit : 20,
+                            skip_invisible : false
+                        });
+                        //pjax后出现文章不显示，没有pjax的下面四行需要去掉
+                        $(".post-block").css({opacity:1});
+                        $(".post-header").css({opacity:1});
+                        $(".post-body").css({opacity:1});
+                        $(".pagination").css({opacity:1});
+                    }else {
+                        alert("密码不对，请重新输入~")
+                    }
+                }
+                //将document的keyup移除，防止在pjax的情况下会重复绑定事件
+            });
+        }
+    }
+    password();
+</script>
+
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        <!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<span id="times" style="margin-right: 10px;">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("05/03/2020 12:00:00");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "小破站已苟活"+dnum+"天";
+        document.getElementById("times").innerHTML = hnum + "小时" + mnum + "分" + snum + "秒";
+    }
+    setInterval("createtime()",250);
+
+    // 自定义邮箱审核规则（目前校验：邮箱必填，且格式必须正确 昵称也必须填写）
+    document.body.addEventListener('click', function(e) {
+        if (e.target.classList.contains('vsubmit')) {
+            const email = document.querySelector('input[type=email]');
+            const nick = document.querySelector('input[name=nick]');
+            const reg = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+            if (!email.value || !nick.value || !reg.test(email.value)) {
+                const str = `<div class="valert text-center"><div class="vtext">请填写正确的昵称和邮箱！</div></div>`;
+                const vmark = document.querySelector('.vmark');
+                vmark.innerHTML = str;
+                vmark.style.display = 'block';
+                setTimeout(function() {
+                    vmark.style.display = 'none';
+                    vmark.innerHTML = '';
+                }, 2500);
+            }
+        }
+    })
+</script>
+  <span class="beian"><a href="http://www.beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备12009483号 </a>
+  </span>
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">A哥(YourBatman)</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">本站总字数：</span>
+    <span title="本站总字数">446k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">本站总阅读时长 &asymp;</span>
+    <span title="本站总阅读时长">6:45</span>
+</div>
+  <div class="addthis_inline_share_toolbox">
+    <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5eb7b6f6b64d54f6" async="async"></script>
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        承蒙 <span id="busuanzi_value_site_uv"></span> 位朋友
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        共造访本站 <span id="busuanzi_value_site_pv"></span> 次
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+  <script>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id    : 25645,
+      el    : 'wpac-rating',
+      color : 'fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+  <script src="//code.tidio.co/imnhfpyrju0tgipwdxke6moou6p9kbdu.js"></script>
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 1, // 打开或关闭导航空格和选项卡 1:打开 0:关闭
+    scrollbar: 1, // 打开/关闭滚动条
+    toolbar  : 1, // 打开/关闭工具栏
+    statusbar: 1, // 打开或关闭状态栏
+    pagemode : 'thumbs', // 侧边栏状态，显示书签或缩略图 接受值：none，thumbs，bookmarks，attachments
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+
+  
+
+  
+
+
+  <!-- 自定义的js效果 -->
+  <script type="text/javascript">
+    (function() {
+var a_idx = 0;
+ 
+        $("body").click(function(e) {
+            //var a = new Array(
+            //    "富强", "民主", "文明", "和谐",
+            //    "自由", "平等", "公正", "法治",
+            //    "爱国", "敬业", "诚信", "友善"
+            //    );
+            var a = new Array(
+            "耕耘","挑灯","悬梁","废寝",
+            "映雪","刺骨","囊萤","凿壁",
+            "勤奋","刻苦","打拼","砥砺");
+
+            var $i = $("<span/>").text(a[a_idx]);
+            a_idx = (a_idx + 1) % a.length;
+            var x = e.pageX,
+            y = e.pageY;
+            $i.css({
+                "z-index": 144469,
+                "top": y - 20,
+                "left": x,
+                "position": "absolute",
+                "font-weight": "bold",
+                "color": "#f00"
+            });
+            $("body").append($i);
+            $i.animate({
+                "top": y - 180,
+                "opacity": 0
+            },
+            1500,
+            function() {
+                $i.remove()
+            })
+        });
+    })();
+  </script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'GL1AoYvDSErHS8idMvn35STX-gzGzoHsz',
+      appKey     : 'flstBFF7gvWX8emTwJooV0bB',
+      placeholder: "各位道友📢📢📢：&#10;1、填写昵称和【正确邮箱号】；&#10;2、有邮箱可收到回复的邮件提醒；&#10;3、礼貌言辞，拒绝黄赌毒；",
+      avatar     : 'robohash',
+      meta       : guest,
+      pageSize   : '6' || 10,
+      visitor    : true,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

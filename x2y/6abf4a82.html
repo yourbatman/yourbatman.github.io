@@ -1,0 +1,1470 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="baidu-site-verification" content="FdPXpeNylP">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.yourbatman.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},"motion":{"enable":false,"async":true,"transition":{"post_block":"flipBounceYIn","post_header":"flipXIn","post_body":"flipBounceXIn","coll_header":"expandIn","sidebar":"shrinkIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="一个static关键字在Spring的使用，竟能写出一个专栏">
+<meta property="og:type" content="article">
+<meta property="og:title" content="static关键字真能提高Bean的优先级吗？答：真能">
+<meta property="og:url" content="https://www.yourbatman.cn/x2y/6abf4a82.html">
+<meta property="og:site_name" content="BAT的乌托邦">
+<meta property="og:description" content="一个static关键字在Spring的使用，竟能写出一个专栏">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200530222152352.png#x200">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200531065807513.png#x50">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200531070853300.jpg#x200">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200531093341371.png#x70">
+<meta property="article:published_time" content="2020-05-31T05:41:58.000Z">
+<meta property="article:modified_time" content="2021-04-30T13:32:41.877Z">
+<meta property="article:author" content="A哥(YourBatman)">
+<meta property="article:tag" content="BAT的乌托邦">
+<meta property="article:tag" content="A哥">
+<meta property="article:tag" content="YourBatman">
+<meta property="article:tag" content="Spring Framework">
+<meta property="article:tag" content="static">
+<meta property="article:tag" content="@Bean">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20200530222152352.png#x200">
+
+<link rel="canonical" href="https://www.yourbatman.cn/x2y/6abf4a82.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>static关键字真能提高Bean的优先级吗？答：真能 | BAT的乌托邦</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?2ad49a2290d0249428335633c45e2806";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">BAT的乌托邦</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">当大潮退去，才知道谁在裸泳</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于A哥/留言板</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">64</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>专栏<span class="badge">15</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>时间轴<span class="badge">56</span></a>
+
+  </li>
+        <li class="menu-item menu-item-top">
+
+    <a href="/top/" rel="section"><i class="fa fa-signal fa-fw"></i>热门文章</a>
+
+  </li>
+        <li class="menu-item menu-item-books">
+
+    <a href="/books/" rel="section"><i class="fa fa-book fa-fw"></i>图书馆</a>
+
+  </li>
+        <li class="menu-item menu-item-links">
+
+    <a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友情债</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="请输入关键字检索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/yourbatman" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+
+        <!~- 跳转到新站点 start... -->
+        <div style="width: 90%;margin-left: 5%;font-size: 24px;color: yellow;font-weight: bolder; margin-bottom: -20px;">
+          <marquee behavior="alternate" hspace="hexo50px" onMouseOut="this.start()" onMouseOver="this.stop()">
+            本站点已归档（不再维护），点击立即前往新站点：
+              <a href="https://yourbatman.cn" target="_self" title="前往新站点" style="color:whitesmoke;text-decoration: underline;">
+                https://yourbatman.cn
+              </a>
+          </marquee>
+        </div>
+        <!~- 跳转到新站点 end... -->
+
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  
+    <div id="yourbatman">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.yourbatman.cn/x2y/6abf4a82.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://img-blog.csdnimg.cn/20200511100304592.jpg">
+      <meta itemprop="name" content="A哥(YourBatman)">
+      <meta itemprop="description" content="我这有故事，你那有酒吗？">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BAT的乌托邦">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          static关键字真能提高Bean的优先级吗？答：真能
+        </h1>
+
+        <div class="post-meta">
+          <!-- 精品文章 精华帖 -->
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-31 13:41:58" itemprop="dateCreated datePublished" datetime="2020-05-31T13:41:58+08:00">2020-05-31</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">收录于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Spring-static%E5%85%B3%E9%94%AE%E5%AD%97/" itemprop="url" rel="index"><span itemprop="name">Spring static关键字</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/x2y/6abf4a82.html" class="post-meta-item leancloud_visitors" data-flag-title="static关键字真能提高Bean的优先级吗？答：真能" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">评论数：</span>
+    
+    <a title="valine" href="/x2y/6abf4a82.html#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/x2y/6abf4a82.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+          <!-- 置顶 可以写top:true  也可以写数字top:1/2/3  顺序规则同Spring-->
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>12k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>11 分钟</span>
+            </span>
+
+          <!-- 本文作者 -->
+          <span class="post-meta-item" title="阅读时长">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-user fa-fw"></i>
+            </span>
+            <span class="post-meta-item-text">本文作者：</span>
+            <a href="/about/" itemprop="url" rel="index">
+              <span>A哥(YourBatman)</span>
+            </a>
+          </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>当大潮退去，才知道谁在裸泳。<br><strong>作者</strong>：A哥（YourBatman）<br><strong>公众号</strong>：BAT的乌托邦（ID：BAT-utopia）<br><strong>文末是否有彩蛋</strong>：有</p>
+</blockquote>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>各位小伙伴大家好，我是A哥。关于Spring初始化Bean的顺序问题，是个老生常谈的话题了，结论可总结为一句话：<strong>全局无序，局部有序</strong>。<code>Spring Bean</code>整体上是无序的，而现实是大多数情况下我们<strong>真的</strong>无需关心，无序就无序呗，无所谓喽。但是（此处应该有但是哈），我有理由相信，对于有一定从业经验的Javaer来说，或多或少都经历过Bean初始化顺序带来的“困扰”，也许是因为没有对你的功能造成影响，也许可能是你全然“不知情”，所以最终就不了了之~</p>
+<p>隐患终归隐患，依照<strong>墨菲定律</strong>来讲，担心的事它总归是会发生的。A哥经常“教唆”程序员要<strong>面向工资编程</strong>，虽然这价值观有点扭曲，但不可否认很多小伙伴真是这么想的（命中你了没有😄），稍加粉饰了而已。话粗理不粗哦，almost所有的Javaer都在用Spring，你凭什么工资比你身边同事的高呢？<br><img data-src="https://img-blog.csdnimg.cn/20200530222152352.png#x200" alt=""><br>Spring对Bean的（生命周期）管理是它最为核心的能力，同时也是<strong>很复杂、很难掌握</strong>的一个知识点。现在就可以启动你的工程，有木有这句日志：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"Bean 'xxx' of type [xxxx] is not eligible for getting processed by all BeanPostProcessors"</span> </span><br><span class="line">	+ <span class="string">"(for example: not eligible for auto-proxying)"</span></span><br></pre></td></tr></table></figure>
+<p>这是一个典型的<strong>Spring Bean过早初始化</strong>问题，搜搜看你日志里是否有此句喽。这句日志是由Spring的<code>BeanPostProcessorChecker</code>这个类负责输出，含义为：你的Bean xxx不能被所有的<code>BeanPostProcessors</code>处理到（有的生命周期触达不到），提醒你注意。此句日志在低些的版本里是<strong>warn警告</strong>级别，在本文约定的版本里官方把它改为了info级别。</p>
+<blockquote>
+<p>绝大多数情况下，此句日志的输出不会对你的功能造成影响，因此无需搭理。这也是Spring官方为何把它从warn调低为info级别的原因</p>
+</blockquote>
+<p>我在CSDN上写过一篇“Spring Bean过早初始化导致的误伤”的文章，<strong>访问量达近4w</strong>：<br><img data-src="https://img-blog.csdnimg.cn/20200531065807513.png#x50" alt=""><br>从这个数据（访问量）上来看，这件事“并不简单”，遇到此麻烦的小伙伴不在少数且确实难倒了一众人。关于Spring Bean的顺序，全局是不可控的，但是局部上它提供了多种方式来方便使用者提高/降低优先级（比如前面的<a href="https://mp.weixin.qq.com/s/bNQMoTyrr8pYEHYdIjHW8A" target="_blank" rel="noopener">使用@AutoConfigureBefore调整配置顺序竟没生效？</a>这篇文章），本文就聊聊<strong>static关键字对于提供Bean的优先级</strong>的功效。<br><img data-src="https://img-blog.csdnimg.cn/20200531070853300.jpg#x200" alt=""></p>
+<hr>
+<h2 id="版本约定"><a href="#版本约定" class="headerlink" title="版本约定"></a>版本约定</h2><p>本文内容若没做特殊说明，均基于以下版本：</p>
+<ul>
+<li>JDK：<code>1.8</code></li>
+<li>Spring Framework：<code>5.2.2.RELEASE</code></li>
+</ul>
+<hr>
+<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><p>本文采用从 <strong>问题提出-结果分析-解决方案-原理剖析</strong> 这4个步骤，层层递进的去感受static关键字在Spring Bean上的魅力~</p>
+<hr>
+<h2 id="警告一：来自BeanPostProcessorChecker"><a href="#警告一：来自BeanPostProcessorChecker" class="headerlink" title="警告一：来自BeanPostProcessorChecker"></a>警告一：来自BeanPostProcessorChecker</h2><p>这是<strong>最为常见</strong>的一种警告，特别当你的工程使用了<code>shiro</code>做鉴权框架的时候。在我记忆中这一年来有N多位小伙伴问过我此问题，可见一斑。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AppConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    AppConfig() &#123;</span><br><span class="line">        System.out.println(<span class="string">"AppConfig init..."</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function">BeanPostProcessor <span class="title">postProcessor</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> MyBeanPostProcessor();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyBeanPostProcessor</span> <span class="keyword">implements</span> <span class="title">BeanPostProcessor</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    MyBeanPostProcessor() &#123;</span><br><span class="line">        System.out.println(<span class="string">"MyBeanPostProcessor init..."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，输出结果：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">AppConfig init...</span><br><span class="line"><span class="number">2020</span>-<span class="number">05</span>-<span class="number">31</span> <span class="number">07</span>:<span class="number">40</span>:<span class="number">50.979</span>  INFO <span class="number">15740</span> --- [           main] trationDelegate$BeanPostProcessorChecker : Bean <span class="string">'appConfig'</span></span><br><span class="line">	 of type [com.yourbatman.config.AppConfig$$EnhancerBySpringCGLIB$$<span class="number">29</span>b523c8] is not eligible <span class="keyword">for</span> getting </span><br><span class="line">	 <span class="function">processed by all <span class="title">BeanPostProcessors</span> <span class="params">(<span class="keyword">for</span> example: not eligible <span class="keyword">for</span> auto-proxying)</span></span></span><br><span class="line"><span class="function">MyBeanPostProcessor init...</span></span><br><span class="line"><span class="function">...</span></span><br></pre></td></tr></table></figure>
+<p>结果分析（问题点/冲突点）：</p>
+<ol>
+<li><code>AppConfig</code>优先于<code>MyBeanPostProcessor</code>进行实例化<ol>
+<li>常识是：<code>MyBeanPostProcessor</code>作为一个后置处理器理应是先被初始化的，而<code>AppConfig</code>仅仅是个普通Bean而已，初始化<strong>理应靠后</strong></li>
+</ol>
+</li>
+<li>出现了<code>BeanPostProcessorChecker</code>日志：表示<code>AppConfig</code>这个Bena不能被所有的BeanPostProcessors处理，所以有<strong>可能</strong>会让它“错过”容器对Bean的某些生命周期管理，因此<strong>可能</strong>损失某些能力（比如不能被自动代理），存在<strong>隐患</strong><ol>
+<li>但凡只要你工程里出现了<code>BeanPostProcessorChecker</code>输出日志，理应都得引起你的注意，因为这属于Spring的警告日志（虽然新版本已下调为了info级别）</li>
+</ol>
+</li>
+</ol>
+<blockquote>
+<p>说明：这是一个Info日志，并非warn/error级别。绝大多数情况下你确实无需关注，但是如果你是一个容器开发者，建议请务必解决此问题（毕竟貌似大多数中间件开发者都有一定代码洁癖😄）</p>
+</blockquote>
+<hr>
+<h3 id="解决方案：static关键字提升优先级"><a href="#解决方案：static关键字提升优先级" class="headerlink" title="解决方案：static关键字提升优先级"></a>解决方案：static关键字提升优先级</h3><p>基于上例，我们仅需做如下小改动：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">AppConfig：</span><br><span class="line"></span><br><span class="line"><span class="comment">//@Bean</span></span><br><span class="line"><span class="comment">//BeanPostProcessor postProcessor() &#123;</span></span><br><span class="line"><span class="comment">//    return new MyBeanPostProcessor();</span></span><br><span class="line"><span class="comment">//&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 方法前面加上static关键字</span></span><br><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> BeanPostProcessor <span class="title">postProcessor</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> MyBeanPostProcessor();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，结果输出：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">MyBeanPostProcessor init...</span><br><span class="line">...</span><br><span class="line">AppConfig init...</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>那个烦人的<code>BeanPostProcessorChecker</code>日志就不见了，清爽了很多。同时亦可发现<code>AppConfig</code>是在<code>MyBeanPostProcessor</code>之后实例化的，这才符合我们所想的“正常”逻辑嘛。</p>
+<hr>
+<h2 id="警告二：Configuration配置类增强失败"><a href="#警告二：Configuration配置类增强失败" class="headerlink" title="警告二：Configuration配置类增强失败"></a>警告二：Configuration配置类增强失败</h2><p>这个“警告”就比上一个严重得多了，它有<strong>极大的可能</strong>导致你程序错误，并且你还<strong>很难定位</strong>问题所在。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AppConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    AppConfig() &#123;</span><br><span class="line">        System.out.println(<span class="string">"AppConfig init..."</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function">BeanDefinitionRegistryPostProcessor <span class="title">postProcessor</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> MyBeanDefinitionRegistryPostProcessor();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">///////////////////////////////</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function">Son <span class="title">son</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Son();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function">Parent <span class="title">parent</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Parent(son());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyBeanDefinitionRegistryPostProcessor</span> <span class="keyword">implements</span> <span class="title">BeanDefinitionRegistryPostProcessor</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    MyBeanDefinitionRegistryPostProcessor() &#123;</span><br><span class="line">        System.out.println(<span class="string">"MyBeanDefinitionRegistryPostProcessor init..."</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">postProcessBeanDefinitionRegistry</span><span class="params">(BeanDefinitionRegistry registry)</span> <span class="keyword">throws</span> BeansException </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">postProcessBeanFactory</span><span class="params">(ConfigurableListableBeanFactory beanFactory)</span> <span class="keyword">throws</span> BeansException </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，结果输出：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">AppConfig init...</span><br><span class="line">MyBeanDefinitionRegistryPostProcessor init...</span><br><span class="line"><span class="number">2020</span>-<span class="number">05</span>-<span class="number">31</span> <span class="number">07</span>:<span class="number">59</span>:<span class="number">06.363</span>  INFO <span class="number">37512</span> --- [           main] o.s.c.a.ConfigurationClassPostProcessor  : Cannot enhance</span><br><span class="line">	 <span class="meta">@Configuration</span> bean definition <span class="string">'appConfig'</span> since its singleton instance has been created too early. The typical</span><br><span class="line">	 cause is a non-<span class="keyword">static</span> <span class="meta">@Bean</span> method with a BeanDefinitionRegistryPostProcessor <span class="keyword">return</span> type: Consider declaring</span><br><span class="line">	 such methods as <span class="string">'static'</span>.</span><br><span class="line">...</span><br><span class="line">son init...hashCode() = <span class="number">1300528434</span></span><br><span class="line">son init...hashCode() = <span class="number">1598434875</span></span><br><span class="line">Parent init...</span><br></pre></td></tr></table></figure>
+<p>结果分析（问题点/冲突点）：</p>
+<ol>
+<li>AppConfig竟然比MyBeanDefinitionRegistryPostProcessor的初始化时机还早，这本就不合理</li>
+<li>从<code>ConfigurationClassPostProcessor</code>的日志中可看到：<strong>AppConfig配置类enhance增强失败</strong></li>
+<li>Son对象竟然被创建了<strong>两个</strong>不同的实例，这将会直接导致功能性错误</li>
+</ol>
+<p>这三步结果环环相扣，因为1导致了2的增强失败，因为2的增强失败导致了3的创建多个实例，真可谓<strong>一步错，步步错</strong>。需要注意的是：这里ConfigurationClassPostProcessor输出的依旧是info日志（我个人认为，Spring把这个输出调整为warn级别是更为合理的，因为它影响较大）。</p>
+<blockquote>
+<p>说明：对这个结果的理解基于对Spring配置类的理解，因此强烈建议你进我公众号参阅那个可能是写的最全、最好的Spring配置类专栏学习（文章不多，6篇足矣）</p>
+</blockquote>
+<p>源码处解释：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">ConfigurationClassPostProcessor：</span><br><span class="line"></span><br><span class="line"><span class="comment">// 对Full模式的配置类尝试使用CGLIB字节码提升</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">enhanceConfigurationClasses</span><span class="params">(ConfigurableListableBeanFactory beanFactory)</span> </span>&#123;</span><br><span class="line">	...</span><br><span class="line">	<span class="comment">// 对Full模式的配置类有个判断/校验</span></span><br><span class="line">	<span class="keyword">if</span> (ConfigurationClassUtils.CONFIGURATION_CLASS_FULL.equals(configClassAttr)) &#123;</span><br><span class="line">		<span class="keyword">if</span> (!(beanDef <span class="keyword">instanceof</span> AbstractBeanDefinition)) &#123;</span><br><span class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> BeanDefinitionStoreException(<span class="string">"Cannot enhance @Configuration bean definition '"</span> +</span><br><span class="line">					beanName + <span class="string">"' since it is not stored in an AbstractBeanDefinition subclass"</span>);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 若判断发现此时该配置类已经是个单例Bean了（说明已初始化完成）</span></span><br><span class="line">		<span class="comment">// 那就不再做处理，并且输出警告日志告知使用者（虽然是info日志）</span></span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (logger.isInfoEnabled() &amp;&amp; beanFactory.containsSingleton(beanName)) &#123;</span><br><span class="line">			logger.info(<span class="string">"Cannot enhance @Configuration bean definition '"</span> + beanName +</span><br><span class="line">					<span class="string">"' since its singleton instance has been created too early. The typical cause "</span> +</span><br><span class="line">					<span class="string">"is a non-static @Bean method with a BeanDefinitionRegistryPostProcessor "</span> +</span><br><span class="line">					<span class="string">"return type: Consider declaring such methods as 'static'."</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		configBeanDefs.put(beanName, (AbstractBeanDefinition) beanDef);</span><br><span class="line">	&#125;</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>由于配置类增强是在<code>BeanFactoryPostProcessor#postProcessBeanFactory()</code>声明周期阶段去做的，而<code>BeanDefinitionRegistryPostProcessor</code>它会优先于该步骤完成实例化（其实主要是优先级比<code>BeanFactoryPostProcessor</code>高），从而<strong>间接带动</strong> AppConfig提前初始化导致了问题，这便是根本原因所在。</p>
+<p>提问点：本处使用了个自定义的<code>BeanDefinitionRegistryPostProcessor</code>模拟了效果，那如果你是使用的<code>BeanFactoryPostProcessor</code>能出来这个效果吗？？？答案是<strong>不能的</strong>，具体原因留给读者思考，可参考：<code>PostProcessorRegistrationDelegate#invokeBeanFactoryPostProcessors</code>这段流程辅助理解。</p>
+<hr>
+<h3 id="解决方案：static关键字提升优先级-1"><a href="#解决方案：static关键字提升优先级-1" class="headerlink" title="解决方案：static关键字提升优先级"></a>解决方案：static关键字提升优先级</h3><p>来吧，继续使用static关键字改造一下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">AppConfig：</span><br><span class="line"></span><br><span class="line"><span class="comment">//@Bean</span></span><br><span class="line"><span class="comment">//BeanDefinitionRegistryPostProcessor postProcessor() &#123;</span></span><br><span class="line"><span class="comment">//    return new MyBeanDefinitionRegistryPostProcessor();</span></span><br><span class="line"><span class="comment">//&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> BeanDefinitionRegistryPostProcessor <span class="title">postProcessor</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> MyBeanDefinitionRegistryPostProcessor();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，结果输出：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">MyBeanDefinitionRegistryPostProcessor init...</span><br><span class="line">...</span><br><span class="line">AppConfig init...</span><br><span class="line">son init...hashCode() = <span class="number">2090289474</span></span><br><span class="line">Parent init...</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>完美。</p>
+<hr>
+<h2 id="警告三：非静态-Bean方法导致-Autowired等注解失效"><a href="#警告三：非静态-Bean方法导致-Autowired等注解失效" class="headerlink" title="警告三：非静态@Bean方法导致@Autowired等注解失效"></a>警告三：非静态@Bean方法导致@Autowired等注解失效</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AppConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> Parent parent;</span><br><span class="line">    <span class="meta">@PostConstruct</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"AppConfig.parent = "</span> + parent);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    AppConfig() &#123;</span><br><span class="line">        System.out.println(<span class="string">"AppConfig init..."</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function">BeanFactoryPostProcessor <span class="title">postProcessor</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> MyBeanFactoryPostProcessor();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function">Son <span class="title">son</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Son();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function">Parent <span class="title">parent</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Parent(son());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyBeanFactoryPostProcessor</span> <span class="keyword">implements</span> <span class="title">BeanFactoryPostProcessor</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    MyBeanFactoryPostProcessor() &#123;</span><br><span class="line">        System.out.println(<span class="string">"MyBeanFactoryPostProcessor init..."</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">postProcessBeanFactory</span><span class="params">(ConfigurableListableBeanFactory beanFactory)</span> <span class="keyword">throws</span> BeansException </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，结果输出：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">AppConfig init...</span><br><span class="line"><span class="number">2020</span>-<span class="number">05</span>-<span class="number">31</span> <span class="number">08</span>:<span class="number">28</span>:<span class="number">06.550</span>  INFO <span class="number">1464</span> --- [           main] o.s.c.a.ConfigurationClassEnhancer       : <span class="meta">@Bean</span> method</span><br><span class="line">	 AppConfig.postProcessor is non-<span class="keyword">static</span> and returns an object assignable to Spring<span class="string">'s BeanFactoryPostProcessor</span></span><br><span class="line"><span class="string">	 interface. This will result in a failure to process annotations such as @Autowired, @Resource and </span></span><br><span class="line"><span class="string">	 @PostConstruct within the method'</span>s declaring <span class="meta">@Configuration</span> <span class="class"><span class="keyword">class</span>. <span class="title">Add</span> <span class="title">the</span> '<span class="title">static</span>' <span class="title">modifier</span> <span class="title">to</span> </span></span><br><span class="line"><span class="class">	 <span class="title">this</span> <span class="title">method</span> <span class="title">to</span> <span class="title">avoid</span> <span class="title">these</span> <span class="title">container</span> <span class="title">lifecycle</span> <span class="title">issues</span></span>; see <span class="meta">@Bean</span> javadoc <span class="keyword">for</span> complete details.</span><br><span class="line">MyBeanFactoryPostProcessor init...</span><br><span class="line">...</span><br><span class="line">son init...hashCode() = <span class="number">882706486</span></span><br><span class="line">Parent init...</span><br></pre></td></tr></table></figure>
+<p>结果分析（问题点/冲突点）：</p>
+<ol>
+<li>AppConfig提前于<code>MyBeanFactoryPostProcessor</code>初始化</li>
+<li><code>@Autowired/@PostConstruct</code>等注解没有生效，<strong>这个问题很大</strong></li>
+</ol>
+<blockquote>
+<p>需要强调的是：此时的AppConfig是被enhance增强成功了的，这样才有可能进入到<code>BeanMethodInterceptor</code>拦截里面，才有可能输出这句日志（该拦截器会拦截Full模式配置列的所有的@Bean方法的执行）</p>
+</blockquote>
+<p>这句日志由<code>ConfigurationClassEnhancer.BeanMethodInterceptor</code>输出，含义为：你的@Bean标注的方法是非static的并且返回了一个<code>BeanFactoryPostProcessor</code>类型的实例，这就导致了<strong>配置类</strong>里面的<code>@Autowired, @Resource,@PostConstruct</code>等注解都将得不到解析，这是比较危险的（所以其实这个日志调整为warn级别也是阔仪的）。</p>
+<blockquote>
+<p>小细节：为毛日志看起来是ConfigurationClassEnhancer这个类输出的呢？这是因为<code>BeanMethodInterceptor</code>是它的静态内部类，和它<strong>共用的</strong>一个logger</p>
+</blockquote>
+<p>源码处解释：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">ConfigurationClassEnhancer.BeanMethodInterceptor：</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (isCurrentlyInvokedFactoryMethod(beanMethod)) &#123;</span><br><span class="line">		<span class="keyword">if</span> (logger.isInfoEnabled() &amp;&amp; BeanFactoryPostProcessor<span class="class">.<span class="keyword">class</span>.<span class="title">isAssignableFrom</span>(<span class="title">beanMethod</span>.<span class="title">getReturnType</span>())) </span>&#123;</span><br><span class="line">			logger.info(String.format(<span class="string">"@Bean method %s.%s is non-static and returns an object "</span> +</span><br><span class="line">							<span class="string">"assignable to Spring's BeanFactoryPostProcessor interface. This will "</span> +</span><br><span class="line">							<span class="string">"result in a failure to process annotations such as @Autowired, "</span> +</span><br><span class="line">							<span class="string">"@Resource and @PostConstruct within the method's declaring "</span> +</span><br><span class="line">							<span class="string">"@Configuration class. Add the 'static' modifier to this method to avoid "</span> +</span><br><span class="line">							<span class="string">"these container lifecycle issues; see @Bean javadoc for complete details."</span>,</span><br><span class="line">					beanMethod.getDeclaringClass().getSimpleName(), beanMethod.getName()));</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> cglibMethodProxy.invokeSuper(enhancedConfigInstance, beanMethodArgs);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p>解释为：如果当前正在执行的@Bean方法（铁定不是static，因为静态方法它也拦截不到嘛）返回类型是<code>BeanFactoryPostProcessor</code>类型，那就输出此警告日志来提醒使用者要当心。</p>
+<hr>
+<h3 id="解决方案：static关键字提升优先级-2"><a href="#解决方案：static关键字提升优先级-2" class="headerlink" title="解决方案：static关键字提升优先级"></a>解决方案：static关键字提升优先级</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">AppConfig：</span><br><span class="line"></span><br><span class="line"><span class="comment">//@Bean</span></span><br><span class="line"><span class="comment">//BeanFactoryPostProcessor postProcessor() &#123;</span></span><br><span class="line"><span class="comment">//    return new MyBeanFactoryPostProcessor();</span></span><br><span class="line"><span class="comment">//&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> BeanFactoryPostProcessor <span class="title">postProcessor</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> MyBeanFactoryPostProcessor();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，结果输出：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">MyBeanFactoryPostProcessor init...</span><br><span class="line">AppConfig init...</span><br><span class="line">son init...hashCode() = <span class="number">1906549136</span></span><br><span class="line">Parent init...</span><br><span class="line"><span class="comment">// @PostConstruct注解生效喽</span></span><br><span class="line">AppConfig.parent = com.yourbatman.bean.Parent<span class="meta">@baf</span>1bb3</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>世界一下子又清爽了有木有。</p>
+<hr>
+<h2 id="原因总结"><a href="#原因总结" class="headerlink" title="原因总结"></a>原因总结</h2><p>以上三个case是有共同点的，粗略的讲导致它们的原因甚至是同一个：<strong>AppConfig这个Bean被过早初始化</strong>。然而我们的解决方案似乎也是同一个：<strong>使用static提升Bean的优先级</strong>。</p>
+<p>那么为何AppConfig会被提前初始化呢？为何使用static关键字就没有问题了呢？根本原因可提前剧透：static静态方法属于类，执行静态方法时并不需要初始化所在类的实例；而实例方法属于实例，执行它时必须先初始化所在类的实例。听起来是不是非常的简单，JavaSE的东西嘛，当然只知晓到这个层次肯定是远远不够的，限于篇幅原因，关于Spring是如何处理的<strong>源码级别的分析</strong>我放在了下篇文章，请别走开哟~</p>
+<hr>
+<h2 id="static静态方法一定优先执行吗？"><a href="#static静态方法一定优先执行吗？" class="headerlink" title="static静态方法一定优先执行吗？"></a>static静态方法一定优先执行吗？</h2><p>看完本文，有些小伙伴就忍不住跃跃欲试了，甚至很武断的得出结论：<strong>static标注的@Bean方法优先级更高</strong>，其实这是错误的，比如你看如下示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AppConfig2</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    AppConfig2()&#123;</span><br><span class="line">        System.out.println(<span class="string">"AppConfig2 init..."</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function">Son <span class="title">son</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Son();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function">Daughter <span class="title">daughter</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Daughter();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function">Parent <span class="title">Parent</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Parent();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，结果输出：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">AppConfig2 init...</span><br><span class="line">son init...</span><br><span class="line">Daughter init...</span><br><span class="line">Parent init...</span><br></pre></td></tr></table></figure>
+<p>这时候你想让Parent在Son之前初始化，因此你想着在用static关键字来提升优先级，这么做：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">AppConfig2：</span><br><span class="line"></span><br><span class="line"><span class="comment">//@Bean</span></span><br><span class="line"><span class="comment">//Parent Parent() &#123;</span></span><br><span class="line"><span class="comment">//    return new Parent();</span></span><br><span class="line"><span class="comment">//&#125;</span></span><br><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> Parent <span class="title">Parent</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Parent();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>结果：你徒劳了，static貌似并没有生效，怎么回事？</p>
+<hr>
+<h3 id="原因浅析"><a href="#原因浅析" class="headerlink" title="原因浅析"></a>原因浅析</h3><p>为了满足你的好奇心，这里给个浅析，道出关键因素。我们知道@Bean方法（不管是静态方法还是实例方法）最终都会被封装进<code>ConfigurationClass</code>实例里面，使用<code>Set&lt;BeanMethod&gt; beanMethods</code>存储着，关键点在于它是个<code>LinkedHashSet</code>所以是有序的（存放顺序），而存入的顺序底层是由<code>clazz.getDeclaredMethods()</code>来决定的，由此可知@Bean方法执行顺序<strong>和有无static没有半毛钱关系</strong>。<br><img data-src="https://img-blog.csdnimg.cn/20200531093341371.png#x70" alt=""></p>
+<blockquote>
+<p>说明：<code>clazz.getDeclaredMethods()</code>得到的是Method[]数组，是有序的。这个顺序由字节码（定义顺序）来保证：先定义，先服务。</p>
+</blockquote>
+<p>由此可见，static并不是<strong>真正意义</strong>上的提高Bean优先级，对于如上你的需求case，你可以使用<code>@DependsOn</code>注解来保证，它也是和Bean顺序息息相关的一个注解，在本专栏后续文章中将会详细讲到。</p>
+<p>所以关于@Bean方法的执行顺序的正确结论应该是：在<strong>同一配置类</strong>内，在无其它“干扰”情况下（无<code>@DependsOn、@Lazy等注解</code>），@Bean方法的执行顺序遵从的是定义顺序（后置处理器类型除外）。</p>
+<p>小提问：如果是垮@Configuration配置类的情况，顺序如何界定呢？那么这就不是同一层级的问题了，首先考虑的应该是@Configuration配置类的顺序问题，前面有文章提到过配置类是支持<strong>有限的</strong>的@Order注解排序的，具体分析请依旧保持关注A哥后续文章详解哈…</p>
+<hr>
+<h2 id="static关键字使用注意事项"><a href="#static关键字使用注意事项" class="headerlink" title="static关键字使用注意事项"></a>static关键字使用注意事项</h2><p>在同一个<code>@Configuration</code>配置类内，对static关键字的使用做出如下说明，供以参考：</p>
+<ol>
+<li>对于普通类型（非后置处理器类型）的@Bean方法，使用static关键字并不能改变顺序（按照方法定义顺序执行），所以别指望它</li>
+<li>static关键字一般有且仅用于@Bean方法返回为<code>BeanPostProcessor</code>、<code>BeanFactoryPostProcessor</code>等类型的方法，并且建议此种方法<strong>请务必使用static修饰</strong>，否则容易导致隐患，埋雷</li>
+</ol>
+<p>static关键字不要滥用（其实任何关键字皆勿乱用），在同一配置类内，<strong>与其说它是提升了Bean的优先级，倒不如说它让@Bean方法静态化从而不再需要依赖所在类的实例即可独立运行</strong>。另外我们知道，static关键还可以修饰（内部）类，那么如果放在类上它又是什么表现呢？同样的，你先思考，下篇文章我们接着聊~</p>
+<blockquote>
+<p>说明：使用static修饰Class类在<strong>Spring Boot</strong>自动配置类里特别特别常见，所以掌握起来很具价值</p>
+</blockquote>
+<hr>
+<h2 id="思考题："><a href="#思考题：" class="headerlink" title="思考题："></a>思考题：</h2><p>今天的思考题比较简单：为何文首三种case的警告信息都是info级别呢？是否有级别过低之嫌？</p>
+<hr>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>本文还是蛮干的哈，不出意外它能够帮你解决你工程中的某些问题，排除掉一些隐患，毕竟墨菲定律被验证了你担心的事它总会发生，防患于未然才能把自己置于安全高地嘛。</p>
+<p>你可能诧异，A哥竟能把static关键字在Spring中的应用都能写出个专栏出来，是的，这不是就是本公众号的定位么 ，小而美和拒绝浅尝辄止嘛。对于一些知识（比如本文的static关键字的使用）我并不推崇强行记忆，因为那真的很容易忘，快速使用可以简单记记，但真想记得牢(甚至成为永久记忆)，那必须得去深水区看看。来吧，下文将授之以渔~</p>
+<blockquote>
+<p>很多小伙伴去强行记忆Spring Boot支持的那17种外部化配置，此时你应该问自己：现在你可能记得，一周以后呢？一个月以后呢？所以你需要另辟蹊径，那就持续关注我吧😄</p>
+</blockquote>
+        <!-- ....这里是正文内容的底部（首页不会展示）... -->
+        <style>
+.table-container img{
+    display: inherit;
+    margin-top: 5px;
+    margin-bottom: 0px;
+    margin-right: 10px;
+}
+</style>
+<hr>
+<h1 style="text-align: left;">关注YourBatman</h1>
+
+<div><table>
+<thead>
+<tr>
+<th>Author</th>
+<th>A哥(YourBatman)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>个人站点</td>
+<td><a href="https://www.yourbatman.cn" rel="nofollow" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc">www.yourbatman.cn</a></td>
+</tr>
+<tr>
+<td>E-mail</td>
+<td>yourbatman@qq.com</td>
+</tr>
+<tr>
+<td><strong>微 信</strong></td>
+<td><a href="https://www.yourbatman.cn/images/wechat.png" rel="nofollow" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc">fsx1056342982</a></td>
+</tr>
+<tr>
+<td><strong><code>活跃平台</code></strong></td>
+<td><a href="https://www.yourbatman.cn" rel="nofollow" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/2020071015182276.png" alt=""></a> <a href="https://fangshixiang.blog.csdn.net/" target="_blank" rel="nofollow noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/20200710151913394.png" alt=""></a><a href="https://yourbatman.cnblogs.com" target="_blank" rel="nofollow noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/20200710151929355.png" alt=""></a><a href="https://juejin.im/user/5b44d178f265da0fa1220efe/posts" target="_blank" rel="nofollow noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/20200710151938937.png" alt=""></a><a href="https://www.zhihu.com/people/fangshixiang/posts" target="_blank" rel="nofollow noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/20200710151950629.png" alt=""></a><a href="https://www.jianshu.com/u/8740f1fdd684" target="_blank" rel="nofollow noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/20200710152000530.png" alt=""></a><a href="https://segmentfault.com/u/yourbatman/articles" target="_blank" rel="nofollow noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/20200710152008726.png" alt=""></a><a href="https://github.com/yourbatman" target="_blank" rel="noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/20200710152015895.png" alt=""></a></td>
+</tr>
+<tr>
+<td><strong>公众号</strong></td>
+<td><a href="https://www.yourbatman.cn/images/wechat_channel.jpg" rel="nofollow" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc">BAT的乌托邦（ID：BAT-utopia）</a></td>
+</tr>
+<tr>
+<td>知识星球</td>
+<td><a href="https://t.zsxq.com/nQBi66I" target="_blank" rel="nofollow noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc">BAT的乌托邦</a></td>
+</tr>
+<tr>
+<td>每日文章推荐</td>
+<td><a href="https://github.com/yourbatman/reading/issues" target="_blank" rel="noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc">每日文章推荐</a></td>
+</tr>
+</tbody>
+</table></div>
+
+<p>
+<img src="https://img-blog.csdnimg.cn/20200710160552549.gif" alt="BAT的乌托邦">
+</p>
+
+    </div>
+
+    
+    
+    
+
+    <!-- 相关阅读（你可能还喜欢） -->
+      
+  <div class="popular-posts-header">你可能还喜欢：</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/x2y/8d076785.html" rel="bookmark">想用@Autowired注入static静态成员？官方不推荐你却还偏要这么做</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/x2y/fa005713.html" rel="bookmark">static关键字有何魔法？竟让Spring Boot搞出那么多静态内部类</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/x2y/7889cb09.html" rel="bookmark">3. 搞定收工，PropertyEditor就到这</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/x2y/e715a0e7.html" rel="bookmark">2. Spring早期类型转换，基于PropertyEditor实现</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/x2y/5cc800bc.html" rel="bookmark">1. 揭秘Spring类型转换 - 框架设计的基石</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/x2y/78d89441.html" rel="bookmark">Spring改变版本号命名规则：此举对非英语国家很友好</a></div>
+    </li>
+  </ul>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-title">
+    <strong>本文标题： </strong>
+    《static关键字真能提高Bean的优先级吗？答：真能》
+  </li>
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>A哥(YourBatman)
+  </li>
+  <li class="post-copyright-date">
+    <strong>发布时间： </strong>2020-05-31 13:41:58
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://www.yourbatman.cn/x2y/6abf4a82.html" title="static关键字真能提高Bean的优先级吗？答：真能">https://www.yourbatman.cn/x2y/6abf4a82.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>许可协议： </strong>本站所有文章均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载：No！转发：Yes！
+  </li>
+</ul>
+</div>
+
+
+      <!-- 添加“本文结束”标记 -->
+      <div class="read-over" style="text-align: center;margin-top: 25px;color: rgba(234,16,61,.569);font-size: 16px">-------------您已触及底线 <i class="fa fa-paw"></i> 感谢阅读-------------</div>
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    请A哥喝水
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="https://img-blog.csdnimg.cn/20200612080128384.png" alt="A哥(YourBatman) 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="https://img-blog.csdnimg.cn/20200612080128343.png" alt="A哥(YourBatman) 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Spring-Framework/" rel="tag"><i class="fa fa-tag"></i> Spring Framework</a>
+              <a href="/tags/static/" rel="tag"><i class="fa fa-tag"></i> static</a>
+              <a href="/tags/Bean/" rel="tag"><i class="fa fa-tag"></i> @Bean</a>
+          </div>
+
+        <!-- 导入投票模块 -->
+        
+  <!-- 投票功能 -->
+  <div class="post-widgets">
+    <div style="color: #ea778c;font-size: 14px;">(>兄台请留步，看完记得六星好评哦<)</div>
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/x2y/1db87a14.html" rel="prev" title="Spring配置类深度剖析-总结篇(手绘流程图，可白嫖)">
+      <i class="fa fa-chevron-left"></i> Spring配置类深度剖析-总结篇(手绘流程图，可白嫖)
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/x2y/fa005713.html" rel="next" title="static关键字有何魔法？竟让Spring Boot搞出那么多静态内部类">
+      static关键字有何魔法？竟让Spring Boot搞出那么多静态内部类 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+    </div>
+  
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#版本约定"><span class="nav-number">1.1.</span> <span class="nav-text">版本约定</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#正文"><span class="nav-number">2.</span> <span class="nav-text">正文</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#警告一：来自BeanPostProcessorChecker"><span class="nav-number">2.1.</span> <span class="nav-text">警告一：来自BeanPostProcessorChecker</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解决方案：static关键字提升优先级"><span class="nav-number">2.1.1.</span> <span class="nav-text">解决方案：static关键字提升优先级</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#警告二：Configuration配置类增强失败"><span class="nav-number">2.2.</span> <span class="nav-text">警告二：Configuration配置类增强失败</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解决方案：static关键字提升优先级-1"><span class="nav-number">2.2.1.</span> <span class="nav-text">解决方案：static关键字提升优先级</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#警告三：非静态-Bean方法导致-Autowired等注解失效"><span class="nav-number">2.3.</span> <span class="nav-text">警告三：非静态@Bean方法导致@Autowired等注解失效</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解决方案：static关键字提升优先级-2"><span class="nav-number">2.3.1.</span> <span class="nav-text">解决方案：static关键字提升优先级</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原因总结"><span class="nav-number">2.4.</span> <span class="nav-text">原因总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#static静态方法一定优先执行吗？"><span class="nav-number">2.5.</span> <span class="nav-text">static静态方法一定优先执行吗？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#原因浅析"><span class="nav-number">2.5.1.</span> <span class="nav-text">原因浅析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#static关键字使用注意事项"><span class="nav-number">2.6.</span> <span class="nav-text">static关键字使用注意事项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思考题："><span class="nav-number">2.7.</span> <span class="nav-text">思考题：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="A哥(YourBatman)"
+      src="https://img-blog.csdnimg.cn/20200511100304592.jpg">
+  <p class="site-author-name" itemprop="name">A哥(YourBatman)</p>
+  <div class="site-description" itemprop="description">我这有故事，你那有酒吗？</div>
+</div>
+<div class="site-author motion-element" style="border-top: 1px dotted #ccc;padding-top: 10px;opacity: 0.7" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img itemprop="image" alt="A哥(YourBatman)" style="max-width: 120px;"
+      src="https://img-blog.csdnimg.cn/20200608214500399.png">
+  <div style="color: #e36a7c;font-size: 10px;" itemprop="description">加A哥好友(备注:Java入群)</div>
+</div>
+  <div class="sidebar-button motion-element">
+    <a onclick="tidioChatApi.open();"><i class="fa fa-comment"></i>
+    私聊A哥
+  </a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://fangshixiang.blog.csdn.net/" title="https:&#x2F;&#x2F;fangshixiang.blog.csdn.net&#x2F;" rel="noopener" target="_blank">CSDN</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/yourbatman/" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;yourbatman&#x2F;" rel="noopener" target="_blank">博客园</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://juejin.im/user/5b44d178f265da0fa1220efe/posts" title="https:&#x2F;&#x2F;juejin.im&#x2F;user&#x2F;5b44d178f265da0fa1220efe&#x2F;posts" rel="noopener" target="_blank">掘金</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.zhihu.com/people/fangshixiang" title="https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;fangshixiang" rel="noopener" target="_blank">知乎</a>
+        </li>
+    </ul>
+  </div>
+
+<!-- 近期文章（源代码） -->
+
+    <div class="recent_posts links-of-blogroll motion-element links-of-blogroll-block">
+      <div class="links-of-blogroll-title">
+        <!-- modify icon to fire by szw -->
+        <i class="fa fa-history fa-" aria-hidden="true"></i>
+        最新文章
+      </div>
+      <ul class="links-of-blogroll-list">
+        
+        
+          <li>
+            <a href="/x2y/ff31c4c6.html" title="8. 格式化器大一统 -- Spring的Formatter抽象" target="_blank">
+            <i class="fa fa-check-square"></i> 8. 格式化器大一统 -- Spring的Formatter抽象
+            </a>
+          </li>
+        
+          <li>
+            <a href="/x2y/9705b9e8.html" title="YourBatman 2020年感悟关键词：科比、裁员、管理层、活着" target="_blank">
+            <i class="fa fa-check-square"></i> YourBatman 2020年感悟关键词：科比、裁员、管理层、活着
+            </a>
+          </li>
+        
+          <li>
+            <a href="/x2y/b6588179.html" title="7. JDK拍了拍你：字符串拼接一定记得用MessageFormat#format" target="_blank">
+            <i class="fa fa-check-square"></i> 7. JDK拍了拍你：字符串拼接一定记得用MessageFormat#format
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+
+
+      </div>
+
+      <!-- canvas粒子时钟效果  放在侧边栏最下面 -->
+      <div style="">
+  <canvas id="canvas" style="width:50%;margin-top:10px;margin-bottom: -10px;" width="820" height="250">当前浏览器不支持canvas，建议使用谷歌浏览器再试</canvas>
+</div>
+<script>
+(function(){
+    var WINDOW_WIDTH = 820;
+    var WINDOW_HEIGHT = 250;
+    var RADIUS = 7; //球半径
+    var NUMBER_GAP = 10; //数字之间的间隙
+    var u=0.65; //碰撞能量损耗系数
+    var context; //Canvas绘制上下文
+    var balls = []; //存储彩色的小球
+    const colors = ["#33B5E5","#0099CC","#AA66CC","#9933CC","#99CC00","#669900","#FFBB33","#FF8800","#FF4444","#CC0000"]; //彩色小球的颜色
+    var currentNums = []; //屏幕显示的8个字符
+    var digit =
+        [
+            [
+                [0,0,1,1,1,0,0],
+                [0,1,1,0,1,1,0],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [0,1,1,0,1,1,0],
+                [0,0,1,1,1,0,0]
+            ],//0
+            [
+                [0,0,0,1,1,0,0],
+                [0,1,1,1,1,0,0],
+                [0,0,0,1,1,0,0],
+                [0,0,0,1,1,0,0],
+                [0,0,0,1,1,0,0],
+                [0,0,0,1,1,0,0],
+                [0,0,0,1,1,0,0],
+                [0,0,0,1,1,0,0],
+                [0,0,0,1,1,0,0],
+                [1,1,1,1,1,1,1]
+            ],//1
+            [
+                [0,1,1,1,1,1,0],
+                [1,1,0,0,0,1,1],
+                [0,0,0,0,0,1,1],
+                [0,0,0,0,1,1,0],
+                [0,0,0,1,1,0,0],
+                [0,0,1,1,0,0,0],
+                [0,1,1,0,0,0,0],
+                [1,1,0,0,0,0,0],
+                [1,1,0,0,0,1,1],
+                [1,1,1,1,1,1,1]
+            ],//2
+            [
+                [1,1,1,1,1,1,1],
+                [0,0,0,0,0,1,1],
+                [0,0,0,0,1,1,0],
+                [0,0,0,1,1,0,0],
+                [0,0,1,1,1,0,0],
+                [0,0,0,0,1,1,0],
+                [0,0,0,0,0,1,1],
+                [0,0,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [0,1,1,1,1,1,0]
+            ],//3
+            [
+                [0,0,0,0,1,1,0],
+                [0,0,0,1,1,1,0],
+                [0,0,1,1,1,1,0],
+                [0,1,1,0,1,1,0],
+                [1,1,0,0,1,1,0],
+                [1,1,1,1,1,1,1],
+                [0,0,0,0,1,1,0],
+                [0,0,0,0,1,1,0],
+                [0,0,0,0,1,1,0],
+                [0,0,0,1,1,1,1]
+            ],//4
+            [
+                [1,1,1,1,1,1,1],
+                [1,1,0,0,0,0,0],
+                [1,1,0,0,0,0,0],
+                [1,1,1,1,1,1,0],
+                [0,0,0,0,0,1,1],
+                [0,0,0,0,0,1,1],
+                [0,0,0,0,0,1,1],
+                [0,0,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [0,1,1,1,1,1,0]
+            ],//5
+            [
+                [0,0,0,0,1,1,0],
+                [0,0,1,1,0,0,0],
+                [0,1,1,0,0,0,0],
+                [1,1,0,0,0,0,0],
+                [1,1,0,1,1,1,0],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [0,1,1,1,1,1,0]
+            ],//6
+            [
+                [1,1,1,1,1,1,1],
+                [1,1,0,0,0,1,1],
+                [0,0,0,0,1,1,0],
+                [0,0,0,0,1,1,0],
+                [0,0,0,1,1,0,0],
+                [0,0,0,1,1,0,0],
+                [0,0,1,1,0,0,0],
+                [0,0,1,1,0,0,0],
+                [0,0,1,1,0,0,0],
+                [0,0,1,1,0,0,0]
+            ],//7
+            [
+                [0,1,1,1,1,1,0],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [0,1,1,1,1,1,0],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [0,1,1,1,1,1,0]
+            ],//8
+            [
+                [0,1,1,1,1,1,0],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [0,1,1,1,0,1,1],
+                [0,0,0,0,0,1,1],
+                [0,0,0,0,0,1,1],
+                [0,0,0,0,1,1,0],
+                [0,0,0,1,1,0,0],
+                [0,1,1,0,0,0,0]
+            ],//9
+            [
+                [0,0,0,0],
+                [0,0,0,0],
+                [0,1,1,0],
+                [0,1,1,0],
+                [0,0,0,0],
+                [0,0,0,0],
+                [0,1,1,0],
+                [0,1,1,0],
+                [0,0,0,0],
+                [0,0,0,0]
+            ]//:
+        ];
+
+    function drawDatetime(cxt){
+        var nums = [];
+
+        context.fillStyle="#005eac"
+        var date = new Date();
+        var offsetX = 70, offsetY = 30;
+        var hours = date.getHours();
+        var num1 = Math.floor(hours/10);
+        var num2 = hours%10;
+        nums.push({num: num1});
+        nums.push({num: num2});
+        nums.push({num: 10}); //冒号
+        var minutes = date.getMinutes();
+        var num1 = Math.floor(minutes/10);
+        var num2 = minutes%10;
+        nums.push({num: num1});
+        nums.push({num: num2});
+        nums.push({num: 10}); //冒号
+        var seconds = date.getSeconds();
+        var num1 = Math.floor(seconds/10);
+        var num2 = seconds%10;
+        nums.push({num: num1});
+        nums.push({num: num2});
+
+        for(var x = 0;x<nums.length;x++){
+            nums[x].offsetX = offsetX;
+            offsetX = drawSingleNumber(offsetX,offsetY, nums[x].num,cxt);
+            //两个数字连一块，应该间隔一些距离
+            if(x<nums.length-1){
+                if((nums[x].num!=10) &&(nums[x+1].num!=10)){
+                    offsetX+=NUMBER_GAP;
+                }
+            }
+        }
+
+        //说明这是初始化
+        if(currentNums.length ==0){
+            currentNums = nums;
+        }else{
+            //进行比较
+            for(var index = 0;index<currentNums.length;index++){
+                if(currentNums[index].num!=nums[index].num){
+                    //不一样时，添加彩色小球
+                    addBalls(nums[index]);
+                    currentNums[index].num=nums[index].num;
+                }
+            }
+        }
+        renderBalls(cxt);
+        updateBalls();
+
+        return date;
+    }
+
+    function addBalls (item) {
+        var num = item.num;
+        var numMatrix = digit[num];
+        for(var y = 0;y<numMatrix.length;y++){
+            for(var x = 0;x<numMatrix[y].length;x++){
+                if(numMatrix[y][x]==1){
+                    var ball={
+                        offsetX:item.offsetX+RADIUS+RADIUS*2*x,
+                        offsetY:30+RADIUS+RADIUS*2*y,
+                        color:colors[Math.floor(Math.random()*colors.length)],
+                        g:1.5+Math.random(),
+                        vx:Math.pow(-1, Math.ceil(Math.random()*10))*4+Math.random(),
+                        vy:-5
+                    }
+                    balls.push(ball);
+                }
+            }
+        }
+    }
+
+    function renderBalls(cxt){
+        for(var index = 0;index<balls.length;index++){
+            cxt.beginPath();
+            cxt.fillStyle=balls[index].color;
+            cxt.arc(balls[index].offsetX, balls[index].offsetY, RADIUS, 0, 2*Math.PI);
+            cxt.fill();
+        }
+    }
+
+    function updateBalls () {
+        var i =0;
+        for(var index = 0;index<balls.length;index++){
+            var ball = balls[index];
+            ball.offsetX += ball.vx;
+            ball.offsetY += ball.vy;
+            ball.vy+=ball.g;
+            if(ball.offsetY > (WINDOW_HEIGHT-RADIUS)){
+                ball.offsetY= WINDOW_HEIGHT-RADIUS;
+                ball.vy=-ball.vy*u;
+            }
+            if(ball.offsetX>RADIUS&&ball.offsetX<(WINDOW_WIDTH-RADIUS)){
+
+                balls[i]=balls[index];
+                i++;
+            }
+        }
+        //去除出边界的球
+        for(;i<balls.length;i++){
+            balls.pop();
+        }
+    }
+    function drawSingleNumber(offsetX, offsetY, num, cxt){
+        var numMatrix = digit[num];
+        for(var y = 0;y<numMatrix.length;y++){
+            for(var x = 0;x<numMatrix[y].length;x++){
+                if(numMatrix[y][x]==1){
+                    cxt.beginPath();
+                    cxt.arc(offsetX+RADIUS+RADIUS*2*x,offsetY+RADIUS+RADIUS*2*y,RADIUS,0,2*Math.PI);
+                    cxt.fill();
+                }
+            }
+        }
+        cxt.beginPath();
+        offsetX += numMatrix[0].length*RADIUS*2;
+        return offsetX;
+    }
+
+    var canvas = document.getElementById("canvas");
+    canvas.width=WINDOW_WIDTH;
+    canvas.height=WINDOW_HEIGHT;
+    context = canvas.getContext("2d");
+
+    //记录当前绘制的时刻
+    var currentDate = new Date();
+
+    setInterval(function(){
+        //清空整个Canvas，重新绘制内容
+        context.clearRect(0, 0, context.canvas.width, context.canvas.height);
+        drawDatetime(context);
+    }, 50)
+})();
+</script>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+
+     <!-- 此处为新加的代码 -->
+     
+<script src="https://my.openwrite.cn/js/readmore.js" type="text/javascript"></script>
+<script>
+    const btw = new BTWPlugin();
+    btw.init({
+        id: 'yourbatman',
+        blogId: '10059-1591593090091-727',
+        name: 'BAT的乌托邦',
+        qrcode: 'https://img-blog.csdnimg.cn/20200511100304545.jpg',
+        keyword: 'vip',
+    });
+</script>
+
+
+     <script src="https://cdn.staticfile.org/jquery/3.1.1/jquery.min.js"></script>
+<script>
+    //暂时储存文章中的内容
+    var div = $('.post-body');
+    //暂时储存目录的内容
+    var toc=$('.post-toc')
+    function password() {
+        if(''){
+            //将文章内容删除
+            div.remove();
+            //将目录删除
+            toc.remove();
+            //将文章删除后，向原来文章的地方添加，应该出现的提示用户输入密码的样式
+            //下面这里的第一个用textarea是因为如果在手机端的时候只能显示一部分文字，
+            //只是拓展:input里面的字只能显示一行，不会自动换行，目前上网搜索没有发现好的办法，所以用了textarea，右下角的小三角通过resize:none 去掉。
+            $('.post-header').after(
+            '<span class="description" value="请输入密码，然后按 Enter 键阅读全文" style="font-style: oblique;font-weight: bold;border: none;display: block;'+
+            'width: 60%;margin: 0 auto;text-align: center;outline: none;margin-bottom: 40px;resize:none; margin-top: 20px;">'+
+            '<i class="fa fa-heartbeat" id="myheartbeat"></i>'+
+            '请输入密码，然后按 Enter 键阅读全文' +
+            '<i class="fa fa-heartbeat" id="myheartbeat"></i>'+
+            '</span>' +
+            '<div class="qiang" style="height: 100px;width: 60%;margin:0 auto">' +
+            '<input class="password"  type="password" autocomplete="new-password" autofocus="autofocus" value="" style="border-radius: 5px;height: 30px;border: none;display: block;border-bottom: 1px solid #ccc;' +
+            'margin: 0 auto;outline: none;width:95%"/>' +
+            '</div>')
+            //绑定点击事件，如果是点击的.password 这个div就改变样式，如果是document中除了div之外的其他任何元素，就变回原来的样式。
+            document.onclick = function (event) {
+                var e = event || window.event;
+                var elem = e.srcElement || e.target;
+
+                while (elem) {
+                    if (elem != document) {
+                        if (elem.className == "password") {
+                            //$(".password").animate({paddingTop:"30px",width:"100%",borderWidth:"2px"},300)
+                            return;
+                        }
+                        elem = elem.parentNode;
+                    } else {
+                        //$(".password").animate({paddingTop:"0px",width:"95%",borderWidth:"1px"},300)
+                        return;
+                    }
+                }
+            }
+            //绑定enter键按下后离开的事件
+            $(document).keyup(function(event){
+                if(event.keyCode ==13&&$('.password').length>0){
+                    //console.log($('.password').val())
+                    //console.log('')
+                    if ($('.password').val() == '') {
+                        //恢复文章内容
+                        (div).appendTo($(".post-header"))
+                        //恢复目录
+                        toc.appendTo($(".sidebar-inner"))
+                        //删除本页面的输入密码组件
+                        $(".description").remove();
+                        $(".qiang").remove();
+                        $(".password").remove();
+
+                        //重新处理pjax事件,如果没有加pjax的从下面这行起到下面的else之间的代码需要去掉。
+                        //图片懒加载，没有加入此功能的这个函数需要去掉
+                        $('img').lazyload({
+                            placeholder: '/images/loading.gif',
+                            effect: 'fadeIn',
+                            threshold : 100,
+                            failure_limit : 20,
+                            skip_invisible : false
+                        });
+                        //pjax后出现文章不显示，没有pjax的下面四行需要去掉
+                        $(".post-block").css({opacity:1});
+                        $(".post-header").css({opacity:1});
+                        $(".post-body").css({opacity:1});
+                        $(".pagination").css({opacity:1});
+                    }else {
+                        alert("密码不对，请重新输入~")
+                    }
+                }
+                //将document的keyup移除，防止在pjax的情况下会重复绑定事件
+            });
+        }
+    }
+    password();
+</script>
+
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        <!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<span id="times" style="margin-right: 10px;">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("05/03/2020 12:00:00");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "小破站已苟活"+dnum+"天";
+        document.getElementById("times").innerHTML = hnum + "小时" + mnum + "分" + snum + "秒";
+    }
+    setInterval("createtime()",250);
+
+    // 自定义邮箱审核规则（目前校验：邮箱必填，且格式必须正确 昵称也必须填写）
+    document.body.addEventListener('click', function(e) {
+        if (e.target.classList.contains('vsubmit')) {
+            const email = document.querySelector('input[type=email]');
+            const nick = document.querySelector('input[name=nick]');
+            const reg = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+            if (!email.value || !nick.value || !reg.test(email.value)) {
+                const str = `<div class="valert text-center"><div class="vtext">请填写正确的昵称和邮箱！</div></div>`;
+                const vmark = document.querySelector('.vmark');
+                vmark.innerHTML = str;
+                vmark.style.display = 'block';
+                setTimeout(function() {
+                    vmark.style.display = 'none';
+                    vmark.innerHTML = '';
+                }, 2500);
+            }
+        }
+    })
+</script>
+  <span class="beian"><a href="http://www.beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备12009483号 </a>
+  </span>
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">A哥(YourBatman)</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">本站总字数：</span>
+    <span title="本站总字数">446k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">本站总阅读时长 &asymp;</span>
+    <span title="本站总阅读时长">6:45</span>
+</div>
+  <div class="addthis_inline_share_toolbox">
+    <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5eb7b6f6b64d54f6" async="async"></script>
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        承蒙 <span id="busuanzi_value_site_uv"></span> 位朋友
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        共造访本站 <span id="busuanzi_value_site_pv"></span> 次
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+  <script>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id    : 25645,
+      el    : 'wpac-rating',
+      color : 'fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+  <script src="//code.tidio.co/imnhfpyrju0tgipwdxke6moou6p9kbdu.js"></script>
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 1, // 打开或关闭导航空格和选项卡 1:打开 0:关闭
+    scrollbar: 1, // 打开/关闭滚动条
+    toolbar  : 1, // 打开/关闭工具栏
+    statusbar: 1, // 打开或关闭状态栏
+    pagemode : 'thumbs', // 侧边栏状态，显示书签或缩略图 接受值：none，thumbs，bookmarks，attachments
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+
+  
+
+  
+
+
+  <!-- 自定义的js效果 -->
+  <script type="text/javascript">
+    (function() {
+var a_idx = 0;
+ 
+        $("body").click(function(e) {
+            //var a = new Array(
+            //    "富强", "民主", "文明", "和谐",
+            //    "自由", "平等", "公正", "法治",
+            //    "爱国", "敬业", "诚信", "友善"
+            //    );
+            var a = new Array(
+            "耕耘","挑灯","悬梁","废寝",
+            "映雪","刺骨","囊萤","凿壁",
+            "勤奋","刻苦","打拼","砥砺");
+
+            var $i = $("<span/>").text(a[a_idx]);
+            a_idx = (a_idx + 1) % a.length;
+            var x = e.pageX,
+            y = e.pageY;
+            $i.css({
+                "z-index": 144469,
+                "top": y - 20,
+                "left": x,
+                "position": "absolute",
+                "font-weight": "bold",
+                "color": "#f00"
+            });
+            $("body").append($i);
+            $i.animate({
+                "top": y - 180,
+                "opacity": 0
+            },
+            1500,
+            function() {
+                $i.remove()
+            })
+        });
+    })();
+  </script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'GL1AoYvDSErHS8idMvn35STX-gzGzoHsz',
+      appKey     : 'flstBFF7gvWX8emTwJooV0bB',
+      placeholder: "各位道友📢📢📢：&#10;1、填写昵称和【正确邮箱号】；&#10;2、有邮箱可收到回复的邮件提醒；&#10;3、礼貌言辞，拒绝黄赌毒；",
+      avatar     : 'robohash',
+      meta       : guest,
+      pageSize   : '6' || 10,
+      visitor    : true,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

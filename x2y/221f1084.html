@@ -1,0 +1,1497 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="baidu-site-verification" content="FdPXpeNylP">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.yourbatman.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},"motion":{"enable":false,"async":true,"transition":{"post_block":"flipBounceYIn","post_header":"flipXIn","post_body":"flipBounceXIn","coll_header":"expandIn","sidebar":"shrinkIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="你为何用Fastjson？你为何仍在用Fastjson？">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Fastjson到了说再见的时候了">
+<meta property="og:url" content="https://www.yourbatman.cn/x2y/221f1084.html">
+<meta property="og:site_name" content="BAT的乌托邦">
+<meta property="og:description" content="你为何用Fastjson？你为何仍在用Fastjson？">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200622172605662.png#x260">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2020062218500935.png#x100">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200701071842704.png#x100">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200622160236785.png#x260">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200622190151492.png##x100">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200701173929379.png#x260">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2020070118342039.png#x260">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200629070547714.png#x260">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200630071300475.png#x260">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200622153533596.png#x260">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200630072342330.png#x160">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200630073524542.gif#x160">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200630073638950.png#x160">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200630073803595.png#x160">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200630073840692.png#x160">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200630074119345.png#x260">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200620162515660.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200701161604410.png#x260">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200701161604416.png#x260">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200620155220213.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2020070116254166.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200701162604932.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200701162620171.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200702142954225.png#x260">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200702151128425.png#x60">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200630074132924.png#x260">
+<meta property="article:published_time" content="2020-07-02T13:14:39.000Z">
+<meta property="article:modified_time" content="2021-04-30T13:32:41.873Z">
+<meta property="article:author" content="A哥(YourBatman)">
+<meta property="article:tag" content="BAT的乌托邦">
+<meta property="article:tag" content="A哥">
+<meta property="article:tag" content="YourBatman">
+<meta property="article:tag" content="Fastjson">
+<meta property="article:tag" content="Jackson">
+<meta property="article:tag" content="安全漏洞">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20200622172605662.png#x260">
+
+<link rel="canonical" href="https://www.yourbatman.cn/x2y/221f1084.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Fastjson到了说再见的时候了 | BAT的乌托邦</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?2ad49a2290d0249428335633c45e2806";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">BAT的乌托邦</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">当大潮退去，才知道谁在裸泳</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于A哥/留言板</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">64</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>专栏<span class="badge">15</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>时间轴<span class="badge">56</span></a>
+
+  </li>
+        <li class="menu-item menu-item-top">
+
+    <a href="/top/" rel="section"><i class="fa fa-signal fa-fw"></i>热门文章</a>
+
+  </li>
+        <li class="menu-item menu-item-books">
+
+    <a href="/books/" rel="section"><i class="fa fa-book fa-fw"></i>图书馆</a>
+
+  </li>
+        <li class="menu-item menu-item-links">
+
+    <a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友情债</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="请输入关键字检索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/yourbatman" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+
+        <!~- 跳转到新站点 start... -->
+        <div style="width: 90%;margin-left: 5%;font-size: 24px;color: yellow;font-weight: bolder; margin-bottom: -20px;">
+          <marquee behavior="alternate" hspace="hexo50px" onMouseOut="this.start()" onMouseOver="this.stop()">
+            本站点已归档（不再维护），点击立即前往新站点：
+              <a href="https://yourbatman.cn" target="_self" title="前往新站点" style="color:whitesmoke;text-decoration: underline;">
+                https://yourbatman.cn
+              </a>
+          </marquee>
+        </div>
+        <!~- 跳转到新站点 end... -->
+
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  
+    <div id="yourbatman">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.yourbatman.cn/x2y/221f1084.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://img-blog.csdnimg.cn/20200511100304592.jpg">
+      <meta itemprop="name" content="A哥(YourBatman)">
+      <meta itemprop="description" content="我这有故事，你那有酒吗？">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BAT的乌托邦">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Fastjson到了说再见的时候了
+        </h1>
+
+        <div class="post-meta">
+          <!-- 精品文章 精华帖 -->
+          
+            <i class="fa fa-anchor" style="background: #00a8c3; padding: 2px 4px 2px 4px; color: #fff;">&nbsp;精华帖</i>
+            <span class="post-meta-divider">|</span>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-07-02 21:14:39" itemprop="dateCreated datePublished" datetime="2020-07-02T21:14:39+08:00">2020-07-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">收录于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/A%E5%93%A5%E5%AD%A6Jackson/" itemprop="url" rel="index"><span itemprop="name">A哥学Jackson</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/x2y/221f1084.html" class="post-meta-item leancloud_visitors" data-flag-title="Fastjson到了说再见的时候了" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">评论数：</span>
+    
+    <a title="valine" href="/x2y/221f1084.html#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/x2y/221f1084.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+          <!-- 置顶 可以写top:true  也可以写数字top:1/2/3  顺序规则同Spring-->
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+          <!-- 本文作者 -->
+          <span class="post-meta-item" title="阅读时长">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-user fa-fw"></i>
+            </span>
+            <span class="post-meta-item-text">本文作者：</span>
+            <a href="/about/" itemprop="url" rel="index">
+              <span>A哥(YourBatman)</span>
+            </a>
+          </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>专注Java领域分享、成长，拒绝浅尝辄止<br><strong>作者</strong>：<a href="https://www.yourbatman.cn/about/">A哥（YourBatman）</a><br><strong>公众号</strong>：BAT的乌托邦（ID：BAT-utopia）<br><strong>个人博客</strong>：<a href="https://www.yourbatman.cn/">https://www.yourbatman.cn</a>，已收录本文</p>
+</blockquote>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>各位小伙伴大家好，我是A哥。停更1个月后回归啦，今天咱们聊聊一个比较有意思的话题：是否真的需要跟Fastjson说再见了？<br><img data-src="https://img-blog.csdnimg.cn/20200622172605662.png#x260" alt=""></p>
+<h2 id="我的态度"><a href="#我的态度" class="headerlink" title="我的态度"></a>我的态度</h2><p>我在CSDN写过好些篇关于JSON的文章，特别是2020年专门写了一个付费专栏：<code>享学Jackson</code><br><img data-src="https://img-blog.csdnimg.cn/2020062218500935.png#x100" alt=""><br><img data-src="https://img-blog.csdnimg.cn/20200701071842704.png#x100" alt=""><br>这个专栏“销量”在我心目中还凑合，4个月“卖出”200份的样子（虽不值一提，但我很满足了😄），小小的一个JSON库而已，热度可见一斑。专栏里不可避免的提到了Jackson和Fastjson的比较，我本人一直持中立态度，主要原因有二：</p>
+<ol>
+<li>两者都很流行（国内Fastjson流行度甚至超过Jackson），因此平时开发中我<strong>两者都用</strong>（需要随大流嘛）</li>
+<li>国产开源软件是需要被支持的，即使现在还存在差距（联想下<strong>最初的</strong>国产手机和苹果手机的差距，再看看现在呢？）</li>
+</ol>
+<p>当然，本文不一样了，必须得加点料。态度中立并不代表没有偏向：很明显我偏向于使用Jackson作为你的 <strong>唯一</strong> JSON库。<br><img data-src="https://img-blog.csdnimg.cn/20200622160236785.png#x260" alt=""></p>
+<hr>
+<hr>
+<p><strong>从本文起</strong>，我将把CSDN里该付费专栏<strong>全部内容</strong>搬到公众号，免费助你轻松拥抱世界上最好的JSON库：Jackson。<br><strong>从本文起</strong>，我将把CSDN里该付费专栏<strong>全部内容</strong>搬到公众号，免费助你轻松拥抱世界上最好的JSON库：Jackson。<br><strong>从本文起</strong>，我将把CSDN里该付费专栏<strong>全部内容</strong>搬到公众号，免费助你轻松拥抱世界上最好的JSON库：Jackson。</p>
+<blockquote>
+<p>市面上并无成体系介绍Jackson的教程（官网都木有），独此一家哦。当然喽，这必将损伤到我的CSDN专栏售卖权益（小钱也是钱嘛😄），所以希望你关注公众号，关注此专栏，然后学到手我就觉得值了</p>
+</blockquote>
+<hr>
+<hr>
+<p>2020-05-30阿里云应急响应中心监测到Fastjson爆发新的反序列化远程代码执行漏洞，黑客利用漏洞，可绕过autoType限制，直接远程执行任意命令攻击服务器，<strong>风险极大</strong>（话外音：此bug必须Fix）。幸运的是，官方的响应速度非常快：<br><img data-src="https://img-blog.csdnimg.cn/20200622190151492.png##x100" alt=""><br>还记得上一次Fastjson <strong>高级别风险</strong> 安全漏洞是什么时候吗？是的，它就发生在2019-09-04，两次相距着实不远，不满你说我还记忆犹新呢，我司安全部门发的邮件还能找到😄。</p>
+<blockquote>
+<p>当然，之前也有些漏洞问题，但关注度不如这两次。主要是这两次时间相近，危险级别非常高影响面很大，所以社区反应较为强烈</p>
+</blockquote>
+<p>这两次“相邻”的安全漏洞着实把Fastjson推到了风口浪尖，吃瓜群众一波接一波，一时间 <strong>“弃用Fastjson，拥抱Jackson/Gson”</strong> 的声音不绝于耳。这很容易理解，因为谁都不情愿时不时收到公司安全部门的这种邮件：<br><img data-src="https://img-blog.csdnimg.cn/20200701173929379.png#x260" alt=""><br>针对此漏洞，虽说咱们Fix起来步骤简单：升级Fastjson的版本，然后重启应用。看起来毫不费力，实则是个大坑。你是否曾想过这个问题：倘若有上百个、几百个Java应用呢？且不谈你操作上的时间和人力成本有多高，单单<strong>管理</strong>起来的工作量也不容小觑。所以如果你是技术Leader，胸中的怒火释放一下是在情理之中的。</p>
+<blockquote>
+<p>相信很少有部门/团队把Spring Boot应用做成<strong>Jar包分离</strong>的形式的吧~因此大概率都需要经过升版本 -&gt; 提交代码 -&gt; 合代码 -&gt; 上pre -&gt; 上线 -&gt; 验证等步骤，so还是比较麻烦的</p>
+</blockquote>
+<hr>
+<h2 id="你为何用Fastjson？"><a href="#你为何用Fastjson？" class="headerlink" title="你为何用Fastjson？"></a>你为何用Fastjson？</h2><p>这个问题你可以问自己，也可以问身边的同事。汇总一下就是答案，这才是来自用户最真实的声音嘛。我针对此也简单“调查”过，把我听到的了解到的汇总为如下三点：</p>
+<ol>
+<li>API简单（static方法直接使用），上手快，对开发者友好</li>
+<li>阿里巴巴出品，背靠大厂值得信赖. </li>
+<li>社区相对活跃，维护升级有保障</li>
+</ol>
+<p>容我猜猜，这3个理由大概率命中了你心中所想吧😄？有大厂做背书自然能给产品加分，但自身优秀才是硬道理。虽然原因有三点，但我认为让很多人决定去使用它、赞它的最最最主要原因其实就一点：<strong>API简单，static方法直接调用对开发者友好</strong>。</p>
+<p>我感觉对于大多数Java Coder（特别对于初学者）来说，使用时会有这样的一种情节在里面：静态方法的逼格比实例方法高。而实际上不应该是这样子的，初学者（初/中级选手）热爱使用静态方法，而高手在设计一个库/框架时应在静态方法+实例方法间运用自如。一味地、过多地使用静态方法只会让你的的思维倾向于<strong>面向过程</strong>，而非更好的利用Java <strong>面向对象</strong> 的特性，因此高下立判。</p>
+<blockquote>
+<p>没有孰优孰劣，适合的才是最好的</p>
+</blockquote>
+<p>发现了没，使用Fastjson的原因中，我们至始至终都没有提到性能高/速度快等字眼，但这却是Fastjson最最最为核心的特性，可谓是它能立足于众多JSON库中、“脱颖而出”的立身之本。岂不怪哉，我们使用它竟<strong>不是</strong>因为它最核心的特性有多好，那这是为何呢？<br><img data-src="https://img-blog.csdnimg.cn/2020070118342039.png#x260" alt=""></p>
+<hr>
+<h2 id="你为何仍在用Fastjson？"><a href="#你为何仍在用Fastjson？" class="headerlink" title="你为何仍在用Fastjson？"></a>你为何仍在用Fastjson？</h2><p>原因可以说出5678种，总而言之言而总之，你不（敢）切换的原因或许只有一个：Fastjson的静态方法调用用着省心；最重要的是，<strong>对其它JSON库（如Jackson/Gson）并不熟悉</strong>不敢切换。</p>
+<p>我认为<strong>害怕来自于未知</strong><br><img data-src="https://img-blog.csdnimg.cn/20200629070547714.png#x260" alt=""><br>不可否认Jackson/Gson的使用门槛的确比Fastjson高那么一丢丢，但这绝不是你拒绝去使用它的理由。受Fastjson这“连续”两次高危漏洞影响，A哥更加坚定了把Jackson当作 <strong>唯一</strong> JSON库的决心，甚至在团队内<strong>严令禁止使用Fastjson</strong>。大家统一了语言/工具，更能提高生产力~</p>
+<p>如果你也是因为不太了解Jackson而不敢离开温室，那么看到本文就很幸运了，本系列会免费带你拥抱Jackson这个高级JSON库，功能上比Fastjson强了不止一点点。</p>
+<hr>
+<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><p>坊间在某坛里看到这样一句言论：<strong>若你还依赖于使用Fastjson，那么你大概率还只是初/中级水平</strong>。这句话必然让Fastjson的忠实用户火冒三丈，抄起家伙嘎嘎就是干。话出必然有因，那么这句话是否真的言过于词呢？接下来就絮叨絮叨</p>
+<p>我很愿意用<strong>存在即合理</strong>原则来表达一个观点：Fastjson出个bug就能有这么高的关注度，不可否认这本身就是一种成功。</p>
+<blockquote>
+<p>误区描述：“合理”请不要误读为“合乎情理”之类，而是当做“理由”来讲。“存在即合理”正确理解为：一切存在的事物都有它存在的理由</p>
+</blockquote>
+<p>任何技术能够流行起来，well-known被我们所熟知必然有它的优势，哪怕这个过人之处<strong>只有一个</strong>。下面我们来看看为何Fastjson能一步步被宠爱，它的魔力到底在哪？</p>
+<blockquote>
+<p>技术选型不应该像相亲：肯定你只需要一个理由，而否定你却能…</p>
+</blockquote>
+<p><img data-src="https://img-blog.csdnimg.cn/20200630071300475.png#x260" alt=""></p>
+<hr>
+<h2 id="Why-Fastjson？"><a href="#Why-Fastjson？" class="headerlink" title="Why Fastjson？"></a>Why Fastjson？</h2><p>虽然最近Fastjson由于出现安全漏洞，社区言论一边倒。即使如此，几乎没人直接否定过Fastjson本身的优秀，特别是当你知道这个使用广泛的库几乎全部来自于一人之手时。他就是匠人温少：<br><img data-src="https://img-blog.csdnimg.cn/20200622153533596.png#x260" alt="图片来源于开源中国"></p>
+<blockquote>
+<p>值得一提的是：温少另一个开源项目Druid是国内<strong>最</strong>流行的（甚至没有之一）数据库连接池产品，广受好评</p>
+</blockquote>
+<p>成人只看利弊，小孩才分对错。为何要使用它能流行开来，那必然是因为它优秀。它优秀品质在其官网可一览无遗：<br><img data-src="https://img-blog.csdnimg.cn/20200630072342330.png#x160" alt="截图来自于Fastjson官网"><br>这些“优点”用中文描述出来更加直（震）观（撼）：</p>
+<h3 id="1、速度快"><a href="#1、速度快" class="headerlink" title="1、速度快"></a>1、速度快</h3><p>fastjson相对其他JSON库的特点是快，从2011年fastjson发布1.1.x版本之后，其性能<strong>从未被</strong>其他Java实现的JSON库超越。</p>
+<blockquote>
+<p>话外音：速度/性能这一块，Fastjson一直拿捏得死死的</p>
+</blockquote>
+<p><img data-src="https://img-blog.csdnimg.cn/20200630073524542.gif#x160" alt=""></p>
+<h3 id="2、使用广泛"><a href="#2、使用广泛" class="headerlink" title="2、使用广泛"></a>2、使用广泛</h3><p>fastjson在阿里巴巴大规模使用，在数万台服务器上部署，fastjson在业界被广泛接受。在2012年被开源中国评选为最受欢迎的国产开源软件之一。</p>
+<blockquote>
+<p>话外音：阿里巴巴数以万计的大规模集群实例做规模背书，说服力杠杠的</p>
+</blockquote>
+<p><img data-src="https://img-blog.csdnimg.cn/20200630073638950.png#x160" alt=""></p>
+<h3 id="3、测试完备"><a href="#3、测试完备" class="headerlink" title="3、测试完备"></a>3、测试完备</h3><p>fastjson有非常多的testcase，在1.2.11版本中，testcase超过3321个。每次发布都会进行回归测试，保证质量稳定。</p>
+<blockquote>
+<p>话外音：单测覆盖率高，代码健壮性有保证</p>
+</blockquote>
+<p><img data-src="https://img-blog.csdnimg.cn/20200630073803595.png#x160" alt=""></p>
+<h3 id="4、使用简单"><a href="#4、使用简单" class="headerlink" title="4、使用简单"></a>4、使用简单</h3><p>fastjson的API十分简洁。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String text = JSON.toJSONString(obj); <span class="comment">//序列化</span></span><br><span class="line">VO vo = JSON.parseObject(<span class="string">"&#123;...&#125;"</span>, VO<span class="class">.<span class="keyword">class</span>)</span>; <span class="comment">//反序列化</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>话外音：不管你是小白还是小小白，轻松上手，使用起来都无障碍</p>
+</blockquote>
+<p><img data-src="https://img-blog.csdnimg.cn/20200630073840692.png#x160" alt=""></p>
+<h3 id="5、功能完备"><a href="#5、功能完备" class="headerlink" title="5、功能完备"></a>5、功能完备</h3><p>支持泛型，支持流处理超大文本，支持枚举，支持序列化和反序列化扩展。</p>
+<blockquote>
+<p>话外音：我这一家就够了，你要的，这都有</p>
+</blockquote>
+<p><img data-src="https://img-blog.csdnimg.cn/20200630074119345.png#x260" alt=""></p>
+<hr>
+<h2 id="Why-Not-Fastjson？"><a href="#Why-Not-Fastjson？" class="headerlink" title="Why Not Fastjson？"></a>Why Not Fastjson？</h2><p><img data-src="https://img-blog.csdnimg.cn/20200620162515660.png" alt=""><br>文首有表态本文我是有态度和有偏向的，因此不来几点原因实则不妥。那么我就针对于官网列出的5点（见上），给出个人观点供以参考。是否言过于辞，咱们拿出另外一个JSON库做出对比，本文以Jackson为例。</p>
+<hr>
+<h3 id="版本约定"><a href="#版本约定" class="headerlink" title="版本约定"></a>版本约定</h3><p>因为要做比较嘛，所以对使用的JSON库做出版本约定：</p>
+<ul>
+<li>Jackson：2.10.1<ul>
+<li>演示代码均使用最常用的<strong>高层API</strong>，而非底层API。毕竟用底层API去PK Fastjson并不公平，毕竟那并不常用</li>
+</ul>
+</li>
+<li>Fastjson：1.2.72<ul>
+<li>only one jar</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="1、速度上并没有那么的快"><a href="#1、速度上并没有那么的快" class="headerlink" title="1、速度上并没有那么的快"></a>1、速度上并没有那么的快</h3><p>速度快/性能高是Fastjson <strong>最最最最最最</strong> 大的“卖点”，可谓是<strong>立身之本</strong>，从它的命名以及它的logo设计上你都能感受到这一点。</p>
+<p>没有调研就没有发言权，本文针对于<strong>最常用</strong>的使用场景来一波测试对比（对比尽量公正，切勿钻牛角尖）。关于Fastjson和Jackson在性能PK这一块，网上的案例有不少，我自己也书写了多个场景的比较代码。但最终我还是决定引用Robin的结果展示给大家，我看了他的测试方案（代码）更加专业些：<a href="https://zhuanlan.zhihu.com/p/99123002" target="_blank" rel="noopener">几种常用 JSON 库性能比较</a>，结论如下两张图</p>
+<p><img data-src="https://img-blog.csdnimg.cn/20200701161604410.png#x260" alt="序列化"><br><img data-src="https://img-blog.csdnimg.cn/20200701161604416.png#x260" alt="反序列化"><br>总的结论：除了<code>Json-lib</code>是来搞笑的（它早已停止更新，切勿在生产上使用），Fastjson、Jsckson、Gson三者不分伯仲，差异性较小。<br><img data-src="https://img-blog.csdnimg.cn/20200620155220213.png" alt=""></p>
+<blockquote>
+<p>综合各种测试case，网上的 + 我自己写的测试用例，三者在性能方面除了Gson稍微差点外，Jackson和Fastjson在速度上可认为是差不多的（甚至Jackson综合性能表现更好）</p>
+</blockquote>
+<p><strong>既然差异性这么小，Fastjson一味的强调它是最快的真的有意义吗？</strong></p>
+<hr>
+<h4 id="JSON的解析速度绝不会制约系统的性能"><a href="#JSON的解析速度绝不会制约系统的性能" class="headerlink" title="JSON的解析速度绝不会制约系统的性能"></a>JSON的解析速度绝不会制约系统的性能</h4><p>比如我们一次REST调用环节全流程可能100ms；其中操作一次数据库，可能需要几十ms；序列化反序列化一次json <strong>一般只需要几ms</strong>；也就是说不同的json库，性能相差都在毫秒间；在一次REST调用全流程里，不同的JSON库在性能表现上影响甚微。</p>
+<p>在现代应用程序中，即使最慢的Gson，也是满足需求的；解析文档速度的快慢，并不能作为选型的唯一标准，可能连主要标准都算不上。对IO优化、网络优化、并行处理等优化措施，远比选用一个更快的库更有效。</p>
+<p>言而总之，如果你选择一个JSON库把性能当作了一个标准，就犯了方向性的错误。</p>
+<hr>
+<h3 id="2、并没有那么的流行"><a href="#2、并没有那么的流行" class="headerlink" title="2、并没有那么的流行"></a>2、并没有那么的流行</h3><p>使用广不广泛、流行度有多高这玩意是相对的。有一个最直观的数据，那就是在Maven中的引用量，我截图如下：<br><img data-src="https://img-blog.csdnimg.cn/2020070116254166.png" alt=""><br><img data-src="https://img-blog.csdnimg.cn/20200701162604932.png" alt=""><br><img data-src="https://img-blog.csdnimg.cn/20200701162620171.png" alt=""><br>从usages数值上看，似乎不在一个量级上。当然这么比较我个人认为不算特别客观，主要原因有二：</p>
+<ol>
+<li>开源的技术发展的越早，使用者越多，主流框架越支持（比如Spring MVC内置Jackson支持），就会形成聚集效应，赢者通吃</li>
+<li>Fastjson起步较晚，且主要发力于国内</li>
+</ol>
+<p>不可否认Fastjson在国内的流行度是非常高的，甚至超过Jackson。否则最近一次的安全漏洞也不会有那么多人吃瓜嘛，但是这种“使用广泛”你也得辩证性的去看，毕竟在中国Java领域里，阿里巴巴是绝对的执牛耳者。</p>
+<p>Fastjson的流行，是有着内在的原因的，比如这个无奈：<br><img data-src="https://img-blog.csdnimg.cn/20200702142954225.png?#x260" alt=""></p>
+<hr>
+<h3 id="3、测试真的完备吗？"><a href="#3、测试真的完备吗？" class="headerlink" title="3、测试真的完备吗？"></a>3、测试真的完备吗？</h3><p>额，这个我只能说：Fastjson自己知道就成，并无必要当作亮点show出来，毕竟使用者只关心出bug、出漏洞的频率和严重性，并不关心工程内部是如何保证健壮性的。</p>
+<p>在使用者眼中：不出bug，一行单测没有都没关系。出了严重bug，有上万个test case也难以让人信服。</p>
+<hr>
+<h3 id="4、API真的简单吗？"><a href="#4、API真的简单吗？" class="headerlink" title="4、API真的简单吗？"></a>4、API真的简单吗？</h3><p>答：真的。文上有解释，这也许可能大概是你选择使用Jackson作为JSON库最重要的理由。 </p>
+<p>当然，API使用简单针对于simple场景，对于复杂场景它也并不能简单应对。道理很简单，POP is simple,OOP is Complex。但恰好的是，在互联网应用场景中使用JSON库，大多属于简单场景，因此Fastjson把它当做一个亮点我觉得是无可厚非的。</p>
+<hr>
+<h3 id="5、功能并没有那么完备"><a href="#5、功能并没有那么完备" class="headerlink" title="5、功能并没有那么完备"></a>5、功能并没有那么完备</h3><p>官网强调了它是支持泛型、枚举等类型的序列化、反序列化的。但是对着JavaBean + JSON规范来讲，Fastjson有不少功能缺失（没遵循规范），这是A哥最为忍受不了的地方，因为它已经不能实现我的功能了。如果你基于它做过中间件开发、框架开发或者是DDD驱动设计开发，相信你也深有体会：<br><img data-src="https://img-blog.csdnimg.cn/20200702151128425.png?#x60" alt=""></p>
+<hr>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>真理是相对的，没有绝对的真理。真理是让人明白道理的，不是用来诡辩的，更不是用来抬扛的。</p>
+<p>同样的，Fastjson还是Jackson也就没有标准的答案，各位还是结合自己的具体情况，见仁见智。本文只是阐述我的<strong>个人观点</strong>，表达了我的使用倾向，供以你决策时参考。</p>
+<p>如果你和我一样，也想把<code>Jackson</code>作为你的<strong>唯一</strong> JSON库，那就关注我吧，接下来我会把付费专栏里的内容全部搬过来给你，免费助你平滑过渡到这个世界上最好的JSON库。<br><img data-src="https://img-blog.csdnimg.cn/20200630074132924.png?#x260" alt=""></p>
+        <!-- ....这里是正文内容的底部（首页不会展示）... -->
+        <style>
+.table-container img{
+    display: inherit;
+    margin-top: 5px;
+    margin-bottom: 0px;
+    margin-right: 10px;
+}
+</style>
+<hr>
+<h1 style="text-align: left;">关注YourBatman</h1>
+
+<div><table>
+<thead>
+<tr>
+<th>Author</th>
+<th>A哥(YourBatman)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>个人站点</td>
+<td><a href="https://www.yourbatman.cn" rel="nofollow" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc">www.yourbatman.cn</a></td>
+</tr>
+<tr>
+<td>E-mail</td>
+<td>yourbatman@qq.com</td>
+</tr>
+<tr>
+<td><strong>微 信</strong></td>
+<td><a href="https://www.yourbatman.cn/images/wechat.png" rel="nofollow" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc">fsx1056342982</a></td>
+</tr>
+<tr>
+<td><strong><code>活跃平台</code></strong></td>
+<td><a href="https://www.yourbatman.cn" rel="nofollow" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/2020071015182276.png" alt=""></a> <a href="https://fangshixiang.blog.csdn.net/" target="_blank" rel="nofollow noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/20200710151913394.png" alt=""></a><a href="https://yourbatman.cnblogs.com" target="_blank" rel="nofollow noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/20200710151929355.png" alt=""></a><a href="https://juejin.im/user/5b44d178f265da0fa1220efe/posts" target="_blank" rel="nofollow noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/20200710151938937.png" alt=""></a><a href="https://www.zhihu.com/people/fangshixiang/posts" target="_blank" rel="nofollow noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/20200710151950629.png" alt=""></a><a href="https://www.jianshu.com/u/8740f1fdd684" target="_blank" rel="nofollow noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/20200710152000530.png" alt=""></a><a href="https://segmentfault.com/u/yourbatman/articles" target="_blank" rel="nofollow noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/20200710152008726.png" alt=""></a><a href="https://github.com/yourbatman" target="_blank" rel="noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"><img src="https://img-blog.csdnimg.cn/20200710152015895.png" alt=""></a></td>
+</tr>
+<tr>
+<td><strong>公众号</strong></td>
+<td><a href="https://www.yourbatman.cn/images/wechat_channel.jpg" rel="nofollow" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc">BAT的乌托邦（ID：BAT-utopia）</a></td>
+</tr>
+<tr>
+<td>知识星球</td>
+<td><a href="https://t.zsxq.com/nQBi66I" target="_blank" rel="nofollow noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc">BAT的乌托邦</a></td>
+</tr>
+<tr>
+<td>每日文章推荐</td>
+<td><a href="https://github.com/yourbatman/reading/issues" target="_blank" rel="noopener" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc">每日文章推荐</a></td>
+</tr>
+</tbody>
+</table></div>
+
+<p>
+<img src="https://img-blog.csdnimg.cn/20200710160552549.gif" alt="BAT的乌托邦">
+</p>
+
+    </div>
+
+    
+    
+    
+
+    <!-- 相关阅读（你可能还喜欢） -->
+      
+  <div class="popular-posts-header">你可能还喜欢：</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/x2y/56130cb.html" rel="bookmark">再爆安全漏洞，这次轮到Jackson了，竟由阿里云上报</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/x2y/a47cf2f7.html" rel="bookmark">4. JSON字符串是如何被解析的？JsonParser了解一下</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/x2y/cae3349a.html" rel="bookmark">3. 懂了这些，方敢在简历上说会用Jackson写JSON</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/x2y/cf41a8ab.html" rel="bookmark">2. 妈呀，Jackson原来是这样写JSON的</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/x2y/dc384b1c.html" rel="bookmark">1. 初识Jackson -- 世界上最好的JSON库</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/x2y/edc7ba2a.html" rel="bookmark">7. Jackson用树模型处理JSON是必备技能，不信你看</a></div>
+    </li>
+  </ul>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-title">
+    <strong>本文标题： </strong>
+    《Fastjson到了说再见的时候了》
+  </li>
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>A哥(YourBatman)
+  </li>
+  <li class="post-copyright-date">
+    <strong>发布时间： </strong>2020-07-02 21:14:39
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://www.yourbatman.cn/x2y/221f1084.html" title="Fastjson到了说再见的时候了">https://www.yourbatman.cn/x2y/221f1084.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>许可协议： </strong>本站所有文章均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载：No！转发：Yes！
+  </li>
+</ul>
+</div>
+
+
+      <!-- 添加“本文结束”标记 -->
+      <div class="read-over" style="text-align: center;margin-top: 25px;color: rgba(234,16,61,.569);font-size: 16px">-------------您已触及底线 <i class="fa fa-paw"></i> 感谢阅读-------------</div>
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    请A哥喝水
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="https://img-blog.csdnimg.cn/20200612080128384.png" alt="A哥(YourBatman) 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="https://img-blog.csdnimg.cn/20200612080128343.png" alt="A哥(YourBatman) 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Jackson/" rel="tag"><i class="fa fa-tag"></i> Jackson</a>
+              <a href="/tags/Fastjson/" rel="tag"><i class="fa fa-tag"></i> Fastjson</a>
+              <a href="/tags/%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E/" rel="tag"><i class="fa fa-tag"></i> 安全漏洞</a>
+          </div>
+
+        <!-- 导入投票模块 -->
+        
+  <!-- 投票功能 -->
+  <div class="post-widgets">
+    <div style="color: #ea778c;font-size: 14px;">(>兄台请留步，看完记得六星好评哦<)</div>
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/x2y/5715d235.html" rel="prev" title="系统设计：你的service要用Dependency Injection吗?">
+      <i class="fa fa-chevron-left"></i> 系统设计：你的service要用Dependency Injection吗?
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/x2y/dc384b1c.html" rel="next" title="1. 初识Jackson -- 世界上最好的JSON库">
+      1. 初识Jackson -- 世界上最好的JSON库 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+    </div>
+  
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#我的态度"><span class="nav-number">1.1.</span> <span class="nav-text">我的态度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#你为何用Fastjson？"><span class="nav-number">1.2.</span> <span class="nav-text">你为何用Fastjson？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#你为何仍在用Fastjson？"><span class="nav-number">1.3.</span> <span class="nav-text">你为何仍在用Fastjson？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#正文"><span class="nav-number">2.</span> <span class="nav-text">正文</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Why-Fastjson？"><span class="nav-number">2.1.</span> <span class="nav-text">Why Fastjson？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、速度快"><span class="nav-number">2.1.1.</span> <span class="nav-text">1、速度快</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、使用广泛"><span class="nav-number">2.1.2.</span> <span class="nav-text">2、使用广泛</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、测试完备"><span class="nav-number">2.1.3.</span> <span class="nav-text">3、测试完备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、使用简单"><span class="nav-number">2.1.4.</span> <span class="nav-text">4、使用简单</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、功能完备"><span class="nav-number">2.1.5.</span> <span class="nav-text">5、功能完备</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Why-Not-Fastjson？"><span class="nav-number">2.2.</span> <span class="nav-text">Why Not Fastjson？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#版本约定"><span class="nav-number">2.2.1.</span> <span class="nav-text">版本约定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1、速度上并没有那么的快"><span class="nav-number">2.2.2.</span> <span class="nav-text">1、速度上并没有那么的快</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#JSON的解析速度绝不会制约系统的性能"><span class="nav-number">2.2.2.1.</span> <span class="nav-text">JSON的解析速度绝不会制约系统的性能</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、并没有那么的流行"><span class="nav-number">2.2.3.</span> <span class="nav-text">2、并没有那么的流行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、测试真的完备吗？"><span class="nav-number">2.2.4.</span> <span class="nav-text">3、测试真的完备吗？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、API真的简单吗？"><span class="nav-number">2.2.5.</span> <span class="nav-text">4、API真的简单吗？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、功能并没有那么完备"><span class="nav-number">2.2.6.</span> <span class="nav-text">5、功能并没有那么完备</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="A哥(YourBatman)"
+      src="https://img-blog.csdnimg.cn/20200511100304592.jpg">
+  <p class="site-author-name" itemprop="name">A哥(YourBatman)</p>
+  <div class="site-description" itemprop="description">我这有故事，你那有酒吗？</div>
+</div>
+<div class="site-author motion-element" style="border-top: 1px dotted #ccc;padding-top: 10px;opacity: 0.7" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img itemprop="image" alt="A哥(YourBatman)" style="max-width: 120px;"
+      src="https://img-blog.csdnimg.cn/20200608214500399.png">
+  <div style="color: #e36a7c;font-size: 10px;" itemprop="description">加A哥好友(备注:Java入群)</div>
+</div>
+  <div class="sidebar-button motion-element">
+    <a onclick="tidioChatApi.open();"><i class="fa fa-comment"></i>
+    私聊A哥
+  </a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://fangshixiang.blog.csdn.net/" title="https:&#x2F;&#x2F;fangshixiang.blog.csdn.net&#x2F;" rel="noopener" target="_blank">CSDN</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/yourbatman/" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;yourbatman&#x2F;" rel="noopener" target="_blank">博客园</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://juejin.im/user/5b44d178f265da0fa1220efe/posts" title="https:&#x2F;&#x2F;juejin.im&#x2F;user&#x2F;5b44d178f265da0fa1220efe&#x2F;posts" rel="noopener" target="_blank">掘金</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.zhihu.com/people/fangshixiang" title="https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;fangshixiang" rel="noopener" target="_blank">知乎</a>
+        </li>
+    </ul>
+  </div>
+
+<!-- 近期文章（源代码） -->
+
+    <div class="recent_posts links-of-blogroll motion-element links-of-blogroll-block">
+      <div class="links-of-blogroll-title">
+        <!-- modify icon to fire by szw -->
+        <i class="fa fa-history fa-" aria-hidden="true"></i>
+        最新文章
+      </div>
+      <ul class="links-of-blogroll-list">
+        
+        
+          <li>
+            <a href="/x2y/ff31c4c6.html" title="8. 格式化器大一统 -- Spring的Formatter抽象" target="_blank">
+            <i class="fa fa-check-square"></i> 8. 格式化器大一统 -- Spring的Formatter抽象
+            </a>
+          </li>
+        
+          <li>
+            <a href="/x2y/9705b9e8.html" title="YourBatman 2020年感悟关键词：科比、裁员、管理层、活着" target="_blank">
+            <i class="fa fa-check-square"></i> YourBatman 2020年感悟关键词：科比、裁员、管理层、活着
+            </a>
+          </li>
+        
+          <li>
+            <a href="/x2y/b6588179.html" title="7. JDK拍了拍你：字符串拼接一定记得用MessageFormat#format" target="_blank">
+            <i class="fa fa-check-square"></i> 7. JDK拍了拍你：字符串拼接一定记得用MessageFormat#format
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+
+
+      </div>
+
+      <!-- canvas粒子时钟效果  放在侧边栏最下面 -->
+      <div style="">
+  <canvas id="canvas" style="width:50%;margin-top:10px;margin-bottom: -10px;" width="820" height="250">当前浏览器不支持canvas，建议使用谷歌浏览器再试</canvas>
+</div>
+<script>
+(function(){
+    var WINDOW_WIDTH = 820;
+    var WINDOW_HEIGHT = 250;
+    var RADIUS = 7; //球半径
+    var NUMBER_GAP = 10; //数字之间的间隙
+    var u=0.65; //碰撞能量损耗系数
+    var context; //Canvas绘制上下文
+    var balls = []; //存储彩色的小球
+    const colors = ["#33B5E5","#0099CC","#AA66CC","#9933CC","#99CC00","#669900","#FFBB33","#FF8800","#FF4444","#CC0000"]; //彩色小球的颜色
+    var currentNums = []; //屏幕显示的8个字符
+    var digit =
+        [
+            [
+                [0,0,1,1,1,0,0],
+                [0,1,1,0,1,1,0],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [0,1,1,0,1,1,0],
+                [0,0,1,1,1,0,0]
+            ],//0
+            [
+                [0,0,0,1,1,0,0],
+                [0,1,1,1,1,0,0],
+                [0,0,0,1,1,0,0],
+                [0,0,0,1,1,0,0],
+                [0,0,0,1,1,0,0],
+                [0,0,0,1,1,0,0],
+                [0,0,0,1,1,0,0],
+                [0,0,0,1,1,0,0],
+                [0,0,0,1,1,0,0],
+                [1,1,1,1,1,1,1]
+            ],//1
+            [
+                [0,1,1,1,1,1,0],
+                [1,1,0,0,0,1,1],
+                [0,0,0,0,0,1,1],
+                [0,0,0,0,1,1,0],
+                [0,0,0,1,1,0,0],
+                [0,0,1,1,0,0,0],
+                [0,1,1,0,0,0,0],
+                [1,1,0,0,0,0,0],
+                [1,1,0,0,0,1,1],
+                [1,1,1,1,1,1,1]
+            ],//2
+            [
+                [1,1,1,1,1,1,1],
+                [0,0,0,0,0,1,1],
+                [0,0,0,0,1,1,0],
+                [0,0,0,1,1,0,0],
+                [0,0,1,1,1,0,0],
+                [0,0,0,0,1,1,0],
+                [0,0,0,0,0,1,1],
+                [0,0,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [0,1,1,1,1,1,0]
+            ],//3
+            [
+                [0,0,0,0,1,1,0],
+                [0,0,0,1,1,1,0],
+                [0,0,1,1,1,1,0],
+                [0,1,1,0,1,1,0],
+                [1,1,0,0,1,1,0],
+                [1,1,1,1,1,1,1],
+                [0,0,0,0,1,1,0],
+                [0,0,0,0,1,1,0],
+                [0,0,0,0,1,1,0],
+                [0,0,0,1,1,1,1]
+            ],//4
+            [
+                [1,1,1,1,1,1,1],
+                [1,1,0,0,0,0,0],
+                [1,1,0,0,0,0,0],
+                [1,1,1,1,1,1,0],
+                [0,0,0,0,0,1,1],
+                [0,0,0,0,0,1,1],
+                [0,0,0,0,0,1,1],
+                [0,0,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [0,1,1,1,1,1,0]
+            ],//5
+            [
+                [0,0,0,0,1,1,0],
+                [0,0,1,1,0,0,0],
+                [0,1,1,0,0,0,0],
+                [1,1,0,0,0,0,0],
+                [1,1,0,1,1,1,0],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [0,1,1,1,1,1,0]
+            ],//6
+            [
+                [1,1,1,1,1,1,1],
+                [1,1,0,0,0,1,1],
+                [0,0,0,0,1,1,0],
+                [0,0,0,0,1,1,0],
+                [0,0,0,1,1,0,0],
+                [0,0,0,1,1,0,0],
+                [0,0,1,1,0,0,0],
+                [0,0,1,1,0,0,0],
+                [0,0,1,1,0,0,0],
+                [0,0,1,1,0,0,0]
+            ],//7
+            [
+                [0,1,1,1,1,1,0],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [0,1,1,1,1,1,0],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [0,1,1,1,1,1,0]
+            ],//8
+            [
+                [0,1,1,1,1,1,0],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [1,1,0,0,0,1,1],
+                [0,1,1,1,0,1,1],
+                [0,0,0,0,0,1,1],
+                [0,0,0,0,0,1,1],
+                [0,0,0,0,1,1,0],
+                [0,0,0,1,1,0,0],
+                [0,1,1,0,0,0,0]
+            ],//9
+            [
+                [0,0,0,0],
+                [0,0,0,0],
+                [0,1,1,0],
+                [0,1,1,0],
+                [0,0,0,0],
+                [0,0,0,0],
+                [0,1,1,0],
+                [0,1,1,0],
+                [0,0,0,0],
+                [0,0,0,0]
+            ]//:
+        ];
+
+    function drawDatetime(cxt){
+        var nums = [];
+
+        context.fillStyle="#005eac"
+        var date = new Date();
+        var offsetX = 70, offsetY = 30;
+        var hours = date.getHours();
+        var num1 = Math.floor(hours/10);
+        var num2 = hours%10;
+        nums.push({num: num1});
+        nums.push({num: num2});
+        nums.push({num: 10}); //冒号
+        var minutes = date.getMinutes();
+        var num1 = Math.floor(minutes/10);
+        var num2 = minutes%10;
+        nums.push({num: num1});
+        nums.push({num: num2});
+        nums.push({num: 10}); //冒号
+        var seconds = date.getSeconds();
+        var num1 = Math.floor(seconds/10);
+        var num2 = seconds%10;
+        nums.push({num: num1});
+        nums.push({num: num2});
+
+        for(var x = 0;x<nums.length;x++){
+            nums[x].offsetX = offsetX;
+            offsetX = drawSingleNumber(offsetX,offsetY, nums[x].num,cxt);
+            //两个数字连一块，应该间隔一些距离
+            if(x<nums.length-1){
+                if((nums[x].num!=10) &&(nums[x+1].num!=10)){
+                    offsetX+=NUMBER_GAP;
+                }
+            }
+        }
+
+        //说明这是初始化
+        if(currentNums.length ==0){
+            currentNums = nums;
+        }else{
+            //进行比较
+            for(var index = 0;index<currentNums.length;index++){
+                if(currentNums[index].num!=nums[index].num){
+                    //不一样时，添加彩色小球
+                    addBalls(nums[index]);
+                    currentNums[index].num=nums[index].num;
+                }
+            }
+        }
+        renderBalls(cxt);
+        updateBalls();
+
+        return date;
+    }
+
+    function addBalls (item) {
+        var num = item.num;
+        var numMatrix = digit[num];
+        for(var y = 0;y<numMatrix.length;y++){
+            for(var x = 0;x<numMatrix[y].length;x++){
+                if(numMatrix[y][x]==1){
+                    var ball={
+                        offsetX:item.offsetX+RADIUS+RADIUS*2*x,
+                        offsetY:30+RADIUS+RADIUS*2*y,
+                        color:colors[Math.floor(Math.random()*colors.length)],
+                        g:1.5+Math.random(),
+                        vx:Math.pow(-1, Math.ceil(Math.random()*10))*4+Math.random(),
+                        vy:-5
+                    }
+                    balls.push(ball);
+                }
+            }
+        }
+    }
+
+    function renderBalls(cxt){
+        for(var index = 0;index<balls.length;index++){
+            cxt.beginPath();
+            cxt.fillStyle=balls[index].color;
+            cxt.arc(balls[index].offsetX, balls[index].offsetY, RADIUS, 0, 2*Math.PI);
+            cxt.fill();
+        }
+    }
+
+    function updateBalls () {
+        var i =0;
+        for(var index = 0;index<balls.length;index++){
+            var ball = balls[index];
+            ball.offsetX += ball.vx;
+            ball.offsetY += ball.vy;
+            ball.vy+=ball.g;
+            if(ball.offsetY > (WINDOW_HEIGHT-RADIUS)){
+                ball.offsetY= WINDOW_HEIGHT-RADIUS;
+                ball.vy=-ball.vy*u;
+            }
+            if(ball.offsetX>RADIUS&&ball.offsetX<(WINDOW_WIDTH-RADIUS)){
+
+                balls[i]=balls[index];
+                i++;
+            }
+        }
+        //去除出边界的球
+        for(;i<balls.length;i++){
+            balls.pop();
+        }
+    }
+    function drawSingleNumber(offsetX, offsetY, num, cxt){
+        var numMatrix = digit[num];
+        for(var y = 0;y<numMatrix.length;y++){
+            for(var x = 0;x<numMatrix[y].length;x++){
+                if(numMatrix[y][x]==1){
+                    cxt.beginPath();
+                    cxt.arc(offsetX+RADIUS+RADIUS*2*x,offsetY+RADIUS+RADIUS*2*y,RADIUS,0,2*Math.PI);
+                    cxt.fill();
+                }
+            }
+        }
+        cxt.beginPath();
+        offsetX += numMatrix[0].length*RADIUS*2;
+        return offsetX;
+    }
+
+    var canvas = document.getElementById("canvas");
+    canvas.width=WINDOW_WIDTH;
+    canvas.height=WINDOW_HEIGHT;
+    context = canvas.getContext("2d");
+
+    //记录当前绘制的时刻
+    var currentDate = new Date();
+
+    setInterval(function(){
+        //清空整个Canvas，重新绘制内容
+        context.clearRect(0, 0, context.canvas.width, context.canvas.height);
+        drawDatetime(context);
+    }, 50)
+})();
+</script>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+
+     <!-- 此处为新加的代码 -->
+     
+<script src="https://my.openwrite.cn/js/readmore.js" type="text/javascript"></script>
+<script>
+    const btw = new BTWPlugin();
+    btw.init({
+        id: 'yourbatman',
+        blogId: '10059-1591593090091-727',
+        name: 'BAT的乌托邦',
+        qrcode: 'https://img-blog.csdnimg.cn/20200511100304545.jpg',
+        keyword: 'vip',
+    });
+</script>
+
+
+     <script src="https://cdn.staticfile.org/jquery/3.1.1/jquery.min.js"></script>
+<script>
+    //暂时储存文章中的内容
+    var div = $('.post-body');
+    //暂时储存目录的内容
+    var toc=$('.post-toc')
+    function password() {
+        if(''){
+            //将文章内容删除
+            div.remove();
+            //将目录删除
+            toc.remove();
+            //将文章删除后，向原来文章的地方添加，应该出现的提示用户输入密码的样式
+            //下面这里的第一个用textarea是因为如果在手机端的时候只能显示一部分文字，
+            //只是拓展:input里面的字只能显示一行，不会自动换行，目前上网搜索没有发现好的办法，所以用了textarea，右下角的小三角通过resize:none 去掉。
+            $('.post-header').after(
+            '<span class="description" value="请输入密码，然后按 Enter 键阅读全文" style="font-style: oblique;font-weight: bold;border: none;display: block;'+
+            'width: 60%;margin: 0 auto;text-align: center;outline: none;margin-bottom: 40px;resize:none; margin-top: 20px;">'+
+            '<i class="fa fa-heartbeat" id="myheartbeat"></i>'+
+            '请输入密码，然后按 Enter 键阅读全文' +
+            '<i class="fa fa-heartbeat" id="myheartbeat"></i>'+
+            '</span>' +
+            '<div class="qiang" style="height: 100px;width: 60%;margin:0 auto">' +
+            '<input class="password"  type="password" autocomplete="new-password" autofocus="autofocus" value="" style="border-radius: 5px;height: 30px;border: none;display: block;border-bottom: 1px solid #ccc;' +
+            'margin: 0 auto;outline: none;width:95%"/>' +
+            '</div>')
+            //绑定点击事件，如果是点击的.password 这个div就改变样式，如果是document中除了div之外的其他任何元素，就变回原来的样式。
+            document.onclick = function (event) {
+                var e = event || window.event;
+                var elem = e.srcElement || e.target;
+
+                while (elem) {
+                    if (elem != document) {
+                        if (elem.className == "password") {
+                            //$(".password").animate({paddingTop:"30px",width:"100%",borderWidth:"2px"},300)
+                            return;
+                        }
+                        elem = elem.parentNode;
+                    } else {
+                        //$(".password").animate({paddingTop:"0px",width:"95%",borderWidth:"1px"},300)
+                        return;
+                    }
+                }
+            }
+            //绑定enter键按下后离开的事件
+            $(document).keyup(function(event){
+                if(event.keyCode ==13&&$('.password').length>0){
+                    //console.log($('.password').val())
+                    //console.log('')
+                    if ($('.password').val() == '') {
+                        //恢复文章内容
+                        (div).appendTo($(".post-header"))
+                        //恢复目录
+                        toc.appendTo($(".sidebar-inner"))
+                        //删除本页面的输入密码组件
+                        $(".description").remove();
+                        $(".qiang").remove();
+                        $(".password").remove();
+
+                        //重新处理pjax事件,如果没有加pjax的从下面这行起到下面的else之间的代码需要去掉。
+                        //图片懒加载，没有加入此功能的这个函数需要去掉
+                        $('img').lazyload({
+                            placeholder: '/images/loading.gif',
+                            effect: 'fadeIn',
+                            threshold : 100,
+                            failure_limit : 20,
+                            skip_invisible : false
+                        });
+                        //pjax后出现文章不显示，没有pjax的下面四行需要去掉
+                        $(".post-block").css({opacity:1});
+                        $(".post-header").css({opacity:1});
+                        $(".post-body").css({opacity:1});
+                        $(".pagination").css({opacity:1});
+                    }else {
+                        alert("密码不对，请重新输入~")
+                    }
+                }
+                //将document的keyup移除，防止在pjax的情况下会重复绑定事件
+            });
+        }
+    }
+    password();
+</script>
+
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        <!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<span id="times" style="margin-right: 10px;">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("05/03/2020 12:00:00");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "小破站已苟活"+dnum+"天";
+        document.getElementById("times").innerHTML = hnum + "小时" + mnum + "分" + snum + "秒";
+    }
+    setInterval("createtime()",250);
+
+    // 自定义邮箱审核规则（目前校验：邮箱必填，且格式必须正确 昵称也必须填写）
+    document.body.addEventListener('click', function(e) {
+        if (e.target.classList.contains('vsubmit')) {
+            const email = document.querySelector('input[type=email]');
+            const nick = document.querySelector('input[name=nick]');
+            const reg = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+            if (!email.value || !nick.value || !reg.test(email.value)) {
+                const str = `<div class="valert text-center"><div class="vtext">请填写正确的昵称和邮箱！</div></div>`;
+                const vmark = document.querySelector('.vmark');
+                vmark.innerHTML = str;
+                vmark.style.display = 'block';
+                setTimeout(function() {
+                    vmark.style.display = 'none';
+                    vmark.innerHTML = '';
+                }, 2500);
+            }
+        }
+    })
+</script>
+  <span class="beian"><a href="http://www.beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备12009483号 </a>
+  </span>
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">A哥(YourBatman)</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">本站总字数：</span>
+    <span title="本站总字数">446k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">本站总阅读时长 &asymp;</span>
+    <span title="本站总阅读时长">6:45</span>
+</div>
+  <div class="addthis_inline_share_toolbox">
+    <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5eb7b6f6b64d54f6" async="async"></script>
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        承蒙 <span id="busuanzi_value_site_uv"></span> 位朋友
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        共造访本站 <span id="busuanzi_value_site_pv"></span> 次
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+  <script>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id    : 25645,
+      el    : 'wpac-rating',
+      color : 'fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+  <script src="//code.tidio.co/imnhfpyrju0tgipwdxke6moou6p9kbdu.js"></script>
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 1, // 打开或关闭导航空格和选项卡 1:打开 0:关闭
+    scrollbar: 1, // 打开/关闭滚动条
+    toolbar  : 1, // 打开/关闭工具栏
+    statusbar: 1, // 打开或关闭状态栏
+    pagemode : 'thumbs', // 侧边栏状态，显示书签或缩略图 接受值：none，thumbs，bookmarks，attachments
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+
+  
+
+  
+
+
+  <!-- 自定义的js效果 -->
+  <script type="text/javascript">
+    (function() {
+var a_idx = 0;
+ 
+        $("body").click(function(e) {
+            //var a = new Array(
+            //    "富强", "民主", "文明", "和谐",
+            //    "自由", "平等", "公正", "法治",
+            //    "爱国", "敬业", "诚信", "友善"
+            //    );
+            var a = new Array(
+            "耕耘","挑灯","悬梁","废寝",
+            "映雪","刺骨","囊萤","凿壁",
+            "勤奋","刻苦","打拼","砥砺");
+
+            var $i = $("<span/>").text(a[a_idx]);
+            a_idx = (a_idx + 1) % a.length;
+            var x = e.pageX,
+            y = e.pageY;
+            $i.css({
+                "z-index": 144469,
+                "top": y - 20,
+                "left": x,
+                "position": "absolute",
+                "font-weight": "bold",
+                "color": "#f00"
+            });
+            $("body").append($i);
+            $i.animate({
+                "top": y - 180,
+                "opacity": 0
+            },
+            1500,
+            function() {
+                $i.remove()
+            })
+        });
+    })();
+  </script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'GL1AoYvDSErHS8idMvn35STX-gzGzoHsz',
+      appKey     : 'flstBFF7gvWX8emTwJooV0bB',
+      placeholder: "各位道友📢📢📢：&#10;1、填写昵称和【正确邮箱号】；&#10;2、有邮箱可收到回复的邮件提醒；&#10;3、礼貌言辞，拒绝黄赌毒；",
+      avatar     : 'robohash',
+      meta       : guest,
+      pageSize   : '6' || 10,
+      visitor    : true,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

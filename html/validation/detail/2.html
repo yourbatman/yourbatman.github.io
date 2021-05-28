@@ -1,0 +1,227 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Bean Validation-规范</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/animate.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="css/styles.css" type="text/css">
+</head>
+
+<body>
+<div class="m-container">
+    <div class="slider">
+        <div class="slide slide--1">
+            <div class="slide__darkbg slide--1__darkbg"></div>
+            <div class="container-fluid">
+                <!-- one -->
+                <div class="m-center fz-lg" style="font-size: 70px;">Bean Validation
+                    <p style="font-size: 30px;text-align: center">规范</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide slide--2">
+            <div class="slide__darkbg slide--2__darkbg"></div>
+            <div class="container-fluid">
+                <div class="m-center fz-md">
+                    <ul class="items">
+                        <li class="animated" data-class="fadeInRight" data-delay="1s">1. 何为Jakarta EE？</li>
+                        <li class="animated" data-class="fadeInRight" data-delay="3s">
+                            <font color="red" style="font-weight: bolder">2. JSR规范</font>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide slide--3">
+            <div class="slide__darkbg slide--3__darkbg"></div>
+            <div class="container-fluid">
+                <!-- three -->
+                <div class="row marginb">
+                    <div class="col-sm-8 subject animated" data-class="pulse" data-delay="1s">
+                        <h1>1. 何为Jakarta EE？<span class="dot-right"></span></h1>
+                    </div>
+                </div>
+                <div class="demo">
+                    <div class="demo__close-menu"></div>
+                    <div class="demo__section demo__section-1 active" data-section="1">
+                        <div class="demo-container">
+                            <h3>1️⃣：2018年03月，Oracle决定把Java EE移交给开源组织「Eclipse 基金会」，并且不再使用Java EE这个名称</h3>
+                            <h3>2️⃣：JCP将继续支持 Java SE社区。但是，「Jakarta EE规范自此将不会在JCP下开发」（阿里云，华为）</h3>
+                            <h3>3️⃣：BAT的乌托邦：https://mp.weixin.qq.com/s/g04HMhrjbvbPn1Mb9JYa5g</h3>
+                        </div>
+                        <div class="img-container" style="margin-top: 6%;">
+                            <div class="img-block" style="margin-left: -23%;
+    position: absolute;"><img style="max-height: 200px;" src="img/Java%20EE%20logo.jfif"/></div>
+                            <div class="img-block" style="margin-left: 20%;
+    position: absolute;"><img style="max-height: 200px;" src="img/jakarta%20EE%20logo.jfif"/></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide slide--4">
+            <div class="slide__darkbg slide--4__darkbg"></div>
+            <div class="container-fluid">
+                <!-- four-->
+                <div class="row marginb">
+                    <div class="col-sm-8 subject animated" data-class="pulse" data-delay="1s">
+                        <h1>二、相关JSR规范<span class="dot-right"></span></h1>
+                    </div>
+                </div>
+                <div class="demo">
+                    <div class="demo__close-menu"></div>
+                    <div class="demo__section demo__section-1 active" data-section="1">
+                        <div class="demo-container">
+                            <h3>1️⃣：JSR303 Bean Validation 1.0。支持Java Bean校验，提供最初13个注解</h3>
+                            <h3>2️⃣：JSR349 Bean validation 1.1。支持方法参数校验</h3>
+                            <h3>3️⃣：JSR380 Bean Validation 2.0。支持容器内校验，新增注解，HV退位让贤</h3>
+                            <h3>4️⃣：落地实现：Hibernate Validator（官推）、Apache BVal（BV3.0已发布？）</h3>
+                            <div class="text-s animated" data-class="shake" data-delay="10s">Demo</div>
+                        </div>
+                        <div class="img-container">
+                            <div class="img-block" style="margin-left: -23%;
+    position: absolute;"><img style="max-height: 160px;" src="img/Bean%20Validation-1.png"/></div>
+                            <div class="img-block" style="margin-left: 20%;
+    position: absolute;"><img style="max-height: 260px;" src="img/Bean%20Validation-2.png"/></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--页码-->
+    <span class="page">1/4</span>
+</div>
+
+<script type="text/javascript" src="js/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        var $cont = $('.m-container');
+        var $slider = $('.slider');
+        var animSpd = 1000; //速度
+        var curSlide = 1;     //初始
+        var animation = false;   //滚动标志
+        var numOfCities = 4;   //页面个数
+
+        //标记防止连续滚动
+        function flag() {
+            animation = false;
+        }
+
+        //滚动分页
+        function pagination(direction) {
+            animation = true;
+            $slider.addClass('animation');
+
+            //整体向左移动100%
+            $slider.css({
+                'transform': 'translate3d(-' + (curSlide - direction) * 100 + '%, 0, 0)'
+            });
+
+            //局部向右边移动50%
+            $slider.find('.slide__darkbg').css({
+                'transform': 'translate3d(' + (curSlide - direction) * 50 + '%, 0, 0)'
+            });
+
+            //在items中查找所有有动画属性的DOM
+            var $animates = $("body").find(".animated");
+            $animates.each(function (index, value) {
+                var $this = $(this);
+                var animationStyle = $this.data("class");    //动画CSS
+                var animationDelay = $this.data("delay");  //动画延迟时间
+                $this.addClass(animationStyle).css({
+                    "-moz-animation-delay": animationDelay,
+                    "-webkit-animation-delay": animationDelay,
+                    "animation-delay": animationDelay
+                });
+            });
+        }
+
+        //mousewheel - IE和chrome ，  DOMMouseScroll - firefox
+        $(document).on('mousewheel DOMMouseScroll', function (e) {
+            if (animation) return;
+            //鼠标滚动属性
+            var delta = e.originalEvent.wheelDelta;
+
+            //delta > 0 向上滚/向右滚
+            if (delta > 0 || e.originalEvent.detail < 0) {
+                if (curSlide <= 1) return;
+                pagination(2);
+                //因为滚动一次会连续触发，所有当鼠标滚动一次之后，就将animation=true组织动画
+                setTimeout(flag, animSpd);
+
+                //设置页码
+                var num = curSlide--;
+                $(".page").html((num - 1) + "/" + numOfCities);
+
+                //设置所有页面隐藏
+                var $sliders = $slider.find(".slide");
+                $sliders.each(function (i) {
+                    $($sliders[i]).fadeOut();
+                })
+                //设置滚动目标页面显示
+                $($sliders[num - 2]).fadeIn();
+
+            }
+
+            //delta < 0 向下滚/向右滚
+            if (delta < 0 || e.originalEvent.detail > 0) {
+                if (curSlide >= numOfCities) return;
+                pagination(0);
+                setTimeout(flag, animSpd);
+                var num = curSlide++;
+                $(".page").html((num + 1) + "/" + numOfCities);
+
+                var $sliders = $slider.find(".slide");
+                $sliders.each(function (i) {
+                    $($sliders[i]).fadeOut();
+                })
+                $($sliders[num]).fadeIn();
+            }
+        });
+    });
+</script>
+<script type="text/javascript" src="js/stopExecutionOnTimeout.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var $demo = $('.demo');
+        var numOfSections = $('.demo__section').length;
+        $(document).on('click', '.demo__menu-btn', function () {
+            $demo.addClass('menu-active');
+        });
+        $(document).on('click', '.demo__close-menu', function () {
+            $demo.removeClass('menu-active');
+        });
+        $(document).on('click', '.demo.menu-active .demo__section', function () {
+            var $section = $(this);
+            var index = +$section.data('section');
+            $('.demo__section.active').removeClass('active');
+            $('.demo__section.inactive').removeClass('inactive');
+            $section.addClass('active');
+            $demo.removeClass('menu-active');
+            for (var i = index + 1; i <= numOfSections; i++) {
+                if (window.CP.shouldStopExecution(1)) {
+                    break;
+                }
+                $('.demo__section[data-section=' + i + ']').addClass('inactive');
+            }
+            window.CP.exitedLoop(1);
+        });
+
+        //3D转换图片切换
+        $(".img-container").on("click", "button", function () {
+            var index = $(this).data("html.index");
+            $(".img-block").find("img").attr("src", "img/" + index + ".png");
+        });
+    });
+</script>
+
+</body>
+</html>

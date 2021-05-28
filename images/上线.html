@@ -1,0 +1,113 @@
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>各位小伙伴大家好，我是A哥。最近遇到两个问题，都是关于IDEA的（言外之意和代码无关），很是让我“生气”呀（关键是浪费时间）。在痛定思痛后，我决定写此专栏，来专门分享/记录使用<code>IntelliJ IDEA</code>过程中遇到的那些奇葩问题和解决方案，以帮助你缩短日常排错时间，这么一思考好像还功德无量呢😄。</p>
+<p><code>IntelliJ IDEA</code>作为Java开发者中最为流行的开发工具（eclipse粉勿喷），熟练掌握它（包括排雷）对提升编码效率能有显著提升。但工具毕竟是工具，这么长时间使用IDEA以来，每个人或多或少的都遇到过关于IDEA七七八八、奇奇怪怪的问题，这些与代码舞棍，但它很容易<strong>偷走</strong>你的时间，半天又更或者是一天之久。</p>
+<blockquote>
+<p>说明：千万不要忽视对IDEA的研究，因为把它玩熟练了它就相当于你的物理外挂</p>
+</blockquote>
+<p>本专栏内容<strong>并非</strong> IDEA教程，而是着眼于分享IDEA使用过程中，那些我遇到（或者大家遇到）的但又不是能够很快速解决，总之就是比较棘手的问题的汇总，有一种错题本的意思有木有。总之就是希望它能够帮助到大家迅速定位or解决问题，避免不必要的时间浪费，毕竟咱们的主业还是敲代码嘛~<br><img src="https://img-blog.csdnimg.cn/20200607164702294.png#x200" alt=""></p>
+<hr>
+<h2 id="版本约定"><a href="#版本约定" class="headerlink" title="版本约定"></a>版本约定</h2><p>本文内容若没做特殊说明，均基于以下版本：</p>
+<ul>
+<li>IntelliJ IDEA：<code>2020.1.2</code>旗舰版</li>
+</ul>
+<hr>
+<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><p>使用IDEA这么久，虽然之前时不时地的跟IDEA问题“交过手”，但真正促使我决定写此专栏的原因还是源自于前两天使用IDEA启动Spring Boot程序时的这个报错：</p>
+<pre><code class="java">Error running <span class="string">'Application'</span>: Command line is too <span class="keyword">long</span>. Shorten command line <span class="keyword">for</span> Application or also <span class="keyword">for</span> Spring Boot <span class="keyword">default</span> configuration.</code></pre>
+<p><img src="https://img-blog.csdnimg.cn/20200607141445942.png#x80" alt=""><br>说实话这个错误我前所未见，看起来还蛮有意思，因此决定研究一番。这不，把研究结果分享给大家，信息共享。</p>
+<p>为了解释好这个问题，我们得先来做些功课，知晓写概念。</p>
+<hr>
+<h2 id="控制台首行路径"><a href="#控制台首行路径" class="headerlink" title="控制台首行路径"></a>控制台首行路径</h2><p>在IDEA里，你每次启动一个main函数时，控制台第一行输出的“日志”称作为：<strong>控制台首行路径</strong>。这里，我运行一个最最最简单的程序，看看它长啥样，程序如下：</p>
+<pre><code class="java"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Application</span> </span>{
+
+    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{
+        System.out.println(<span class="string">"Hello world"</span>);
+    }
+}</code></pre>
+<p>运行程序，控制台输出如下截图：<br><img src="https://img-blog.csdnimg.cn/202006071446358.png#x100" alt=""><br>相信小伙伴每天都能看见它但大概率不会注意到它，我也不例外。你想不到的是，恰巧这行“日志”就成为了本文今天的<strong>主角</strong>，会围绕它来展阐述。</p>
+<blockquote>
+<p>特别说明：如果你是用外置tomcat驱动应用启动的话效果不是这样子的。因为它使用的是tomcat的脚本来启动，所以首行日志形如这样：<code>D:\developer\apache-tomcat-9.0.34\bin\catalina.bat run</code></p>
+</blockquote>
+<hr>
+<h3 id="首行路径内容"><a href="#首行路径内容" class="headerlink" title="首行路径内容"></a>首行路径内容</h3><p>知道了什么叫首行路径，那么它的内容才是我们要关心的。如上截图中，细心的你会发现最后是<code>...</code>省略号，因此内容绝不止你现在看到的那么简单。你可以鼠标点击一下，展开全部内容，截图如下：<br><img src="https://img-blog.csdnimg.cn/20200607145503910.png#x15" alt=""><br>这<strong>一行</strong>实在太长了，无法横向截图全部展示出来，因此我把它复制出来放在文本编辑器中查看：<br><img src="https://img-blog.csdnimg.cn/2020060715041445.png#x200" alt=""><br>这个截图是<strong>一行</strong>哦（只是我在文本编辑器了自动折行了而已），仍旧不能看到全部内容，因为字数真的太多了，总字数统计如下：<br><img src="https://img-blog.csdnimg.cn/20200607150518466.png#x80" alt=""><br>仅仅一行，字数超过26000个。咋舌吧：第一行控制台“日志”竟然输出了超过2.6w个字符。从内容结构上来看，这是一个command命令：<strong>调用java.exe程序启动一个java进程的命令</strong>。</p>
+<hr>
+<h2 id="为何启动抛错Command-line-is-too-long"><a href="#为何启动抛错Command-line-is-too-long" class="headerlink" title="为何启动抛错Command line is too long"></a>为何启动抛错Command line is too long</h2><p>99.99%的情况下，你可以在IDEA里正常启动你的应用，即使首行路径很长很长。但是直到当我启动我的这个Spring Boot应用时，弹出红色提示：<br><img src="https://img-blog.csdnimg.cn/20200607141445942.png#x80" alt=""><br>直接禁止了我的running运行。提示内容中文释义为：运行“Application”时出错：<strong>命令行太长</strong>。缩短应用程序或Spring Boot默认配置的命令行。我相信如果你也是第一次见到此case，表情和我一样是这样的：<br><img src="https://img-blog.csdnimg.cn/20200607151511391.png#x160" alt=""><br>main方法都启不动了，那还得了。遇到这种情况，我只能使用百度大法（谷歌大法）了：<br><img src="https://img-blog.csdnimg.cn/20200607151831469.png#x200" alt=""><br>一看能搜出这么多结果，我也就不慌了，按照“教程”很容易的把问题解决了。另外呢，通过此次搜索到的结果聊两句题外话：</p>
+<ol>
+<li>虽然Result Count不少，但是我发现实质上内容几乎一毛一样，真乃天下文章一大抄</li>
+<li>访问量并不代表文章质量高，只是它刚好命中了关键字而已，比如标题党</li>
+</ol>
+<p>我得出如此感悟，也是促使我写本文的原因之一。<strong>因为A哥的文章一贯如此，是有些B格的</strong>。接下来以点带面，把这部分内容帮大家展开展开，解决问题并非最终目的，而是为了：记得牢，能装x，一切为了加薪。</p>
+<hr>
+<h2 id="原因分析"><a href="#原因分析" class="headerlink" title="原因分析"></a>原因分析</h2><p>出现此问题的直接原因是：IDEA集成开发环境运行你的“源码”的时候（注意是源码基础上运行，并非打好的jar包哦），是通过命令（首行那个非常非常长的）来启动Java进程的。这个命令主要包含两大部分：</p>
+<ol>
+<li><code>vm/程序</code>参数。也就是你看到的那些-XX -D等参数，这部分理论上可以无限长但实际上一般不会太长</li>
+<li><code>-classpath</code>参数，它用于指定运行时jar包路径（因为jar包理论上是可以在任何地方的），这部分可能性就多了</li>
+</ol>
+<p>关键就在于<code>-classpath</code>参数，<strong>它可以非常长</strong>，你依赖的jar包越多此路径就越长；你的base基路径越长它就越长；倘若你还要做复杂的Junit单元测试，那加入的jar包就更多长度可能就越长喽。总的来说：此part是<strong>很有可能</strong>超长从而导致<code>Command line is too long</code>现象的。</p>
+<p>如果类路径太长（可能性大），或者您有许多VM参数（可能性小），则无法启动该程序。原因是<strong>大多数操作系统</strong>都有命令行长度限制。在这种情况下，IntelliJ IDEA将提供尝试缩短类路径的能力。</p>
+<hr>
+<h3 id="IDEA老版本方案"><a href="#IDEA老版本方案" class="headerlink" title="IDEA老版本方案"></a>IDEA老版本方案</h3><p>针对此问题，在之前版本（确切的说是2017.3之前的版本），需要通过XML文件配置来解决：找到工程下的<code>.idea/workspace.xml</code>这个文件，添加如下项：</p>
+<pre><code class="xml"><span class="tag">&lt;<span class="name">component</span> <span class="attr">name</span>=<span class="string">"PropertiesComponent"</span>&gt;</span>
+    ...
+    <span class="comment">&lt;!-- 这句是你需要添加的项 --&gt;</span>
+    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"dynamic.classpath"</span> <span class="attr">value</span>=<span class="string">"true"</span> /&gt;</span>
+    ...
+<span class="tag">&lt;/<span class="name">component</span>&gt;</span></code></pre>
+<p>再次启动程序发现问题解决。我有理由相信，在这个时间节点上应该没有人用这么古老的版本了吧，但你在网上搜的文章大多数都还是这种解决方案，因此请务必注意甄别哦（2017.3以后的版本请参照下面方案解决）。</p>
+<blockquote>
+<p>所以我不是说了麽，任何不指定版本的解决方案、源码分析文章都是不太负责任的。作为一个程序员，应该适当提高自己的版本意识</p>
+</blockquote>
+<hr>
+<h3 id="IDEA新版本方案：命令行缩短器"><a href="#IDEA新版本方案：命令行缩短器" class="headerlink" title="IDEA新版本方案：命令行缩短器"></a>IDEA新版本方案：命令行缩短器</h3><p>在IDEA的<code>2017.3</code>版本中提供了一项新特性：命令行缩短器。旨在用来解决此类问题，也就是说<strong>从此版本开始</strong>，不再需要通过XML文件来编辑IDE的设置那么麻烦了，而是直接在界面操作即可：<br><img src="https://img-blog.csdnimg.cn/20200607154204781.png#x200" alt=""><br>最初，IntelliJ IDEA尝试将长类路径写入<strong>文本文件</strong>（这意味着应用程序是中间类加载器）。但是不幸的是，这不适用于某些框架，例如JMock。然后，IntelliJ IDEA尝试使用或多或少的标准方法，即将长类路径打包到<strong>classpath.jar</strong>中。不幸的是，对于其他一些框架，这也不起作用。</p>
+<blockquote>
+<p>总结：这两种方案都不是100%完美的，具体情况具体分析</p>
+</blockquote>
+<p>从上对话框中可以看到IDEA一共提供了三种命令行缩短器供你选择：</p>
+<ol>
+<li>none。这是默认选项。IDE不会缩短长类路径。如果命令行超出操作系统限制，<strong>则IDEA将无法运行您的应用程序</strong></li>
+<li>jar manifest。IDE通过<strong>临时classpath.jar</strong>传递长类路径。原始类路径在<code>MANIFEST.MF</code>中定义为classpath.jar中的类路径属性</li>
+<li>classpath file。IDE将把长类路径写入文本文件</li>
+</ol>
+<hr>
+<h4 id="jar-manifest方式"><a href="#jar-manifest方式" class="headerlink" title="jar manifest方式"></a>jar manifest方式</h4><p>选择此种方式，运行测试程序，首行<strong>全部内容</strong>展示如下：</p>
+<pre><code class="java">D:\developer\jdks\<span class="number">1.8</span><span class="number">.0_241</span>\bin\java.exe -XX:TieredStopAtLevel=<span class="number">1</span> -noverify 
+    -Dspring.output.ansi.enabled=always -Dcom.sun.management.jmxremote 
+    -Dspring.jmx.enabled=<span class="keyword">true</span> -Dspring.liveBeansView.mbeanDomain 
+    -Dspring.application.admin.enabled=<span class="keyword">true</span> 
+    <span class="string">"-javaagent:C:\Program Files\JetBrains\IntelliJ IDEA 2020.1.1\lib\idea_rt.jar=5975:C:\Program Files\JetBrains\IntelliJ IDEA 2020.1.1\bin"</span> -Dfile.encoding=UTF-<span class="number">8</span> 
+    -classpath C:\Users\xxx\AppData\Local\Temp\classpath1199511058.jar 
+    com.xxx.Application</code></pre>
+<p>区别主要在于<code>-classpath</code>这一行，它不再是把所有jar的路径展示出来，而是“封装”到了一个jar文件里，这一下子让<strong>命令长度</strong>大幅减少，能够100%保证不会超长了，所以启动也就不会报错喽。</p>
+<p>另外，在IDEA里你直接单击此jar路径是可以预览器内容的（真贴心）：<br><img src="https://img-blog.csdnimg.cn/20200607160409685.png#x200" alt=""><br>当然，你也可以在你磁盘里找到此jar文件，然后查看其内容（说明：请确保<strong>hold住线程了</strong>再去找对应文件，否则临时文件是线程结束后就删除了的）：<br><img src="https://img-blog.csdnimg.cn/20200607160536376.png#x100" alt=""><br><strong>特别强调</strong>：我在实践过程中，使用此种方式出现过jar包没有被加载进来的情况，在此提醒各位，若你也有类似现象发生，请切换成使用classpath file方式吧。</p>
+<blockquote>
+<p>毕竟官方也说了：这两种路径缩短方式，对某些框架可能存在不兼容情况，just可能而已哦~</p>
+</blockquote>
+<hr>
+<h4 id="classpath-file方式"><a href="#classpath-file方式" class="headerlink" title="classpath file方式"></a>classpath file方式</h4><p>选择此种方式，运行测试程序，首行<strong>全部内容</strong>展示如下：</p>
+<pre><code class="java">D:\developer\jdks\<span class="number">1.8</span><span class="number">.0_241</span>\bin\java.exe -XX:TieredStopAtLevel=<span class="number">1</span> -noverify 
+    -Dspring.output.ansi.enabled=always -Dcom.sun.management.jmxremote 
+    -Dspring.jmx.enabled=<span class="keyword">true</span> -Dspring.liveBeansView.mbeanDomain 
+    -Dspring.application.admin.enabled=<span class="keyword">true</span> 
+    <span class="string">"-javaagent:C:\Program Files\JetBrains\IntelliJ IDEA 2020.1.1\lib\idea_rt.jar=5975:C:\Program Files\JetBrains\IntelliJ IDEA 2020.1.1\bin"</span> -Dfile.encoding=UTF-<span class="number">8</span> 
+    -classpath C:\Users\xxx\AppData\Local\Temp\idea_classpath921151059
+    com.xxx.Application</code></pre>
+<p>有了上面的描述，这个就不用A哥赘述了。</p>
+<hr>
+<hr>
+<h2 id="扩展知识：windows系统命令最大长度"><a href="#扩展知识：windows系统命令最大长度" class="headerlink" title="扩展知识：windows系统命令最大长度"></a>扩展知识：windows系统命令最大长度</h2><p>这属于扩展知识，延伸阅读内容。</p>
+<p>既然已经知道出现此问题的原因是命令超长了而“报错”，A哥就想那<strong>windows命令最长允许多少字符呢</strong>？带着这个问题，我开始了一番苦心寻找，最后终于在windows官网找到了我想要的答案。地址在这：<a href="https://docs.microsoft.com/zh-cn/windows/win32/api/processenv/nf-processenv-setenvironmentvariablea?redirectedfrom=MSDN" target="_blank" rel="noopener">https://docs.microsoft.com/zh-cn/windows/win32/api/processenv/nf-processenv-setenvironmentvariablea?redirectedfrom=MSDN</a></p>
+<p>在Windows上，命令行长度最大为<strong>32767</strong>个字符（和shell长度、命令提示符长度的区别）。当提供足够大的类路径时，将违反此限制，并且Windows拒绝执行该命令并抛出错误代码87。推荐的解决方案有如下两种：</p>
+<ol>
+<li>将所有jar复制到一个公共文件夹，例如<code>c:\jars</code>，然后将其包括在内。这样，每个jar都有一个<strong>短路径</strong>，即<code>c:\jars</code>（而不是长路径<code>c:\program files\app\lib\app-jar1.jar</code>），并且应该可以将这个路径们控制在38kb之内</li>
+<li>如果步骤1不起作用，则可以将单个jar提取到一个文件夹中，并创建一个包含所有提取文件的<strong>新jar</strong>。这样就只需要引入这个新jar就可以了</li>
+</ol>
+<p>这是两种解决问题的思想：短路径方式（简单高效）和打包方式（100%能解决问题）</p>
+<blockquote>
+<p>别问A哥为毛只给出windows的最大长度，没有Mac的吗？我只能说，我很穷所以用的是windows本，Mac的我不关心😄</p>
+</blockquote>
+<hr>
+<h2 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h2><p>今日份思考题比较简单</p>
+<ol>
+<li>为毛你的<strong>Spring Boot应用</strong>在生产环境下从来不用担心出现Command line is too long这种错误？</li>
+<li>有哪些<strong>有效的方式</strong>可以避免你的开发环境出现此问题？</li>
+</ol>
+<hr>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>IDEA采坑系列第一篇到这就结束了，算不算精彩呢？我个人觉得还可以😄。此专栏后续将不定期的更新，除了我自己准备外，同时也<strong>非常欢迎</strong>各位小伙伴能把平时遇到的IDEA遇到的棘手问题反馈给我（最好有解决方案哦），咱们一起把这个事做好，也算造福于大家嘛，毕竟我一个人碰见的case实则有限，有建议的可以下方扫码加我好友私聊我。</p>
