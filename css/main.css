@@ -1334,7 +1334,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #ff2212;
+  background: #5bff40;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -3030,22 +3030,6 @@ blockquote p {
   text-align: left;
 }
 /* 导流的阅读更多 */
-#yourbatman #read-more-wrap a {
-  box-shadow: inset 0 0 10px 0 rgba(0,0,0,0.35);
-  border: none !important;
-  transition-property: unset;
-  padding: 0 15px;
-  font-weight: bolder;
-}
-#yourbatman #btw-footer {
-  display: none;
-}
-#yourbatman #btw-modal-input-code {
-  margin-bottom: 20px;
-}
-#yourbatman #btw-modal-header strong {
-  color: #4200e2;
-}
 /* 首页的图片、文字样式 */
 .post-body img.homepage {
   margin-bottom: 15px;
